@@ -23,7 +23,7 @@ See LICENSE file for full licensing details. -->
         <t t-call="website.layout">
             <div class="container">
                 <div class="container">            
-                    <h3><t t-esc="builder_name"/> - <small>Form.io Builder</small></h3>
+                    <h3><small>Form.io Builder</small> - <t t-esc="builder_name"/></h3>
                 </div>
                 <div class="container mt16">                
                     <input type="hidden" id="builder_id" name="builder_id" t-att-value="builder_id"/>
