@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <menuitem
+        id="menu_formio_root"
+        name="Form.io"
+        sequence="2"
+        groups="base.group_user"/>
+    <menuitem
+        id="menu_formio_builder"
+        name="Form Builder"
+        parent="formio.menu_formio_root"
+        sequence="10"
+        action="formio.action_formio_builder"/>
+</odoo>
