@@ -14,8 +14,9 @@ class Formio(http.Controller):
     def builder_edit(self, builder_id, **kwargs):
         builder = request.env['formio.builder'].browse(builder_id)
         values = {
-            'builder_name': builder.name,
             'builder_id': builder_id,
+            'builder_name': builder.name,
+            'builder_title': builder.title,
         }
         return request.render('formio.formio_builder', values)
 

@@ -8,7 +8,9 @@ See LICENSE file for full licensing details. -->
         <field name="model">formio.builder</field>
         <field name="arch" type="xml">
             <tree string="Builder">
+                <field name="title"/>
                 <field name="name"/>
+                <field name="res_model_id"/>
             </tree>
         </field>
     </record>
@@ -26,6 +28,13 @@ See LICENSE file for full licensing details. -->
                     <label for="name" class="oe_edit_only"/>
                     <h1><field name="name"/></h1>
                     <notebook>
+                        <page string="General" name="general">
+                            <group>
+                                <field name="title"/>
+                                <field name="description"/>
+                                <field name="res_model_id"/>
+                            </group>
+                        </page>
                         <page string="Schema" name="schema">
                             <field name="schema"/>
                         </page>
