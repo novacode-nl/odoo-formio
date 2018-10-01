@@ -10,23 +10,23 @@ from odoo import api, fields, models, _
 
 
 class Builder(models.Model):
-
     _name = 'formio.builder'
     _description = 'Formio Builder'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(
-        "Name", required=True,
+        "Name", required=True, track_visibility='onchange',
         help="""Identifies this specific form.\n
         This name can be used in APIs. Use only ASCII letters, digits, "-" or "_".
         """)
     title = fields.Char("Title",
-        help="Form title in the current language",
+        help="Form title in the current language", track_visibility='onchange',
         default="Untitled Form")
     description = fields.Text("Description")
     res_model_id = fields.Many2one(
         "ir.model",
         "Resource Model",
-        ondelete='restrict',
+        ondelete='restrict', track_visibility='onchange',
         help="Model as resource this form represents or acts on")
     schema = fields.Text()
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
