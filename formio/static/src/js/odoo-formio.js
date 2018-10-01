@@ -1,4 +1,4 @@
-odoo.define('formio.Builder', ['web.ajax'], function (require) {
+odoo.define('formio.Builder', function (require) {
     "use strict";
 
     var ajax = require('web.ajax');

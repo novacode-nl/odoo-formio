@@ -1,0 +1,38 @@
+header a.navbar-brand.logo {
+    padding: 0 15px;
+}
+
+header a.navbar-brand.logo img {
+    height: 40px;
+    margin-top: 5px;
+}
+
+.navbar.navbar-static-top ul.nav > li.divider {
+	height: 40px;
+	margin-top: 5px;
+	border-right: 1px solid #ccc;
+}
+
+body #wrapwrap main {
+    background-color: #e7e7e7;
+}
+
+body #wrapwrap main .container {
+    background-color: #fff;
+}
+
+body #wrapwrap main .container.formio_builder_name {
+    background-color: #e7e7e7;
+}
+
+.container.form_builder_container {
+    padding: 12px;
+}
+
+#formio_builder {
+    padding: 12x;
+}
+
+#formio_builder.row {
+    margin-right: 0;
+}

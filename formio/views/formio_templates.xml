@@ -7,28 +7,71 @@ See LICENSE file for full licensing details. -->
     <html>
         <head>
             <title>Form.io Builder | <t t-esc="builder_name"/></title>
-            <t t-call-assets="web.assets_common" t-css="false"/>
+            <t t-call-assets="web.assets_common" t-css="true" t-js="true"/>
+            <t t-call-assets="web.assets_frontend" t-css="true"/>
 
-            <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
             
-            <link rel='stylesheet' href='https://unpkg.com/formiojs@latest/dist/formio.full.min.css'/>
-            <script src='https://unpkg.com/formiojs@latest/dist/formio.full.min.js'></script>
-            
+            <link rel="stylesheet" href="https://unpkg.com/formiojs@latest/dist/formio.full.min.css"/>
+            <script src="https://unpkg.com/formiojs@latest/dist/formio.full.min.js"></script>
+
+            <link rel="stylesheet" href="/formio/static/src/css/odoo-formio.css"/>
             <script type="text/javascript" src="/formio/static/src/js/odoo-formio.js"/>
 
             <link rel="shortcut icon" href="/web/static/src/img/favicon.ico" type="image/x-icon"/>
         </head>
-        <body>
-            <div class="container">
-                <div class="container">            
-                    <h3><small>Form.io Builder</small><small style="margin: 0 4px;"> | </small><t t-esc="builder_name"/></h3>
-                </div>
-                <div class="container mt16">                
+        <body class="o_connected_user">
+            <nav id="oe_main_menu_navbar" class="o_main_navbar">
+                <ul class="o_menu_systray hidden-xs">
+                    <li t-if="not translatable" id="edit-in-backend">
+                        <a data-action="edit" href="#"><span class="fa fa-pencil"/>Edit</a>
+                        <!-- t-attf-href="/web#return_label=Formio&amp;view_type=form&amp;model=#{main_object._name}&amp;id=#{main_object.id}&amp;action=#{action}" -->
+                    </li>
+                </ul>
+            </nav>
+            <div id="wrapwrap">
+                <header>
+                    <div class="navbar navbar-default navbar-static-top">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <a href="/" class="navbar-brand logo">
+                                    <span t-field="res_company.logo" t-options="{'widget': 'image'}" t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name" />
+                                </a>
+                            </div>
+                            <div class="collapse navbar-collapse navbar-top-collapse">
+                                <ul class="nav navbar-nav navbar-right" id="top_menu">
+                                    <li><a href="/">Home</a></li>
+                                    <!-- <li><a href="javascript: window.history.back()">Back</a></li> -->
+                                    <li class="divider"/>
+                                    <li class="dropdown" t-ignore="true" t-if="not user_id._is_public()">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <b>
+                                                <span t-esc="user_id.name[:23] + '...' if user_id.name and len(user_id.name) &gt; 25 else user_id.name"/>
+                                                <span class="caret"></span>
+                                            </b>
+                                        </a>
+                                        <ul class="dropdown-menu js_usermenu" role="menu">
+                                            <li id="o_logout"><a t-attf-href="/web/session/logout?redirect=/" role="menuitem">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <main>
+                    <div class="container formio_builder_name">            
+                        <h3><small>Form.io Builder</small><small style="margin: 0 4px;"> | </small><t t-esc="builder_name"/></h3>
+                    </div>
                     <input type="hidden" id="builder_id" name="builder_id" t-att-value="builder_id"/>
-                    <div id="formio_builder"></div>
-                </div>
+
+                    <div class="container form_builder_container mt8">
+                        <div id="formio_builder"></div>
+                    </div>
+                    <input type="hidden" id="builder_id" name="builder_id" t-att-value="builder_id"/>
+                </main>
             </div>
         </body>
     </html>
-    </template>
+</template>
 </odoo>
