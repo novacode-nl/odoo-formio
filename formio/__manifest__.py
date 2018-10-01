@@ -10,7 +10,7 @@
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
     'category': 'Extra Tools',
-    'depends': ['web', 'base'],
+    'depends': ['web'],
     'data': [
         'views/formio_builder_views.xml',
         'views/formio_menu.xml',

@@ -20,7 +20,7 @@ See LICENSE file for full licensing details. -->
 	    <form string="Form">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_edit" type="object" string="Edit"
+                        <button name="action_edit" type="object" string="Form.io"
                                 class="oe_stat_button" icon="fa-edit"/>
                     </div>
                     <label for="name" class="oe_edit_only"/>

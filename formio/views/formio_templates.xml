@@ -7,24 +7,28 @@ See LICENSE file for full licensing details. -->
     <html>
         <head>
             <title>Form.io Builder | <t t-esc="builder_name"/></title>
-            <t t-call-assets="web.assets_common" t-css="true" t-js="true"/>
-            <t t-call-assets="web.assets_frontend" t-css="true"/>
-
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+            <link rel="shortcut icon" href="/web/static/src/img/favicon.ico" type="image/x-icon"/>
             
+            <!-- Form.io (core) -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
             <link rel="stylesheet" href="https://unpkg.com/formiojs@latest/dist/formio.full.min.css"/>
             <script src="https://unpkg.com/formiojs@latest/dist/formio.full.min.js"></script>
 
+            <!-- Odoo (core) -->
+            <t t-call-assets="web.assets_common" t-css="true"/>
+            <t t-call-assets="web.assets_common" t-js="false"/>
+            <!-- <t t-call-assets="web.assets_frontend" t-css="true"/> -->
+            <!-- <t t-call-assets="web.assets_frontend" t-js="false"/> -->
+
+            <!-- formio module -->
             <link rel="stylesheet" href="/formio/static/src/css/odoo-formio.css"/>
             <script type="text/javascript" src="/formio/static/src/js/odoo-formio.js"/>
-
-            <link rel="shortcut icon" href="/web/static/src/img/favicon.ico" type="image/x-icon"/>
         </head>
         <body class="o_connected_user">
             <nav id="oe_main_menu_navbar" class="o_main_navbar">
                 <ul class="o_menu_systray hidden-xs">
                     <li t-if="not translatable" id="edit-in-backend">
-                        <a data-action="edit" href="#"><span class="fa fa-pencil"/>Edit</a>
+                        <a data-action="edit" href="#"><span class="fa fa-external-link"/>View in Odoo</a>
                         <!-- t-attf-href="/web#return_label=Formio&amp;view_type=form&amp;model=#{main_object._name}&amp;id=#{main_object.id}&amp;action=#{action}" -->
                     </li>
                 </ul>
@@ -60,11 +64,17 @@ See LICENSE file for full licensing details. -->
                     </div>
                 </header>
                 <main>
-                    <div class="container formio_builder_name">            
-                        <h3><small>Form.io Builder</small><small style="margin: 0 4px;"> | </small><t t-esc="builder_name"/></h3>
+                    <div class="container formio_builder_title">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img width="110" src="/formio/static/src/img/formio-logo.png"/>
+                            </div>
+                            <div class="col-md-10 formio_builder_name">
+                                <h3><t t-esc="builder_name"/></h3>
+                            </div>
+                        </div>
                     </div>
-                    <input type="hidden" id="builder_id" name="builder_id" t-att-value="builder_id"/>
-
+                    
                     <div class="container form_builder_container mt8">
                         <div id="formio_builder"></div>
                     </div>

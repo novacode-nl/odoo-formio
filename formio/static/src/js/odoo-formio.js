@@ -1,9 +1,9 @@
-odoo.define('formio.Builder', function (require) {
+odoo.define('formio.Builder', ['web.ajax'], function (require) {
     "use strict";
 
     var ajax = require('web.ajax');
 
-    window.onload = function() {
+    $(document).ready(function() {
         var builder_id = document.getElementById('builder_id').value,
             schema_url = '/formio/builder/schema/' + builder_id,
             post_url = '/formio/builder/post/' + builder_id,
@@ -45,6 +45,5 @@ odoo.define('formio.Builder', function (require) {
                 });
             });
         });
-    };
-
+    });
 });
