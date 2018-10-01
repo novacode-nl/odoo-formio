@@ -3,33 +3,32 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
-    <template id="assets_frontend_formio" inherit_id="web.assets_frontend" name="Form.io assets">
-        <xpath expr="." position="inside">
-            <!-- XXX serve files from module? (Currently github.com/formio/formiojs release: 3.6.12) -->
-            <!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/> -->
-            <!-- <link rel='stylesheet' href='/formio/static/src/css/formio.full.min.css'/> -->
-            <!-- <script type="text/javascript" src="/formio/static/src/js/formio.full.min.js"/> -->
+    <template id="formio_builder" name="Form.io">&lt;!DOCTYPE html&gt;
+    <html>
+        <head>
+            <title>Form.io Builder | <t t-esc="builder_name"/></title>
+            <t t-call-assets="web.assets_common" t-css="false"/>
 
-            <!-- XXX Already loaded and conflicts? font-awesome and bootstrap -->
-            <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/> -->
-            <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/> -->
-            <link rel="stylesheet" href="https://unpkg.com/formiojs@latest/dist/formio.full.min.css"/>
-            <script src="https://unpkg.com/formiojs@latest/dist/formio.full.min.js"></script>
+            <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'/>
+            
+            <link rel='stylesheet' href='https://unpkg.com/formiojs@latest/dist/formio.full.min.css'/>
+            <script src='https://unpkg.com/formiojs@latest/dist/formio.full.min.js'></script>
+            
             <script type="text/javascript" src="/formio/static/src/js/odoo-formio.js"/>
-        </xpath>
-    </template>
 
-    <template id="formio_builder" name="Form.io Builder">
-        <t t-call="website.layout">
+            <link rel="shortcut icon" href="/web/static/src/img/favicon.ico" type="image/x-icon"/>
+        </head>
+        <body>
             <div class="container">
                 <div class="container">            
-                    <h3><small>Form.io Builder - </small><t t-esc="builder_name"/></h3>
+                    <h3><small>Form.io Builder</small><small style="margin: 0 4px;"> | </small><t t-esc="builder_name"/></h3>
                 </div>
                 <div class="container mt16">                
                     <input type="hidden" id="builder_id" name="builder_id" t-att-value="builder_id"/>
                     <div id="formio_builder"></div>
                 </div>
             </div>
-        </t>
+        </body>
+    </html>
     </template>
 </odoo>
