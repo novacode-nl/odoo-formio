@@ -10,7 +10,8 @@ See LICENSE file for full licensing details. -->
             <tree string="Form">
                 <field name="title"/>
                 <field name="name"/>
-                <field name="res_model_id"/>
+                <field name="submission_user_id"/>
+                <field name="submission_date"/>
             </tree>
         </field>
     </record>
@@ -26,24 +27,23 @@ See LICENSE file for full licensing details. -->
                                 class="oe_stat_button" icon="fa-edit"/>
                     </div>
                     <group>
-                        <field name="builder_id"/>
                         <field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/>
+                        <field name="builder_id"/>
                     </group>
                     <notebook>
-                        <page string="General" name="general">
+                        <page string="Submission" name="submission">
                             <group>
-                                <field name="title"/>
-                                <field name="res_model_id"/>
+                                <field name="submission_user_id"/>
+                                <field name="submission_date"/>
                             </group>
                         </page>
-                        <page string="Submission" name="submission">
-                            <field name="data"/>
+                        <page string="Data" name="data">
+                            <field name="submission_data"/>
                         </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>
-                    <field name="activity_ids" widget="mail_activity"/>
                     <field name="message_ids" widget="mail_thread"/>
                 </div>
             </form>

@@ -17,11 +17,10 @@ class Builder(models.Model):
     name = fields.Char(
         "Name", required=True, track_visibility='onchange',
         help="""Identifies this specific form.\n
-        This name can be used in APIs. Use only ASCII letters, digits, "-" or "_".
-        """)
-    title = fields.Char("Title",
-        help="Form title in the current language", track_visibility='onchange',
-        default="Untitled Form")
+        This name can be used in APIs. Use only ASCII letters, digits, "-" or "_".""")
+    title = fields.Char(
+        "Title", default="Untitled Form",
+        help="Form title in the current language", track_visibility='onchange')
     description = fields.Text("Description")
     res_model_id = fields.Many2one(
         "ir.model",
@@ -46,10 +45,6 @@ class Builder(models.Model):
         
     @api.multi
     def action_edit(self):
-        # url = '{base_url}/formio/builder/{builder_id}'.format(
-        #     base_url=self.env['ir.config_parameter'].get_param('web.base.url'),
-        #     builder_id=self.id)
-
         return {
             'type': 'ir.actions.act_url',
             'url': self.edit_url,

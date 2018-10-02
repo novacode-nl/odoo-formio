@@ -4,9 +4,10 @@
 
 import json
 
-from odoo import http
+from odoo import http, fields
 from odoo.http import request
 from odoo.exceptions import ValidationError
+
 
 class Formio(http.Controller):
 
@@ -60,8 +61,8 @@ class Formio(http.Controller):
     @http.route('/formio/form/data/<int:form_id>', type='json', auth='user', website=True)
     def form_data(self, form_id, **kwargs):
         form = request.env['formio.form'].browse(form_id)
-        if form and form.data:
-            return form.data
+        if form and form.submission_data:
+            return form.submission_data
         else:
             return {}
 
@@ -71,5 +72,9 @@ class Formio(http.Controller):
             # TODO raise or set exception (in JSON resonse) ?
             return
         
-        data = json.dumps(post['data'])
-        form.write({'data': data})
+        vals = {
+            'submission_data': json.dumps(post['data']),
+            'submission_user_id': request.env.user.id,
+            'submission_date': fields.Datetime.now(),
+        }
+        form.write(vals)
