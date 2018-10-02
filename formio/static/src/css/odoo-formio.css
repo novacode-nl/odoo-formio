@@ -1,5 +1,5 @@
 body {
-    background-color: #e7e7e7;
+    background-color: #f3f3f3;
 }
 
 header a.navbar-brand.logo {
@@ -44,7 +44,7 @@ body #wrapwrap {
 }
 
 body #wrapwrap main {
-    background-color: #e7e7e7;
+    background-color: #f3f3f3;
 }
 
 body #wrapwrap main .container {
@@ -59,7 +59,7 @@ body #wrapwrap main .container {
 /* Form.io Builder */
 
 body #wrapwrap main .container.formio_builder_title {
-    background-color: #e7e7e7;
+    background-color: #f3f3f3;
 }
 
 .formio_builder_title h3, .formio_builder_title img {
@@ -77,6 +77,8 @@ body #wrapwrap main .container.formio_builder_title {
 
 .container.form_builder_container {
     padding: 12px;
+    border: 1px solid #e7e7e7;
+
 }
 
 #formio_builder {
@@ -90,7 +92,7 @@ body #wrapwrap main .container.formio_builder_title {
 /* Form.io Form */
 
 body #wrapwrap main .container.formio_form_title {
-    background-color: #e7e7e7;
+    background-color: #f3f3f3;
 }
 
 .formio_form_title h3, .formio_form_title img {
@@ -104,6 +106,7 @@ body #wrapwrap main .container.formio_form_title {
 
 .container.form_form_container {
     padding: 12px;
+    border: 1px solid #e7e7e7;
 }
 
 #formio_form {
