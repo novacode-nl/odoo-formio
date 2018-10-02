@@ -25,7 +25,7 @@ header .navbar {
     font-size: 13px;
 }
 
-#oe_main_menu_navbar .o_menu_systray a > .fa-external-link {
+#oe_main_menu_navbar .o_menu_systray a > .fa {
     margin-right: 7.5px;
 }
 

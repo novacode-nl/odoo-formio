@@ -23,8 +23,8 @@ See LICENSE file for full licensing details. -->
 	    <form string="Form">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_edit" type="object" string="Edit"
-                                class="oe_stat_button" icon="fa-edit"/>
+                        <button name="action_edit" type="object" string="Form"
+                                class="oe_stat_button" icon="fa-external-link"/>
                     </div>
                     <group>
                         <field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/>
