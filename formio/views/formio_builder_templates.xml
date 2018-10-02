@@ -6,7 +6,7 @@ See LICENSE file for full licensing details. -->
     <template id="formio_builder" name="Form.io">
         <html>
             <head>
-                <title>Form.io Builder | <t t-esc="builder_title"/></title>
+                <title><t t-esc="builder_title"/> | Form Builder</title>
                 <link rel="shortcut icon" href="/web/static/src/img/favicon.ico" type="image/x-icon"/>
                 
                 <!-- Form.io (core) -->
