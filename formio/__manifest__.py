@@ -13,9 +13,10 @@
     'depends': ['web', 'mail'],
     'data': [
         'views/formio_builder_views.xml',
+        'views/formio_builder_templates.xml',
         'views/formio_form_views.xml',
+        'views/formio_form_templates.xml',
         'views/formio_menu.xml',
-        'views/formio_templates.xml'
     ],
     'application': True,
     'description': """
