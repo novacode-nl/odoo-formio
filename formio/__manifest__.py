@@ -21,9 +21,15 @@
         'views/formio_menu.xml',
     ],
     'application': True,
+    'images': [
+        'static/description/banner.png',
+    ],
     'description': """
 Form.io integration
 ====================
+
+Design and serve "Form.io" webforms, while manage and store its data in Odoo.
+=> http://form.io
 
 After installation you can start right away!
 No extra installation or setup is required.
@@ -31,8 +37,14 @@ No extra installation or setup is required.
 Form Builder
 ------------
 
-* Deployed and ready to use. Just create and edit a Form (Builder) from within Odoo.
-* Form schema/data is tored in your Odoo database upon each change.
+* Deployed and ready to use. Just create and edit a Form Builder, which starts in Odoo.
+* Form schema/data is stored in your Odoo database upon each change.
+
+Form
+----
+
+* Users can create, edit and fill-in Forms.
+* Forms are stored in the Odoo database.
 
 """
 }
