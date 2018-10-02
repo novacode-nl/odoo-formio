@@ -29,10 +29,13 @@ header .navbar {
     margin-right: 7.5px;
 }
 
-#oe_main_menu_navbar .o_menu_systray a:hover {
-    background-color: #5f5e97;
-    border-color: #5b5a91;
+#oe_main_menu_navbar .o_menu_systray a {
     text-decoration: none;
+}
+
+/* Odoo: /web/static/src/less/web.assets_frontend/import_bootstrap.less.css */
+.navbar-default .navbar-nav > li > a {
+    color: #777;
 }
 
 body #wrapwrap {
@@ -40,7 +43,7 @@ body #wrapwrap {
 	display: table;
 	table-layout: fixed;
 	width: 100%;
-	height: 100%;
+	/* height: 100%; XXX causes a inexplicable vertical scroll */
 }
 
 body #wrapwrap main {
