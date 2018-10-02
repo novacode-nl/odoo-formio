@@ -37,7 +37,7 @@ See LICENSE file for full licensing details. -->
                                 <field name="submission_date"/>
                             </group>
                         </page>
-                        <page string="Data" name="data" groups="formio.group_formio_mamager">
+                        <page string="Data" name="data" groups="formio.group_formio_manager">
                             <field name="submission_data"/>
                         </page>
                     </notebook>
