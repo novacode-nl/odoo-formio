@@ -7,6 +7,7 @@ See LICENSE file for full licensing details. -->
         id="menu_formio_root"
         name="Form.io"
         sequence="2"
+        web_icon="formio,static/description/icon.png"/>
         groups="base.group_user"/>
     <menuitem
         id="menu_formio_form"
