@@ -28,7 +28,7 @@ See LICENSE file for full licensing details. -->
                     </div>
                     <group>
                         <field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/>
-                        <field name="builder_id"/>
+                        <field name="builder_id" attrs="{'readonly': [('id', '!=', False)]}"/>
                     </group>
                     <notebook>
                         <page string="Submission" name="submission">
@@ -37,7 +37,7 @@ See LICENSE file for full licensing details. -->
                                 <field name="submission_date"/>
                             </group>
                         </page>
-                        <page string="Data" name="data">
+                        <page string="Data" name="data" groups="formio.group_formio_mamager">
                             <field name="submission_data"/>
                         </page>
                     </notebook>

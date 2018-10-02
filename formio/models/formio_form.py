@@ -24,13 +24,14 @@ class Form(models.Model):
     res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model')
     res_id = fields.Integer("Record ID", ondelete='restrict',
         help="Database ID of the record in res_model to which this applies")
-    submission_data = fields.Text('Data', default=False, readonly=True) # track_visibility='onchange'
-    submission_user_id = fields.Many2one('res.users', string='User')
-    submission_date = fields.Datetime(string='Date')
+    submission_data = fields.Text('Data', default=False, readonly=True)
+    submission_user_id = fields.Many2one('res.users', string='Submission User', readonly=True)
+    submission_date = fields.Datetime(string='Submission Date', readonly=True, track_visibility='onchange')
 
     def _compute_edit_url(self):
+        # sudo() is needed for regular users.
         url = '{base_url}/formio/form/{form_id}'.format(
-            base_url=self.env['ir.config_parameter'].get_param('web.base.url'),
+            base_url=self.env['ir.config_parameter'].sudo().get_param('web.base.url'),
             form_id=self.id)
         self.edit_url = url
         

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Nova Code (http://www.novacode.nl)
+See LICENSE file for full copyright and licensing details. -->
+
+<odoo>
+    <!-- <data noupdate="1"> -->
+    <data>
+        <!-- Builder -->
+        <record id="access_formio_builder_manager" model="ir.model.access">
+            <field name="name">formio.builder.manager</field>
+            <field name="model_id" ref="formio.model_formio_builder"/>
+            <field name="group_id" ref="formio.group_formio_manager"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="access_formio_builder_user" model="ir.model.access">
+            <field name="name">formio.builder.user</field>
+            <field name="model_id" ref="formio.model_formio_builder"/>
+            <field name="group_id" ref="formio.group_formio_user"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <!-- Form -->
+        <record id="access_formio_form_manager" model="ir.model.access">
+            <field name="name">formio.form.manager</field>
+            <field name="model_id" ref="formio.model_formio_form"/>
+            <field name="group_id" ref="formio.group_formio_manager"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record id="access_formio_form_user" model="ir.model.access">
+            <field name="name">formio.form.user</field>
+            <field name="model_id" ref="formio.model_formio_form"/>
+            <field name="group_id" ref="formio.group_formio_user"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+    </data>
+</odoo>

@@ -19,5 +19,6 @@ See LICENSE file for full licensing details. -->
         name="Form Builder"
         parent="formio.menu_formio_root"
         sequence="20"
+        groups="formio.group_formio_manager"
         action="formio.action_formio_builder"/>
 </odoo>

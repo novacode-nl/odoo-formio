@@ -12,6 +12,8 @@
     'category': 'Extra Tools',
     'depends': ['web', 'mail'],
     'data': [
+        'security/formio_security.xml',
+        'security/ir_model_access.xml',
         'views/formio_builder_views.xml',
         'views/formio_builder_templates.xml',
         'views/formio_form_views.xml',

@@ -38,8 +38,9 @@ class Builder(models.Model):
             raise ValidationError('Name is invalid. Use ASCII letters, digits, "-" or "_".')
 
     def _compute_edit_url(self):
+        # sudo() is needed for regular users.
         url = '{base_url}/formio/builder/{builder_id}'.format(
-            base_url=self.env['ir.config_parameter'].get_param('web.base.url'),
+            base_url=self.env['ir.config_parameter'].sudo().get_param('web.base.url'),
             builder_id=self.id)
         self.edit_url = url
         
