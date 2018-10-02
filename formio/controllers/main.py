@@ -14,6 +14,9 @@ class Formio(http.Controller):
     # Builder
     @http.route('/formio/builder/<int:builder_id>', type='http', auth='user', website=True)
     def builder_edit(self, builder_id, **kwargs):
+        if not request.env.user.has_group('formio.group_formio_manager'):
+            return request.redirect("/")
+        
         builder = request.env['formio.builder'].browse(builder_id)
         values = {
             'builder_id': builder_id,
@@ -24,6 +27,9 @@ class Formio(http.Controller):
 
     @http.route('/formio/builder/schema/<int:builder_id>', type='json', auth='user', website=True)
     def builder_schema(self, builder_id, **kwargs):
+        if not request.env.user.has_group('formio.group_formio_manager'):
+            return
+        
         builder = request.env['formio.builder'].browse(builder_id)
         if builder and builder.schema:
             return builder.schema
@@ -32,8 +38,10 @@ class Formio(http.Controller):
 
     @http.route('/formio/builder/save/<model("formio.builder"):builder>', type='json', auth="user", methods=['POST'], website=True)
     def builder_save(self, builder, **post):
+        if not request.env.user.has_group('formio.group_formio_manager'):
+            return
+        
         if not 'builder_id' in post or int(post['builder_id']) != builder.id:
-            # TODO raise or set exception (in JSON resonse) ?
             return
         
         schema = json.dumps(post['schema'])
@@ -42,6 +50,9 @@ class Formio(http.Controller):
     # Form
     @http.route('/formio/form/<int:form_id>', type='http', auth='user', website=True)
     def form_edit(self, form_id, **kwargs):
+        if not request.env.user.has_group('formio.group_formio_user'):
+            return request.redirect("/")
+        
         form = request.env['formio.form'].browse(form_id)
         values = {
             'form_id': form_id,
@@ -52,6 +63,9 @@ class Formio(http.Controller):
 
     @http.route('/formio/form/schema/<int:form_id>', type='json', auth='user', website=True)
     def form_schema(self, form_id, **kwargs):
+        if not request.env.user.has_group('formio.group_formio_user'):
+            return
+        
         form = request.env['formio.form'].browse(form_id)
         if form and form.builder_id.schema:
             return form.builder_id.schema
@@ -60,6 +74,9 @@ class Formio(http.Controller):
 
     @http.route('/formio/form/data/<int:form_id>', type='json', auth='user', website=True)
     def form_data(self, form_id, **kwargs):
+        if not request.env.user.has_group('formio.group_formio_user'):
+            return
+        
         form = request.env['formio.form'].browse(form_id)
         if form and form.submission_data:
             return form.submission_data
@@ -68,6 +85,9 @@ class Formio(http.Controller):
 
     @http.route('/formio/form/submit/<model("formio.form"):form>', type='json', auth="user", methods=['POST'], website=True)
     def form_submit(self, form, **post):
+        if not request.env.user.has_group('formio.group_formio_user'):
+            return
+        
         if not 'form_id' in post or int(post['form_id']) != form.id:
             # TODO raise or set exception (in JSON resonse) ?
             return
