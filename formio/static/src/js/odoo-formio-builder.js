@@ -6,7 +6,7 @@ odoo.define('formio.Builder', ['web.ajax'], function (require) {
     $(document).ready(function() {
         var builder_id = document.getElementById('builder_id').value,
             schema_url = '/formio/builder/schema/' + builder_id,
-            post_url = '/formio/builder/post/' + builder_id,
+            save_url = '/formio/builder/save/' + builder_id,
             schema = {};
         
         ajax.jsonRpc(schema_url, 'call', {}).then(function(result) {
@@ -17,12 +17,11 @@ odoo.define('formio.Builder', ['web.ajax'], function (require) {
             // Render the Builder (with JSON schema).
             Formio.builder(document.getElementById('formio_builder'), schema).then(function(builder) {
                 builder.on('saveComponent', function(component) {
-                    ajax.jsonRpc(post_url, 'call', {
+                    ajax.jsonRpc(save_url, 'call', {
                         'builder_id': builder_id,
                         'schema': builder.schema
                     }).then(function (result) {
-                        console.log(result);
-                        alert('saved component');
+                        console.log('Form.io: saved component '+ component.key);
                     });
                 });
                 builder.on('deleteComponent', function(component) {
@@ -36,11 +35,11 @@ odoo.define('formio.Builder', ['web.ajax'], function (require) {
                             new_schema['components'].push(builder.schema.components[i]);
                         }
                     }
-                    ajax.jsonRpc(post_url, 'call', {
+                    ajax.jsonRpc(save_url, 'call', {
                         'builder_id': builder_id,
                         'schema': new_schema
                     }).then(function (result) {
-                        alert('deleted component');
+                        console.log('Form.io: deleted component '+ component.key);
                     });
                 });
             });

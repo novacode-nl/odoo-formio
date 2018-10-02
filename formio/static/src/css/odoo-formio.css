@@ -51,6 +51,11 @@ body #wrapwrap main .container {
     background-color: #fff;
 }
 
+#formio-logo {
+    float: left;
+    margin-right: 15px;
+}
+
 /* Form.io Builder */
 
 body #wrapwrap main .container.formio_builder_title {
@@ -62,8 +67,12 @@ body #wrapwrap main .container.formio_builder_title {
 }
 
 .formio_builder_title .formio_builder_name {
-    padding-left: 0;
     color: #777777;
+    float: left;
+}
+
+.formio_builder_title h3.formio_builder_name small {
+    vertical-align: middle;
 }
 
 .container.form_builder_container {
@@ -75,6 +84,33 @@ body #wrapwrap main .container.formio_builder_title {
 }
 
 #formio_builder.row {
+    margin-right: 0;
+}
+
+/* Form.io Form */
+
+body #wrapwrap main .container.formio_form_title {
+    background-color: #e7e7e7;
+}
+
+.formio_form_title h3, .formio_form_title img {
+    margin: 10px 0;
+}
+
+.formio_form_title .formio_form_name {
+    color: #777777;
+    float: left;
+}
+
+.container.form_form_container {
+    padding: 12px;
+}
+
+#formio_form {
+    padding: 12x;
+}
+
+#formio_form.row {
     margin-right: 0;
 }
 

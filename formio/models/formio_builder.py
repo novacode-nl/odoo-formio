@@ -30,6 +30,7 @@ class Builder(models.Model):
         help="Model as resource this form represents or acts on")
     schema = fields.Text()
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
+    forms = fields.One2many('formio.form', 'builder_id', string='Forms')
 
     @api.constrains('name')
     def constaint_check_name(self):

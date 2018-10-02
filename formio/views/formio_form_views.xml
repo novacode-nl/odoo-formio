@@ -3,11 +3,11 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
-    <record id="view_formio_builder_tree" model="ir.ui.view">
-        <field name="name">formio.builder.tree</field>
-        <field name="model">formio.builder</field>
+    <record id="view_formio_form_tree" model="ir.ui.view">
+        <field name="name">formio.form.tree</field>
+        <field name="model">formio.form</field>
         <field name="arch" type="xml">
-            <tree string="Builder">
+            <tree string="Form">
                 <field name="title"/>
                 <field name="name"/>
                 <field name="res_model_id"/>
@@ -15,31 +15,29 @@ See LICENSE file for full licensing details. -->
         </field>
     </record>
 
-    <record id="view_formio_builder" model="ir.ui.view">
-        <field name="name">formio.builder.form</field>
-        <field name="model">formio.builder</field>
+    <record id="view_formio_form" model="ir.ui.view">
+        <field name="name">formio.form.form</field>
+        <field name="model">formio.form</field>
         <field name="arch" type="xml">
 	    <form string="Form">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_edit" type="object" string="Form.io"
+                        <button name="action_edit" type="object" string="Edit"
                                 class="oe_stat_button" icon="fa-edit"/>
                     </div>
-                    <label for="name" class="oe_edit_only"/>
-                    <h1><field name="name"/></h1>
+                    <group>
+                        <field name="builder_id"/>
+                        <field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/>
+                    </group>
                     <notebook>
                         <page string="General" name="general">
                             <group>
                                 <field name="title"/>
-                                <field name="description"/>
                                 <field name="res_model_id"/>
                             </group>
                         </page>
-                        <page string="Schema" name="schema">
-                            <field name="schema"/>
-                        </page>
-                        <page string="Forms" name="forms">
-                            <field name="forms"/>
+                        <page string="Submission" name="submission">
+                            <field name="data"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -52,11 +50,11 @@ See LICENSE file for full licensing details. -->
         </field>
     </record>
 
-    <record id="action_formio_builder" model="ir.actions.act_window">
-        <field name="name">Form Builder</field>
-        <field name="res_model">formio.builder</field>
+    <record id="action_formio_form" model="ir.actions.act_window">
+        <field name="name">Form</field>
+        <field name="res_model">formio.form</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="view_formio_builder_tree"/>
+        <field name="view_id" ref="view_formio_form_tree"/>
     </record>
 </odoo>
