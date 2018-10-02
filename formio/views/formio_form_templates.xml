@@ -14,9 +14,9 @@ See LICENSE file for full licensing details. -->
                 <link rel="stylesheet" href="https://unpkg.com/formiojs@latest/dist/formio.full.min.css"/>
                 <script src="https://unpkg.com/formiojs@latest/dist/formio.full.min.js"></script>
 
-                <!-- Odoo (core) -->
-                <t t-call-assets="web.assets_common" t-css="true"/>
-                <t t-call-assets="web.assets_common" t-js="false"/>
+                <!-- Odoo (only Javascript and include specific CSS) -->
+                <t t-call-assets="web.assets_common" t-css="false"/>
+                <link rel="stylesheet" href="/web/static/src/less/web.assets_common/navbar.less.css"/>
 
                 <!-- formio module -->
                 <link rel="stylesheet" href="/formio/static/src/css/odoo-formio.css"/>
