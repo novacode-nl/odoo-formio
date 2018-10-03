@@ -15,10 +15,13 @@
         'security/formio_security.xml',
         'security/ir_model_access.xml',
         'views/formio_builder_views.xml',
-        'views/formio_builder_templates.xml',
         'views/formio_form_views.xml',
-        'views/formio_form_templates.xml',
         'views/formio_menu.xml',
+        # formio templates
+        'views/formio_common_templates.xml',
+        'views/formio_builder_templates.xml',
+        'views/formio_form_templates.xml',
+
     ],
     'application': True,
     'images': [
