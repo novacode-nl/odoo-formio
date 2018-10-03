@@ -28,7 +28,7 @@
 Form.io
 =======
 
-Build, publish and store webforms in Odoo with the "Form.io" GUI/renderer',
+Build, publish and store webforms in Odoo with the "Form.io" GUI/renderer.
 
 http://form.io
 
