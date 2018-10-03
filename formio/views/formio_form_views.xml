@@ -24,11 +24,11 @@ See LICENSE file for full licensing details. -->
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_edit" type="object" string="Form"
-                                class="oe_stat_button" icon="fa-external-link"/>
+                                class="oe_stat_button" icon="fa-file-text"/>
                     </div>
                     <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/></h1>
                     <group>
-                        <field name="res_model_name" attrs="{'readonly': [('id', '!=', False)]}"/>
+                        <field name="res_model_name" readonly="1" attrs="{'invisible': [('builder_id', '=', False)]}"/>
                         <field name="builder_id" attrs="{'readonly': [('id', '!=', False)]}"/>
                     </group>
                     <notebook>
