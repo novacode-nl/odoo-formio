@@ -26,11 +26,11 @@ See LICENSE file for full licensing details. -->
                 <nav id="oe_main_menu_navbar" class="o_main_navbar">
                     <ul class="o_menu_systray hidden-xs">
                         <li t-if="not translatable" id="edit-in-backend">
-                            <a data-action="edit" href="#"><span class="fa fa-location-arrow"/>View in Odoo</a>
+                            <a data-action="edit" href="#"><span class="fa fa-location-arrow"/>Details <small>(in Odoo)</small></a>
                             <!-- t-attf-href="/web#return_label=Formio&amp;view_type=form&amp;model=#{main_object._name}&amp;id=#{main_object.id}&amp;action=#{action}" -->
                         </li>
                         <li t-if="not translatable" id="odoo-home">
-                            <a href="/"><span class="fa fa-home"/>Home</a>
+                            <a href="/"><span class="fa fa-home"/>Odoo</a>
                         </li>
                     </ul>
                 </nav>
