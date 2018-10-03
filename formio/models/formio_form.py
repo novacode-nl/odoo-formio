@@ -21,6 +21,7 @@ class Form(models.Model):
     name = fields.Char(related='builder_id.name', readonly=True)
     title = fields.Char(related='builder_id.title', readonly=True)
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
+    act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model')
     res_id = fields.Integer("Record ID", ondelete='restrict',
         help="Database ID of the record in res_model to which this applies")
@@ -34,6 +35,15 @@ class Form(models.Model):
             base_url=self.env['ir.config_parameter'].sudo().get_param('web.base.url'),
             form_id=self.id)
         self.edit_url = url
+
+    def _compute_act_window_url(self):
+        # sudo() is needed for regular users.
+        action = self.env.ref('formio.action_formio_form')
+        url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
+            id=self.id,
+            model=self._name,
+            action=action.id)
+        self.act_window_url = url
         
     @api.multi
     def action_edit(self):

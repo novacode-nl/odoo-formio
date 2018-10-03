@@ -29,6 +29,7 @@ class Builder(models.Model):
         help="Model as resource this form represents or acts on")
     schema = fields.Text()
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
+    act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
 
     @api.constrains('name')
@@ -43,6 +44,15 @@ class Builder(models.Model):
             base_url=self.env['ir.config_parameter'].sudo().get_param('web.base.url'),
             builder_id=self.id)
         self.edit_url = url
+
+    def _compute_act_window_url(self):
+        # sudo() is needed for regular users.
+        action = self.env.ref('formio.action_formio_builder')
+        url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
+            id=self.id,
+            model=self._name,
+            action=action.id)
+        self.act_window_url = url
         
     @api.multi
     def action_edit(self):

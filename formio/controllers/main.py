@@ -22,6 +22,7 @@ class Formio(http.Controller):
             'builder_id': builder_id,
             'builder_name': builder.name,
             'builder_title': builder.title,
+            'act_window_url': builder.act_window_url
         }
         return request.render('formio.formio_builder', values)
 
@@ -58,6 +59,7 @@ class Formio(http.Controller):
             'form_id': form_id,
             'form_name': form.name,
             'form_title': form.title,
+            'act_window_url': form.act_window_url
         }
         return request.render('formio.formio_form', values)
 
