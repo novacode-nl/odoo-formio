@@ -23,6 +23,7 @@ class Form(models.Model):
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model')
+    res_model_name = fields.Char(related='res_model_id.name', readonly=True, string='Resource Name')
     res_id = fields.Integer("Record ID", ondelete='restrict',
         help="Database ID of the record in res_model to which this applies")
     submission_data = fields.Text('Data', default=False, readonly=True)

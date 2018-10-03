@@ -21,7 +21,6 @@
         'views/formio_common_templates.xml',
         'views/formio_builder_templates.xml',
         'views/formio_form_templates.xml',
-
     ],
     'application': True,
     'images': [

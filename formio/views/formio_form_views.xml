@@ -9,7 +9,7 @@ See LICENSE file for full licensing details. -->
         <field name="arch" type="xml">
             <tree string="Form">
                 <field name="title"/>
-                <field name="name"/>
+                <field name="res_model_name"/>
                 <field name="submission_user_id"/>
                 <field name="submission_date"/>
             </tree>
@@ -28,6 +28,7 @@ See LICENSE file for full licensing details. -->
                     </div>
                     <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/></h1>
                     <group>
+                        <field name="res_model_name" attrs="{'readonly': [('id', '!=', False)]}"/>
                         <field name="builder_id" attrs="{'readonly': [('id', '!=', False)]}"/>
                     </group>
                     <notebook>
