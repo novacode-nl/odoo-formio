@@ -2,17 +2,12 @@ body {
     background-color: #f5f5f5;
 }
 
-header a.navbar-brand.logo {
-    padding: 0 15px;
-}
-
-header a.navbar-brand.logo img {
-    height: 40px;
-    margin-top: 5px;
-}
-
 header .navbar {
     margin-bottom: 0;
+}
+
+.navbar-brand.company-logo {
+    padding: 0 15px 0 0;
 }
 
 .navbar.navbar-static-top ul.nav > li.divider {
@@ -38,6 +33,10 @@ header .navbar {
     color: #777;
 }
 
+main a.navbar-brand.logo img {
+    max-height: 75px;
+}
+
 body #wrapwrap {
 	position: relative;
 	display: table;
@@ -54,10 +53,6 @@ body #wrapwrap main .container {
     background-color: #fff;
 }
 
-#formio-logo {
-    float: left;
-    margin-right: 15px;
-}
 
 /* Form.io Builder */
 
@@ -65,13 +60,14 @@ body #wrapwrap main .container.formio_builder_title {
     background-color: #f5f5f5;
 }
 
-.formio_builder_title h3, .formio_builder_title img {
-    margin: 10px 0;
+.formio_builder_title .row > div {
+    height: 75px;
 }
 
 .formio_builder_title .formio_builder_name {
-    color: #777777;
     float: left;
+    margin-top: 25px;
+    color: #777777;
 }
 
 .formio_builder_title h3.formio_builder_name small {
@@ -98,13 +94,14 @@ body #wrapwrap main .container.formio_form_title {
     background-color: #f5f5f5;
 }
 
-.formio_form_title h3, .formio_form_title img {
-    margin: 10px 0;
+.formio_form_title .row > div {
+    height: 75px;
 }
 
 .formio_form_title .formio_form_name {
-    color: #777777;
     float: left;
+    margin-top: 25px;
+    color: #777777;
 }
 
 .container.form_form_container {

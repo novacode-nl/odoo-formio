@@ -26,7 +26,9 @@ See LICENSE file for full licensing details. -->
                         <div class="container formio_form_title">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <img id="formio-logo" width="120" src="/formio/static/src/img/formio-logo.png"/>
+                                    <a href="/" class="navbar-brand logo company-logo">
+                                        <span t-field="res_company.logo" t-options="{'widget': 'image'}" t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name"/>
+                                    </a>
                                     <h3 class="formio_form_name"><t t-esc="form_title"/></h3>
                                 </div>
                             </div>
