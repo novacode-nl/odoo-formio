@@ -14,7 +14,7 @@ See LICENSE file for full licensing details. -->
                     type="object"
                     class="oe_stat_button"
                     icon="fa-file-text">
-                    <field name="formio_forms_count" widget="statinfo" string="Forms.io(s)"/>
+                    <field name="formio_forms_count" widget="statinfo" string="Forms.io"/>
                 </button>
             </div>
         </field>
