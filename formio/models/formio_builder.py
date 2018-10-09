@@ -14,6 +14,7 @@ class Builder(models.Model):
     _name = 'formio.builder'
     _description = 'Formio Builder'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _rec_name = 'title'
 
     name = fields.Char(
         "Name", required=True, track_visibility='onchange',

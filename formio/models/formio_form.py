@@ -22,9 +22,9 @@ class Form(models.Model):
     title = fields.Char(related='builder_id.title', readonly=True)
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
-    res_act_window_url = fields.Char(compute='_compute_resource_act_window', readonly=True)
-    res_act_window_label = fields.Char(compute='_compute_resource_act_window', readonly=True)
-    res_act_window_label_extra = fields.Char(compute='_compute_resource_act_window', readonly=True)
+    res_act_window_url = fields.Char(compute='_compute_res_act_window', readonly=True)
+    res_act_window_label = fields.Char(compute='_compute_res_act_window', readonly=True)
+    res_act_window_label_extra = fields.Char(compute='_compute_res_act_window', readonly=True)
     res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model')
     res_model_name = fields.Char(related='res_model_id.name', readonly=True, string='Resource Name')
     res_id = fields.Integer("Record ID", ondelete='restrict',
@@ -49,7 +49,7 @@ class Form(models.Model):
             action=action.id)
         self.act_window_url = url
 
-    def _compute_resource_act_window(self):
+    def _compute_res_act_window(self):
         self.res_act_window_url = False
         self.res_act_window_label = False
         self.res_act_window_extra = False

@@ -30,7 +30,7 @@ class Form(models.Model):
             res['domain'] = {'builder_id': [('res_model_id', '=', res_model_id)]}
         return res
 
-    def _compute_resource_act_window(self):
+    def _compute_res_act_window(self):
         if not self.res_model_id.model == 'sale.order':
             return
         
