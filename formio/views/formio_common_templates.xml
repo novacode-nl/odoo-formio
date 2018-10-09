@@ -12,9 +12,10 @@ See LICENSE file for full licensing details. -->
             <link rel="stylesheet" href="https://unpkg.com/formiojs@latest/dist/formio.full.min.css"/>
             <script src="https://unpkg.com/formiojs@latest/dist/formio.full.min.js"></script>
 
-            <!-- Odoo (only Javascript and include specific CSS) -->
-            <t t-call-assets="web.assets_common" t-css="false"/>
-            <link rel="stylesheet" href="/web/static/src/less/web.assets_common/navbar.less.css"/>
+            <t t-call-assets="web.assets_common"/>
+            <!-- FIXME Odoo (only Javascript and include specific CSS). But including less doesn't compile/fails! -->
+            <!-- <t t-call-assets="web.assets_common" t-css="false"/> -->
+            <!-- <link rel="stylesheet" type="text/less" href="/web/static/src/less/navbar.less"/> -->
 
             <!-- formio module -->
             <link rel="stylesheet" href="/formio/static/src/css/odoo-formio.css"/>
