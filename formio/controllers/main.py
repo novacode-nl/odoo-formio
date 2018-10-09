@@ -59,7 +59,10 @@ class Formio(http.Controller):
             'form_id': form_id,
             'form_name': form.name,
             'form_title': form.title,
-            'act_window_url': form.act_window_url
+            'act_window_url': form.act_window_url,
+            'res_act_window_url': form.res_act_window_url,
+            'res_act_window_label': form.res_act_window_label,
+            'res_act_window_label_extra': form.res_act_window_label_extra,
         }
         return request.render('formio.formio_form', values)
 

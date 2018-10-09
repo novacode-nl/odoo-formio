@@ -12,8 +12,19 @@ See LICENSE file for full licensing details. -->
             <body class="o_connected_user">
                 <nav id="oe_main_menu_navbar" class="o_main_navbar">
                     <ul class="o_menu_systray hidden-xs">
+                        <t t-if="res_act_window_url and res_act_window_label">
+                            <li t-if="not translatable" id="res-in-backend">
+                                <a t-attf-href="#{res_act_window_url}">
+                                    <span class="fa fa-link"/>
+                                    <t t-esc="res_act_window_label"/>
+                                    <t t-if="res_act_window_label_extra">
+                                        <small> (<t t-esc="res_act_window_label_extra"/>)</small>
+                                    </t>
+                                </a>
+                            </li>
+                        </t>
                         <li t-if="not translatable" id="edit-in-backend">
-                            <a t-attf-href="#{act_window_url}"><span class="fa fa-location-arrow"/>Details <small>(in Odoo)</small></a>
+                            <a t-attf-href="#{act_window_url}"><span class="fa fa-location-arrow"/>Form Details</a>
                         </li>
                         <li t-if="not translatable" id="odoo-home">
                             <a href="/"><span class="fa fa-home"/>Odoo</a>
