@@ -12,13 +12,13 @@ See LICENSE file for full licensing details. -->
             <body class="o_connected_user">
                 <nav id="oe_main_menu_navbar" class="o_main_navbar">
                     <ul class="o_menu_systray hidden-xs">
-                        <t t-if="res_act_window_url and res_act_window_label">
+                        <t t-if="res_act_window_url and res_name">
                             <li t-if="not translatable" id="res-in-backend">
                                 <a t-attf-href="#{res_act_window_url}">
                                     <span class="fa fa-link"/>
-                                    <t t-esc="res_act_window_label"/>
-                                    <t t-if="res_act_window_label_extra">
-                                        <small> (<t t-esc="res_act_window_label_extra"/>)</small>
+                                    <t t-esc="res_name"/>
+                                    <t t-if="res_info">
+                                        <small> (<t t-esc="res_info"/>)</small>
                                     </t>
                                 </a>
                             </li>

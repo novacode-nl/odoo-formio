@@ -30,7 +30,7 @@ class Form(models.Model):
             res['domain'] = {'builder_id': [('res_model_id', '=', res_model_id)]}
         return res
 
-    def _compute_res_act_window(self):
+    def _compute_res_fields(self):
         if not self.res_model_id.model == 'sale.order':
             return
         
@@ -44,5 +44,5 @@ class Form(models.Model):
             model='sale.order',
             action=action.id)
         self.res_act_window_url = url
-        self.res_act_window_label = self.sale_order_id.name
-        self.res_act_window_label_extra = get_field_selection_label(self.sale_order_id, 'state')
+        self.res_name = self.sale_order_id.name
+        self.res_info = get_field_selection_label(self.sale_order_id, 'state')

@@ -22,13 +22,13 @@ class Form(models.Model):
     title = fields.Char(related='builder_id.title', readonly=True)
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
-    res_act_window_url = fields.Char(compute='_compute_res_act_window', readonly=True)
-    res_act_window_label = fields.Char(compute='_compute_res_act_window', readonly=True)
-    res_act_window_label_extra = fields.Char(compute='_compute_res_act_window', readonly=True)
     res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model')
     res_model_name = fields.Char(related='res_model_id.name', readonly=True, string='Resource Name')
     res_id = fields.Integer("Record ID", ondelete='restrict',
         help="Database ID of the record in res_model to which this applies")
+    res_act_window_url = fields.Char(compute='_compute_res_fields', readonly=True)
+    res_name = fields.Char(compute='_compute_res_fields', readonly=True)
+    res_info = fields.Char(compute='_compute_res_fields', readonly=True)
     submission_data = fields.Text('Data', default=False, readonly=True)
     submission_user_id = fields.Many2one('res.users', string='Submission User', readonly=True)
     submission_date = fields.Datetime(string='Submission Date', readonly=True, track_visibility='onchange')
@@ -49,10 +49,10 @@ class Form(models.Model):
             action=action.id)
         self.act_window_url = url
 
-    def _compute_res_act_window(self):
+    def _compute_res_fields(self):
         self.res_act_window_url = False
-        self.res_act_window_label = False
-        self.res_act_window_extra = False
+        self.res_name = False
+        self.res_info = False
         
     @api.multi
     def action_edit(self):
