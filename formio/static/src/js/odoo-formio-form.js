@@ -7,10 +7,10 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
     var ajax = require('web.ajax');
 
     $(document).ready(function() {
-        var form_id = document.getElementById('form_id').value,
-            schema_url = '/formio/form/schema/' + form_id,
-            data_url = '/formio/form/data/' + form_id,
-            submit_url = '/formio/form/submit/' + form_id,
+        var slug = document.getElementById('form_slug').value,
+            schema_url = '/formio/form/schema/' + slug,
+            data_url = '/formio/form/data/' + slug,
+            submit_url = '/formio/form/submit/' + slug,
             schema = {};
 
         ajax.jsonRpc(schema_url, 'call', {}).then(function(result) {
@@ -22,7 +22,7 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
                     // Events
                     form.on('submit', function(form_obj) {
                         ajax.jsonRpc(submit_url, 'call', {
-                            'form_id': form_id,
+                            'slug': slug,
                             'data': form_obj.data
                         }).then(function () {
                             // TODO Come with a better approach, instead of the setTimeout.

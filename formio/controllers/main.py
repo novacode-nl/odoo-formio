@@ -8,6 +8,10 @@ from odoo import http, fields
 from odoo.http import request
 from odoo.exceptions import ValidationError
 
+def form_by_slug(slug):
+    form = request.env['formio.form'].search([('slug', '=', slug)], limit=1)
+    return form
+
 
 class Formio(http.Controller):
 
@@ -49,16 +53,18 @@ class Formio(http.Controller):
         builder.write({'schema': schema})
 
     # Form
-    @http.route('/formio/form/<int:form_id>', type='http', auth='user', website=True)
-    def form_edit(self, form_id, **kwargs):
+    @http.route('/formio/form/<string:slug>', type='http', auth='user', website=True)
+    def form_edit(self, slug, **kwargs):
         if not request.env.user.has_group('formio.group_formio_user'):
             return request.redirect("/")
-        
-        form = request.env['formio.form'].browse(form_id)
+
+        # form = request.env['formio.form'].search([('slug', '=', slug)])
+        form = form_by_slug(slug)
         values = {
-            'form_id': form_id,
-            'form_name': form.name,
-            'form_title': form.title,
+            'slug': form.slug,
+            'id': form.id,
+            'name': form.name,
+            'title': form.title,
             'act_window_url': form.act_window_url,
             'res_act_window_url': form.res_act_window_url,
             'res_name': form.res_name,
@@ -66,34 +72,38 @@ class Formio(http.Controller):
         }
         return request.render('formio.formio_form', values)
 
-    @http.route('/formio/form/schema/<int:form_id>', type='json', auth='user', website=True)
-    def form_schema(self, form_id, **kwargs):
+    @http.route('/formio/form/schema/<string:slug>', type='json', auth='user', website=True)
+    def form_schema(self, slug, **kwargs):
         if not request.env.user.has_group('formio.group_formio_user'):
             return
         
-        form = request.env['formio.form'].browse(form_id)
+        # form = request.env['formio.form'].browse(form_id)
+        form = form_by_slug(slug)
         if form and form.builder_id.schema:
             return form.builder_id.schema
         else:
             return {}
 
-    @http.route('/formio/form/data/<int:form_id>', type='json', auth='user', website=True)
-    def form_data(self, form_id, **kwargs):
+    @http.route('/formio/form/data/<string:slug>', type='json', auth='user', website=True)
+    def form_data(self, slug, **kwargs):
         if not request.env.user.has_group('formio.group_formio_user'):
             return
         
-        form = request.env['formio.form'].browse(form_id)
+        # form = request.env['formio.form'].browse(form_id)
+        form = form_by_slug(slug)
         if form and form.submission_data:
             return form.submission_data
         else:
             return {}
 
-    @http.route('/formio/form/submit/<model("formio.form"):form>', type='json', auth="user", methods=['POST'], website=True)
-    def form_submit(self, form, **post):
+    @http.route('/formio/form/submit/<string:slug>', type='json', auth="user", methods=['POST'], website=True)
+    def form_submit(self, slug, **post):
+        """ POST with ID instead of slug, to get the model object right away """
         if not request.env.user.has_group('formio.group_formio_user'):
             return
-        
-        if not 'form_id' in post or int(post['form_id']) != form.id:
+
+        form = form_by_slug(slug)
+        if not form:
             # TODO raise or set exception (in JSON resonse) ?
             return
         

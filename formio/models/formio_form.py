@@ -5,6 +5,7 @@
 import json
 import re
 import requests
+import uuid
 
 from odoo import api, fields, models, _
 
@@ -19,6 +20,7 @@ class Form(models.Model):
     builder_id = fields.Many2one(
         'formio.builder', string='Form builder', ondelete='restrict', store=True)
     name = fields.Char(related='builder_id.name', readonly=True)
+    slug = fields.Char(default=lambda self: self._default_slug(), required=True, readonly=True)
     title = fields.Char(related='builder_id.title', readonly=True)
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
@@ -33,11 +35,15 @@ class Form(models.Model):
     submission_user_id = fields.Many2one('res.users', string='Submission User', readonly=True)
     submission_date = fields.Datetime(string='Submission Date', readonly=True, track_visibility='onchange')
 
+    @api.model
+    def _default_slug(self):
+        return str(uuid.uuid4())
+    
     def _compute_edit_url(self):
         # sudo() is needed for regular users.
-        url = '{base_url}/formio/form/{form_id}'.format(
+        url = '{base_url}/formio/form/{slug}'.format(
             base_url=self.env['ir.config_parameter'].sudo().get_param('web.base.url'),
-            form_id=self.id)
+            slug=self.slug)
         self.edit_url = url
 
     def _compute_act_window_url(self):

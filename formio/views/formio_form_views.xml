@@ -12,6 +12,7 @@ See LICENSE file for full licensing details. -->
                 <field name="res_model_name"/>
                 <field name="submission_user_id"/>
                 <field name="submission_date"/>
+                <field name="slug"/>
             </tree>
         </field>
     </record>
@@ -28,8 +29,9 @@ See LICENSE file for full licensing details. -->
                     </div>
                     <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/></h1>
                     <group>
-                        <field name="res_model_name" readonly="1" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                        <field name="res_model_name" readonly="1" attrs="{'invisible': [('res_model_name', '=', False)]}"/>
                         <field name="builder_id" attrs="{'readonly': [('id', '!=', False)]}"/>
+                        <field name="slug" attrs="{'invisible': [('id', '=', False)]}"/>
                     </group>
                     <notebook>
                         <page string="Submission" name="submission">
