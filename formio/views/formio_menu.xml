@@ -22,4 +22,15 @@ See LICENSE file for full licensing details. -->
         parent="formio.menu_formio_root"
         sequence="70"
         action="formio.action_formio_form"/>
+    <menuitem
+        id="menu_formio_settings"
+        name="Settings"
+        parent="formio.menu_formio_root"
+        sequence="100"/>
+    <menuitem
+        id="menu_formio_version"
+        name="Form.io Versions"
+        parent="formio.menu_formio_settings"
+        sequence="30"
+        action="formio.action_formio_version"/>
 </odoo>

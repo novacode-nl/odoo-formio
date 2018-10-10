@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <data>
+        <record id="formio_version_latest" model="formio.version">
+            <field name="name">latest</field>
+        </record>
+        <record id="formio_version_v3_6_6" model="formio.version">
+            <field name="name">v3.6.6</field>
+        </record>
+    </data>
+</odoo>

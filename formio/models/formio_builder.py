@@ -18,12 +18,15 @@ class Builder(models.Model):
 
     name = fields.Char(
         "Name", required=True, track_visibility='onchange',
-        help="""Identifies this specific form.\n
-        This name can be used in APIs. Use only ASCII letters, digits, "-" or "_".""")
+        help="""Identifies this specific form. This name can be used in APIs. \
+        Use only ASCII letters, digits, "-" or "_".""")
     title = fields.Char(
-        "Title", default="Untitled Form",
-        help="Form title in the current language", track_visibility='onchange')
+        "Title", required=True, default="Untitled Form",
+        help="The form title in the current language", track_visibility='onchange')
     description = fields.Text("Description")
+    formio_version_id = fields.Many2one(
+        'formio.version', string='Form.io Version', required=True,
+        help="""Loads the specific Form.io Javascript API/libraries version (sourcecode: https://github.com/formio/formio.js)""")
     res_model_id = fields.Many2one(
         "ir.model",
         "Resource Model",

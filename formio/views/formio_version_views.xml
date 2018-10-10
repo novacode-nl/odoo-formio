@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <record id="view_formio_version_tree" model="ir.ui.view">
+        <field name="name">formio.version.tree</field>
+        <field name="model">formio.version</field>
+        <field name="arch" type="xml">
+            <tree string="Version">
+                <field name="name"/>
+                <field name="assets"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_formio_version_form" model="ir.ui.view">
+        <field name="name">formio.version.form</field>
+        <field name="model">formio.version</field>
+        <field name="arch" type="xml">
+	    <form string="Form">
+                <sheet>
+                    <label for="name" class="oe_edit_only"/>
+                    <h1><field name="name"/></h1>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                    <notebook>
+                        <page string="Assets" name="assets" groups="formio.group_formio_manager">
+                            <field name="assets">
+                                <tree>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="attachment_id"/>
+                                    <field name="type"/>
+                                    <field name="attachment_type"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_formio_version" model="ir.actions.act_window">
+        <field name="name">Form.io Versions</field>
+        <field name="res_model">formio.version</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_formio_version_tree"/>
+    </record>
+</odoo>

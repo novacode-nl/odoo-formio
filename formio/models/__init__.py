@@ -4,3 +4,5 @@
 
 from . import formio_builder
 from . import formio_form
+from . import formio_version
+from . import formio_version_asset

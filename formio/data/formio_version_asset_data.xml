@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <data>
+        <record id="formio_version_latest_bootstrap_css" model="formio.version">
+            <field name="version_id" ref="formio.formio_version_latest"/>
+            <field name="type">css</field>
+            <field name="url">https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css</field>
+        </record>
+        <record id="formio_version_latest_full_css" model="formio.version">
+            <field name="version_id" ref="formio.formio_version_latest"/>
+            <field name="type">css</field>
+            <field name="url">https://unpkg.com/formiojs@latest/dist/formio.full.min.css</field>
+        </record>
+        <record id="formio_version_asset_latest_full_js" model="formio.version">
+            <field name="version_id" ref="formio.formio_version_latest"/>
+            <field name="type">css</field>
+            <field name="url">https://unpkg.com/formiojs@latest/dist/formio.full.min.js</field>
+        </record>
+    </data>
+</odoo>
