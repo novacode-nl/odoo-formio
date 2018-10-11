@@ -9,7 +9,8 @@ See LICENSE file for full licensing details. -->
         <field name="arch" type="xml">
             <tree string="Version">
                 <field name="name"/>
-                <field name="assets"/>
+                <field name="css_assets"/>
+                <field name="js_assets"/>
             </tree>
         </field>
     </record>
