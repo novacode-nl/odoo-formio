@@ -4,11 +4,11 @@ See LICENSE file for full licensing details. -->
 
 <odoo>
     <data>
-        <record id="formio_version_latest" model="formio.version">
+        <record id="version_latest" model="formio.version">
             <field name="name">latest</field>
         </record>
-        <record id="formio_version_v3_6_6" model="formio.version">
-            <field name="name">v3.6.6</field>
+        <record id="version_3_6_6" model="formio.version">
+            <field name="name">3.6.6</field>
         </record>
     </data>
 </odoo>

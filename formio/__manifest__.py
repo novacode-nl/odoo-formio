@@ -13,6 +13,7 @@
     'depends': ['web', 'mail'],
     'data': [
         'data/formio_version_data.xml',
+        'data/formio_version_asset_data.xml',
         # security
         'security/formio_security.xml',
         'security/ir_model_access.xml',

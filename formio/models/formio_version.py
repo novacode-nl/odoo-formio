@@ -14,3 +14,9 @@ class Version(models.Model):
         help="""Form.io release/version.""")
     description = fields.Text("Description")
     assets = fields.One2many('formio.version.asset', 'version_id', string='Assets')
+    css_assets = fields.One2many(
+        'formio.version.asset', 'version_id', domain=[('type', '=', 'css')],
+        string='CSS Assets')
+    js_assets = fields.One2many(
+        'formio.version.asset', 'version_id', domain=[('type', '=', 'js')],
+        string='Javascript Assets')

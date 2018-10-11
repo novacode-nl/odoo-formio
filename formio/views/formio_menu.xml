@@ -23,14 +23,21 @@ See LICENSE file for full licensing details. -->
         sequence="70"
         action="formio.action_formio_form"/>
     <menuitem
-        id="menu_formio_settings"
-        name="Settings"
+        id="menu_formio_configuration"
+        name="Configuration"
         parent="formio.menu_formio_root"
         sequence="100"/>
+    <!-- Settings like: Hide the Form.io logo -->
+    <menuitem
+        id="menu_formio_settings"
+        name="Settings"
+        parent="formio.menu_formio_configuration"
+        sequence="30"/>
+    <!-- action="formio.action_formio_settings"/> -->
     <menuitem
         id="menu_formio_version"
         name="Form.io Versions"
-        parent="formio.menu_formio_settings"
+        parent="formio.menu_formio_configuration"
         sequence="30"
         action="formio.action_formio_version"/>
 </odoo>

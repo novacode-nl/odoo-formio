@@ -23,10 +23,13 @@ class Formio(http.Controller):
         
         builder = request.env['formio.builder'].browse(builder_id)
         values = {
+            'builder': builder,
+            'formio_css_assets': builder.formio_css_assets,
+            'formio_js_assets': builder.formio_js_assets,
             'builder_id': builder_id,
             'builder_name': builder.name,
             'builder_title': builder.title,
-            'act_window_url': builder.act_window_url
+            'act_window_url': builder.act_window_url,
         }
         return request.render('formio.formio_builder', values)
 
@@ -58,9 +61,10 @@ class Formio(http.Controller):
         if not request.env.user.has_group('formio.group_formio_user'):
             return request.redirect("/")
 
-        # form = request.env['formio.form'].search([('slug', '=', slug)])
         form = form_by_slug(slug)
         values = {
+            'formio_css_assets': form.builder_id.formio_css_assets,
+            'formio_js_assets': form.builder_id.formio_js_assets,
             'slug': form.slug,
             'id': form.id,
             'name': form.name,
@@ -77,7 +81,6 @@ class Formio(http.Controller):
         if not request.env.user.has_group('formio.group_formio_user'):
             return
         
-        # form = request.env['formio.form'].browse(form_id)
         form = form_by_slug(slug)
         if form and form.builder_id.schema:
             return form.builder_id.schema
@@ -89,7 +92,6 @@ class Formio(http.Controller):
         if not request.env.user.has_group('formio.group_formio_user'):
             return
         
-        # form = request.env['formio.form'].browse(form_id)
         form = form_by_slug(slug)
         if form and form.submission_data:
             return form.submission_data

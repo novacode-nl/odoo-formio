@@ -7,17 +7,21 @@ See LICENSE file for full licensing details. -->
         <head>
             <link rel="shortcut icon" href="/web/static/src/img/favicon.ico" type="image/x-icon"/>
             
-            <!-- Form.io (core) -->
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-            <link rel="stylesheet" href="https://unpkg.com/formiojs@latest/dist/formio.full.min.css"/>
-            <script src="https://unpkg.com/formiojs@latest/dist/formio.full.min.js"></script>
-
+            <!-- Form.io -->
+            <t t-foreach="formio_css_assets" t-as="css">
+                <link rel="stylesheet" type="text/css" t-att-href="css.url"/>
+            </t>
+            <t t-foreach="formio_js_assets" t-as="js">
+                <script type="text/javascript" t-att-src="js.url"></script>
+            </t>
+            
+            <!-- Odoo -->
             <t t-call-assets="web.assets_common"/>
             <!-- FIXME Odoo (only Javascript and include specific CSS). But including less doesn't compile/fails! -->
             <!-- <t t-call-assets="web.assets_common" t-css="false"/> -->
             <!-- <link rel="stylesheet" type="text/less" href="/web/static/src/less/navbar.less"/> -->
 
-            <!-- formio module -->
+            <!-- formio Odoo module -->
             <link rel="stylesheet" href="/formio/static/src/css/odoo-formio.css"/>
             <t t-raw="0"/>
         </head>
