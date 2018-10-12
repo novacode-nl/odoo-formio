@@ -37,8 +37,8 @@ See LICENSE file for full licensing details. -->
                     <notebook>
                         <page string="General" name="general">
                             <group>
-                                <field name="description" groups="formio.group_formio_manager"/>
                                 <field name="res_model_id" groups="formio.group_formio_manager"/>
+                                <field name="description" groups="formio.group_formio_manager"/>
                             </group>
                         </page>
                         <page string="Schema" name="schema" groups="formio.group_formio_manager">

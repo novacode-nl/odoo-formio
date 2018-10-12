@@ -10,7 +10,7 @@
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
     'category': 'Sales',
-    'depends': ['sale', 'formio'],
+    'depends': ['sale_management', 'formio'],
     'data': [
         'views/sale_views.xml',
     ],
