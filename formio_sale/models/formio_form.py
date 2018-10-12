@@ -31,18 +31,17 @@ class Form(models.Model):
         return res
 
     def _compute_res_fields(self):
-        if not self.res_model_id.model == 'sale.order':
-            return
-        
-        if self.sale_order_id.state in ('draft', 'sent'):
-            action = self.env.ref('sale.action_quotations')
-        else:
-            action = self.env.ref('sale.action_orders')
+        for r in self:
+            if r.res_model_id.model == 'sale.order':
+                if r.sale_order_id.state in ('draft', 'sent'):
+                    action = self.env.ref('sale.action_quotations')
+                else:
+                    action = self.env.ref('sale.action_orders')
 
-        url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
-            id=self.res_id,
-            model='sale.order',
-            action=action.id)
-        self.res_act_window_url = url
-        self.res_name = self.sale_order_id.name
-        self.res_info = get_field_selection_label(self.sale_order_id, 'state')
+                url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
+                    id=r.res_id,
+                    model='sale.order',
+                    action=action.id)
+                r.res_act_window_url = url
+                r.res_name = r.sale_order_id.name
+                r.res_info = get_field_selection_label(r.sale_order_id, 'state')

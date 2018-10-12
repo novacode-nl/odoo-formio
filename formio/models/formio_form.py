@@ -32,8 +32,12 @@ class Form(models.Model):
     res_name = fields.Char(compute='_compute_res_fields', readonly=True)
     res_info = fields.Char(compute='_compute_res_fields', readonly=True)
     submission_data = fields.Text('Data', default=False, readonly=True)
-    submission_user_id = fields.Many2one('res.users', string='Submission User', readonly=True)
-    submission_date = fields.Datetime(string='Submission Date', readonly=True, track_visibility='onchange')
+    submission_user_id = fields.Many2one(
+        'res.users', string='Submission User', readonly=True,
+        help='User who submitted the form.')
+    submission_date = fields.Datetime(
+        string='Submission Date', readonly=True, track_visibility='onchange',
+        help='Datetime when the form was last submitted.')
 
     @api.model
     def _default_slug(self):
@@ -41,27 +45,30 @@ class Form(models.Model):
     
     def _compute_edit_url(self):
         # sudo() is needed for regular users.
-        url = '{base_url}/formio/form/{slug}'.format(
-            base_url=self.env['ir.config_parameter'].sudo().get_param('web.base.url'),
-            slug=self.slug)
-        self.edit_url = url
+        for r in self:
+            url = '{base_url}/formio/form/{slug}'.format(
+                base_url=r.env['ir.config_parameter'].sudo().get_param('web.base.url'),
+                slug=r.slug)
+            r.edit_url = url
 
     def _compute_act_window_url(self):
         # sudo() is needed for regular users.
-        action = self.env.ref('formio.action_formio_form')
-        url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
-            id=self.id,
-            model=self._name,
-            action=action.id)
-        self.act_window_url = url
+        for r in self:
+            action = self.env.ref('formio.action_formio_form')
+            url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
+                id=r.id,
+                model=r._name,
+                action=action.id)
+            r.act_window_url = url
 
     def _compute_res_fields(self):
-        self.res_act_window_url = False
-        self.res_name = False
-        self.res_info = False
+        for r in self:
+            r.res_act_window_url = False
+            r.res_name = False
+            r.res_info = False
         
     @api.multi
-    def action_edit(self):
+    def action_formio(self):
         return {
             'type': 'ir.actions.act_url',
             'url': self.edit_url,

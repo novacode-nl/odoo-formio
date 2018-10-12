@@ -13,18 +13,75 @@ See LICENSE file for full licensing details. -->
                 <field name="submission_user_id"/>
                 <field name="submission_date"/>
                 <field name="slug"/>
+                <button name="action_formio" type="object" string="Open"/>
             </tree>
         </field>
     </record>
 
-    <record id="view_formio_form" model="ir.ui.view">
+    <record id="view_formio_form_kanban" model="ir.ui.view">
+        <field name="name">formio.form.kanban</field>
+        <field name="model">formio.form</field>
+        <field name="arch" type="xml">
+            <kanban class="oe_background_grey o_kanban_dashboard">
+                <field name="res_model_id"/>
+                <field name="res_id"/>
+                <field name="res_act_window_url"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <!-- <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click"> -->
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_headings">
+                                        <strong class="o_kanban_record_title"><field name="title"/></strong><br/>
+                                        <div class="row">
+                                            <div class="col-xs-4 mt8">
+                                                <button class="btn btn-primary" name="action_formio" type="object">Open</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_body">
+                                    <t t-if="record.res_model_id.raw_value and record.res_id.raw_value">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <t t-if="record.res_info.raw_value"><field name="res_info"/>: </t><a class="btn btn-default" t-att-href="record.res_act_window_url.raw_value"><field name="res_name"/></a>
+                                            </div>
+                                        </div>
+                                    </t>
+                                    <small class="o_kanban_record_subtitle text-muted">
+                                        <!-- submission info -->
+                                        <t t-if="record.submission_user_id.raw_value">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <i class="fa fa-user"/> <field name="submission_user_id"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <i class="fa fa-clock-o"/> <field name="submission_date"/>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </small>
+                                </div>
+                            </div>
+                            <!-- <div class="oe_clear"></div> -->
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_formio_form_form" model="ir.ui.view">
         <field name="name">formio.form.form</field>
         <field name="model">formio.form</field>
         <field name="arch" type="xml">
 	    <form string="Form">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_edit" type="object" string="Form"
+                        <button name="action_formio" type="object" string="Form"
                                 class="oe_stat_button" icon="fa-file-text"/>
                     </div>
                     <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/></h1>
@@ -57,7 +114,26 @@ See LICENSE file for full licensing details. -->
         <field name="name">Forms</field>
         <field name="res_model">formio.form</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="view_formio_form_tree"/>
+        <field name="view_mode">tree,kanban,form</field>
+        <!-- <field name="view_id" ref="view_formio_form_tree"/> -->
+    </record>
+
+    <record id="action_formio_form_view_kanban" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="formio.view_formio_form_kanban"/>
+        <field name="act_window_id" ref="action_formio_form"/>
+    </record>
+    <record id="action_formio_form_view_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="0"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="formio.view_formio_form_tree"/>
+        <field name="act_window_id" ref="action_formio_form"/>
+    </record>
+    <record id="action_formio_form_view_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="formio.view_formio_form_form"/>
+        <field name="act_window_id" ref="action_formio_form"/>
     </record>
 </odoo>
