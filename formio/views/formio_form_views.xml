@@ -9,11 +9,12 @@ See LICENSE file for full licensing details. -->
         <field name="arch" type="xml">
             <tree string="Form">
                 <field name="title"/>
-                <field name="res_model_name"/>
+                <field name="res_name"/>
+                <field name="res_info"/>
+                <button name="action_formio" type="object" string="Open"/>
                 <field name="submission_user_id"/>
                 <field name="submission_date"/>
-                <field name="slug"/>
-                <button name="action_formio" type="object" string="Open"/>
+                <field name="id"/>
             </tree>
         </field>
     </record>
@@ -41,7 +42,7 @@ See LICENSE file for full licensing details. -->
                                         </div>
                                     </div>
                                 </div>
-                                <div class="o_kanban_record_body">
+                                <div class="o_kanban_record_body" style="min-height: 67px;">
                                     <t t-if="record.res_model_id.raw_value and record.res_id.raw_value">
                                         <div class="row">
                                             <div class="col-xs-12">
@@ -65,8 +66,14 @@ See LICENSE file for full licensing details. -->
                                         </t>
                                     </small>
                                 </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left"/>
+                                    <div class="oe_kanban_bottom_right">
+                                        <small class="text-muted">ID: <field name="id"/></small>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- <div class="oe_clear"></div> -->
+                            <div class="oe_clear"></div>
                         </div>
                     </t>
                 </templates>
