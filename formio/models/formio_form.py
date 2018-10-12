@@ -79,9 +79,5 @@ class Form(models.Model):
         }
 
     @api.multi
-    def action_resource_object(self):
-        return {
-            'type': 'ir.actions.act_url',
-            'url': self.res_act_window_url,
-            'target': 'current',
-        }
+    def action_open_res_act_window(self):
+        raise NotImplementedError

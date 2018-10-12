@@ -90,7 +90,7 @@ See LICENSE file for full licensing details. -->
                     <div class="oe_button_box" name="button_box">
                         <button name="action_formio" type="object" string="Form"
                                 class="oe_stat_button" icon="fa-file-text"/>
-                        <button name="action_resource_object" type="object"
+                        <button name="action_open_res_act_window" type="object"
                                 attrs="{'invisible': [('res_info', '=', False)]}"
                                 class="oe_stat_button" icon="fa-link">
                             <field name="res_info"/>

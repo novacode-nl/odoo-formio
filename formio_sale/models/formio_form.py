@@ -5,6 +5,7 @@
 from odoo import api, fields, models, _
 from odoo.addons.formio.utils import get_field_selection_label
 
+
 class Form(models.Model):
     _inherit = 'formio.form'
 
@@ -45,3 +46,18 @@ class Form(models.Model):
                 r.res_act_window_url = url
                 r.res_name = r.sale_order_id.name
                 r.res_info = get_field_selection_label(r.sale_order_id, 'state')
+
+    @api.multi
+    def action_open_res_act_window(self):
+        if self.res_model_id.model == 'sale.order':
+            if self.sale_order_id.state in ('draft', 'sent'):
+                action = self.env.ref('sale.action_quotations')
+            else:
+                action = self.env.ref('sale.action_orders')
+
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'sale.order',
+            'res_id': self.sale_order_id.id,
+            "views": [[False, "form"]],
+        }
