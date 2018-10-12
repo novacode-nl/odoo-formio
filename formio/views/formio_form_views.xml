@@ -94,7 +94,7 @@ See LICENSE file for full licensing details. -->
                     <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/></h1>
                     <group>
                         <field name="res_model_name" readonly="1" attrs="{'invisible': [('res_model_name', '=', False)]}"/>
-                        <field name="builder_id" attrs="{'readonly': [('id', '!=', False)]}"/>
+                        <field name="builder_id" attrs="{'readonly': [('id', '!=', False)]}" string="Form"/>
                         <field name="slug" attrs="{'invisible': [('id', '=', False)]}"/>
                     </group>
                     <notebook>
@@ -117,22 +117,34 @@ See LICENSE file for full licensing details. -->
         </field>
     </record>
 
+    <record id="view_formio_search" model="ir.ui.view">
+        <field name="name">formio.form.search</field>
+        <field name="model">formio.form</field>
+        <field name="arch" type="xml">
+            <search string="Forms">
+                <field name="title"/>
+                <field name="res_model_id"/>
+                <field name="res_id"/>
+            </search>
+        </field>
+    </record>
+    
+    <!-- actions -->
     <record id="action_formio_form" model="ir.actions.act_window">
         <field name="name">Forms</field>
         <field name="res_model">formio.form</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,kanban,form</field>
-        <!-- <field name="view_id" ref="view_formio_form_tree"/> -->
     </record>
 
     <record id="action_formio_form_view_kanban" model="ir.actions.act_window.view">
-        <field name="sequence" eval="1"/>
+        <field name="sequence" eval="0"/>
         <field name="view_mode">kanban</field>
         <field name="view_id" ref="formio.view_formio_form_kanban"/>
         <field name="act_window_id" ref="action_formio_form"/>
     </record>
     <record id="action_formio_form_view_tree" model="ir.actions.act_window.view">
-        <field name="sequence" eval="0"/>
+        <field name="sequence" eval="1"/>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="formio.view_formio_form_tree"/>
         <field name="act_window_id" ref="action_formio_form"/>
