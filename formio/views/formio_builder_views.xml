@@ -25,7 +25,7 @@ See LICENSE file for full licensing details. -->
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_edit" type="object" string="Form Builder"
-                                groups="formio.group_formio_manager"
+                                groups="formio.group_formio_admin"
                                 class="oe_stat_button" icon="fa-rocket"/>
                     </div>
                     <label for="name" class="oe_edit_only"/>
@@ -37,19 +37,19 @@ See LICENSE file for full licensing details. -->
                     <notebook>
                         <page string="General" name="general">
                             <group>
-                                <field name="res_model_id" groups="formio.group_formio_manager"/>
-                                <field name="description" groups="formio.group_formio_manager"/>
+                                <field name="res_model_id" groups="formio.group_formio_admin"/>
+                                <field name="description" groups="formio.group_formio_admin"/>
                             </group>
                         </page>
-                        <page string="Schema" name="schema" groups="formio.group_formio_manager">
+                        <page string="Schema" name="schema" groups="formio.group_formio_admin">
                             <field name="schema"/>
                         </page>
-                        <page string="Forms" name="forms" groups="formio.group_formio_manager">
+                        <page string="Forms" name="forms" groups="formio.group_formio_admin">
                             <field name="forms"/>
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter" groups="formio.group_formio_manager">
+                <div class="oe_chatter" groups="formio.group_formio_admin">
                     <field name="message_follower_ids" widget="mail_followers"/>
                     <field name="activity_ids" widget="mail_activity"/>
                     <field name="message_ids" widget="mail_thread"/>

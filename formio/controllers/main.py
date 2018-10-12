@@ -18,7 +18,7 @@ class Formio(http.Controller):
     # Builder
     @http.route('/formio/builder/<int:builder_id>', type='http', auth='user', website=True)
     def builder_edit(self, builder_id, **kwargs):
-        if not request.env.user.has_group('formio.group_formio_manager'):
+        if not request.env.user.has_group('formio.group_formio_admin'):
             return request.redirect("/")
         
         builder = request.env['formio.builder'].browse(builder_id)
@@ -35,7 +35,7 @@ class Formio(http.Controller):
 
     @http.route('/formio/builder/schema/<int:builder_id>', type='json', auth='user', website=True)
     def builder_schema(self, builder_id, **kwargs):
-        if not request.env.user.has_group('formio.group_formio_manager'):
+        if not request.env.user.has_group('formio.group_formio_admin'):
             return
         
         builder = request.env['formio.builder'].browse(builder_id)
@@ -46,7 +46,7 @@ class Formio(http.Controller):
 
     @http.route('/formio/builder/save/<model("formio.builder"):builder>', type='json', auth="user", methods=['POST'], website=True)
     def builder_save(self, builder, **post):
-        if not request.env.user.has_group('formio.group_formio_manager'):
+        if not request.env.user.has_group('formio.group_formio_admin'):
             return
         
         if not 'builder_id' in post or int(post['builder_id']) != builder.id:

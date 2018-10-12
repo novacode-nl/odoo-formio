@@ -27,7 +27,7 @@ See LICENSE file for full licensing details. -->
                         <field name="description"/>
                     </group>
                     <notebook>
-                        <page string="Assets" name="assets" groups="formio.group_formio_manager">
+                        <page string="Assets" name="assets" groups="formio.group_formio_admin">
                             <field name="assets">
                                 <tree>
                                     <field name="sequence" widget="handle"/>

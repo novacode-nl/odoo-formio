@@ -6,10 +6,10 @@ See LICENSE file for full copyright and licensing details. -->
     <!-- <data noupdate="1"> -->
     <data>
         <!-- Builder -->
-        <record id="access_formio_builder_manager" model="ir.model.access">
-            <field name="name">formio.builder.manager</field>
+        <record id="access_formio_builder_admin" model="ir.model.access">
+            <field name="name">formio.builder.admin</field>
             <field name="model_id" ref="formio.model_formio_builder"/>
-            <field name="group_id" ref="formio.group_formio_manager"/>
+            <field name="group_id" ref="formio.group_formio_admin"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="1"/>
             <field name="perm_write" eval="1"/>
@@ -27,10 +27,10 @@ See LICENSE file for full copyright and licensing details. -->
         </record>
 
         <!-- Form -->
-        <record id="access_formio_form_manager" model="ir.model.access">
-            <field name="name">formio.form.manager</field>
+        <record id="access_formio_form_admin" model="ir.model.access">
+            <field name="name">formio.form.admin</field>
             <field name="model_id" ref="formio.model_formio_form"/>
-            <field name="group_id" ref="formio.group_formio_manager"/>
+            <field name="group_id" ref="formio.group_formio_admin"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="0"/>
             <field name="perm_write" eval="0"/>

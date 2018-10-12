@@ -14,7 +14,7 @@ See LICENSE file for full licensing details. -->
         name="Form Builders"
         parent="formio.menu_formio_root"
         sequence="50"
-        groups="formio.group_formio_manager"
+        groups="formio.group_formio_admin"
         action="formio.action_formio_builder"/>
     <menuitem
         id="menu_formio_form"
