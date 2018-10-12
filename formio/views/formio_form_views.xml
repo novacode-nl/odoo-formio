@@ -90,18 +90,27 @@ See LICENSE file for full licensing details. -->
                     <div class="oe_button_box" name="button_box">
                         <button name="action_formio" type="object" string="Form"
                                 class="oe_stat_button" icon="fa-file-text"/>
+                        <button name="action_resource_object" type="object"
+                                attrs="{'invisible': [('res_info', '=', False)]}"
+                                class="oe_stat_button" icon="fa-link">
+                            <field name="res_info"/>
+                        </button>
                     </div>
                     <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/></h1>
                     <group>
-                        <field name="res_model_name" readonly="1" attrs="{'invisible': [('res_model_name', '=', False)]}"/>
-                        <field name="builder_id" attrs="{'readonly': [('id', '!=', False)]}" string="Form"/>
-                        <field name="slug" attrs="{'invisible': [('id', '=', False)]}"/>
+                        <group>
+                            <field name="builder_id" attrs="{'readonly': [('id', '!=', False)], 'invisible': [('id', '!=', False)]}" string="Form"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group>
+                            <strong><field name="res_info"/></strong> <field nolabel="1" name="res_name"/>
+                        </group>
                     </group>
                     <notebook>
                         <page string="Submission" name="submission">
                             <group>
-                                <field name="submission_user_id"/>
-                                <field name="submission_date"/>
+                                <field name="submission_user_id" string="User"/>
+                                <field name="submission_date" string="Date"/>
                             </group>
                         </page>
                         <page string="Data" name="data" groups="formio.group_formio_admin">

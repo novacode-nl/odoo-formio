@@ -31,6 +31,9 @@ class Form(models.Model):
     res_act_window_url = fields.Char(compute='_compute_res_fields', readonly=True)
     res_name = fields.Char(compute='_compute_res_fields', readonly=True)
     res_info = fields.Char(compute='_compute_res_fields', readonly=True)
+    user_id = fields.Many2one(
+        'res.users', string='Assigned to', default=lambda self: self.env.uid,
+        index=True, track_visibility='onchange')
     submission_data = fields.Text('Data', default=False, readonly=True)
     submission_user_id = fields.Many2one(
         'res.users', string='Submission User', readonly=True,
@@ -73,4 +76,12 @@ class Form(models.Model):
             'type': 'ir.actions.act_url',
             'url': self.edit_url,
             'target': 'new',
+        }
+
+    @api.multi
+    def action_resource_object(self):
+        return {
+            'type': 'ir.actions.act_url',
+            'url': self.res_act_window_url,
+            'target': 'current',
         }
