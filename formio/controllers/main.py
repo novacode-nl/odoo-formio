@@ -2,6 +2,7 @@
 # Copyright 2018 Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
+from collections import deque
 import json
 import logging
 
@@ -126,9 +127,25 @@ class Formio(http.Controller):
 
     @http.route('/formio/form/data/<string:slug>', type='http', auth='user', website=True)
     def form_data(self, slug, **kwargs):
+        """ Get data from a resource-object.
+
+        EXAMPLE
+        =======
+        This example loads data into Select Component, whereby choices
+        are the Partner/Contact names with city "Sittard".
+
+        Form.io configuration (in "Data" tab)
+        -------------------------------------
+        - Data Source URL: /formio/form/res_data
+        - Filter Query: model=res.partner&label=name&domain_fields=function&city=Sittard
+        """
         if not request.env.user.has_group('formio.group_formio_user'):
             return
 
+        form = form_by_slug(slug)
+        if not form:
+            return
+        
         args = request.httprequest.args
 
         model = args.get('model')
@@ -157,6 +174,61 @@ class Formio(http.Controller):
         try:
             records = request.env[model].search_read(domain, [label])
             data = json.dumps([{'id': r['id'], 'label': r[label]} for r in records])
+            return data
+        except Exception as e:
+            _logger.error("Exception: %s" % e)
+
+    @http.route('/formio/form/res_data/<string:slug>', type='http', auth='user', website=True)
+    def form_res_data(self, slug, **kwargs):
+        """ Get data from a linked resource-object (by: res_model_id, res_id),
+
+        This also traverses relations.
+
+        EXAMPLE
+        =======
+        This example loads data into Select Component whereby choices
+        are the product-names from a Sale Order.
+        The Form(Builder) has the "Resource Model" set to "Quotation" (i.e. sale.order).
+
+        Form.io configuration (in "Data" tab)
+        -------------------------------------
+        - Data Source URL: /formio/form/res_data
+        - Filter Query: field=order_line.product_id&label=name
+        """
+
+        if not request.env.user.has_group('formio.group_formio_user'):
+            return
+
+        form = form_by_slug(slug)
+        if not form:
+            return
+
+        args = request.httprequest.args
+
+        field = args.get('field')
+        # TODO: formio error?
+        if field is None:
+            _logger('field is missing in "Data Filter Query"')
+
+        label = args.get('label')
+        # TODO: formio error?
+        if label is None:
+            _logger.error('label is missing in "Data Filter Query"')
+
+        try:
+            record = request.env[form.res_model_id.model].browse(form.res_id)
+
+            fields = deque(args.get('field').split('.'))
+            res_data = []
+            while fields:
+                _field = fields.popleft()
+
+                if not res_data or not isinstance(res_data.ids, list):
+                    res_data = getattr(record, _field)
+                elif isinstance(res_data, list):
+                    res_data = [get_attr(r, _field) for r in res_data]
+
+            data = json.dumps([{'id': r['id'], 'label': r[label]} for r in res_data])
             return data
         except Exception as e:
             _logger.error("Exception: %s" % e)
