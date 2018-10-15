@@ -99,7 +99,7 @@ See LICENSE file for full licensing details. -->
                     <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/></h1>
                     <group>
                         <group>
-                            <field name="builder_id" attrs="{'readonly': [('id', '!=', False)], 'invisible': [('id', '!=', False)]}" string="Form"/>
+                            <field name="builder_id" attrs="{'readonly': [('id', '!=', False)]}" groups="formio.group_formio_admin" string="Form"/>
                             <field name="user_id"/>
                         </group>
                         <group>
