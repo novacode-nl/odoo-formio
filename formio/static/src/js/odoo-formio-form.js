@@ -20,19 +20,14 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
                 //Formio.icons = 'fontawesome';
                 Formio.createForm(document.getElementById('formio_form'), schema).then(function(form) {
                     // Events
-                    form.on('submit', function(form_obj) {
+                    form.on('submit', function(submission) {
                         ajax.jsonRpc(submit_url, 'call', {
                             'slug': slug,
-                            'data': form_obj.data
-                        }).then(function () {
-                            // TODO Come with a better approach, instead of the setTimeout.
-                            console.log('Form.io: submitted form');
-                            setTimeout(function () {
-                                window.location.reload();
-                            }, 500);
+                            'data': submission.data
+                        }).then(function() {
+                            form.emit('submitDone', submission);
                         });
                     });
-
                     // Set the Submission (data)
                     // https://github.com/formio/formio.js/wiki/Form-Renderer#setting-the-submission
                     ajax.jsonRpc(data_url, 'call', {}).then(function(result) {
