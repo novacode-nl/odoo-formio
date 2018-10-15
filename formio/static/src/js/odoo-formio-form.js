@@ -8,8 +8,9 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
 
     $(document).ready(function() {
         var slug = document.getElementById('form_slug').value,
+            base_url = document.getElementById('base_url').value,
             schema_url = '/formio/form/schema/' + slug,
-            data_url = '/formio/form/data/' + slug,
+            submission_url = '/formio/form/submission/' + slug,
             submit_url = '/formio/form/submit/' + slug,
             schema = {};
 
@@ -17,8 +18,18 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
             if (!$.isEmptyObject(result)) {
                 schema = JSON.parse(result);
 
-                //Formio.icons = 'fontawesome';
-                Formio.createForm(document.getElementById('formio_form'), schema).then(function(form) {
+                var hooks = {
+                    'addComponent': function(container, comp, parent) {
+                        if (comp.component.hasOwnProperty('data') && comp.component.data.hasOwnProperty('url') &&
+                            !$.isEmptyObject(comp.component.data.url)) {
+                            comp.component.data.url = base_url.concat(comp.component.data.url, '/', slug);
+                        }
+                        return container;
+                    }
+                };
+
+                //formio.icons = 'fontawesome';
+                Formio.createForm(document.getElementById('formio_form'), schema, {hooks: hooks}).then(function(form) {
                     // Events
                     form.on('submit', function(submission) {
                         ajax.jsonRpc(submit_url, 'call', {
@@ -30,7 +41,7 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
                     });
                     // Set the Submission (data)
                     // https://github.com/formio/formio.js/wiki/Form-Renderer#setting-the-submission
-                    ajax.jsonRpc(data_url, 'call', {}).then(function(result) {
+                    ajax.jsonRpc(submission_url, 'call', {}).then(function(result) {
                         if (!$.isEmptyObject(result)) {
                             form.submission = {'data': JSON.parse(result)};
                         }

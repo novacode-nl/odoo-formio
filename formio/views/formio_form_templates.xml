@@ -49,6 +49,7 @@ See LICENSE file for full licensing details. -->
                             <div id="formio_form"></div>
                         </div>
                         <input type="hidden" id="form_slug" name="slug" t-att-value="slug"/>
+                        <input type="hidden" id="base_url" name="base_url" t-att-value="base_url"/>
                     </main>
                 </div>
             </body>

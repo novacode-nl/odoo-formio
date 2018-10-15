@@ -3,10 +3,13 @@
 # See LICENSE file for full licensing details.
 
 import json
+import logging
 
 from odoo import http, fields
 from odoo.http import request
 from odoo.exceptions import ValidationError
+
+_logger = logging.getLogger(__name__)
 
 def form_by_slug(slug):
     form = request.env['formio.form'].search([('slug', '=', slug)], limit=1)
@@ -62,7 +65,12 @@ class Formio(http.Controller):
             return request.redirect("/")
 
         form = form_by_slug(slug)
+        scheme = request.httprequest.environ['wsgi.url_scheme']
+        host = request.httprequest.environ['HTTP_HOST']
+        base_url = scheme + '://' + host
+
         values = {
+            'base_url': base_url,
             'formio_css_assets': form.builder_id.formio_css_assets,
             'formio_js_assets': form.builder_id.formio_js_assets,
             'slug': form.slug,
@@ -87,8 +95,8 @@ class Formio(http.Controller):
         else:
             return {}
 
-    @http.route('/formio/form/data/<string:slug>', type='json', auth='user', website=True)
-    def form_data(self, slug, **kwargs):
+    @http.route('/formio/form/submission/<string:slug>', type='json', auth='user', website=True)
+    def form_submission(self, slug, **kwargs):
         if not request.env.user.has_group('formio.group_formio_user'):
             return
         
@@ -115,3 +123,40 @@ class Formio(http.Controller):
             'submission_date': fields.Datetime.now(),
         }
         form.write(vals)
+
+    @http.route('/formio/form/data/<string:slug>', type='http', auth='user', website=True)
+    def form_data(self, slug, **kwargs):
+        if not request.env.user.has_group('formio.group_formio_user'):
+            return
+
+        args = request.httprequest.args
+
+        model = args.get('model')
+        # TODO: formio error?
+        if model is None:
+            _logger('model is missing in "Data Filter Query"')
+
+        label = args.get('label')
+        # TODO: formio error?
+        if label is None:
+            _logger.error('label is missing in "Data Filter Query"')
+
+        domain = []
+        domain_fields = args.getlist('domain_fields')
+        # domain_fields_op = args.getlist('domain_fields_operators')
+
+        for domain_field in domain_fields:
+            value = args.get(domain_field)
+
+            if value is not None:
+                filter = (domain_field, '=', value)
+                domain.append(filter)
+
+        _logger.debug("domain: %s" % domain)
+
+        try:
+            records = request.env[model].search_read(domain, [label])
+            data = json.dumps([{'id': r['id'], 'label': r[label]} for r in records])
+            return data
+        except Exception as e:
+            _logger.error("Exception: %s" % e)
