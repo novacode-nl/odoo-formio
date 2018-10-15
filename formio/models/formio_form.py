@@ -20,7 +20,7 @@ class Form(models.Model):
     builder_id = fields.Many2one(
         'formio.builder', string='Form builder', ondelete='restrict', store=True)
     name = fields.Char(related='builder_id.name', readonly=True)
-    slug = fields.Char(default=lambda self: self._default_slug(), required=True, readonly=True)
+    slug = fields.Char(default=lambda self: self._default_slug(), required=True, readonly=True, copy=False)
     title = fields.Char(related='builder_id.title', readonly=True)
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
