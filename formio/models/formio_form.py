@@ -20,7 +20,9 @@ class Form(models.Model):
     builder_id = fields.Many2one(
         'formio.builder', string='Form builder', ondelete='restrict', store=True)
     name = fields.Char(related='builder_id.name', readonly=True)
-    slug = fields.Char(default=lambda self: self._default_slug(), required=True, readonly=True, copy=False)
+    uuid = fields.Char(
+        default=lambda self: self._default_uuid(), required=True, readonly=True, copy=False,
+        string='UUID')
     title = fields.Char(related='builder_id.title', readonly=True)
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
@@ -43,15 +45,15 @@ class Form(models.Model):
         help='Datetime when the form was last submitted.')
 
     @api.model
-    def _default_slug(self):
+    def _default_uuid(self):
         return str(uuid.uuid4())
     
     def _compute_edit_url(self):
         # sudo() is needed for regular users.
         for r in self:
-            url = '{base_url}/formio/form/{slug}'.format(
+            url = '{base_url}/formio/form/{uuid}'.format(
                 base_url=r.env['ir.config_parameter'].sudo().get_param('web.base.url'),
-                slug=r.slug)
+                uuid=r.uuid)
             r.edit_url = url
 
     def _compute_act_window_url(self):

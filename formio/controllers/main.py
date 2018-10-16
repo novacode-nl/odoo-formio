@@ -12,8 +12,8 @@ from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
-def form_by_slug(slug):
-    form = request.env['formio.form'].search([('slug', '=', slug)], limit=1)
+def form_by_uuid(uuid):
+    form = request.env['formio.form'].search([('uuid', '=', uuid)], limit=1)
     return form
 
 
@@ -60,12 +60,12 @@ class Formio(http.Controller):
         builder.write({'schema': schema})
 
     # Form
-    @http.route('/formio/form/<string:slug>', type='http', auth='user', website=True)
-    def form_edit(self, slug, **kwargs):
+    @http.route('/formio/form/<string:uuid>', type='http', auth='user', website=True)
+    def form_edit(self, uuid, **kwargs):
         if not request.env.user.has_group('formio.group_formio_user'):
             return request.redirect("/")
 
-        form = form_by_slug(slug)
+        form = form_by_uuid(uuid)
         scheme = request.httprequest.environ['wsgi.url_scheme']
         host = request.httprequest.environ['HTTP_HOST']
         base_url = scheme + '://' + host
@@ -74,7 +74,7 @@ class Formio(http.Controller):
             'base_url': base_url,
             'formio_css_assets': form.builder_id.formio_css_assets,
             'formio_js_assets': form.builder_id.formio_js_assets,
-            'slug': form.slug,
+            'uuid': form.uuid,
             'id': form.id,
             'name': form.name,
             'title': form.title,
@@ -85,35 +85,35 @@ class Formio(http.Controller):
         }
         return request.render('formio.formio_form', values)
 
-    @http.route('/formio/form/schema/<string:slug>', type='json', auth='user', website=True)
-    def form_schema(self, slug, **kwargs):
+    @http.route('/formio/form/schema/<string:uuid>', type='json', auth='user', website=True)
+    def form_schema(self, uuid, **kwargs):
         if not request.env.user.has_group('formio.group_formio_user'):
             return
         
-        form = form_by_slug(slug)
+        form = form_by_uuid(uuid)
         if form and form.builder_id.schema:
             return form.builder_id.schema
         else:
             return {}
 
-    @http.route('/formio/form/submission/<string:slug>', type='json', auth='user', website=True)
-    def form_submission(self, slug, **kwargs):
+    @http.route('/formio/form/submission/<string:uuid>', type='json', auth='user', website=True)
+    def form_submission(self, uuid, **kwargs):
         if not request.env.user.has_group('formio.group_formio_user'):
             return
         
-        form = form_by_slug(slug)
+        form = form_by_uuid(uuid)
         if form and form.submission_data:
             return form.submission_data
         else:
             return {}
 
-    @http.route('/formio/form/submit/<string:slug>', type='json', auth="user", methods=['POST'], website=True)
-    def form_submit(self, slug, **post):
-        """ POST with ID instead of slug, to get the model object right away """
+    @http.route('/formio/form/submit/<string:uuid>', type='json', auth="user", methods=['POST'], website=True)
+    def form_submit(self, uuid, **post):
+        """ POST with ID instead of uuid, to get the model object right away """
         if not request.env.user.has_group('formio.group_formio_user'):
             return
 
-        form = form_by_slug(slug)
+        form = form_by_uuid(uuid)
         if not form:
             # TODO raise or set exception (in JSON resonse) ?
             return
@@ -125,8 +125,8 @@ class Formio(http.Controller):
         }
         form.write(vals)
 
-    @http.route('/formio/form/data/<string:slug>', type='http', auth='user', website=True)
-    def form_data(self, slug, **kwargs):
+    @http.route('/formio/form/data/<string:uuid>', type='http', auth='user', website=True)
+    def form_data(self, uuid, **kwargs):
         """ Get data from a resource-object.
 
         EXAMPLE
@@ -142,7 +142,7 @@ class Formio(http.Controller):
         if not request.env.user.has_group('formio.group_formio_user'):
             return
 
-        form = form_by_slug(slug)
+        form = form_by_uuid(uuid)
         if not form:
             return
         
@@ -178,8 +178,8 @@ class Formio(http.Controller):
         except Exception as e:
             _logger.error("Exception: %s" % e)
 
-    @http.route('/formio/form/res_data/<string:slug>', type='http', auth='user', website=True)
-    def form_res_data(self, slug, **kwargs):
+    @http.route('/formio/form/res_data/<string:uuid>', type='http', auth='user', website=True)
+    def form_res_data(self, uuid, **kwargs):
         """ Get data from a linked resource-object (by: res_model_id, res_id),
 
         This also traverses relations.
@@ -199,7 +199,7 @@ class Formio(http.Controller):
         if not request.env.user.has_group('formio.group_formio_user'):
             return
 
-        form = form_by_slug(slug)
+        form = form_by_uuid(uuid)
         if not form:
             return
 

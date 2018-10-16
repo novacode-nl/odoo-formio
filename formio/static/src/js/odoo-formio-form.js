@@ -7,11 +7,11 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
     var ajax = require('web.ajax');
 
     $(document).ready(function() {
-        var slug = document.getElementById('form_slug').value,
+        var uuid = document.getElementById('form_uuid').value,
             base_url = document.getElementById('base_url').value,
-            schema_url = '/formio/form/schema/' + slug,
-            submission_url = '/formio/form/submission/' + slug,
-            submit_url = '/formio/form/submit/' + slug,
+            schema_url = '/formio/form/schema/' + uuid,
+            submission_url = '/formio/form/submission/' + uuid,
+            submit_url = '/formio/form/submit/' + uuid,
             schema = {};
 
         ajax.jsonRpc(schema_url, 'call', {}).then(function(result) {
@@ -22,7 +22,7 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
                     'addComponent': function(container, comp, parent) {
                         if (comp.component.hasOwnProperty('data') && comp.component.data.hasOwnProperty('url') &&
                             !$.isEmptyObject(comp.component.data.url)) {
-                            comp.component.data.url = base_url.concat(comp.component.data.url, '/', slug);
+                            comp.component.data.url = base_url.concat(comp.component.data.url, '/', uuid);
                         }
                         return container;
                     }
@@ -33,7 +33,7 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
                     // Events
                     form.on('submit', function(submission) {
                         ajax.jsonRpc(submit_url, 'call', {
-                            'slug': slug,
+                            'uuid': uuid,
                             'data': submission.data
                         }).then(function() {
                             form.emit('submitDone', submission);
