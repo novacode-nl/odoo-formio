@@ -7,24 +7,24 @@ See LICENSE file for full licensing details. -->
         <html>
             <t t-call="formio.formio_html_head">
                 <script type="text/javascript" src="/formio/static/src/js/odoo-formio-form.js"/>
-                <title><t t-esc="title"/> | Form</title>
+                <title><t t-esc="form.title"/> | Form</title>
             </t>
             <body class="o_connected_user">
                 <nav id="oe_main_menu_navbar" class="o_main_navbar">
                     <ul class="o_menu_systray hidden-xs">
-                        <t t-if="res_act_window_url and res_name">
+                        <t t-if="form.res_act_window_url and form.res_name">
                             <li t-if="not translatable" id="res-in-backend">
-                                <a t-attf-href="#{res_act_window_url}">
+                                <a t-attf-href="#{form.res_act_window_url}">
                                     <span class="fa fa-link"/>
-                                    <t t-esc="res_name"/>
-                                    <t t-if="res_info">
-                                        <small> (<t t-esc="res_info"/>)</small>
+                                    <t t-esc="form.res_name"/>
+                                    <t t-if="form.res_info">
+                                        <small> (<t t-esc="form.res_info"/>)</small>
                                     </t>
                                 </a>
                             </li>
                         </t>
                         <li t-if="not translatable" id="edit-in-backend">
-                            <a t-attf-href="#{act_window_url}"><span class="fa fa-location-arrow"/>Form Details</a>
+                            <a t-attf-href="#{form.act_window_url}"><span class="fa fa-location-arrow"/>Form Details</a>
                         </li>
                         <li t-if="not translatable" id="odoo-home">
                             <a href="/"><span class="fa fa-home"/>Odoo</a>
@@ -40,7 +40,7 @@ See LICENSE file for full licensing details. -->
                                     <a href="/" class="navbar-brand logo company-logo">
                                         <span t-field="res_company.logo" t-options="{'widget': 'image'}" t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name"/>
                                     </a>
-                                    <h3 class="formio_form_name"><t t-esc="title"/></h3>
+                                    <h3 class="formio_form_name"><t t-esc="form.title"/></h3>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@ See LICENSE file for full licensing details. -->
                         <div class="container form_form_container mt8">
                             <div id="formio_form"></div>
                         </div>
-                        <input type="hidden" id="form_uuid" name="uuid" t-att-value="uuid"/>
+                        <input type="hidden" id="form_uuid" name="uuid" t-att-value="form.uuid"/>
                         <input type="hidden" id="base_url" name="base_url" t-att-value="base_url"/>
                     </main>
                 </div>

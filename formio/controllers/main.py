@@ -30,10 +30,6 @@ class Formio(http.Controller):
             'builder': builder,
             'formio_css_assets': builder.formio_css_assets,
             'formio_js_assets': builder.formio_js_assets,
-            'builder_id': builder_id,
-            'builder_name': builder.name,
-            'builder_title': builder.title,
-            'act_window_url': builder.act_window_url,
         }
         return request.render('formio.formio_builder', values)
 
@@ -71,17 +67,10 @@ class Formio(http.Controller):
         base_url = scheme + '://' + host
 
         values = {
-            'base_url': base_url,
+            'form': form,
             'formio_css_assets': form.builder_id.formio_css_assets,
             'formio_js_assets': form.builder_id.formio_js_assets,
-            'uuid': form.uuid,
-            'id': form.id,
-            'name': form.name,
-            'title': form.title,
-            'act_window_url': form.act_window_url,
-            'res_act_window_url': form.res_act_window_url,
-            'res_name': form.res_name,
-            'res_info': form.res_info,
+            'base_url': base_url
         }
         return request.render('formio.formio_form', values)
 
