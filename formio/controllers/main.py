@@ -125,7 +125,7 @@ class Formio(http.Controller):
 
         Form.io configuration (in "Data" tab)
         -------------------------------------
-        - Data Source URL: /formio/form/res_data
+        - Data Source URL: /formio/form/data
         - Filter Query: model=res.partner&label=name&domain_fields=function&city=Sittard
         """
         if not request.env.user.has_group('formio.group_formio_user'):
