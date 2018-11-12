@@ -7,7 +7,7 @@ See LICENSE file for full copyright and licensing details. -->
     <data>
         <!-- Builder -->
         <record id="access_formio_builder_admin" model="ir.model.access">
-            <field name="name">formio.builder.admin</field>
+            <field name="name">formio.builder: Admin</field>
             <field name="model_id" ref="formio.model_formio_builder"/>
             <field name="group_id" ref="formio.group_formio_admin"/>
             <field name="perm_read" eval="1"/>
@@ -17,7 +17,7 @@ See LICENSE file for full copyright and licensing details. -->
         </record>
 
         <record id="access_formio_builder_user" model="ir.model.access">
-            <field name="name">formio.builder.user</field>
+            <field name="name">formio.builder: User</field>
             <field name="model_id" ref="formio.model_formio_builder"/>
             <field name="group_id" ref="formio.group_formio_user"/>
             <field name="perm_read" eval="1"/>
@@ -28,23 +28,65 @@ See LICENSE file for full copyright and licensing details. -->
 
         <!-- Form -->
         <record id="access_formio_form_admin" model="ir.model.access">
-            <field name="name">formio.form.admin</field>
+            <field name="name">formio.form: Admin</field>
             <field name="model_id" ref="formio.model_formio_form"/>
             <field name="group_id" ref="formio.group_formio_admin"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="access_formio_form_user" model="ir.model.access">
+            <field name="name">formio.form: User</field>
+            <field name="model_id" ref="formio.model_formio_form"/>
+            <field name="group_id" ref="formio.group_formio_user"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="0"/>
             <field name="perm_write" eval="0"/>
             <field name="perm_unlink" eval="0"/>
         </record>
 
-        <record id="access_formio_form_user" model="ir.model.access">
-            <field name="name">formio.form.user</field>
-            <field name="model_id" ref="formio.model_formio_form"/>
-            <field name="group_id" ref="formio.group_formio_user"/>
+        <!-- Formio Version -->
+        <record id="access_formio_version_admin" model="ir.model.access">
+            <field name="name">formio.version: Admin</field>
+            <field name="model_id" ref="formio.model_formio_version"/>
+            <field name="group_id" ref="formio.group_formio_admin"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="1"/>
             <field name="perm_write" eval="1"/>
             <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="access_formio_version_user" model="ir.model.access">
+            <field name="name">formio.version: User</field>
+            <field name="model_id" ref="formio.model_formio_version"/>
+            <field name="group_id" ref="formio.group_formio_user"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <!-- Formio Version Asset -->
+        <record id="access_formio_version_asset_admin" model="ir.model.access">
+            <field name="name">formio.version.asset: Admin</field>
+            <field name="model_id" ref="formio.model_formio_version_asset"/>
+            <field name="group_id" ref="formio.group_formio_admin"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="access_formio_version_asset_user" model="ir.model.access">
+            <field name="name">formio.version.asset: User</field>
+            <field name="model_id" ref="formio.model_formio_version_asset"/>
+            <field name="group_id" ref="formio.group_formio_user"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
         </record>
     </data>
 </odoo>
