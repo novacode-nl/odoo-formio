@@ -8,7 +8,7 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
 
     $(document).ready(function() {
         var uuid = document.getElementById('form_uuid').value,
-            base_url = document.getElementById('base_url').value,
+            base_url = window.location.protocol + '//' + window.location.host,
             schema_url = '/formio/form/schema/' + uuid,
             submission_url = '/formio/form/submission/' + uuid,
             submit_url = '/formio/form/submit/' + uuid,

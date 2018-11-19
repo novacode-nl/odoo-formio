@@ -62,15 +62,10 @@ class Formio(http.Controller):
             return request.redirect("/")
 
         form = form_by_uuid(uuid)
-        scheme = request.httprequest.environ['wsgi.url_scheme']
-        host = request.httprequest.environ['HTTP_HOST']
-        base_url = scheme + '://' + host
-
         values = {
             'form': form,
             'formio_css_assets': form.builder_id.formio_css_assets,
             'formio_js_assets': form.builder_id.formio_js_assets,
-            'base_url': base_url
         }
         return request.render('formio.formio_form', values)
 
