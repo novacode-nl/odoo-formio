@@ -13,12 +13,16 @@
     'data': [
         'data/formio_version_data.xml',
         'data/formio_version_asset_data.xml',
+        # translations
+        'data/formio_translations_nl.xml',
+        'data/formio_translations_nl_BE.xml',
         # security
         'security/formio_security.xml',
         'security/ir_model_access.xml',
         # views
         'views/formio_builder_views.xml',
         'views/formio_form_views.xml',
+        'views/formio_translation_views.xml',
         'views/formio_version_views.xml',
         'views/formio_menu.xml',
         # formio templates

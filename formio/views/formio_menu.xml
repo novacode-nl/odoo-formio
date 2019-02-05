@@ -40,4 +40,10 @@ See LICENSE file for full licensing details. -->
         parent="formio.menu_formio_configuration"
         sequence="30"
         action="formio.action_formio_version"/>
+    <menuitem
+        id="menu_formio_translation"
+        name="Form.io Translations"
+        parent="formio.menu_formio_configuration"
+        sequence="30"
+        action="formio.action_formio_translation"/>
 </odoo>

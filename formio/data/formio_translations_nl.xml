@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <!-- nl -->
+    <data noupdate="1">
+        <record id="complete" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">complete</field>
+            <field name="value">Formulier is ingediend</field>
+        </record>
+        <record id="error" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">error</field>
+            <field name="value">Voordat u het formulier kunt opslaan, dient u de volgende fouten op te lossen.</field>
+        </record>
+        <record id="required" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">required</field>
+            <field name="value">{{field}} is verplicht</field>
+        </record>
+        <record id="pattern" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">pattern</field>
+            <field name="value">{{field}} voldoet niet aan het formaat {{pattern}}</field>
+        </record>
+        <record id="minLength" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">minLength</field>
+            <field name="value">{{field}} moet langer zijn dan {{length}} karakters.</field>
+        </record>
+        <record id="maxLength" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">maxLength</field>
+            <field name="value">{{field}} moet korter zijn dan {{length}} karakters.</field>
+        </record>
+        <record id="min" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">min</field>
+            <field name="value">{{field}} kan niet kleiner zijn dan {{min}}.</field>
+        </record>
+        <record id="max" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">max</field>
+            <field name="value">{{field}} kan niet groter zijn dan {{min}}.</field>
+        </record>
+        <record id="maxDate" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">maxDate</field>
+            <field name="value">{{field}} mag geen datum bevatten na {{- maxDate}}.</field>
+        </record>
+        <record id="minDate" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">minDate</field>
+            <field name="value">{{field}} mag geen datum bevatten voor {{- minDate}}.</field>
+        </record>
+        <record id="invalid_email" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">invalid_email</field>
+            <field name="value">{{field}} moet een geldig emailadres zijn.</field>
+        </record>
+        <record id="invalid_url" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">invalid_url</field>
+            <field name="value">{{field}} moet een geldige URL zijn.</field>
+        </record>
+        <record id="invalid_regex" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">invalid_regex</field>
+            <field name="value">{{field}} komt niet overeen met het patroon.</field>
+        </record>
+        <record id="invalid_date" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">invalid_date</field>
+            <field name="value">{{field}} is geen valide datum.</field>
+        </record>
+        <record id="invalid_day" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">invalid_day</field>
+            <field name="value">{{field}} is geen valide dag.</field>
+        </record>
+        <record id="mask" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">mask</field>
+            <field name="value">{{field}} komt niet overeen met het invoermasker.</field>
+        </record>
+        <record id="month" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">month</field>
+            <field name="value">Maand</field>
+        </record>
+        <record id="day" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">day</field>
+            <field name="value">Dag</field>
+        </record>
+        <record id="year" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">year</field>
+            <field name="value">Jaar</field>
+        </record>
+        <record id="january" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">january</field>
+            <field name="value">januari</field>
+        </record>
+        <record id="february" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">february</field>
+            <field name="value">februari</field>
+        </record>
+        <record id="march" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">march</field>
+            <field name="value">maart</field>
+        </record>
+        <record id="april" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">april</field>
+            <field name="value">april</field>
+        </record>
+        <record id="may" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">may</field>
+            <field name="value">mei</field>
+        </record>
+        <record id="june" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">june</field>
+            <field name="value">juni</field>
+        </record>
+        <record id="july" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">july</field>
+            <field name="value">juli</field>
+        </record>
+        <record id="august" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">august</field>
+            <field name="value">augustus</field>
+        </record>
+        <record id="september" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">september</field>
+            <field name="value">september</field>
+        </record>
+        <record id="october" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">october</field>
+            <field name="value">oktober</field>
+        </record>
+        <record id="november" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">november</field>
+            <field name="value">november</field>
+        </record>
+        <record id="december" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">december</field>
+            <field name="value">december</field>
+        </record>
+        <record id="next" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">next</field>
+            <field name="value">Volgende</field>
+        </record>
+        <record id="previous" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">previous</field>
+            <field name="value">Vorige</field>
+        </record>
+        <record id="cancel" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">cancel</field>
+            <field name="value">Annuleren</field>
+        </record>
+        <record id="submit" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="property">submit</field>
+            <field name="value">Verstuur formulier</field>
+        </record>
+    </data>
+</odoo>

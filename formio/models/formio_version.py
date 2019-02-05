@@ -12,6 +12,7 @@ class Version(models.Model):
         "Name", required=True, track_visibility='onchange',
         help="""Form.io release/version.""")
     description = fields.Text("Description")
+    translations = fields.Many2many('formio.translation', string='Translations')
     assets = fields.One2many('formio.version.asset', 'version_id', string='Assets')
     css_assets = fields.One2many(
         'formio.version.asset', 'version_id', domain=[('type', '=', 'css')],
