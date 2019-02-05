@@ -37,7 +37,7 @@ See LICENSE file for full licensing details. -->
                                         <strong class="o_kanban_record_title"><field name="title"/></strong><br/>
                                         <div class="row">
                                             <div class="col-xs-4 mt8">
-                                                <button class="btn btn-primary" name="action_formio" type="object">Open</button>
+                                                <button class="btn btn-primary" name="action_formio" type="object" role="button">Open</button>
                                             </div>
                                         </div>
                                     </div>
@@ -46,7 +46,7 @@ See LICENSE file for full licensing details. -->
                                     <t t-if="record.res_model_id.raw_value and record.res_id.raw_value">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <t t-if="record.res_info.raw_value"><field name="res_info"/>: </t><a class="btn btn-default" t-att-href="record.res_act_window_url.raw_value"><field name="res_name"/></a>
+                                                <t t-if="record.res_info.raw_value"><field name="res_info"/>: </t><a class="btn btn-default" t-att-href="record.res_act_window_url.raw_value" role="button"><field name="res_name"/></a>
                                             </div>
                                         </div>
                                     </t>
@@ -55,12 +55,12 @@ See LICENSE file for full licensing details. -->
                                         <t t-if="record.submission_user_id.raw_value">
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <i class="fa fa-user"/> <field name="submission_user_id"/>
+                                                    <i class="fa fa-user" title="Submission user" aria-label="Submission user"/> <field name="submission_user_id"/>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <i class="fa fa-clock-o"/> <field name="submission_date"/>
+                                                    <i class="fa fa-clock-o" title="Submission date" aria-label="Submission date"/> <field name="submission_date"/>
                                                 </div>
                                             </div>
                                         </t>
@@ -89,10 +89,10 @@ See LICENSE file for full licensing details. -->
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_formio" type="object" string="Form"
-                                class="oe_stat_button" icon="fa-rocket"/>
+                                class="oe_stat_button" icon="fa-rocket" aria-label="Form"/>
                         <button name="action_open_res_act_window" type="object"
                                 attrs="{'invisible': [('res_info', '=', False)]}"
-                                class="oe_stat_button" icon="fa-link">
+                                class="oe_stat_button" icon="fa-link" aria-label="Resource">
                             <field name="res_info"/>
                         </button>
                     </div>
