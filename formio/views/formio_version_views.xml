@@ -27,6 +27,15 @@ See LICENSE file for full licensing details. -->
                         <field name="description"/>
                     </group>
                     <notebook>
+                        <page string="Translations" name="translations" groups="formio.group_formio_admin">
+                            <field name="translations">
+                                <tree editable="bottom">
+                                    <field name="lang_id" options="{'no_quick_create':True,'no_create_edit':True}"/>
+                                    <field name="property"/>
+                                    <field name="value"/>
+                                </tree>
+                            </field>
+                        </page>
                         <page string="Assets" name="assets" groups="formio.group_formio_admin">
                             <field name="assets">
                                 <tree>

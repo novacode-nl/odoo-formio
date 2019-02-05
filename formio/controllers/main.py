@@ -80,6 +80,29 @@ class Formio(http.Controller):
         else:
             return {}
 
+    @http.route('/formio/form/options/<string:uuid>', type='json', auth='user', website=True)
+    def form_options(self, uuid, **kwargs):
+        # TODO support language switcher (from GUI)
+        if not request.env.user.has_group('formio.group_formio_user'):
+            return
+        form = form_by_uuid(uuid)
+        options = {}
+        if form and form.builder_id.formio_version_id.translations:
+            lang = request.env['res.lang']._lang_get(request.env.user.lang)
+            i18n = {}
+            for trans in form.builder_id.formio_version_id.translations:
+                if trans.lang_id.iso_code not in i18n:
+                    i18n[trans.lang_id.iso_code] = {trans.property: trans.value}
+                else:
+                    i18n[trans.lang_id.iso_code][trans.property] = trans.value
+
+            options['language'] = lang.iso_code
+            options['i18n'] = i18n
+                
+            return json.dumps(options)
+        else:
+            return {}
+
     @http.route('/formio/form/submission/<string:uuid>', type='json', auth='user', website=True)
     def form_submission(self, uuid, **kwargs):
         if not request.env.user.has_group('formio.group_formio_user'):
