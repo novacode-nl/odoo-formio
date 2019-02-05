@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2018 Nova Code (http://www.novacode.nl)
+# Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
 def get_field_selection_label(model_obj, field, print_label=False):

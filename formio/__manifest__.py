@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# Copyright 2018 Nova Code (http://www.novacode.nl)
+# Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
 {
     'name': 'Form.io',
     'summary': 'Build, publish and store webforms in Odoo with the "Form.io" GUI/renderer',
-    'version': '0.2',
+    'version': '0.3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
