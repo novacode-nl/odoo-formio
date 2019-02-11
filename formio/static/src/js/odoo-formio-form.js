@@ -36,7 +36,9 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
                     options['hooks'] = hooks;
 
                     Formio.createForm(document.getElementById('formio_form'), schema, options).then(function(form) {
-                        form.language = options['language'];
+                        if ('language' in options) {
+                            form.language = options['language'];
+                        }
                         // Events
                         form.on('submit', function(submission) {
                             ajax.jsonRpc(submit_url, 'call', {

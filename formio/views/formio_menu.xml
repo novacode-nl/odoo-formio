@@ -41,9 +41,20 @@ See LICENSE file for full licensing details. -->
         sequence="30"
         action="formio.action_formio_version"/>
     <menuitem
-        id="menu_formio_translation"
+        id="menu_formio_translation_root"
         name="Form.io Translations"
         parent="formio.menu_formio_configuration"
-        sequence="30"
+        sequence="30"/>
+    <menuitem
+        id="menu_formio_translation"
+        name="Translations"
+        parent="formio.menu_formio_translation_root"
+        sequence="10"
         action="formio.action_formio_translation"/>
+    <menuitem
+        id="menu_formio_translation_source"
+        name="Translation Sources"
+        parent="formio.menu_formio_translation_root"
+        sequence="20"
+        action="formio.action_formio_translation_source"/>
 </odoo>

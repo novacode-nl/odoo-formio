@@ -100,7 +100,7 @@ class Formio(http.Controller):
                 
             return json.dumps(options)
         else:
-            return {}
+            return json.dumps({})
 
     @http.route('/formio/form/submission/<string:uuid>', type='json', auth='user', website=True)
     def form_submission(self, uuid, **kwargs):
