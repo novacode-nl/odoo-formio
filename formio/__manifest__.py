@@ -24,6 +24,7 @@
         # views
         'views/formio_builder_views.xml',
         'views/formio_form_views.xml',
+        'views/formio_translation_source_views.xml',
         'views/formio_translation_views.xml',
         'views/formio_version_views.xml',
         'views/formio_menu.xml',
