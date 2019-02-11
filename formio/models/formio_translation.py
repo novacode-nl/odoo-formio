@@ -21,7 +21,7 @@ class Translation(models.Model):
         res = []
         for r in self:
             name = '{lang}: {source} => {value}'.format(
-                lang=r.lang_id, source=source_id.source, value=r.value
+                lang=r.lang_id, source=r.source_id.source, value=r.value
             )
             res.append((r.id, name))
         return res
