@@ -7,7 +7,7 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.form.tree</field>
         <field name="model">formio.form</field>
         <field name="arch" type="xml">
-            <tree string="Form">
+            <tree string="Forms">
                 <field name="title"/>
                 <field name="res_name"/>
                 <field name="res_info"/>

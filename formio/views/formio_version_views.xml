@@ -31,7 +31,7 @@ See LICENSE file for full licensing details. -->
                             <field name="translations">
                                 <tree editable="bottom">
                                     <field name="lang_id" options="{'no_quick_create':True,'no_create_edit':True}"/>
-                                    <field name="property"/>
+                                    <field name="source_id"/>
                                     <field name="value"/>
                                 </tree>
                             </field>

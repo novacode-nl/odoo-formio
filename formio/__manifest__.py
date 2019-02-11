@@ -15,6 +15,7 @@
         'data/formio_version_data.xml',
         'data/formio_version_asset_data.xml',
         # translations
+        'data/formio_translations_sources.xml',
         'data/formio_translations_nl.xml',
         'data/formio_translations_nl_BE.xml',
         # security

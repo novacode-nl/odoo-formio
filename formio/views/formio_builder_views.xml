@@ -21,7 +21,7 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.builder.form</field>
         <field name="model">formio.builder</field>
         <field name="arch" type="xml">
-	    <form string="Form">
+	    <form string="Builder">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_edit" type="object" string="Form Builder"
