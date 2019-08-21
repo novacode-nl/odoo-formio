@@ -113,6 +113,7 @@ See LICENSE file for full licensing details. -->
                         </group>
                         <group>
                             <field name="uuid" groups="formio.group_formio_admin" attrs="{'invisible': [('id', '=', False)]}"/>
+                            <field name="portal"/>
                         </group>
                     </group>
                     <notebook>
