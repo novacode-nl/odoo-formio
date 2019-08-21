@@ -14,15 +14,20 @@ _logger = logging.getLogger(__name__)
 def get_form(uuid, mode):
     """ Verifies access to form and return form or False (if no access). """
 
-    if not request.env['formio.form'].sudo().check_access_rights(mode, False):
+    if not request.env['formio.form'].check_access_rights(mode, False):
         return False
     
-    form = request.env['formio.form'].sudo().search([('uuid', '=', uuid)], limit=1)
-    try:
-        # Catch the deny access exception
-        form.check_access_rule(mode)
-    except AccessError as e:
-        return False
+    form = request.env['formio.form'].search([('uuid', '=', uuid)], limit=1)
+    if form:
+        try:
+            # Catch the deny access exception
+            form.check_access_rule(mode)
+        except AccessError as e:
+            return False
+    elif request.env.user.has_group('base.group_portal'):
+        form = request.env['formio.form'].sudo().search([('uuid', '=', uuid)], limit=1)
+        if form.user_id.id != request.env.user.id:
+            return False
         
     return form
 
