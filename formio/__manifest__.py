@@ -32,6 +32,7 @@
         'views/formio_common_templates.xml',
         'views/formio_builder_templates.xml',
         'views/formio_form_templates.xml',
+        'views/formio_portal_templates.xml',
     ],
     'installable': True,
     'application': True,

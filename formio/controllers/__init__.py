@@ -2,3 +2,4 @@
 # See LICENSE file for full licensing details.
 
 from . import main
+from . import portal

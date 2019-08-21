@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <template id="portal_layout" name="Portal layout: formio menu entry" inherit_id="portal.portal_breadcrumbs" priority="40">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'formio' or formio" t-attf-class="breadcrumb-item #{'active ' if not formio else ''}">
+                <a t-if="formio" t-attf-href="/my/formio?{{ keep_query() }}">Forms (formio)</a>
+                <t t-else="">Forms (formio 1)</t>
+            </li>
+            <li t-if="form" class="breadcrumb-item active">
+                <span t-field="form.name"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home" name="Portal My Home: formio forms" inherit_id="portal.portal_my_home" priority="40">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-if="form_count" t-call="portal.portal_docs_entry">
+                <t t-set="title">Forms (formio)</t>
+                <t t-set="url" t-value="'/my/formio'"/>
+                <t t-set="count" t-value="form_count"/>
+            </t>
+        </xpath>
+    </template>
+    
+    <template id="portal_my_formio" name="My Projects">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Forms (formio)</t>
+            </t>
+            <t t-if="not forms">
+                <div class="alert alert-warning mt8" role="alert">
+                    There are no Forms (formio).
+                </div>
+            </t>
+            <t t-if="forms" t-call="portal.portal_table">
+                <thead>
+                    <th>Title</th>
+                    <th>Actions</th>
+                    <th>Last submission date</th>
+                </thead>
+                <tbody>
+                    <tr t-foreach="forms" t-as="form">
+                        <td>
+                            <span t-field="form.title"/>
+                        </td>
+                        <td>
+                            <a role="button" class="btn btn-sm btn-secondary"
+                               t-attf-href="{{ form.edit_url }}">
+                                <span aria-label="Edit form" title="Edit form"> Edit form</span>
+                            </a>
+                        </td>
+                        <td>
+                            <span t-field="form.submission_date"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </t>
+        </t>
+    </template>
+</odoo>
