@@ -26,7 +26,7 @@ def get_form(uuid, mode):
             return False
     elif request.env.user.has_group('base.group_portal'):
         form = request.env['formio.form'].sudo().search([('uuid', '=', uuid)], limit=1)
-        if form.user_id.id != request.env.user.id:
+        if not form or form.builder_id.portal is False or form.user_id.id != request.env.user.id:
             return False
         
     return form

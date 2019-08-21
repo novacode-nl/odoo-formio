@@ -10,7 +10,7 @@ class CustomerPortal(CustomerPortal):
 
     def _prepare_portal_layout_values(self):
         values = super(CustomerPortal, self)._prepare_portal_layout_values()
-        domain = [('user_id', '=', request.env.user.id)]
+        domain = [('user_id', '=', request.env.user.id), ('builder_id.portal', '=', True)]
         values['form_count'] = request.env['formio.form'].sudo().search_count(domain)
         return values
 

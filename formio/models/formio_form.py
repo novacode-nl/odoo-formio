@@ -42,6 +42,7 @@ class Form(models.Model):
     submission_date = fields.Datetime(
         string='Submission Date', readonly=True, track_visibility='onchange',
         help='Datetime when the form was last submitted.')
+    portal = fields.Boolean("Portal usage", related='builder_id.portal', help="Form is accessible by assigned portal user")
 
     @api.model
     def _default_uuid(self):
