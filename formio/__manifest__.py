@@ -4,7 +4,7 @@
 {
     'name': 'Form.io',
     'summary': 'Build, publish and store webforms in Odoo with the "Form.io" GUI/renderer',
-    'version': '0.3',
+    'version': '0.4',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
@@ -20,6 +20,7 @@
         # security
         'security/formio_security.xml',
         'security/ir_model_access.xml',
+        'security/ir_rule.xml',
         # views
         'views/formio_builder_views.xml',
         'views/formio_form_views.xml',
@@ -32,6 +33,7 @@
         'views/formio_builder_templates.xml',
         'views/formio_form_templates.xml',
     ],
+    'installable': True,
     'application': True,
     'images': [
         'static/description/banner.png',

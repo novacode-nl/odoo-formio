@@ -7,14 +7,24 @@ import logging
 
 from odoo import http, fields
 from odoo.http import request
-from odoo.exceptions import ValidationError
+from odoo.exceptions import AccessError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
-def form_by_uuid(uuid):
+def get_form(uuid, mode):
+    """ Verifies access to form and return form or False (if no access). """
+    
+    if not request.env['formio.form'].check_access_rights(mode, False):
+        return False
+    
     form = request.env['formio.form'].search([('uuid', '=', uuid)], limit=1)
+    try:
+        # Catch the deny access exception
+        form.check_access_rule(mode)
+    except AccessError as e:
+        return False
+        
     return form
-
 
 class Formio(http.Controller):
 
@@ -57,10 +67,9 @@ class Formio(http.Controller):
     # Form
     @http.route('/formio/form/<string:uuid>', type='http', auth='user', website=True)
     def form_edit(self, uuid, **kwargs):
-        if not request.env.user.has_group('formio.group_formio_user'):
+        form = get_form(uuid, 'read')
+        if not form:
             return request.redirect("/")
-
-        form = form_by_uuid(uuid)
         values = {
             'form': form,
             'formio_css_assets': form.builder_id.formio_css_assets,
@@ -70,10 +79,7 @@ class Formio(http.Controller):
 
     @http.route('/formio/form/schema/<string:uuid>', type='json', auth='user', website=True)
     def form_schema(self, uuid, **kwargs):
-        if not request.env.user.has_group('formio.group_formio_user'):
-            return
-        
-        form = form_by_uuid(uuid)
+        form = get_form(uuid, 'read')
         if form and form.builder_id.schema:
             return form.builder_id.schema
         else:
@@ -81,10 +87,7 @@ class Formio(http.Controller):
 
     @http.route('/formio/form/options/<string:uuid>', type='json', auth='user', website=True)
     def form_options(self, uuid, **kwargs):
-        # TODO support language switcher (from GUI)
-        if not request.env.user.has_group('formio.group_formio_user'):
-            return
-        form = form_by_uuid(uuid)
+        form = get_form(uuid, 'read')
         options = {}
         if form and form.builder_id.formio_version_id.translations:
             lang = request.env['res.lang']._lang_get(request.env.user.lang)
@@ -104,10 +107,11 @@ class Formio(http.Controller):
 
     @http.route('/formio/form/submission/<string:uuid>', type='json', auth='user', website=True)
     def form_submission(self, uuid, **kwargs):
-        if not request.env.user.has_group('formio.group_formio_user'):
+        if not request.env.user.has_group('formio.group_formio_user') and \
+           not request.env.user.has_group('base.group_portal'):
             return
         
-        form = form_by_uuid(uuid)
+        form = get_form(uuid, 'read')
         if form and form.submission_data:
             return form.submission_data
         else:
@@ -116,10 +120,11 @@ class Formio(http.Controller):
     @http.route('/formio/form/submit/<string:uuid>', type='json', auth="user", methods=['POST'], website=True)
     def form_submit(self, uuid, **post):
         """ POST with ID instead of uuid, to get the model object right away """
-        if not request.env.user.has_group('formio.group_formio_user'):
+        if not request.env.user.has_group('formio.group_formio_user') and \
+           not request.env.user.has_group('base.group_portal'):
             return
 
-        form = form_by_uuid(uuid)
+        form = get_form(uuid, 'write')
         if not form:
             # TODO raise or set exception (in JSON resonse) ?
             return
@@ -145,10 +150,11 @@ class Formio(http.Controller):
         - Data Source URL: /formio/form/data
         - Filter Query: model=res.partner&label=name&domain_fields=function&city=Sittard
         """
-        if not request.env.user.has_group('formio.group_formio_user'):
+        if not request.env.user.has_group('formio.group_formio_user') or \
+           not request.env.user.has_group('base.group_portal'):
             return
 
-        form = form_by_uuid(uuid)
+        form = get_form(uuid, 'read')
         if not form:
             return
         
@@ -202,10 +208,11 @@ class Formio(http.Controller):
         - Filter Query: field=order_line.product_id&label=name
         """
 
-        if not request.env.user.has_group('formio.group_formio_user'):
+        if not request.env.user.has_group('formio.group_formio_user') and \
+           not request.env.user.has_group('base.group_portal'):
             return
 
-        form = form_by_uuid(uuid)
+        form = get_form(uuid, 'read')
         if not form:
             return
 

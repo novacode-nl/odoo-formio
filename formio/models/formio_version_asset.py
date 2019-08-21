@@ -11,7 +11,10 @@ class VersionAsset(models.Model):
 
     version_id = fields.Many2one('formio.version', string='Version')
     type = fields.Selection([('js', 'js'), ('css', 'css')], string='Type')
-    attachment_id = fields.Many2one('ir.attachment', string="Attachment", required=True, ondelete='cascade')
+    attachment_id = fields.Many2one(
+        'ir.attachment', string="Attachment",
+        required=True, ondelete='cascade',
+        context={'default_res_model': 'formio.version.asset'})
     attachment_type = fields.Selection(related='attachment_id.type', string='Attachment Type', readonly=True)
     sequence = fields.Integer(string='Sequence', default=1)
     url = fields.Char(compute='_compute_url')
