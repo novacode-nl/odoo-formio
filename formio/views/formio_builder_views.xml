@@ -12,6 +12,7 @@ See LICENSE file for full licensing details. -->
                 <field name="name"/>
                 <field name="forms"/>
                 <field name="res_model_id"/>
+                <field name="portal"/>
                 <field name="formio_version_id"/>
             </tree>
         </field>
@@ -38,6 +39,7 @@ See LICENSE file for full licensing details. -->
                         <page string="General" name="general">
                             <group>
                                 <field name="res_model_id" groups="formio.group_formio_admin"/>
+                                <field name="portal" groups="formio.group_formio_admin"/>
                                 <field name="description" groups="formio.group_formio_admin"/>
                             </group>
                         </page>

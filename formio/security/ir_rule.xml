@@ -4,6 +4,17 @@ See LICENSE file for full copyright and licensing details. -->
 
 <odoo>
     <data>
+        <record id="formio_form_user" model="ir.rule">
+            <field name="name">formio.form: User assigned forms</field>
+            <field name="model_id" ref="model_formio_form"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="groups" eval="[(4, ref('formio.group_formio_user'))]"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+        </record>
+        
         <record id="formio_form_portal_user" model="ir.rule">
             <field name="name">formio.form: Portal User</field>
             <field name="model_id" ref="model_formio_form"/>
@@ -11,8 +22,8 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_write" eval="True"/>
             <field name="perm_create" eval="False"/>
             <field name="perm_unlink" eval="False"/>
-            <field name="groups" eval="[(4, ref('base.group_portal')), (4, ref('formio.group_formio_user'))]"/>
-            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[('builder_id.portal', '=', True), ('user_id', '=', user.id)]</field>
         </record>
     </data>
 </odoo>

@@ -13,11 +13,11 @@ _logger = logging.getLogger(__name__)
 
 def get_form(uuid, mode):
     """ Verifies access to form and return form or False (if no access). """
-    
-    if not request.env['formio.form'].check_access_rights(mode, False):
+
+    if not request.env['formio.form'].sudo().check_access_rights(mode, False):
         return False
     
-    form = request.env['formio.form'].search([('uuid', '=', uuid)], limit=1)
+    form = request.env['formio.form'].sudo().search([('uuid', '=', uuid)], limit=1)
     try:
         # Catch the deny access exception
         form.check_access_rule(mode)
@@ -120,9 +120,6 @@ class Formio(http.Controller):
     @http.route('/formio/form/submit/<string:uuid>', type='json', auth="user", methods=['POST'], website=True)
     def form_submit(self, uuid, **post):
         """ POST with ID instead of uuid, to get the model object right away """
-        if not request.env.user.has_group('formio.group_formio_user') and \
-           not request.env.user.has_group('base.group_portal'):
-            return
 
         form = get_form(uuid, 'write')
         if not form:
@@ -150,9 +147,6 @@ class Formio(http.Controller):
         - Data Source URL: /formio/form/data
         - Filter Query: model=res.partner&label=name&domain_fields=function&city=Sittard
         """
-        if not request.env.user.has_group('formio.group_formio_user') or \
-           not request.env.user.has_group('base.group_portal'):
-            return
 
         form = get_form(uuid, 'read')
         if not form:
@@ -207,10 +201,6 @@ class Formio(http.Controller):
         - Data Source URL: /formio/form/res_data
         - Filter Query: field=order_line.product_id&label=name
         """
-
-        if not request.env.user.has_group('formio.group_formio_user') and \
-           not request.env.user.has_group('base.group_portal'):
-            return
 
         form = get_form(uuid, 'read')
         if not form:

@@ -38,7 +38,7 @@ class Builder(models.Model):
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
-    portal = fields.Boolean("Portal", help="Form is accessible by assigned portal user")
+    portal = fields.Boolean("Portal usage", track_visibility='onchange', help="Form is accessible by assigned portal user")
 
     @api.constrains('name')
     def constaint_check_name(self):
