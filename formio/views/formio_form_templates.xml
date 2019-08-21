@@ -23,7 +23,7 @@ See LICENSE file for full licensing details. -->
                                 </a>
                             </li>
                         </t>
-                        <li t-if="not translatable" id="edit-in-backend">
+                        <li groups="base.group_user" t-if="not translatable" id="edit-in-backend">
                             <a t-attf-href="#{form.act_window_url}"><span class="fa fa-location-arrow"/>Form Details</a>
                         </li>
                         <li t-if="not translatable" id="odoo-home">

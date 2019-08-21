@@ -46,6 +46,7 @@ See LICENSE file for full licensing details. -->
                                     </b>
                                 </a>
                                 <ul class="dropdown-menu js_usermenu" role="menu">
+                                    <li groups="base.group_portal"><a t-attf-href="/my/home" role="menuitem">My Account</a></li>
                                     <li id="o_logout"><a t-attf-href="/web/session/logout?redirect=/" role="menuitem">Logout</a></li>
                                 </ul>
                             </li>
