@@ -9,7 +9,7 @@
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
     'category': 'Extra Tools',
-    'depends': ['web', 'mail'],
+    'depends': ['web', 'portal', 'mail'],
     'data': [
         'data/formio_version_data.xml',
         'data/formio_version_asset_data.xml',
