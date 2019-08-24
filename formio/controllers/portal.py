@@ -25,7 +25,7 @@ class CustomerPortal(CustomerPortal):
         forms = request.env['formio.form'].sudo().search(domain, order=order)
 
         values.update({
-            'forms': [forms], # TODO wrap []
+            'forms': forms, # TODO wrap []
             'page_name': 'form',
             'default_url': '/my/formio',
         })
