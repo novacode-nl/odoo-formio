@@ -105,15 +105,23 @@ See LICENSE file for full licensing details. -->
                         </button>
                     </div>
                     <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/></h1>
-                    <group>
+                    <group name="general">
                         <group>
                             <field name="builder_id" groups="formio.group_formio_admin"/>
-                            <field name="user_id"/>
-                            <strong attrs="{'invisible': [('res_name', '=', False)]}"><field name="res_info"/></strong> <field nolabel="1" name="res_name" attrs="{'invisible': [('res_name', '=', False)]}"/>
+                            <!-- <strong attrs="{'invisible': [('res_name', '=', False)]}"><field name="res_info"/></strong> <field nolabel="1" name="res_name" attrs="{'invisible': [('res_name', '=', False)]}"/> -->
                         </group>
                         <group>
                             <field name="uuid" groups="formio.group_formio_admin" attrs="{'invisible': [('id', '=', False)]}"/>
-                            <field name="portal"/>
+                            <field name="portal" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <group name="assignment">
+                        <group attrs="{'invisible': [('builder_id', '=', False)]}">
+                            <field name="user_id"/>
+                            <field name="invitation_mail_template_id"/>
+                        </group>
+                        <group attrs="{'invisible': [('user_id', '=', False)]}">
+                            <field name="invitation_mail_sent_date" attrs="{'invisible': [('invitation_mail_sent_date', '=', False)]}"/>
                         </group>
                     </group>
                     <notebook>

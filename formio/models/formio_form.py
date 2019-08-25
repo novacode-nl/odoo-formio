@@ -33,8 +33,13 @@ class Form(models.Model):
     res_name = fields.Char(compute='_compute_res_fields', readonly=True)
     res_info = fields.Char(compute='_compute_res_fields', readonly=True)
     user_id = fields.Many2one(
-        'res.users', string='Assigned to', default=lambda self: self.env.uid,
+        'res.users', string='Assigned user',
         index=True, track_visibility='onchange')
+    invitation_mail_template_id = fields.Many2one(
+        'mail.template', 'Invitation Mail',
+        domain=[('model', '=', 'formio.form')],
+        help="This e-mail template will be sent on user assignment. Leave empty to send nothing.")
+    invitation_mail_sent_date = fields.Datetime(string='Invitation Mail Sent On')
     submission_data = fields.Text('Data', default=False, readonly=True)
     submission_user_id = fields.Many2one(
         'res.users', string='Submission User', readonly=True,
@@ -47,7 +52,25 @@ class Form(models.Model):
     @api.model
     def _default_uuid(self):
         return str(uuid.uuid4())
-    
+
+    @api.onchange('portal')
+    def _onchange_portal(self):
+        res = {}
+        group_portal = self.env.ref('base.group_portal').id
+        if not self.portal:
+            if self.user_id.has_group('base.group_portal'):
+                self.user_id = False
+            res['domain'] = {'user_id': [('groups_id', '!=', group_portal)]}
+        else:
+            res['domain'] = {
+                'user_id': [
+                    '|',
+                    ('groups_id', '=', group_portal),
+                    ('groups_id', '!=', False)
+                ]
+            }
+        return res
+
     def _compute_edit_url(self):
         # sudo() is needed for regular users.
         for r in self:
