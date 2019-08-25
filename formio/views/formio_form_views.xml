@@ -120,9 +120,6 @@ See LICENSE file for full licensing details. -->
                             <field name="user_id"/>
                             <field name="invitation_mail_template_id"/>
                         </group>
-                        <group attrs="{'invisible': [('user_id', '=', False)]}">
-                            <field name="invitation_mail_sent_date" attrs="{'invisible': [('invitation_mail_sent_date', '=', False)]}"/>
-                        </group>
                     </group>
                     <notebook>
                         <page string="Submission" name="submission">
