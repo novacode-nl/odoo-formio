@@ -57,10 +57,18 @@ class Form(models.Model):
     def _onchange_portal(self):
         res = {}
         group_portal = self.env.ref('base.group_portal').id
+        group_formio_user = self.env.ref('formio.group_formio_user').id
+        group_formio_user_all = self.env.ref('formio.group_formio_user_all_forms').id
         if not self.portal:
             if self.user_id.has_group('base.group_portal'):
                 self.user_id = False
-            res['domain'] = {'user_id': [('groups_id', '!=', group_portal)]}
+            res['domain'] = {
+                'user_id': [
+                    ('groups_id', '!=', group_portal),
+                    '|',
+                    ('groups_id', '=', group_formio_user),
+                    ('groups_id', '=', group_formio_user_all),
+                ]}
         else:
             res['domain'] = {
                 'user_id': [
