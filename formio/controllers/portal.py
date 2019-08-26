@@ -26,7 +26,7 @@ class CustomerPortal(CustomerPortal):
 
         values.update({
             'forms': forms, # TODO wrap []
-            'page_name': 'form',
+            'page_name': 'formio',
             'default_url': '/my/formio',
         })
         return request.render("formio.portal_my_formio", values)

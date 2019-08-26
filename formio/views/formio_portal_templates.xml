@@ -6,8 +6,8 @@ See LICENSE file for full licensing details. -->
     <template id="portal_layout" name="Portal layout: formio menu entry" inherit_id="portal.portal_breadcrumbs" priority="40">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'formio' or formio" t-attf-class="breadcrumb-item #{'active ' if not formio else ''}">
-                <a t-if="formio" t-attf-href="/my/formio?{{ keep_query() }}">Forms (formio)</a>
-                <t t-else="">Forms (formio 1)</t>
+                <a t-if="formio" t-attf-href="/my/formio?{{ keep_query() }}"></a>
+                <t t-else="">Forms</t>
             </li>
             <li t-if="form" class="breadcrumb-item active">
                 <span t-field="form.name"/>
@@ -18,7 +18,7 @@ See LICENSE file for full licensing details. -->
     <template id="portal_my_home" name="Portal My Home: formio forms" inherit_id="portal.portal_my_home" priority="40">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-if="form_count" t-call="portal.portal_docs_entry">
-                <t t-set="title">Forms (formio)</t>
+                <t t-set="title">Forms</t>
                 <t t-set="url" t-value="'/my/formio'"/>
                 <t t-set="count" t-value="form_count"/>
             </t>
@@ -30,7 +30,7 @@ See LICENSE file for full licensing details. -->
             <t t-set="breadcrumbs_searchbar" t-value="True"/>
 
             <t t-call="portal.portal_searchbar">
-                <t t-set="title">Forms (formio)</t>
+                <t t-set="title">Forms</t>
             </t>
             <t t-if="not forms">
                 <div class="alert alert-warning mt8" role="alert">
