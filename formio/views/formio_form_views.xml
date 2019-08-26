@@ -113,7 +113,8 @@ See LICENSE file for full licensing details. -->
                     <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/></h1>
                     <group name="general">
                         <group>
-                            <field name="builder_id" groups="formio.group_formio_admin"/>
+                            <field name="builder_id" groups="formio.group_formio_admin"
+                                   attrs="{'readonly': [('submission_data', '!=', False)]}"/>
                             <!-- <strong attrs="{'invisible': [('res_name', '=', False)]}"><field name="res_info"/></strong> <field nolabel="1" name="res_name" attrs="{'invisible': [('res_name', '=', False)]}"/> -->
                         </group>
                         <group>
