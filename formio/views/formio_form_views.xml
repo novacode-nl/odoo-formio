@@ -94,6 +94,12 @@ See LICENSE file for full licensing details. -->
         <field name="model">formio.form</field>
         <field name="arch" type="xml">
 	    <form string="Form">
+                <header>
+                    <button
+                        name="action_send_invitation_mail" type="object" string="Send Invitation Mail"
+                        attrs="{'invisible': ['|', ('user_id', '=', False), ('id', '=', False)]}"
+                        class="btn-primary"/>
+                </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_formio" type="object" string="Form"
@@ -117,8 +123,8 @@ See LICENSE file for full licensing details. -->
                     </group>
                     <group name="assignment">
                         <group attrs="{'invisible': [('builder_id', '=', False)]}">
+                            <field name="invitation_mail_template_id" invisible="1"/>
                             <field name="user_id"/>
-                            <field name="invitation_mail_template_id"/>
                         </group>
                     </group>
                     <notebook>

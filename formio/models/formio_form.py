@@ -48,6 +48,33 @@ class Form(models.Model):
         help='Datetime when the form was last submitted.')
     portal = fields.Boolean("Portal usage", related='builder_id.portal', help="Form is accessible by assigned portal user")
 
+    @api.multi
+    def action_send_invitation_mail(self):
+        self.ensure_one()
+
+        compose_form_id = self.env.ref('mail.email_compose_message_wizard_form').id
+        if self.portal:
+            template_id = self.env.ref('formio.mail_invitation_portal_user').id
+        else:
+            template_id = self.env.ref('formio.mail_invitation_internal_user').id
+        ctx = dict(
+            default_composition_mode='comment',
+            default_res_id=self.id,
+            default_model='formio.form',
+            default_use_template=bool(template_id),
+            default_template_id=template_id,
+            custom_layout='mail.mail_notification_light'
+        )
+        return {
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'view_id': compose_form_id,
+            'target': 'new',
+            'context': ctx,
+        }
+
     @api.model
     def _default_uuid(self):
         return str(uuid.uuid4())

@@ -5,7 +5,7 @@ See LICENSE file for full copyright and licensing details.
 
 <odoo>
     <data>
-        <record id="invitation_internal_user" model="mail.template">
+        <record id="mail_invitation_internal_user" model="mail.template">
             <field name="name">Form.io: Invitation internal user</field>
             <field name="model_id" ref="formio.model_formio_form"/>
             <field name="auto_delete" eval="False"/>
@@ -16,8 +16,9 @@ See LICENSE file for full copyright and licensing details.
 <![CDATA[
 <div style="margin: 0px; padding: 0px; font-size: 13px;">
     <p style="margin: 0px; padding: 0px; font-size: 13px;">
-        Hello ${object.user_id.partner_id.name},<br /><br />
-        You have been assigned to a form. Your response would be appreciated.
+        Hello ${object.user_id.partner_id.name},<br/><br/>
+        You have been invited to fill-in the form: ${object.title}<br/>
+        Your response would be appreciated.
         <div style="margin: 16px 0px 16px 0px;">
             <a href="${object.edit_url}"
                 style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
@@ -30,7 +31,7 @@ See LICENSE file for full copyright and licensing details.
             </field>
         </record>
 
-        <record id="invitation_portal_user" model="mail.template">
+        <record id="mail_invitation_portal_user" model="mail.template">
             <field name="name">Form.io: Invitation portal user</field>
             <field name="model_id" ref="formio.model_formio_form"/>
             <field name="auto_delete" eval="False"/>
@@ -41,8 +42,9 @@ See LICENSE file for full copyright and licensing details.
 <![CDATA[
 <div style="margin: 0px; padding: 0px; font-size: 13px;">
     <p style="margin: 0px; padding: 0px; font-size: 13px;">
-        Hello ${object.user_id.partner_id.name},<br /><br />
-        You have been assigned to a form. Your response would be appreciated.
+        Hello ${object.user_id.partner_id.name},<br/><br/>
+        You have been invited to fill-in the form: ${object.title}<br/>
+        Your response would be appreciated.
         <div style="margin: 16px 0px 16px 0px;">
             <a href="${object.edit_url}"
                 style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
