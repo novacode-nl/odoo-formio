@@ -32,7 +32,7 @@ class Form(models.Model):
         [(STATE_PENDING, 'Pending'), (STATE_PROGRESS, 'In Progress'),
          (STATE_COMPLETE, 'Complete'), (STATE_CANCELED, 'Canceled')],
         string="State", default=STATE_PENDING, track_visibility='onchange', index=True)
-    edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
+    url = fields.Char(compute='_compute_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model')
     res_model_name = fields.Char(related='res_model_id.name', readonly=True, string='Resource Name')
@@ -104,7 +104,7 @@ class Form(models.Model):
             'view_mode': 'form',
             'res_model': 'mail.compose.message',
             'view_id': compose_form_id,
-            'target': 'self',
+            'target': 'new',
             'context': ctx,
         }
 
@@ -138,13 +138,13 @@ class Form(models.Model):
             }
         return res
 
-    def _compute_edit_url(self):
+    def _compute_url(self):
         # sudo() is needed for regular users.
         for r in self:
             url = '{base_url}/formio/form/{uuid}'.format(
                 base_url=r.env['ir.config_parameter'].sudo().get_param('web.base.url'),
                 uuid=r.uuid)
-            r.edit_url = url
+            r.url = url
 
     def _compute_act_window_url(self):
         # sudo() is needed for regular users.
@@ -166,7 +166,7 @@ class Form(models.Model):
     def action_formio(self):
         return {
             'type': 'ir.actions.act_url',
-            'url': self.edit_url,
+            'url': self.url,
             'target': 'self',
         }
 

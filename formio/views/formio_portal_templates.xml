@@ -51,11 +51,11 @@ See LICENSE file for full licensing details. -->
                         </td>
                         <td>
                             <a t-if="form.state not in ['COMPLETE', 'CANCELED']" role="button" class="btn btn-sm btn-primary"
-                               t-attf-href="{{ form.edit_url }}">
+                               t-attf-href="{{ form.url }}">
                                 <span aria-label="Edit form" title="Edit form"> Edit form</span>
                             </a>
                             <a t-else="" role="button" class="btn btn-sm btn-secondary"
-                               t-attf-href="{{ form.edit_url }}">
+                               t-attf-href="{{ form.url }}">
                                 <span aria-label="View form" title="View form"> View form</span>
                             </a>
                         </td>
