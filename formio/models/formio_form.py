@@ -71,7 +71,7 @@ class Form(models.Model):
             'view_mode': 'form',
             'res_model': 'mail.compose.message',
             'view_id': compose_form_id,
-            'target': 'new',
+            'target': 'self',
             'context': ctx,
         }
 
@@ -134,7 +134,7 @@ class Form(models.Model):
         return {
             'type': 'ir.actions.act_url',
             'url': self.edit_url,
-            'target': 'new',
+            'target': 'self',
         }
 
     @api.multi

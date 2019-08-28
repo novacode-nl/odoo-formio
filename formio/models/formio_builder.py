@@ -67,5 +67,5 @@ class Builder(models.Model):
         return {
             'type': 'ir.actions.act_url',
             'url': self.edit_url,
-            'target': 'new',
+            'target': 'self',
         }
