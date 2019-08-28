@@ -112,10 +112,6 @@ class Formio(http.Controller):
 
     @http.route('/formio/form/submission/<string:uuid>', type='json', auth='user', website=True)
     def form_submission(self, uuid, **kwargs):
-        if not request.env.user.has_group('formio.group_formio_user') and \
-           not request.env.user.has_group('base.group_portal'):
-            return
-        
         form = self.get_form(uuid, 'read')
         if form and form.submission_data:
             return form.submission_data
