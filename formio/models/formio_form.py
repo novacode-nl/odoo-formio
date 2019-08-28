@@ -8,6 +8,11 @@ import uuid
 
 from odoo import api, fields, models, _
 
+STATE_PENDING = 'PENDING'
+STATE_PROGRESS = 'PROGRESS'
+STATE_COMPLETE = 'COMPLETE'
+STATE_CANCELED = 'CANCELED'
+
 
 class Form(models.Model):
     _name = 'formio.form'
@@ -23,6 +28,10 @@ class Form(models.Model):
         default=lambda self: self._default_uuid(), required=True, readonly=True, copy=False,
         string='UUID')
     title = fields.Char(related='builder_id.title', readonly=True)
+    state = fields.Selection(
+        [(STATE_PENDING, 'Pending'), (STATE_PROGRESS, 'In Progress'),
+         (STATE_COMPLETE, 'Complete'), (STATE_CANCELED, 'Canceled')],
+        string="State", default=STATE_PENDING, track_visibility='onchange', index=True)
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model')
@@ -47,6 +56,30 @@ class Form(models.Model):
         string='Submission Date', readonly=True, track_visibility='onchange',
         help='Datetime when the form was last submitted.')
     portal = fields.Boolean("Portal usage", related='builder_id.portal', help="Form is accessible by assigned portal user")
+
+    @api.multi
+    def write(self, vals):
+        if 'submission_data' in vals and self.state in [STATE_COMPLETE, STATE_CANCELED]:
+            return False
+        if 'submission_data' in vals and self.state == 'PENDING':
+            vals['state'] = STATE_PROGRESS
+        res = super(Form, self).write(vals)
+        return res
+
+    @api.multi
+    def action_progress(self):
+        self.ensure_one()
+        self.write({'state': STATE_PROGRESS})
+
+    @api.multi
+    def action_complete(self):
+        self.ensure_one()
+        self.write({'state': STATE_COMPLETE})
+
+    @api.multi
+    def action_cancel(self):
+        self.ensure_one()
+        self.write({'state': STATE_CANCELED})
 
     @api.multi
     def action_send_invitation_mail(self):

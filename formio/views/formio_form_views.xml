@@ -14,6 +14,7 @@ See LICENSE file for full licensing details. -->
                 <button name="action_formio" type="object" string="Open"/>
                 <field name="submission_user_id"/>
                 <field name="submission_date"/>
+                <field name="state"/>
                 <field name="portal"/>
                 <field name="id"/>
             </tree>
@@ -67,6 +68,11 @@ See LICENSE file for full licensing details. -->
                                                     <i class="fa fa-clock-o" title="Submission date" aria-label="Submission date"/> <field name="submission_date"/>
                                                 </div>
                                             </div>
+                                            <div>
+                                                <div>
+                                                    <span class="text-muted">State: <field name="state"/></span>
+                                                </div>
+                                            </div>
                                         </t>
                                     </small>
                                 </div>
@@ -97,8 +103,18 @@ See LICENSE file for full licensing details. -->
                 <header>
                     <button
                         name="action_send_invitation_mail" type="object" string="Send Invitation Mail"
-                        attrs="{'invisible': ['|', ('user_id', '=', False), ('id', '=', False)]}"
+                        attrs="{'invisible': ['|', '|', ('user_id', '=', False), ('id', '=', False), ('state', 'not in', ['PENDING', 'PROGRESS'])]}"
                         class="btn-primary"/>
+                    <button
+                        name="action_progress" type="object" string="In Progress"
+                        attrs="{'invisible': [('state', 'in', ['PENDING', 'PROGRESS'])]}"/>
+                    <button
+                        name="action_complete" type="object" string="Complete"
+                        attrs="{'invisible': [('state', '!=', 'PROGRESS')]}"/>
+                    <button
+                        name="action_cancel" type="object" string="Cancel"
+                        attrs="{'invisible': [('state', 'in', ['COMPLETE', 'CANCELED'])]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="PENDING,PROGRESS,COMPLETE,CANCELED"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -125,7 +141,7 @@ See LICENSE file for full licensing details. -->
                     <group name="assignment">
                         <group attrs="{'invisible': [('builder_id', '=', False)]}">
                             <field name="invitation_mail_template_id" invisible="1"/>
-                            <field name="user_id"/>
+                            <field name="user_id" attrs="{'readonly': [('state', 'in', ['COMPLETE', 'CANCELED'])]}"/>
                         </group>
                     </group>
                     <notebook>

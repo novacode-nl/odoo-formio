@@ -42,6 +42,7 @@ See LICENSE file for full licensing details. -->
                     <th>Title</th>
                     <th>Actions</th>
                     <th>Last submission date</th>
+                    <th>State</th>
                 </thead>
                 <tbody>
                     <tr t-foreach="forms" t-as="form">
@@ -49,13 +50,20 @@ See LICENSE file for full licensing details. -->
                             <span t-field="form.title"/>
                         </td>
                         <td>
-                            <a role="button" class="btn btn-sm btn-secondary"
+                            <a t-if="form.state not in ['COMPLETE', 'CANCELED']" role="button" class="btn btn-sm btn-primary"
                                t-attf-href="{{ form.edit_url }}">
                                 <span aria-label="Edit form" title="Edit form"> Edit form</span>
+                            </a>
+                            <a t-else="" role="button" class="btn btn-sm btn-secondary"
+                               t-attf-href="{{ form.edit_url }}">
+                                <span aria-label="View form" title="View form"> View form</span>
                             </a>
                         </td>
                         <td>
                             <span t-field="form.submission_date"/>
+                        </td>
+                        <td>
+                            <span t-field="form.state"/>
                         </td>
                     </tr>
                 </tbody>
