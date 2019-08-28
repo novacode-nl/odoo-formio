@@ -12,6 +12,7 @@ See LICENSE file for full licensing details. -->
                 <field name="res_name"/>
                 <field name="res_info"/>
                 <button name="action_formio" type="object" string="Open"/>
+                <field name="user_id"/>
                 <field name="submission_user_id"/>
                 <field name="submission_date"/>
                 <field name="state"/>
