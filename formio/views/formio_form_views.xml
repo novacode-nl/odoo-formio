@@ -54,7 +54,7 @@ See LICENSE file for full licensing details. -->
                                             </div>
                                         </div>
                                     </t>
-                                    <small class="o_kanban_record_subtitle text-muted">
+                                    <span class="oe_kanban_details">
                                         <!-- submission info -->
                                         <t t-if="record.submission_user_id.raw_value">
                                             <strong>Submission:</strong>
@@ -70,19 +70,20 @@ See LICENSE file for full licensing details. -->
                                             </div>
                                             <div>
                                                 <div>
-                                                    <span class="text-muted">State: <field name="state"/></span>
+                                                    <span>State: <field name="state"/></span>
                                                 </div>
                                             </div>
                                         </t>
-                                    </small>
+                                    </span>
                                 </div>
                                 <div class="o_kanban_record_bottom">
-                                    <div class="oe_kanban_bottom_left"/>
-                                    <div class="oe_kanban_bottom_right">
+                                    <div class="oe_kanban_bottom_left">
                                         <small class="text-muted">ID: <field name="id"/></small>
                                         <div style="margin-left: 4px;" attrs="{'invisible': [('portal', '=', False)]}">
                                             <i class="fa fa-globe text-muted"/><span class="text-muted"> portal</span>
                                         </div>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
                                         <img t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)" t-att-title="record.user_id.value" t-att-alt="record.user_id.value" width="24" height="24" class="oe_kanban_avatar"/>
                                     </div>
                                 </div>
@@ -171,6 +172,9 @@ See LICENSE file for full licensing details. -->
             <search string="Forms">
                 <field name="uuid"/>
                 <field name="title"/>
+                <field name="user_id"/>
+                <field name="submission_user_id"/>
+                <field name="submission_date"/>
                 <field name="res_model_id"/>
                 <field name="res_id"/>
             </search>
