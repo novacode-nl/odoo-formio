@@ -39,6 +39,7 @@ class Builder(models.Model):
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal usage", track_visibility='onchange', help="Form is accessible by assigned portal user")
+    view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
 
     @api.constrains('name')
     def constaint_check_name(self):

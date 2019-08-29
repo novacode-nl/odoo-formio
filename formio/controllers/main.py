@@ -99,6 +99,7 @@ class Formio(http.Controller):
 
         if form.state in [STATE_COMPLETE, STATE_CANCELED]:
             options['readOnly'] = True
+            options['viewAsHtml'] = form.builder_id.view_as_html
         if form and form.builder_id.formio_version_id.translations:
             lang = request.env['res.lang']._lang_get(request.env.user.lang)
             i18n = {}
