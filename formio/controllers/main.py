@@ -135,6 +135,9 @@ class Formio(http.Controller):
             'submission_user_id': request.env.user.id,
             'submission_date': fields.Datetime.now(),
         }
+
+        if not post['data'].get('saveAsDraft'):
+            vals['state'] = STATE_COMPLETE
         form.write(vals)
 
     @http.route('/formio/form/data/<string:uuid>', type='http', auth='user', website=True)

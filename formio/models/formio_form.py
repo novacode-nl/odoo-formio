@@ -9,7 +9,7 @@ import uuid
 from odoo import api, fields, models, _
 
 STATE_PENDING = 'PENDING'
-STATE_PROGRESS = 'PROGRESS'
+STATE_DRAFT = 'DRAFT'
 STATE_COMPLETE = 'COMPLETE'
 STATE_CANCELED = 'CANCELED'
 
@@ -29,7 +29,7 @@ class Form(models.Model):
         string='UUID')
     title = fields.Char(related='builder_id.title', readonly=True)
     state = fields.Selection(
-        [(STATE_PENDING, 'Pending'), (STATE_PROGRESS, 'In Progress'),
+        [(STATE_PENDING, 'Pending'), (STATE_DRAFT, 'Draft'),
          (STATE_COMPLETE, 'Complete'), (STATE_CANCELED, 'Canceled')],
         string="State", default=STATE_PENDING, track_visibility='onchange', index=True)
     url = fields.Char(compute='_compute_url', readonly=True)
@@ -62,14 +62,14 @@ class Form(models.Model):
         if 'submission_data' in vals and self.state in [STATE_COMPLETE, STATE_CANCELED]:
             return False
         if 'submission_data' in vals and self.state == 'PENDING':
-            vals['state'] = STATE_PROGRESS
+            vals['state'] = STATE_DRAFT
         res = super(Form, self).write(vals)
         return res
 
     @api.multi
-    def action_progress(self):
+    def action_draft(self):
         self.ensure_one()
-        self.write({'state': STATE_PROGRESS})
+        self.write({'state': STATE_DRAFT})
 
     @api.multi
     def action_complete(self):

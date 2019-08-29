@@ -105,18 +105,18 @@ See LICENSE file for full licensing details. -->
                 <header>
                     <button
                         name="action_send_invitation_mail" type="object" string="Send Invitation Mail"
-                        attrs="{'invisible': ['|', '|', ('user_id', '=', False), ('id', '=', False), ('state', 'not in', ['PENDING', 'PROGRESS'])]}"
+                        attrs="{'invisible': ['|', '|', ('user_id', '=', False), ('id', '=', False), ('state', 'not in', ['PENDING', 'DRAFT'])]}"
                         class="btn-primary"/>
                     <button
-                        name="action_progress" type="object" string="In Progress"
-                        attrs="{'invisible': [('state', 'in', ['PENDING', 'PROGRESS'])]}"/>
+                       name="action_draft" type="object" string="Draft"
+                        attrs="{'invisible': [('state', 'in', ['PENDING', 'DRAFT'])]}"/>
                     <button
                         name="action_complete" type="object" string="Complete"
-                        attrs="{'invisible': [('state', '!=', 'PROGRESS')]}"/>
+                        attrs="{'invisible': [('state', '!=', 'DRAFT')]}"/>
                     <button
                         name="action_cancel" type="object" string="Cancel"
                         attrs="{'invisible': [('state', 'in', ['COMPLETE', 'CANCELED'])]}"/>
-                    <field name="state" widget="statusbar" statusbar_visible="PENDING,PROGRESS,COMPLETE,CANCELED"/>
+                    <field name="state" widget="statusbar" statusbar_visible="PENDING,DRAFT,COMPLETE,CANCELED"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
