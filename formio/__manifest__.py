@@ -13,6 +13,7 @@
     'data': [
         'data/formio_version_data.xml',
         'data/formio_version_asset_data.xml',
+        'data/formio_demo_data.xml',
         'data/mail_template_data.xml',
         # translations
         'data/formio_translations_sources.xml',
