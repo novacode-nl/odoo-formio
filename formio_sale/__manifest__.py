@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io - Sales',
+    'name': 'Sales Form.io',
     'summary': 'Form.io webforms on Sale Orders/Quotes',
     'version': '0.1',
     'author': 'Nova Code',
