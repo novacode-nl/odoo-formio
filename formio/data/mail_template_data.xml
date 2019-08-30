@@ -18,7 +18,8 @@ See LICENSE file for full copyright and licensing details.
     <p style="margin: 0px; padding: 0px; font-size: 13px;">
         Hello ${object.user_id.partner_id.name},<br/><br/>
         You have been invited to fill-in the form: ${object.title}<br/>
-        Your response would be appreciated.
+        Your response would be appreciated.<br/><br/>
+        Click the button to go to the form, which requires you're logged in.
         <div style="margin: 16px 0px 16px 0px;">
             <a href="${object.url}"
                 style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
@@ -44,7 +45,8 @@ See LICENSE file for full copyright and licensing details.
     <p style="margin: 0px; padding: 0px; font-size: 13px;">
         Hello ${object.user_id.partner_id.name},<br/><br/>
         You have been invited to fill-in the form: ${object.title}<br/>
-        Your response would be appreciated.
+        Your response would be appreciated.<br/><br/>
+        Click the button to go to the form, which requires you're logged in.
         <div style="margin: 16px 0px 16px 0px;">
             <a href="${object.url}"
                 style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
