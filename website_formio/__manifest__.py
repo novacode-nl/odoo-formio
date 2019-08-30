@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Website Form.io',
+    'name': 'Form.io Website',
     'summary': '"Thank you page" after form submission.',
     'version': '1.0',
     'author': 'Nova Code',
