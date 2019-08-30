@@ -14,7 +14,7 @@ from ..models.formio_form import STATE_COMPLETE, STATE_CANCELED
 _logger = logging.getLogger(__name__)
 
 
-class Formio(http.Controller):
+class FormioController(http.Controller):
 
     def get_form(self, uuid, mode):
         """ Verifies access to form and return form or False (if no access). """
@@ -92,14 +92,13 @@ class Formio(http.Controller):
         else:
             return {}
 
-    @http.route('/formio/form/options/<string:uuid>', type='json', auth='user', website=True)
-    def form_options(self, uuid, **kwargs):
-        form = self.get_form(uuid, 'read')
+    def _prepare_form_options(self, form):
         options = {}
 
         if form.state in [STATE_COMPLETE, STATE_CANCELED]:
             options['readOnly'] = True
             options['viewAsHtml'] = form.builder_id.view_as_html
+
         if form and form.builder_id.formio_version_id.translations:
             lang = request.env['res.lang']._lang_get(request.env.user.lang)
             i18n = {}
@@ -110,7 +109,13 @@ class Formio(http.Controller):
                     i18n[trans.lang_id.iso_code][trans.property] = trans.value
             options['language'] = lang.iso_code
             options['i18n'] = i18n
-                
+
+        return options
+
+    @http.route('/formio/form/options/<string:uuid>', type='json', auth='user', website=True)
+    def form_options(self, uuid, **kwargs):
+        form = self.get_form(uuid, 'read')
+        options = self._prepare_form_options(form)
         return json.dumps(options)
 
     @http.route('/formio/form/submission/<string:uuid>', type='json', auth='user', website=True)

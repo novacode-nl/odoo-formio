@@ -48,6 +48,13 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
                                 form.emit('submitDone', submission);
                             });
                         });
+                        if ('submitDone' in options && 'url' in options['submitDone']) {
+                            form.on('submitDone', function(submission) {
+                                if ('submit' in submission.data && submission.data.submit == true) {
+                                    window.location = options['submitDone']['url'];
+                                }
+                            });
+                        }
                         // Set the Submission (data)
                         // https://github.com/formio/formio.js/wiki/Form-Renderer#setting-the-submission
                         ajax.jsonRpc(submission_url, 'call', {}).then(function(result) {
