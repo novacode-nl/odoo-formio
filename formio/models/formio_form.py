@@ -57,6 +57,15 @@ class Form(models.Model):
         string='Submission Date', readonly=True, track_visibility='onchange',
         help='Datetime when the form was last submitted.')
     portal = fields.Boolean("Portal usage", related='builder_id.portal', help="Form is accessible by assigned portal user")
+    allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
+
+    def _compute_access(self):
+        for r in self:
+            unlink_form = self.get_form(r.uuid, 'unlink')
+            if unlink_form:
+                r.allow_unlink = True
+            else:
+                r.allow_unlink = False
 
     @api.multi
     def write(self, vals):
@@ -186,7 +195,7 @@ class Form(models.Model):
         if not self.env['formio.form'].check_access_rights(mode, False):
             return False
 
-        form = self.env['formio.form'].search([('uuid', '=', uuid)], limit=1)
+        form = self.search([('uuid', '=', uuid)], limit=1)
         if form:
             try:
                 # Catch the deny access exception
@@ -194,7 +203,7 @@ class Form(models.Model):
             except AccessError as e:
                 return False
         elif self.env.user.has_group('base.group_portal'):
-            form = self.env['formio.form'].sudo().search([('uuid', '=', uuid)], limit=1)
+            form = self.sudo().search([('uuid', '=', uuid)], limit=1)
             if not form or form.builder_id.portal is False or form.user_id.id != self.env.user.id:
                 return False
         return form

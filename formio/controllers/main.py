@@ -63,6 +63,7 @@ class FormioController(http.Controller):
             # TODO website page with message?
             return request.redirect("/")
         values = {
+            'user': request.env.user,
             'form': form,
             'formio_css_assets': form.builder_id.formio_css_assets,
             'formio_js_assets': form.builder_id.formio_js_assets,

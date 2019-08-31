@@ -4,17 +4,6 @@ See LICENSE file for full copyright and licensing details. -->
 
 <odoo>
     <data>
-        <record id="formio_form_unlink" model="ir.rule">
-            <field name="name">formio.form unlink</field>
-            <field name="model_id" ref="model_formio_form"/>
-            <field name="perm_read" eval="False"/>
-            <field name="perm_write" eval="False"/>
-            <field name="perm_create" eval="False"/>
-            <field name="perm_unlink" eval="True"/>
-            <field name="groups" eval="[(4, ref('formio.group_formio_user')), (4, ref('base.group_portal'))]"/>
-            <field name="domain_force">[('state', 'in', ['PENDING', 'CANCEL'])]</field>
-        </record>
-        
         <record id="formio_form_user" model="ir.rule">
             <field name="name">formio.form: User assigned forms</field>
             <field name="model_id" ref="model_formio_form"/>
@@ -34,7 +23,14 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_create" eval="False"/>
             <field name="perm_unlink" eval="True"/>
             <field name="groups" eval="[(4, ref('formio.group_formio_user'))]"/>
-            <field name="domain_force">[('create_uid', '=', user.id), ('user_id', '=', user.id), ('state', 'in', ['PENDING'])]</field>
+            <field name="domain_force">
+                ['|',
+                '&amp;',
+                ('create_uid', '=', user.id), ('user_id', '=', user.id),
+                '|',
+                ('state', 'in', ['PENDING']),
+                '&amp;', ('state', 'in', ['DRAFT']), ('builder_id.always_allow_delete_draft', '=', True)]
+            </field>
         </record>
         
         <record id="formio_form_portal_user" model="ir.rule">
@@ -57,10 +53,13 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="True"/>
             <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
             <field name="domain_force">
-                [('builder_id.portal', '=', True), ('create_uid', '=', user.id), ('user_id', '=', user.id),
+                ['|',
+                '&amp;',
+                '&amp;',
+                ('builder_id.portal', '=', True), ('create_uid', '=', user.id), ('user_id', '=', user.id),
                 '|',
                 ('state', 'in', ['PENDING']),
-                '&amp;', ('state', 'in', ['DRAFT']), ('builder_id.allow_delete_draft', '=', True)]
+                '&amp;', ('state', 'in', ['DRAFT']), ('builder_id.always_allow_delete_draft', '=', True)]
             </field>
         </record>
     </data>

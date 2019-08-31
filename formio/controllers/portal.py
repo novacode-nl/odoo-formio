@@ -11,7 +11,7 @@ class CustomerPortal(CustomerPortal):
     def _prepare_portal_layout_values(self):
         values = super(CustomerPortal, self)._prepare_portal_layout_values()
         domain = [('user_id', '=', request.env.user.id), ('builder_id.portal', '=', True)]
-        values['form_count'] = request.env['formio.form'].sudo().search_count(domain)
+        values['form_count'] = request.env['formio.form'].search_count(domain)
         return values
 
     @http.route(['/my/formio'], type='http', auth="user", website=True)
@@ -22,7 +22,7 @@ class CustomerPortal(CustomerPortal):
             ('user_id', '=', request.env.user.id)
         ]
         order = 'create_date DESC'
-        forms = request.env['formio.form'].sudo().search(domain, order=order)
+        forms = request.env['formio.form'].search(domain, order=order)
 
         # TODO create model (class)method for this?
         domain = [
@@ -31,7 +31,7 @@ class CustomerPortal(CustomerPortal):
         # TODO order by sequence?
         order = 'name ASC'
 
-        builders_create_form = request.env['formio.builder'].sudo().search(domain, order=order)
+        builders_create_form = request.env['formio.builder'].search(domain, order=order)
         values.update({
             'forms': forms,
             'builders_create_form': builders_create_form,
