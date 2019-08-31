@@ -21,7 +21,7 @@ class CustomerPortal(CustomerPortal):
         domain = [
             ('user_id', '=', request.env.user.id)
         ]
-        order = 'name ASC'
+        order = 'create_date DESC'
         forms = request.env['formio.form'].sudo().search(domain, order=order)
 
         # TODO create model (class)method for this?
