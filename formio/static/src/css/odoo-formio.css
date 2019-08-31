@@ -99,11 +99,7 @@ body #wrapwrap main .container.formio_form_actions {
     height: 75px;
 }
 
-.formio_form_actions .row > div a {
-    margin: 8px 0;
-}
-
-.formio_form_actions .row > div.actions-right a {
+.formio_form_actions .row > div.actions-right * {
     float: right;
 }
 

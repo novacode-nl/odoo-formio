@@ -31,7 +31,7 @@ class Form(models.Model):
     title = fields.Char(related='builder_id.title', readonly=True)
     state = fields.Selection(
         [(STATE_PENDING, 'Pending'), (STATE_DRAFT, 'Draft'),
-         (STATE_COMPLETE, 'Complete'), (STATE_CANCEL, 'Cancel')],
+         (STATE_COMPLETE, 'Completed'), (STATE_CANCEL, 'Canceled')],
         string="State", default=STATE_PENDING, track_visibility='onchange', index=True)
     url = fields.Char(compute='_compute_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)

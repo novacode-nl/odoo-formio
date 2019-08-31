@@ -51,14 +51,20 @@ See LICENSE file for full licensing details. -->
             <t t-if="forms" t-call="portal.portal_table">
                 <thead>
                     <th>Title</th>
-                    <th>Actions</th>
                     <th>Last submission date</th>
                     <th>State</th>
+                    <th>Actions</th>
                 </thead>
                 <tbody>
                     <tr t-foreach="forms" t-as="form">
                         <td>
                             <span t-field="form.title"/>
+                        </td>
+                        <td>
+                            <span t-field="form.submission_date"/>
+                        </td>
+                        <td>
+                            <span t-field="form.state"/>
                         </td>
                         <td>
                             <a t-if="form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-primary"
@@ -75,16 +81,14 @@ See LICENSE file for full licensing details. -->
                                t-attf-href="/my/formio/delete/{{ form.uuid }}">
                                 <span aria-label="Delete form" title="Delete form" confirm="Are you sure?">Delete Form</span>
                             </a>
-                            <a t-if="form.state in ['COMPLETE', 'CANCEL']" role="button" class="btn btn-sm btn-secondary"
+                            <a t-if="form.state == 'COMPLETE'" role="button" class="btn btn-sm btn-secondary"
                                t-attf-href="{{ form.url }}">
                                 <span aria-label="View form" title="View form">View Form</span>
                             </a>
-                        </td>
-                        <td>
-                            <span t-field="form.submission_date"/>
-                        </td>
-                        <td>
-                            <span t-field="form.state"/>
+                            <a t-elif="form.state == 'CANCEL'" role="button" class="btn btn-sm btn-light"
+                               t-attf-href="{{ form.url }}">
+                                <span aria-label="View form" title="View form">View Form</span>
+                            </a>
                         </td>
                     </tr>
                 </tbody>
