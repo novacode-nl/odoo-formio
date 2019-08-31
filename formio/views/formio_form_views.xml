@@ -105,6 +105,7 @@ See LICENSE file for full licensing details. -->
                 <header>
                     <button
                         name="action_send_invitation_mail" type="object" string="Send Invitation Mail"
+                        groups="formio.group_formio_user_all_forms"
                         attrs="{'invisible': ['|', '|', ('user_id', '=', False), ('id', '=', False), ('state', 'not in', ['PENDING', 'DRAFT'])]}"
                         class="btn-primary"/>
                     <button
@@ -131,19 +132,19 @@ See LICENSE file for full licensing details. -->
                     <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/></h1>
                     <group name="general">
                         <group>
-                            <field name="builder_id" groups="formio.group_formio_admin"
+                            <field name="builder_id"
                                    attrs="{'readonly': [('submission_data', '!=', False)]}"/>
                             <!-- <strong attrs="{'invisible': [('res_name', '=', False)]}"><field name="res_info"/></strong> <field nolabel="1" name="res_name" attrs="{'invisible': [('res_name', '=', False)]}"/> -->
                         </group>
                         <group>
-                            <field name="uuid" groups="formio.group_formio_admin" attrs="{'invisible': [('id', '=', False)]}"/>
+                            <field name="uuid" attrs="{'invisible': [('id', '=', False)]}"/>
                             <field name="portal" attrs="{'invisible': [('builder_id', '=', False)]}"/>
                         </group>
                     </group>
                     <group name="assignment">
                         <group attrs="{'invisible': [('builder_id', '=', False)]}">
                             <field name="invitation_mail_template_id" invisible="1"/>
-                            <field name="user_id" attrs="{'readonly': [('state', 'in', ['COMPLETE', 'CANCELED'])]}"/>
+                            <field name="user_id" groups="formio.group_formio_user_all_forms" attrs="{'readonly': [('state', 'in', ['COMPLETE', 'CANCELED'])]}"/>
                         </group>
                     </group>
                     <notebook>

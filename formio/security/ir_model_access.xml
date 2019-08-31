@@ -62,8 +62,8 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="model_id" ref="formio.model_formio_form"/>
             <field name="group_id" ref="formio.group_formio_user_all_forms"/>
             <field name="perm_read" eval="1"/>
-            <field name="perm_create" eval="0"/>
-            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
             <field name="perm_unlink" eval="0"/>
         </record>
 
@@ -72,8 +72,8 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="model_id" ref="formio.model_formio_form"/>
             <field name="group_id" ref="formio.group_formio_user"/>
             <field name="perm_read" eval="1"/>
-            <field name="perm_create" eval="0"/>
-            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
             <field name="perm_unlink" eval="0"/>
         </record>
 
@@ -82,7 +82,7 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="model_id" ref="formio.model_formio_form"/>
             <field name="group_id" ref="base.group_portal"/>
             <field name="perm_read" eval="1"/>
-            <field name="perm_create" eval="0"/>
+            <field name="perm_create" eval="1"/>
             <field name="perm_write" eval="1"/>
             <field name="perm_unlink" eval="0"/>
         </record>
