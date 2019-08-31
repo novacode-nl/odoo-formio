@@ -8,16 +8,17 @@ See LICENSE file for full licensing details. -->
         <field name="model">formio.form</field>
         <field name="arch" type="xml">
             <tree string="Forms">
+                <field name="uuid"/>
                 <field name="title"/>
+                <field name="name"/>
                 <field name="res_name"/>
                 <field name="res_info"/>
-                <button name="action_formio" type="object" string="Open"/>
+                <field name="create_uid"/>
                 <field name="user_id"/>
                 <field name="submission_user_id"/>
                 <field name="submission_date"/>
-                <field name="state"/>
                 <field name="portal"/>
-                <field name="id"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
