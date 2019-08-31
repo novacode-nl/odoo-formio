@@ -47,7 +47,7 @@ See LICENSE file for full licensing details. -->
                         <div class="container formio_form_actions">
                             <div class="row">
                                 <div class="col-md-12 actions-right">
-                                    <a class="btn btn-sm btn-link"
+                                    <a class="btn btn-sm btn-info"
                                        style="margin-left: 8px"
                                        t-attf-href="/my/formio">
                                         <span aria-label="Delete form" title="My forms">My Forms</span>
