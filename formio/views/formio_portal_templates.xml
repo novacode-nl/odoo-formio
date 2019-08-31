@@ -17,7 +17,7 @@ See LICENSE file for full licensing details. -->
 
     <template id="portal_my_home" name="Portal My Home: formio forms" inherit_id="portal.portal_my_home" priority="40">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
-            <t t-if="form_count" t-call="portal.portal_docs_entry">
+            <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Forms</t>
                 <t t-set="url" t-value="'/my/formio'"/>
                 <t t-set="count" t-value="form_count"/>
@@ -34,9 +34,21 @@ See LICENSE file for full licensing details. -->
             </t>
             <t t-if="not forms">
                 <div class="alert alert-warning mt8" role="alert">
-                    There are no Forms (formio).
+                    There are no Forms.
                 </div>
             </t>
+
+            <div class="o_dropdown_kanban dropdown mt8 mb8">
+                <button class="dropdown-toggle btn btn-primary" role="button" data-toggle="dropdown" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                    Create a Form
+                </button>
+                <div class="dropdown-menu" role="menu">
+                    <t t-foreach="builders_create_form" t-as="builder">
+                        <a t-attf-href="/my/formio/create/{{ builder.name }}" class="dropdown-item"><span t-field="builder.title"/></a>
+                    </t>
+                </div>
+            </div>
+
             <t t-if="forms" t-call="portal.portal_table">
                 <thead>
                     <th>Title</th>

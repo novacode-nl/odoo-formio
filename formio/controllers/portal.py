@@ -24,8 +24,17 @@ class CustomerPortal(CustomerPortal):
         order = 'name ASC'
         forms = request.env['formio.form'].sudo().search(domain, order=order)
 
+        # TODO create model (class)method for this?
+        domain = [
+            ('portal', '=', True)
+        ]
+        # TODO order by sequence?
+        order = 'name ASC'
+
+        builders_create_form = request.env['formio.builder'].sudo().search(domain, order=order)
         values.update({
-            'forms': forms, # TODO wrap []
+            'forms': forms,
+            'builders_create_form': builders_create_form,
             'page_name': 'formio',
             'default_url': '/my/formio',
         })
