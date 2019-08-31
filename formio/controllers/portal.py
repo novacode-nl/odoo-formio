@@ -30,3 +30,17 @@ class CustomerPortal(CustomerPortal):
             'default_url': '/my/formio',
         })
         return request.render("formio.portal_my_formio", values)
+
+    @http.route(['/my/formio/create/<string:name>'], type='http', auth="user", method=['GET'], website=True)
+    def portal_create_form(self, name):
+        builder = request.env['formio.builder'].search([('name', '=', name), ('portal', '=', True)], limit=1)
+        if not builder:
+            # TODO website page with message?
+            return request.redirect('/my/formio')
+        vals = {
+            'builder_id': builder.id,
+            'user_id': request.env.user.id
+        }
+        form = request.env['formio.form'].create(vals)
+        url = '/formio/form/{uuid}'.format(uuid=form.uuid)
+        return request.redirect(url)
