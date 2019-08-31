@@ -28,7 +28,6 @@ See LICENSE file for full licensing details. -->
     <template id="portal_my_formio" name="My Projects">
         <t t-call="portal.portal_layout">
             <t t-set="breadcrumbs_searchbar" t-value="True"/>
-
             <t t-call="portal.portal_searchbar">
                 <t t-set="title">Forms</t>
             </t>
@@ -37,18 +36,18 @@ See LICENSE file for full licensing details. -->
                     There are no Forms.
                 </div>
             </t>
-
-            <div class="o_dropdown_kanban dropdown mt8 mb8">
-                <button class="dropdown-toggle btn btn-primary" role="button" data-toggle="dropdown" href="#" aria-label="Dropdown menu" title="Dropdown menu">
-                    Create a Form
-                </button>
-                <div class="dropdown-menu" role="menu">
-                    <t t-foreach="builders_create_form" t-as="builder">
-                        <a t-attf-href="/my/formio/create/{{ builder.name }}" class="dropdown-item"><span t-field="builder.title"/></a>
-                    </t>
+            <t t-if="builders_create_form">
+                <div class="o_dropdown_kanban dropdown mt8 mb8">
+                    <button class="dropdown-toggle btn btn-primary" role="button" data-toggle="dropdown" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                        Create a Form
+                    </button>
+                    <div class="dropdown-menu" role="menu">
+                        <t t-foreach="builders_create_form" t-as="builder">
+                            <a t-attf-href="/my/formio/create/{{ builder.name }}" class="dropdown-item"><span t-field="builder.title"/></a>
+                        </t>
+                    </div>
                 </div>
-            </div>
-
+            </t>
             <t t-if="forms" t-call="portal.portal_table">
                 <thead>
                     <th>Title</th>
@@ -62,13 +61,23 @@ See LICENSE file for full licensing details. -->
                             <span t-field="form.title"/>
                         </td>
                         <td>
-                            <a t-if="form.state not in ['COMPLETE', 'CANCELED']" role="button" class="btn btn-sm btn-primary"
+                            <a t-if="form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-primary"
                                t-attf-href="{{ form.url }}">
-                                <span aria-label="Edit form" title="Edit form"> Edit form</span>
+                                <span aria-label="Edit form" title="Edit form">Edit Form</span>
                             </a>
-                            <a t-else="" role="button" class="btn btn-sm btn-secondary"
+                            <a t-if="form.state in ['DRAFT']" role="button" class="btn btn-sm btn-warning"
+                               style="margin-left: 8px"
+                               t-attf-href="/my/formio/cancel/{{ form.uuid }}">
+                                <span aria-label="Cancel &amp; close Form" title="Cancel &amp; close Form" confirm="Are you sure?">Cancel Form</span>
+                            </a>
+                            <a t-if="form.state in ['PENDING']" role="button" class="btn btn-sm btn-danger"
+                               style="margin-left: 8px"
+                               t-attf-href="/my/formio/delete/{{ form.uuid }}">
+                                <span aria-label="Delete form" title="Delete form" confirm="Are you sure?">Delete Form</span>
+                            </a>
+                            <a t-if="form.state in ['COMPLETE', 'CANCEL']" role="button" class="btn btn-sm btn-secondary"
                                t-attf-href="{{ form.url }}">
-                                <span aria-label="View form" title="View form"> View form</span>
+                                <span aria-label="View form" title="View form">View Form</span>
                             </a>
                         </td>
                         <td>

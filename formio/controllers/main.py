@@ -7,33 +7,13 @@ import logging
 
 from odoo import http, fields
 from odoo.http import request
-from odoo.exceptions import AccessError, ValidationError
 
-from ..models.formio_form import STATE_DRAFT, STATE_COMPLETE, STATE_CANCELED
+from ..models.formio_form import STATE_DRAFT, STATE_COMPLETE, STATE_CANCEL
 
 _logger = logging.getLogger(__name__)
 
 
 class FormioController(http.Controller):
-
-    def get_form(self, uuid, mode):
-        """ Verifies access to form and return form or False (if no access). """
-
-        if not request.env['formio.form'].check_access_rights(mode, False):
-            return False
-
-        form = request.env['formio.form'].search([('uuid', '=', uuid)], limit=1)
-        if form:
-            try:
-                # Catch the deny access exception
-                form.check_access_rule(mode)
-            except AccessError as e:
-                return False
-        elif request.env.user.has_group('base.group_portal'):
-            form = request.env['formio.form'].sudo().search([('uuid', '=', uuid)], limit=1)
-            if not form or form.builder_id.portal is False or form.user_id.id != request.env.user.id:
-                return False
-        return form
 
     # Builder
     @http.route('/formio/builder/<int:builder_id>', type='http', auth='user', website=True)
@@ -72,10 +52,13 @@ class FormioController(http.Controller):
         schema = json.dumps(post['schema'])
         builder.write({'schema': schema})
 
+    def _get_form(self, uuid, mode):
+        return request.env['formio.form'].get_form(uuid, mode)
+
     # Form
     @http.route('/formio/form/<string:uuid>', type='http', auth='user', website=True)
     def form_edit(self, uuid, **kwargs):
-        form = self.get_form(uuid, 'read')
+        form = self._get_form(uuid, 'read')
         if not form:
             # TODO website page with message?
             return request.redirect("/")
@@ -88,7 +71,7 @@ class FormioController(http.Controller):
 
     @http.route('/formio/form/schema/<string:uuid>', type='json', auth='user', website=True)
     def form_schema(self, uuid, **kwargs):
-        form = self.get_form(uuid, 'read')
+        form = self._get_form(uuid, 'read')
         if form and form.builder_id.schema:
             return form.builder_id.schema
         else:
@@ -97,7 +80,7 @@ class FormioController(http.Controller):
     def _prepare_form_options(self, form):
         options = {}
 
-        if form.state in [STATE_COMPLETE, STATE_CANCELED]:
+        if form.state in [STATE_COMPLETE, STATE_CANCEL]:
             options['readOnly'] = True
             options['viewAsHtml'] = form.builder_id.view_as_html
 
@@ -116,13 +99,13 @@ class FormioController(http.Controller):
 
     @http.route('/formio/form/options/<string:uuid>', type='json', auth='user', website=True)
     def form_options(self, uuid, **kwargs):
-        form = self.get_form(uuid, 'read')
+        form = self._get_form(uuid, 'read')
         options = self._prepare_form_options(form)
         return json.dumps(options)
 
     @http.route('/formio/form/submission/<string:uuid>', type='json', auth='user', website=True)
     def form_submission(self, uuid, **kwargs):
-        form = self.get_form(uuid, 'read')
+        form = self._get_form(uuid, 'read')
         if form and form.submission_data:
             return form.submission_data
         else:
@@ -132,7 +115,7 @@ class FormioController(http.Controller):
     def form_submit(self, uuid, **post):
         """ POST with ID instead of uuid, to get the model object right away """
 
-        form = self.get_form(uuid, 'write')
+        form = self._get_form(uuid, 'write')
         if not form:
             # TODO raise or set exception (in JSON resonse) ?
             return
@@ -164,7 +147,7 @@ class FormioController(http.Controller):
         - Filter Query: model=res.partner&label=name&domain_fields=function&city=Sittard
         """
 
-        form = self.get_form(uuid, 'read')
+        form = self._get_form(uuid, 'read')
         if not form:
             return
         
@@ -218,7 +201,7 @@ class FormioController(http.Controller):
         - Filter Query: field=order_line.product_id&label=name
         """
 
-        form = self.get_form(uuid, 'read')
+        form = self._get_form(uuid, 'read')
         if not form:
             return
 

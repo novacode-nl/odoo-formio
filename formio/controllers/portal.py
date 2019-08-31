@@ -53,3 +53,27 @@ class CustomerPortal(CustomerPortal):
         form = request.env['formio.form'].create(vals)
         url = '/formio/form/{uuid}'.format(uuid=form.uuid)
         return request.redirect(url)
+
+    @http.route(['/my/formio/delete/<string:uuid>'], type='http', auth="user", method=['GET'], website=True)
+    def portal_delete_form(self, uuid):
+        """ Unlink form. Access rules apply on the unlink method """
+
+        form = request.env['formio.form'].get_form(uuid, 'unlink')
+        if not form:
+            # TODO call method (website_formio page) with message?
+            return request.redirect('/my/formio')
+        form.unlink()
+        # TODO call method (website_formio page) with message?
+        return request.redirect('/my/formio')
+
+    @http.route(['/my/formio/cancel/<string:uuid>'], type='http', auth="user", method=['GET'], website=True)
+    def portal_cancel_form(self, uuid):
+        """ Cancel form. Access rules apply on the write method """
+
+        form = request.env['formio.form'].get_form(uuid, 'write')
+        if not form:
+            # TODO call method (website_formio page) with message?
+            return request.redirect('/my/formio')
+        form.action_cancel()
+        # TODO call method (website_formio page) with message?
+        return request.redirect('/my/formio')

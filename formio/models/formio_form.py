@@ -7,11 +7,12 @@ import requests
 import uuid
 
 from odoo import api, fields, models, _
+from odoo.exceptions import AccessError
 
 STATE_PENDING = 'PENDING'
 STATE_DRAFT = 'DRAFT'
 STATE_COMPLETE = 'COMPLETE'
-STATE_CANCELED = 'CANCELED'
+STATE_CANCEL = 'CANCEL'
 
 
 class Form(models.Model):
@@ -30,7 +31,7 @@ class Form(models.Model):
     title = fields.Char(related='builder_id.title', readonly=True)
     state = fields.Selection(
         [(STATE_PENDING, 'Pending'), (STATE_DRAFT, 'Draft'),
-         (STATE_COMPLETE, 'Complete'), (STATE_CANCELED, 'Canceled')],
+         (STATE_COMPLETE, 'Complete'), (STATE_CANCEL, 'Cancel')],
         string="State", default=STATE_PENDING, track_visibility='onchange', index=True)
     url = fields.Char(compute='_compute_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
@@ -59,7 +60,7 @@ class Form(models.Model):
 
     @api.multi
     def write(self, vals):
-        if 'submission_data' in vals and self.state in [STATE_COMPLETE, STATE_CANCELED]:
+        if 'submission_data' in vals and self.state in [STATE_COMPLETE, STATE_CANCEL]:
             # Throw and catch exception (FormioFormException), e.g. to redirect in controller.
             return False
         res = super(Form, self).write(vals)
@@ -78,7 +79,7 @@ class Form(models.Model):
     @api.multi
     def action_cancel(self):
         self.ensure_one()
-        self.write({'state': STATE_CANCELED})
+        self.write({'state': STATE_CANCEL})
 
     @api.multi
     def action_send_invitation_mail(self):
@@ -177,6 +178,26 @@ class Form(models.Model):
     @api.multi
     def action_open_res_act_window(self):
         raise NotImplementedError
+
+    @api.model
+    def get_form(self, uuid, mode):
+        """ Verifies access to form and return form or False (if no access). """
+
+        if not self.env['formio.form'].check_access_rights(mode, False):
+            return False
+
+        form = self.env['formio.form'].search([('uuid', '=', uuid)], limit=1)
+        if form:
+            try:
+                # Catch the deny access exception
+                form.check_access_rule(mode)
+            except AccessError as e:
+                return False
+        elif self.env.user.has_group('base.group_portal'):
+            form = self.env['formio.form'].sudo().search([('uuid', '=', uuid)], limit=1)
+            if not form or form.builder_id.portal is False or form.user_id.id != self.env.user.id:
+                return False
+        return form
 
 
 class IrAttachment(models.Model):

@@ -64,7 +64,7 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="1"/>
             <field name="perm_write" eval="1"/>
-            <field name="perm_unlink" eval="0"/>
+            <field name="perm_unlink" eval="1"/>
         </record>
 
         <record id="access_formio_form_user" model="ir.model.access">
@@ -74,7 +74,7 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="1"/>
             <field name="perm_write" eval="1"/>
-            <field name="perm_unlink" eval="0"/>
+            <field name="perm_unlink" eval="1"/>
         </record>
 
         <record id="access_formio_form_portal_user" model="ir.model.access">
@@ -84,7 +84,7 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="1"/>
             <field name="perm_write" eval="1"/>
-            <field name="perm_unlink" eval="0"/>
+            <field name="perm_unlink" eval="1"/>
         </record>
 
         <!-- Formio Version -->

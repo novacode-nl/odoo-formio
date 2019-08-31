@@ -117,8 +117,8 @@ See LICENSE file for full licensing details. -->
                         attrs="{'invisible': [('state', '!=', 'DRAFT')]}"/>
                     <button
                         name="action_cancel" type="object" string="Cancel"
-                        attrs="{'invisible': [('state', 'in', ['COMPLETE', 'CANCELED'])]}"/>
-                    <field name="state" widget="statusbar" statusbar_visible="PENDING,DRAFT,COMPLETE,CANCELED"/>
+                        attrs="{'invisible': [('state', 'in', ['CANCEL'])]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="PENDING,DRAFT,COMPLETE,CANCEL"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -145,7 +145,7 @@ See LICENSE file for full licensing details. -->
                     <group name="assignment">
                         <group attrs="{'invisible': [('builder_id', '=', False)]}">
                             <field name="invitation_mail_template_id" invisible="1"/>
-                            <field name="user_id" groups="formio.group_formio_user_all_forms" attrs="{'readonly': [('state', 'in', ['COMPLETE', 'CANCELED'])]}"/>
+                            <field name="user_id" groups="formio.group_formio_user_all_forms" attrs="{'readonly': [('state', 'in', ['COMPLETE', 'CANCEL'])]}"/>
                         </group>
                     </group>
                     <notebook>

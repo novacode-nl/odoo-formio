@@ -90,12 +90,21 @@ body #wrapwrap main .container.formio_builder_title {
 
 /* Form.io Form */
 
-body #wrapwrap main .container.formio_form_title {
+body #wrapwrap main .container.formio_form_title,
+body #wrapwrap main .container.formio_form_actions {
     background-color: #f5f5f5;
 }
 
 .formio_form_title .row > div {
     height: 75px;
+}
+
+.formio_form_actions .row > div a {
+    margin: 8px 0;
+}
+
+.formio_form_actions .row > div.actions-right a {
+    float: right;
 }
 
 .formio_form_title .formio_form_name {
