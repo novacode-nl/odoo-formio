@@ -57,18 +57,11 @@ class Form(models.Model):
         help='Datetime when the form was last submitted.')
     portal = fields.Boolean("Portal usage", related='builder_id.portal', help="Form is accessible by assigned portal user")
 
-    @api.model
-    def create(self, vals):
-        if not self.env.user.has_group('formio.group_formio_user_all_forms'):
-            vals['state'] = STATE_DRAFT
-        return super(Form, self).create(vals)
-
     @api.multi
     def write(self, vals):
         if 'submission_data' in vals and self.state in [STATE_COMPLETE, STATE_CANCELED]:
+            # Throw and catch exception (FormioFormException), e.g. to redirect in controller.
             return False
-        if 'submission_data' in vals and self.state == STATE_PENDING:
-            vals['state'] = STATE_DRAFT
         res = super(Form, self).write(vals)
         return res
 

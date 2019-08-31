@@ -9,7 +9,7 @@ from odoo import http, fields
 from odoo.http import request
 from odoo.exceptions import AccessError, ValidationError
 
-from ..models.formio_form import STATE_COMPLETE, STATE_CANCELED
+from ..models.formio_form import STATE_DRAFT, STATE_COMPLETE, STATE_CANCELED
 
 _logger = logging.getLogger(__name__)
 
@@ -39,6 +39,7 @@ class FormioController(http.Controller):
     @http.route('/formio/builder/<int:builder_id>', type='http', auth='user', website=True)
     def builder_edit(self, builder_id, **kwargs):
         if not request.env.user.has_group('formio.group_formio_admin'):
+            # TODO website page with message?
             return request.redirect("/")
         
         builder = request.env['formio.builder'].browse(builder_id)
@@ -76,6 +77,7 @@ class FormioController(http.Controller):
     def form_edit(self, uuid, **kwargs):
         form = self.get_form(uuid, 'read')
         if not form:
+            # TODO website page with message?
             return request.redirect("/")
         values = {
             'form': form,
@@ -143,6 +145,8 @@ class FormioController(http.Controller):
 
         if not post['data'].get('saveAsDraft'):
             vals['state'] = STATE_COMPLETE
+        else:
+            vals['state'] = STATE_DRAFT
         form.write(vals)
 
     @http.route('/formio/form/data/<string:uuid>', type='http', auth='user', website=True)
