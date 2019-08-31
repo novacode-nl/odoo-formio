@@ -56,7 +56,12 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_create" eval="False"/>
             <field name="perm_unlink" eval="True"/>
             <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
-            <field name="domain_force">[('builder_id.portal', '=', True), ('create_uid', '=', user.id), ('user_id', '=', user.id), ('state', 'in', ['PENDING'])]</field>
+            <field name="domain_force">
+                [('builder_id.portal', '=', True), ('create_uid', '=', user.id), ('user_id', '=', user.id),
+                '|',
+                ('state', 'in', ['PENDING']),
+                '&amp;', ('state', 'in', ['DRAFT']), ('builder_id.allow_delete_draft', '=', True)]
+            </field>
         </record>
     </data>
 </odoo>

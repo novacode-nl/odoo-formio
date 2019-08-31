@@ -75,16 +75,25 @@ See LICENSE file for full licensing details. -->
                                t-attf-href="{{ form.url }}">
                                 <span aria-label="Edit form" title="Edit form">Edit Form</span>
                             </a>
-                            <a t-if="form.state in ['DRAFT']" role="button" class="btn btn-sm btn-warning"
-                               style="margin-left: 8px"
-                               t-attf-href="/my/formio/cancel/{{ form.uuid }}">
-                                <span aria-label="Cancel &amp; close Form" title="Cancel &amp; close Form" confirm="Are you sure?">Cancel Form</span>
-                            </a>
+
                             <a t-if="form.state in ['PENDING']" role="button" class="btn btn-sm btn-danger"
                                style="margin-left: 8px"
                                t-attf-href="/my/formio/delete/{{ form.uuid }}">
                                 <span aria-label="Delete form" title="Delete form" confirm="Are you sure?">Delete Form</span>
                             </a>
+
+                            <!-- DRAFT state (delete or cancel) -->
+                            <a t-if="form.state in ['DRAFT'] and form.builder_id.allow_delete_draft" role="button" class="btn btn-sm btn-danger"
+                               style="margin-left: 8px"
+                               t-attf-href="/my/formio/delete/{{ form.uuid }}">
+                                <span aria-label="Delete form" title="Delete form" confirm="Are you sure?">Delete Form</span>
+                            </a>
+                            <a t-elif="form.state in ['DRAFT']" role="button" class="btn btn-sm btn-warning"
+                               style="margin-left: 8px"
+                               t-attf-href="/my/formio/cancel/{{ form.uuid }}">
+                                <span aria-label="Cancel &amp; close Form" title="Cancel &amp; close Form" confirm="Are you sure?">Cancel Form</span>
+                            </a>
+
                             <a t-if="form.state == 'COMPLETE'" role="button" class="btn btn-sm btn-secondary"
                                t-attf-href="{{ form.url }}">
                                 <span aria-label="View form" title="View form">View Form</span>

@@ -40,6 +40,7 @@ class Builder(models.Model):
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal usage", track_visibility='onchange', help="Form is accessible by assigned portal user")
     view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
+    allow_delete_draft = fields.Boolean("Allow Delete of Draft ", track_visibility='onchange', help="Allow delete of a form in Draft state.")
 
     @api.constrains('name')
     def constaint_check_name(self):

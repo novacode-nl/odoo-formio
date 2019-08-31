@@ -41,6 +41,7 @@ See LICENSE file for full licensing details. -->
                                 <group>
                                     <field name="portal" groups="formio.group_formio_admin"/>
                                     <field name="view_as_html" groups="formio.group_formio_admin"/>
+                                    <field name="allow_delete_draft" groups="formio.group_formio_admin"/>
                                 </group>
                                 <group>
                                     <field name="res_model_id" groups="formio.group_formio_admin"/>
