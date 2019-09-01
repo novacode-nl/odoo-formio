@@ -47,7 +47,6 @@ See LICENSE file for full licensing details. -->
                         <div class="container formio_form_actions">
                             <div class="row">
                                 <div class="col-md-12 actions-right">
-                                    <t t-if="user.has_group('base.group_portal')">
                                     <a class="btn btn-sm btn-info"
                                        style="margin-left: 8px"
                                        t-attf-href="/my/formio">
@@ -58,12 +57,11 @@ See LICENSE file for full licensing details. -->
                                        t-attf-href="/my/formio/delete/{{ form.uuid }}">
                                         <span aria-label="Delete form" title="Delete form">Delete Form</span>
                                     </a>
-                                    <a t-elif="form.state in ['DRAFT'] and form.portal == True" role="button" class="btn btn-sm btn-warning"
+                                    <a t-elif="not form.allow_unlink and form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-warning"
                                        style="margin-left: 8px"
                                        t-attf-href="/my/formio/cancel/{{ form.uuid }}">
                                         <span aria-label="Cancel form" title="Cancel form">Cancel &amp; close Form</span>
                                     </a>
-                                    </t>
                                     <h5 class="text-muted" style="margin-right: 8px;">State: <span class="text-muted" t-field="form.state"/></h5>
                                 </div>
                             </div>

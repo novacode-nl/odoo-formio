@@ -81,7 +81,7 @@ See LICENSE file for full licensing details. -->
                                style="margin-right: 8px">
                                 <span aria-label="Delete form" title="Delete form" confirm="Are you sure?">Delete Form</span>
                             </a>
-                            <a t-elif="form.state in ['DRAFT'] and form.portal == True" role="button" class="btn btn-sm btn-warning"
+                            <a t-elif="not form.allow_unlink and form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-warning"
                                t-attf-href="/my/formio/cancel/{{ form.uuid }}" style="margin-right: 8px">
                                 <span aria-label="Cancel &amp; close Form" title="Cancel &amp; close Form" confirm="Are you sure?">Cancel Form</span>
                             </a>
