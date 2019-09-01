@@ -49,12 +49,11 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="True"/>
             <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
             <field name="domain_force">
-                ['|',
+                [
                 '&amp;',
                 '&amp;',
                 '&amp;',
-                ('builder_id.portal', '=', True), ('create_uid', '=', user.id), ('user_id', '=', user.id), ('state', '!=', 'COMPLETE'),
-                ('state', 'in', ['PENDING'])]
+                ('builder_id.portal', '=', True), ('create_uid', '=', user.id), ('user_id', '=', user.id), ('state', '!=', 'COMPLETE')]
             </field>
         </record>
     </data>
