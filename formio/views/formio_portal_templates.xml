@@ -72,18 +72,17 @@ See LICENSE file for full licensing details. -->
                         </td>
                         <td>
                             <a t-if="form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-primary"
-                               t-attf-href="{{ form.url }}">
+                               t-attf-href="{{ form.url }}" style="margin-right: 8px">
                                 <span aria-label="Edit form" title="Edit form">Edit Form</span>
                             </a>
 
                             <a t-if="form.allow_unlink" role="button" class="btn btn-sm btn-danger"
-                               style="margin-left: 8px"
-                               t-attf-href="/my/formio/delete/{{ form.uuid }}">
+                               t-attf-href="/my/formio/delete/{{ form.uuid }}"
+                               style="margin-right: 8px">
                                 <span aria-label="Delete form" title="Delete form" confirm="Are you sure?">Delete Form</span>
                             </a>
                             <a t-elif="form.state in ['DRAFT'] and form.portal == True" role="button" class="btn btn-sm btn-warning"
-                               style="margin-left: 8px"
-                               t-attf-href="/my/formio/cancel/{{ form.uuid }}">
+                               t-attf-href="/my/formio/cancel/{{ form.uuid }}" style="margin-right: 8px">
                                 <span aria-label="Cancel &amp; close Form" title="Cancel &amp; close Form" confirm="Are you sure?">Cancel Form</span>
                             </a>
 
