@@ -26,7 +26,8 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="domain_force">
                 ['|',
                 '&amp;',
-                ('create_uid', '=', user.id), ('user_id', '=', user.id),
+                '&amp;',
+                ('create_uid', '=', user.id), ('user_id', '=', user.id), ('state', '!=', 'COMPLETE'),
                 '|',
                 ('state', 'in', ['PENDING'])]
             </field>
@@ -55,7 +56,8 @@ See LICENSE file for full copyright and licensing details. -->
                 ['|',
                 '&amp;',
                 '&amp;',
-                ('builder_id.portal', '=', True), ('create_uid', '=', user.id), ('user_id', '=', user.id),
+                '&amp;',
+                ('builder_id.portal', '=', True), ('create_uid', '=', user.id), ('user_id', '=', user.id), ('state', '!=', 'COMPLETE'),
                 ('state', 'in', ['PENDING'])]
             </field>
         </record>
