@@ -43,7 +43,7 @@ See LICENSE file for full licensing details. -->
                                         <strong class="o_kanban_record_title"><field name="title"/></strong><br/>
                                         <div>
                                             <div class="mt8">
-                                                <button class="btn btn-primary" name="action_formio" type="object" role="button">Open</button>
+                                                <button class="btn btn-primary" name="action_formio" type="object" role="button">Form</button>
                                             </div>
                                         </div>
                                     </div>

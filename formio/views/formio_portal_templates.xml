@@ -25,7 +25,7 @@ See LICENSE file for full licensing details. -->
         </xpath>
     </template>
     
-    <template id="portal_my_formio" name="My Projects">
+    <template id="portal_my_formio" name="My Forms">
         <t t-call="portal.portal_layout">
             <t t-set="breadcrumbs_searchbar" t-value="True"/>
             <t t-call="portal.portal_searchbar">
@@ -59,7 +59,7 @@ See LICENSE file for full licensing details. -->
                 <tbody>
                     <tr t-foreach="forms" t-as="form">
                         <td>
-                            <span t-field="form.title"/>
+                            <span t-field="form.title"/> <small class="text-muted">#<span t-field="form.id"/></small>
                         </td>
                         <td>
                             <span t-field="form.submission_user_id"/>

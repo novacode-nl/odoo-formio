@@ -62,6 +62,7 @@ See LICENSE file for full licensing details. -->
                                        t-attf-href="/my/formio/cancel/{{ form.uuid }}">
                                         <span aria-label="Cancel form" title="Cancel form">Cancel &amp; close Form</span>
                                     </a>
+                                    <h5 class="text-muted"> | #<span t-field="form.id"/></h5>
                                     <h5 class="text-muted" style="margin-right: 8px;">State: <span class="text-muted" t-field="form.state"/></h5>
                                 </div>
                             </div>
