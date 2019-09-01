@@ -28,8 +28,7 @@ See LICENSE file for full copyright and licensing details. -->
                 '&amp;',
                 ('create_uid', '=', user.id), ('user_id', '=', user.id),
                 '|',
-                ('state', 'in', ['PENDING']),
-                '&amp;', ('state', 'in', ['DRAFT']), ('builder_id.always_allow_delete_draft', '=', True)]
+                ('state', 'in', ['PENDING'])]
             </field>
         </record>
         
@@ -57,9 +56,7 @@ See LICENSE file for full copyright and licensing details. -->
                 '&amp;',
                 '&amp;',
                 ('builder_id.portal', '=', True), ('create_uid', '=', user.id), ('user_id', '=', user.id),
-                '|',
-                ('state', 'in', ['PENDING']),
-                '&amp;', ('state', 'in', ['DRAFT']), ('builder_id.always_allow_delete_draft', '=', True)]
+                ('state', 'in', ['PENDING'])]
             </field>
         </record>
     </data>
