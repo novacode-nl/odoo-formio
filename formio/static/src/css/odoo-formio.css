@@ -100,16 +100,12 @@ body #wrapwrap main .container.formio_form_header {
     background-color: #f5f5f5;
 }
 
-body #wrapwrap main .container.formio_form_header .language-selector {
-    margin-top: 8px;
+body #wrapwrap main .container.formio_form_header .actions {
+    margin-top: 16px;
 }
 
 .formio_form_title .row > div {
     height: 75px;
-}
-
-.formio_form_header .row > div.actions-right {
-    margin-top: 16px;
 }
 
 .formio_form_header .row > div.actions-right * {

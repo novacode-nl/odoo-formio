@@ -35,20 +35,13 @@ See LICENSE file for full licensing details. -->
                     <t t-call="formio.formio_header"/>
                     <main>
                         <div class="container formio_form_header">
-                            <div class="row language-selector">
-                                <div class="col-md-12">
+                            <div class="row actions">
+                                <div class="col-md-6">
                                     <t t-foreach="languages" t-as="lang">
                                         <button class="btn btn-sm btn-default" t-attf-onclick="setLanguage('{{ lang.iso_code }}')"><span t-field="lang.name"/></button>
                                     </t>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <h3 class="formio_form_name">
-                                        <t t-esc="form.title"/>
-                                    </h3>
-                                </div>
-                                <div class="col-md-8 actions-right">
+                                <div class="col-md-6 actions-right">
                                     <a class="btn btn-sm btn-info"
                                        style="margin-left: 8px"
                                        t-attf-href="/my/formio">
@@ -66,6 +59,13 @@ See LICENSE file for full licensing details. -->
                                     </a>
                                     <h5 class="text-muted"> | #<span t-field="form.id"/></h5>
                                     <h5 class="text-muted" style="margin-right: 8px;">State: <span class="text-muted" t-field="form.state"/></h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3 class="formio_form_name">
+                                        <t t-esc="form.title"/>
+                                    </h3>
                                 </div>
                             </div>
                         </div>
