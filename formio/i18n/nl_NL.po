@@ -1,15 +1,16 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* formio
+# 	* formio
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-01 12:45+0000\n"
-"PO-Revision-Date: 2019-09-02 07:10+0200\n"
+"POT-Creation-Date: 2019-09-02 08:06+0000\n"
+"PO-Revision-Date: 2019-09-02 10:13+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -17,21 +18,26 @@ msgstr ""
 
 #. module: formio
 #: model:mail.template,body_html:formio.mail_invitation_portal_user
-msgid "\n"
+msgid ""
+"\n"
 "\n"
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hello ${object.user_id.partner_id.name},<br/><br/>\n"
 "        You have been invited to fill-in the form: ${object.title}<br/>\n"
 "        Your response would be appreciated.<br/><br/>\n"
-"        Click the button to go to the form, which requires you're logged in.\n"
+"        Click the button to go to the form, which requires you're logged "
+"in.\n"
 "        <div style=\"margin: 16px 0px 16px 0px;\">\n"
 "            <a href=\"${object.url}\"\n"
-"                style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                style=\"background-color: #875A7B; padding: 8px 16px 8px "
+"16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+"\">\n"
 "                Form\n"
 "            </a>\n"
 "        </div>\n"
-"        Your assigned forms are listed on the page <a href=\"/my/formio\">My Forms</a> \n"
+"        Your assigned forms are listed on the page <a href=\"/my/formio\">My "
+"Forms</a> \n"
 "    </p>\n"
 "</div>\n"
 "\n"
@@ -40,32 +46,41 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Beste ${object.user_id.partner_id.name},<br/><br/>\n"
-"        U bent uitgenodigd voor het invullen van het formulier: ${object.title}<br/>\n"
+"        U bent uitgenodigd voor het invullen van het formulier: ${object."
+"title}<br/>\n"
 "        Uw inzending wordt erg gewaardeerd.<br/><br/>\n"
-"        Klik op de knop om het formulier te openen. Hiervoor moet u zijn ingelogd.\n"
+"        Klik op de knop om het formulier te openen. Hiervoor moet u zijn "
+"ingelogd.\n"
 "        <div style=\"margin: 16px 0px 16px 0px;\">\n"
 "            <a href=\"${object.url}\"\n"
-"                style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                style=\"background-color: #875A7B; padding: 8px 16px 8px "
+"16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+"\">\n"
 "                Formulier\n"
 "            </a>\n"
 "        </div>\n"
-"        Uw formulieren zijn beschikbaar op de pagina <a href=\"/my/formio\">Mijn Formulieren</a> \n"
+"        Uw formulieren zijn beschikbaar op de pagina <a href=\"/my/formio"
+"\">Mijn Formulieren</a> \n"
 "    </p>\n"
 "</div>\n"
 
 #. module: formio
 #: model:mail.template,body_html:formio.mail_invitation_internal_user
-msgid "\n"
+msgid ""
+"\n"
 "\n"
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hello ${object.user_id.partner_id.name},<br/><br/>\n"
 "        You have been invited to fill-in the form: ${object.title}<br/>\n"
 "        Your response would be appreciated.<br/><br/>\n"
-"        Click the button to go to the form, which requires you're logged in.\n"
+"        Click the button to go to the form, which requires you're logged "
+"in.\n"
 "        <div style=\"margin: 16px 0px 16px 0px;\">\n"
 "            <a href=\"${object.url}\"\n"
-"                style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                style=\"background-color: #875A7B; padding: 8px 16px 8px "
+"16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+"\">\n"
 "                Form\n"
 "            </a>\n"
 "        </div>\n"
@@ -77,12 +92,16 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Beste ${object.user_id.partner_id.name},<br/><br/>\n"
-"        U bent uitgenodigd voor het invullen van het formulier: ${object.title}<br/>\n"
+"        U bent uitgenodigd voor het invullen van het formulier: ${object."
+"title}<br/>\n"
 "        Uw inzending wordt erg gewaardeerd.<br/><br/>\n"
-"        Klik op de knop om het formulier te openen. Hiervoor moet u zijn ingelogd.\n"
+"        Klik op de knop om het formulier te openen. Hiervoor moet u zijn "
+"ingelogd.\n"
 "        <div style=\"margin: 16px 0px 16px 0px;\">\n"
 "            <a href=\"${object.url}\"\n"
-"                style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                style=\"background-color: #875A7B; padding: 8px 16px 8px "
+"16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+"\">\n"
 "                Formulier\n"
 "            </a>\n"
 "        </div>\n"
@@ -91,38 +110,64 @@ msgstr ""
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
-msgid "<i class=\"fa fa-clock-o\" title=\"Submission date\" aria-label=\"Submission date\"/>"
-msgstr "<i class=\"fa fa-clock-o\" title=\"Ingediend op\" aria-label=\"Ingediend op\"/>"
+msgid ""
+"<i class=\"fa fa-clock-o\" title=\"Submission date\" aria-label=\"Submission "
+"date\"/>"
+msgstr ""
+"<i class=\"fa fa-clock-o\" title=\"Ingediend op\" aria-label=\"Ingediend op"
+"\"/>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
-msgid "<i class=\"fa fa-globe text-muted\"/><span class=\"text-muted\"> portal</span>"
-msgstr "<i class=\"fa fa-globe text-muted\"/><span class=\"text-muted\"> portaal</span>"
+msgid ""
+"<i class=\"fa fa-globe text-muted\"/><span class=\"text-muted\"> portal</"
+"span>"
+msgstr ""
+"<i class=\"fa fa-globe text-muted\"/><span class=\"text-muted\"> portaal</"
+"span>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
-msgid "<i class=\"fa fa-user\" title=\"Submission user\" aria-label=\"Submission user\"/>"
-msgstr "<i class=\"fa fa-user\" title=\"Ingediend door\" aria-label=\"Ingediend door\"/>"
+msgid ""
+"<i class=\"fa fa-user\" title=\"Submission user\" aria-label=\"Submission "
+"user\"/>"
+msgstr ""
+"<i class=\"fa fa-user\" title=\"Ingediend door\" aria-label=\"Ingediend door"
+"\"/>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
-msgid "<span aria-label=\"Cancel &amp; close Form\" title=\"Cancel &amp; close Form\" confirm=\"Are you sure?\">Cancel Form</span>"
-msgstr "<span aria-label=\"Annuleren\" title=\"Annuleren\" confirm=\"Bent u zeker?\">Annuleren</span>"
+msgid ""
+"<span aria-label=\"Cancel &amp; close Form\" title=\"Cancel &amp; close Form"
+"\" confirm=\"Are you sure?\">Cancel Form</span>"
+msgstr ""
+"<span aria-label=\"Annuleren\" title=\"Annuleren\" confirm=\"Bent u zeker?"
+"\">Annuleren</span>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.formio_form
-msgid "<span aria-label=\"Cancel form\" title=\"Cancel form\">Cancel &amp; close Form</span>"
-msgstr "<span aria-label=\"Annuleren\" title=\"Annuleren\">Annuleren &amp; sluit Formulier</span>\n"
+msgid ""
+"<span aria-label=\"Cancel form\" title=\"Cancel form\">Cancel &amp; close "
+"Form</span>"
+msgstr ""
+"<span aria-label=\"Annuleren\" title=\"Annuleren\">Annuleren &amp; sluit "
+"Formulier</span>\n"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
-msgid "<span aria-label=\"Delete form\" title=\"Delete form\" confirm=\"Are you sure?\">Delete Form</span>"
-msgstr "<span aria-label=\"Verwijderen\" title=\"Verwijderen\" confirm=\"Bent u zeker?\">Verwijderen</span>"
+msgid ""
+"<span aria-label=\"Delete form\" title=\"Delete form\" confirm=\"Are you "
+"sure?\">Delete Form</span>"
+msgstr ""
+"<span aria-label=\"Verwijderen\" title=\"Verwijderen\" confirm=\"Bent u "
+"zeker?\">Verwijderen</span>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.formio_form
-msgid "<span aria-label=\"Delete form\" title=\"Delete form\">Delete Form</span>"
-msgstr "<span aria-label=\"Verwijderen\" title=\"Verwijderen\">Verwijderen</span>"
+msgid ""
+"<span aria-label=\"Delete form\" title=\"Delete form\">Delete Form</span>"
+msgstr ""
+"<span aria-label=\"Verwijderen\" title=\"Verwijderen\">Verwijderen</span>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
@@ -132,7 +177,9 @@ msgstr "<span aria-label=\"Bewerken\" title=\"Bewerken\">Bewerken</span>"
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.formio_form
 msgid "<span aria-label=\"My forms\" title=\"My forms\">My Forms</span>"
-msgstr "<span aria-label=\"Mijn formulieren\" title=\"Mijn formulieren\">Mijn Formulieren</span>"
+msgstr ""
+"<span aria-label=\"Mijn formulieren\" title=\"Mijn formulieren\">Mijn "
+"Formulieren</span>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
@@ -274,7 +321,7 @@ msgstr "Formulier aanmaken"
 #: model:ir.model.fields,field_description:formio.field_formio_version__create_uid
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__create_date
@@ -358,6 +405,7 @@ msgid "Followers (Partners)"
 msgstr ""
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_form
@@ -417,18 +465,18 @@ msgstr ""
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__formio_version_id
 msgid "Form.io Version"
-msgstr ""
+msgstr "Form.io Versie"
 
 #. module: formio
 #: model:ir.actions.act_window,name:formio.action_formio_version
 #: model:ir.ui.menu,name:formio.menu_formio_version
 msgid "Form.io Versions"
-msgstr ""
+msgstr "Form.io Versies"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_version__name
 msgid "Form.io release/version."
-msgstr ""
+msgstr "Form.io release/versie"
 
 #. module: formio
 #: model:ir.model,name:formio.model_formio_builder
@@ -474,11 +522,6 @@ msgid "Forms"
 msgstr "Formulieren"
 
 #. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
-msgid "General"
-msgstr ""
-
-#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__id
 #: model:ir.model.fields,field_description:formio.field_formio_form__id
 #: model:ir.model.fields,field_description:formio.field_formio_translation__id
@@ -496,7 +539,9 @@ msgstr ""
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__name
 #: model:ir.model.fields,help:formio.field_formio_form__name
-msgid "Identifies this specific form. This name can be used in APIs.         Use only ASCII letters, digits, \"-\" or \"_\"."
+msgid ""
+"Identifies this specific form. This name can be used in APIs.         Use "
+"only ASCII letters, digits, \"-\" or \"_\"."
 msgstr ""
 
 #. module: formio
@@ -570,7 +615,9 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__formio_version_id
-msgid "Loads the specific Form.io Javascript API/libraries version (sourcecode: \\https://github.com/formio/formio.js)"
+msgid ""
+"Loads the specific Form.io Javascript API/libraries version (sourcecode: "
+"\\https://github.com/formio/formio.js)"
 msgstr ""
 
 #. module: formio
@@ -660,6 +707,11 @@ msgid "Number of unread messages"
 msgstr ""
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+msgid "Other"
+msgstr "Overige"
+
+#. module: formio
 #: selection:formio.builder,activity_state:0
 msgid "Overdue"
 msgstr ""
@@ -745,6 +797,7 @@ msgstr ""
 
 #. module: formio
 #: model:ir.ui.menu,name:formio.menu_formio_settings
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -768,7 +821,8 @@ msgstr "Status:"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__activity_state
-msgid "Status based on activities\n"
+msgid ""
+"Status based on activities\n"
 "Overdue: Due date is already passed\n"
 "Today: Activity date is today\n"
 "Planned: Future activities."
@@ -782,12 +836,12 @@ msgstr "Indiening"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__submission_date
 msgid "Submission Date"
-msgstr "Ingediend Op"
+msgstr "Ingediend op"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__submission_user_id
 msgid "Submission User"
-msgstr "Ingediend Door"
+msgstr "Ingediend door"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
@@ -812,7 +866,9 @@ msgstr "Er zijn geen formulieren."
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_form__invitation_mail_template_id
-msgid "This e-mail template will be sent on user assignment. Leave empty to send nothing."
+msgid ""
+"This e-mail template will be sent on user assignment. Leave empty to send "
+"nothing."
 msgstr ""
 
 #. module: formio
@@ -933,8 +989,15 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__wizard
+msgid "Wizard"
+msgstr ""
+
+#. module: formio
 #: model:ir.model.fields,help:formio.field_formio_version_asset__attachment_type
-msgid "You can either upload a file from your computer or copy/paste an internet link to your file."
+msgid ""
+"You can either upload a file from your computer or copy/paste an internet "
+"link to your file."
 msgstr ""
 
 #. module: formio
@@ -952,4 +1015,3 @@ msgstr ""
 #: selection:formio.version.asset,type:0
 msgid "js"
 msgstr ""
-

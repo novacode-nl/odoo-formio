@@ -8,7 +8,7 @@ See LICENSE file for full licensing details. -->
         <field name="model">formio.builder</field>
         <field name="inherit_id" ref="formio.view_formio_builder"/>
         <field name="arch" type="xml">
-            <field name="view_as_html" position="after">
+            <field name="portal" position="after">
                 <field name="submit_done_page" groups="formio.group_formio_admin"/>
                 <!-- TODO hyperlink to website (target="_blank") -->
             </field>

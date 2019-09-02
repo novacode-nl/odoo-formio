@@ -1,6 +1,7 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
+import ast
 import json
 import re
 import requests
@@ -40,12 +41,42 @@ class Builder(models.Model):
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal usage", track_visibility='onchange', help="Form is accessible by assigned portal user")
     view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
+    wizard = fields.Boolean("Wizard", track_visibility='onchange')
 
     @api.constrains('name')
     def constaint_check_name(self):
         self.ensure_one
         if re.search(r"[^a-zA-Z0-9_-]", self.name) is not None:
             raise ValidationError('Name is invalid. Use ASCII letters, digits, "-" or "_".')
+
+    def _decode_schema(self, schema):
+        """ Convert schema (str) to dictionary
+
+        json.loads(data) refuses identifies with single quotes.Use
+        ast.literal_eval() instead.
+        
+        :param str schema: schema string
+        :return str schema: schema as dictionary
+        """
+        try:
+            schema = json.loads(self.schema)
+        except:
+            schema = ast.literal_eval(self.schema)
+
+    @api.onchange('wizard')
+    def _onchange_wizard(self):
+        if self.wizard:
+            if self.schema:
+                schema = self._decode_schema(self.schema)
+                schema['display'] = 'wizard'
+                self.schema = json.dumps(schema)
+            else:
+                self.schema = "{'display': 'wizard'}"
+        else:
+            if self.schema:
+                schema = self._decode_schema(self.schema)
+                del schema['display']
+                self.schema = json.dumps(schema)
 
     def _compute_edit_url(self):
         # sudo() is needed for regular users.

@@ -36,13 +36,14 @@ See LICENSE file for full licensing details. -->
                         <field name="formio_version_id"/>
                     </group>
                     <notebook>
-                        <page string="General" name="general">
+                        <page string="Settings" name="settings">
                             <group>
-                                <group>
-                                    <field name="portal" groups="formio.group_formio_admin"/>
+                                <group name="form_settings" string="Form">
+                                    <field name="wizard" groups="formio.group_formio_admin"/>
                                     <field name="view_as_html" groups="formio.group_formio_admin"/>
                                 </group>
-                                <group>
+                                <group name="other_settings" string="Other">
+                                    <field name="portal" groups="formio.group_formio_admin"/>
                                     <field name="res_model_id" groups="formio.group_formio_admin"/>
                                 </group>
                                 <field name="description" groups="formio.group_formio_admin"/>
