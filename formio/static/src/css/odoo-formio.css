@@ -16,6 +16,10 @@ header .navbar {
 	border-right: 1px solid #ccc;
 }
 
+.navbar.navbar-static-top {
+    padding: 0.5rem 1rem;
+}
+
 #oe_main_menu_navbar {
     font-size: 13px;
 }
@@ -35,6 +39,8 @@ header .navbar {
 
 main a.navbar-brand.logo img {
     max-height: 75px;
+    height: 75px;
+    padding-top: 0;
 }
 
 body #wrapwrap {
@@ -90,8 +96,7 @@ body #wrapwrap main .container.formio_builder_title {
 
 /* Form.io Form */
 
-body #wrapwrap main .container.formio_form_title,
-body #wrapwrap main .container.formio_form_actions {
+body #wrapwrap main .container.formio_form_header {
     background-color: #f5f5f5;
 }
 
@@ -99,7 +104,11 @@ body #wrapwrap main .container.formio_form_actions {
     height: 75px;
 }
 
-.formio_form_actions .row > div.actions-right * {
+.formio_form_header .row > div.actions-right {
+    margin-top: 16px;
+}
+
+.formio_form_header .row > div.actions-right * {
     float: right;
 }
 

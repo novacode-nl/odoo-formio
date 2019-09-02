@@ -29,13 +29,11 @@ See LICENSE file for full licensing details. -->
 
     <template id="formio_header" name="Form.io head">
         <header>
-            <div class="navbar navbar-default navbar-static-top">
+            <nav class="navbar navbar-default navbar-static-top">
                 <div class="container">
-                    <div class="navbar-header">
-                        <a href="https://form.io" target="_blank" class="navbar-brand logo">
-                            <img id="formio-logo" width="120" src="/formio/static/src/img/formio-logo.png"/>
-                        </a>
-                    </div>
+                    <a href="/" class="navbar-brand logo" style="padding-top: 0; padding-bottom: 0">
+                        <img height="45px" t-att-src="'/logo.png?company=%s' % res_company.id" t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name"/>
+                    </a>
                     <div class="collapse navbar-collapse navbar-top-collapse">
                         <ul class="nav navbar-nav navbar-right" id="top_menu">
                             <li class="dropdown" t-ignore="true" t-if="not user_id._is_public()">
@@ -53,7 +51,7 @@ See LICENSE file for full licensing details. -->
                         </ul>
                     </div>
                 </div>
-            </div>
+            </nav>
         </header>
     </template>
 </odoo>
