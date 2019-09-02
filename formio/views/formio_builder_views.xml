@@ -49,6 +49,16 @@ See LICENSE file for full licensing details. -->
                                 <field name="description" groups="formio.group_formio_admin"/>
                             </group>
                         </page>
+                        <page string="Translations" name="translations" groups="formio.group_formio_admin">
+                            <field name="translations">
+                                <tree editable="bottom">
+                                    <field name="builder_id" context="{'default_builder_id': id}"/>
+                                    <field name="lang_id"/>
+                                    <field name="source"/>
+                                    <field name="value"/>
+                                </tree>
+                            </field>
+                        </page>
                         <page string="Schema" name="schema" groups="formio.group_formio_admin">
                             <field name="schema"/>
                         </page>

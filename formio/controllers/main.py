@@ -62,11 +62,28 @@ class FormioController(http.Controller):
         if not form:
             # TODO website page with message?
             return request.redirect("/")
+        
+        query = """
+            SELECT
+              DISTINCT(lang_id) AS lang_id
+            FROM
+              formio_builder_translation
+            WHERE
+              builder_id = {builder_id}
+        """.format(builder_id=form.builder_id.id)
+
+        request.env.cr.execute(query)
+        lang_ids = request.env.cr.fetchall()
+
+        domain = ['|', ('id', 'in', lang_ids), ('code', 'in', [request.env.user.lang, 'en_US'])]
+        languages = request.env['res.lang'].with_context(active_test=False).search(domain)
+
         values = {
             'user': request.env.user,
             'form': form,
             'formio_css_assets': form.builder_id.formio_css_assets,
             'formio_js_assets': form.builder_id.formio_js_assets,
+            'languages': languages
         }
         return request.render('formio.formio_form', values)
 
@@ -88,11 +105,21 @@ class FormioController(http.Controller):
         if form and form.builder_id.formio_version_id.translations:
             lang = request.env['res.lang']._lang_get(request.env.user.lang)
             i18n = {}
+
+            # Formio GUI/API translations
             for trans in form.builder_id.formio_version_id.translations:
                 if trans.lang_id.iso_code not in i18n:
                     i18n[trans.lang_id.iso_code] = {trans.property: trans.value}
                 else:
                     i18n[trans.lang_id.iso_code][trans.property] = trans.value
+
+            # Form Builder translations (labels etc)
+            for trans in form.builder_id.translations:
+                if trans.lang_id.iso_code not in i18n:
+                    i18n[trans.lang_id.iso_code] = {trans.source: trans.value}
+                else:
+                    i18n[trans.lang_id.iso_code][trans.source] = trans.value
+
             options['language'] = lang.iso_code
             options['i18n'] = i18n
 

@@ -249,5 +249,46 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_write" eval="0"/>
             <field name="perm_unlink" eval="0"/>
         </record>
+
+        <!-- Formio Builder Translations -->
+        <record id="access_formio_builder_translation_admin" model="ir.model.access">
+            <field name="name">formio.builder.translation: Admin</field>
+            <field name="model_id" ref="formio.model_formio_builder_translation"/>
+            <field name="group_id" ref="formio.group_formio_admin"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="access_formio_builder_translation_user_all_forms" model="ir.model.access">
+            <field name="name">formio.builder.translation: User all forms</field>
+            <field name="model_id" ref="formio.model_formio_builder_translation"/>
+            <field name="group_id" ref="formio.group_formio_user_all_forms"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record id="access_formio_builder_translation_user" model="ir.model.access">
+            <field name="name">formio.builder.translation: User assigned forms</field>
+            <field name="model_id" ref="formio.model_formio_builder_translation"/>
+            <field name="group_id" ref="formio.group_formio_user"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record id="access_formio_builder_translation_portal_user" model="ir.model.access">
+            <field name="name">formio.builder.translation: Portal User</field>
+            <field name="model_id" ref="formio.model_formio_builder_translation"/>
+            <field name="group_id" ref="base.group_portal"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
     </data>
 </odoo>

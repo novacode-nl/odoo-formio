@@ -42,6 +42,7 @@ class Builder(models.Model):
     portal = fields.Boolean("Portal usage", track_visibility='onchange', help="Form is accessible by assigned portal user")
     view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
     wizard = fields.Boolean("Wizard", track_visibility='onchange')
+    translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations')
 
     @api.constrains('name')
     def constaint_check_name(self):
