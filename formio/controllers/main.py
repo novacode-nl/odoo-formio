@@ -62,29 +62,36 @@ class FormioController(http.Controller):
         if not form:
             # TODO website page with message?
             return request.redirect("/")
-        
+
+        # Get active languages used in Builder translations.
         query = """
             SELECT
-              DISTINCT(lang_id) AS lang_id
+              DISTINCT(fbt.lang_id) AS lang_id
             FROM
-              formio_builder_translation
+              formio_builder_translation AS fbt
+              INNER JOIN res_lang AS l ON l.id = fbt.lang_id
             WHERE
-              builder_id = {builder_id}
+              fbt.builder_id = {builder_id}
+              AND l.active = True
         """.format(builder_id=form.builder_id.id)
 
         request.env.cr.execute(query)
-        lang_ids = request.env.cr.fetchall()
+        builder_lang_ids = [r[0] for r in request.env.cr.fetchall()]
 
-        domain = ['|', ('id', 'in', lang_ids), ('code', 'in', [request.env.user.lang, 'en_US'])]
-        languages = request.env['res.lang'].with_context(active_test=False).search(domain)
+        # Always include english (en_US).
+        domain = ['|', ('id', 'in', builder_lang_ids), ('code', 'in', [request.env.user.lang, 'en_US'])]
+        languages = request.env['res.lang'].with_context(active_test=False).search(domain, order='name asc')
+        languages = languages.filtered(lambda r: r.id in builder_lang_ids or r.code == 'en_US')
 
         values = {
+            'languages': [], # initialize, otherwise template/view crashes.
             'user': request.env.user,
             'form': form,
             'formio_css_assets': form.builder_id.formio_css_assets,
             'formio_js_assets': form.builder_id.formio_js_assets,
-            'languages': languages
         }
+        if len(languages) > 1:
+            values['languages'] = languages
         return request.render('formio.formio_form', values)
 
     @http.route('/formio/form/schema/<string:uuid>', type='json', auth='user', website=True)
