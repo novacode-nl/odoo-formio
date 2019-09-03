@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-02 08:06+0000\n"
-"PO-Revision-Date: 2019-09-02 10:13+0200\n"
+"POT-Creation-Date: 2019-09-03 08:13+0000\n"
+"PO-Revision-Date: 2019-09-03 10:17+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -315,6 +315,7 @@ msgstr "Formulier aanmaken"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__create_uid
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__create_uid
 #: model:ir.model.fields,field_description:formio.field_formio_form__create_uid
 #: model:ir.model.fields,field_description:formio.field_formio_translation__create_uid
 #: model:ir.model.fields,field_description:formio.field_formio_translation_source__create_uid
@@ -325,6 +326,7 @@ msgstr "Aangemaakt door"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__create_date
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__create_date
 #: model:ir.model.fields,field_description:formio.field_formio_form__create_date
 #: model:ir.model.fields,field_description:formio.field_formio_translation__create_date
 #: model:ir.model.fields,field_description:formio.field_formio_translation_source__create_date
@@ -362,6 +364,7 @@ msgstr "Omschrijving"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__display_name
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__display_name
 #: model:ir.model.fields,field_description:formio.field_formio_form__display_name
 #: model:ir.model.fields,field_description:formio.field_formio_translation__display_name
 #: model:ir.model.fields,field_description:formio.field_formio_translation_source__display_name
@@ -413,6 +416,7 @@ msgid "Form"
 msgstr "Form"
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__builder_id
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 msgid "Form Builder"
 msgstr "Ontwerp"
@@ -452,26 +456,9 @@ msgid "Form.io Javascript"
 msgstr ""
 
 #. module: formio
-#: model:ir.actions.act_window,name:formio.action_formio_translation_source
-msgid "Form.io Translation Sources"
-msgstr ""
-
-#. module: formio
-#: model:ir.actions.act_window,name:formio.action_formio_translation
-#: model:ir.ui.menu,name:formio.menu_formio_translation_root
-msgid "Form.io Translations"
-msgstr ""
-
-#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__formio_version_id
 msgid "Form.io Version"
 msgstr "Form.io Versie"
-
-#. module: formio
-#: model:ir.actions.act_window,name:formio.action_formio_version
-#: model:ir.ui.menu,name:formio.menu_formio_version
-msgid "Form.io Versions"
-msgstr "Form.io Versies"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_version__name
@@ -481,6 +468,11 @@ msgstr "Form.io release/versie"
 #. module: formio
 #: model:ir.model,name:formio.model_formio_builder
 msgid "Formio Builder"
+msgstr ""
+
+#. module: formio
+#: model:ir.model,name:formio.model_formio_builder_translation
+msgid "Formio Builder Translation"
 msgstr ""
 
 #. module: formio
@@ -523,6 +515,7 @@ msgstr "Formulieren"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__id
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__id
 #: model:ir.model.fields,field_description:formio.field_formio_form__id
 #: model:ir.model.fields,field_description:formio.field_formio_translation__id
 #: model:ir.model.fields,field_description:formio.field_formio_translation_source__id
@@ -579,12 +572,14 @@ msgid "Javascript Assets"
 msgstr ""
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__lang_id
 #: model:ir.model.fields,field_description:formio.field_formio_translation__lang_id
 msgid "Language"
-msgstr ""
+msgstr "Taal"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder____last_update
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation____last_update
 #: model:ir.model.fields,field_description:formio.field_formio_form____last_update
 #: model:ir.model.fields,field_description:formio.field_formio_translation____last_update
 #: model:ir.model.fields,field_description:formio.field_formio_translation_source____last_update
@@ -595,6 +590,7 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__write_uid
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__write_uid
 #: model:ir.model.fields,field_description:formio.field_formio_form__write_uid
 #: model:ir.model.fields,field_description:formio.field_formio_translation__write_uid
 #: model:ir.model.fields,field_description:formio.field_formio_translation_source__write_uid
@@ -605,6 +601,7 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__write_date
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__write_date
 #: model:ir.model.fields,field_description:formio.field_formio_form__write_date
 #: model:ir.model.fields,field_description:formio.field_formio_translation__write_date
 #: model:ir.model.fields,field_description:formio.field_formio_translation_source__write_date
@@ -659,7 +656,7 @@ msgstr "Mijn Account"
 #: model:ir.model.fields,field_description:formio.field_formio_form__name
 #: model:ir.model.fields,field_description:formio.field_formio_version__name
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__activity_date_deadline
@@ -756,7 +753,7 @@ msgstr ""
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__res_name
 msgid "Res Name"
-msgstr ""
+msgstr "Res Naam"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
@@ -772,7 +769,7 @@ msgstr ""
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__res_model_name
 msgid "Resource Name"
-msgstr ""
+msgstr "Resource Naam"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__activity_user_id
@@ -802,10 +799,11 @@ msgid "Settings"
 msgstr "Instellingen"
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__source
 #: model:ir.model.fields,field_description:formio.field_formio_translation__source_id
 #: model:ir.model.fields,field_description:formio.field_formio_translation_source__source
-msgid "Source"
-msgstr ""
+msgid "Source Term"
+msgstr "Bronterm"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__state
@@ -886,26 +884,31 @@ msgstr ""
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_translation_form
 msgid "Translation"
-msgstr ""
+msgstr "Vertaling"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_translation_source_form
 msgid "Translation Source"
-msgstr ""
+msgstr "Vertaling Bronterm"
 
 #. module: formio
+#: model:ir.actions.act_window,name:formio.action_formio_translation_source
 #: model:ir.ui.menu,name:formio.menu_formio_translation_source
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_translation_source_tree
 msgid "Translation Sources"
-msgstr ""
+msgstr "Vertalingen Brontermen"
 
 #. module: formio
+#: model:ir.actions.act_window,name:formio.action_formio_translation
+#: model:ir.model.fields,field_description:formio.field_formio_builder__translations
 #: model:ir.model.fields,field_description:formio.field_formio_version__translations
 #: model:ir.ui.menu,name:formio.menu_formio_translation
+#: model:ir.ui.menu,name:formio.menu_formio_translation_root
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_translation_tree
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_form
 msgid "Translations"
-msgstr ""
+msgstr "Vertalingen"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__type
@@ -956,15 +959,22 @@ msgid "User: Assigned forms"
 msgstr "Gebruiker: Toegewezen formulieren"
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__value
 #: model:ir.model.fields,field_description:formio.field_formio_translation__value
-msgid "Value"
-msgstr ""
+msgid "Translation Value"
+msgstr "Vertalingswaarde"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__version_id
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_tree
 msgid "Version"
 msgstr "Versie"
+
+#. module: formio
+#: model:ir.actions.act_window,name:formio.action_formio_version
+#: model:ir.ui.menu,name:formio.menu_formio_version
+msgid "Versions"
+msgstr "Versies"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__view_as_html

@@ -10,9 +10,9 @@ class Translation(models.Model):
     _order = 'lang_id ASC'
 
     lang_id = fields.Many2one('res.lang', string='Language', required=True)
-    source_id = fields.Many2one('formio.translation.source', string='Source', required=True)
+    source_id = fields.Many2one('formio.translation.source', string='Source Term', required=True)
     property = fields.Text(related='source_id.property', string='Property', readonly=True)
-    value = fields.Text(string='Value', required=True)
+    value = fields.Text(string='Translation Value', required=True)
 
     @api.multi
     @api.depends('lang_id', 'source_id', 'value')

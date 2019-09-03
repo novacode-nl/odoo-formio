@@ -10,4 +10,4 @@ class TranslationSource(models.Model):
     _rec_name = 'source'
 
     property = fields.Text(string='Property', required=True)
-    source = fields.Text(string='Source', required=True)
+    source = fields.Text(string='Source Term', required=True)

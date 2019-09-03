@@ -30,7 +30,7 @@ See LICENSE file for full licensing details. -->
     </record>
 
     <record id="action_formio_translation_source" model="ir.actions.act_window">
-        <field name="name">Form.io Translation Sources</field>
+        <field name="name">Translation Sources</field>
         <field name="res_model">formio.translation.source</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>

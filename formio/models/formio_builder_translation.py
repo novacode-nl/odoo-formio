@@ -11,8 +11,8 @@ class BuilderTranslation(models.Model):
 
     builder_id = fields.Many2one('formio.builder', string='Form Builder', required=True)
     lang_id = fields.Many2one('res.lang', string='Language', required=True)
-    source = fields.Text(string='Source', required=True)
-    value = fields.Text(string='Value', required=True)
+    source = fields.Text(string='Source Term', required=True)
+    value = fields.Text(string='Translated Value', required=True)
 
     @api.multi
     @api.depends('lang_id', 'source', 'value')

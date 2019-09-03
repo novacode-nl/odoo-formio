@@ -36,13 +36,13 @@ See LICENSE file for full licensing details. -->
     <!-- action="formio.action_formio_settings"/> -->
     <menuitem
         id="menu_formio_version"
-        name="Form.io Versions"
+        name="Versions"
         parent="formio.menu_formio_configuration"
         sequence="30"
         action="formio.action_formio_version"/>
     <menuitem
         id="menu_formio_translation_root"
-        name="Form.io Translations"
+        name="Translations"
         parent="formio.menu_formio_configuration"
         sequence="30"/>
     <menuitem
