@@ -109,23 +109,25 @@ class FormioController(http.Controller):
             options['readOnly'] = True
             options['viewAsHtml'] = form.builder_id.view_as_html
 
-        if form and form.builder_id.formio_version_id.translations:
-            lang = request.env['res.lang']._lang_get(request.env.user.lang)
-            i18n = {}
+        lang = request.env['res.lang']._lang_get(request.env.user.lang)
+        i18n = {}
 
-            # Formio GUI/API translations
+        # Formio GUI/API translations
+        if form.builder_id.formio_version_id.translations:
             for trans in form.builder_id.formio_version_id.translations:
                 if trans.lang_id.iso_code not in i18n:
                     i18n[trans.lang_id.iso_code] = {trans.property: trans.value}
                 else:
                     i18n[trans.lang_id.iso_code][trans.property] = trans.value
 
-            # Form Builder translations (labels etc)
-            for trans in form.builder_id.translations:
-                if trans.lang_id.iso_code not in i18n:
-                    i18n[trans.lang_id.iso_code] = {trans.source: trans.value}
-                else:
-                    i18n[trans.lang_id.iso_code][trans.source] = trans.value
+        # Form Builder translations (labels etc).
+        # These could override the former GUI/API translations, but
+        # that's how the Javascript API works.
+        for trans in form.builder_id.translations:
+            if trans.lang_id.iso_code not in i18n:
+                i18n[trans.lang_id.iso_code] = {trans.source: trans.value}
+            else:
+                i18n[trans.lang_id.iso_code][trans.source] = trans.value
 
             options['language'] = lang.iso_code
             options['i18n'] = i18n
@@ -135,7 +137,10 @@ class FormioController(http.Controller):
     @http.route('/formio/form/options/<string:uuid>', type='json', auth='user', website=True)
     def form_options(self, uuid, **kwargs):
         form = self._get_form(uuid, 'read')
-        options = self._prepare_form_options(form)
+        if form:
+            options = self._prepare_form_options(form)
+        else:
+            options = {}
         return json.dumps(options)
 
     @http.route('/formio/form/submission/<string:uuid>', type='json', auth='user', website=True)
