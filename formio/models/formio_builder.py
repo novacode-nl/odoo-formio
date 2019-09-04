@@ -63,16 +63,17 @@ class Builder(models.Model):
             schema = json.loads(self.schema)
         except:
             schema = ast.literal_eval(self.schema)
+        return schema
 
     @api.onchange('wizard')
     def _onchange_wizard(self):
         if self.wizard:
             if self.schema:
                 schema = self._decode_schema(self.schema)
-                schema['display'] = 'wizard'
+                schema['display'] = '"wizard"'
                 self.schema = json.dumps(schema)
             else:
-                self.schema = "{'display': 'wizard'}"
+                self.schema = '{"display": "wizard"}'
         else:
             if self.schema:
                 schema = self._decode_schema(self.schema)
