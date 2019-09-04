@@ -104,13 +104,18 @@ class FormioController(http.Controller):
 
     def _prepare_form_options(self, form):
         options = {}
+        i18n = {}
+        context = request.env.context
+        Lang  = request.env['res.lang']
 
         if form.state in [STATE_COMPLETE, STATE_CANCEL]:
             options['readOnly'] = True
             options['viewAsHtml'] = form.builder_id.view_as_html
 
-        lang = request.env['res.lang']._lang_get(request.env.user.lang)
-        i18n = {}
+        if 'lang' in context:
+            lang = Lang._lang_get(context['lang'])
+        else:
+            lang = Lang._lang_get(request.env.user.lang)
 
         # Formio GUI/API translations
         if form.builder_id.formio_version_id.translations:
