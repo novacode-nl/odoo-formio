@@ -17,6 +17,10 @@ main {
     font-size: 14px;
 }
 
+.o_main_navbar > .o_menu_brand {
+    text-decoration: none;
+}
+
 #oe_main_menu_navbar .dropdown-menu {
     font-size: 12px;
 }
