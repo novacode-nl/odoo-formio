@@ -6,19 +6,7 @@ See LICENSE file for full licensing details. -->
     <template id="formio_builder" name="Form.io Builder">
         <t t-call="web.layout">
             <t t-set="head">
-                <t t-call-assets="web.assets_common" t-js="false"/>
-                <t t-call-assets="web.assets_frontend" t-js="false"/>
-                <t t-call-assets="web.assets_common" t-css="false"/>
-                <t t-call-assets="web.assets_frontend" t-css="false"/>
-
-                <!-- Form.io -->
-                <t t-foreach="formio_css_assets" t-as="css">
-                    <link rel="stylesheet" type="text/css" t-att-href="css.url"/>
-                </t>
-                <t t-foreach="formio_js_assets" t-as="js">
-                    <script type="text/javascript" t-att-src="js.url"></script>
-                </t>
-                <link rel="stylesheet" href="/formio/static/src/css/odoo-formio-common.css"/>
+                <t t-call="formio.formio_html_head"/>
                 <script type="text/javascript" src="/formio/static/src/js/odoo-formio-builder.js"/>
             </t>
 
@@ -26,80 +14,26 @@ See LICENSE file for full licensing details. -->
                 <t t-set="body_classname" t-value="'o_connected_user' if env['ir.ui.view'].user_has_groups('base.group_user') else None"/>
             </xpath>
 
-            <nav groups="base.group_user" id="oe_main_menu_navbar" class="o_main_navbar">
-                <ul id="oe_applications">
-                    <li class="dropdown active">
-                        <a class="dropdown o_menu_brand" data-toggle="dropdown" href="#">
-                            <i class="fa fa-th-large"/>
-                        </a>
-                        <div class="dropdown-menu" role="menu">
-                            <t t-set="debug_param" t-value="'?&amp;debug=' if debug else ''"/>
-                            <t t-as="menu" t-foreach="menu_data['children']">
-                                <a role="menuitem"
-                                   t-attf-class="dropdown-item #{'oe_menu_toggler' if menu.get('children') else 'oe_menu_leaf'}"
-                                   t-att-data-action-id="menu['action'] and menu['action'].split(',')[1] or None"
-                                   t-att-data-action-model="menu['action'] and menu['action'].split(',')[0] or None"
-                                   t-att-data-menu="menu['id']"
-                                   t-att-data-menu-xmlid="menu.get('xmlid')"
-                                   t-att-href="'/web%s#menu_id=%s&amp;action=%s' % (debug_param, menu['id'], menu['action'] and menu['action'].split(',')[1] or '')">
-                                    <i t-attf-class="fa #{menu.get('icon')} fa-lg fa-fw" t-if="menu.get('icon')" role="img" aria-label="Menu" title="Menu"/>
-                                    <span class="oe_menu_text">
-                                        <t t-esc="menu['name']"/>
-                                    </span>
-                                </a>
-                            </t>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="o_menu_systray hidden-xs">
-                    <li t-if="not translatable" id="edit-in-backend">
+            <t t-call="formio.formio_menu_nav">
+                <t t-set="items_menu_systray">
+                    <li t-if="builder" id="edit-in-backend">
                         <a t-attf-href="#{builder.act_window_url}"><span class="fa fa-cog"/> Form Builder</a>
                     </li>
-                </ul>
-                <a class="o_menu_brand" href="#">Form.io</a>
-                <button type="button" class="fa fa-bars float-right d-block d-md-none o_mobile_menu_toggle" aria-label="Menu" title="Menu"/>
-            </nav>
+                </t>
+            </t>
 
-            <header>
-                <nav class="navbar navbar-expand-md navbar-light bg-light">
-                    <div class="container">
-                        <a href="/" class="navbar-brand logo">
-                            <img t-att-src="'/logo.png?company=%s' % res_company.id" t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name"/>
-                        </a>
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#top_menu_collapse">
-                            <span class="navbar-toggler-icon"/>
-                        </button>
-                        <div class="collapse navbar-collapse" id="top_menu_collapse">
-                            <!-- FIXME We want menu to open to the right by default (except cases handled in JS) -->
-                            <ul class="nav navbar-nav ml-auto text-right" id="top_menu">
-                                <li class="nav-item divider" t-ignore="true" t-if="not user_id._is_public()"/>
-                                <li class="nav-item dropdown" t-ignore="true" t-if="not user_id._is_public()">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                        <b>
-                                            <span t-esc="user_id.name[:23] + '...' if user_id.name and len(user_id.name) &gt; 25 else user_id.name"/>
-                                        </b>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right js_usermenu" role="menu">
-                                        <a class="dropdown-item" href="/my/home" role="menuitem">My Account</a>
-                                        <a id="o_logout" class="dropdown-item" t-attf-href="/web/session/logout?redirect=/" role="menuitem">Logout</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </header>
-
+            <t t-call="formio.formio_header"/>
+            
             <div id="wrapwrap">
                 <main>
-                    <div class="container formio_builder_title mt16 mb16">
+                    <div class="container mt16 mb16">
                         <div class="row">
                             <div class="col-md-12">
                                 <h3 class="formio_builder_name"><t t-esc="builder.title"/><small> - (<t t-esc="builder.name"/>)</small></h3>
                             </div>
                         </div>
                     </div>
-                    <div id="form_builder_container">
+                    <div id="formio_builder_container">
                         <div id="formio_builder"></div>
                     </div>
                     <input type="hidden" id="builder_id" name="builder_id" t-att-value="builder.id"/>

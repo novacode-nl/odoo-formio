@@ -21,7 +21,12 @@ class FormioController(http.Controller):
         if not request.env.user.has_group('formio.group_formio_admin'):
             # TODO website page with message?
             return request.redirect("/")
-        
+
+        # Needed to update language
+        context = request.env.context.copy()
+        context.update({'lang': request.env.user.lang})
+        request.env.context = context
+
         builder = request.env['formio.builder'].browse(builder_id)
         values = {
             'builder': builder,
@@ -63,6 +68,11 @@ class FormioController(http.Controller):
         if not form:
             # TODO website page with message?
             return request.redirect("/")
+
+        # Needed to update language
+        context = request.env.context.copy()
+        context.update({'lang': request.env.user.lang})
+        request.env.context = context
 
         # Get active languages used in Builder translations.
         query = """
@@ -111,7 +121,10 @@ class FormioController(http.Controller):
 
         if form.state in [STATE_COMPLETE, STATE_CANCEL]:
             options['readOnly'] = True
-            options['viewAsHtml'] = form.builder_id.view_as_html
+
+            if form.builder_id.view_as_html:
+                options['renderMode'] = 'html'
+                options['viewAsHtml'] = True # backwards compatible (version < 4.x)?
 
         if 'lang' in context:
             lang = Lang._lang_get(context['lang'])
@@ -172,7 +185,7 @@ class FormioController(http.Controller):
             'submission_date': fields.Datetime.now(),
         }
 
-        if not post['data'].get('saveAsDraft'):
+        if not post['data'].get('saveDraft'):
             vals['state'] = STATE_COMPLETE
         else:
             vals['state'] = STATE_DRAFT

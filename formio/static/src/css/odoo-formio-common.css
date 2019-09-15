@@ -8,12 +8,10 @@ main {
     width: 75%;
 }
 
-#form_builder_container {
+#formio_builder_container, #formio_form_container {
     background-color: #fff;
     padding: 12px;
 }
-
-/* navbar dropdown tile & menu */
 
 #oe_main_menu_navbar a.dropdown i.fa-th-large {
     font-size: 14px;
