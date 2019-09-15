@@ -12,6 +12,14 @@ See LICENSE file for full licensing details. -->
             <field name="url">https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css</field>
         </record>
 
+        <record id="css_bootstrap_4_1_3" model="ir.attachment">
+            <field name="name">https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css</field>
+            <field name="type">url</field>
+            <field name="res_model">formio.version.asset</field>
+            <field name="public" eval="True"/>
+            <field name="url">https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css</field>
+        </record>
+
         <!-- latest (version) -->
         <record id="css_formio_latest" model="ir.attachment">
             <field name="name">https://unpkg.com/formiojs@latest/dist/formio.full.min.css</field>
@@ -32,7 +40,7 @@ See LICENSE file for full licensing details. -->
             <field name="version_id" ref="formio.version_latest"/>
             <field name="sequence">1</field>
             <field name="type">css</field>
-            <field name="attachment_id" ref="formio.css_bootstrap_3_3_7"/>
+            <field name="attachment_id" ref="formio.css_bootstrap_4_1_3"/>
         </record>
         <record id="asset_latest_css" model="formio.version.asset">
             <field name="version_id" ref="formio.version_latest"/>

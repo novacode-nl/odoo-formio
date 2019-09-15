@@ -1,0 +1,14 @@
+/* TODO: media queries for mobile (width) */
+#wrapwrap {
+    background-color: #f5f5f5;
+}
+
+main {
+    margin: 0 auto;
+    width: 75%;
+}
+
+#form_builder_container {
+    background-color: #fff;
+    padding: 12px;
+}
