@@ -26,7 +26,7 @@ See LICENSE file for full licensing details. -->
                 <t t-set="body_classname" t-value="'o_connected_user' if env['ir.ui.view'].user_has_groups('base.group_user') else None"/>
             </xpath>
 
-            <nav groups="base.group_user" t-if="website and menu_data" id="oe_main_menu_navbar" class="o_main_navbar">
+            <nav groups="base.group_user" id="oe_main_menu_navbar" class="o_main_navbar">
                 <ul id="oe_applications">
                     <li class="dropdown active">
                         <a class="dropdown o_menu_brand" data-toggle="dropdown" href="#">
@@ -55,9 +55,6 @@ See LICENSE file for full licensing details. -->
                     <li t-if="not translatable" id="edit-in-backend">
                         <a t-attf-href="#{builder.act_window_url}"><span class="fa fa-cog"/> Form Builder</a>
                     </li>
-                    <li t-if="not translatable" id="odoo-home">
-                        <a href="/"><span class="fa fa-home"/> Odoo</a>
-                    </li>
                 </ul>
                 <a class="o_menu_brand" href="#">Form.io</a>
                 <button type="button" class="fa fa-bars float-right d-block d-md-none o_mobile_menu_toggle" aria-label="Menu" title="Menu"/>
@@ -82,7 +79,8 @@ See LICENSE file for full licensing details. -->
                                             <span t-esc="user_id.name[:23] + '...' if user_id.name and len(user_id.name) &gt; 25 else user_id.name"/>
                                         </b>
                                     </a>
-                                    <div class="dropdown-menu js_usermenu" role="menu">
+                                    <div class="dropdown-menu dropdown-menu-right js_usermenu" role="menu">
+                                        <a class="dropdown-item" href="/my/home" role="menuitem">My Account</a>
                                         <a id="o_logout" class="dropdown-item" t-attf-href="/web/session/logout?redirect=/" role="menuitem">Logout</a>
                                     </div>
                                 </li>

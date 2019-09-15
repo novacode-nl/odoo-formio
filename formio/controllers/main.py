@@ -27,6 +27,7 @@ class FormioController(http.Controller):
             'builder': builder,
             'formio_css_assets': builder.formio_css_assets,
             'formio_js_assets': builder.formio_js_assets,
+            'menu_data': request.env['ir.ui.menu'].load_menus_root()
         }
         return request.render('formio.formio_builder', values)
 
