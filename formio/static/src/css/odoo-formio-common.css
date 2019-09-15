@@ -29,3 +29,20 @@ main {
 #top_menu span, #top_menu a, #top_menu span a {
     font-size: 14px;
 }
+
+/* Overrides: bootstrap 3 compatibility (with 4) issues */
+header .navbar {
+    margin-bottom: 0
+}
+
+.navbar-brand {
+    height: auto;
+}
+
+.navbar ul.nav > li.divider {
+    height: auto;
+}
+
+#top_menu.navbar-nav {
+    float: right;
+}
