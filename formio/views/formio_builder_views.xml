@@ -10,8 +10,9 @@ See LICENSE file for full licensing details. -->
             <tree string="Form Builders">
                 <field name="title"/>
                 <field name="name"/>
-                <field name="version"/>                
+                <field name="version"/>
                 <field name="state"/>
+                <field name="parent_id"/>
                 <field name="portal"/>
                 <field name="formio_version_id"/>
                 <field name="res_model_id"/>

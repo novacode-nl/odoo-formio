@@ -25,7 +25,9 @@ class Builder(models.Model):
     _name = 'formio.builder'
     _description = 'Formio Builder'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+
     _rec_name = 'verbose_name'
+    _order = 'name ASC, version DESC'
 
     name = fields.Char(
         "Name", required=True, track_visibility='onchange',
@@ -184,7 +186,7 @@ class Builder(models.Model):
 
         while builder.parent_id:
             builder = builder.parent_id
-        builder = self.search([('id', 'child_of', builder.id)], limit=1, order='id DESC')
+        builder = self.search([('name', '=', builder.name)], limit=1, order='id DESC')
 
         alter = {}
         alter["parent_id"] = self.id
