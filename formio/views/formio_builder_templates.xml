@@ -32,6 +32,9 @@ See LICENSE file for full licensing details. -->
                                 <h3 class="formio_builder_name"><t t-esc="builder.title"/><small> - (<t t-esc="builder.name"/>)</small></h3>
                             </div>
                             <div class="col-md-6 mt8">
+                                <span class="float-right pull-right" style="margin-left: 12px;">
+                                    <span class="text-muted">Version: <span class="text-muted" t-field="builder.version"/></span>
+                                </span>
                                 <strong class="float-right pull-right">
                                     <span class="text-muted">State: <span class="text-muted" t-field="builder.state"/></span>
 
