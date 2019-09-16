@@ -26,6 +26,7 @@ class Form(models.Model):
 
     builder_id = fields.Many2one(
         'formio.builder', string='Form builder', ondelete='restrict',
+        context={'display_name_title': True},
         domain=[('state', '=', BUILDER_STATE_CURRENT)])
     name = fields.Char(related='builder_id.name', readonly=True)
     uuid = fields.Char(

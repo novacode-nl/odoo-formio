@@ -47,7 +47,7 @@ See LICENSE file for full licensing details. -->
                     <label for="name" class="oe_edit_only"/>
                     <h1><field name="name" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/></h1>
                     <group>
-                        <field name="title" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                        <field name="title"/>
                         <field name="formio_version_id" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                     </group>
                     <notebook>

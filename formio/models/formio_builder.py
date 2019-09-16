@@ -26,7 +26,7 @@ class Builder(models.Model):
     _description = 'Formio Builder'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    _rec_name = 'verbose_name'
+    _rec_name = 'display_name'
     _order = 'name ASC, version DESC'
 
     name = fields.Char(
@@ -58,7 +58,7 @@ class Builder(models.Model):
         - Draft: In draft / design.
         - Current: Live and in use (publisehd).
         - Obsolete: Was current but obsolete (unpublished)""")
-    verbose_name = fields.Char("Verbose Name", compute='_compute_verbose_name', store=False)
+    display_name = fields.Char("Display Name", compute='_compute_display_name', store=False)
     parent_id = fields.Many2one('formio.builder', string='Parent Version', readonly=True)
     version = fields.Integer("Version", required=True, readonly=True, default=1)
     version_comment = fields.Text("Version Comment")
@@ -136,11 +136,14 @@ class Builder(models.Model):
                 self.schema = json.dumps(schema)
 
     @api.depends('title', 'name', 'version')
-    def _compute_verbose_name(self):
+    def _compute_display_name(self):
         for r in self:
-            state = get_field_selection_label(r, 'state')
-            r.verbose_name = _("{name} [state: {state}, version: {version}]").format(
-                name=r.name, state=state, version=r.version)
+            if self._context.get('display_name_title'):
+                r.display_name = r.title
+            else:
+                state = get_field_selection_label(r, 'state')
+                r.display_name = _("{name} [state: {state}, version: {version}]").format(
+                    name=r.name, state=state, version=r.version)
 
     def _compute_edit_url(self):
         # sudo() is needed for regular users.

@@ -1008,9 +1008,9 @@ msgid "User: Assigned forms"
 msgstr "Gebruiker: Toegewezen formulieren"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__verbose_name
-msgid "Verbose Name"
-msgstr "Uitgebreide Naam"
+#: model:ir.model.fields,field_description:formio.field_formio_builder__display_name
+msgid "Display Name"
+msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__version
