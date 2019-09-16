@@ -147,19 +147,20 @@ class Builder(models.Model):
 
     def _compute_edit_url(self):
         # sudo() is needed for regular users.
-        url = '{base_url}/formio/builder/{builder_id}'.format(
-            base_url=self.env['ir.config_parameter'].sudo().get_param('web.base.url'),
-            builder_id=self.id)
-        self.edit_url = url
+        for r in self:
+            url = '{base_url}/formio/builder/{builder_id}'.format(
+                base_url=self.env['ir.config_parameter'].sudo().get_param('web.base.url'),
+                builder_id=r.id)
+            r.edit_url = url
 
     def _compute_act_window_url(self):
-        # sudo() is needed for regular users.
-        action = self.env.ref('formio.action_formio_builder')
-        url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
-            id=self.id,
-            model=self._name,
-            action=action.id)
-        self.act_window_url = url
+        for r in self:
+            action = self.env.ref('formio.action_formio_builder')
+            url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
+                id=r.id,
+                model=r._name,
+                action=action.id)
+            r.act_window_url = url
         
     @api.multi
     def action_formio_builder(self):

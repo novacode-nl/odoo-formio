@@ -5,6 +5,8 @@ from odoo import http
 from odoo.http import request
 from odoo.addons.portal.controllers.portal import CustomerPortal
 
+from ..models.formio_builder import STATE_CURRENT
+
 
 class CustomerPortal(CustomerPortal):
 
@@ -26,7 +28,8 @@ class CustomerPortal(CustomerPortal):
 
         # TODO create model (class)method for this?
         domain = [
-            ('portal', '=', True)
+            ('portal', '=', True),
+            ('state', '=', STATE_CURRENT)
         ]
         # TODO order by sequence?
         order = 'name ASC'

@@ -115,7 +115,7 @@ class FormioController(http.Controller):
             'form': form,
             'formio_css_assets': form.builder_id.formio_css_assets,
             'formio_js_assets': form.builder_id.formio_js_assets,
-            'menu_data': request.env['ir.ui.menu'].load_menus_root()
+            'menu_data': request.env['ir.ui.menu'].sudo().load_menus_root()
         }
         if len(languages) > 1:
             values['languages'] = languages
