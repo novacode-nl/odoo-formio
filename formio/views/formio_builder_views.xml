@@ -26,8 +26,8 @@ See LICENSE file for full licensing details. -->
 	    <form string="Form Builders">
                 <header>
                     <button
-                       name="action_publish" type="object" string="Publish"
-                       attrs="{'invisible': [('state', '=', 'PUBLISHED')]}"
+                       name="action_current" type="object" string="Confirm as Current"
+                       attrs="{'invisible': [('state', '=', 'CURRENT')]}"
                        class="btn-primary"/>
                     <button
                         name="action_obsolete" type="object" string="Obsolete"

@@ -10,12 +10,12 @@ from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 STATE_DRAFT = 'DRAFT'
-STATE_PUBLISHED = 'PUBLISHED'
+STATE_CURRENT = 'CURRENT'
 STATE_OBSOLETE = 'OBSOLETE'
 
 STATES = [
     (STATE_DRAFT, _("Draft")),
-    (STATE_PUBLISHED, _("Published")),
+    (STATE_CURRENT, _("Current")),
     (STATE_OBSOLETE, _("Obsolete"))]
 
 
@@ -51,9 +51,9 @@ class Builder(models.Model):
         selection='_states_selection', string="State",
         default=STATE_DRAFT, required=True, track_visibility='onchange',
         help="""\
-        - Draft: In draft and was never published
-        - Published: Live and in use.
-        - Obsolete: Was published but obsolete (unpublished)""")
+        - Draft: In draft / design.
+        - Current: Live and in use (publisehd).
+        - Obsolete: Was current but obsolete (unpublished)""")
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal usage", track_visibility='onchange', help="Form is accessible by assigned portal user")
     view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
@@ -124,9 +124,9 @@ class Builder(models.Model):
         }
 
     @api.multi
-    def action_publish(self):
+    def action_current(self):
         self.ensure_one()
-        self.write({'state': STATE_PUBLISHED})
+        self.write({'state': STATE_CURRENT})
 
     @api.multi
     def action_obsolete(self):

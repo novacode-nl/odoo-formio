@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-16 10:06+0000\n"
-"PO-Revision-Date: 2019-09-16 12:08+0200\n"
+"POT-Creation-Date: 2019-09-16 10:35+0000\n"
+"PO-Revision-Date: 2019-09-16 12:27+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -111,9 +111,9 @@ msgstr ""
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__state
 msgid ""
-"        - Draft: In draft and was never published (Current)\n"
-"        - Current: Published i.e. live\n"
-"        - Obsolete: Was published but obsolete"
+"        - Draft: In draft / design.\n"
+"        - Current: Live and in use (publisehd).\n"
+"        - Obsolete: Was current but obsolete (unpublished)"
 msgstr ""
 
 #. module: formio
@@ -305,6 +305,11 @@ msgid "Configuration"
 msgstr "Configuratie"
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+msgid "Confirm as Current"
+msgstr "Bevestig als Actueel"
+
+#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
 msgid "Create a Form"
 msgstr "Formulier aanmaken"
@@ -330,6 +335,13 @@ msgstr "Aangemaakt door"
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__create_date
 msgid "Created on"
 msgstr ""
+
+#. module: formio
+#: code:addons/formio/models/formio_builder.py:18
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+#, python-format
+msgid "Current"
+msgstr "Actueel"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__submission_data
@@ -746,17 +758,6 @@ msgstr "Portaal gebruik"
 #: model:ir.model.fields,field_description:formio.field_formio_translation_source__property
 msgid "Property"
 msgstr ""
-
-#. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
-msgid "Publish"
-msgstr "Publiceer"
-
-#. module: formio
-#: code:addons/formio/models/formio_builder.py:18
-#, python-format
-msgid "Published"
-msgstr "Gepubliceerd"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__res_id
