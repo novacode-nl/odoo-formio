@@ -9,6 +9,8 @@ import uuid
 from odoo import api, fields, models, _
 from odoo.exceptions import AccessError
 
+from .formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
+
 STATE_PENDING = 'PENDING'
 STATE_DRAFT = 'DRAFT'
 STATE_COMPLETE = 'COMPLETE'
@@ -23,7 +25,8 @@ class Form(models.Model):
     _rec_name = 'name'
 
     builder_id = fields.Many2one(
-        'formio.builder', string='Form builder', ondelete='restrict', store=True)
+        'formio.builder', string='Form builder', ondelete='restrict',
+        domain=[('state', '=', BUILDER_STATE_CURRENT)])
     name = fields.Char(related='builder_id.name', readonly=True)
     uuid = fields.Char(
         default=lambda self: self._default_uuid(), required=True, readonly=True, copy=False,
