@@ -14,9 +14,9 @@ STATE_CURRENT = 'CURRENT'
 STATE_OBSOLETE = 'OBSOLETE'
 
 STATES = [
-    (STATE_DRAFT, _("Draft")),
-    (STATE_CURRENT, _("Current")),
-    (STATE_OBSOLETE, _("Obsolete"))]
+    (STATE_DRAFT, "Draft"),
+    (STATE_CURRENT, "Current"),
+    (STATE_OBSOLETE, "Obsolete")]
 
 
 class Builder(models.Model):
@@ -48,7 +48,7 @@ class Builder(models.Model):
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     state = fields.Selection(
-        selection='_states_selection', string="State",
+        selection=STATES, string="State",
         default=STATE_DRAFT, required=True, track_visibility='onchange',
         help="""\
         - Draft: In draft / design.
