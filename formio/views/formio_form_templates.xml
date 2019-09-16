@@ -72,7 +72,7 @@ See LICENSE file for full licensing details. -->
                             <div class="col-md-6 mt8">
                                 <small class="float-right pull-right">
                                     <span class="text-muted">State: <span class="text-muted" t-field="form.state"/></span>
-                                    <span class="text-muted"> | #<span t-field="form.id"/></span>
+                                    <span class="text-muted"> | ID: <span t-field="form.id"/></span>
 
                                 </small>
                             </div>

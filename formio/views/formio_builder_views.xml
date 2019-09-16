@@ -7,7 +7,7 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.builder.tree</field>
         <field name="model">formio.builder</field>
         <field name="arch" type="xml">
-            <tree string="Builder">
+            <tree string="Form Builders">
                 <field name="title"/>
                 <field name="name"/>
                 <field name="state"/>
@@ -23,11 +23,11 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.builder.form</field>
         <field name="model">formio.builder</field>
         <field name="arch" type="xml">
-	    <form string="Builder">
+	    <form string="Form Builders">
                 <header>
                     <button
-                       name="action_current" type="object" string="Current"
-                       attrs="{'invisible': [('state', '=', 'CURRENT')]}"
+                       name="action_publish" type="object" string="Publish"
+                       attrs="{'invisible': [('state', '=', 'PUBLISHED')]}"
                        class="btn-primary"/>
                     <button
                         name="action_obsolete" type="object" string="Obsolete"

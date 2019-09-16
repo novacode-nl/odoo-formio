@@ -9,7 +9,7 @@ from odoo import http, fields
 from odoo.http import request
 
 from ..models.formio_builder import \
-    STATE_CURRENT as BUILDER_STATE_CURRENT, STATE_OBSOLETE as BUILDER_STATE_OBSOLETE
+    STATE_PUBLISHED as BUILDER_STATE_PUBLISHED, STATE_OBSOLETE as BUILDER_STATE_OBSOLETE
 
 from ..models.formio_form import \
     STATE_DRAFT as FORM_STATE_DRAFT, STATE_COMPLETE as FORM_STATE_COMPLETE, STATE_CANCEL as FORM_STATE_CANCEL
@@ -132,7 +132,7 @@ class FormioController(http.Controller):
     def _prepare_builder_options(self, builder):
         options = {}
 
-        if builder.state in [BUILDER_STATE_CURRENT, BUILDER_STATE_OBSOLETE]:
+        if builder.state in [BUILDER_STATE_PUBLISHED, BUILDER_STATE_OBSOLETE]:
             options['readOnly'] = True
         return options
 

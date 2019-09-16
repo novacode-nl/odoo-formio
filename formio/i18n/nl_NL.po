@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-03 08:13+0000\n"
-"PO-Revision-Date: 2019-09-03 10:17+0200\n"
+"POT-Creation-Date: 2019-09-16 10:06+0000\n"
+"PO-Revision-Date: 2019-09-16 12:08+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -109,6 +109,14 @@ msgstr ""
 "</div>"
 
 #. module: formio
+#: model:ir.model.fields,help:formio.field_formio_builder__state
+msgid ""
+"        - Draft: In draft and was never published (Current)\n"
+"        - Current: Published i.e. live\n"
+"        - Obsolete: Was published but obsolete"
+msgstr ""
+
+#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
 msgid ""
 "<i class=\"fa fa-clock-o\" title=\"Submission date\" aria-label=\"Submission "
@@ -187,20 +195,14 @@ msgid "<span aria-label=\"View form\" title=\"View form\">View Form</span>"
 msgstr "<span aria-label=\"Weergeven\" title=\"Weergeven\">Weergeven</span>"
 
 #. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.formio_builder
-msgid "<span class=\"fa fa-cog\"/>Settings <small>(in Odoo)</small>"
-msgstr "<span class=\"fa fa-cog\"/>Instellingen <small>(in Odoo)</small>"
+#: model_terms:ir.ui.view,arch_db:formio.formio_form
+msgid "<span class=\"fa fa-cog\"/> Form"
+msgstr "<span class=\"fa fa-cog\"/> Formulier"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.formio_builder
-#: model_terms:ir.ui.view,arch_db:formio.formio_form
-msgid "<span class=\"fa fa-home\"/>Odoo"
-msgstr ""
-
-#. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.formio_form
-msgid "<span class=\"fa fa-location-arrow\"/>Form Details"
-msgstr "<span class=\"fa fa-location-arrow\"/>Formulier Details"
+msgid "<span class=\"fa fa-cog\"/> Form Builder"
+msgstr "<span class=\"fa fa-cog\"/> Form Builder"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
@@ -271,12 +273,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__attachment_type
 msgid "Attachment Type"
 msgstr ""
-
-#. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_tree
-msgid "Builder"
-msgstr "Ontwerp"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version__css_assets
@@ -374,8 +370,9 @@ msgid "Display Name"
 msgstr "Weergave Naam"
 
 #. module: formio
-#: selection:formio.form,state:0
+#: code:addons/formio/models/formio_builder.py:17 selection:formio.form,state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
+#, python-format
 msgid "Draft"
 msgstr "Concept"
 
@@ -419,13 +416,15 @@ msgstr "Form"
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__builder_id
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 msgid "Form Builder"
-msgstr "Ontwerp"
+msgstr "Form Builder"
 
 #. module: formio
 #: model:ir.actions.act_window,name:formio.action_formio_builder
 #: model:ir.ui.menu,name:formio.menu_formio_builder
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_tree
 msgid "Form Builders"
-msgstr "Ontwerpen"
+msgstr "Form Builders"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__builder_id
@@ -442,6 +441,7 @@ msgstr ""
 #: model:ir.module.category,description:formio.module_category_formio
 #: model:ir.module.category,name:formio.module_category_formio
 #: model:ir.ui.menu,name:formio.menu_formio_root
+#: model_terms:ir.ui.view,arch_db:formio.formio_menu_nav
 msgid "Form.io"
 msgstr ""
 
@@ -629,6 +629,11 @@ msgid "Main Attachment"
 msgstr ""
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.formio_menu_nav
+msgid "Menu"
+msgstr ""
+
+#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_has_error
 #: model:ir.model.fields,field_description:formio.field_formio_form__message_has_error
 msgid "Message Delivery error"
@@ -704,6 +709,13 @@ msgid "Number of unread messages"
 msgstr ""
 
 #. module: formio
+#: code:addons/formio/models/formio_builder.py:19
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+#, python-format
+msgid "Obsolete"
+msgstr "Verouderd"
+
+#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 msgid "Other"
 msgstr "Overige"
@@ -734,6 +746,17 @@ msgstr "Portaal gebruik"
 #: model:ir.model.fields,field_description:formio.field_formio_translation_source__property
 msgid "Property"
 msgstr ""
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+msgid "Publish"
+msgstr "Publiceer"
+
+#. module: formio
+#: code:addons/formio/models/formio_builder.py:18
+#, python-format
+msgid "Published"
+msgstr "Gepubliceerd"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__res_id
@@ -806,12 +829,14 @@ msgid "Source Term"
 msgstr "Bronterm"
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__state
 #: model:ir.model.fields,field_description:formio.field_formio_form__state
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
 msgid "State"
 msgstr "Status"
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.formio_builder
 #: model_terms:ir.ui.view,arch_db:formio.formio_form
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
 msgid "State:"
@@ -882,6 +907,11 @@ msgid "Today"
 msgstr ""
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__value
+msgid "Translated Value"
+msgstr "Vertalingswaarde"
+
+#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_translation_form
 msgid "Translation"
 msgstr "Vertaling"
@@ -897,6 +927,11 @@ msgstr "Vertaling Bronterm"
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_translation_source_tree
 msgid "Translation Sources"
 msgstr "Vertalingen Brontermen"
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_translation__value
+msgid "Translation Value"
+msgstr "Vertalingswaarde"
 
 #. module: formio
 #: model:ir.actions.act_window,name:formio.action_formio_translation
@@ -959,12 +994,6 @@ msgid "User: Assigned forms"
 msgstr "Gebruiker: Toegewezen formulieren"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__value
-#: model:ir.model.fields,field_description:formio.field_formio_translation__value
-msgid "Translation Value"
-msgstr "Vertalingswaarde"
-
-#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__version_id
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_tree
 msgid "Version"
@@ -1024,4 +1053,9 @@ msgstr ""
 #. module: formio
 #: selection:formio.version.asset,type:0
 msgid "js"
+msgstr ""
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.formio_form
+msgid "| ID:"
 msgstr ""
