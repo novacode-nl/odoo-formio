@@ -9,6 +9,15 @@ import requests
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
+STATE_DRAFT = 'DRAFT'
+STATE_CURRENT = 'CURRENT'
+STATE_OBSOLETE = 'OBSOLETE'
+
+STATES = [
+    (STATE_DRAFT, "Draft"),
+    (STATE_CURRENT, "Current"),
+    (STATE_OBSOLETE, "Obsolete")]
+
 
 class Builder(models.Model):
     _name = 'formio.builder'
@@ -38,11 +47,21 @@ class Builder(models.Model):
     schema = fields.Text()
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
+    state = fields.Selection(
+        selection='_states_selection', string="State",
+        default=STATE_DRAFT, required=True, track_visibility='onchange',
+        help="""\
+        - Draft: In draft and was never published (Current)
+        - Current: Published i.e. live
+        - Obsolete: Was published but obsolete""")
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal usage", track_visibility='onchange', help="Form is accessible by assigned portal user")
     view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
     wizard = fields.Boolean("Wizard", track_visibility='onchange')
     translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations')
+
+    def _states_selection(self):
+        return STATES
 
     @api.constrains('name')
     def constaint_check_name(self):
@@ -97,9 +116,19 @@ class Builder(models.Model):
         self.act_window_url = url
         
     @api.multi
-    def action_edit(self):
+    def action_formio_builder(self):
         return {
             'type': 'ir.actions.act_url',
             'url': self.edit_url,
             'target': 'self',
         }
+
+    @api.multi
+    def action_current(self):
+        self.ensure_one()
+        self.write({'state': STATE_CURRENT})
+
+    @api.multi
+    def action_obsolete(self):
+        self.ensure_one()
+        self.write({'state': STATE_OBSOLETE})

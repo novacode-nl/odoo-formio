@@ -8,7 +8,11 @@ import logging
 from odoo import http, fields
 from odoo.http import request
 
-from ..models.formio_form import STATE_DRAFT, STATE_COMPLETE, STATE_CANCEL
+from ..models.formio_builder import \
+    STATE_CURRENT as BUILDER_STATE_CURRENT, STATE_OBSOLETE as BUILDER_STATE_OBSOLETE
+
+from ..models.formio_form import \
+    STATE_DRAFT as FORM_STATE_DRAFT, STATE_COMPLETE as FORM_STATE_COMPLETE, STATE_CANCEL as FORM_STATE_CANCEL
 
 _logger = logging.getLogger(__name__)
 
@@ -35,6 +39,17 @@ class FormioController(http.Controller):
             'menu_data': request.env['ir.ui.menu'].load_menus_root()
         }
         return request.render('formio.formio_builder', values)
+
+    @http.route('/formio/builder/options/<int:builder_id>', type='json', auth='user', website=True)
+    def builder_options(self, builder_id, **kwargs):
+        if not request.env.user.has_group('formio.group_formio_admin'):
+            return
+        builder = request.env['formio.builder'].browse(builder_id)
+        if builder:
+            options = self._prepare_builder_options(builder)
+        else:
+            options = {}
+        return json.dumps(options)
 
     @http.route('/formio/builder/schema/<int:builder_id>', type='json', auth='user', website=True)
     def builder_schema(self, builder_id, **kwargs):
@@ -114,13 +129,20 @@ class FormioController(http.Controller):
         else:
             return {}
 
+    def _prepare_builder_options(self, builder):
+        options = {}
+
+        if builder.state in [BUILDER_STATE_CURRENT, BUILDER_STATE_OBSOLETE]:
+            options['readOnly'] = True
+        return options
+
     def _prepare_form_options(self, form):
         options = {}
         i18n = {}
         context = request.env.context
         Lang  = request.env['res.lang']
 
-        if form.state in [STATE_COMPLETE, STATE_CANCEL]:
+        if form.state in [FORM_STATE_COMPLETE, FORM_STATE_CANCEL]:
             options['readOnly'] = True
 
             if form.builder_id.view_as_html:
@@ -187,9 +209,9 @@ class FormioController(http.Controller):
         }
 
         if not post['data'].get('saveDraft'):
-            vals['state'] = STATE_COMPLETE
+            vals['state'] = FORM_STATE_COMPLETE
         else:
-            vals['state'] = STATE_DRAFT
+            vals['state'] = FORM_STATE_DRAFT
         form.write(vals)
 
     @http.route('/formio/form/data/<string:uuid>', type='http', auth='user', website=True)

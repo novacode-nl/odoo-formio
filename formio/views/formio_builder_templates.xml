@@ -28,8 +28,14 @@ See LICENSE file for full licensing details. -->
                 <main>
                     <div class="container mt16 mb16">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <h3 class="formio_builder_name"><t t-esc="builder.title"/><small> - (<t t-esc="builder.name"/>)</small></h3>
+                            </div>
+                            <div class="col-md-6 mt8">
+                                <strong class="float-right pull-right">
+                                    <span class="text-muted">State: <span class="text-muted" t-field="builder.state"/></span>
+
+                                </strong>
                             </div>
                         </div>
                     </div>

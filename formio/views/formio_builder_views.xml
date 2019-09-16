@@ -10,10 +10,11 @@ See LICENSE file for full licensing details. -->
             <tree string="Builder">
                 <field name="title"/>
                 <field name="name"/>
-                <field name="forms"/>
-                <field name="res_model_id"/>
+                <field name="state"/>
                 <field name="portal"/>
                 <field name="formio_version_id"/>
+                <field name="res_model_id"/>
+                <field name="forms"/>
             </tree>
         </field>
     </record>
@@ -23,28 +24,38 @@ See LICENSE file for full licensing details. -->
         <field name="model">formio.builder</field>
         <field name="arch" type="xml">
 	    <form string="Builder">
+                <header>
+                    <button
+                       name="action_current" type="object" string="Current"
+                       attrs="{'invisible': [('state', '=', 'CURRENT')]}"
+                       class="btn-primary"/>
+                    <button
+                        name="action_obsolete" type="object" string="Obsolete"
+                        attrs="{'invisible': [('state', '=', 'OBSOLETE')]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_edit" type="object" string="Form Builder"
+                        <button name="action_formio_builder" type="object" string="Form Builder"
                                 groups="formio.group_formio_admin"
                                 class="oe_stat_button" icon="fa-rocket"/>
                     </div>
                     <label for="name" class="oe_edit_only"/>
-                    <h1><field name="name"/></h1>
+                    <h1><field name="name" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/></h1>
                     <group>
-                        <field name="title"/>
-                        <field name="formio_version_id"/>
+                        <field name="title" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                        <field name="formio_version_id" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                     </group>
                     <notebook>
                         <page string="Settings" name="settings">
                             <group>
                                 <group name="form_settings" string="Form">
-                                    <field name="wizard" groups="formio.group_formio_admin"/>
+                                    <field name="wizard" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="view_as_html" groups="formio.group_formio_admin"/>
                                 </group>
                                 <group name="other_settings" string="Other">
                                     <field name="portal" groups="formio.group_formio_admin"/>
-                                    <field name="res_model_id" groups="formio.group_formio_admin"/>
+                                    <field name="res_model_id" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
                                 <field name="description" groups="formio.group_formio_admin"/>
                             </group>
@@ -60,7 +71,7 @@ See LICENSE file for full licensing details. -->
                             </field>
                         </page>
                         <page string="Schema" name="schema" groups="formio.group_formio_admin">
-                            <field name="schema"/>
+                            <field name="schema" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                         </page>
                         <page string="Forms" name="forms" groups="formio.group_formio_admin">
                             <field name="forms"/>
