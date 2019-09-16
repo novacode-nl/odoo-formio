@@ -9,6 +9,8 @@ import requests
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
+from ..utils import get_field_selection_label
+
 STATE_DRAFT = 'DRAFT'
 STATE_CURRENT = 'CURRENT'
 STATE_OBSOLETE = 'OBSOLETE'
@@ -23,7 +25,7 @@ class Builder(models.Model):
     _name = 'formio.builder'
     _description = 'Formio Builder'
     _inherit = ['mail.thread', 'mail.activity.mixin']
-    _rec_name = 'title'
+    _rec_name = 'verbose_name'
 
     name = fields.Char(
         "Name", required=True, track_visibility='onchange',
@@ -54,6 +56,10 @@ class Builder(models.Model):
         - Draft: In draft / design.
         - Current: Live and in use (publisehd).
         - Obsolete: Was current but obsolete (unpublished)""")
+    verbose_name = fields.Char("Verbose Name", compute='_compute_verbose_name', store=False)
+    parent_id = fields.Many2one('formio.builder', string='Parent Version', readonly=True)
+    version = fields.Integer("Version", required=True, readonly=True, default=1)
+    version_comment = fields.Text("Version Comment")
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal usage", track_visibility='onchange', help="Form is accessible by assigned portal user")
     view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
@@ -68,6 +74,34 @@ class Builder(models.Model):
         self.ensure_one
         if re.search(r"[^a-zA-Z0-9_-]", self.name) is not None:
             raise ValidationError('Name is invalid. Use ASCII letters, digits, "-" or "_".')
+
+    @api.one
+    @api.constrains("name", "state")
+    def constraint_one_current(self):
+        """ Per name there can be only 1 record with state current at
+        a time. """
+
+        res = self.search([
+            ("name", "=", self.name),
+            ("state", "=", STATE_CURRENT)
+            ])
+        if len(res) > 1:
+            msg = _('Only one Form Builder with name "{name}" can be in state Current.').format(
+                name=self.name)
+            raise ValidationError(msg)
+
+    @api.one
+    @api.constrains("name", "version")
+    def constraint_one_version(self):
+        """ Per name there can be only 1 record with same version at a
+        time. """
+
+        domain = [('name', '=', self.name)]
+        name_version_grouped = self.read_group(domain, ['version'], ['version'])
+
+        if name_version_grouped[0]['version_count'] > 1:
+            raise ValidationError("%s already has a record with version: %d"
+                                  % (self.name, self.version))
 
     def _decode_schema(self, schema):
         """ Convert schema (str) to dictionary
@@ -98,6 +132,13 @@ class Builder(models.Model):
                 schema = self._decode_schema(self.schema)
                 del schema['display']
                 self.schema = json.dumps(schema)
+
+    @api.depends('title', 'name', 'version')
+    def _compute_verbose_name(self):
+        for r in self:
+            state = get_field_selection_label(r, 'state')
+            r.verbose_name = _("{name} [state: {state}, version: {version}]").format(
+                name=r.name, state=state, version=r.version)
 
     def _compute_edit_url(self):
         # sudo() is needed for regular users.
@@ -132,3 +173,51 @@ class Builder(models.Model):
     def action_obsolete(self):
         self.ensure_one()
         self.write({'state': STATE_OBSOLETE})
+
+    @api.multi
+    @api.returns('self', lambda value: value)
+    def copy_as_new_version(self):
+        """Get last version for builder-forms by traversing-up on parent_id"""
+        
+        self.ensure_one()
+        builder = self
+
+        while builder.parent_id:
+            builder = builder.parent_id
+        builder = self.search([('id', 'child_of', builder.id)], limit=1, order='id DESC')
+
+        alter = {}
+        alter["parent_id"] = self.id
+        alter["state"] = STATE_DRAFT
+        alter["version"] = builder.version + 1
+
+        res = super(Builder, self).copy(alter)
+        return res
+
+    @api.multi
+    def action_new_builder_version(self):
+        self.ensure_one()
+        res = self.copy_as_new_version()
+
+        form_view = self.env["ir.ui.view"].search(
+            [("name", "=", "formio.builder.form")]
+        )[0]
+
+        tree_view = self.env["ir.ui.view"].search(
+            [("name", "=", "formio.builder.tree")]
+        )[0]
+
+        return {
+            "name": self.name,
+            "type": "ir.actions.act_window",
+            "res_model": "formio.builder",
+            "view_type": "form",
+            "view_mode": "form, tree",
+            "views": [
+                [form_view.id, "form"],
+                [tree_view.id, "tree"],
+            ],
+            "target": "current",
+            "res_id": res.id,
+            "context": {}
+        }

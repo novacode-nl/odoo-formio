@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-16 11:00+0000\n"
-"PO-Revision-Date: 2019-09-16 12:27+0200\n"
+"POT-Creation-Date: 2019-09-16 11:52+0000\n"
+"PO-Revision-Date: 2019-09-16 13:56+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -308,6 +308,11 @@ msgstr "Configuratie"
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 msgid "Confirm as Current"
 msgstr "Bevestig als Actueel"
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+msgid "Create New Version"
+msgstr "Maak nieuwe versie"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
@@ -724,6 +729,12 @@ msgid "Obsolete"
 msgstr "Verouderd"
 
 #. module: formio
+#: code:addons/formio/models/formio_builder.py:89
+#, python-format
+msgid "Only one Form Builder with name \"{name}\" can be in state Current."
+msgstr "Er mag maar 1 Form Builder met de naam \"{name}, de status Actueel hebben."
+
+#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 msgid "Other"
 msgstr "Overige"
@@ -732,6 +743,11 @@ msgstr "Overige"
 #: selection:formio.builder,activity_state:0
 msgid "Overdue"
 msgstr ""
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__parent_id
+msgid "Parent Version"
+msgstr "Vorige Versie"
 
 #. module: formio
 #: selection:formio.form,state:0
@@ -991,10 +1007,22 @@ msgid "User: Assigned forms"
 msgstr "Gebruiker: Toegewezen formulieren"
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__verbose_name
+msgid "Verbose Name"
+msgstr "Uitgebreide Naam"
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__version
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__version_id
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_tree
 msgid "Version"
 msgstr "Versie"
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__version_comment
+msgid "Version Comment"
+msgstr "Versie Commentaar"
 
 #. module: formio
 #: model:ir.actions.act_window,name:formio.action_formio_version
@@ -1051,6 +1079,12 @@ msgstr ""
 #: selection:formio.version.asset,type:0
 msgid "js"
 msgstr ""
+
+#. module: formio
+#: code:addons/formio/models/formio_builder.py:140
+#, python-format
+msgid "{name} [state: {state}, version: {version}]"
+msgstr "{name} [status: {state}, versie: {version}]"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.formio_form
