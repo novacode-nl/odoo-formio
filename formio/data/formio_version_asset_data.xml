@@ -10,35 +10,35 @@ See LICENSE file for full licensing details. -->
             <field name="url">https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css</field>
         </record>
 
-        <!-- latest (version) -->
-        <record id="css_formio_latest" model="ir.attachment">
-            <field name="name">https://unpkg.com/formiojs@latest/dist/formio.full.min.css</field>
+        <!-- 3.27.3 (version) -->
+        <record id="css_formio_3_27_3" model="ir.attachment">
+            <field name="name">https://unpkg.com/formiojs@3.27.3/dist/formio.full.min.css</field>
             <field name="type">url</field>
-            <field name="url">https://unpkg.com/formiojs@latest/dist/formio.full.min.css</field>
+            <field name="url">https://unpkg.com/formiojs@3.27.3/dist/formio.full.min.css</field>
         </record>
-        <record id="js_formio_latest" model="ir.attachment">
-            <field name="name">https://unpkg.com/formiojs@latest/dist/formio.full.min.js</field>
+        <record id="js_formio_3_27_3" model="ir.attachment">
+            <field name="name">https://unpkg.com/formiojs@3.27.3/dist/formio.full.min.js</field>
             <field name="type">url</field>
-            <field name="url">https://unpkg.com/formiojs@latest/dist/formio.full.min.js</field>
+            <field name="url">https://unpkg.com/formiojs@3.27.3/dist/formio.full.min.js</field>
         </record>
         
-        <record id="asset_latest_bootstrap_css" model="formio.version.asset">
-            <field name="version_id" ref="formio.version_latest"/>
+        <record id="asset_3_27_3_bootstrap_css" model="formio.version.asset">
+            <field name="version_id" ref="formio.version_3_27_3"/>
             <field name="sequence">1</field>
             <field name="type">css</field>
             <field name="attachment_id" ref="formio.css_bootstrap_3_3_7"/>
         </record>
-        <record id="asset_latest_css" model="formio.version.asset">
-            <field name="version_id" ref="formio.version_latest"/>
+        <record id="asset_3_27_3_css" model="formio.version.asset">
+            <field name="version_id" ref="formio.version_3_27_3"/>
             <field name="sequence">2</field>
             <field name="type">css</field>
-            <field name="attachment_id" ref="formio.css_formio_latest"/>
+            <field name="attachment_id" ref="formio.css_formio_3_27_3"/>
         </record>
-        <record id="asset_latest_js" model="formio.version.asset">
-            <field name="version_id" ref="formio.version_latest"/>
+        <record id="asset_3_27_3_js" model="formio.version.asset">
+            <field name="version_id" ref="formio.version_3_27_3"/>
             <field name="sequence">2</field>
             <field name="type">js</field>
-            <field name="attachment_id" ref="formio.js_formio_latest"/>
+            <field name="attachment_id" ref="formio.js_formio_3_27_3"/>
         </record>
 
         <!-- 3.6.6 -->
