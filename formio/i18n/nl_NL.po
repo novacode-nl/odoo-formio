@@ -770,8 +770,8 @@ msgstr ""
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__portal
 #: model:ir.model.fields,field_description:formio.field_formio_form__portal
-msgid "Portal usage"
-msgstr "Portaal gebruik"
+msgid "Portal"
+msgstr "Portaal"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_translation__property

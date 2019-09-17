@@ -64,7 +64,7 @@ class Form(models.Model):
     submission_date = fields.Datetime(
         string='Submission Date', readonly=True, track_visibility='onchange',
         help='Datetime when the form was last submitted.')
-    portal = fields.Boolean("Portal usage", related='builder_id.portal', help="Form is accessible by assigned portal user")
+    portal = fields.Boolean("Portal", related='builder_id.portal', help="Form is accessible by assigned portal user")
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
 
     @api.multi
