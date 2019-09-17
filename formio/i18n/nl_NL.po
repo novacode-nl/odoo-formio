@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-17 09:08+0000\n"
+"POT-Creation-Date: 2019-09-17 09:55+0000\n"
 "PO-Revision-Date: 2019-09-17 11:14+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -254,7 +254,7 @@ msgstr ""
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Assigned User"
 msgstr "Toegewezen gebruiker"
 
@@ -282,16 +282,6 @@ msgid "Attachment Type"
 msgstr ""
 
 #. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
-msgid "Form Builder"
-msgstr "Form Builder"
-
-#. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
-msgid "Form Builders"
-msgstr "Form Builders"
-
-#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version__css_assets
 msgid "CSS Assets"
 msgstr ""
@@ -303,7 +293,7 @@ msgstr "Annuleer"
 
 #. module: formio
 #: selection:formio.form,state:0
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Canceled"
 msgstr "Geannuleerd"
 
@@ -314,7 +304,7 @@ msgstr "Voltooi"
 
 #. module: formio
 #: selection:formio.form,state:0
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Completed"
 msgstr "Voltooid"
 
@@ -361,7 +351,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: formio
-#: selection:formio.builder,state:0 selection:formio.form,group_state:0
+#: selection:formio.builder,state:0 selection:formio.form,kanban_group_state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 msgid "Current"
 msgstr "Actueel"
@@ -410,11 +400,11 @@ msgid "Display Name"
 msgstr "Weergave Naam"
 
 #. module: formio
-#: selection:formio.builder,state:0 selection:formio.form,group_state:0
+#: selection:formio.builder,state:0 selection:formio.form,kanban_group_state:0
 #: selection:formio.form,state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Draft"
 msgstr "Concept"
 
@@ -450,6 +440,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_tree
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_form
 msgid "Form"
 msgstr "Form"
@@ -457,6 +448,7 @@ msgstr "Form"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__builder_id
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Form Builder"
 msgstr "Form Builder"
 
@@ -464,6 +456,7 @@ msgstr "Form Builder"
 #: model:ir.actions.act_window,name:formio.action_formio_builder
 #: model:ir.ui.menu,name:formio.menu_formio_builder
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_tree
 msgid "Form Builders"
 msgstr "Form Builders"
@@ -550,20 +543,15 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_home
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_tree
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
 msgid "Forms"
 msgstr "Formulieren"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Group By"
-msgstr ""
-
-#. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_form__group_state
-msgid "Group State"
 msgstr ""
 
 #. module: formio
@@ -627,6 +615,11 @@ msgstr ""
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version__js_assets
 msgid "Javascript Assets"
+msgstr ""
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_form__kanban_group_state
+msgid "Kanban Group State"
 msgstr ""
 
 #. module: formio
@@ -720,7 +713,7 @@ msgid "My Form Builders"
 msgstr "Mijn Form Builders"
 
 #. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "My Forms"
 msgstr "Mijn Formulieren"
 
@@ -788,7 +781,7 @@ msgid "Number of unread messages"
 msgstr ""
 
 #. module: formio
-#: selection:formio.builder,state:0 selection:formio.form,group_state:0
+#: selection:formio.builder,state:0 selection:formio.form,kanban_group_state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 msgid "Obsolete"
@@ -817,8 +810,10 @@ msgid "Parent Version"
 msgstr "Vorige Versie"
 
 #. module: formio
-#: selection:formio.form,group_state:0 selection:formio.form,state:0
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
+#: code:addons/formio/models/formio_form.py:42
+#: selection:formio.form,kanban_group_state:0 selection:formio.form,state:0
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
+#, python-format
 msgid "Pending"
 msgstr "In afwachting"
 
@@ -921,7 +916,7 @@ msgstr "Bronterm"
 #: model:ir.model.fields,field_description:formio.field_formio_form__state
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "State"
 msgstr "Status"
 
@@ -948,7 +943,7 @@ msgstr "Indiening"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__submission_date
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Submission Date"
 msgstr "Ingediend op"
 
@@ -988,7 +983,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:formio.field_formio_builder__title
 #: model:ir.model.fields,field_description:formio.field_formio_form__title
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Title"
 msgstr "Titel"
 

@@ -32,8 +32,8 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.form.kanban</field>
         <field name="model">formio.form</field>
         <field name="arch" type="xml">
-            <kanban class="oe_background_grey o_kanban_dashboard" default_group_by="group_state" quick_create="false">
-                <field name="group_state"/>
+            <kanban class="oe_background_grey o_kanban_dashboard" default_group_by="kanban_group_state" quick_create="false">
+                <field name="kanban_group_state"/>
                 <field name="res_model_id"/>
                 <field name="res_id"/>
                 <field name="res_act_window_url"/>
@@ -174,7 +174,7 @@ See LICENSE file for full licensing details. -->
         </field>
     </record>
 
-    <record id="view_formio_search" model="ir.ui.view">
+    <record id="view_formio_form_search" model="ir.ui.view">
         <field name="name">formio.form.search</field>
         <field name="model">formio.form</field>
         <field name="arch" type="xml">
