@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-17 09:55+0000\n"
+"POT-Creation-Date: 2019-09-17 10:04+0000\n"
 "PO-Revision-Date: 2019-09-17 11:14+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -292,7 +292,7 @@ msgid "Cancel"
 msgstr "Annuleer"
 
 #. module: formio
-#: selection:formio.form,state:0
+#: selection:formio.form,kanban_group_state:0 selection:formio.form,state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Canceled"
 msgstr "Geannuleerd"
@@ -303,7 +303,7 @@ msgid "Complete"
 msgstr "Voltooi"
 
 #. module: formio
-#: selection:formio.form,state:0
+#: selection:formio.form,kanban_group_state:0 selection:formio.form,state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Completed"
 msgstr "Voltooid"
@@ -351,7 +351,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: formio
-#: selection:formio.builder,state:0 selection:formio.form,kanban_group_state:0
+#: selection:formio.builder,state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 msgid "Current"
 msgstr "Actueel"
@@ -781,7 +781,7 @@ msgid "Number of unread messages"
 msgstr ""
 
 #. module: formio
-#: selection:formio.builder,state:0 selection:formio.form,kanban_group_state:0
+#: selection:formio.builder,state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 msgid "Obsolete"
@@ -810,10 +810,8 @@ msgid "Parent Version"
 msgstr "Vorige Versie"
 
 #. module: formio
-#: code:addons/formio/models/formio_form.py:42
 #: selection:formio.form,kanban_group_state:0 selection:formio.form,state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
-#, python-format
 msgid "Pending"
 msgstr "In afwachting"
 

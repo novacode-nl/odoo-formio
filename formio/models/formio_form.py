@@ -39,7 +39,7 @@ class Form(models.Model):
          (STATE_COMPLETE, 'Completed'), (STATE_CANCEL, 'Canceled')],
         string="State", default=STATE_PENDING, track_visibility='onchange', index=True)
     kanban_group_state = fields.Selection(
-        [('A', _('Pending')), ('B', 'Draft'), ('C', 'Current'), ('D', 'Obsolete')],
+        [('A', 'Pending'), ('B', 'Draft'), ('C', 'Completed'), ('D', 'Canceled')],
         compute='_compute_kanban_group_state', store=True)
     url = fields.Char(compute='_compute_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
