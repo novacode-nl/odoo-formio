@@ -3,16 +3,33 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
+    <template id="formio_builder_embed" name="Form.io Builder - Embed">
+        <html>
+            <head>
+                <t t-call-assets="web.assets_common" t-css="false"/>
+
+                <t t-foreach="formio_css_assets" t-as="css">
+                    <link rel="stylesheet" type="text/css" t-att-href="css.url"/>
+                </t>
+                <t t-foreach="formio_js_assets" t-as="js">
+                    <script type="text/javascript" t-att-src="js.url"></script>
+                </t>
+                <script type="text/javascript" src="/formio/static/src/js/odoo-formio-builder.js"/>
+            </head>
+            <body style="width: 95%">
+                <div id="formio_builder_container">
+                    <div id="formio_builder"></div>
+                </div>
+                <input type="hidden" id="builder_id" name="builder_id" t-att-value="builder.id"/>
+            </body>
+        </html>
+    </template>
+
     <template id="formio_builder" name="Form.io Builder">
         <t t-call="web.layout">
             <t t-set="head">
                 <t t-call="formio.formio_html_head"/>
-                <script type="text/javascript" src="/formio/static/src/js/odoo-formio-builder.js"/>
             </t>
-
-            <xpath expr="//t[@t-set='html_data']" position="after">
-                <t t-set="body_classname" t-value="'o_connected_user' if env['ir.ui.view'].user_has_groups('base.group_user') else None"/>
-            </xpath>
 
             <t t-call="formio.formio_menu_nav">
                 <t t-set="items_menu_systray">
@@ -42,10 +59,9 @@ See LICENSE file for full licensing details. -->
                             </div>
                         </div>
                     </div>
-                    <div id="formio_builder_container">
-                        <div id="formio_builder"></div>
+                    <div id="formio_builder_container" class="embed-responsive embed-responsive-21by9">
+                        <iframe t-attf-src="/formio/builder/embed/#{builder.id}" class="embed-responsive-item"/>
                     </div>
-                    <input type="hidden" id="builder_id" name="builder_id" t-att-value="builder.id"/>
                 </main>
             </div>
         </t>

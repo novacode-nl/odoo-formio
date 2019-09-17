@@ -34,11 +34,28 @@ class FormioController(http.Controller):
         builder = request.env['formio.builder'].browse(builder_id)
         values = {
             'builder': builder,
-            'formio_css_assets': builder.formio_css_assets,
-            'formio_js_assets': builder.formio_js_assets,
             'menu_data': request.env['ir.ui.menu'].load_menus_root()
         }
         return request.render('formio.formio_builder', values)
+
+    @http.route('/formio/builder/embed/<int:builder_id>', type='http', auth='user', website=True)
+    def builder_embed(self, builder_id, **kwargs):
+        if not request.env.user.has_group('formio.group_formio_admin'):
+            # TODO Render template with message?
+            return request.redirect("/")
+
+        # Needed to update language
+        context = request.env.context.copy()
+        context.update({'lang': request.env.user.lang})
+        request.env.context = context
+
+        builder = request.env['formio.builder'].browse(builder_id)
+        values = {
+            'builder': builder,
+            'formio_css_assets': builder.formio_css_assets,
+            'formio_js_assets': builder.formio_js_assets,
+        }
+        return request.render('formio.formio_builder_embed', values)
 
     @http.route('/formio/builder/options/<int:builder_id>', type='json', auth='user', website=True)
     def builder_options(self, builder_id, **kwargs):
@@ -113,13 +130,53 @@ class FormioController(http.Controller):
             'languages': [], # initialize, otherwise template/view crashes.
             'user': request.env.user,
             'form': form,
-            'formio_css_assets': form.builder_id.formio_css_assets,
-            'formio_js_assets': form.builder_id.formio_js_assets,
             'menu_data': request.env['ir.ui.menu'].sudo().load_menus_root()
         }
         if len(languages) > 1:
             values['languages'] = languages
         return request.render('formio.formio_form', values)
+
+    @http.route('/formio/form/embed/<string:uuid>', type='http', auth='user', website=True)
+    def form_embed(self, uuid, **kwargs):
+        form = self._get_form(uuid, 'read')
+        if not form:
+            # TODO Render template with message?
+            return request.redirect("/")
+
+        # Needed to update language
+        context = request.env.context.copy()
+        context.update({'lang': request.env.user.lang})
+        request.env.context = context
+
+        # Get active languages used in Builder translations.
+        query = """
+            SELECT
+              DISTINCT(fbt.lang_id) AS lang_id
+            FROM
+              formio_builder_translation AS fbt
+              INNER JOIN res_lang AS l ON l.id = fbt.lang_id
+            WHERE
+              fbt.builder_id = {builder_id}
+              AND l.active = True
+        """.format(builder_id=form.builder_id.id)
+
+        request.env.cr.execute(query)
+        builder_lang_ids = [r[0] for r in request.env.cr.fetchall()]
+
+        # Always include english (en_US).
+        domain = ['|', ('id', 'in', builder_lang_ids), ('code', 'in', [request.env.user.lang, 'en_US'])]
+        languages = request.env['res.lang'].with_context(active_test=False).search(domain, order='name asc')
+        languages = languages.filtered(lambda r: r.id in builder_lang_ids or r.code == 'en_US')
+
+        values = {
+            'languages': [], # initialize, otherwise template/view crashes.
+            'form': form,
+            'formio_css_assets': form.builder_id.formio_css_assets,
+            'formio_js_assets': form.builder_id.formio_js_assets,
+        }
+        if len(languages) > 1:
+            values['languages'] = languages
+        return request.render('formio.formio_form_embed', values)
 
     @http.route('/formio/form/schema/<string:uuid>', type='json', auth='user', website=True)
     def form_schema(self, uuid, **kwargs):

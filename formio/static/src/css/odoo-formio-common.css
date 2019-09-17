@@ -1,6 +1,9 @@
 /* TODO: media queries for mobile (width) */
+
 #wrapwrap {
-    background-color: #ececec;
+    background-color: #fff;
+    display: block;
+    min-height: none; /* get rid off window vertical scrollbar */
 }
 
 main {
@@ -8,9 +11,8 @@ main {
     width: 75%;
 }
 
-#formio_builder_container, #formio_form_container {
-    background-color: #fff;
-    padding: 12px;
+header {
+    margin-top: 40px;
 }
 
 #oe_main_menu_navbar a.dropdown i.fa-th-large {
@@ -34,19 +36,25 @@ main {
     font-size: 14px;
 }
 
-/* Overrides: bootstrap 3 compatibility (with 4) issues */
-header .navbar {
-    margin-bottom: 0
+#form_info {
+    margin-bottom: 8px;
 }
 
-.navbar-brand {
-    height: auto;
+/* Form.io rendering area */
+
+#formio_builder_container {
+    margin-left: 20px;
+    width: 90%;
+    height: 75%;
+    position: absolute;
+    top: 70px;
+    left: 0;
 }
 
-.navbar ul.nav > li.divider {
-    height: auto;
-}
-
-#top_menu.navbar-nav {
-    float: right;
+#formio_form_container {
+    width: 85%;
+    height: 75%;
+    position: absolute;
+    top: 60px;
+    left: 10%;
 }

@@ -11,12 +11,6 @@ See LICENSE file for full licensing details. -->
         <t t-call-assets="web.assets_common" t-css="false"/>
         <t t-call-assets="web.assets_frontend" t-css="false"/>
 
-        <t t-foreach="formio_css_assets" t-as="css">
-            <link rel="stylesheet" type="text/css" t-att-href="css.url"/>
-        </t>
-        <t t-foreach="formio_js_assets" t-as="js">
-            <script type="text/javascript" t-att-src="js.url"></script>
-        </t>
         <link rel="stylesheet" href="/formio/static/src/css/odoo-formio-common.css"/>
     </template>
 
