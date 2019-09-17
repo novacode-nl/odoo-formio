@@ -19,6 +19,7 @@ See LICENSE file for full licensing details. -->
                 <field name="res_info"/>
                 <field name="portal"/>
                 <field name="create_uid"/>
+                <field name="create_date"/>
             </tree>
         </field>
     </record>

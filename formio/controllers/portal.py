@@ -51,6 +51,7 @@ class CustomerPortal(CustomerPortal):
             return request.redirect('/my/formio')
         vals = {
             'builder_id': builder.id,
+            'title': builder.title,
             'user_id': request.env.user.id
         }
         form = request.env['formio.form'].create(vals)
