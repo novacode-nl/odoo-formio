@@ -183,6 +183,25 @@ See LICENSE file for full licensing details. -->
                 <field name="submission_date"/>
                 <field name="res_model_id"/>
                 <field name="res_id"/>
+                <separator/>
+                <filter string="My Forms" name="my_forms"
+                        domain="[('user_id', '=', uid)]"/>
+                <separator/>
+                <filter string="Pending" name="state_pending"
+                        domain="[('state', '=', 'PENDING')]"/>
+                <filter string="Draft" name="state_draft"
+                        domain="[('state', '=', 'DRAFT')]"/>
+                <filter string="Completed" name="state_complete"
+                        domain="[('state', '=', 'COMPLETE')]"/>
+                <filter string="Canceled" name="state_cancel"
+                        domain="[('state', '=', 'CANCEL')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Submission Date" name="submission_date" domain="[]" context="{'group_by':'submission_date'}"/>
+                    <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
+                    <filter string="Form Builder" name="builder_id" domain="[]" context="{'group_by':'builder_id'}"/>
+                    <filter string="Title" name="title" domain="[]" context="{'group_by':'title'}"/>
+                    <filter string="Assigned User" name="user" domain="[]" context="{'group_by':'user_id'}"/>
+                </group>
             </search>
         </field>
     </record>

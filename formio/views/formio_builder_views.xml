@@ -10,11 +10,13 @@ See LICENSE file for full licensing details. -->
             <tree string="Form Builders">
                 <field name="title"/>
                 <field name="name"/>
-                <field name="version"/>
                 <field name="state"/>
+                <field name="version"/>
                 <field name="parent_id"/>
-                <field name="portal"/>
                 <field name="formio_version_id"/>
+                <field name="user_id"/>
+                <field name="write_date"/>
+                <field name="portal"/>
                 <field name="res_model_id"/>
                 <field name="forms"/>
             </tree>
@@ -49,6 +51,7 @@ See LICENSE file for full licensing details. -->
                     <group>
                         <field name="name" placeholder="Use ASCII letters, digits (0-9), - or _" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                         <field name="formio_version_id" placeholder="Select latest version only to try new form components." attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                        <field name="user_id"/>
                     </group>
                     <notebook>
                         <page string="Settings" name="settings">
@@ -93,6 +96,44 @@ See LICENSE file for full licensing details. -->
                     <field name="message_ids" widget="mail_thread"/>
                 </div>
             </form>
+        </field>
+    </record>
+
+    <record id="view_formio_builder_search" model="ir.ui.view">
+        <field name="name">formio.builder.search</field>
+        <field name="model">formio.builder</field>
+        <field name="arch" type="xml">
+            <search string="Form Builders">
+                <field name="title"/>
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="formio_version_id"/>
+                <separator/>
+                <filter string="My Form Builders" name="my_builders"
+                        domain="[('user_id', '=', uid)]"/>
+                <separator/>
+                <filter string="Draft" name="state_draft"
+                        domain="[('state', '=', 'DRAFT')]"/>
+                <filter string="Current" name="state_current"
+                        domain="[('state', '=', 'CURRENT')]"/>
+                <filter string="Obsolete" name="state_obsolete"
+                        domain="[('state', '=', 'OBSOLETE')]"/>
+                <separator/>
+                <filter string="Portal" name="portal"
+                        domain="[('portal', '=', True)]"/>
+                <filter string="Not Portal" name="not_portal"
+                        domain="[('portal', '=', False)]"/>
+                <separator/>
+                <filter string="Wizard" name="wizard"
+                        domain="[('wizard', '=', True)]"/>
+                <filter string="Not Wizard" name="not_portal"
+                        domain="[('wizard', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Name" name="name" domain="[]" context="{'group_by':'name'}"/>
+                    <filter string="Assigned User" name="user" domain="[]" context="{'group_by':'user_id'}"/>
+                    <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
+                </group>
+            </search>
         </field>
     </record>
 

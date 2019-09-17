@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-17 07:42+0000\n"
-"PO-Revision-Date: 2019-09-17 10:19+0200\n"
+"POT-Creation-Date: 2019-09-17 09:08+0000\n"
+"PO-Revision-Date: 2019-09-17 11:14+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -46,16 +46,21 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Beste ${object.user_id.partner_id.name},<br/><br/>\n"
-"        U bent uitgenodigd voor het invullen van het formulier: ${object.title}<br/>\n"
+"        U bent uitgenodigd voor het invullen van het formulier: ${object."
+"title}<br/>\n"
 "        Uw inzending wordt erg gewaardeerd.<br/><br/>\n"
-"        Klik op de knop om het formulier te openen. Daarvoor moet u zijn ingelogd.\n"
+"        Klik op de knop om het formulier te openen. Daarvoor moet u zijn "
+"ingelogd.\n"
 "        <div style=\"margin: 16px 0px 16px 0px;\">\n"
 "            <a href=\"${object.url}\"\n"
-"                style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                style=\"background-color: #875A7B; padding: 8px 16px 8px "
+"16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+"\">\n"
 "                Formulier\n"
 "            </a>\n"
 "        </div>\n"
-"        Uw formulieren zijn beschikbaar op de pagina <a href=\"/my/formio\">Mijn Formulieren</a> \n"
+"        Uw formulieren zijn beschikbaar op de pagina <a href=\"/my/formio"
+"\">Mijn Formulieren</a> \n"
 "    </p>\n"
 "</div>\n"
 
@@ -87,12 +92,16 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Beste ${object.user_id.partner_id.name},<br/><br/>\n"
-"        U bent uitgenodigd voor het invullen van het formulier: ${object.title}<br/>\n"
+"        U bent uitgenodigd voor het invullen van het formulier: ${object."
+"title}<br/>\n"
 "        Uw inzending wordt erg gewaardeerd.<br/><br/>\n"
-"        Klik op de knop om het formulier te openen. Daarvoor moet u zijn ingelogd.\n"
+"        Klik op de knop om het formulier te openen. Daarvoor moet u zijn "
+"ingelogd.\n"
 "        <div style=\"margin: 16px 0px 16px 0px;\">\n"
 "            <a href=\"${object.url}\"\n"
-"                style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                style=\"background-color: #875A7B; padding: 8px 16px 8px "
+"16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+"\">\n"
 "                Formulier\n"
 "            </a>\n"
 "        </div>\n"
@@ -244,6 +253,13 @@ msgid "Assets"
 msgstr ""
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
+msgid "Assigned User"
+msgstr "Toegewezen gebruiker"
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__user_id
 #: model:ir.model.fields,field_description:formio.field_formio_form__user_id
 msgid "Assigned user"
 msgstr "Toegewezen gebruiker"
@@ -266,6 +282,16 @@ msgid "Attachment Type"
 msgstr ""
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
+msgid "Form Builder"
+msgstr "Form Builder"
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
+msgid "Form Builders"
+msgstr "Form Builders"
+
+#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version__css_assets
 msgid "CSS Assets"
 msgstr ""
@@ -277,6 +303,7 @@ msgstr "Annuleer"
 
 #. module: formio
 #: selection:formio.form,state:0
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
 msgid "Canceled"
 msgstr "Geannuleerd"
 
@@ -287,6 +314,7 @@ msgstr "Voltooi"
 
 #. module: formio
 #: selection:formio.form,state:0
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
 msgid "Completed"
 msgstr "Voltooid"
 
@@ -334,6 +362,7 @@ msgstr ""
 
 #. module: formio
 #: selection:formio.builder,state:0 selection:formio.form,group_state:0
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 msgid "Current"
 msgstr "Actueel"
 
@@ -383,7 +412,9 @@ msgstr "Weergave Naam"
 #. module: formio
 #: selection:formio.builder,state:0 selection:formio.form,group_state:0
 #: selection:formio.form,state:0
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
 msgid "Draft"
 msgstr "Concept"
 
@@ -446,7 +477,7 @@ msgstr ""
 #: model:ir.model.fields,help:formio.field_formio_builder__portal
 #: model:ir.model.fields,help:formio.field_formio_form__portal
 msgid "Form is accessible by assigned portal user"
-msgstr ""
+msgstr "Formulier is toegankelijk voor toegewezen portaal gebruiker."
 
 #. module: formio
 #: model:ir.module.category,description:formio.module_category_formio
@@ -523,6 +554,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_search
 msgid "Forms"
 msgstr "Formulieren"
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
+msgid "Group By"
+msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__group_state
@@ -678,9 +715,20 @@ msgid "My Account"
 msgstr "Mijn Account"
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
+msgid "My Form Builders"
+msgstr "Mijn Form Builders"
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
+msgid "My Forms"
+msgstr "Mijn Formulieren"
+
+#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__name
 #: model:ir.model.fields,field_description:formio.field_formio_form__name
 #: model:ir.model.fields,field_description:formio.field_formio_version__name
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 msgid "Name"
 msgstr "Naam"
 
@@ -698,6 +746,16 @@ msgstr ""
 #: model:ir.model.fields,field_description:formio.field_formio_builder__activity_type_id
 msgid "Next Activity Type"
 msgstr ""
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
+msgid "Not Portal"
+msgstr "Niet Portaal"
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
+msgid "Not Wizard"
+msgstr "Niet Wizard"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_needaction_counter
@@ -732,11 +790,12 @@ msgstr ""
 #. module: formio
 #: selection:formio.builder,state:0 selection:formio.form,group_state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 msgid "Obsolete"
 msgstr "Verouderd"
 
 #. module: formio
-#: code:addons/formio/models/formio_builder.py:91
+#: code:addons/formio/models/formio_builder.py:92
 #, python-format
 msgid "Only one Form Builder with name \"{name}\" can be in state Current."
 msgstr ""
@@ -759,6 +818,7 @@ msgstr "Vorige Versie"
 
 #. module: formio
 #: selection:formio.form,group_state:0 selection:formio.form,state:0
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
 msgid "Pending"
 msgstr "In afwachting"
 
@@ -770,6 +830,7 @@ msgstr ""
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__portal
 #: model:ir.model.fields,field_description:formio.field_formio_form__portal
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 msgid "Portal"
 msgstr "Portaal"
 
@@ -829,7 +890,8 @@ msgstr ""
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 msgid "Select latest version only to try new form components."
-msgstr "Selecteer alleen de nieuwste versie om nieuwe form componeneten te proberen."
+msgstr ""
+"Selecteer alleen de nieuwste versie om nieuwe form componeneten te proberen."
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
@@ -858,6 +920,8 @@ msgstr "Bronterm"
 #: model:ir.model.fields,field_description:formio.field_formio_builder__state
 #: model:ir.model.fields,field_description:formio.field_formio_form__state
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
 msgid "State"
 msgstr "Status"
 
@@ -884,6 +948,7 @@ msgstr "Indiening"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__submission_date
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
 msgid "Submission Date"
 msgstr "Ingediend op"
 
@@ -923,6 +988,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:formio.field_formio_builder__title
 #: model:ir.model.fields,field_description:formio.field_formio_form__title
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_search
 msgid "Title"
 msgstr "Titel"
 
@@ -1071,6 +1137,7 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__wizard
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 msgid "Wizard"
 msgstr ""
 
@@ -1098,7 +1165,7 @@ msgid "js"
 msgstr ""
 
 #. module: formio
-#: code:addons/formio/models/formio_builder.py:145
+#: code:addons/formio/models/formio_builder.py:146
 #, python-format
 msgid "{title} [state: {state}, version: {version}]"
 msgstr "{title} [status: {state}, versie: {version}]"
