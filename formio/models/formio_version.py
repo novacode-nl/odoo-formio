@@ -7,6 +7,7 @@ from odoo import api, fields, models, _
 class Version(models.Model):
     _name = 'formio.version'
     _description = 'Formio Version'
+    _order = 'name DESC'
 
     name = fields.Char(
         "Name", required=True, track_visibility='onchange',

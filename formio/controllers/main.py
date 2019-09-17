@@ -8,7 +8,11 @@ import logging
 from odoo import http, fields
 from odoo.http import request
 
-from ..models.formio_form import STATE_DRAFT, STATE_COMPLETE, STATE_CANCEL
+from ..models.formio_builder import \
+    STATE_CURRENT as BUILDER_STATE_CURRENT, STATE_OBSOLETE as BUILDER_STATE_OBSOLETE
+
+from ..models.formio_form import \
+    STATE_DRAFT as FORM_STATE_DRAFT, STATE_COMPLETE as FORM_STATE_COMPLETE, STATE_CANCEL as FORM_STATE_CANCEL
 
 _logger = logging.getLogger(__name__)
 
@@ -21,14 +25,31 @@ class FormioController(http.Controller):
         if not request.env.user.has_group('formio.group_formio_admin'):
             # TODO website page with message?
             return request.redirect("/")
-        
+
+        # Needed to update language
+        context = request.env.context.copy()
+        context.update({'lang': request.env.user.lang})
+        request.env.context = context
+
         builder = request.env['formio.builder'].browse(builder_id)
         values = {
             'builder': builder,
             'formio_css_assets': builder.formio_css_assets,
             'formio_js_assets': builder.formio_js_assets,
+            'menu_data': request.env['ir.ui.menu'].load_menus_root()
         }
         return request.render('formio.formio_builder', values)
+
+    @http.route('/formio/builder/options/<int:builder_id>', type='json', auth='user', website=True)
+    def builder_options(self, builder_id, **kwargs):
+        if not request.env.user.has_group('formio.group_formio_admin'):
+            return
+        builder = request.env['formio.builder'].browse(builder_id)
+        if builder:
+            options = self._prepare_builder_options(builder)
+        else:
+            options = {}
+        return json.dumps(options)
 
     @http.route('/formio/builder/schema/<int:builder_id>', type='json', auth='user', website=True)
     def builder_schema(self, builder_id, **kwargs):
@@ -63,6 +84,11 @@ class FormioController(http.Controller):
             # TODO website page with message?
             return request.redirect("/")
 
+        # Needed to update language
+        context = request.env.context.copy()
+        context.update({'lang': request.env.user.lang})
+        request.env.context = context
+
         # Get active languages used in Builder translations.
         query = """
             SELECT
@@ -89,6 +115,7 @@ class FormioController(http.Controller):
             'form': form,
             'formio_css_assets': form.builder_id.formio_css_assets,
             'formio_js_assets': form.builder_id.formio_js_assets,
+            'menu_data': request.env['ir.ui.menu'].sudo().load_menus_root()
         }
         if len(languages) > 1:
             values['languages'] = languages
@@ -102,15 +129,25 @@ class FormioController(http.Controller):
         else:
             return {}
 
+    def _prepare_builder_options(self, builder):
+        options = {}
+
+        if builder.state in [BUILDER_STATE_CURRENT, BUILDER_STATE_OBSOLETE]:
+            options['readOnly'] = True
+        return options
+
     def _prepare_form_options(self, form):
         options = {}
         i18n = {}
         context = request.env.context
         Lang  = request.env['res.lang']
 
-        if form.state in [STATE_COMPLETE, STATE_CANCEL]:
+        if form.state in [FORM_STATE_COMPLETE, FORM_STATE_CANCEL]:
             options['readOnly'] = True
-            options['viewAsHtml'] = form.builder_id.view_as_html
+
+            if form.builder_id.view_as_html:
+                options['renderMode'] = 'html'
+                options['viewAsHtml'] = True # backwards compatible (version < 4.x)?
 
         if 'lang' in context:
             lang = Lang._lang_get(context['lang'])
@@ -171,10 +208,10 @@ class FormioController(http.Controller):
             'submission_date': fields.Datetime.now(),
         }
 
-        if not post['data'].get('saveAsDraft'):
-            vals['state'] = STATE_COMPLETE
+        if not post['data'].get('saveDraft'):
+            vals['state'] = FORM_STATE_COMPLETE
         else:
-            vals['state'] = STATE_DRAFT
+            vals['state'] = FORM_STATE_DRAFT
         form.write(vals)
 
     @http.route('/formio/form/data/<string:uuid>', type='http', auth='user', website=True)

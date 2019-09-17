@@ -7,13 +7,18 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.builder.tree</field>
         <field name="model">formio.builder</field>
         <field name="arch" type="xml">
-            <tree string="Builder">
+            <tree string="Form Builders">
                 <field name="title"/>
                 <field name="name"/>
-                <field name="forms"/>
-                <field name="res_model_id"/>
-                <field name="portal"/>
+                <field name="state"/>
+                <field name="version"/>
+                <field name="parent_id"/>
                 <field name="formio_version_id"/>
+                <field name="user_id"/>
+                <field name="write_date"/>
+                <field name="portal"/>
+                <field name="res_model_id"/>
+                <field name="forms"/>
             </tree>
         </field>
     </record>
@@ -22,31 +27,49 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.builder.form</field>
         <field name="model">formio.builder</field>
         <field name="arch" type="xml">
-	    <form string="Builder">
+	    <form string="Form Builders">
+                <header>
+                    <button
+                       name="action_current" type="object" string="Confirm as Current"
+                       attrs="{'invisible': [('state', 'in', ['CURRENT', 'OBSOLETE'])]}"
+                       class="btn-primary"/>
+                    <button
+                        name="action_obsolete" type="object" string="Obsolete"
+                        attrs="{'invisible': [('state', '=', 'OBSOLETE')]}"/>
+                    <button name="action_new_builder_version" type="object" attrs="{'invisible':[('id','=',False)]}"
+                            string="Create New Version" class="oe_stat_button"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_edit" type="object" string="Form Builder"
+                        <button name="action_formio_builder" type="object" string="Form Builder"
                                 groups="formio.group_formio_admin"
                                 class="oe_stat_button" icon="fa-rocket"/>
                     </div>
-                    <label for="name" class="oe_edit_only"/>
-                    <h1><field name="name"/></h1>
+                    <label for="title" class="oe_edit_only"/>
+                    <h1><field name="title" placeholder="Insert a meaningful title here"/></h1>
                     <group>
-                        <field name="title"/>
-                        <field name="formio_version_id"/>
+                        <field name="name" placeholder="Use ASCII letters, digits (0-9), - or _" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                        <field name="formio_version_id" placeholder="Select latest version only to try new form components." attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                        <field name="user_id"/>
                     </group>
                     <notebook>
                         <page string="Settings" name="settings">
                             <group>
                                 <group name="form_settings" string="Form">
-                                    <field name="wizard" groups="formio.group_formio_admin"/>
+                                    <field name="wizard" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="view_as_html" groups="formio.group_formio_admin"/>
                                 </group>
                                 <group name="other_settings" string="Other">
                                     <field name="portal" groups="formio.group_formio_admin"/>
-                                    <field name="res_model_id" groups="formio.group_formio_admin"/>
+                                    <field name="res_model_id" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
-                                <field name="description" groups="formio.group_formio_admin"/>
+                                <group string="Version">
+                                    <field name="version" />
+                                    <field name="version_comment" attrs="{'required': [('version', '>', 1)]}"/>
+                                    <field name="parent_id" />
+                                </group>
+                                <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
                             </group>
                         </page>
                         <page string="Translations" name="translations" groups="formio.group_formio_admin">
@@ -60,7 +83,7 @@ See LICENSE file for full licensing details. -->
                             </field>
                         </page>
                         <page string="Schema" name="schema" groups="formio.group_formio_admin">
-                            <field name="schema"/>
+                            <field name="schema" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                         </page>
                         <page string="Forms" name="forms" groups="formio.group_formio_admin">
                             <field name="forms"/>
@@ -73,6 +96,44 @@ See LICENSE file for full licensing details. -->
                     <field name="message_ids" widget="mail_thread"/>
                 </div>
             </form>
+        </field>
+    </record>
+
+    <record id="view_formio_builder_search" model="ir.ui.view">
+        <field name="name">formio.builder.search</field>
+        <field name="model">formio.builder</field>
+        <field name="arch" type="xml">
+            <search string="Form Builders">
+                <field name="title"/>
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="formio_version_id"/>
+                <separator/>
+                <filter string="My Form Builders" name="my_builders"
+                        domain="[('user_id', '=', uid)]"/>
+                <separator/>
+                <filter string="Draft" name="state_draft"
+                        domain="[('state', '=', 'DRAFT')]"/>
+                <filter string="Current" name="state_current"
+                        domain="[('state', '=', 'CURRENT')]"/>
+                <filter string="Obsolete" name="state_obsolete"
+                        domain="[('state', '=', 'OBSOLETE')]"/>
+                <separator/>
+                <filter string="Portal" name="portal"
+                        domain="[('portal', '=', True)]"/>
+                <filter string="Not Portal" name="not_portal"
+                        domain="[('portal', '=', False)]"/>
+                <separator/>
+                <filter string="Wizard" name="wizard"
+                        domain="[('wizard', '=', True)]"/>
+                <filter string="Not Wizard" name="not_portal"
+                        domain="[('wizard', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Name" name="name" domain="[]" context="{'group_by':'name'}"/>
+                    <filter string="Assigned User" name="user" domain="[]" context="{'group_by':'user_id'}"/>
+                    <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
+                </group>
+            </search>
         </field>
     </record>
 

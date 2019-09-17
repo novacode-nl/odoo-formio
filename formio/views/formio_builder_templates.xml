@@ -4,40 +4,50 @@ See LICENSE file for full licensing details. -->
 
 <odoo>
     <template id="formio_builder" name="Form.io Builder">
-        <html>
-            <t t-call="formio.formio_html_head">
+        <t t-call="web.layout">
+            <t t-set="head">
+                <t t-call="formio.formio_html_head"/>
                 <script type="text/javascript" src="/formio/static/src/js/odoo-formio-builder.js"/>
-                <title><t t-esc="builder.title"/> | Builder Form</title>
             </t>
-            <body class="o_connected_user">
-                <nav id="oe_main_menu_navbar" class="o_main_navbar">
-                    <ul class="o_menu_systray hidden-xs">
-                        <li t-if="not translatable" id="edit-in-backend">
-                            <a t-attf-href="#{builder.act_window_url}"><span class="fa fa-cog"/>Settings <small>(in Odoo)</small></a>
-                        </li>
-                        <li t-if="not translatable" id="odoo-home">
-                            <a href="/"><span class="fa fa-home"/>Odoo</a>
-                        </li>
-                    </ul>
-                </nav>
-                <div id="wrapwrap">
-                    <t t-call="formio.formio_header"/>
-                    <main>
-                        <div class="container formio_builder_title">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h3 class="formio_builder_name"><t t-esc="builder.title"/><small> - (<t t-esc="builder.name"/>)</small></h3>
-                                </div>
+
+            <xpath expr="//t[@t-set='html_data']" position="after">
+                <t t-set="body_classname" t-value="'o_connected_user' if env['ir.ui.view'].user_has_groups('base.group_user') else None"/>
+            </xpath>
+
+            <t t-call="formio.formio_menu_nav">
+                <t t-set="items_menu_systray">
+                    <li t-if="builder" id="edit-in-backend">
+                        <a t-attf-href="#{builder.act_window_url}"><span class="fa fa-cog"/> Form Builder</a>
+                    </li>
+                </t>
+            </t>
+
+            <t t-call="formio.formio_header"/>
+            
+            <div id="wrapwrap">
+                <main>
+                    <div class="container mt16 mb16">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 class="formio_builder_name"><t t-esc="builder.title"/><small> - (<t t-esc="builder.name"/>)</small></h3>
+                            </div>
+                            <div class="col-md-6 mt8">
+                                <span class="float-right pull-right" style="margin-left: 12px;">
+                                    <span class="text-muted">Version: <span class="text-muted" t-field="builder.version"/></span>
+                                </span>
+                                <strong class="float-right pull-right">
+                                    <span class="text-muted">State: <span class="text-muted" t-field="builder.state"/></span>
+
+                                </strong>
                             </div>
                         </div>
-                        
-                        <div class="container form_builder_container mt8">
-                            <div id="formio_builder"></div>
-                        </div>
-                        <input type="hidden" id="builder_id" name="builder_id" t-att-value="builder.id"/>
-                    </main>
-                </div>
-            </body>
-        </html>
+                    </div>
+                    <div id="formio_builder_container">
+                        <div id="formio_builder"></div>
+                    </div>
+                    <input type="hidden" id="builder_id" name="builder_id" t-att-value="builder.id"/>
+                </main>
+            </div>
+        </t>
     </template>
 </odoo>

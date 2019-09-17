@@ -7,18 +7,23 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.form.tree</field>
         <field name="model">formio.form</field>
         <field name="arch" type="xml">
-            <tree string="Forms">
+            <tree string="Forms"
+                  decoration-info="state in ('DRAFT')"
+                  decoration-success="state in ('COMPLETE')"
+                  decoration-muted="state in ('CANCEL')">
                 <field name="id"/>
                 <field name="title"/>
-                <field name="name"/>
-                <field name="res_name"/>
-                <field name="res_info"/>
-                <field name="create_uid"/>
+                <field name="builder_id"/>
                 <field name="user_id"/>
                 <field name="submission_user_id"/>
                 <field name="submission_date"/>
-                <field name="portal"/>
                 <field name="state"/>
+                <button string="Form" class="btn-sm btn-secondary" name="action_formio" type="object"/>
+                <field name="res_name"/>
+                <field name="res_info"/>
+                <field name="portal"/>
+                <field name="create_uid"/>
+                <field name="create_date"/>
             </tree>
         </field>
     </record>
@@ -27,7 +32,8 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.form.kanban</field>
         <field name="model">formio.form</field>
         <field name="arch" type="xml">
-            <kanban class="oe_background_grey o_kanban_dashboard">
+            <kanban class="oe_background_grey o_kanban_dashboard" default_group_by="kanban_group_state" quick_create="false">
+                <field name="kanban_group_state"/>
                 <field name="res_model_id"/>
                 <field name="res_id"/>
                 <field name="res_act_window_url"/>
@@ -130,7 +136,7 @@ See LICENSE file for full licensing details. -->
                             <field name="res_info"/>
                         </button>
                     </div>
-                    <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/></h1>
+                    <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}"/></h1>
                     <group name="general">
                         <group>
                             <field name="builder_id"
@@ -168,11 +174,12 @@ See LICENSE file for full licensing details. -->
         </field>
     </record>
 
-    <record id="view_formio_search" model="ir.ui.view">
+    <record id="view_formio_form_search" model="ir.ui.view">
         <field name="name">formio.form.search</field>
         <field name="model">formio.form</field>
         <field name="arch" type="xml">
             <search string="Forms">
+                <field name="id"/>
                 <field name="uuid"/>
                 <field name="title"/>
                 <field name="user_id"/>
@@ -180,6 +187,25 @@ See LICENSE file for full licensing details. -->
                 <field name="submission_date"/>
                 <field name="res_model_id"/>
                 <field name="res_id"/>
+                <separator/>
+                <filter string="My Forms" name="my_forms"
+                        domain="[('user_id', '=', uid)]"/>
+                <separator/>
+                <filter string="Pending" name="state_pending"
+                        domain="[('state', '=', 'PENDING')]"/>
+                <filter string="Draft" name="state_draft"
+                        domain="[('state', '=', 'DRAFT')]"/>
+                <filter string="Completed" name="state_complete"
+                        domain="[('state', '=', 'COMPLETE')]"/>
+                <filter string="Canceled" name="state_cancel"
+                        domain="[('state', '=', 'CANCEL')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Submission Date" name="submission_date" domain="[]" context="{'group_by':'submission_date'}"/>
+                    <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
+                    <filter string="Form Builder" name="builder_id" domain="[]" context="{'group_by':'builder_id'}"/>
+                    <filter string="Title" name="title" domain="[]" context="{'group_by':'title'}"/>
+                    <filter string="Assigned User" name="user" domain="[]" context="{'group_by':'user_id'}"/>
+                </group>
             </search>
         </field>
     </record>
@@ -188,20 +214,19 @@ See LICENSE file for full licensing details. -->
     <record id="action_formio_form" model="ir.actions.act_window">
         <field name="name">Forms</field>
         <field name="res_model">formio.form</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,kanban,form</field>
     </record>
 
-    <record id="action_formio_form_view_kanban" model="ir.actions.act_window.view">
-        <field name="sequence" eval="0"/>
-        <field name="view_mode">kanban</field>
-        <field name="view_id" ref="formio.view_formio_form_kanban"/>
-        <field name="act_window_id" ref="action_formio_form"/>
-    </record>
     <record id="action_formio_form_view_tree" model="ir.actions.act_window.view">
-        <field name="sequence" eval="1"/>
+        <field name="sequence" eval="0"/>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="formio.view_formio_form_tree"/>
+        <field name="act_window_id" ref="action_formio_form"/>
+    </record>
+    <record id="action_formio_form_view_kanban" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="formio.view_formio_form_kanban"/>
         <field name="act_window_id" ref="action_formio_form"/>
     </record>
     <record id="action_formio_form_view_form" model="ir.actions.act_window.view">

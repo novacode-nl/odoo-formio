@@ -1,0 +1,52 @@
+/* TODO: media queries for mobile (width) */
+#wrapwrap {
+    background-color: #ececec;
+}
+
+main {
+    margin: 0 auto;
+    width: 75%;
+}
+
+#formio_builder_container, #formio_form_container {
+    background-color: #fff;
+    padding: 12px;
+}
+
+#oe_main_menu_navbar a.dropdown i.fa-th-large {
+    font-size: 14px;
+}
+
+.o_main_navbar > .o_menu_brand {
+    text-decoration: none;
+}
+
+#oe_main_menu_navbar .dropdown-menu {
+    font-size: 12px;
+}
+
+#oe_main_menu_navbar .o_menu_systray a {
+    text-decoration: none;
+    font-size: 14px;
+}
+
+#top_menu span, #top_menu a, #top_menu span a {
+    font-size: 14px;
+}
+
+/* Overrides: bootstrap 3 compatibility (with 4) issues */
+header .navbar {
+    margin-bottom: 0
+}
+
+.navbar-brand {
+    height: auto;
+}
+
+.navbar ul.nav > li.divider {
+    height: auto;
+}
+
+#top_menu.navbar-nav {
+    float: right;
+}
