@@ -10,15 +10,15 @@ See LICENSE file for full licensing details. -->
             <tree string="Forms">
                 <field name="id"/>
                 <field name="title"/>
-                <field name="name"/>
-                <field name="res_name"/>
-                <field name="res_info"/>
-                <field name="create_uid"/>
+                <field name="builder_id"/>
                 <field name="user_id"/>
                 <field name="submission_user_id"/>
                 <field name="submission_date"/>
-                <field name="portal"/>
                 <field name="state"/>
+                <field name="res_name"/>
+                <field name="res_info"/>
+                <field name="portal"/>
+                <field name="create_uid"/>
             </tree>
         </field>
     </record>
@@ -27,7 +27,8 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.form.kanban</field>
         <field name="model">formio.form</field>
         <field name="arch" type="xml">
-            <kanban class="oe_background_grey o_kanban_dashboard">
+            <kanban class="oe_background_grey o_kanban_dashboard" default_group_by="group_state" quick_create="false">
+                <field name="group_state"/>
                 <field name="res_model_id"/>
                 <field name="res_id"/>
                 <field name="res_act_window_url"/>
@@ -130,7 +131,7 @@ See LICENSE file for full licensing details. -->
                             <field name="res_info"/>
                         </button>
                     </div>
-                    <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}" readonly="1"/></h1>
+                    <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}"/></h1>
                     <group name="general">
                         <group>
                             <field name="builder_id"
@@ -173,6 +174,7 @@ See LICENSE file for full licensing details. -->
         <field name="model">formio.form</field>
         <field name="arch" type="xml">
             <search string="Forms">
+                <field name="id"/>
                 <field name="uuid"/>
                 <field name="title"/>
                 <field name="user_id"/>
@@ -188,20 +190,19 @@ See LICENSE file for full licensing details. -->
     <record id="action_formio_form" model="ir.actions.act_window">
         <field name="name">Forms</field>
         <field name="res_model">formio.form</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,kanban,form</field>
     </record>
 
-    <record id="action_formio_form_view_kanban" model="ir.actions.act_window.view">
-        <field name="sequence" eval="0"/>
-        <field name="view_mode">kanban</field>
-        <field name="view_id" ref="formio.view_formio_form_kanban"/>
-        <field name="act_window_id" ref="action_formio_form"/>
-    </record>
     <record id="action_formio_form_view_tree" model="ir.actions.act_window.view">
-        <field name="sequence" eval="1"/>
+        <field name="sequence" eval="0"/>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="formio.view_formio_form_tree"/>
+        <field name="act_window_id" ref="action_formio_form"/>
+    </record>
+    <record id="action_formio_form_view_kanban" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="formio.view_formio_form_kanban"/>
         <field name="act_window_id" ref="action_formio_form"/>
     </record>
     <record id="action_formio_form_view_form" model="ir.actions.act_window.view">

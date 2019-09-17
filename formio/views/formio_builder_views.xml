@@ -44,11 +44,11 @@ See LICENSE file for full licensing details. -->
                                 groups="formio.group_formio_admin"
                                 class="oe_stat_button" icon="fa-rocket"/>
                     </div>
-                    <label for="name" class="oe_edit_only"/>
-                    <h1><field name="name" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/></h1>
+                    <label for="title" class="oe_edit_only"/>
+                    <h1><field name="title" placeholder="Insert a meaningful title here"/></h1>
                     <group>
-                        <field name="title"/>
-                        <field name="formio_version_id" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                        <field name="name" placeholder="Use ASCII letters, digits (0-9), - or _" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                        <field name="formio_version_id" placeholder="Select latest version only to try new form components." attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                     </group>
                     <notebook>
                         <page string="Settings" name="settings">
@@ -66,7 +66,7 @@ See LICENSE file for full licensing details. -->
                                     <field name="version_comment" attrs="{'required': [('version', '>', 1)]}"/>
                                     <field name="parent_id" />
                                 </group>
-                                <field name="description" groups="formio.group_formio_admin"/>
+                                <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
                             </group>
                         </page>
                         <page string="Translations" name="translations" groups="formio.group_formio_admin">

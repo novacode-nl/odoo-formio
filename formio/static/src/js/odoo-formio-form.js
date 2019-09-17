@@ -56,11 +56,11 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
                         form.on('submitDone', function(submission) {
                             if ('submitDone' in options && 'url' in options['submitDone'] &&
                                 'submit' in submission.data && submission.data.submit == true) {
-                                window.location = options['submitDone']['url'];
+                                setTimeout(function() {window.location = options['submitDone']['url'];}, 1000);
                             }
                             else {
                                 // Probably by saveAsDraft
-                                window.location.reload();
+                                setTimeout(function() {window.location.reload();}, 1000);
                             }
                         });
                         // Set the Submission (data)

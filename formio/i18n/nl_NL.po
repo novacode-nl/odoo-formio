@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-16 12:13+0000\n"
-"PO-Revision-Date: 2019-09-16 14:15+0200\n"
+"POT-Creation-Date: 2019-09-17 07:42+0000\n"
+"PO-Revision-Date: 2019-09-17 09:46+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -342,7 +342,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: formio
-#: selection:formio.builder,state:0
+#: selection:formio.builder,state:0 selection:formio.form,group_state:0
 msgid "Current"
 msgstr "Actueel"
 
@@ -374,6 +374,11 @@ msgid "Description"
 msgstr "Omschrijving"
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+msgid "Description..."
+msgstr "Omschrijving..."
+
+#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__display_name
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__display_name
 #: model:ir.model.fields,field_description:formio.field_formio_form__display_name
@@ -385,7 +390,8 @@ msgid "Display Name"
 msgstr "Weergave Naam"
 
 #. module: formio
-#: selection:formio.builder,state:0 selection:formio.form,state:0
+#: selection:formio.builder,state:0 selection:formio.form,group_state:0
+#: selection:formio.form,state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
 msgid "Draft"
 msgstr "Concept"
@@ -528,6 +534,11 @@ msgid "Forms"
 msgstr "Formulieren"
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_form__group_state
+msgid "Group State"
+msgstr ""
+
+#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__id
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__id
 #: model:ir.model.fields,field_description:formio.field_formio_form__id
@@ -568,6 +579,11 @@ msgstr ""
 #: model:ir.model.fields,help:formio.field_formio_form__message_has_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+msgid "Insert a meaningful title here"
+msgstr "Voer hier een betekenisvolle titel in"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__invitation_mail_template_id
@@ -723,7 +739,7 @@ msgid "Number of unread messages"
 msgstr ""
 
 #. module: formio
-#: selection:formio.builder,state:0
+#: selection:formio.builder,state:0 selection:formio.form,group_state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 msgid "Obsolete"
 msgstr "Verouderd"
@@ -751,7 +767,7 @@ msgid "Parent Version"
 msgstr "Vorige Versie"
 
 #. module: formio
-#: selection:formio.form,state:0
+#: selection:formio.form,group_state:0 selection:formio.form,state:0
 msgid "Pending"
 msgstr "In afwachting"
 
@@ -818,6 +834,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
 msgid "Schema"
 msgstr ""
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+msgid "Select latest version only to try new form components."
+msgstr "Selecteer alleen de nieuwste versie om nieuwe form componeneten te proberen."
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
@@ -892,7 +913,6 @@ msgstr "Ingediend door"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__title
-#: model:ir.model.fields,help:formio.field_formio_form__title
 msgid "The form title in the current language"
 msgstr ""
 
@@ -988,6 +1008,11 @@ msgid "Url"
 msgstr ""
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder
+msgid "Use ASCII letters, digits (0-9), - or _"
+msgstr "Gebruik ASCII letters, cijfers, - of _"
+
+#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
 msgid "User"
 msgstr "Gebruiker"
@@ -1006,11 +1031,6 @@ msgstr "Gebruiker: Alle formulieren"
 #: model:res.groups,name:formio.group_formio_user
 msgid "User: Assigned forms"
 msgstr "Gebruiker: Toegewezen formulieren"
-
-#. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__display_name
-msgid "Display Name"
-msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__version
@@ -1087,10 +1107,10 @@ msgid "js"
 msgstr ""
 
 #. module: formio
-#: code:addons/formio/models/formio_builder.py:142
+#: code:addons/formio/models/formio_builder.py:145
 #, python-format
-msgid "{name} [state: {state}, version: {version}]"
-msgstr "{name} [status: {state}, versie: {version}]"
+msgid "{title} [state: {state}, version: {version}]"
+msgstr "{title} [status: {state}, versie: {version}]"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.formio_form

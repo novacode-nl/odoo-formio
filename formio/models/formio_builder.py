@@ -34,7 +34,7 @@ class Builder(models.Model):
         help="""Identifies this specific form. This name can be used in APIs. \
         Use only ASCII letters, digits, "-" or "_".""")
     title = fields.Char(
-        "Title", required=True, default="Untitled Form",
+        "Title", required=True,
         help="The form title in the current language", track_visibility='onchange')
     description = fields.Text("Description")
     formio_version_id = fields.Many2one(
@@ -142,8 +142,8 @@ class Builder(models.Model):
                 r.display_name = r.title
             else:
                 state = get_field_selection_label(r, 'state')
-                r.display_name = _("{name} [state: {state}, version: {version}]").format(
-                    name=r.name, state=state, version=r.version)
+                r.display_name = _("{title} [state: {state}, version: {version}]").format(
+                    title=r.title, state=state, version=r.version)
 
     def _compute_edit_url(self):
         # sudo() is needed for regular users.

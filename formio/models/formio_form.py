@@ -23,6 +23,7 @@ class Form(models.Model):
     _inherit = ['mail.thread']
 
     _rec_name = 'name'
+    _order = 'id DESC'
 
     builder_id = fields.Many2one(
         'formio.builder', string='Form builder', ondelete='restrict',
@@ -32,11 +33,14 @@ class Form(models.Model):
     uuid = fields.Char(
         default=lambda self: self._default_uuid(), required=True, readonly=True, copy=False,
         string='UUID')
-    title = fields.Char(related='builder_id.title', readonly=True)
+    title = fields.Char()
     state = fields.Selection(
         [(STATE_PENDING, 'Pending'), (STATE_DRAFT, 'Draft'),
          (STATE_COMPLETE, 'Completed'), (STATE_CANCEL, 'Canceled')],
         string="State", default=STATE_PENDING, track_visibility='onchange', index=True)
+    group_state = fields.Selection(
+        [('A', 'Pending'), ('B', 'Draft'), ('C', 'Current'), ('D', 'Obsolete')],
+        compute='_compute_group_state', store=True)
     url = fields.Char(compute='_compute_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model')
@@ -62,6 +66,19 @@ class Form(models.Model):
         help='Datetime when the form was last submitted.')
     portal = fields.Boolean("Portal usage", related='builder_id.portal', help="Form is accessible by assigned portal user")
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
+
+    @api.multi
+    @api.depends('state')
+    def _compute_group_state(self):
+        for r in self:
+            if r.state == STATE_PENDING:
+                r.group_state = 'A'
+            if r.state == STATE_DRAFT:
+                r.group_state = 'B'
+            if r.state == STATE_COMPLETE:
+                r.group_state = 'C'
+            if r.state == STATE_CANCEL:
+                r.group_state = 'D'
 
     def _compute_access(self):
         for r in self:
@@ -129,6 +146,7 @@ class Form(models.Model):
     def _onchange_builder(self):
         if not self.env.user.has_group('formio.group_formio_user_all_forms'):
             self.user_id = self.env.user.id
+        self.title = self.builder_id.title
 
     @api.onchange('portal')
     def _onchange_portal(self):
