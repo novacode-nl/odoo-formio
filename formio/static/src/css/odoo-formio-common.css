@@ -1,18 +1,16 @@
 /* TODO: media queries for mobile (width) */
 
+body {
+    height: auto; /* override Odoo web_common */
+}
+
 #wrapwrap {
     background-color: #fff;
     display: block;
-    min-height: none; /* get rid off window vertical scrollbar */
-}
-
-main {
-    margin: 0 auto;
-    width: 75%;
 }
 
 header {
-    margin-top: 40px;
+    margin-top: 45px;
 }
 
 #oe_main_menu_navbar a.dropdown i.fa-th-large {
@@ -40,21 +38,90 @@ header {
     margin-bottom: 8px;
 }
 
-/* Form.io rendering area */
+/************************
+ Form.io rendering area
+************************/
+
+/* Builder */
 
 #formio_builder_container {
-    margin-left: 20px;
-    width: 90%;
-    height: 75%;
-    position: absolute;
-    top: 70px;
-    left: 0;
+    height: auto;
 }
 
+@media screen and (max-height: 1440px) {
+    #formio_builder_container {
+        height: 1200px;
+    }
+}
+
+@media screen and (max-height: 1280px) {
+    #formio_builder_container {
+        height: 1000px;
+    }
+}
+
+@media screen and (max-height: 1080px) {
+    #formio_builder_container {
+        height: 800px;
+    }
+}
+
+@media screen and (height: 1024px) {
+    #formio_builder_container {
+        height: 800px;
+    }
+}
+
+@media screen and (max-height: 900px) {
+    #formio_builder_container {
+        height: 700px;
+    }
+}
+
+@media screen and (max-height: 800px) {
+    #formio_builder_container {
+        height: 500px;
+    }
+}
+
+/* Form */
+
 #formio_form_container {
-    width: 85%;
-    height: 75%;
-    position: absolute;
-    top: 60px;
-    left: 10%;
+    height: auto;
+}
+
+@media screen and (max-height: 1440px) {
+    #formio_form_container {
+        height: 1200px;
+    }
+}
+
+@media screen and (max-height: 1280px) {
+    #formio_form_container {
+        height: 900px;
+    }
+}
+
+@media screen and (max-height: 1080px) {
+    #formio_form_container {
+        height: 800px;
+    }
+}
+
+@media screen and (max-height: 1024px) {
+    #formio_form_container {
+        height: 800px;
+    }
+}
+
+@media screen and (max-height: 900px) {
+    #formio_form_container {
+        height: 650px;
+    }
+}
+
+@media screen and (max-height: 800px) {
+    #formio_form_container {
+        height: 500px;
+    }
 }

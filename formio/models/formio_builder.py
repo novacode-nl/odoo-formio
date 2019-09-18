@@ -172,6 +172,11 @@ class Builder(models.Model):
         }
 
     @api.multi
+    def action_draft(self):
+        self.ensure_one()
+        self.write({'state': STATE_DRAFT})
+
+    @api.multi
     def action_current(self):
         self.ensure_one()
         self.write({'state': STATE_CURRENT})

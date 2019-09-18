@@ -18,13 +18,6 @@ See LICENSE file for full licensing details. -->
                 <script type="text/javascript" src="/formio/static/src/js/odoo-formio-form.js"/>
             </head>
             <body>
-                <div class="row" style="width: 95%">
-                    <div class="col-md-6 mt16">
-                        <h3 class="formio_form_name">
-                            <t t-esc="form.title"/>
-                        </h3>
-                    </div>
-                </div>
                 <div class="row odoo_formio_actions" style="width: 95%">
                     <div class="col-md-6">
                         <t t-foreach="languages" t-as="lang">
@@ -58,7 +51,7 @@ See LICENSE file for full licensing details. -->
             <t t-call="formio.formio_header"/>
 
             <div id="wrapwrap">
-                <main>
+                <main class="container-fluid">
                     <div class="container mt16 mb16">
                         <div class="row actions">
                             <div class="col-md-12">
@@ -91,7 +84,12 @@ See LICENSE file for full licensing details. -->
                             </div>
                         </div>
                         <div class="row" id="form_info">
-                            <div class="col-md-12 mt8">
+                            <div class="col-md-6 mt8">
+                                <h3 class="formio_form_name">
+                                    <t t-esc="form.title"/>
+                                </h3>
+                            </div>
+                            <div class="col-md-6 mt8">
                                 <small class="float-right pull-right">
                                     <span class="text-muted">State: <span class="text-muted" t-field="form.state"/></span>
                                     <span class="text-muted"> | ID: <span t-field="form.id"/></span>
@@ -99,7 +97,7 @@ See LICENSE file for full licensing details. -->
                                 </small>
                             </div>
                         </div>
-                        <div id="formio_form_container" class="embed-responsive embed-responsive-16by9">
+                        <div id="formio_form_container" class="embed-responsive embed-responsive-21by9">
                             <iframe class="embed-responsive-item" t-attf-src="/formio/form/embed/#{form.uuid}" frameborder="0"/>
                         </div>
                     </div>

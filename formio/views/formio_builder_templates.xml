@@ -42,7 +42,7 @@ See LICENSE file for full licensing details. -->
             <t t-call="formio.formio_header"/>
             
             <div id="wrapwrap">
-                <main>
+                <main class="container-fluid">
                     <div class="container mt16 mb16">
                         <div class="row">
                             <div class="col-md-6">
