@@ -206,10 +206,8 @@ class FormioController(http.Controller):
                 options['renderMode'] = 'html'
                 options['viewAsHtml'] = True # backwards compatible (version < 4.x)?
 
-        if 'lang' in context:
-            lang = Lang._lang_get(context['lang'])
-        else:
-            lang = Lang._lang_get(request.env.user.lang)
+        lang = Lang._lang_get(request.env.user.lang)
+        options['language'] = lang.iso_code
 
         # Formio GUI/API translations
         if form.builder_id.formio_version_id.translations:
@@ -227,8 +225,6 @@ class FormioController(http.Controller):
                 i18n[trans.lang_id.iso_code] = {trans.source: trans.value}
             else:
                 i18n[trans.lang_id.iso_code][trans.source] = trans.value
-
-            options['language'] = lang.iso_code
             options['i18n'] = i18n
 
         return options
