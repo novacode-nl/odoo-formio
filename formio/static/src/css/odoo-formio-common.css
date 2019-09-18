@@ -9,9 +9,9 @@ body {
     display: block;
 }
 
-header {
-    margin-top: 45px;
-}
+/* header { */
+/*     margin-top: 45px; */
+/* } */
 
 #oe_main_menu_navbar a.dropdown i.fa-th-large {
     font-size: 14px;
