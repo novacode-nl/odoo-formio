@@ -47,7 +47,7 @@ See LICENSE file for full licensing details. -->
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_formio_builder" type="object" string="Form Builder"
+                        <button name="action_client_formio_builder" type="object" string="Form Builder"
                                 groups="formio.group_formio_admin"
                                 class="oe_stat_button" icon="fa-rocket"/>
                     </div>
@@ -140,6 +140,12 @@ See LICENSE file for full licensing details. -->
                 </group>
             </search>
         </field>
+    </record>
+
+    <record id="action_client_formio_builder" model="ir.actions.client">
+        <field name="name">Form.io Builder</field>
+        <field name="tag">formio_builder</field>
+        <field name="target">main</field>
     </record>
 
     <record id="action_formio_builder" model="ir.actions.act_window">

@@ -58,7 +58,8 @@ class Builder(models.Model):
         - Draft: In draft / design.
         - Current: Live and in use (publisehd).
         - Obsolete: Was current but obsolete (unpublished)""")
-    display_name = fields.Char("Display Name", compute='_compute_display_name', store=False)
+    display_state = fields.Char("Display State", compute='_compute_display_fields', store=False)
+    display_name = fields.Char("Display Name", compute='_compute_display_fields', store=False)
     parent_id = fields.Many2one('formio.builder', string='Parent Version', readonly=True)
     version = fields.Integer("Version", required=True, readonly=True, default=1)
     version_comment = fields.Text("Version Comment")
@@ -136,15 +137,15 @@ class Builder(models.Model):
                 del schema['display']
                 self.schema = json.dumps(schema)
 
-    @api.depends('title', 'name', 'version')
-    def _compute_display_name(self):
+    @api.depends('title', 'name', 'version', 'state')
+    def _compute_display_fields(self):
         for r in self:
+            r.display_state = get_field_selection_label(r, 'state')
             if self._context.get('display_name_title'):
                 r.display_name = r.title
             else:
-                state = get_field_selection_label(r, 'state')
-                r.display_name = _("{title} [state: {state}, version: {version}]").format(
-                    title=r.title, state=state, version=r.version)
+                r.display_name = _("{title} (State: {state}, Version: {version})").format(
+                    title=r.title, state=r.display_state, version=r.version)
 
     def _compute_edit_url(self):
         # sudo() is needed for regular users.
@@ -169,6 +170,14 @@ class Builder(models.Model):
             'type': 'ir.actions.act_url',
             'url': self.edit_url,
             'target': 'self',
+        }
+
+    @api.multi
+    def action_client_formio_builder(self):
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'formio_builder',
+            'target': 'main',
         }
 
     @api.multi

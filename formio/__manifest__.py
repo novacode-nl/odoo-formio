@@ -10,6 +10,9 @@
     'license': 'LGPL-3',
     'category': 'Extra Tools',
     'depends': ['web', 'portal', 'mail'],
+    'qweb': [
+        'static/src/xml/formio.xml',
+    ],
     'data': [
         'data/formio_version_data.xml',
         'data/formio_version_asset_data.xml',

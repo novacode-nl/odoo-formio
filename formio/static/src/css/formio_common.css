@@ -1,0 +1,39 @@
+.formio_header {
+    margin: 0 auto;
+    padding: 20px 20px 20px 30px;
+}
+
+/* Builder */
+
+.formio_builder {
+    border-bottom: 1px solid #ccc;
+    height: 100%;
+}
+
+.formio_builder iframe {
+    padding-left: 30px;
+}
+
+@media screen and (max-height: 1080px) {
+    .formio_builder {
+        height: 860px;
+    }
+}
+
+@media screen and (max-height: 900px) {
+    .formio_builder {
+        height: 700px;
+    }
+}
+
+@media screen and (max-height: 800px) {
+    .formio_builder {
+        height: 600px;
+    }
+}
+
+@media screen and (max-height: 768px) {
+    .formio_builder {
+        height: 550px;
+    }
+}

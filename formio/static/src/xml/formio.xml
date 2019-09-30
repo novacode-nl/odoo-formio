@@ -1,0 +1,34 @@
+<template>
+    <t t-name="FormioBuilderWidget">
+        <div class="o_control_panel o_breadcrumb_full">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    Form Builders
+                </li>
+                <li class="breadcrumb-item active">
+                    <a t-attf-href="#{widget.builder.act_window_url}">
+                        <t t-esc="widget.builder.display_name"/>
+                    </a>
+                </li>
+            </ol>
+        </div>
+            <div class="formio_builder_container">
+            <div class="row formio_header">
+                <div class="col-md-6">
+                    <span>State: <span><t t-esc="widget.builder.display_state"/></span></span>
+                    <span style="margin-left: 12px;">
+                        <span>Version: <span><t t-esc="widget.builder.version"/></span></span>
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <span class="float-right pull-right">
+                        <a t-attf-href="#{widget.builder.act_window_url}"><span class="fa fa-cog"/> Form Builder</a>
+                    </span>
+                </div>
+            </div>
+            <div class="formio_builder embed-responsive embed-responsive-21by9">
+                <iframe t-attf-src="/formio/builder/embed/#{widget.builder.id}" class="embed-responsive-item"/>
+            </div>
+        </div>
+    </t>
+</template>

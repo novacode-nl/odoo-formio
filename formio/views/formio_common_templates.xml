@@ -11,7 +11,7 @@ See LICENSE file for full licensing details. -->
         <t t-call-assets="web.assets_common" t-css="false"/>
         <t t-call-assets="web.assets_frontend" t-css="false"/>
 
-        <link rel="stylesheet" href="/formio/static/src/css/odoo-formio-common.css"/>
+        <link rel="stylesheet" href="/formio/static/src/css/formio_common.css"/>
     </template>
 
     <template id="formio_menu_nav" name="Form.io main menu/nav">
