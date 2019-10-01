@@ -12,7 +12,7 @@
                 </li>
             </ol>
         </div>
-            <div class="formio_builder_container">
+        <div t-attf-class="formio_builder_container {{ widget.builder.state }}">
             <div class="row formio_header">
                 <div class="col-md-6">
                     <span class="state">

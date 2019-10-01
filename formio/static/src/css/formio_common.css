@@ -10,6 +10,24 @@
     height: 100%;
 }
 
+/* Start states */
+.formio_builder_container.OBSOLETE .formio_header {
+    background-color: #ccc;
+}
+
+.formio_builder_container.OBSOLETE .formio_builder {
+    opacity: 0.6;
+}
+
+.formio_builder_container.CURRENT .formio_header {
+    background-color: #73b743; /* #418410; */
+}
+
+.formio_builder_container.CURRENT .formio_header * {
+    color: #fff;
+}
+/* End states */
+
 .formio_builder iframe {
     padding-left: 30px;
 }
