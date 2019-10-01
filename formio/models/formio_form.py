@@ -22,12 +22,10 @@ class Form(models.Model):
     _description = 'Formio Form'
     _inherit = ['mail.thread']
 
-    _rec_name = 'name'
     _order = 'id DESC'
 
     builder_id = fields.Many2one(
         'formio.builder', string='Form builder', ondelete='restrict',
-        context={'display_name_title': True},
         domain=[('state', '=', BUILDER_STATE_CURRENT)])
     name = fields.Char(related='builder_id.name', readonly=True)
     uuid = fields.Char(

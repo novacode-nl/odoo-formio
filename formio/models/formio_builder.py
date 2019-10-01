@@ -26,7 +26,7 @@ class Builder(models.Model):
     _description = 'Formio Builder'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    _rec_name = 'display_name'
+    _rec_name = 'display_name_full'
     _order = 'name ASC, version DESC'
 
     name = fields.Char(
@@ -41,6 +41,7 @@ class Builder(models.Model):
         'formio.version', string='Form.io Version', required=True,
         track_visibility='onchange',
         help="""Loads the specific Form.io Javascript API/libraries version (sourcecode: \https://github.com/formio/formio.js)""")
+    formio_version_name = fields.Char(related='formio_version_id.name')
     formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='Form.io CSS')
     formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='Form.io Javascript')
     res_model_id = fields.Many2one(
@@ -59,7 +60,7 @@ class Builder(models.Model):
         - Current: Live and in use (publisehd).
         - Obsolete: Was current but obsolete (unpublished)""")
     display_state = fields.Char("Display State", compute='_compute_display_fields', store=False)
-    display_name = fields.Char("Display Name", compute='_compute_display_fields', store=False)
+    display_name_full = fields.Char("Display Name Full", compute='_compute_display_fields', store=False)
     parent_id = fields.Many2one('formio.builder', string='Parent Version', readonly=True)
     version = fields.Integer("Version", required=True, readonly=True, default=1)
     version_comment = fields.Text("Version Comment")
@@ -142,9 +143,9 @@ class Builder(models.Model):
         for r in self:
             r.display_state = get_field_selection_label(r, 'state')
             if self._context.get('display_name_title'):
-                r.display_name = r.title
+                r.display_name_full = r.title
             else:
-                r.display_name = _("{title} (State: {state}, Version: {version})").format(
+                r.display_name_full = _("{title} (state: {state} - version: {version})").format(
                     title=r.title, state=r.display_state, version=r.version)
 
     def _compute_edit_url(self):

@@ -54,25 +54,27 @@ See LICENSE file for full licensing details. -->
                     <label for="title" class="oe_edit_only"/>
                     <h1><field name="title" placeholder="Insert a meaningful title here"/></h1>
                     <group>
-                        <field name="name" placeholder="Use ASCII letters, digits (0-9), - or _" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                        <field name="formio_version_id" placeholder="Select latest version only to try new form components." attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                        <field name="user_id"/>
+                        <group>
+                            <field name="name" placeholder="Use ASCII letters, digits (0-9), - or _" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                            <field name="version" />
+                            <field name="parent_id" />
+                            <field name="version_comment" attrs="{'required': [('version', '>', 1)]}"/>
+                        </group>
+                        <group>
+                            <field name="user_id"/>
+                        </group>
                     </group>
                     <notebook>
                         <page string="Settings" name="settings">
                             <group>
-                                <group name="form_settings" string="Form">
+                                <group name="form_settings" string="Form.io">
+                                    <field name="formio_version_id" placeholder="Select latest version only to try new form components." attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="wizard" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="view_as_html" groups="formio.group_formio_admin"/>
                                 </group>
-                                <group name="other_settings" string="Other">
+                                <group name="integration_settings" string="Integration">
                                     <field name="portal" groups="formio.group_formio_admin"/>
                                     <field name="res_model_id" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                </group>
-                                <group string="Version">
-                                    <field name="version" />
-                                    <field name="version_comment" attrs="{'required': [('version', '>', 1)]}"/>
-                                    <field name="parent_id" />
                                 </group>
                                 <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
                             </group>

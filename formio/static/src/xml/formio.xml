@@ -7,7 +7,7 @@
                 </li>
                 <li class="breadcrumb-item active">
                     <a t-attf-href="#{widget.builder.act_window_url}">
-                        <t t-esc="widget.builder.display_name"/>
+                        <t t-esc="widget.builder.title"/>
                     </a>
                 </li>
             </ol>
@@ -15,9 +15,14 @@
             <div class="formio_builder_container">
             <div class="row formio_header">
                 <div class="col-md-6">
-                    <span>State: <span><t t-esc="widget.builder.display_state"/></span></span>
-                    <span style="margin-left: 12px;">
-                        <span>Version: <span><t t-esc="widget.builder.version"/></span></span>
+                    <span class="state">
+                        <span >State: </span><strong><t t-esc="widget.builder.display_state"/></strong>
+                    </span>
+                    <span class="version">
+                        <span style="margin-left: 12px;">Version: </span><strong><t t-esc="widget.builder.version"/></strong>
+                    </span>
+                    <span class="formio_version">
+                        <span style="margin-left: 12px;">Form.io version: </span><strong><t t-esc="widget.builder.formio_version_name"/></strong>
                     </span>
                 </div>
                 <div class="col-md-6">
