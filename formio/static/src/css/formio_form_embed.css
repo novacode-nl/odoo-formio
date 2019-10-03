@@ -1,0 +1,13 @@
+body {
+    width: 95%; !important;
+    margin: 0 auto;
+}
+
+.formio_header {
+    padding: 20px 0 20px; 0;
+}
+
+.formio_form_embed_container {
+    width: 90%;
+    margin: 0 auto;
+}

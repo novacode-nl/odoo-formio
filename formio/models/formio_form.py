@@ -9,6 +9,8 @@ import uuid
 from odoo import api, fields, models, _
 from odoo.exceptions import AccessError
 
+from ..utils import get_field_selection_label
+
 from .formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
 
 STATE_PENDING = 'PENDING'
@@ -36,11 +38,13 @@ class Form(models.Model):
         [(STATE_PENDING, 'Pending'), (STATE_DRAFT, 'Draft'),
          (STATE_COMPLETE, 'Completed'), (STATE_CANCEL, 'Canceled')],
         string="State", default=STATE_PENDING, track_visibility='onchange', index=True)
+    display_state = fields.Char("Display State", compute='_compute_display_fields', store=False)
     kanban_group_state = fields.Selection(
         [('A', 'Pending'), ('B', 'Draft'), ('C', 'Completed'), ('D', 'Canceled')],
         compute='_compute_kanban_group_state', store=True)
     url = fields.Char(compute='_compute_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
+    act_window_multi_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model')
     res_model_name = fields.Char(related='res_model_id.name', readonly=True, string='Resource Name')
     res_id = fields.Integer("Record ID", ondelete='restrict',
@@ -86,6 +90,11 @@ class Form(models.Model):
             else:
                 r.allow_unlink = False
 
+    @api.depends('state')
+    def _compute_display_fields(self):
+        for r in self:
+            r.display_state = get_field_selection_label(r, 'state')
+
     @api.multi
     def write(self, vals):
         if 'submission_data' in vals and self.state in [STATE_COMPLETE, STATE_CANCEL]:
@@ -93,6 +102,14 @@ class Form(models.Model):
             return False
         res = super(Form, self).write(vals)
         return res
+
+    @api.multi
+    def action_client_formio_form(self):
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'formio_form',
+            'target': 'main',
+        }
 
     @api.multi
     def action_draft(self):

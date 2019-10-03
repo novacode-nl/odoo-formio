@@ -34,7 +34,6 @@ class FormioController(http.Controller):
         builder = request.env['formio.builder'].browse(builder_id)
         values = {
             'builder': builder,
-            'menu_data': request.env['ir.ui.menu'].load_menus_root()
         }
         return request.render('formio.formio_builder', values)
 
@@ -130,7 +129,6 @@ class FormioController(http.Controller):
             'languages': [], # initialize, otherwise template/view crashes.
             'user': request.env.user,
             'form': form,
-            'menu_data': request.env['ir.ui.menu'].sudo().load_menus_root()
         }
         if len(languages) > 1:
             values['languages'] = languages

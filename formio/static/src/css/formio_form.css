@@ -1,0 +1,37 @@
+.formio_form_container .formio_header {
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.formio_form_iframe_container  {
+    border-bottom: 1px solid #ccc;
+    height: 100%;
+}
+
+.formio_form_container .formio_header .form_state .badge {
+    font-size: 1.05em;
+}
+
+@media screen and (max-height: 1080px) {
+    .formio_form_iframe_container {
+        height: 720px;
+    }
+}
+
+@media screen and (max-height: 900px) {
+    .formio_form_iframe_container {
+        height: 680px;
+    }
+}
+
+@media screen and (max-height: 800px) {
+    .formio_form_iframe_container {
+        height: 600px;
+    }
+}
+
+@media screen and (max-height: 768px) {
+    .formio_form_iframe_container {
+        height: 550px;
+    }
+}

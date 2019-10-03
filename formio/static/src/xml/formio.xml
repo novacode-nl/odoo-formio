@@ -15,24 +15,88 @@
         <div t-attf-class="formio_builder_container {{ widget.builder.state }}">
             <div class="row formio_header">
                 <div class="col-md-6">
-                    <span class="state">
-                        <span >State: </span><strong><t t-esc="widget.builder.display_state"/></strong>
-                    </span>
-                    <span class="version">
-                        <span style="margin-left: 12px;">Version: </span><strong><t t-esc="widget.builder.version"/></strong>
-                    </span>
-                    <span class="formio_version">
-                        <span style="margin-left: 12px;">Form.io version: </span><strong><t t-esc="widget.builder.formio_version_name"/></strong>
-                    </span>
+                    <h1>
+                        <t t-esc="widget.builder.title"/>
+                    </h1>
                 </div>
                 <div class="col-md-6">
-                    <span class="float-right pull-right">
-                        <a t-attf-href="#{widget.builder.act_window_url}"><span class="fa fa-cog"/> Form Builder</a>
-                    </span>
+                    <div class="formio_builder_dock float-right">
+                        <span class="builder_state">
+                            <t t-if="widget.builder.state == 'DRAFT'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-warning">State: <strong><t t-esc="widget.builder.display_state"/></strong></span>
+                            </t>
+                            <t t-elif="widget.builder.state == 'CURRENT'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-success">State: <strong><t t-esc="widget.builder.display_state"/></strong></span>
+                            </t>
+                            <t t-elif="widget.builder.state == 'OBSOLETE'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-dark">State: <strong><t t-esc="widget.builder.display_state"/></strong></span>
+                            </t>
+                            <t t-else="">
+                                <span t-attf-class="badge mb-1 badge-pill badge-light">State: <strong><t t-esc="widget.builder.display_state"/></strong></span>
+                            </t>
+                        </span>
+                        <span class="version">
+                            <!-- TODO: class .header-item to margin-left -->
+                            <span style="margin-left: 12px;">Version: </span><strong><t t-esc="widget.builder.version"/></strong>
+                        </span>
+                        <span class="formio_version">
+                            <span style="margin-left: 12px;">Form.io version: </span><strong><t t-esc="widget.builder.formio_version_name"/></strong>
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="formio_builder embed-responsive embed-responsive-21by9">
+            <div class="formio_builder_iframe_container embed-responsive embed-responsive-21by9">
                 <iframe t-attf-src="/formio/builder/embed/#{widget.builder.id}" class="embed-responsive-item"/>
+            </div>
+        </div>
+    </t>
+    <t t-name="FormioFormWidget">
+        <div class="o_control_panel o_breadcrumb_full">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Forms</li>
+                <li class="breadcrumb-item active">
+                    <a t-attf-href="#{widget.form.act_window_url}">
+                        <t t-esc="widget.form.title"/>
+                    </a>
+                </li>
+            </ol>
+        </div>
+        <div t-attf-class="formio_form_container {{ widget.form.state }}">
+            <div class="row formio_header">
+                <div class="col-md-6">
+                    <h1>
+                        <t t-esc="widget.form.title"/>
+                    </h1>
+                </div>
+                <div class="col-md-6">
+                    <div class="formio_form_dock float-right">
+                        <!-- TODO: class .header-item to margin-left -->
+                        <span class="form_state">
+                            <t t-if="widget.form.state == 'PENDING'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-alpha">State: <strong><t t-esc="widget.form.display_state"/></strong></span>
+                            </t>
+                            <t t-elif="widget.form.state == 'DRAFT'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-warning">State: <strong><t t-esc="widget.form.display_state"/></strong></span>
+                            </t>
+                            <t t-elif="widget.form.state == 'COMPLETE'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-success">State: <strong><t t-esc="widget.form.display_state"/></strong></span>
+                            </t>
+                            <t t-elif="widget.form.state == 'CANCEL'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-dark">State: <strong><t t-esc="widget.form.display_state"/></strong></span>
+                            </t>
+                            <t t-else="">
+                                <span t-attf-class="badge mb-1 badge-pill badge-light">State: <strong><t t-esc="widget.form.display_state"/></strong></span>
+                            </t>
+                        </span>
+                        <span class="form_id" style="margin-left: 12px;">
+                            <span>ID: <strong><t t-esc="widget.form.id"/></strong></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="formio_form_iframe_container embed-responsive embed-responsive-21by9">
+                <iframe t-attf-src="/formio/form/embed/#{widget.form.uuid}" class="embed-responsive-item"/>
             </div>
         </div>
     </t>

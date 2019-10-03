@@ -1,7 +1,7 @@
 // Copyright Nova Code (http://www.novacode.nl)
 // See LICENSE file for full licensing details.
 
-odoo.define('formio.Form', ['web.ajax'], function (require) {
+odoo.define('formio.formio_form_embed', ['web.ajax'], function (require) {
     "use strict";
 
     // TODO Get rid of callbacks and refactor in a classy way.
