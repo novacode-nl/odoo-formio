@@ -1,6 +1,13 @@
+.o_control_panel.o_breadcrumb_full {
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+}
+
 .formio_form_container {
     width: 88%;
     margin: 0 auto;
+    padding-top: 50px;
 }
 
 .formio_form_iframe_container {
