@@ -6,6 +6,7 @@ See LICENSE file for full licensing details. -->
     <template id="assets_backend_formio_form" name="formio_form assets" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
             <link rel="stylesheet" type="text/css" href="/formio/static/src/css/formio_form.css"/>
+            <script type="text/javascript" src="/formio/static/src/js/iframeResizer.min.js"></script>
             <script type="text/javascript" src="/formio/static/src/js/formio_form_widget.js"></script>
         </xpath>
     </template>
@@ -20,9 +21,10 @@ See LICENSE file for full licensing details. -->
                     <script type="text/javascript" t-att-src="js.url"></script>
                 </t>
                 <link rel="stylesheet" href="/formio/static/src/css/formio_form_embed.css"/>
-
+                
                 <!-- Odoo JS dependencies could cause clashes with Form.io JS -->
                 <t t-call-assets="web.assets_common" t-css="false"/>
+                <script type="text/javascript" src="/formio/static/src/js/iframeResizer.contentWindow.min.js"></script>
                 <script type="text/javascript" src="/formio/static/src/js/formio_form.js"/>
             </head>
             <body>

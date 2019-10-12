@@ -14,12 +14,7 @@
         </div>
         <div t-attf-class="formio_builder_container {{ widget.builder.state }}">
             <div class="row formio_header">
-                <div class="col-md-6">
-                    <h1>
-                        <t t-esc="widget.builder.title"/>
-                    </h1>
-                </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="formio_builder_dock float-right">
                         <span class="builder_state">
                             <t t-if="widget.builder.state == 'DRAFT'">
@@ -37,16 +32,25 @@
                         </span>
                         <span class="version">
                             <!-- TODO: class .header-item to margin-left -->
-                            <span style="margin-left: 12px;">Version: </span><strong><t t-esc="widget.builder.version"/></strong>
+                            <span style="margin-left: 15px;">Version: </span><strong><t t-esc="widget.builder.version"/></strong>
+                        </span>
+                        <span class="parent">
+                            <!-- TODO: class .header-item to margin-left -->
+                            <span style="margin-left: 15px;">Parent version: </span><strong><t t-esc="widget.builder.parent_version"/></strong>
                         </span>
                         <span class="formio_version">
-                            <span style="margin-left: 12px;">Form.io version: </span><strong><t t-esc="widget.builder.formio_version_name"/></strong>
+                            <span style="margin-left: 15px;">Form.io version: </span><strong><t t-esc="widget.builder.formio_version_name"/></strong>
                         </span>
                     </div>
                 </div>
             </div>
-            <div class="formio_builder_iframe_container embed-responsive embed-responsive-21by9">
-                <iframe t-attf-src="/formio/builder/embed/#{widget.builder.id}" class="embed-responsive-item"/>
+            <div class="formio_builder_iframe_container">
+                <div class="formio_title">
+                    <h1>
+                        <t t-esc="widget.builder.title"/>
+                    </h1>
+                </div>
+                <iframe t-attf-src="/formio/builder/embed/#{widget.builder.id}" id="formio_builder_embed"></iframe>
             </div>
         </div>
     </t>
@@ -63,14 +67,8 @@
         </div>
         <div t-attf-class="formio_form_container {{ widget.form.state }}">
             <div class="row formio_header">
-                <div class="col-md-6">
-                    <h1>
-                        <t t-esc="widget.form.title"/>
-                    </h1>
-                </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="formio_form_dock float-right">
-                        <!-- TODO: class .header-item to margin-left -->
                         <span class="form_state">
                             <t t-if="widget.form.state == 'PENDING'">
                                 <span t-attf-class="badge mb-1 badge-pill badge-alpha">State: <strong><t t-esc="widget.form.display_state"/></strong></span>
@@ -94,9 +92,16 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="formio_form_iframe_container embed-responsive embed-responsive-21by9">
-                <iframe t-attf-src="/formio/form/embed/#{widget.form.uuid}" class="embed-responsive-item"/>
+            <div class="formio_form_iframe_container">
+                <div class="formio_title">
+                    <h1>
+                        <t t-esc="widget.form.title"/>
+                    </h1>
+                </div>
+                <iframe t-attf-src="/formio/form/embed/#{widget.form.uuid}" id="formio_form_embed"/>
+                <script>
+                    iFrameResize({}, '#formio_form_embed')
+                </script>
             </div>
         </div>
     </t>
