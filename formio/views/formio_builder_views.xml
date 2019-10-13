@@ -56,9 +56,9 @@ See LICENSE file for full licensing details. -->
                     <group>
                         <group>
                             <field name="name" placeholder="Use ASCII letters, digits (0-9), - or _" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                            <field name="version" />
-                            <field name="parent_id" />
+                            <field name="version"/>
                             <field name="version_comment" attrs="{'required': [('version', '>', 1)]}"/>
+                            <field name="parent_id" string="Parent Version"/>
                         </group>
                         <group>
                             <field name="user_id"/>
@@ -76,7 +76,17 @@ See LICENSE file for full licensing details. -->
                                     <field name="portal" groups="formio.group_formio_admin"/>
                                     <field name="res_model_id" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
+                                <group name="submit_done" string="Redirect after Submission">
+                                    <field name="submit_done_url" string="URL" groups="formio.group_formio_admin" readonly="0"/>
+                                </group>
                                 <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
+                            </group>
+                        </page>
+                        <page string="Portal Settings" name="portal_settings" attrs="{'invisible': [('portal', '=', False)]}">
+                            <group>
+                                <group name="portal_submit_done" string="Redirect after Submission">
+                                    <field name="portal_submit_done_url" string="URL" groups="formio.group_formio_admin" readonly="0"/>
+                                </group>
                             </group>
                         </page>
                         <page string="Translations" name="translations" groups="formio.group_formio_admin">

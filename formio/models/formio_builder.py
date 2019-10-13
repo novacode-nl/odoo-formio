@@ -70,6 +70,8 @@ class Builder(models.Model):
     portal = fields.Boolean("Portal", track_visibility='onchange', help="Form is accessible by assigned portal user")
     view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
     wizard = fields.Boolean("Wizard", track_visibility='onchange')
+    submit_done_url = fields.Char()
+    portal_submit_done_url = fields.Char()
     translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations')
 
     def _states_selection(self):
@@ -165,7 +167,7 @@ class Builder(models.Model):
                 model=r._name,
                 action=action.id)
             r.act_window_url = url
-        
+
     @api.multi
     def action_formio_builder(self):
         return {

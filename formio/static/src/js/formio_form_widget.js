@@ -26,8 +26,9 @@ odoo.define('formio.formio_form', function (require) {
         },
 
         start: function() {
-            var self = this;
-            var form_id = self.params.context.active_id;
+            var self = this,
+                form_id = self.params.context.active_id,
+                base_url = window.location.protocol + '//' + window.location.host;
 
             var form = this._rpc({
                 model: 'formio.form',
@@ -36,9 +37,22 @@ odoo.define('formio.formio_form', function (require) {
             }).then(function (res) {
                 self.form = res.length && res[0];
                 self.$el.html(QWeb.render("FormioFormWidget", {'widget': self}));
+
+                window.addEventListener('message', function(event) {
+                    if (event.origin == base_url && event.data == 'formioSubmitDone') {
+                        if (self.form.hasOwnProperty('submit_done_url') && self.form.submit_done_url.length > 0) {
+                            window.location = self.form.submit_done_url;
+                        }
+                        else {
+                            // Probably by saveAsDraft
+                            window.location.reload();
+                        }
+                    }
+                }, false);
+                
             });
             return $.when(form, this._super.apply(this, arguments));
-        }
+        },
     });
 
     core.action_registry.add('formio_form', FormioForm);

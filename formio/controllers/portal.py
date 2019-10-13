@@ -102,7 +102,7 @@ class CustomerPortal(CustomerPortal):
             'user_id': request.env.user.id
         }
         form = request.env['formio.form'].create(vals)
-        url = '/my/formio/edit/{uuid}'.format(uuid=form.uuid)
+        url = '/my/formio/form/{uuid}'.format(uuid=form.uuid)
         return request.redirect(url)
 
     @http.route(['/my/formio/delete/<string:uuid>'], type='http', auth="user", method=['GET'], website=True)

@@ -54,14 +54,7 @@ odoo.define('formio.formio_form_embed', ['web.ajax'], function (require) {
                             });
                         });
                         form.on('submitDone', function(submission) {
-                            if ('submitDone' in options && 'url' in options['submitDone'] &&
-                                'submit' in submission.data && submission.data.submit == true) {
-                                setTimeout(function() {window.location = options['submitDone']['url'];}, 1000);
-                            }
-                            else {
-                                // Probably by saveAsDraft
-                                setTimeout(function() {window.location.reload();}, 1000);
-                            }
+                            window.parent.postMessage('formioSubmitDone', base_url);
                         });
                         // Set the Submission (data)
                         // https://github.com/formio/formio.js/wiki/Form-Renderer#setting-the-submission
