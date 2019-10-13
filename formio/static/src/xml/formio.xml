@@ -55,7 +55,7 @@
         </div>
     </t>
     <t t-name="FormioFormWidget">
-        <div class="o_control_panel o_breadcrumb_full">
+        <div class="formio o_control_panel o_breadcrumb_full">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Forms</li>
                 <li class="breadcrumb-item active">
