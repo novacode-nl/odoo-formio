@@ -1,7 +1,7 @@
 // Copyright Nova Code (http://www.novacode.nl)
 // See LICENSE file for full licensing details.
 
-odoo.define('formio.Builder', ['web.ajax'], function (require) {
+odoo.define('formio.formio_builder_embed',  ['web.ajax'], function (require) {
     "use strict";
 
     var ajax = require('web.ajax');

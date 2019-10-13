@@ -128,7 +128,7 @@ See LICENSE file for full licensing details. -->
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_formio" type="object" string="Form"
+                        <button name="action_client_formio_form" type="object" string="Form"
                                 class="oe_stat_button" icon="fa-rocket" aria-label="Form"/>
                         <button name="action_open_res_act_window" type="object"
                                 attrs="{'invisible': [('res_info', '=', False)]}"
@@ -211,6 +211,12 @@ See LICENSE file for full licensing details. -->
     </record>
     
     <!-- actions -->
+    <record id="action_client_formio_form" model="ir.actions.client">
+        <field name="name">Form.io Form</field>
+        <field name="tag">formio_form</field>
+        <field name="target">main</field>
+    </record>
+
     <record id="action_formio_form" model="ir.actions.act_window">
         <field name="name">Forms</field>
         <field name="res_model">formio.form</field>
