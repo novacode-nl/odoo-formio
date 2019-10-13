@@ -1,7 +1,7 @@
 .formio.o_control_panel.o_breadcrumb_full {
     position: fixed;
     width: 100%;
-    z-index: 9999;
+    /* z-index: 9999; */
 }
 
 .formio_form_container {
