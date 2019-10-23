@@ -27,8 +27,8 @@ class Form(models.Model):
     _order = 'id DESC'
 
     builder_id = fields.Many2one(
-        'formio.builder', string='Form builder', ondelete='restrict',
-        domain=[('state', '=', BUILDER_STATE_CURRENT)])
+        'formio.builder', string='Form builder', required=True,
+        ondelete='restrict', domain=[('state', '=', BUILDER_STATE_CURRENT)])
     name = fields.Char(related='builder_id.name', readonly=True)
     uuid = fields.Char(
         default=lambda self: self._default_uuid(), required=True, readonly=True, copy=False,
