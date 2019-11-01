@@ -45,8 +45,11 @@ class Builder(models.Model):
     formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='Form.io CSS')
     formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='Form.io Javascript')
     res_model_id = fields.Many2one(
-        "ir.model",
-        "Resource Model",
+        "ir.model", compute='_compute_res_model_id', store=True,
+        string="Model", help="Model as resource this form represents or acts on")
+    formio_res_model_id = fields.Many2one(
+        "formio.res.model",
+        string="Resource Model",
         ondelete='restrict', track_visibility='onchange',
         help="Model as resource this form represents or acts on")
     schema = fields.Text()
@@ -140,6 +143,13 @@ class Builder(models.Model):
                 schema = self._decode_schema(self.schema)
                 del schema['display']
                 self.schema = json.dumps(schema)
+
+    @api.depends('formio_res_model_id')
+    def _compute_res_model_id(self):
+        if self.formio_res_model_id:
+            self.res_model_id = self.formio_res_model_id.ir_model_id.id
+        else:
+            self.res_model_id = False
 
     @api.depends('title', 'name', 'version', 'state')
     def _compute_display_fields(self):

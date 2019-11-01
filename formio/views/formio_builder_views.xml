@@ -74,7 +74,10 @@ See LICENSE file for full licensing details. -->
                                 </group>
                                 <group name="integration_settings" string="Integration">
                                     <field name="portal" groups="formio.group_formio_admin"/>
-                                    <field name="res_model_id" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="formio_res_model_id" groups="formio.group_formio_admin"
+                                           attrs="{'readonly': [('state', '!=', 'DRAFT')]}"
+                                           edit="false" create="false" quick_create="false"
+                                           options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
                                 </group>
                                 <group name="submit_done" string="Redirect after Submission">
                                     <field name="submit_done_url" string="URL" groups="formio.group_formio_admin" readonly="0"/>
