@@ -17,7 +17,7 @@ See LICENSE file for full licensing details. -->
                 <field name="user_id"/>
                 <field name="write_date"/>
                 <field name="portal"/>
-                <field name="res_model_id"/>
+                <field name="formio_res_model_id"/>
                 <field name="forms"/>
             </tree>
         </field>
