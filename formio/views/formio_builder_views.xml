@@ -23,7 +23,7 @@ See LICENSE file for full licensing details. -->
         </field>
     </record>
 
-    <record id="view_formio_builder" model="ir.ui.view">
+    <record id="view_formio_builder_form" model="ir.ui.view">
         <field name="name">formio.builder.form</field>
         <field name="model">formio.builder</field>
         <field name="arch" type="xml">
@@ -85,6 +85,7 @@ See LICENSE file for full licensing details. -->
                                 <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
                             </group>
                         </page>
+                        <page string="Resource Settings" name="res_model_settings" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
                         <page string="Portal Settings" name="portal_settings" attrs="{'invisible': [('portal', '=', False)]}">
                             <group>
                                 <group name="portal_submit_done" string="Redirect after Submission">
