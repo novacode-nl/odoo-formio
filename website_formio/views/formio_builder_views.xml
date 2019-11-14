@@ -3,10 +3,10 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
-    <record id="view_formio_builder_website" model="ir.ui.view">
+    <record id="view_formio_builder_form_website" model="ir.ui.view">
         <field name="name">formio.builder.form.website</field>
         <field name="model">formio.builder</field>
-        <field name="inherit_id" ref="formio.view_formio_builder"/>
+        <field name="inherit_id" ref="formio.view_formio_builder_form"/>
         <field name="arch" type="xml">
             <!-- submit_done -->
             <field name="submit_done_url" position="before">
