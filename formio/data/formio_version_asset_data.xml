@@ -75,7 +75,7 @@ See LICENSE file for full licensing details. -->
             <field name="version_id" ref="formio.version_4_7_8"/>
             <field name="sequence">1</field>
             <field name="type">css</field>
-            <field name="attachment_id" ref="formio.css_bootstrap_3_3_7"/>
+            <field name="attachment_id" ref="formio.css_bootstrap_4_1_3"/>
         </record>
         <record id="asset_4_7_8_css" model="formio.version.asset">
             <field name="version_id" ref="formio.version_4_7_8"/>
