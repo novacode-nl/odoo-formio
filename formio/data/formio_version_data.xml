@@ -5,7 +5,7 @@ See LICENSE file for full licensing details. -->
 <odoo>
     <data>
         <record id="version_latest" model="formio.version">
-            <field name="name">latest</field>
+            <field name="name">latest (experimental)</field>
             <field name="description">This is experimental and not for production purposes!
 It loads the latest (upstream) release of the Form.io client libraries (JS, CSS).
 Please use wise, to experiment with new features (Form Components).
