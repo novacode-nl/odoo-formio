@@ -9,15 +9,15 @@ See LICENSE file for full licensing details. -->
             <field name="type">url</field>
             <field name="res_model">formio.version.asset</field>
             <field name="public" eval="True"/>
-            <field name="url">https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css</field>
+            <field name="url">/formio/static/lib/bootstrap/3.3.7/bootstrap.min.css</field>
         </record>
 
         <record id="css_bootstrap_4_1_3" model="ir.attachment">
-            <field name="name">https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css</field>
+            <field name="name">bootstrap 4.1.3 bootstrap.min.css</field>
             <field name="type">url</field>
             <field name="res_model">formio.version.asset</field>
             <field name="public" eval="True"/>
-            <field name="url">https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css</field>
+            <field name="url">/formio/static/lib/bootstrap/4.1.3/bootstrap.min.css</field>
         </record>
 
         <!-- latest (version) -->
@@ -57,18 +57,18 @@ See LICENSE file for full licensing details. -->
 
         <!-- 4.7.8 -->
         <record id="css_formio_4_7_8" model="ir.attachment">
-            <field name="name">https://unpkg.com/formiojs@4.7.8/dist/formio.full.min.css</field>
+            <field name="name">formio 4.7.8 formio.full.min.css</field>
             <field name="type">url</field>
             <field name="res_model">formio.version.asset</field>
             <field name="public" eval="True"/>
-            <field name="url">https://unpkg.com/formiojs@4.7.8/dist/formio.full.min.css</field>
+            <field name="url">/formio/static/lib/formiojs/4.7.8/formio.full.min.css</field>
         </record>
         <record id="js_formio_4_7_8" model="ir.attachment">
-            <field name="name">https://unpkg.com/formiojs@4.7.8/dist/formio.full.min.js</field>
+            <field name="name">formio 4.7.8 formio.full.min.js</field>
             <field name="type">url</field>
             <field name="res_model">formio.version.asset</field>
             <field name="public" eval="True"/>
-            <field name="url">https://unpkg.com/formiojs@4.7.8/dist/formio.full.min.js</field>
+            <field name="url">/formio/static/lib/formiojs/4.7.8/formio.full.min.js</field>
         </record>
 
         <record id="asset_4_7_8_bootstrap_css" model="formio.version.asset">
