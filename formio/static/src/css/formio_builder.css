@@ -9,10 +9,14 @@
     background:url('/web/static/lib/select2/select2-spinner.gif') center center no-repeat;
 }
 
-.formio_builder_iframe_container .formio_title h1 {
+.formio_builder_iframe_container .row {
+    margin: 0;
+}
+
+.formio_builder_iframe_container .formio_title, .formio_builder_iframe_container .formio_actions {
     background-color: #fff;
     margin-bottom: 0;
-    padding: 20px;
+    padding: 20px 20px 0 20px;
 }
 
 .formio_builder_iframe_container iframe{

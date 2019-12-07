@@ -45,12 +45,24 @@
                 </div>
             </div>
             <div class="formio_builder_iframe_container">
-                <div class="formio_title">
+                <div class="row">
+                <div class="col-sm-8 col-md-8 formio_title">
                     <h1>
                         <t t-esc="widget.builder.title"/>
                     </h1>
                 </div>
-                <iframe t-attf-src="/formio/builder/embed/#{widget.builder.id}" id="formio_builder_embed"></iframe>
+                <div class="col-sm-4 col-md-4 formio_actions">
+                    <button id="fullscreen_formio" class="pull-right">Fullscreen (Exit with ESC)</button>
+                </div>
+                </div>
+                <iframe t-attf-src="/formio/builder/embed/#{widget.builder.id}" id="formio_builder_embed" allowfullscreen="true"></iframe>
+                <script>
+                    var fullscreen = document.getElementById('fullscreen_formio');
+                    var iframe = document.getElementById('formio_builder_embed');
+                    fullscreen.addEventListener('click', (function () {
+                        iframe.requestFullscreen();
+                    }));
+                </script>
             </div>
         </div>
     </t>
