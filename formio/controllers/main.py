@@ -259,10 +259,11 @@ class FormioController(http.Controller):
             'submission_date': fields.Datetime.now(),
         }
 
-        if not post['data'].get('saveDraft'):
-            vals['state'] = FORM_STATE_COMPLETE
-        else:
+        if post['data'].get('saveDraft') and not post['data'].get('submit'):
             vals['state'] = FORM_STATE_DRAFT
+        else:
+            vals['state'] = FORM_STATE_COMPLETE
+
         form.write(vals)
 
     @http.route('/formio/form/data/<string:uuid>', type='http', auth='user', website=True)
