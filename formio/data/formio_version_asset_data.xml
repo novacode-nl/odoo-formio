@@ -22,18 +22,18 @@ See LICENSE file for full licensing details. -->
 
         <!-- latest (version) -->
         <record id="css_formio_latest" model="ir.attachment">
-            <field name="name">https://unpkg.com/formiojs@latest/dist/formio.full.min.css</field>
+            <field name="name">https://unpkg.com/formiojs@latest/dist/formio.full.css</field>
             <field name="type">url</field>
             <field name="res_model">formio.version.asset</field>
             <field name="public" eval="True"/>
-            <field name="url">https://unpkg.com/formiojs@latest/dist/formio.full.min.css</field>
+            <field name="url">https://unpkg.com/formiojs@latest/dist/formio.full.css</field>
         </record>
         <record id="js_formio_latest" model="ir.attachment">
-            <field name="name">https://unpkg.com/formiojs@latest/dist/formio.full.min.js</field>
+            <field name="name">https://unpkg.com/formiojs@latest/dist/formio.full.js</field>
             <field name="type">url</field>
             <field name="res_model">formio.version.asset</field>
             <field name="public" eval="True"/>
-            <field name="url">https://unpkg.com/formiojs@latest/dist/formio.full.min.js</field>
+            <field name="url">https://unpkg.com/formiojs@latest/dist/formio.full.js</field>
         </record>
         
         <record id="asset_latest_bootstrap_css" model="formio.version.asset">
