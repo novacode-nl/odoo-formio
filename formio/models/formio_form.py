@@ -1,6 +1,7 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
+import ast
 import json
 import re
 import requests
@@ -97,13 +98,20 @@ class Form(models.Model):
         for r in self:
             r.display_state = get_field_selection_label(r, 'state')
 
-    @api.multi
-    def write(self, vals):
-        if 'submission_data' in vals and self.state in [STATE_COMPLETE, STATE_CANCEL]:
-            # Throw and catch exception (FormioFormException), e.g. to redirect in controller.
-            return False
-        res = super(Form, self).write(vals)
-        return res
+    def _decode_data(self, data):
+        """ Convert data (str) to dictionary
+
+        json.loads(data) refuses identifies with single quotes.Use
+        ast.literal_eval() instead.
+
+        :param str data: submission_data string
+        :return str data: submission_data as dictionary
+        """
+        try:
+            data = json.loads(data)
+        except:
+            data = ast.literal_eval(data)
+        return data
 
     @api.multi
     def action_client_formio_form(self):
@@ -116,7 +124,13 @@ class Form(models.Model):
     @api.multi
     def action_draft(self):
         self.ensure_one()
-        self.write({'state': STATE_DRAFT})
+        vals = {'state': STATE_DRAFT}
+        submission_data = self._decode_data(self.submission_data)
+        if 'submit' in submission_data:
+            del submission_data['submit']
+            vals['submission_data'] = json.dumps(submission_data)
+
+        self.write(vals)
 
     @api.multi
     def action_complete(self):

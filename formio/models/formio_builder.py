@@ -124,9 +124,9 @@ class Builder(models.Model):
         :return str schema: schema as dictionary
         """
         try:
-            schema = json.loads(self.schema)
+            schema = json.loads(schema)
         except:
-            schema = ast.literal_eval(self.schema)
+            schema = ast.literal_eval(schema)
         return schema
 
     @api.onchange('wizard')
