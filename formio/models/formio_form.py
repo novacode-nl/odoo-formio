@@ -48,6 +48,7 @@ class Form(models.Model):
     act_window_multi_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model')
     res_model_name = fields.Char(related='res_model_id.name', readonly=True, string='Resource Name')
+    res_model = fields.Char(related='res_model_id.model', readonly=True, string='Resource Model')
     res_id = fields.Integer("Record ID", ondelete='restrict',
         help="Database ID of the record in res_model to which this applies")
     res_act_window_url = fields.Char(compute='_compute_res_fields', readonly=True)

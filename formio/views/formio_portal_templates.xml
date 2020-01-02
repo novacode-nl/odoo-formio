@@ -60,6 +60,7 @@ See LICENSE file for full licensing details. -->
             <t t-if="forms" t-call="portal.portal_table">
                 <thead>
                     <th>Title</th>
+                    <th>Created on</th>
                     <th>Submission user</th>
                     <th>Submission date</th>
                     <th>State</th>
@@ -69,6 +70,9 @@ See LICENSE file for full licensing details. -->
                     <tr t-foreach="forms" t-as="form">
                         <td>
                             <span t-field="form.title"/> <small class="text-muted">#<span t-field="form.id"/></small>
+                        </td>
+                        <td>
+                            <span t-field="form.create_date"/>
                         </td>
                         <td>
                             <span t-field="form.submission_user_id"/>
@@ -81,26 +85,26 @@ See LICENSE file for full licensing details. -->
                         </td>
                         <td>
                             <a t-if="form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-primary"
-                               t-attf-href="/my/formio/form/{{ form.uuid }}" style="margin-right: 8px">
+                               t-attf-href="/my/formio/form/{{ form.uuid }}?{{ keep_query() }}" style="margin-right: 8px">
                                 <span aria-label="Edit form" title="Edit form">Edit Form</span>
                             </a>
 
                             <a t-if="form.state == 'COMPLETE'" role="button" class="btn btn-sm btn-secondary"
-                               t-attf-href="/my/formio/form/{{ form.uuid }}">
+                               t-attf-href="/my/formio/form/{{ form.uuid }}?{{ keep_query() }}">
                                 <span aria-label="View form" title="View form">View Form</span>
                             </a>
                             <a t-elif="form.state == 'CANCEL'" role="button" class="btn btn-sm btn-light"
-                               t-attf-href="/my/formio/form/{{ form.uuid }}">
+                               t-attf-href="/my/formio/form/{{ form.uuid }}?{{ keep_query() }}">
                                 <span aria-label="View form" title="View form">View Form</span>
                             </a>
 
                             <a t-if="form.allow_unlink" role="button" class="btn btn-sm btn-danger"
-                               t-attf-href="/my/formio/delete/{{ form.uuid }}"
+                               t-attf-href="/my/formio/delete/{{ form.uuid }}?{{ keep_query() }}"
                                style="margin-right: 8px">
                                 <span aria-label="Delete form" title="Delete form" confirm="Are you sure?">Delete Form</span>
                             </a>
                             <a t-elif="not form.allow_unlink and form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-warning"
-                               t-attf-href="/my/formio/cancel/{{ form.uuid }}" style="margin-right: 8px">
+                               t-attf-href="/my/formio/cancel/{{ form.uuid }}?{{ keep_query() }}" style="margin-right: 8px">
                                 <span aria-label="Cancel &amp; close Form" title="Cancel &amp; close Form" confirm="Are you sure?">Cancel Form</span>
                             </a>
                         </td>
