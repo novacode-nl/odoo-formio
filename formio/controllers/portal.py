@@ -10,12 +10,19 @@ from ..models.formio_builder import STATE_CURRENT
 
 class FormioCustomerPortal(CustomerPortal):
 
+    def _prepare_portal_layout_values(self):
+        values = super(FormioCustomerPortal, self)._prepare_portal_layout_values()
+        domain = [('user_id', '=', request.env.user.id), ('builder_id.portal', '=', True)]
+        values['form_count'] = request.env['formio.form'].search_count(domain)
+        return values
+
     def _formio_form_prepare_portal_layout_values(self, **kwargs):
         values = super(FormioCustomerPortal, self)._prepare_portal_layout_values()
 
         # TODO create model (class)method for this?
         domain = [
             ('portal', '=', True),
+            ('formio_res_model_id', '=', False),
             ('state', '=', STATE_CURRENT)
         ]
         # TODO order by sequence?
@@ -97,15 +104,21 @@ class FormioCustomerPortal(CustomerPortal):
             return '/my/formio'
 
     @http.route(['/my/formio'], type='http', auth="user", website=True)
-    def portal_forms(self, sortby=None, search=None, search_in='content',  **kw):
+    def portal_forms(self, sortby=None, search=None, search_in='content',  **kwargs):
         domain = [
             ('user_id', '=', request.env.user.id),
             ('builder_id.portal', '=', True)
         ]
+        res_model = kwargs.get('res_model')
+        res_id = kwargs.get('res_id')
+        if res_model and res_id:
+            domain.append(('res_model', '=', res_model))
+            domain.append(('res_id', '=', res_id))
+        
         order = 'create_date DESC'
         forms = request.env['formio.form'].search(domain, order=order)
 
-        values = self._formio_form_prepare_portal_layout_values(**kw)
+        values = self._formio_form_prepare_portal_layout_values(**kwargs)
         values['forms'] = forms
         return request.render("formio.portal_my_formio", values)
 
