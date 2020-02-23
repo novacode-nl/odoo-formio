@@ -26,8 +26,8 @@ odoo.define('formio.formio_form_embed', ['web.ajax'], function (require) {
                     var options = JSON.parse(_options);
                     var hooks = {
                         'addComponent': function(container, comp, parent) {
-                            if (comp.component.hasOwnProperty('data') && comp.component.data.hasOwnProperty('url') &&
-                                !$.isEmptyObject(comp.component.data.url)) {
+                            if (comp.hasOwnProperty('component') && comp.component.hasOwnProperty('data') &&
+                                comp.component.data.hasOwnProperty('url') && !$.isEmptyObject(comp.component.data.url)) {
                                 comp.component.data.url = base_url.concat(comp.component.data.url, '/', uuid);
                             }
                             return container;
