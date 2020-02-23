@@ -89,8 +89,7 @@ class FormioCustomerPortal(CustomerPortal):
         }
         if len(languages) > 1:
             values['languages'] = languages
-
-        return self._get_page_view_values(form, False, values, 'my_formio', False, **kwargs)
+        return values
 
     def _get_form(self, uuid, mode):
         return request.env['formio.form'].get_form(uuid, mode)

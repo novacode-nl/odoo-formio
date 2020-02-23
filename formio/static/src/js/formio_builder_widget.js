@@ -4,19 +4,18 @@
 odoo.define('formio.formio_builder', function (require) {
     "use strict";
 
-    var AbstractAction = require('web.AbstractAction');
+    var Widget = require('web.Widget');
     var core = require('web.core');
 
     var QWeb = core.qweb;
     var _t = core._t;
 
-    var FormioBuilder = AbstractAction.extend({
+    var FormioBuilder = Widget.extend({
         title: core._t('Form.io Builder'),
         //template: "FormioBuilderWidget",
 
         init: function (parent, params) {
             this._super.apply(this, arguments);
-            this.action_manager = parent;
             this.params = params;
 
             // Adding values from the context is necessary to put this information in the url via the action manager so that
@@ -42,6 +41,6 @@ odoo.define('formio.formio_builder', function (require) {
         }
     });
 
-    core.action_registry.add('formio_builder', FormioBuilder);
-    return FormioBuilder;
+core.action_registry.add('formio_builder', FormioBuilder);
+return FormioBuilder;
 });

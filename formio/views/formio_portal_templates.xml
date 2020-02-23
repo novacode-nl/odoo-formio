@@ -12,9 +12,9 @@ See LICENSE file for full licensing details. -->
         </xpath>
     </template>
 
-    <template id="portal_layout" name="Portal layout: formio menu entry" inherit_id="portal.portal_breadcrumbs" priority="40">
+    <template id="portal_layout" name="Portal layout: formio menu entry" inherit_id="portal.portal_layout" priority="40">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
-            <li t-if="page_name == 'formio' or formio" t-attf-class="breadcrumb-item #{'active ' if not formio else ''}">
+            <li t-if="page_name == 'formio' or formio">
                 <a t-if="form" t-attf-href="/my/formio?{{ keep_query() }}">Forms</a>
                 <t t-else="">Forms</t>
             </li>
@@ -25,12 +25,11 @@ See LICENSE file for full licensing details. -->
     </template>
 
     <template id="portal_my_home" name="Portal My Home: formio forms" inherit_id="portal.portal_my_home" priority="40">
-        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
-            <t t-call="portal.portal_docs_entry">
-                <t t-set="title">Forms</t>
-                <t t-set="url" t-value="'/my/formio'"/>
-                <t t-set="count" t-value="form_count"/>
-            </t>
+        <xpath expr="//ul[hasclass('o_portal_docs')]" position="inside">
+            <li t-if="form_count" class="list-group-item">
+                <span class="badge" t-esc="form_count"/>
+                <a href="/my/formio">Forms</a>
+            </li>
         </xpath>
     </template>
     
@@ -50,66 +49,70 @@ See LICENSE file for full licensing details. -->
                     <button class="dropdown-toggle btn btn-primary" role="button" data-toggle="dropdown" href="#" aria-label="Dropdown menu" title="Dropdown menu">
                         Create a Form
                     </button>
-                    <div class="dropdown-menu" role="menu">
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                         <t t-foreach="builders_create_form" t-as="builder">
-                            <a t-attf-href="/my/formio/create/{{ builder.name }}" class="dropdown-item"><span t-field="builder.title"/></a>
+                            <li><a t-attf-href="/my/formio/create/{{ builder.name }}" class="dropdown-item"><span t-field="builder.title"/></a></li>
                         </t>
-                    </div>
+                    </ul>
                 </div>
             </t>
-            <t t-if="forms" t-call="portal.portal_table">
-                <thead>
-                    <th>Title</th>
-                    <th>Resource</th>
-                    <th>Created on</th>
-                    <th>Submission date</th>
-                    <th>State</th>
-                    <th>Actions</th>
-                </thead>
-                <tbody>
-                    <tr t-foreach="forms" t-as="form">
-                        <td>
-                            <span t-field="form.title"/> <small class="text-muted">#<span t-field="form.id"/></small>
-                        </td>
-                        <td>
-                            <span t-field="form.res_info"/>
-                        </td>
-                        <td>
-                            <span t-field="form.create_date"/>
-                        </td>
-                        <td>
-                            <span t-field="form.submission_date"/>
-                        </td>
-                        <td>
-                            <span t-field="form.state"/>
-                        </td>
-                        <td>
-                            <a t-if="form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-primary"
-                               t-attf-href="/my/formio/form/{{ form.uuid }}?{{ keep_query() }}" style="margin-right: 8px">
-                                <span aria-label="Edit form" title="Edit form">Edit Form</span>
-                            </a>
+            <t t-if="forms" class="panel panel-default">
+                <div class="table-responsive">
+                    <table class="table table-hover o_portal_my_doc_table">
+                        <thead>
+                            <th>Title</th>
+                            <th>Resource</th>
+                            <th>Created on</th>
+                            <th>Submission date</th>
+                            <th>State</th>
+                            <th>Actions</th>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="forms" t-as="form">
+                                <td>
+                                    <span t-field="form.title"/> <small class="text-muted">#<span t-field="form.id"/></small>
+                                </td>
+                                <td>
+                                    <span t-field="form.res_info"/>
+                                </td>
+                                <td>
+                                    <span t-field="form.create_date"/>
+                                </td>
+                                <td>
+                                    <span t-field="form.submission_date"/>
+                                </td>
+                                <td>
+                                    <span t-field="form.state"/>
+                                </td>
+                                <td>
+                                    <a t-if="form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-primary"
+                                       t-attf-href="/my/formio/form/{{ form.uuid }}?{{ keep_query() }}" style="margin-right: 8px">
+                                        <span aria-label="Edit form" title="Edit form">Edit Form</span>
+                                    </a>
 
-                            <a t-if="form.state == 'COMPLETE'" role="button" class="btn btn-sm btn-secondary"
-                               t-attf-href="/my/formio/form/{{ form.uuid }}?{{ keep_query() }}">
-                                <span aria-label="View form" title="View form">View Form</span>
-                            </a>
-                            <a t-elif="form.state == 'CANCEL'" role="button" class="btn btn-sm btn-light"
-                               t-attf-href="/my/formio/form/{{ form.uuid }}?{{ keep_query() }}">
-                                <span aria-label="View form" title="View form">View Form</span>
-                            </a>
+                                    <a t-if="form.state == 'COMPLETE'" role="button" class="btn btn-sm btn-info"
+                                       t-attf-href="/my/formio/form/{{ form.uuid }}?{{ keep_query() }}">
+                                        <span aria-label="View form" title="View form">View Form</span>
+                                    </a>
+                                    <a t-elif="form.state == 'CANCEL'" role="button" class="btn btn-sm btn-light"
+                                       t-attf-href="/my/formio/form/{{ form.uuid }}?{{ keep_query() }}">
+                                        <span aria-label="View form" title="View form">View Form</span>
+                                    </a>
 
-                            <a t-if="form.allow_unlink" role="button" class="btn btn-sm btn-danger"
-                               t-attf-href="/my/formio/delete/{{ form.uuid }}?{{ keep_query() }}"
-                               style="margin-right: 8px">
-                                <span aria-label="Delete form" title="Delete form" confirm="Are you sure?">Delete Form</span>
-                            </a>
-                            <a t-elif="not form.allow_unlink and form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-warning"
-                               t-attf-href="/my/formio/cancel/{{ form.uuid }}?{{ keep_query() }}" style="margin-right: 8px">
-                                <span aria-label="Cancel &amp; close Form" title="Cancel &amp; close Form" confirm="Are you sure?">Cancel Form</span>
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
+                                    <a t-if="form.allow_unlink" role="button" class="btn btn-sm btn-danger"
+                                       t-attf-href="/my/formio/delete/{{ form.uuid }}?{{ keep_query() }}"
+                                       style="margin-right: 8px">
+                                        <span aria-label="Delete form" title="Delete form" confirm="Are you sure?">Delete Form</span>
+                                    </a>
+                                    <a t-elif="not form.allow_unlink and form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-warning"
+                                       t-attf-href="/my/formio/cancel/{{ form.uuid }}?{{ keep_query() }}" style="margin-right: 8px">
+                                        <span aria-label="Cancel &amp; close Form" title="Cancel &amp; close Form" confirm="Are you sure?">Cancel Form</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </t>
         </t>
     </template>
