@@ -3,14 +3,23 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
+    <template id="assets_frontend" inherit_id="web.assets_frontend" name="Portal Assets" priority="15">
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" type="text/css" href="/formio/static/src/css/formio_portal_form.css"/>
+        </xpath>
+        <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.min.js"></script>
+        </xpath>
+    </template>
+
     <template id="portal_layout" name="Portal layout: formio menu entry" inherit_id="portal.portal_breadcrumbs" priority="40">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'formio' or formio" t-attf-class="breadcrumb-item #{'active ' if not formio else ''}">
-                <a t-if="formio" t-attf-href="/my/formio?{{ keep_query() }}"></a>
+                <a t-if="form" t-attf-href="/my/formio?{{ keep_query() }}">Forms</a>
                 <t t-else="">Forms</t>
             </li>
             <li t-if="form" class="breadcrumb-item active">
-                <span t-field="form.name"/>
+                <span t-field="form.title"/>
             </li>
         </xpath>
     </template>
@@ -51,7 +60,8 @@ See LICENSE file for full licensing details. -->
             <t t-if="forms" t-call="portal.portal_table">
                 <thead>
                     <th>Title</th>
-                    <th>Submission user</th>
+                    <th>Resource</th>
+                    <th>Created on</th>
                     <th>Submission date</th>
                     <th>State</th>
                     <th>Actions</th>
@@ -62,7 +72,10 @@ See LICENSE file for full licensing details. -->
                             <span t-field="form.title"/> <small class="text-muted">#<span t-field="form.id"/></small>
                         </td>
                         <td>
-                            <span t-field="form.submission_user_id"/>
+                            <span t-field="form.res_info"/>
+                        </td>
+                        <td>
+                            <span t-field="form.create_date"/>
                         </td>
                         <td>
                             <span t-field="form.submission_date"/>
@@ -72,32 +85,91 @@ See LICENSE file for full licensing details. -->
                         </td>
                         <td>
                             <a t-if="form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-primary"
-                               t-attf-href="{{ form.url }}" style="margin-right: 8px">
+                               t-attf-href="/my/formio/form/{{ form.uuid }}?{{ keep_query() }}" style="margin-right: 8px">
                                 <span aria-label="Edit form" title="Edit form">Edit Form</span>
                             </a>
 
                             <a t-if="form.state == 'COMPLETE'" role="button" class="btn btn-sm btn-secondary"
-                               t-attf-href="{{ form.url }}">
+                               t-attf-href="/my/formio/form/{{ form.uuid }}?{{ keep_query() }}">
                                 <span aria-label="View form" title="View form">View Form</span>
                             </a>
                             <a t-elif="form.state == 'CANCEL'" role="button" class="btn btn-sm btn-light"
-                               t-attf-href="{{ form.url }}">
+                               t-attf-href="/my/formio/form/{{ form.uuid }}?{{ keep_query() }}">
                                 <span aria-label="View form" title="View form">View Form</span>
                             </a>
 
                             <a t-if="form.allow_unlink" role="button" class="btn btn-sm btn-danger"
-                               t-attf-href="/my/formio/delete/{{ form.uuid }}"
+                               t-attf-href="/my/formio/delete/{{ form.uuid }}?{{ keep_query() }}"
                                style="margin-right: 8px">
                                 <span aria-label="Delete form" title="Delete form" confirm="Are you sure?">Delete Form</span>
                             </a>
                             <a t-elif="not form.allow_unlink and form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-warning"
-                               t-attf-href="/my/formio/cancel/{{ form.uuid }}" style="margin-right: 8px">
+                               t-attf-href="/my/formio/cancel/{{ form.uuid }}?{{ keep_query() }}" style="margin-right: 8px">
                                 <span aria-label="Cancel &amp; close Form" title="Cancel &amp; close Form" confirm="Are you sure?">Cancel Form</span>
                             </a>
                         </td>
                     </tr>
                 </tbody>
             </t>
+        </t>
+    </template>
+
+    <template id="portal_my_formio_edit" name="Form.io Form">
+        <t t-call="portal.portal_layout">
+            <div t-attf-class="formio_form_container {{ form.state }}">
+                <div class="row formio_header">
+                    <div class="col-md-12">
+                        <div class="formio_form_dock float-right">
+                            <span class="form_state">
+                                <t t-if="form.state == 'PENDING'">
+                                    <span t-attf-class="badge mb-1 badge-pill badge-alpha">State: <strong><t t-esc="form.display_state"/></strong></span>
+                                </t>
+                                <t t-elif="form.state == 'DRAFT'">
+                                    <span t-attf-class="badge mb-1 badge-pill badge-warning">State: <strong><t t-esc="form.display_state"/></strong></span>
+                                </t>
+                                <t t-elif="form.state == 'COMPLETE'">
+                                    <span t-attf-class="badge mb-1 badge-pill badge-success">State: <strong><t t-esc="form.display_state"/></strong></span>
+                                </t>
+                                <t t-elif="form.state == 'CANCEL'">
+                                    <span t-attf-class="badge mb-1 badge-pill badge-dark">State: <strong><t t-esc="form.display_state"/></strong></span>
+                                </t>
+                                <t t-else="">
+                                    <span t-attf-class="badge mb-1 badge-pill badge-light">State: <strong><t t-esc="form.display_state"/></strong></span>
+                                </t>
+                            </span>
+                            <span class="form_id" style="margin-left: 12px;">
+                                <span>ID: <strong><t t-esc="form.id"/></strong></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="formio_form_iframe_container">
+                    <div class="formio_title">
+                        <h1>
+                            <t t-esc="form.title"/>
+                        </h1>
+                    </div>
+                    <iframe t-attf-src="/formio/form/embed/#{form.uuid}" id="formio_form_embed"/>
+                    <script type="text/javascript">
+                        // TODO move to Javascript file.
+                        iFrameResize({}, '#formio_form_embed')
+                        window.addEventListener('message', function(event) {
+                            var base_url = window.location.protocol + '//' + window.location.host;
+                            if (event.origin == base_url &amp;&amp; event.data == 'formioSubmitDone') {
+                                var portal_submit_done_url = document.getElementById('portal_submit_done_url').value;
+                                if (portal_submit_done_url &amp;&amp; portal_submit_done_url.length > 0) {
+                                    window.location = portal_submit_done_url;
+                                }
+                                else {
+                                    // Probably by saveAsDraft
+                                    window.location.reload();
+                                }
+                            }
+                        }, false);
+                    </script>
+                    <input type="hidden" id="portal_submit_done_url" name="portal_submit_done_url" t-att-value="form.portal_submit_done_url"/>
+                </div>
+            </div>
         </t>
     </template>
 </odoo>

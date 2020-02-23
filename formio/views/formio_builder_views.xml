@@ -17,13 +17,13 @@ See LICENSE file for full licensing details. -->
                 <field name="user_id"/>
                 <field name="write_date"/>
                 <field name="portal"/>
-                <field name="res_model_id"/>
+                <field name="formio_res_model_id"/>
                 <field name="forms"/>
             </tree>
         </field>
     </record>
 
-    <record id="view_formio_builder" model="ir.ui.view">
+    <record id="view_formio_builder_form" model="ir.ui.view">
         <field name="name">formio.builder.form</field>
         <field name="model">formio.builder</field>
         <field name="arch" type="xml">
@@ -35,41 +35,62 @@ See LICENSE file for full licensing details. -->
                        class="btn-primary"/>
                     <button
                         name="action_obsolete" type="object" string="Obsolete"
-                        attrs="{'invisible': [('state', '=', 'OBSOLETE')]}"/>
+                        attrs="{'invisible': [('state', '=', 'OBSOLETE')]}"
+                        confirm="Are you sure? The Form shall be unpublished."/>
                     <button name="action_new_builder_version" type="object" attrs="{'invisible':[('id','=',False)]}"
                             string="Create New Version" class="oe_stat_button"/>
+                    <button
+                       name="action_draft" type="object" string="Draft"
+                       attrs="{'invisible': [('state', 'in', ['DRAFT'])]}"
+                       confirm="Are you sure? Modifying the Builder causes existing forms to be invalid."/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_formio_builder" type="object" string="Form Builder"
+                        <button name="action_client_formio_builder" type="object" string="Form Builder"
                                 groups="formio.group_formio_admin"
                                 class="oe_stat_button" icon="fa-rocket"/>
                     </div>
                     <label for="title" class="oe_edit_only"/>
                     <h1><field name="title" placeholder="Insert a meaningful title here"/></h1>
                     <group>
-                        <field name="name" placeholder="Use ASCII letters, digits (0-9), - or _" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                        <field name="formio_version_id" placeholder="Select latest version only to try new form components." attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                        <field name="user_id"/>
+                        <group>
+                            <field name="name" placeholder="Use ASCII letters, digits (0-9), - or _" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                            <field name="version"/>
+                            <field name="version_comment" attrs="{'required': [('version', '>', 1)]}"/>
+                            <field name="parent_id" string="Parent Version"/>
+                        </group>
+                        <group>
+                            <field name="user_id"/>
+                        </group>
                     </group>
                     <notebook>
                         <page string="Settings" name="settings">
                             <group>
-                                <group name="form_settings" string="Form">
+                                <group name="form_settings" string="Form.io">
+                                    <field name="formio_version_id" placeholder="Select latest version only to try new form components." attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="wizard" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="view_as_html" groups="formio.group_formio_admin"/>
                                 </group>
-                                <group name="other_settings" string="Other">
+                                <group name="integration_settings" string="Integration">
                                     <field name="portal" groups="formio.group_formio_admin"/>
-                                    <field name="res_model_id" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="formio_res_model_id" groups="formio.group_formio_admin"
+                                           attrs="{'readonly': [('state', '!=', 'DRAFT')]}"
+                                           edit="false" create="false" quick_create="false"
+                                           options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
                                 </group>
-                                <group string="Version">
-                                    <field name="version" />
-                                    <field name="version_comment" attrs="{'required': [('version', '>', 1)]}"/>
-                                    <field name="parent_id" />
+                                <group name="submit_done" string="Redirect after Submission">
+                                    <field name="submit_done_url" string="URL" groups="formio.group_formio_admin" readonly="0"/>
                                 </group>
                                 <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
+                            </group>
+                        </page>
+                        <page string="Resource Settings" name="res_model_settings" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
+                        <page string="Portal Settings" name="portal_settings" attrs="{'invisible': [('portal', '=', False)]}">
+                            <group>
+                                <group name="portal_submit_done" string="Redirect after Submission">
+                                    <field name="portal_submit_done_url" string="URL" groups="formio.group_formio_admin" readonly="0"/>
+                                </group>
                             </group>
                         </page>
                         <page string="Translations" name="translations" groups="formio.group_formio_admin">
@@ -135,6 +156,12 @@ See LICENSE file for full licensing details. -->
                 </group>
             </search>
         </field>
+    </record>
+
+    <record id="action_client_formio_builder" model="ir.actions.client">
+        <field name="name">Form.io Builder</field>
+        <field name="tag">formio_builder</field>
+        <field name="target">main</field>
     </record>
 
     <record id="action_formio_builder" model="ir.actions.act_window">

@@ -3,7 +3,7 @@
 
 {
     'name': 'Form.io Website',
-    'summary': '"Thank you page" after form submission.',
+    'summary': 'Redirect to website-page or URL - after form submission.',
     'version': '1.0',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',

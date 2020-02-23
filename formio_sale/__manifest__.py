@@ -11,6 +11,7 @@
     'category': 'Sales',
     'depends': ['sale_management', 'formio'],
     'data': [
+        'data/formio_sale_data.xml',
         'views/sale_views.xml',
     ],
     'application': True,

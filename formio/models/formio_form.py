@@ -1,6 +1,7 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
+import ast
 import json
 import re
 import requests
@@ -8,6 +9,8 @@ import uuid
 
 from odoo import api, fields, models, _
 from odoo.exceptions import AccessError
+
+from ..utils import get_field_selection_label
 
 from .formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
 
@@ -22,13 +25,11 @@ class Form(models.Model):
     _description = 'Formio Form'
     _inherit = ['mail.thread']
 
-    _rec_name = 'name'
     _order = 'id DESC'
 
     builder_id = fields.Many2one(
-        'formio.builder', string='Form builder', ondelete='restrict',
-        context={'display_name_title': True},
-        domain=[('state', '=', BUILDER_STATE_CURRENT)])
+        'formio.builder', string='Form builder', required=True,
+        ondelete='restrict', domain=[('state', '=', BUILDER_STATE_CURRENT)])
     name = fields.Char(related='builder_id.name', readonly=True)
     uuid = fields.Char(
         default=lambda self: self._default_uuid(), required=True, readonly=True, copy=False,
@@ -38,13 +39,16 @@ class Form(models.Model):
         [(STATE_PENDING, 'Pending'), (STATE_DRAFT, 'Draft'),
          (STATE_COMPLETE, 'Completed'), (STATE_CANCEL, 'Canceled')],
         string="State", default=STATE_PENDING, track_visibility='onchange', index=True)
+    display_state = fields.Char("Display State", compute='_compute_display_fields', store=False)
     kanban_group_state = fields.Selection(
         [('A', 'Pending'), ('B', 'Draft'), ('C', 'Completed'), ('D', 'Canceled')],
         compute='_compute_kanban_group_state', store=True)
     url = fields.Char(compute='_compute_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
+    act_window_multi_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model')
     res_model_name = fields.Char(related='res_model_id.name', readonly=True, string='Resource Name')
+    res_model = fields.Char(related='res_model_id.model', readonly=True, string='Resource Model')
     res_id = fields.Integer("Record ID", ondelete='restrict',
         help="Database ID of the record in res_model to which this applies")
     res_act_window_url = fields.Char(compute='_compute_res_fields', readonly=True)
@@ -64,7 +68,9 @@ class Form(models.Model):
     submission_date = fields.Datetime(
         string='Submission Date', readonly=True, track_visibility='onchange',
         help='Datetime when the form was last submitted.')
+    submit_done_url = fields.Char(related='builder_id.submit_done_url')
     portal = fields.Boolean("Portal", related='builder_id.portal', help="Form is accessible by assigned portal user")
+    portal_submit_done_url = fields.Char(related='builder_id.portal_submit_done_url')
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
 
     @api.multi
@@ -88,18 +94,44 @@ class Form(models.Model):
             else:
                 r.allow_unlink = False
 
+    @api.depends('state')
+    def _compute_display_fields(self):
+        for r in self:
+            r.display_state = get_field_selection_label(r, 'state')
+
+    def _decode_data(self, data):
+        """ Convert data (str) to dictionary
+
+        json.loads(data) refuses identifies with single quotes.Use
+        ast.literal_eval() instead.
+
+        :param str data: submission_data string
+        :return str data: submission_data as dictionary
+        """
+        try:
+            data = json.loads(data)
+        except:
+            data = ast.literal_eval(data)
+        return data
+
     @api.multi
-    def write(self, vals):
-        if 'submission_data' in vals and self.state in [STATE_COMPLETE, STATE_CANCEL]:
-            # Throw and catch exception (FormioFormException), e.g. to redirect in controller.
-            return False
-        res = super(Form, self).write(vals)
-        return res
+    def action_client_formio_form(self):
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'formio_form',
+            'target': 'main',
+        }
 
     @api.multi
     def action_draft(self):
         self.ensure_one()
-        self.write({'state': STATE_DRAFT})
+        vals = {'state': STATE_DRAFT}
+        submission_data = self._decode_data(self.submission_data)
+        if 'submit' in submission_data:
+            del submission_data['submit']
+            vals['submission_data'] = json.dumps(submission_data)
+
+        self.write(vals)
 
     @api.multi
     def action_complete(self):

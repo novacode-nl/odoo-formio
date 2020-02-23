@@ -26,7 +26,7 @@ class Builder(models.Model):
     _description = 'Formio Builder'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    _rec_name = 'display_name'
+    _rec_name = 'display_name_full'
     _order = 'name ASC, version DESC'
 
     name = fields.Char(
@@ -41,11 +41,15 @@ class Builder(models.Model):
         'formio.version', string='Form.io Version', required=True,
         track_visibility='onchange',
         help="""Loads the specific Form.io Javascript API/libraries version (sourcecode: \https://github.com/formio/formio.js)""")
+    formio_version_name = fields.Char(related='formio_version_id.name')
     formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='Form.io CSS')
     formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='Form.io Javascript')
     res_model_id = fields.Many2one(
-        "ir.model",
-        "Resource Model",
+        "ir.model", compute='_compute_res_model_id', store=True,
+        string="Model", help="Model as resource this form represents or acts on")
+    formio_res_model_id = fields.Many2one(
+        "formio.res.model",
+        string="Resource Model",
         ondelete='restrict', track_visibility='onchange',
         help="Model as resource this form represents or acts on")
     schema = fields.Text()
@@ -58,8 +62,10 @@ class Builder(models.Model):
         - Draft: In draft / design.
         - Current: Live and in use (publisehd).
         - Obsolete: Was current but obsolete (unpublished)""")
-    display_name = fields.Char("Display Name", compute='_compute_display_name', store=False)
-    parent_id = fields.Many2one('formio.builder', string='Parent Version', readonly=True)
+    display_state = fields.Char("Display State", compute='_compute_display_fields', store=False)
+    display_name_full = fields.Char("Display Name Full", compute='_compute_display_fields', store=False)
+    parent_id = fields.Many2one('formio.builder', string='Parent Builder', readonly=True)
+    parent_version = fields.Integer(related='parent_id.version', string='Parent Version', readonly=True)
     version = fields.Integer("Version", required=True, readonly=True, default=1)
     version_comment = fields.Text("Version Comment")
     user_id = fields.Many2one('res.users', string='Assigned user', track_visibility='onchange')
@@ -67,6 +73,8 @@ class Builder(models.Model):
     portal = fields.Boolean("Portal", track_visibility='onchange', help="Form is accessible by assigned portal user")
     view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
     wizard = fields.Boolean("Wizard", track_visibility='onchange')
+    submit_done_url = fields.Char()
+    portal_submit_done_url = fields.Char()
     translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations')
 
     def _states_selection(self):
@@ -116,9 +124,9 @@ class Builder(models.Model):
         :return str schema: schema as dictionary
         """
         try:
-            schema = json.loads(self.schema)
+            schema = json.loads(schema)
         except:
-            schema = ast.literal_eval(self.schema)
+            schema = ast.literal_eval(schema)
         return schema
 
     @api.onchange('wizard')
@@ -136,15 +144,22 @@ class Builder(models.Model):
                 del schema['display']
                 self.schema = json.dumps(schema)
 
-    @api.depends('title', 'name', 'version')
-    def _compute_display_name(self):
+    @api.depends('formio_res_model_id')
+    def _compute_res_model_id(self):
+        if self.formio_res_model_id:
+            self.res_model_id = self.formio_res_model_id.ir_model_id.id
+        else:
+            self.res_model_id = False
+
+    @api.depends('title', 'name', 'version', 'state')
+    def _compute_display_fields(self):
         for r in self:
+            r.display_state = get_field_selection_label(r, 'state')
             if self._context.get('display_name_title'):
-                r.display_name = r.title
+                r.display_name_full = r.title
             else:
-                state = get_field_selection_label(r, 'state')
-                r.display_name = _("{title} [state: {state}, version: {version}]").format(
-                    title=r.title, state=state, version=r.version)
+                r.display_name_full = _("{title} (state: {state} - version: {version})").format(
+                    title=r.title, state=r.display_state, version=r.version)
 
     def _compute_edit_url(self):
         # sudo() is needed for regular users.
@@ -162,7 +177,7 @@ class Builder(models.Model):
                 model=r._name,
                 action=action.id)
             r.act_window_url = url
-        
+
     @api.multi
     def action_formio_builder(self):
         return {
@@ -170,6 +185,19 @@ class Builder(models.Model):
             'url': self.edit_url,
             'target': 'self',
         }
+
+    @api.multi
+    def action_client_formio_builder(self):
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'formio_builder',
+            'target': 'main',
+        }
+
+    @api.multi
+    def action_draft(self):
+        self.ensure_one()
+        self.write({'state': STATE_DRAFT})
 
     @api.multi
     def action_current(self):

@@ -41,10 +41,16 @@ See LICENSE file for full licensing details. -->
         sequence="30"
         action="formio.action_formio_version"/>
     <menuitem
+        id="menu_formio_res_model"
+        name="Resource Models"
+        parent="formio.menu_formio_configuration"
+        sequence="40"
+        action="formio.action_formio_res_model"/>
+    <menuitem
         id="menu_formio_translation_root"
         name="Translations"
         parent="formio.menu_formio_configuration"
-        sequence="30"/>
+        sequence="50"/>
     <menuitem
         id="menu_formio_translation"
         name="Translations"
