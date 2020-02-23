@@ -7,8 +7,8 @@ from odoo import api, fields, models
 class Builder(models.Model):
     _inherit = 'formio.builder'
 
-    submit_done_page_id = fields.Many2one('website.page', domain=[('is_published', '=', True), ('url', '!=', '/')])
-    portal_submit_done_page_id = fields.Many2one('website.page', domain=[('is_published', '=', True), ('url', '!=', '/')])
+    submit_done_page_id = fields.Many2one('website.page', domain=[('website_published', '=', True), ('url', '!=', '/')])
+    portal_submit_done_page_id = fields.Many2one('website.page', domain=[('website_published', '=', True), ('url', '!=', '/')])
 
     @api.model
     def create(self, vals):
