@@ -167,7 +167,7 @@ See LICENSE file for full licensing details. -->
     <record id="action_formio_builder" model="ir.actions.act_window">
         <field name="name">Form Builders</field>
         <field name="res_model">formio.builder</field>
-        <field name="view_type">form</field>
+        <!-- <field name="view_type">form</field> -->
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="view_formio_builder_tree"/>
     </record>

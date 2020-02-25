@@ -63,7 +63,7 @@ See LICENSE file for full licensing details. -->
     <record id="action_formio_version" model="ir.actions.act_window">
         <field name="name">Versions</field>
         <field name="res_model">formio.version</field>
-        <field name="view_type">form</field>
+        <!-- <field name="view_type">form</field> -->
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="view_formio_version_tree"/>
     </record>

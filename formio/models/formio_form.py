@@ -8,7 +8,7 @@ import requests
 import uuid
 
 from odoo import api, fields, models, _
-from odoo.exceptions import AccessError
+from odoo.exceptions import AccessError, UserError
 
 from ..utils import get_field_selection_label
 
@@ -73,7 +73,7 @@ class Form(models.Model):
     portal_submit_done_url = fields.Char(related='builder_id.portal_submit_done_url')
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
 
-    @api.multi
+    
     @api.depends('state')
     def _compute_kanban_group_state(self):
         for r in self:
@@ -114,7 +114,7 @@ class Form(models.Model):
             data = ast.literal_eval(data)
         return data
 
-    @api.multi
+    
     def action_client_formio_form(self):
         return {
             'type': 'ir.actions.client',
@@ -122,7 +122,7 @@ class Form(models.Model):
             'target': 'main',
         }
 
-    @api.multi
+    
     def action_draft(self):
         self.ensure_one()
         vals = {'state': STATE_DRAFT}
@@ -133,17 +133,17 @@ class Form(models.Model):
 
         self.write(vals)
 
-    @api.multi
+    
     def action_complete(self):
         self.ensure_one()
         self.write({'state': STATE_COMPLETE})
 
-    @api.multi
+    
     def action_cancel(self):
         self.ensure_one()
         self.write({'state': STATE_CANCEL})
 
-    @api.multi
+    
     def action_send_invitation_mail(self):
         self.ensure_one()
 
@@ -162,7 +162,7 @@ class Form(models.Model):
         )
         return {
             'type': 'ir.actions.act_window',
-            'view_type': 'form',
+            # 'view_type': 'form',
             'view_mode': 'form',
             'res_model': 'mail.compose.message',
             'view_id': compose_form_id,
@@ -222,7 +222,9 @@ class Form(models.Model):
                 id=r.id,
                 model=r._name,
                 action=action.id)
+            # raise UserError(url)
             r.act_window_url = url
+            r.act_window_multi_url = url
 
     def _compute_res_fields(self):
         for r in self:
@@ -230,7 +232,7 @@ class Form(models.Model):
             r.res_name = False
             r.res_info = False
         
-    @api.multi
+    
     def action_formio(self):
         return {
             'type': 'ir.actions.act_url',
@@ -238,7 +240,7 @@ class Form(models.Model):
             'target': 'self',
         }
 
-    @api.multi
+    
     def action_open_res_act_window(self):
         raise NotImplementedError
 

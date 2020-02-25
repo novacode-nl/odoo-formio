@@ -14,7 +14,6 @@ class BuilderTranslation(models.Model):
     source = fields.Text(string='Source Term', required=True)
     value = fields.Text(string='Translated Value', required=True)
 
-    @api.multi
     @api.depends('lang_id', 'source', 'value')
     def name_get(self):
         res = []
