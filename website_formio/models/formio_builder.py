@@ -22,7 +22,6 @@ class Builder(models.Model):
             vals['portal_submit_done_url'] = portal_submit_done_page.url
         return super(Builder, self).create(vals)
 
-    @api.multi
     def write(self, vals):
         submit_done_page_id = vals.get('submit_done_page_id')
         portal_submit_done_page_id = vals.get('portal_submit_done_page_id')

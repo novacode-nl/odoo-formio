@@ -52,17 +52,10 @@
                     </h1>
                 </div>
                 <div class="col-sm-4 col-md-4 formio_actions">
-                    <button id="fullscreen_formio" class="pull-right">Fullscreen (Exit with ESC)</button>
+                    <!-- <button id="fullscreen_formio" class="pull-right">Fullscreen (Exit with ESC)</button> -->
                 </div>
                 </div>
-                <iframe t-attf-src="/formio/builder/embed/#{widget.builder.id}" id="formio_builder_embed" allowfullscreen="true"></iframe>
-                <script>
-                    var fullscreen = document.getElementById('fullscreen_formio');
-                    var iframe = document.getElementById('formio_builder_embed');
-                    fullscreen.addEventListener('click', (function () {
-                        iframe.requestFullscreen();
-                    }));
-                </script>
+                <iframe t-attf-src="/formio/builder/embed/#{widget.builder.id}" id="formio_builder_embed" allowfullscreen="false"></iframe>
             </div>
         </div>
     </t>

@@ -3,11 +3,12 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
-    <template id="assets_frontend" inherit_id="web.assets_frontend" name="Portal Assets" priority="15">
-        <xpath expr="//link[last()]" position="after">
+
+    <template id="assets_frontend" inherit_id="web.assets_frontend" name="Sale frontend assets">
+        <xpath expr="link[last()]" position="after">
             <link rel="stylesheet" type="text/css" href="/formio/static/src/css/formio_portal_form.css"/>
         </xpath>
-        <xpath expr="//script[last()]" position="after">
+        <xpath expr="script[last()]" position="after">
             <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.min.js"></script>
         </xpath>
     </template>
@@ -152,7 +153,14 @@ See LICENSE file for full licensing details. -->
                     <iframe t-attf-src="/formio/form/embed/#{form.uuid}" id="formio_form_embed"/>
                     <script type="text/javascript">
                         // TODO move to Javascript file.
+
+                        <!-- setTimeout(() => {
+                            iFrameResize({}, '#formio_form_embed')
+                        }, 1000) -->
                         iFrameResize({}, '#formio_form_embed')
+
+                        alert(1);
+                        
                         window.addEventListener('message', function(event) {
                             var base_url = window.location.protocol + '//' + window.location.host;
                             if (event.origin == base_url &amp;&amp; event.data == 'formioSubmitDone') {

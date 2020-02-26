@@ -76,19 +76,12 @@ class FormioCustomerPortal(CustomerPortal):
         request.env.cr.execute(query)
         builder_lang_ids = [r[0] for r in request.env.cr.fetchall()]
 
-        # Always include english (en_US).
-        domain = ['|', ('id', 'in', builder_lang_ids), ('code', 'in', [request.env.user.lang, 'en_US'])]
-        languages = request.env['res.lang'].with_context(active_test=False).search(domain, order='name asc')
-        languages = languages.filtered(lambda r: r.id in builder_lang_ids or r.code == 'en_US')
-
         values = {
-            'languages': [], # initialize, otherwise template/view crashes.
+            'languages': request.env['res.lang'].get_available(), # initialize, otherwise template/view crashes.
             'user': request.env.user,
             'form': form,
             'page_name': 'formio',
         }
-        if len(languages) > 1:
-            values['languages'] = languages
 
         return self._get_page_view_values(form, False, values, 'my_formio', False, **kwargs)
 
@@ -130,6 +123,7 @@ class FormioCustomerPortal(CustomerPortal):
             return request.redirect("/")
 
         values = self._formio_form_get_page_view_values(form, **kwargs)
+        print(values)
         return request.render("formio.portal_my_formio_edit", values)
 
     @http.route(['/my/formio/create/<string:name>'], type='http', auth="user", method=['GET'], website=True)

@@ -72,7 +72,7 @@ class Builder(models.Model):
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal", track_visibility='onchange', help="Form is accessible by assigned portal user")
     view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
-    wizard = fields.Boolean("Wizard", track_visibility='onchange')
+    # wizard = fields.Boolean("Wizard", track_visibility='onchange')
     submit_done_url = fields.Char()
     portal_submit_done_url = fields.Char()
     translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations')
@@ -129,20 +129,20 @@ class Builder(models.Model):
             schema = ast.literal_eval(schema)
         return schema
 
-    @api.onchange('wizard')
-    def _onchange_wizard(self):
-        if self.wizard:
-            if self.schema:
-                schema = self._decode_schema(self.schema)
-                schema['display'] = '"wizard"'
-                self.schema = json.dumps(schema)
-            else:
-                self.schema = '{"display": "wizard"}'
-        else:
-            if self.schema:
-                schema = self._decode_schema(self.schema)
-                del schema['display']
-                self.schema = json.dumps(schema)
+    # @api.onchange('wizard')
+    # def _onchange_wizard(self):
+    #     if self.wizard:
+    #         if self.schema:
+    #             schema = self._decode_schema(self.schema)
+    #             schema['display'] = '"wizard"'
+    #             self.schema = json.dumps(schema)
+    #         else:
+    #             self.schema = '{"display": "wizard"}'
+    #     else:
+    #         if self.schema:
+    #             schema = self._decode_schema(self.schema)
+    #             del schema['display']
+    #             self.schema = json.dumps(schema)
 
     @api.depends('formio_res_model_id')
     def _compute_res_model_id(self):

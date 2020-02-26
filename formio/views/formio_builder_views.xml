@@ -69,7 +69,7 @@ See LICENSE file for full licensing details. -->
                             <group>
                                 <group name="form_settings" string="Form.io">
                                     <field name="formio_version_id" placeholder="Select latest version only to try new form components." attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                    <field name="wizard" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <!-- <field name="wizard" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/> -->
                                     <field name="view_as_html" groups="formio.group_formio_admin"/>
                                 </group>
                                 <group name="integration_settings" string="Integration">
@@ -145,10 +145,10 @@ See LICENSE file for full licensing details. -->
                 <filter string="Not Portal" name="not_portal"
                         domain="[('portal', '=', False)]"/>
                 <separator/>
-                <filter string="Wizard" name="wizard"
+                <!-- <filter string="Wizard" name="wizard"
                         domain="[('wizard', '=', True)]"/>
                 <filter string="Not Wizard" name="not_portal"
-                        domain="[('wizard', '=', False)]"/>
+                        domain="[('wizard', '=', False)]"/> -->
                 <group expand="0" string="Group By">
                     <filter string="Name" name="name" domain="[]" context="{'group_by':'name'}"/>
                     <filter string="Assigned User" name="user" domain="[]" context="{'group_by':'user_id'}"/>

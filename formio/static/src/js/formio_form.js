@@ -15,8 +15,7 @@ odoo.define('formio.formio_form_embed', ['web.ajax'], function (require) {
             options_url = '/formio/form/options/' + uuid,
             submission_url = '/formio/form/submission/' + uuid,
             submit_url = '/formio/form/submit/' + uuid,
-            schema = {},
-            options = {};
+            schema = {};
 
         ajax.jsonRpc(schema_url, 'call', {}).then(function(result) {
             if (!$.isEmptyObject(result)) {
@@ -26,8 +25,8 @@ odoo.define('formio.formio_form_embed', ['web.ajax'], function (require) {
                     var options = JSON.parse(_options);
                     var hooks = {
                         'addComponent': function(container, comp, parent) {
-                            if (comp.component.hasOwnProperty('data') && comp.component.data.hasOwnProperty('url') &&
-                                !$.isEmptyObject(comp.component.data.url)) {
+                            if (comp.hasOwnProperty('component') && comp.component.hasOwnProperty('data') &&
+                                comp.component.data.hasOwnProperty('url') && !$.isEmptyObject(comp.component.data.url)) {
                                 comp.component.data.url = base_url.concat(comp.component.data.url, '/', uuid);
                             }
                             return container;
@@ -35,37 +34,7 @@ odoo.define('formio.formio_form_embed', ['web.ajax'], function (require) {
                     };
                     options['hooks'] = hooks;
 
-                    console.log(options)
-                    console.log(schema)
-                    console.log(document.getElementById('formio_form'))
-
-
-                    Formio.createForm(document.getElementById('formio_form'), {
-                        // display: 'wizard',
-                        components: [
-                          {
-                            type: 'textfield',
-                            key: 'firstName',
-                            label: 'First Name',
-                            placeholder: 'Enter your first name.',
-                            input: true
-                          },
-                          {
-                            type: 'textfield',
-                            key: 'lastName',
-                            label: 'Last Name',
-                            placeholder: 'Enter your last name',
-                            input: true
-                          },
-                          {
-                            type: 'button',
-                            action: 'submit',
-                            label: 'Submit',
-                            theme: 'primary'
-                          }
-                        ]
-                      }, options).then(function(form) {
-                        console.log(form)
+                    Formio.createForm(document.getElementById('formio_form'), schema, options).then(function(form) {
                         // Language
                         if ('language' in options) {
                             form.language = options['language'];
