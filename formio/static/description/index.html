@@ -55,6 +55,15 @@
       <img class="oe_demo oe_picture oe_screenshot" src="intro-screenshot-2.png">
     </div>
   </div>
+  <div class="oe_row oe_centeralign mb16">
+    <h4>Visit the Demo</h4>
+    <a href="https://odoo12-b4a887d572e9.victhorious.com/web/login" target="_blank" class="oe_button oe_big">Demo</a>
+    <p class="mt8"><strong>Users</strong> (Email / Password)</p>
+    <ul>
+      <li>demo / demo</li>
+      <li>portal / portal</li>
+    </ul>
+  </div>
   <div class="oe_row oe_centeralign mb64">
     <h4>Check out the links below, for more info about the <i>Form.io Platform</i></h4>
     <a href="https://form.io" target="_blank" class="oe_button oe_big">Form.io</a>
@@ -107,9 +116,129 @@
 <section class="oe_container oe_dark">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Changelog</h2>
+    <h4 class="oe_mb16">1.6</h4>
+    <ul>
+      <li>
+        Portal: Improved (refactored) controller layout values method.
+      </li>
+      <li>
+        Portal: form buttons now keep query-params.
+      </li>
+    </ul>
+    <h4 class="oe_mb16">1.5</h4>
+    <ul>
+      <li>
+        Demo Builder: Save as Draft (button).
+      </li>
+      <li>
+        Form update to <strong>Draft</strong> fix (workaround). Remove <code>submission_data['submit']</code>.
+      </li>
+    </ul>
+    <h4 class="oe_mb16">1.4</h4>
+    <ul>
+      <li>
+        Click button to display the <strong>Form Builder</strong> in <strong>Full Screen</strong>.
+      </li>
+    </ul>
+    <h4 class="oe_mb16">1.3</h4>
+    <ul>
+      <li>
+        Include and serve the Formio.js library assets (JS, CSS) within the module. Don't use CDN anymore.
+      </li>
+    </ul>
+    <h4 class="oe_mb16">1.3</h4>
+    <ul>
+      <li>
+        Portal: Improved (refactored) controller layout values method.
+      </li>
+      <li>
+        Portal: form buttons now keep query-params.
+      </li>
+    </ul>
+    <h4 class="oe_mb16">1.2</h4>
+    <ul>
+      <li>
+        Rename (consistency) Builder form-view id/ref: from <code>view_formio_builder</code> to <code>view_formio_builder_form</code>.
+      </li>
+    </ul>
+    <h4 class="oe_mb16">1.1</h4>
+    <ul>
+      <li>
+        Possible "Resource model(s)" needs to be registered from sub-modules e.g. formio_sale.
+        Just choosing from all models is useless and confuses the user about its functionality.
+      </li>
+    </ul>
+    <h4 class="oe_mb16">1.0</h4>
+    <ul>
+      <li>Form.io embedded in iframe. This avoids clashes (Javascript and CSS) between Odoo and Form.io.</li>
+      <li>Redesign of Form.io templates</li>
+    </ul>
+    <h4 class="oe_mb16">0.16</h4>
+    <ul>
+      <li>Search filters on Form Builder and Forms.</li>
+      <li>Assign a user (owner/author/designer) to a Form Builder.</li>
+    </ul>
+    <h4 class="oe_mb16">0.15</h4>
+    <ul>
+      <li>Change default forms view to list.</li>
+      <li>Improve forms kanban to group by state.</li>
+    </ul>
+    <h4 class="oe_mb16">0.14</h4>
+    <ul>
+      <li>Form Builder versioning. Also create a new Builder version-record (from existing one).</li>
+    </ul>
+    <h4 class="oe_mb16">0.13</h4>
+    <ul>
+      <li>Form Builder states: Draft (in design), Current (published) and Obsolete (unpublished).</li>
+    </ul>
+    <h4 class="oe_mb16">0.12</h4>
+    <ul>
+      <li>Redesign of Builder and Form templates. A simplification and improvement.</li>
+      <li>Hopefully fixed enough styling issues due to Bootstrap 4 VS 3 presence (Odoo, Formio) and differences.</li>
+      <li>Other small improvements</li>
+    </ul>
+    <h4 class="oe_mb16">0.11</h4>
+    <ul>
+      <li>Include new Form.io versions and assets (3.27.3, 4.0.8)</li>
+      <li>Add recommendation into the description of the "latest" Form.io version.</li>
+    </ul>
+    <h4 class="oe_mb16">0.10</h4>
+    <ul>
+      <li>Translation system for Form labels, placeholders etc.</li>
+      <li>Language selector on Form.</li>      
+    </ul>
+    <h4 class="oe_mb16">0.9</h4>
+    <ul>
+      <li>Simple form wizards.</li>
+    </ul>
+    <h4 class="oe_mb16">0.8</h4>
+    <ul>
+      <li>Access-check improvements.</li>
+      <li>UI improvements.</li>
+      <li>Dutch translations.</li>
+    </ul>
+    <h4 class="oe_mb16">0.7</h4>
+    <ul>
+      <li>Dropdown button in Portal, to add and fill-in new Form(s).</li>
+    </ul>
+    <h4 class="oe_mb16">0.6</h4>
+    <ul>
+      <li>Form state (Pending, In Progress, Complete, Canceled).</li>
+      <li>Form is readonly if state is Complete or Canceled.</li>
+    </ul>
+    <h4 class="oe_mb16">0.5</h4>
+    <ul>
+      <li>Form invitation mail.</li>
+      <li>Improvements regarding form assignment (user filter).</li>
+    </ul>
+    <h4 class="oe_mb16">0.4</h4>
+    <ul>
+      <li>Portal User can use forms.</li>
+      <li>Restrict access to assigned forms (Portal User, Internal User).</li>
+    </ul>
     <h4 class="oe_mb16">0.3</h4>
     <ul>
-      <li>Translations</li>
+      <li>Translations system to manage the Form.io translatable terms and load into the form.</li>
     </ul>
     <h4 class="oe_mb16">0.2</h4>
     <ul>

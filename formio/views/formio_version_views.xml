@@ -31,19 +31,27 @@ See LICENSE file for full licensing details. -->
                             <field name="translations">
                                 <tree editable="bottom">
                                     <field name="lang_id" options="{'no_quick_create':True,'no_create_edit':True}"/>
-                                    <field name="property"/>
+                                    <field name="source_id"/>
                                     <field name="value"/>
                                 </tree>
                             </field>
                         </page>
                         <page string="Assets" name="assets" groups="formio.group_formio_admin">
-                            <field name="assets">
+                            <field name="assets" context="{'default_version_id': id}">
                                 <tree>
                                     <field name="sequence" widget="handle"/>
                                     <field name="attachment_id"/>
                                     <field name="type"/>
                                     <field name="attachment_type"/>
                                 </tree>
+                                <form>
+                                    <group>
+                                        <field name="version_id" readonly="1" attrs="{'invisible': [('version_id', '=', False)]}"/>
+                                        <field name="type"/>
+                                        <field name="attachment_id"/>
+                                        <field name="attachment_type" attrs="{'invisible': [('attachment_id', '=', False)]}"/>
+                                    </group>
+                                </form>
                             </field>
                         </page>
                     </notebook>
@@ -53,7 +61,7 @@ See LICENSE file for full licensing details. -->
     </record>
 
     <record id="action_formio_version" model="ir.actions.act_window">
-        <field name="name">Form.io Versions</field>
+        <field name="name">Versions</field>
         <field name="res_model">formio.version</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>

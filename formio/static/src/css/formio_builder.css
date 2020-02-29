@@ -1,0 +1,71 @@
+.formio_builder_container {
+    width: 88%;
+    margin: 0 auto;
+}
+
+.formio_builder_iframe_container {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    background:url('/web/static/lib/select2/select2-spinner.gif') center center no-repeat;
+}
+
+.formio_builder_iframe_container .row {
+    margin: 0;
+}
+
+.formio_builder_iframe_container .formio_title, .formio_builder_iframe_container .formio_actions {
+    background-color: #fff;
+    margin-bottom: 0;
+    padding: 20px 20px 0 20px;
+}
+
+.formio_builder_iframe_container iframe{
+    width: 1px;
+    min-width: 100%;
+    border: 0;
+}
+
+.formio_builder_container .formio_header {
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.formio_builder_container .formio_header .formio_builder_dock * {
+    font-size: 14px;
+}
+
+@media screen and (max-height: 1440px) {
+    .formio_builder_iframe_container iframe{
+        height: 1000px;
+    }
+}
+
+@media screen and (max-height: 1200px) {
+    .formio_builder_iframe_container iframe{
+        height: 800px;
+    }
+}
+
+@media screen and (max-height: 1024px) {
+    .formio_builder_iframe_container iframe{
+        height: 680px;
+    }
+}
+
+@media screen and (max-height: 900px) {
+    .formio_builder_iframe_container iframe{
+        height: 600px;
+    }
+}
+
+@media screen and (max-height: 800px) {
+    .formio_builder_iframe_container iframe{
+        height: 600px;
+    }
+}
+
+@media screen and (max-height: 768px) {
+    .formio_builder_iframe_container iframe{
+        height: 520px;
+    }
+}

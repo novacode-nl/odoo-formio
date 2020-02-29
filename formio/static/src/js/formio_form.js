@@ -1,7 +1,7 @@
 // Copyright Nova Code (http://www.novacode.nl)
 // See LICENSE file for full licensing details.
 
-odoo.define('formio.Form', ['web.ajax'], function (require) {
+odoo.define('formio.formio_form_embed', ['web.ajax'], function (require) {
     "use strict";
 
     // TODO Get rid of callbacks and refactor in a classy way.
@@ -26,8 +26,8 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
                     var options = JSON.parse(_options);
                     var hooks = {
                         'addComponent': function(container, comp, parent) {
-                            if (comp.component.hasOwnProperty('data') && comp.component.data.hasOwnProperty('url') &&
-                                !$.isEmptyObject(comp.component.data.url)) {
+                            if (comp.hasOwnProperty('component') && comp.component.hasOwnProperty('data') &&
+                                comp.component.data.hasOwnProperty('url') && !$.isEmptyObject(comp.component.data.url)) {
                                 comp.component.data.url = base_url.concat(comp.component.data.url, '/', uuid);
                             }
                             return container;
@@ -36,7 +36,14 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
                     options['hooks'] = hooks;
 
                     Formio.createForm(document.getElementById('formio_form'), schema, options).then(function(form) {
-                        form.language = options['language'];
+                        // Language
+                        if ('language' in options) {
+                            form.language = options['language'];
+                        }
+                        window.setLanguage = function(lang) {
+                            form.language = lang;
+                        };
+                        
                         // Events
                         form.on('submit', function(submission) {
                             ajax.jsonRpc(submit_url, 'call', {
@@ -45,6 +52,9 @@ odoo.define('formio.Form', ['web.ajax'], function (require) {
                             }).then(function() {
                                 form.emit('submitDone', submission);
                             });
+                        });
+                        form.on('submitDone', function(submission) {
+                            window.parent.postMessage('formioSubmitDone', base_url);
                         });
                         // Set the Submission (data)
                         // https://github.com/formio/formio.js/wiki/Form-Renderer#setting-the-submission

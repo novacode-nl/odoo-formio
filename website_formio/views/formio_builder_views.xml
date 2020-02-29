@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <record id="view_formio_builder_form_website" model="ir.ui.view">
+        <field name="name">formio.builder.form.website</field>
+        <field name="model">formio.builder</field>
+        <field name="inherit_id" ref="formio.view_formio_builder_form"/>
+        <field name="arch" type="xml">
+            <!-- submit_done -->
+            <field name="submit_done_url" position="before">
+                <field name="submit_done_page_id" string="Page" groups="formio.group_formio_admin"/>
+            </field>
+            <field name="submit_done_url" position="attributes">
+                <attribute name="attrs">{'readonly': [('submit_done_page_id', '!=', False)]}</attribute>
+            </field>
+            <!-- portal_submit_done -->
+            <field name="portal_submit_done_url" position="before">
+                <field name="portal_submit_done_page_id" string="Page" groups="formio.group_formio_admin"/>
+            </field>
+            <field name="portal_submit_done_url" position="attributes">
+                <attribute name="attrs">{'readonly': [('portal_submit_done_page_id', '!=', False)]}</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>

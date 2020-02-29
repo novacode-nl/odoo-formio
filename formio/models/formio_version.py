@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
@@ -8,6 +7,7 @@ from odoo import api, fields, models, _
 class Version(models.Model):
     _name = 'formio.version'
     _description = 'Formio Version'
+    _order = 'name DESC'
 
     name = fields.Char(
         "Name", required=True, track_visibility='onchange',

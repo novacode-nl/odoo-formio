@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io - Sales',
+    'name': 'Form.io Sales',
     'summary': 'Form.io webforms on Sale Orders/Quotes',
     'version': '0.1',
     'author': 'Nova Code',
@@ -12,6 +11,7 @@
     'category': 'Sales',
     'depends': ['sale_management', 'formio'],
     'data': [
+        'data/formio_sale_data.xml',
         'views/sale_views.xml',
     ],
     'application': True,

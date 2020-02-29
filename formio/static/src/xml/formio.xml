@@ -1,0 +1,120 @@
+<template>
+    <t t-name="FormioBuilderWidget">
+        <div class="o_control_panel o_breadcrumb_full">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    Form Builders
+                </li>
+                <li class="breadcrumb-item active">
+                    <a t-attf-href="#{widget.builder.act_window_url}">
+                        <t t-esc="widget.builder.title"/>
+                    </a>
+                </li>
+            </ol>
+        </div>
+        <div t-attf-class="formio_builder_container {{ widget.builder.state }}">
+            <div class="row formio_header">
+                <div class="col-md-12">
+                    <div class="formio_builder_dock float-right">
+                        <span class="builder_state">
+                            <t t-if="widget.builder.state == 'DRAFT'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-warning">State: <strong><t t-esc="widget.builder.display_state"/></strong></span>
+                            </t>
+                            <t t-elif="widget.builder.state == 'CURRENT'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-success">State: <strong><t t-esc="widget.builder.display_state"/></strong></span>
+                            </t>
+                            <t t-elif="widget.builder.state == 'OBSOLETE'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-dark">State: <strong><t t-esc="widget.builder.display_state"/></strong></span>
+                            </t>
+                            <t t-else="">
+                                <span t-attf-class="badge mb-1 badge-pill badge-light">State: <strong><t t-esc="widget.builder.display_state"/></strong></span>
+                            </t>
+                        </span>
+                        <span class="version">
+                            <!-- TODO: class .header-item to margin-left -->
+                            <span style="margin-left: 15px;">Version: </span><strong><t t-esc="widget.builder.version"/></strong>
+                        </span>
+                        <span class="parent">
+                            <!-- TODO: class .header-item to margin-left -->
+                            <span style="margin-left: 15px;">Parent version: </span><strong><t t-esc="widget.builder.parent_version"/></strong>
+                        </span>
+                        <span class="formio_version">
+                            <span style="margin-left: 15px;">Form.io version: </span><strong><t t-esc="widget.builder.formio_version_name"/></strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="formio_builder_iframe_container">
+                <div class="row">
+                <div class="col-sm-8 col-md-8 formio_title">
+                    <h1>
+                        <t t-esc="widget.builder.title"/>
+                    </h1>
+                </div>
+                <div class="col-sm-4 col-md-4 formio_actions">
+                    <button id="fullscreen_formio" class="pull-right">Fullscreen (Exit with ESC)</button>
+                </div>
+                </div>
+                <iframe t-attf-src="/formio/builder/embed/#{widget.builder.id}" id="formio_builder_embed" allowfullscreen="true"></iframe>
+                <script>
+                    var fullscreen = document.getElementById('fullscreen_formio');
+                    var iframe = document.getElementById('formio_builder_embed');
+                    fullscreen.addEventListener('click', (function () {
+                        iframe.requestFullscreen();
+                    }));
+                </script>
+            </div>
+        </div>
+    </t>
+    <t t-name="FormioFormWidget">
+        <div class="formio o_control_panel o_breadcrumb_full">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Forms</li>
+                <li class="breadcrumb-item active">
+                    <a t-attf-href="#{widget.form.act_window_url}">
+                        <t t-esc="widget.form.title"/>
+                    </a>
+                </li>
+            </ol>
+        </div>
+        <div t-attf-class="formio_form_container {{ widget.form.state }}">
+            <div class="row formio_header">
+                <div class="col-md-12">
+                    <div class="formio_form_dock float-right">
+                        <span class="form_state">
+                            <t t-if="widget.form.state == 'PENDING'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-alpha">State: <strong><t t-esc="widget.form.display_state"/></strong></span>
+                            </t>
+                            <t t-elif="widget.form.state == 'DRAFT'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-warning">State: <strong><t t-esc="widget.form.display_state"/></strong></span>
+                            </t>
+                            <t t-elif="widget.form.state == 'COMPLETE'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-success">State: <strong><t t-esc="widget.form.display_state"/></strong></span>
+                            </t>
+                            <t t-elif="widget.form.state == 'CANCEL'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-dark">State: <strong><t t-esc="widget.form.display_state"/></strong></span>
+                            </t>
+                            <t t-else="">
+                                <span t-attf-class="badge mb-1 badge-pill badge-light">State: <strong><t t-esc="widget.form.display_state"/></strong></span>
+                            </t>
+                        </span>
+                        <span class="form_id" style="margin-left: 12px;">
+                            <span>ID: <strong><t t-esc="widget.form.id"/></strong></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="formio_form_iframe_container">
+                <div class="formio_title">
+                    <h1>
+                        <t t-esc="widget.form.title"/>
+                    </h1>
+                </div>
+                <iframe t-attf-src="/formio/form/embed/#{widget.form.uuid}" id="formio_form_embed"/>
+                <script>
+                    iFrameResize({}, '#formio_form_embed')
+                </script>
+            </div>
+        </div>
+    </t>
+</template>

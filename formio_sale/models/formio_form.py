@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
 from odoo import api, fields, models, _
+from odoo.addons.formio.models.formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
 from odoo.addons.formio.utils import get_field_selection_label
 
 
@@ -28,7 +28,11 @@ class Form(models.Model):
         res = {}
         if self._context.get('active_model') == 'sale.order':
             res_model_id = self.env.ref('sale.model_sale_order').id
-            res['domain'] = {'builder_id': [('res_model_id', '=', res_model_id)]}
+            domain = [
+                ('state', '=', BUILDER_STATE_CURRENT),
+                ('res_model_id', '=', res_model_id),
+            ]
+            res['domain'] = {'builder_id': domain}
         return res
 
     def _compute_res_fields(self):
