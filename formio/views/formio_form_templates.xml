@@ -23,8 +23,9 @@ See LICENSE file for full licensing details. -->
                 <link rel="stylesheet" href="/formio/static/src/css/formio_form_embed.css"/>
                 
                 <!-- Odoo JS dependencies could cause clashes with Form.io JS -->
-                <t t-call-assets="web.assets_common" t-css="false"/>
+                <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
                 <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.contentWindow.min.js"></script>
+                <script type="text/javascript" src="/formio/static/src/js/odoo.jsonrpc.js"/>
                 <script type="text/javascript" src="/formio/static/src/js/formio_form.js"/>
             </head>
             <body>
