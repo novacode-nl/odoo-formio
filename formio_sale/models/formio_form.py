@@ -12,9 +12,6 @@ class Form(models.Model):
     sale_order_id = fields.Many2one(
         'sale.order', compute='_compute_sale_order_id', store=True,
         readonly=True, string='Sale Order')
-    partner_id = fields.Many2one(
-        'res.partner', related='sale_order_id.partner_id',
-        store=True, readonly=True, string='Partner')
 
     @api.one
     @api.depends('res_model_id', 'res_id')
@@ -23,9 +20,16 @@ class Form(models.Model):
             order = self.env['sale.order'].search([('id', '=', self.res_id)])
             self.sale_order_id = order.id
 
+    @api.one
+    @api.depends('res_model_id', 'res_id')
+    def _compute_partner_id(self):
+        super(Form, self)._compute_partner_id()
+        if self.res_model_id.model == 'sale.order':
+            self.partner_id = self.sale_order_id.partner_id
+
     @api.onchange('builder_id')
     def _onchange_builder_id(self):
-        res = {}
+        res = super(Form, self)._onchange_builder_id()
         if self._context.get('active_model') == 'sale.order':
             res_model_id = self.env.ref('sale.model_sale_order').id
             domain = [
@@ -36,6 +40,7 @@ class Form(models.Model):
         return res
 
     def _compute_res_fields(self):
+        super(Form, self)._compute_res_fields()
         for r in self:
             if r.res_model_id.model == 'sale.order':
                 if r.sale_order_id.state in ('draft', 'sent'):
@@ -53,15 +58,16 @@ class Form(models.Model):
 
     @api.multi
     def action_open_res_act_window(self):
+        res = super(Form, self).action_open_res_act_window()
         if self.res_model_id.model == 'sale.order':
             if self.sale_order_id.state in ('draft', 'sent'):
                 action = self.env.ref('sale.action_quotations')
             else:
                 action = self.env.ref('sale.action_orders')
-
-        return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'sale.order',
-            'res_id': self.sale_order_id.id,
-            "views": [[False, "form"]],
-        }
+            res = {
+                'type': 'ir.actions.act_window',
+                'res_model': 'sale.order',
+                'res_id': self.sale_order_id.id,
+                "views": [[False, "form"]],
+            }
+        return res
