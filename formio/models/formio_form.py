@@ -72,6 +72,9 @@ class Form(models.Model):
     portal = fields.Boolean("Portal", related='builder_id.portal', help="Form is accessible by assigned portal user")
     portal_submit_done_url = fields.Char(related='builder_id.portal_submit_done_url')
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
+    partner_id = fields.Many2one(
+        'res.partner', compute='_compute_partner_id',
+        store=True, readonly=True, string='Partner')
 
     @api.multi
     @api.depends('state')
@@ -180,6 +183,10 @@ class Form(models.Model):
             self.user_id = self.env.user.id
         self.title = self.builder_id.title
 
+    @api.onchange('builder_id')
+    def _onchange_builder_id(self):
+        return {}
+
     @api.onchange('portal')
     def _onchange_portal(self):
         res = {}
@@ -224,6 +231,11 @@ class Form(models.Model):
                 action=action.id)
             r.act_window_url = url
 
+    @api.one
+    @api.depends('res_model_id', 'res_id')
+    def _compute_partner_id(self):
+        pass
+
     def _compute_res_fields(self):
         for r in self:
             r.res_act_window_url = False
@@ -240,7 +252,7 @@ class Form(models.Model):
 
     @api.multi
     def action_open_res_act_window(self):
-        raise NotImplementedError
+        pass
 
     @api.model
     def get_form(self, uuid, mode):
