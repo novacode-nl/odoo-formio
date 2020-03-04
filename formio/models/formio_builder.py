@@ -179,14 +179,6 @@ class Builder(models.Model):
             r.act_window_url = url
 
     @api.multi
-    def action_formio_builder(self):
-        return {
-            'type': 'ir.actions.act_url',
-            'url': self.edit_url,
-            'target': 'self',
-        }
-
-    @api.multi
     def action_client_formio_builder(self):
         return {
             'type': 'ir.actions.client',
