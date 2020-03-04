@@ -231,14 +231,6 @@ class Form(models.Model):
             r.res_info = False
         
     @api.multi
-    def action_formio(self):
-        return {
-            'type': 'ir.actions.act_url',
-            'url': self.url,
-            'target': 'self',
-        }
-
-    @api.multi
     def action_open_res_act_window(self):
         raise NotImplementedError
 

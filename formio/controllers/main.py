@@ -21,24 +21,7 @@ class FormioController(http.Controller):
 
     # Builder
     @http.route('/formio/builder/<int:builder_id>', type='http', auth='user', website=True)
-    def builder_edit(self, builder_id, **kwargs):
-        if not request.env.user.has_group('formio.group_formio_admin'):
-            # TODO website page with message?
-            return request.redirect("/")
-
-        # Needed to update language
-        context = request.env.context.copy()
-        context.update({'lang': request.env.user.lang})
-        request.env.context = context
-
-        builder = request.env['formio.builder'].browse(builder_id)
-        values = {
-            'builder': builder,
-        }
-        return request.render('formio.formio_builder', values)
-
-    @http.route('/formio/builder/embed/<int:builder_id>', type='http', auth='user', website=True)
-    def builder_embed(self, builder_id, **kwargs):
+    def builder_root(self, builder_id, **kwargs):
         if not request.env.user.has_group('formio.group_formio_admin'):
             # TODO Render template with message?
             return request.redirect("/")
@@ -93,49 +76,8 @@ class FormioController(http.Controller):
         return request.env['formio.form'].get_form(uuid, mode)
 
     # Form
-    @http.route('/formio/form/<string:uuid>', type='http', auth='user', website=True)
-    def form_edit(self, uuid, **kwargs):
-        form = self._get_form(uuid, 'read')
-        if not form:
-            # TODO website page with message?
-            return request.redirect("/")
-
-        # Needed to update language
-        context = request.env.context.copy()
-        context.update({'lang': request.env.user.lang})
-        request.env.context = context
-
-        # Get active languages used in Builder translations.
-        query = """
-            SELECT
-              DISTINCT(fbt.lang_id) AS lang_id
-            FROM
-              formio_builder_translation AS fbt
-              INNER JOIN res_lang AS l ON l.id = fbt.lang_id
-            WHERE
-              fbt.builder_id = {builder_id}
-              AND l.active = True
-        """.format(builder_id=form.builder_id.id)
-
-        request.env.cr.execute(query)
-        builder_lang_ids = [r[0] for r in request.env.cr.fetchall()]
-
-        # Always include english (en_US).
-        domain = ['|', ('id', 'in', builder_lang_ids), ('code', 'in', [request.env.user.lang, 'en_US'])]
-        languages = request.env['res.lang'].with_context(active_test=False).search(domain, order='name asc')
-        languages = languages.filtered(lambda r: r.id in builder_lang_ids or r.code == 'en_US')
-
-        values = {
-            'languages': [], # initialize, otherwise template/view crashes.
-            'user': request.env.user,
-            'form': form,
-        }
-        if len(languages) > 1:
-            values['languages'] = languages
-        return request.render('formio.formio_form', values)
-
-    @http.route('/formio/form/embed/<string:uuid>', type='http', auth='user', website=True)
-    def form_embed(self, uuid, **kwargs):
+    @http.route('/formio/form/<string:uuid>/root', type='http', auth='user', website=True)
+    def form_root(self, uuid, **kwargs):
         form = self._get_form(uuid, 'read')
         if not form:
             # TODO Render template with message?
@@ -176,7 +118,7 @@ class FormioController(http.Controller):
             values['languages'] = languages
         return request.render('formio.formio_form_embed', values)
 
-    @http.route('/formio/form/schema/<string:uuid>', type='json', auth='user', website=True)
+    @http.route('/formio/form/<string:uuid>/schema', type='json', auth='user', website=True)
     def form_schema(self, uuid, **kwargs):
         form = self._get_form(uuid, 'read')
         if form and form.builder_id.schema:
@@ -227,7 +169,7 @@ class FormioController(http.Controller):
 
         return options
 
-    @http.route('/formio/form/options/<string:uuid>', type='json', auth='user', website=True)
+    @http.route('/formio/form/<string:uuid>/options', type='json', auth='user', website=True)
     def form_options(self, uuid, **kwargs):
         form = self._get_form(uuid, 'read')
         if form:
@@ -236,7 +178,7 @@ class FormioController(http.Controller):
             options = {}
         return json.dumps(options)
 
-    @http.route('/formio/form/submission/<string:uuid>', type='json', auth='user', website=True)
+    @http.route('/formio/form/<string:uuid>/submission', type='json', auth='user', website=True)
     def form_submission(self, uuid, **kwargs):
         form = self._get_form(uuid, 'read')
         if form and form.submission_data:
@@ -244,7 +186,7 @@ class FormioController(http.Controller):
         else:
             return {}
 
-    @http.route('/formio/form/submit/<string:uuid>', type='json', auth="user", methods=['POST'], website=True)
+    @http.route('/formio/form/<string:uuid>/submit', type='json', auth="user", methods=['POST'], website=True)
     def form_submit(self, uuid, **post):
         """ POST with ID instead of uuid, to get the model object right away """
 
@@ -266,7 +208,7 @@ class FormioController(http.Controller):
 
         form.write(vals)
 
-    @http.route('/formio/form/data/<string:uuid>', type='http', auth='user', website=True)
+    @http.route('/formio/form/<string:uuid>/data', type='http', auth='user', website=True)
     def form_data(self, uuid, **kwargs):
         """ Get data from a resource-object.
 
@@ -277,8 +219,8 @@ class FormioController(http.Controller):
 
         Form.io configuration (in "Data" tab)
         -------------------------------------
-        - Data Source URL: /formio/form/data
-        - Filter Query: model=res.partner&label=name&domain_fields=function&city=Sittard
+        - Data Source URL: data
+        - Filter Query: model=res.partner&label=name&domain_fields=city&city=Sittard
         """
 
         form = self._get_form(uuid, 'read')
@@ -317,7 +259,7 @@ class FormioController(http.Controller):
         except Exception as e:
             _logger.error("Exception: %s" % e)
 
-    @http.route('/formio/form/res_data/<string:uuid>', type='http', auth='user', website=True)
+    @http.route('/formio/form/<string:uuid>/res_data', type='http', auth='user', website=True)
     def form_res_data(self, uuid, **kwargs):
         """ Get data from a linked resource-object (by: res_model_id, res_id),
 
@@ -331,7 +273,7 @@ class FormioController(http.Controller):
 
         Form.io configuration (in "Data" tab)
         -------------------------------------
-        - Data Source URL: /formio/form/res_data
+        - Data Source URL: res_data
         - Filter Query: field=order_line.product_id&label=name
         """
 
