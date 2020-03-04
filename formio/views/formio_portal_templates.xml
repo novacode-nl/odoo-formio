@@ -149,7 +149,7 @@ See LICENSE file for full licensing details. -->
                             <t t-esc="form.title"/>
                         </h1>
                     </div>
-                    <iframe t-attf-src="/formio/form/#{form.uuid}" id="formio_form_embed"/>
+                    <iframe t-attf-src="/formio/form/#{form.uuid}/root" id="formio_form_embed"/>
                     <script type="text/javascript">
                         // TODO move to Javascript file.
                         iFrameResize({}, '#formio_form_embed')
