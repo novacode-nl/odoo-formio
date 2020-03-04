@@ -5,7 +5,7 @@ See LICENSE file for full licensing details. -->
 <odoo>
     <data>
         <record id="formio_res_model_sale_order" model="formio.res.model">
-            <field name="formio_res_model_id" ref="sale.model_sale_order"/>
+            <field name="ir_model_id" ref="sale.model_sale_order"/>
         </record>
         
         <record id="formio_builder_sale_demo" model="formio.builder">
