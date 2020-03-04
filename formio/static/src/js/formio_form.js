@@ -4,10 +4,11 @@
 $(document).ready(function() {
     var uuid = document.getElementById('form_uuid').value,
         base_url = window.location.protocol + '//' + window.location.host,
-        schema_url = '/formio/form/schema/' + uuid,
-        options_url = '/formio/form/options/' + uuid,
-        submission_url = '/formio/form/submission/' + uuid,
-        submit_url = '/formio/form/submit/' + uuid,
+        formio_uuid = '/formio/form/' + uuid,
+        schema_url = formio_uuid + '/schema/',
+        options_url = formio_uuid + '/options/',
+        submission_url = formio_uuid + '/submission/',
+        submit_url = formio_uuid + '/submit/',
         schema = {},
         options = {};
 
