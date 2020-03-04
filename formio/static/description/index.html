@@ -116,6 +116,17 @@
 <section class="oe_container oe_dark">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Changelog</h2>
+    <h4 class="oe_mb16">1.8</h4>
+    <ul>
+      <li>
+        Change URLs and controllers FROM <code>/formio/form/&lt;action&gt;/&lt;string:uuid&gt;</code> URLs TO <code>/formio/form/&lt;string:uuid&gt;/&lt;action&gt;</code>. This solves issues regarding relative URLs from a Formio Javascript perspective (components).
+        The UUID was stripped by the Formio Javascript client API.<br/>
+        Should solve: <a href="https://github.com/novacode-nl/odoo-formio/issues/11" target="_blank">https://github.com/novacode-nl/odoo-formio/issues/11</a>
+      </li>
+      <li>
+        Remove 2 legacy (obsolete) controller methods for routes: <code>/formio/form/&lt;string:uuid&gt;</code> and <code>/formio/builder/&lt;int:builder_id&gt;</code>
+      </li>
+    </ul>
     <h4 class="oe_mb16">1.7</h4>
     <ul>
       <li>
