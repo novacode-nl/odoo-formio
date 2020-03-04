@@ -12,6 +12,7 @@
     'depends': ['sale_management', 'formio'],
     'data': [
         'data/formio_sale_data.xml',
+        'data/formio_demo_data.xml',
         'views/sale_views.xml',
     ],
     'application': True,
