@@ -9,7 +9,8 @@ class BuilderTranslation(models.Model):
     _description = 'Formio Builder Translation'
     _order = 'lang_id ASC'
 
-    builder_id = fields.Many2one('formio.builder', string='Form Builder', required=True)
+    builder_id = fields.Many2one(
+        'formio.builder', string='Form Builder', required=True, ondelete='cascade')
     lang_id = fields.Many2one('res.lang', string='Language', required=True)
     source = fields.Text(string='Source Term', required=True)
     value = fields.Text(string='Translated Value', required=True)

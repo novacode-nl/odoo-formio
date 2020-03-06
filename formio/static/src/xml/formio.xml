@@ -55,7 +55,7 @@
                     <button id="fullscreen_formio" class="pull-right">Fullscreen (Exit with ESC)</button>
                 </div>
                 </div>
-                <iframe t-attf-src="/formio/builder/embed/#{widget.builder.id}" id="formio_builder_embed" allowfullscreen="true"></iframe>
+                <iframe t-attf-src="/formio/builder/#{widget.builder.id}" id="formio_builder_embed" allowfullscreen="true"></iframe>
                 <script>
                     var fullscreen = document.getElementById('fullscreen_formio');
                     var iframe = document.getElementById('formio_builder_embed');
@@ -110,7 +110,7 @@
                         <t t-esc="widget.form.title"/>
                     </h1>
                 </div>
-                <iframe t-attf-src="/formio/form/embed/#{widget.form.uuid}" id="formio_form_embed"/>
+                <iframe t-attf-src="/formio/form/#{widget.form.uuid}/root" id="formio_form_embed"/>
                 <script>
                     iFrameResize({}, '#formio_form_embed')
                 </script>
