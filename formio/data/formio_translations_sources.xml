@@ -2,7 +2,7 @@
 <!-- Copyright Nova Code (http://www.novacode.nl)
 See LICENSE file for full licensing details. -->
 
-<odoo>
+<flectra>
     <data>
         <record id="i18n_complete" model="formio.translation.source">
             <field name="property">complete</field>
@@ -153,4 +153,4 @@ See LICENSE file for full licensing details. -->
             <field name="source">Submit</field>
         </record>
     </data>
-</odoo>
+</flectra>

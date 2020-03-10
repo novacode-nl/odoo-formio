@@ -5,8 +5,8 @@ from collections import deque
 import json
 import logging
 
-from odoo import http, fields
-from odoo.http import request
+from flectra import http, fields
+from flectra.http import request
 
 from ..models.formio_builder import \
     STATE_CURRENT as BUILDER_STATE_CURRENT, STATE_OBSOLETE as BUILDER_STATE_OBSOLETE

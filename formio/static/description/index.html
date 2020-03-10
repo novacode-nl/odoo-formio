@@ -13,19 +13,19 @@
 	<ul class="list-unstyled">
           <li>
 	    <i class="fa fa-check-square-o text-primary"></i>
-            A powerful <strong>"Drag and drop" Form Builder</strong> in Odoo.
+            A powerful <strong>"Drag and drop" Form Builder</strong> in Flectra.
 	  </li>
           <li>
             <i class="fa fa-check-square-o text-primary"></i>
-            <strong>Start Building Forms</strong> in Odoo.
+            <strong>Start Building Forms</strong> in Flectra.
 	  </li>
           <li>
             <i class="fa fa-check-square-o text-primary"></i>
-            <strong>Configure and manage Form Builders</strong> in Odoo.
+            <strong>Configure and manage Form Builders</strong> in Flectra.
           </li>
           <li>
             <i class="fa fa-check-square-o text-primary"></i>
-            Show and open <strong>Form Submissions</strong> in Odoo.
+            Show and open <strong>Form Submissions</strong> in Flectra.
           </li>
           <li>
 	    <i class="fa fa-check-square-o text-primary"></i>
@@ -45,7 +45,7 @@
 	  </li>
 	  <li>
 	    <i class="fa fa-check-square-o text-primary"></i>
-            Provide <strong>Form-fields with data from Odoo</strong>. For example: a selection/dropdown field where choices are Odoo Products, filtered by some product-category.
+            Provide <strong>Form-fields with data from Flectra</strong>. For example: a selection/dropdown field where choices are Flectra Products, filtered by some product-category.
 	  </li>
 	</ul>
       </div>
@@ -57,7 +57,7 @@
   </div>
   <div class="oe_row oe_centeralign mb16">
     <h4>Visit the Demo</h4>
-    <a href="https://odoo12-b4a887d572e9.victhorious.com/web/login" target="_blank" class="oe_button oe_big">Demo</a>
+    <a href="https://flectra12-b4a887d572e9.victhorious.com/web/login" target="_blank" class="oe_button oe_big">Demo</a>
     <p class="mt8"><strong>Users</strong> (Email / Password)</p>
     <ul>
       <li>demo / demo</li>
@@ -75,13 +75,13 @@
 <section class="oe_container oe_dark">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Form Builders</h2>
-    <h3 class="oe_slogan">Manage, configure and store in Odoo</h3>
+    <h3 class="oe_slogan">Manage, configure and store in Flectra</h3>
     <div class="oe_row_img oe_centered">
       <h4 class="oe_mb16 text-center">List Form Builders</h4>
       <img class="oe_demo oe_picture oe_screenshot" src="builder-list.png">
     </div>
     <div class="oe_row_img oe_centered">
-      <h4 class="oe_mb16 text-center">Edit Form Builder <small>(Odoo record)<small></h4>
+      <h4 class="oe_mb16 text-center">Edit Form Builder <small>(Flectra record)<small></h4>
       <img class="oe_demo oe_picture oe_screenshot" src="builder-edit.png">
     </div>
     <div class="oe_row_img oe_centered">
@@ -95,19 +95,19 @@
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Forms & Submissions</h2>
     <div class="oe_row_img oe_centered">
-      <h4 class="oe_mb16 text-center">Start with Form <small>(from Odoo or by hyperlink)</small></h4>
-      <img class="oe_demo oe_picture oe_screenshot" src="form-odoo-create.png">
+      <h4 class="oe_mb16 text-center">Start with Form <small>(from Flectra or by hyperlink)</small></h4>
+      <img class="oe_demo oe_picture oe_screenshot" src="form-flectra-create.png">
     </div>
     <div class="oe_row_img oe_centered">
       <h4 class="oe_mb16 text-center">"Form.io" Form <small>(to fill in)</small></h4>
       <img class="oe_demo oe_picture oe_screenshot" src="form-formio.png">
     </div>
     <div class="oe_row_img oe_centered">
-      <h4 class="oe_mb16 text-center">List Form Submissions <small>(Odoo kanban/list of records)<small></h4>
+      <h4 class="oe_mb16 text-center">List Form Submissions <small>(Flectra kanban/list of records)<small></h4>
       <img class="oe_demo oe_picture oe_screenshot" src="form-list.png">
     </div>
     <div class="oe_row_img oe_centered">
-      <h4 class="oe_mb16 text-center">A Form Submission <small>(Odoo record)<small></h4>
+      <h4 class="oe_mb16 text-center">A Form Submission <small>(Flectra record)<small></h4>
       <img class="oe_demo oe_picture oe_screenshot" src="form-details.png">
     </div>
   </div>
@@ -121,7 +121,7 @@
       <li>
         Change URLs and controllers FROM <code>/formio/form/&lt;action&gt;/&lt;string:uuid&gt;</code> URLs TO <code>/formio/form/&lt;string:uuid&gt;/&lt;action&gt;</code>. This solves issues regarding relative URLs from a Formio Javascript perspective (components).
         The UUID was stripped by the Formio Javascript client API.<br/>
-        Should solve: <a href="https://github.com/novacode-nl/odoo-formio/issues/11" target="_blank">https://github.com/novacode-nl/odoo-formio/issues/11</a>
+        Should solve: <a href="https://github.com/novacode-nl/flectra-formio/issues/11" target="_blank">https://github.com/novacode-nl/flectra-formio/issues/11</a>
       </li>
       <li>
         Remove 2 legacy (obsolete) controller methods for routes: <code>/formio/form/&lt;string:uuid&gt;</code> and <code>/formio/builder/&lt;int:builder_id&gt;</code>
@@ -130,7 +130,7 @@
     <h4 class="oe_mb16">1.7</h4>
     <ul>
       <li>
-        Prevent Javascript clashes between Odoo and Form.io. Hence remove all Odoo Javascript (assets) loading in the Form.io iframe.
+        Prevent Javascript clashes between Flectra and Form.io. Hence remove all Flectra Javascript (assets) loading in the Form.io iframe.
       </li>
       <li>
         Add and load standalone JsonRPC client.
@@ -190,7 +190,7 @@
     </ul>
     <h4 class="oe_mb16">1.0</h4>
     <ul>
-      <li>Form.io embedded in iframe. This avoids clashes (Javascript and CSS) between Odoo and Form.io.</li>
+      <li>Form.io embedded in iframe. This avoids clashes (Javascript and CSS) between Flectra and Form.io.</li>
       <li>Redesign of Form.io templates</li>
     </ul>
     <h4 class="oe_mb16">0.16</h4>
@@ -214,7 +214,7 @@
     <h4 class="oe_mb16">0.12</h4>
     <ul>
       <li>Redesign of Builder and Form templates. A simplification and improvement.</li>
-      <li>Hopefully fixed enough styling issues due to Bootstrap 4 VS 3 presence (Odoo, Formio) and differences.</li>
+      <li>Hopefully fixed enough styling issues due to Bootstrap 4 VS 3 presence (Flectra, Formio) and differences.</li>
       <li>Other small improvements</li>
     </ul>
     <h4 class="oe_mb16">0.11</h4>

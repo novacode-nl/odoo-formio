@@ -2,7 +2,7 @@
 <!-- Copyright Nova Code (http://www.novacode.nl)
 See LICENSE file for full copyright and licensing details. -->
 
-<odoo>
+<flectra>
     <data>
         <record id="formio_form_user" model="ir.rule">
             <field name="name">formio.form: User assigned forms</field>
@@ -57,4 +57,4 @@ See LICENSE file for full copyright and licensing details. -->
             </field>
         </record>
     </data>
-</odoo>
+</flectra>

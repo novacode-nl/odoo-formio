@@ -1,9 +1,9 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from odoo import http
-from odoo.http import request
-from odoo.addons.portal.controllers.portal import CustomerPortal
+from flectra import http
+from flectra.http import request
+from flectra.addons.portal.controllers.portal import CustomerPortal
 
 from ..models.formio_builder import STATE_CURRENT
 

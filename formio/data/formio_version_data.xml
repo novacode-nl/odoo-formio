@@ -2,7 +2,7 @@
 <!-- Copyright Nova Code (http://www.novacode.nl)
 See LICENSE file for full licensing details. -->
 
-<odoo>
+<flectra>
     <data>
         <record id="version_latest" model="formio.version">
             <field name="name">latest (experimental)</field>
@@ -24,4 +24,4 @@ Please use wise, to experiment with new features (Form Components).
             <field name="name">3.6.6</field>
         </record>
     </data>
-</odoo>
+</flectra>

@@ -2,7 +2,7 @@
 <!-- Copyright Nova Code (http://www.novacode.nl)
 See LICENSE file for full licensing details. -->
 
-<odoo>
+<flectra>
     <menuitem
         id="menu_formio_root"
         name="Form.io"
@@ -63,4 +63,4 @@ See LICENSE file for full licensing details. -->
         parent="formio.menu_formio_translation_root"
         sequence="20"
         action="formio.action_formio_translation_source"/>
-</odoo>
+</flectra>

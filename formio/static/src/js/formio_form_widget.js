@@ -1,7 +1,7 @@
 // Copyright Nova Code (http://www.novacode.nl)
 // See LICENSE file for full licensing details.
 
-odoo.define('formio.formio_form', function (require) {
+flectra.define('formio.formio_form', function (require) {
     "use strict";
 
     var Widget = require('web.Widget');

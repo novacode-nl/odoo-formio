@@ -2,7 +2,7 @@
 <!-- Copyright Nova Code (http://www.novacode.nl)
 See LICENSE file for full licensing details. -->
 
-<odoo>
+<flectra>
     <template id="assets_backend_formio_builder" name="formio_builder assets" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
             <link rel="stylesheet" type="text/css" href="/formio/static/src/css/formio_builder.css"/>
@@ -21,9 +21,9 @@ See LICENSE file for full licensing details. -->
                 </t>
                 <link rel="stylesheet" href="/formio/static/src/css/formio_builder_embed.css"/>
                 
-                <!-- Odoo JS dependencies could cause clashes with Form.io JS -->
+                <!-- Flectra JS dependencies could cause clashes with Form.io JS -->
                 <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
-                <script type="text/javascript" src="/formio/static/src/js/odoo.jsonrpc.js"/>
+                <script type="text/javascript" src="/formio/static/src/js/flectra.jsonrpc.js"/>
                 <script type="text/javascript" src="/formio/static/src/js/formio_builder.js"/>
             </head>
             <body>
@@ -34,4 +34,4 @@ See LICENSE file for full licensing details. -->
             </body>
         </html>
     </template>
-</odoo>
+</flectra>

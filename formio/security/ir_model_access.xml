@@ -2,7 +2,7 @@
 <!-- Copyright Nova Code (http://www.novacode.nl)
 See LICENSE file for full copyright and licensing details. -->
 
-<odoo>
+<flectra>
     <!-- <data noupdate="1"> -->
     <data>
         <!-- Builder -->
@@ -332,4 +332,4 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="0"/>
         </record>
     </data>
-</odoo>
+</flectra>
