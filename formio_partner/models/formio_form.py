@@ -13,7 +13,7 @@ class Form(models.Model):
     @api.depends('res_model_id', 'res_id')
     def _compute_partner_id(self):
         super(Form, self)._compute_partner_id()
-        if self.res_model_id.model == 'res.partner':
+        if self._context.get('active_model') == 'res.partner':
             partner = self.env['res.partner'].search([('id', '=', self.res_id)])
             self.partner_id = partner.id
 

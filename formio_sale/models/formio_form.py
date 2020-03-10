@@ -16,7 +16,7 @@ class Form(models.Model):
     @api.one
     @api.depends('res_model_id', 'res_id')
     def _compute_sale_order_id(self):
-        if self.res_model_id.model == 'sale.order':
+        if self._context.get('active_model') == 'sale.order':
             order = self.env['sale.order'].search([('id', '=', self.res_id)])
             self.sale_order_id = order.id
 
@@ -24,7 +24,7 @@ class Form(models.Model):
     @api.depends('res_model_id', 'res_id')
     def _compute_partner_id(self):
         super(Form, self)._compute_partner_id()
-        if self.res_model_id.model == 'sale.order':
+        if self._context.get('active_model') == 'sale.order':
             self.partner_id = self.sale_order_id.partner_id
 
     @api.onchange('builder_id')
