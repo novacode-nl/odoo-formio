@@ -7,7 +7,7 @@ from odoo import api, fields, models, _
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    formio_forms = fields.One2many('formio.form', 'partner_id', string='Form.io Forms')
+    formio_forms = fields.One2many('formio.form', 'base_res_partner_id', string='Form.io Forms')
     formio_forms_count = fields.Integer(compute='_compute_formio_forms_count')
     formio_this_model_id = fields.Many2one('ir.model', compute='_compute_formio_this_model_id')
 

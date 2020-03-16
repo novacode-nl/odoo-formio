@@ -21,7 +21,7 @@
     ],
     'description': """
 Form.io - Partners
-===============
+==================
 
 Build and publish (Form.io) forms for Partners.
 """

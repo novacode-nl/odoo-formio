@@ -9,13 +9,27 @@ from odoo.addons.formio.utils import get_field_selection_label
 class Form(models.Model):
     _inherit = 'formio.form'
 
+    base_res_partner_id = fields.Many2one(
+        'res.partner', compute='_compute_res_fields', store=True,
+        readonly=True, string='Partner')
+
     @api.one
     @api.depends('res_model_id', 'res_id')
-    def _compute_partner_id(self):
-        super(Form, self)._compute_partner_id()
-        if self._context.get('active_model') == 'res.partner':
+    def _compute_res_fields(self):
+        super(Form, self)._compute_res_fields()
+        if self.res_model == 'res.partner':
             partner = self.env['res.partner'].search([('id', '=', self.res_id)])
-            self.partner_id = partner.id
+            self.base_res_partner_id = partner.id
+            self.base_partner_id = partner.id
+
+            action = self.env.ref('contacts.action_contacts')
+            url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
+                id=self.res_id,
+                model='res.partner',
+                action=action.id)
+            self.res_act_window_url = url
+            self.res_name = self.res_model_name
+            self.res_info = partner.name
 
     @api.onchange('builder_id')
     def _onchange_builder_id(self):
@@ -29,19 +43,6 @@ class Form(models.Model):
             res['domain'] = {'builder_id': domain}
         return res
 
-    def _compute_res_fields(self):
-        super(Form, self)._compute_res_fields()
-        for r in self:
-            if r.res_model_id.model == 'res.partner':
-                action = self.env.ref('base.action_partner_form')
-                url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
-                    id=r.res_id,
-                    model='res.partner',
-                    action=action.id)
-                r.res_act_window_url = url
-                r.res_name = r.res_model_name
-                r.res_info = r.partner_id.name
-
     @api.multi
     def action_open_res_act_window(self):
         res = super(Form, self).action_open_res_act_window()
@@ -49,7 +50,7 @@ class Form(models.Model):
             res = {
                 'type': 'ir.actions.act_window',
                 'res_model': 'res.partner',
-                'res_id': self.partner_id.id,
+                'res_id': self.base_res_partner_id.id,
                 "views": [[False, "form"]],
             }
         return res
