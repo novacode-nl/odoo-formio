@@ -20,7 +20,7 @@ class Form(models.Model):
         if self.res_model == 'res.partner':
             partner = self.env['res.partner'].search([('id', '=', self.res_id)])
             self.base_res_partner_id = partner.id
-            self.base_partner_id = partner.id
+            self.res_partner_id = partner.id
 
             action = self.env.ref('contacts.action_contacts')
             url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
