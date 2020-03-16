@@ -236,7 +236,7 @@ class Form(models.Model):
         
     @api.multi
     def action_open_res_act_window(self):
-        raise NotImplementedError
+        pass
 
     @api.model
     def get_form(self, uuid, mode):
