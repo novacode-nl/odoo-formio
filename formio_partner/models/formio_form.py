@@ -46,7 +46,7 @@ class Form(models.Model):
     @api.multi
     def action_open_res_act_window(self):
         res = super(Form, self).action_open_res_act_window()
-        if self._context.get('active_model') == 'res.partner':
+        if self.res_model_id.model == 'res.partner':
             res = {
                 'type': 'ir.actions.act_window',
                 'res_model': 'res.partner',
