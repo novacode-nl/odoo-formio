@@ -112,7 +112,7 @@
                 </div>
                 <iframe t-attf-src="/formio/form/#{widget.form.uuid}/root" id="formio_form_embed"/>
                 <script>
-                    iFrameResize({}, '#formio_form_embed')
+                    iFrameResize({heightCalculationMethod: 'max'}, '#formio_form_embed');
                 </script>
             </div>
         </div>
