@@ -48,12 +48,13 @@ class Form(models.Model):
     act_window_multi_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model')
     res_model_name = fields.Char(related='res_model_id.name', readonly=True, string='Resource Name')
-    res_model = fields.Char(related='res_model_id.model', readonly=True, string='Resource Model')
+    res_model = fields.Char(related='res_model_id.model', readonly=True, string='Resource Model Name')
     res_id = fields.Integer("Record ID", ondelete='restrict',
         help="Database ID of the record in res_model to which this applies")
     res_act_window_url = fields.Char(compute='_compute_res_fields', readonly=True)
-    res_name = fields.Char(compute='_compute_res_fields', readonly=True)
+    res_name = fields.Char(compute='_compute_res_fields', store=True)
     res_info = fields.Char(compute='_compute_res_fields', readonly=True)
+    res_partner_id = fields.Many2one('res.partner', compute='_compute_res_fields', store=True, readonly=True, string='Resource Partner')
     user_id = fields.Many2one(
         'res.users', string='Assigned user',
         index=True, track_visibility='onchange')
@@ -65,6 +66,7 @@ class Form(models.Model):
     submission_user_id = fields.Many2one(
         'res.users', string='Submission User', readonly=True,
         help='User who submitted the form.')
+    submission_partner_id = fields.Many2one('res.partner', related='submission_user_id.partner_id', string='Submission Partner')
     submission_date = fields.Datetime(
         string='Submission Date', readonly=True, track_visibility='onchange',
         help='Datetime when the form was last submitted.')
@@ -233,14 +235,11 @@ class Form(models.Model):
 
     @api.one
     @api.depends('res_model_id', 'res_id')
-    def _compute_partner_id(self):
-        pass
-
     def _compute_res_fields(self):
-        for r in self:
-            r.res_act_window_url = False
-            r.res_name = False
-            r.res_info = False
+        self.res_act_window_url = False
+        self.res_name = False
+        self.res_info = False
+        self.res_partner_id = False
         
     @api.multi
     def action_open_res_act_window(self):
