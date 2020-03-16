@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <data>
+        <record id="formio_res_model_crm_lead" model="formio.res.model">
+            <field name="ir_model_id" ref="crm.model_crm_lead"/>
+            <field name="module_dependency">True</field>
+        </record>
+    </data>
+</odoo>

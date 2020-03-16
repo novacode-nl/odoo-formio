@@ -36,7 +36,7 @@ class Form(models.Model):
 
     @api.onchange('builder_id')
     def _onchange_builder_id(self):
-        res = {}
+        res = super(Form, self)._onchange_builder_id()
         if self._context.get('active_model') == 'sale.order':
             res_model_id = self.env.ref('sale.model_sale_order').id
             domain = [
@@ -48,15 +48,16 @@ class Form(models.Model):
 
     @api.multi
     def action_open_res_act_window(self):
+        res = super(Form, self).action_open_res_act_window()
         if self.res_model_id.model == 'sale.order':
             if self.sale_order_id.state in ('draft', 'sent'):
                 action = self.env.ref('sale.action_quotations')
             else:
                 action = self.env.ref('sale.action_orders')
-
-        return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'sale.order',
-            'res_id': self.sale_order_id.id,
-            "views": [[False, "form"]],
-        }
+            res = {
+                'type': 'ir.actions.act_window',
+                'res_model': 'sale.order',
+                'res_id': self.sale_order_id.id,
+                "views": [[False, "form"]],
+            }
+        return res
