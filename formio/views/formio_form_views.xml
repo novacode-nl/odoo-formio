@@ -15,12 +15,13 @@ See LICENSE file for full licensing details. -->
                 <field name="title"/>
                 <field name="builder_id"/>
                 <field name="user_id"/>
-                <field name="submission_user_id"/>
+                <field name="submission_partner_id"/>
                 <field name="submission_date"/>
                 <field name="state"/>
                 <button string="Form" class="btn-sm btn-secondary" name="action_client_formio_form" type="object"/>
                 <field name="res_name"/>
                 <field name="res_info"/>
+                <field name="res_partner_id"/>
                 <field name="portal"/>
                 <field name="create_uid"/>
                 <field name="create_date"/>
@@ -64,11 +65,11 @@ See LICENSE file for full licensing details. -->
                                     </t>
                                     <span class="oe_kanban_details">
                                         <!-- submission info -->
-                                        <t t-if="record.submission_user_id.raw_value">
+                                        <t t-if="record.submission_partner_id.raw_value">
                                             <strong>Submission:</strong>
                                             <div>
                                                 <div>
-                                                    <i class="fa fa-user" title="Submission user" aria-label="Submission user"/> <field name="submission_user_id"/>
+                                                    <i class="fa fa-user" title="Submission partner" aria-label="Submission partner"/> <field name="submission_partner_id"/>
                                                 </div>
                                             </div>
                                             <div>
@@ -157,7 +158,8 @@ See LICENSE file for full licensing details. -->
                     <notebook>
                         <page string="Submission" name="submission">
                             <group>
-                                <field name="submission_user_id" string="User"/>
+                                <field name="submission_partner_id" string="Partner"/>
+                                <field name="submission_user_id" groups="base.group_erp_manager" string="User"/>
                                 <field name="submission_date" string="Date"/>
                             </group>
                         </page>
@@ -182,9 +184,11 @@ See LICENSE file for full licensing details. -->
                 <field name="id"/>
                 <field name="uuid"/>
                 <field name="title"/>
-                <field name="user_id"/>
-                <field name="submission_user_id"/>
-                <field name="submission_date"/>
+                <field name="user_id" groups="base.group_erp_manager"/>
+                <field name="submission_partner_id"/>
+                <field name="submission_user_id" groups="base.group_erp_manager"/>
+                <field name="res_name" string="Resource Name"/>
+                <field name="res_partner_id"/>
                 <field name="res_model_id"/>
                 <field name="res_id"/>
                 <separator/>
@@ -200,11 +204,12 @@ See LICENSE file for full licensing details. -->
                 <filter string="Canceled" name="state_cancel"
                         domain="[('state', '=', 'CANCEL')]"/>
                 <group expand="0" string="Group By">
-                    <filter string="Submission Date" name="submission_date" domain="[]" context="{'group_by':'submission_date'}"/>
-                    <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
-                    <filter string="Form Builder" name="builder_id" domain="[]" context="{'group_by':'builder_id'}"/>
                     <filter string="Title" name="title" domain="[]" context="{'group_by':'title'}"/>
+                    <filter string="Form Builder" name="builder_id" domain="[]" context="{'group_by':'builder_id'}"/>
+                    <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
+                    <filter string="Resource Name" name="res_name" domain="[]" context="{'group_by':'res_name'}"/>
                     <filter string="Assigned User" name="user" domain="[]" context="{'group_by':'user_id'}"/>
+                    <filter string="Submission Date" name="submission_date" domain="[]" context="{'group_by':'submission_date'}"/>
                 </group>
             </search>
         </field>

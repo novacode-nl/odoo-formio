@@ -144,6 +144,7 @@ class Builder(models.Model):
                 del schema['display']
                 self.schema = json.dumps(schema)
 
+    @api.one
     @api.depends('formio_res_model_id')
     def _compute_res_model_id(self):
         if self.formio_res_model_id:
