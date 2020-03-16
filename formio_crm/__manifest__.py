@@ -20,7 +20,7 @@
     ],
     'description': """
 Form.io - CRM Lead
-===============
+==================
 
 Build and publish (Form.io) forms for Leads.
 """

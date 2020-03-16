@@ -16,6 +16,7 @@ class Form(models.Model):
     @api.one
     @api.depends('res_model_id', 'res_id')
     def _compute_res_fields(self):
+        super(Form, self)._compute_res_fields()
         if self.res_model == 'sale.order':
             order = self.env['sale.order'].search([('id', '=', self.res_id)])
             self.sale_order_id = order.id
