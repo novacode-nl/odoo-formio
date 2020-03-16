@@ -10,18 +10,29 @@ class Form(models.Model):
     _inherit = 'formio.form'
 
     sale_order_id = fields.Many2one(
-        'sale.order', compute='_compute_sale_order_id', store=True,
+        'sale.order', compute='_compute_res_fields', store=True,
         readonly=True, string='Sale Order')
-    partner_id = fields.Many2one(
-        'res.partner', related='sale_order_id.partner_id',
-        store=True, readonly=True, string='Partner')
 
     @api.one
     @api.depends('res_model_id', 'res_id')
-    def _compute_sale_order_id(self):
-        if self.res_model_id.model == 'sale.order':
+    def _compute_res_fields(self):
+        if self.res_model == 'sale.order':
             order = self.env['sale.order'].search([('id', '=', self.res_id)])
             self.sale_order_id = order.id
+            self.res_partner_id = order.partner_id.id
+
+            if order.state in ('draft', 'sent'):
+                action = self.env.ref('sale.action_quotations')
+            else:
+                action = self.env.ref('sale.action_orders')
+
+            url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
+                id=self.res_id,
+                model='sale.order',
+                action=action.id)
+            self.res_act_window_url = url
+            self.res_name = order.name
+            self.res_info = get_field_selection_label(order, 'state')
 
     @api.onchange('builder_id')
     def _onchange_builder_id(self):
@@ -34,22 +45,6 @@ class Form(models.Model):
             ]
             res['domain'] = {'builder_id': domain}
         return res
-
-    def _compute_res_fields(self):
-        for r in self:
-            if r.res_model_id.model == 'sale.order':
-                if r.sale_order_id.state in ('draft', 'sent'):
-                    action = self.env.ref('sale.action_quotations')
-                else:
-                    action = self.env.ref('sale.action_orders')
-
-                url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
-                    id=r.res_id,
-                    model='sale.order',
-                    action=action.id)
-                r.res_act_window_url = url
-                r.res_name = r.sale_order_id.name
-                r.res_info = get_field_selection_label(r.sale_order_id, 'state')
 
     @api.multi
     def action_open_res_act_window(self):
