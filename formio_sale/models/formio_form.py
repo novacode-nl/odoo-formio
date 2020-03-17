@@ -16,28 +16,31 @@ class Form(models.Model):
     @api.one
     @api.depends('res_model_id', 'res_id')
     def _compute_res_fields(self):
-        super(Form, self)._compute_res_fields()
-        if self.res_model == 'sale.order':
-            order = self.env['sale.order'].search([('id', '=', self.res_id)])
-            self.sale_order_id = order.id
-            self.res_partner_id = order.partner_id.id
+        compute = super(Form, self)._compute_res_fields()
+        if not compute:
+            return False
 
-            if order.state in ('draft', 'sent'):
-                action = self.env.ref('sale.action_quotations')
-            else:
-                action = self.env.ref('sale.action_orders')
+        for r in self:
+            if r.res_model == 'sale.order' and r.res_id:
+                order = self.env['sale.order'].search([('id', '=', r.res_id)])
+                r.sale_order_id = order.id
+                r.res_partner_id = order.partner_id.id
+                if order.state in ('draft', 'sent'):
+                    action = self.env.ref('sale.action_quotations')
+                else:
+                    action = self.env.ref('sale.action_orders')
 
-            url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
-                id=self.res_id,
-                model='sale.order',
-                action=action.id)
-            self.res_act_window_url = url
-            self.res_name = order.name
-            self.res_info = get_field_selection_label(order, 'state')
+                url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
+                    id=r.res_id,
+                    model='sale.order',
+                    action=action.id)
+                r.res_act_window_url = url
+                r.res_name = order.name
+                r.res_info = get_field_selection_label(order, 'state')
 
     @api.onchange('builder_id')
-    def _onchange_builder_id(self):
-        res = super(Form, self)._onchange_builder_id()
+    def _onchange_builder(self):
+        res = super(Form, self)._onchange_builder()
         if self._context.get('active_model') == 'sale.order':
             res_model_id = self.env.ref('sale.model_sale_order').id
             domain = [
