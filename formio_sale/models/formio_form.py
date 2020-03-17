@@ -13,7 +13,6 @@ class Form(models.Model):
         'sale.order', compute='_compute_res_fields', store=True,
         readonly=True, string='Sale Order')
 
-    @api.one
     @api.depends('res_model_id', 'res_id')
     def _compute_res_fields(self):
         compute = super(Form, self)._compute_res_fields()
