@@ -9,9 +9,9 @@ from odoo.addons.formio.utils import get_field_selection_label
 class Form(models.Model):
     _inherit = 'formio.form'
 
-    crm_lead_id = fields.Many2one(
-        'crm.lead', compute='_compute_res_fields', store=True,
-        readonly=True, string='CRM Lead')
+    base_res_partner_id = fields.Many2one(
+        'res.partner', compute='_compute_res_fields', store=True,
+        readonly=True, string='Partner')
 
     @api.depends('res_model_id', 'res_id')
     def _compute_res_fields(self):
@@ -20,25 +20,25 @@ class Form(models.Model):
             return False
 
         for r in self:
-            if r.res_model == 'crm.lead':
-                lead = self.env['crm.lead'].search([('id', '=', r.res_id)])
-                r.crm_lead_id = lead.id
-                r.res_partner_id = r.crm_lead_id.partner_id
+            if r.res_model == 'res.partner':
+                partner = self.env['res.partner'].search([('id', '=', r.res_id)])
+                r.base_res_partner_id = partner.id
+                r.res_partner_id = partner.id
 
-                action = self.env.ref('crm.action_crm_tag_form_view_oppor11')
+                action = self.env.ref('contacts.action_contacts')
                 url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
                     id=r.res_id,
-                    model='crm.lead',
+                    model='res.partner',
                     action=action.id)
                 r.res_act_window_url = url
                 r.res_name = r.res_model_name
-                r.res_info = r.crm_lead_id.stage_id.name
+                r.res_info = partner.name
 
     @api.onchange('builder_id')
-    def _onchange_builder_id(self):
-        res = super(Form, self)._onchange_builder_id()
-        if self._context.get('active_model') == 'crm.lead':
-            res_model_id = self.env.ref('crm.model_crm_lead').id
+    def _onchange_builder(self):
+        res = super(Form, self)._onchange_builder()
+        if self._context.get('active_model') == 'res.partner':
+            res_model_id = self.env.ref('base.model_res_partner').id
             domain = [
                 ('state', '=', BUILDER_STATE_CURRENT),
                 ('res_model_id', '=', res_model_id),
@@ -49,11 +49,11 @@ class Form(models.Model):
     @api.multi
     def action_open_res_act_window(self):
         res = super(Form, self).action_open_res_act_window()
-        if self._context.get('active_model') == 'crm.lead':
+        if self.res_model_id.model == 'res.partner':
             res = {
                 'type': 'ir.actions.act_window',
-                'res_model': 'crm.lead',
-                'res_id': self.crm_lead_id.id,
+                'res_model': 'res.partner',
+                'res_id': self.base_res_partner_id.id,
                 "views": [[False, "form"]],
             }
         return res

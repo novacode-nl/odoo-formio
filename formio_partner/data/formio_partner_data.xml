@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <data>
+        <record id="formio_res_model_res_partner" model="formio.res.model">
+            <field name="ir_model_id" ref="base.model_res_partner"/>
+            <field name="module_dependency">True</field>
+        </record>
+    </data>
+</odoo>
