@@ -12,7 +12,6 @@
     'depends': ['contacts', 'formio'],
     'data': [
         'data/formio_partner_data.xml',
-        'views/formio_form_views.xml',
         'views/res_partner_views.xml',
     ],
     'application': True,
