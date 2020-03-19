@@ -15,24 +15,23 @@ class Form(models.Model):
 
     @api.depends('res_model_id', 'res_id')
     def _compute_res_fields(self):
-        compute = super(Form, self)._compute_res_fields()
-        if not compute:
-            return False
+        super(Form, self)._compute_res_fields()
 
-        for r in self:
-            if r.res_model == 'res.partner':
-                partner = self.env['res.partner'].search([('id', '=', r.res_id)])
-                r.base_res_partner_id = partner.id
-                r.res_partner_id = partner.id
+        if self._context.get('active_model') == 'res.partner':
+            for r in self:
+                if r.res_model == 'res.partner':
+                    partner = self.env['res.partner'].search([('id', '=', r.res_id)])
+                    r.base_res_partner_id = partner.id
+                    r.res_partner_id = partner.id
 
-                action = self.env.ref('contacts.action_contacts')
-                url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
-                    id=r.res_id,
-                    model='res.partner',
-                    action=action.id)
-                r.res_act_window_url = url
-                r.res_name = r.res_model_name
-                r.res_info = partner.name
+                    action = self.env.ref('contacts.action_contacts')
+                    url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
+                        id=r.res_id,
+                        model='res.partner',
+                        action=action.id)
+                    r.res_act_window_url = url
+                    r.res_name = r.res_model_name
+                    r.res_info = partner.name
 
     @api.onchange('builder_id')
     def _onchange_builder(self):

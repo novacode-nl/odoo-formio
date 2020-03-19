@@ -15,24 +15,23 @@ class Form(models.Model):
 
     @api.depends('res_model_id', 'res_id')
     def _compute_res_fields(self):
-        compute = super(Form, self)._compute_res_fields()
-        if not compute:
-            return False
+        super(Form, self)._compute_res_fields()
 
-        for r in self:
-            if r.res_model == 'crm.lead':
-                lead = self.env['crm.lead'].search([('id', '=', r.res_id)])
-                r.crm_lead_id = lead.id
-                r.res_partner_id = r.crm_lead_id.partner_id
+        if self._context.get('active_model') == 'crm.lead':
+            for r in self:
+                if r.res_model == 'crm.lead':
+                    lead = self.env['crm.lead'].search([('id', '=', r.res_id)])
+                    r.crm_lead_id = lead.id
+                    r.res_partner_id = r.crm_lead_id.partner_id
 
-                action = self.env.ref('crm.action_crm_tag_form_view_oppor11')
-                url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
-                    id=r.res_id,
-                    model='crm.lead',
-                    action=action.id)
-                r.res_act_window_url = url
-                r.res_name = r.res_model_name
-                r.res_info = r.crm_lead_id.stage_id.name
+                    action = self.env.ref('crm.action_crm_tag_form_view_oppor11')
+                    url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
+                        id=r.res_id,
+                        model='crm.lead',
+                        action=action.id)
+                    r.res_act_window_url = url
+                    r.res_name = r.res_model_name
+                    r.res_info = r.crm_lead_id.stage_id.name
 
     @api.onchange('builder_id')
     def _onchange_builder(self):

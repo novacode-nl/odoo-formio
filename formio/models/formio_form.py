@@ -235,10 +235,6 @@ class Form(models.Model):
             r.res_name = False
             r.res_info = False
             r.res_partner_id = False
-        if self._context.get('active_model') == 'formio.form':
-            return True
-        else:
-            return False
         
     @api.multi
     def action_open_res_act_window(self):
