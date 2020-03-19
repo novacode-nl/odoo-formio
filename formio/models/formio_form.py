@@ -71,7 +71,7 @@ class Form(models.Model):
         string='Submission Date', readonly=True, track_visibility='onchange',
         help='Datetime when the form was last submitted.')
     submit_done_url = fields.Char(related='builder_id.submit_done_url')
-    portal = fields.Boolean("Portal", related='builder_id.portal', help="Form is accessible by assigned portal user")
+    portal = fields.Boolean("Portal", related='builder_id.portal', readonly=True, help="Form is accessible by assigned portal user")
     portal_submit_done_url = fields.Char(related='builder_id.portal_submit_done_url')
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
 
@@ -178,13 +178,11 @@ class Form(models.Model):
 
     @api.onchange('builder_id')
     def _onchange_builder(self):
+        res = {}
         if not self.env.user.has_group('formio.group_formio_user_all_forms'):
             self.user_id = self.env.user.id
         self.title = self.builder_id.title
-
-    @api.onchange('builder_id')
-    def _onchange_builder_id(self):
-        return {}
+        return res
 
     @api.onchange('portal')
     def _onchange_portal(self):
@@ -230,14 +228,17 @@ class Form(models.Model):
                 action=action.id)
             r.act_window_url = url
 
-    @api.one
     @api.depends('res_model_id', 'res_id')
     def _compute_res_fields(self):
-        if not self.res_model:
-            self.res_act_window_url = False
-            self.res_name = False
-            self.res_info = False
-            self.res_partner_id = False
+        for r in self:
+            r.res_act_window_url = False
+            r.res_name = False
+            r.res_info = False
+            r.res_partner_id = False
+        if self._context.get('active_model') == 'formio.form':
+            return True
+        else:
+            return False
         
     @api.multi
     def action_open_res_act_window(self):

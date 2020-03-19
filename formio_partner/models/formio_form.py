@@ -13,27 +13,30 @@ class Form(models.Model):
         'res.partner', compute='_compute_res_fields', store=True,
         readonly=True, string='Partner')
 
-    @api.one
     @api.depends('res_model_id', 'res_id')
     def _compute_res_fields(self):
-        super(Form, self)._compute_res_fields()
-        if self.res_model == 'res.partner':
-            partner = self.env['res.partner'].search([('id', '=', self.res_id)])
-            self.base_res_partner_id = partner.id
-            self.res_partner_id = partner.id
+        compute = super(Form, self)._compute_res_fields()
+        if not compute:
+            return False
 
-            action = self.env.ref('contacts.action_contacts')
-            url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
-                id=self.res_id,
-                model='res.partner',
-                action=action.id)
-            self.res_act_window_url = url
-            self.res_name = self.res_model_name
-            self.res_info = partner.name
+        for r in self:
+            if r.res_model == 'res.partner':
+                partner = self.env['res.partner'].search([('id', '=', r.res_id)])
+                r.base_res_partner_id = partner.id
+                r.res_partner_id = partner.id
+
+                action = self.env.ref('contacts.action_contacts')
+                url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
+                    id=r.res_id,
+                    model='res.partner',
+                    action=action.id)
+                r.res_act_window_url = url
+                r.res_name = r.res_model_name
+                r.res_info = partner.name
 
     @api.onchange('builder_id')
-    def _onchange_builder_id(self):
-        res = super(Form, self)._onchange_builder_id()
+    def _onchange_builder(self):
+        res = super(Form, self)._onchange_builder()
         if self._context.get('active_model') == 'res.partner':
             res_model_id = self.env.ref('base.model_res_partner').id
             domain = [
