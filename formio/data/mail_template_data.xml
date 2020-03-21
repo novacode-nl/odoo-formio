@@ -3,7 +3,7 @@
 See LICENSE file for full copyright and licensing details.
 -->
 
-<odoo>
+<flectra>
     <data>
         <record id="mail_invitation_internal_user" model="mail.template">
             <field name="name">Form.io: Invitation internal user</field>
@@ -60,4 +60,4 @@ See LICENSE file for full copyright and licensing details.
             </field>
         </record>
     </data>
-</odoo>
+</flectra>

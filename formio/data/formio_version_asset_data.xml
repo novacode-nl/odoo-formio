@@ -2,7 +2,7 @@
 <!-- Copyright Nova Code (http://www.novacode.nl)
 See LICENSE file for full licensing details. -->
 
-<odoo>
+<flectra>
     <data>
         <record id="css_bootstrap_3_3_7" model="ir.attachment">
             <field name="name">https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css</field>
@@ -195,4 +195,4 @@ See LICENSE file for full licensing details. -->
             <field name="attachment_id" ref="formio.js_formio_3_6_6"/>
         </record>
     </data>
-</odoo>
+</flectra>

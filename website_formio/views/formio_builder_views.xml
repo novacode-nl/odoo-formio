@@ -2,7 +2,7 @@
 <!-- Copyright Nova Code (http://www.novacode.nl)
 See LICENSE file for full licensing details. -->
 
-<odoo>
+<flectra>
     <record id="view_formio_builder_form_website" model="ir.ui.view">
         <field name="name">formio.builder.form.website</field>
         <field name="model">formio.builder</field>
@@ -24,4 +24,4 @@ See LICENSE file for full licensing details. -->
             </field>
         </field>
     </record>
-</odoo>
+</flectra>

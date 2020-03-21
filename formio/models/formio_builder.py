@@ -6,8 +6,8 @@ import json
 import re
 import requests
 
-from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
+from flectra import api, fields, models, _
+from flectra.exceptions import ValidationError
 
 from ..utils import get_field_selection_label
 

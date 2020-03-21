@@ -2,7 +2,7 @@
 <!-- Copyright Nova Code (http://www.novacode.nl)
 See LICENSE file for full licensing details. -->
 
-<odoo>
+<flectra>
     <!-- nl -->
     <data noupdate="1">
         <record id="i18n_nl_BE_complete" model="formio.translation">
@@ -186,4 +186,4 @@ See LICENSE file for full licensing details. -->
             <field name="value">Verstuur formulier</field>
         </record>
     </data>
-</odoo>
+</flectra>

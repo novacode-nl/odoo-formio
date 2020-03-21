@@ -2,7 +2,7 @@
 <!-- Copyright Nova Code (http://www.novacode.nl)
 See LICENSE file for full licensing details. -->
 
-<odoo>
+<flectra>
     <record id="view_formio_form_tree" model="ir.ui.view">
         <field name="name">formio.form.tree</field>
         <field name="model">formio.form</field>
@@ -246,4 +246,4 @@ See LICENSE file for full licensing details. -->
         <field name="view_id" ref="formio.view_formio_form_form"/>
         <field name="act_window_id" ref="action_formio_form"/>
     </record>
-</odoo>
+</flectra>

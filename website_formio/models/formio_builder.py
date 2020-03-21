@@ -1,7 +1,7 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from odoo import api, fields, models
+from flectra import api, fields, models
 
 
 class Builder(models.Model):

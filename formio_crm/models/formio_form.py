@@ -1,9 +1,9 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from odoo import api, fields, models, _
-from odoo.addons.formio.models.formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
-from odoo.addons.formio.utils import get_field_selection_label
+from flectra import api, fields, models, _
+from flectra.addons.formio.models.formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
+from flectra.addons.formio.utils import get_field_selection_label
 
 
 class Form(models.Model):

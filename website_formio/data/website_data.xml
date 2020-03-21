@@ -2,7 +2,7 @@
 <!-- Copyright Nova Code (http://www.novacode.nl)
 See LICENSE file for full licensing details. -->
 
-<odoo>
+<flectra>
     <data noupdate="1">
         <record id="formio_thankyou" model="ir.ui.view">
             <field name="name">Form.io: Thank you (form submission)</field>
@@ -61,4 +61,4 @@ See LICENSE file for full licensing details. -->
             <field name="view_id" ref="formio_thankyou"/>
         </record>
     </data>
-</odoo>
+</flectra>

@@ -7,8 +7,8 @@ import re
 import requests
 import uuid
 
-from odoo import api, fields, models, _
-from odoo.exceptions import AccessError
+from flectra import api, fields, models, _
+from flectra.exceptions import AccessError
 
 from ..utils import get_field_selection_label
 
