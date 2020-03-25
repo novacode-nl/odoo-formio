@@ -228,21 +228,18 @@ class Form(models.Model):
                 action=action.id)
             r.act_window_url = url
 
-    @api.depends('res_model_id', 'res_id')
+    @api.depends('res_id')
     def _compute_res_fields(self):
-        for r in self:
-            r.res_act_window_url = False
-            r.res_name = False
-            r.res_info = False
-            r.res_partner_id = False
-        if self._context.get('active_model') == 'formio.form':
-            return True
-        else:
-            return False
+        pass
         
     @api.multi
     def action_open_res_act_window(self):
-        pass
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': self.res_model,
+            'res_id': self.res_id,
+            "views": [[False, "form"]],
+        }
 
     @api.model
     def get_form(self, uuid, mode):

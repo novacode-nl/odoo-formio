@@ -134,12 +134,13 @@ See LICENSE file for full licensing details. -->
                         <button name="action_open_res_act_window" type="object"
                                 attrs="{'invisible': [('res_info', '=', False)]}"
                                 class="oe_stat_button" icon="fa-link" aria-label="Resource">
-                            <field name="res_info"/>
+                            <field name="res_name"/>
                         </button>
                     </div>
                     <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}"/></h1>
                     <group name="general">
                         <group>
+                            <field name="res_info" string="Resource" attrs="{'invisible': [('res_info', '=', False)]}"/>
                             <field name="builder_id"
                                    attrs="{'readonly': [('submission_data', '!=', False)]}"/>
                             <!-- <strong attrs="{'invisible': [('res_name', '=', False)]}"><field name="res_info"/></strong> <field nolabel="1" name="res_name" attrs="{'invisible': [('res_name', '=', False)]}"/> -->
