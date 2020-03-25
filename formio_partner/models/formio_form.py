@@ -13,12 +13,8 @@ class Form(models.Model):
         'res.partner', compute='_compute_res_fields', store=True,
         readonly=True, string='Partner')
 
-    @api.depends('res_model_id', 'res_id')
+    @api.depends('res_id')
     def _compute_res_fields(self):
-        compute = super(Form, self)._compute_res_fields()
-        if not compute:
-            return False
-
         for r in self:
             if r.res_model == 'res.partner':
                 partner = self.env['res.partner'].search([('id', '=', r.res_id)])
@@ -44,16 +40,4 @@ class Form(models.Model):
                 ('res_model_id', '=', res_model_id),
             ]
             res['domain'] = {'builder_id': domain}
-        return res
-
-    @api.multi
-    def action_open_res_act_window(self):
-        res = super(Form, self).action_open_res_act_window()
-        if self.res_model_id.model == 'res.partner':
-            res = {
-                'type': 'ir.actions.act_window',
-                'res_model': 'res.partner',
-                'res_id': self.base_res_partner_id.id,
-                "views": [[False, "form"]],
-            }
         return res
