@@ -9,12 +9,22 @@ from odoo.addons.formio.utils import get_field_selection_label
 class Form(models.Model):
     _inherit = 'formio.form'
 
-    base_res_partner_id = fields.Many2one(
-        'res.partner', compute='_compute_res_fields', store=True,
-        readonly=True, string='Partner')
+    base_res_partner_id = fields.Many2one('res.partner', readonly=True, string='Partner')
 
-    @api.depends('res_id')
+    def _prepare_create_vals(self, vals):
+        vals = super(Form, self)._prepare_create_vals(vals)
+        builder = self._get_builder_from_id(vals.get('builder_id'))
+        res_id = self._context.get('active_id')
+
+        if not builder or not builder.res_model_id.model == 'res.partner' or not res_id:
+            return vals
+
+        vals['base_res_partner_id'] = res_id
+        return vals
+
+    @api.depends('base_res_partner_id')
     def _compute_res_fields(self):
+        super(Form, self)._compute_res_fields()
         for r in self:
             if r.res_model == 'res.partner':
                 partner = self.env['res.partner'].search([('id', '=', r.res_id)])
@@ -31,8 +41,8 @@ class Form(models.Model):
                 r.res_info = partner.name
 
     @api.onchange('builder_id')
-    def _onchange_builder(self):
-        res = super(Form, self)._onchange_builder()
+    def _onchange_builder_domain(self):
+        res = super(Form, self)._onchange_builder_domain()
         if self._context.get('active_model') == 'res.partner':
             res_model_id = self.env.ref('base.model_res_partner').id
             domain = [

@@ -75,6 +75,18 @@ class Form(models.Model):
     portal_submit_done_url = fields.Char(related='builder_id.portal_submit_done_url')
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
 
+    @api.model
+    def create(self, vals):
+        vals = self._prepare_create_vals(vals)
+        res = super(Form, self).create(vals)
+        return res
+
+    def _prepare_create_vals(self, vals):
+        return vals
+
+    def _get_builder_from_id(self, builder_id):
+        return self.env['formio.builder'].browse(builder_id)
+
     @api.multi
     @api.depends('state')
     def _compute_kanban_group_state(self):
@@ -177,12 +189,15 @@ class Form(models.Model):
         return str(uuid.uuid4())
 
     @api.onchange('builder_id')
-    def _onchange_builder(self):
+    def _onchange_builder_domain(self):
         res = {}
+        return res
+
+    @api.onchange('builder_id')
+    def _onchange_builder(self):
         if not self.env.user.has_group('formio.group_formio_user_all_forms'):
             self.user_id = self.env.user.id
         self.title = self.builder_id.title
-        return res
 
     @api.onchange('portal')
     def _onchange_portal(self):
