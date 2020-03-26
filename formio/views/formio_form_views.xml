@@ -142,7 +142,7 @@ See LICENSE file for full licensing details. -->
                         <group>
                             <field name="res_info" string="Resource" attrs="{'invisible': [('res_info', '=', False)]}"/>
                             <field name="builder_id"
-                                   attrs="{'readonly': [('submission_data', '!=', False)]}"/>
+                                   attrs="{'readonly': [('id', '!=', False)]}"/>
                             <!-- <strong attrs="{'invisible': [('res_name', '=', False)]}"><field name="res_info"/></strong> <field nolabel="1" name="res_name" attrs="{'invisible': [('res_name', '=', False)]}"/> -->
                         </group>
                         <group>
