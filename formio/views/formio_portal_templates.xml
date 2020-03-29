@@ -119,43 +119,17 @@ See LICENSE file for full licensing details. -->
 
     <template id="portal_my_formio_edit" name="Form.io Form">
         <t t-call="portal.portal_layout">
-            <div t-attf-class="formio_form_container {{ form.state }}">
-                <div class="row formio_header">
-                    <div class="col-md-12">
-                        <div class="formio_form_dock float-right">
-                            <span class="form_state">
-                                <t t-if="form.state == 'PENDING'">
-                                    <span t-attf-class="badge mb-1 badge-pill badge-alpha">State: <strong><t t-esc="form.display_state"/></strong></span>
-                                </t>
-                                <t t-elif="form.state == 'DRAFT'">
-                                    <span t-attf-class="badge mb-1 badge-pill badge-warning">State: <strong><t t-esc="form.display_state"/></strong></span>
-                                </t>
-                                <t t-elif="form.state == 'COMPLETE'">
-                                    <span t-attf-class="badge mb-1 badge-pill badge-success">State: <strong><t t-esc="form.display_state"/></strong></span>
-                                </t>
-                                <t t-elif="form.state == 'CANCEL'">
-                                    <span t-attf-class="badge mb-1 badge-pill badge-dark">State: <strong><t t-esc="form.display_state"/></strong></span>
-                                </t>
-                                <t t-else="">
-                                    <span t-attf-class="badge mb-1 badge-pill badge-light">State: <strong><t t-esc="form.display_state"/></strong></span>
-                                </t>
-                            </span>
-                            <span class="form_id" style="margin-left: 12px;">
-                                <span>ID: <strong><t t-esc="form.id"/></strong></span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
+            <div t-attf-class="formio_form_container mt16 {{ form.state }}">
                 <div class="formio_form_iframe_container">
                     <div class="formio_title">
                         <h1>
                             <t t-esc="form.title"/>
                         </h1>
                     </div>
-                    <iframe t-attf-src="/formio/form/#{form.uuid}/root" id="formio_form_embed"/>
+                    <iframe t-attf-src="/formio/form/#{form.uuid}/root" class="formio_form_embed"/>
                     <script type="text/javascript">
                         // TODO move to Javascript file.
-                        iFrameResize({}, '#formio_form_embed')
+                        iFrameResize({}, '.formio_form_embed')
                         window.addEventListener('message', function(event) {
                             var base_url = window.location.protocol + '//' + window.location.host;
                             if (event.origin == base_url &amp;&amp; event.data == 'formioSubmitDone') {

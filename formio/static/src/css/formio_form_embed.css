@@ -1,10 +1,32 @@
 .formio_form_embed_container {
-    padding: 0 20px;
     margin: 0 auto;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.formio_form_dock {
+    margin-bottom: 20px;
+}
+
+.formio_form_dock * {
+    font-size: 14px;
+}
+
+.formio_form_dock ul {
+    list-style: none;
+}
+
+.formio_form_dock ul li {
+    float: left;
+    margin-left: 20px;
 }
 
 .formio_languages {
-    margin-left: 20px;
+    clear: both;
     margin-bottom: 20px;
-    padding-top: 4px;
+    padding-left: 4px;
+}
+
+.formio_languages button {
+    border: 1px solid #d8d8d8;
 }

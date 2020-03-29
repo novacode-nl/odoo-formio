@@ -80,8 +80,8 @@ class FormioController(http.Controller):
     def form_root(self, uuid, **kwargs):
         form = self._get_form(uuid, 'read')
         if not form:
-            # TODO Render template with message?
-            return request.redirect("/")
+            msg = 'Form UUID %s' % uuid
+            return request.not_found(msg)
 
         # Needed to update language
         context = request.env.context.copy()

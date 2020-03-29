@@ -6,8 +6,10 @@ See LICENSE file for full licensing details. -->
     <template id="assets_backend_formio_form" name="formio_form assets" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
             <link rel="stylesheet" type="text/css" href="/formio/static/src/css/formio_form.css"/>
+            <script type="text/javascript" src="/formio/static/src/js/views/formio_form_view.js"></script>
+            <script type="text/javascript" src="/formio/static/src/js/views/formio_form_controller.js"></script>
+            <script type="text/javascript" src="/formio/static/src/js/views/formio_form_renderer.js"></script>
             <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.min.js"></script>
-            <script type="text/javascript" src="/formio/static/src/js/formio_form_widget.js"></script>
         </xpath>
     </template>
 
@@ -28,7 +30,37 @@ See LICENSE file for full licensing details. -->
                 <link rel="stylesheet" href="/formio/static/src/css/formio_form_embed.css"/>
             </head>
             <body>
-                <div t-if="languages" class="formio_languages">
+                <div class="formio_form_dock float-right">
+                    <ul>
+                        <li t-if="form.assigned_partner_id" class="assigned">
+                            <strong>Assigned:</strong> <span t-esc="form.assigned_partner_name"/>
+                        </li>
+                        <li t-if="form.submission_data" class="submission">
+                            <strong>Submission:</strong> <span t-esc="form.submission_partner_name"/> (<span t-field="form.submission_date"/>)
+                        </li>
+                        <li class="form_id">
+                            <strong>ID:</strong> <span t-esc="form.id"/>
+                        </li>
+                        <li class="form_state">
+                            <t t-if="form.state == 'PENDING'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-info">State: <strong><t t-esc="form.display_state"/></strong></span>
+                            </t>
+                            <t t-elif="form.state == 'DRAFT'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-warning">State: <span t-esc="form.display_state"/></span>
+                            </t>
+                            <t t-elif="form.state == 'COMPLETE'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-success">State: <strong><t t-esc="form.display_state"/></strong></span>
+                            </t>
+                            <t t-elif="form.state == 'CANCEL'">
+                                <span t-attf-class="badge mb-1 badge-pill badge-dark">State: <strong><t t-esc="form.display_state"/></strong></span>
+                            </t>
+                            <t t-else="">
+                                <span t-attf-class="badge mb-1 badge-pill badge-light">State: <strong><t t-esc="form.display_state"/></strong></span>
+                            </t>
+                        </li>
+                    </ul>
+                </div>
+                <div class="formio_languages">
                         <t t-foreach="languages" t-as="lang">
                             <button class="btn btn-sm btn-default" t-attf-onclick="setLanguage('{{ lang.iso_code }}')"><span t-field="lang.name"/></button>
                         </t>

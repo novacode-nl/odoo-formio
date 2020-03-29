@@ -6,11 +6,14 @@ See LICENSE file for full licensing details. -->
     <template id="assets_backend_formio_builder" name="formio_builder assets" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
             <link rel="stylesheet" type="text/css" href="/formio/static/src/css/formio_builder.css"/>
-            <script type="text/javascript" src="/formio/static/src/js/formio_builder_widget.js"></script>
+            <script type="text/javascript" src="/formio/static/src/js/views/formio_builder_view.js"></script>
+            <script type="text/javascript" src="/formio/static/src/js/views/formio_builder_controller.js"></script>
+            <script type="text/javascript" src="/formio/static/src/js/views/formio_builder_renderer.js"></script>
         </xpath>
     </template>
 
     <template id="formio_builder_embed" name="Form.io Builder - Embed">
+        &lt;!DOCTYPE html&gt;
         <html>
             <head>
                 <t t-foreach="formio_css_assets" t-as="css">

@@ -48,7 +48,10 @@ $(document).ready(function() {
                         });
                     });
                     form.on('submitDone', function(submission) {
-                        window.parent.postMessage('formioSubmitDone', base_url);
+                        if (submission.state == 'submitted') {
+                            window.parent.postMessage('formioSubmitDone', base_url);
+                        }
+                        window.location.reload();
                     });
                     // Set the Submission (data)
                     // https://github.com/formio/formio.js/wiki/Form-Renderer#setting-the-submission

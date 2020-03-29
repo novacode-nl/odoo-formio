@@ -23,6 +23,23 @@ See LICENSE file for full licensing details. -->
         </field>
     </record>
 
+    <record id="view_formio_builder_formio" model="ir.ui.view">
+        <field name="name">formio.builder.formio</field>
+        <field name="model">formio.builder</field>
+        <field name="arch" type="xml">
+            <formio_builder string="Form.io">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="title"/>
+                <field name="version"/>
+                <field name="parent_version"/>
+                <field name="formio_version_name"/>
+                <field name="state"/>
+                <field name="display_state"/>
+            </formio_builder>
+        </field>
+    </record>
+
     <record id="view_formio_builder_form" model="ir.ui.view">
         <field name="name">formio.builder.form</field>
         <field name="model">formio.builder</field>
@@ -47,7 +64,7 @@ See LICENSE file for full licensing details. -->
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_client_formio_builder" type="object" string="Form Builder"
+                        <button name="action_view_formio" type="object" string="Form Builder"
                                 groups="formio.group_formio_admin"
                                 class="oe_stat_button" icon="fa-rocket"/>
                     </div>
@@ -158,17 +175,29 @@ See LICENSE file for full licensing details. -->
         </field>
     </record>
 
-    <record id="action_client_formio_builder" model="ir.actions.client">
-        <field name="name">Form.io Builder</field>
-        <field name="tag">formio_builder</field>
-        <field name="target">main</field>
-    </record>
-
+    <!-- actions -->
     <record id="action_formio_builder" model="ir.actions.act_window">
         <field name="name">Form Builders</field>
         <field name="res_model">formio.builder</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="view_formio_builder_tree"/>
+        <field name="view_mode">tree,form,formio_builder</field>
+    </record>
+
+    <record id="action_formio_builder_view_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="0"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="formio.view_formio_builder_tree"/>
+        <field name="act_window_id" ref="action_formio_builder"/>
+    </record>
+    <record id="action_formio_builder_view_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="formio.view_formio_builder_form"/>
+        <field name="act_window_id" ref="action_formio_builder"/>
+    </record>
+    <record id="action_formio_builder_view_formio" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">formio_builder</field>
+        <field name="view_id" ref="formio.view_formio_builder_formio"/>
+        <field name="act_window_id" ref="action_formio_builder"/>
     </record>
 </odoo>
