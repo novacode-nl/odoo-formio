@@ -1,25 +1,10 @@
-.formio.o_control_panel.o_breadcrumb_full {
-    position: fixed;
-    width: 100%;
-    /* z-index: 9999; */
-}
-
-.formio_form_container {
-    width: 88%;
-    margin: 0 auto;
-    padding: 50px 0;
-}
-
 .formio_form_iframe_container {
-    border: 1px solid #ccc;
-    background-color: #fff !important;
     background:url('/web/static/lib/select2/select2-spinner.gif') center center no-repeat;
 }
 
 .formio_form_iframe_container .formio_title h1 {
     background-color: #fff;
     margin-bottom: 0;
-    padding: 20px;
 }
 
 .formio_form_iframe_container iframe{
@@ -35,4 +20,13 @@
 
 .formio_form_container .formio_header .formio_form_dock * {
     font-size: 14px;
+}
+
+.formio_form_container .formio_header .formio_form_dock ul {
+    list-style: none;
+}
+
+.formio_form_container .formio_header .formio_form_dock ul li {
+    float: left;
+    margin-left: 20px;
 }

@@ -111,7 +111,7 @@ class Builder(models.Model):
         name_version_grouped = self.read_group(domain, ['version'], ['version'])
 
         if name_version_grouped[0]['version_count'] > 1:
-            raise ValidationError("%s already has a record with version: %d"
+            raise ValidationError("%s already has a record with version: %d. Use button/action: Create New Version."
                                   % (self.name, self.version))
 
     def _decode_schema(self, schema):
@@ -180,11 +180,18 @@ class Builder(models.Model):
             r.act_window_url = url
 
     @api.multi
-    def action_client_formio_builder(self):
+    def action_view_formio(self):
+        self.ensure_one()
+        view_id = self.env.ref('formio.view_formio_builder_formio').id
         return {
-            'type': 'ir.actions.client',
-            'tag': 'formio_builder',
-            'target': 'main',
+            "name": self.name,
+            "type": "ir.actions.act_window",
+            "res_model": "formio.builder",
+            "views": [(view_id, 'formio_builder')],
+            "view_mode": "formio_builder",
+            "target": "current",
+            "res_id": self.id,
+            "context": {}
         }
 
     @api.multi
