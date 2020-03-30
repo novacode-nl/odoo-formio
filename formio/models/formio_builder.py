@@ -73,7 +73,6 @@ class Builder(models.Model):
     portal = fields.Boolean("Portal", track_visibility='onchange', help="Form is accessible by assigned portal user")
     view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
     wizard = fields.Boolean("Wizard", track_visibility='onchange')
-    submit_done_url = fields.Char()
     portal_submit_done_url = fields.Char()
     translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations')
 
@@ -107,10 +106,9 @@ class Builder(models.Model):
         """ Per name there can be only 1 record with same version at a
         time. """
 
-        domain = [('name', '=', self.name)]
-        name_version_grouped = self.read_group(domain, ['version'], ['version'])
-
-        if name_version_grouped[0]['version_count'] > 1:
+        domain = [('name', '=', self.name), ('version', '=', self.version)]
+        res = self.search_count(domain)
+        if res > 1:
             raise ValidationError("%s already has a record with version: %d. Use button/action: Create New Version."
                                   % (self.name, self.version))
 

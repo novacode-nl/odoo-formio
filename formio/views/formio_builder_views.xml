@@ -96,9 +96,6 @@ See LICENSE file for full licensing details. -->
                                            edit="false" create="false" quick_create="false"
                                            options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
                                 </group>
-                                <group name="submit_done" string="Redirect after Submission">
-                                    <field name="submit_done_url" string="URL" groups="formio.group_formio_admin" readonly="0"/>
-                                </group>
                                 <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
                             </group>
                         </page>

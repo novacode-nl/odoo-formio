@@ -73,7 +73,6 @@ class Form(models.Model):
     submission_date = fields.Datetime(
         string='Submission Date', readonly=True, track_visibility='onchange',
         help='Datetime when the form was last submitted.')
-    submit_done_url = fields.Char(related='builder_id.submit_done_url')
     portal = fields.Boolean("Portal", related='builder_id.portal', readonly=True, help="Form is accessible by assigned portal user")
     portal_submit_done_url = fields.Char(related='builder_id.portal_submit_done_url')
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
