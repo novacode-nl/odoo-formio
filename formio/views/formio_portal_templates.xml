@@ -138,7 +138,6 @@ See LICENSE file for full licensing details. -->
                                     window.location = portal_submit_done_url;
                                 }
                                 else {
-                                    // Probably by saveAsDraft
                                     window.location.reload();
                                 }
                             }

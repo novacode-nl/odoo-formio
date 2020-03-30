@@ -11,7 +11,7 @@ class Builder(models.Model):
 
     @api.model
     def create(self, vals):
-        portal_submit_done_page_id = vals.get('portal_xsubmit_done_page_id')
+        portal_submit_done_page_id = vals.get('portal_submit_done_page_id')
         if portal_submit_done_page_id:
             portal_submit_done_page = self.env['website.page'].browse(portal_submit_done_page_id)
             vals['portal_submit_done_url'] = portal_submit_done_page.url
