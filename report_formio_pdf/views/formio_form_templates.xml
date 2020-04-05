@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+
+    <template id="formio_form_embed_pdf_export" name="Form.io Form - Embed" inherit_id="formio.formio_form_embed">
+        <xpath expr="//head" position="inside">
+            <script type="text/javascript" src="/report_formio_pdf/static/lib/FormioExport.min.js"></script>
+            <script type="text/javascript" src="/report_formio_pdf/static/src/js/formio_report_pdf.js"></script>
+        </xpath>
+        <xpath expr="//body/div/ul" position="inside">
+            <li t-if="form.state == 'COMPLETE'" class="print">
+                <button class="btn btn-secondary btn-sm" id="formio_print" type="submit">Print</button>
+            </li>
+        </xpath>
+    </template>
+
+</odoo>
