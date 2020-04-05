@@ -16,24 +16,27 @@ $(document).ready(function() {
         var component = await getComponent();
         var submission = await getSubmission();
         var options = await getOptions();
-
+        var config = await getConfig();
         var exporter = new FormioExport(component, submission, options);
 
-        // TODO
-        var config = {
-            download: false,
-            filename: 'example.pdf'
-        };
-
-        exporter.toPdf(config).then((pdf) => {
-            // download the pdf file
-            pdf.save();
-            // get the datauri string
-            var datauri = pdf.output('datauristring');
-        })
+        exporter.toPdf(config);
     }
 
-    function getConfig() {
+    async function getConfig() {
+        var title = await getTitle();
+        return {
+            download: true,
+            filename: title + '.pdf',
+            html2canvas: {
+                scale: 5,
+                logging: false
+            },
+            jsPDF: {
+                orientation: 'p',
+                unit: 'mm',
+                format: [210, 297]
+            }
+        };
     }
 
     function getTitle() {
@@ -87,5 +90,6 @@ $(document).ready(function() {
             return options
         });
     }
+    
     $("#formio_print").click(getPDF);
 });
