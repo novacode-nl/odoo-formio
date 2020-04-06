@@ -9,6 +9,7 @@ $(document).ready(function() {
         options_url = formio_uuid + '/options/',
         submission_url = formio_uuid + '/submission/',
         title_url = formio_uuid + '/title/',
+        paperformat_url = formio_uuid + '/paperformat/',
         schema = {},
         options = {};
 
@@ -24,17 +25,19 @@ $(document).ready(function() {
 
     async function getConfig() {
         var title = await getTitle();
+        var paperformat = await getPaperformat();
         return {
             download: true,
             filename: title + '.pdf',
+            margin: [paperformat['margin_top'], paperformat['margin_right'], paperformat['margin_bottom'], paperformat['margin_left']],
             html2canvas: {
                 scale: 5,
                 logging: false
             },
             jsPDF: {
-                orientation: 'p',
-                unit: 'mm',
-                format: [210, 297]
+                orientation: paperformat['orientation'],
+                unit: paperformat['format']['unit'],
+                format: paperformat['format']['size']
             }
         };
     }
@@ -48,6 +51,11 @@ $(document).ready(function() {
     }
 
     function getPaperformat() {
+        return $.jsonRpc.request(paperformat_url, 'call', {}).then(function(result) {
+            if (!$.isEmptyObject(result)) {´
+                return JSON.parse(result)
+            }
+        });
     }
 
     async function getComponent() {
@@ -67,7 +75,6 @@ $(document).ready(function() {
 
     function getSubmission() {
         return $.jsonRpc.request(submission_url, 'call', {}).then(function(result) {
-            console.log(result)
             if (!$.isEmptyObject(result)) {
                 return {'data': JSON.parse(result)};
             }
@@ -90,6 +97,6 @@ $(document).ready(function() {
             return options
         });
     }
-    
+
     $("#formio_print").click(getPDF);
 });
