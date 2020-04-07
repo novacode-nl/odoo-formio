@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Flectra Server 1.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-07 12:13+0000\n"
-"PO-Revision-Date: 2020-04-07 15:22+0200\n"
+"PO-Revision-Date: 2020-04-07 17:35+0200\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -195,18 +195,18 @@ msgstr "<strong>Übertragung:</strong>"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form_act_window_multi_url
 msgid "Act Window Multi Url"
-msgstr ""
+msgstr "Act Window Multi Url"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder_act_window_url
 #: model:ir.model.fields,field_description:formio.field_formio_form_act_window_url
 msgid "Act Window Url"
-msgstr ""
+msgstr "Act Window Url"
 
 #. module: formio
 #: model:ir.ui.view,arch_db:formio.portal_my_formio
 msgid "Actions"
-msgstr ""
+msgstr "Actions"
 
 #. module: formio
 #: model:res.groups,name:formio.group_formio_admin
@@ -236,7 +236,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:formio.field_formio_version_assets
 #: model:ir.ui.view,arch_db:formio.view_formio_version_form
 msgid "Assets"
-msgstr ""
+msgstr "Assets"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form_assigned_partner_id
@@ -276,7 +276,7 @@ msgstr "Vorlage"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version_css_assets
 msgid "CSS Assets"
-msgstr ""
+msgstr "CSS Assets"
 
 #. module: formio
 #: code:addons/formio/formio/models/formio_res_model.py:22
