@@ -52,7 +52,7 @@ $(document).ready(function() {
 
     function getPaperformat() {
         return $.jsonRpc.request(paperformat_url, 'call', {}).then(function(result) {
-            if (!$.isEmptyObject(result)) {´
+            if (!$.isEmptyObject(result)) {
                 return JSON.parse(result)
             }
         });
