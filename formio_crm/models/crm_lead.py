@@ -34,3 +34,10 @@ class CrmLead(models.Model):
             'res_model': 'formio.form',
             'view_id': False,
         }
+
+    @api.onchange('partner_id')
+    def _onchange_partner_id(self):
+        super(CrmLead, self)._onchange_partner_id()
+        for r in self.formio_forms:
+            if r.res_model == 'crm.lead':
+                r.res_partner_id = self.partner_id
