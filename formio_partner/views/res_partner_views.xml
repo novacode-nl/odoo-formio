@@ -12,7 +12,7 @@ See LICENSE file for full licensing details. -->
                 <button
                     type="action"
                     name="%(formio.action_formio_form)d"
-                    context="{'search_default_res_id_id': id, 'search_default_res_model_id': formio_this_model_id, 'default_res_model_id': formio_this_model_id, 'default_res_id': id}"
+                    context="{'search_default_res_partner_id': id, 'search_default_res_model_id': formio_this_model_id, 'default_res_model_id': formio_this_model_id, 'default_res_id': id}"
                     class="oe_stat_button"
                     icon="fa-file-text">
                     <field name="formio_forms_count" widget="statinfo" string="Forms"/>
