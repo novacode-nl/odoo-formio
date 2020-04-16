@@ -11,7 +11,7 @@ class Form(models.Model):
     _inherit = 'formio.form'
 
     def __getattr__(self, name):
-        if name == 'formio':
+        if name == '_formio':
             if 'formio' not in self.__dict__:
                 context = self._context
                 if 'lang' in context:

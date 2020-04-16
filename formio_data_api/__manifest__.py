@@ -3,7 +3,7 @@
 
 {
     'name': 'Form.io Data API',
-    'summary': 'Pythonic API to Form.io data.',
+    'summary': 'Python API for Form.io data (form submission).',
     'version': '0.1',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -12,7 +12,7 @@
     'depends': ['formio'],
     'data': [],
     'external_dependencies': {
-        'python': ['formiodata'],
+        'python': ['formi-data'],
     },
     'application': False,
     'images': [
