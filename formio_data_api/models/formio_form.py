@@ -1,7 +1,8 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from formiodata import builder, submission
+from formiodata.builder import Builder
+from formiodata.submission import Submission
 
 from odoo import models
 from odoo.exceptions import UserError
@@ -12,7 +13,7 @@ class Form(models.Model):
 
     def __getattr__(self, name):
         if name == '_formio':
-            if 'formio' not in self.__dict__:
+            if '_formio' not in self.__dict__:
                 context = self._context
                 if 'lang' in context:
                     lang = context['lang']
@@ -27,15 +28,13 @@ class Form(models.Model):
 
                 # TODO remove unicode?
                 schema_json = u'%s' % self.builder_id.schema
-
-                builder_obj = builder.Builder(
-                    self.builder_id.schema, res_lang.iso_code, context={'model_object': self})
+                builder_obj = Builder(self.builder_id.schema, res_lang.iso_code, context={'model_object': self})
 
                 if self.submission_data is False:
-                    # HACK masquerade empty Submission object on the formio attr.
-                    self.formio = EmptySubmission(submisison_json, builder_obj)
+                    # HACK masquerade empty Submission object
+                    self._formio = Submission('{}', builder_obj)
                 else:
-                    self.formio = submission.Submission(self.submission_data, builder_obj)
-            return self.formio
+                    self._formio = Submission(self.submission_data, builder_obj)
+                return self._formio
         else:
             return self.__getattribute__(name)
