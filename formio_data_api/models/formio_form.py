@@ -2,13 +2,13 @@
 # See LICENSE file for full licensing details.
 
 from formiodata.builder import Builder
-from formiodata.submission import Submission
+from formiodata.form import Form
 
 from odoo import models
 from odoo.exceptions import UserError
 
 
-class Form(models.Model):
+class FormioForm(models.Model):
     _inherit = 'formio.form'
 
     def __getattr__(self, name):
@@ -31,10 +31,10 @@ class Form(models.Model):
                 builder_obj = Builder(self.builder_id.schema, res_lang.iso_code, context={'model_object': self})
 
                 if self.submission_data is False:
-                    # HACK masquerade empty Submission object
-                    self._formio = Submission('{}', builder_obj)
+                    # HACK masquerade empty Form object
+                    self._formio = Form('{}', builder_obj)
                 else:
-                    self._formio = Submission(self.submission_data, builder_obj)
+                    self._formio = Form(self.submission_data, builder_obj)
                 return self._formio
         else:
             return self.__getattribute__(name)
