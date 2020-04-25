@@ -135,7 +135,6 @@ class FormioController(http.Controller):
 
     def _prepare_form_options(self, form):
         options = {}
-        i18n = {}
         context = request.env.context
         Lang  = request.env['res.lang']
 
@@ -148,24 +147,7 @@ class FormioController(http.Controller):
 
         lang = Lang._lang_get(request.env.user.lang)
         options['language'] = lang.iso_code
-
-        # Formio GUI/API translations
-        if form.builder_id.formio_version_id.translations:
-            for trans in form.builder_id.formio_version_id.translations:
-                if trans.lang_id.iso_code not in i18n:
-                    i18n[trans.lang_id.iso_code] = {trans.property: trans.value}
-                else:
-                    i18n[trans.lang_id.iso_code][trans.property] = trans.value
-
-        # Form Builder translations (labels etc).
-        # These could override the former GUI/API translations, but
-        # that's how the Javascript API works.
-        for trans in form.builder_id.translations:
-            if trans.lang_id.iso_code not in i18n:
-                i18n[trans.lang_id.iso_code] = {trans.source: trans.value}
-            else:
-                i18n[trans.lang_id.iso_code][trans.source] = trans.value
-            options['i18n'] = i18n
+        options['i18n'] = form.i18n_translations()
 
         return options
 
