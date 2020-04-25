@@ -28,7 +28,7 @@ class FormioForm(models.Model):
 
                 # TODO remove unicode?
                 schema_json = u'%s' % self.builder_id.schema
-                builder_obj = Builder(self.builder_id.schema, res_lang.iso_code, context={'model_object': self})
+                builder_obj = Builder(self.builder_id.schema, res_lang.iso_code, i18n=self.i18n_translations())
 
                 if self.submission_data is False:
                     # HACK masquerade empty Form object
