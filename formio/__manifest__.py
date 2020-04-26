@@ -4,7 +4,7 @@
 {
     'name': 'Form.io',
     'summary': 'Build, publish and store webforms in Odoo with the "Form.io" GUI/renderer',
-    'version': '2.0',
+    'version': '2.1',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
