@@ -85,7 +85,7 @@ See LICENSE file for full licensing details. -->
                         <page string="Settings" name="settings">
                             <group>
                                 <group name="form_settings" string="Form.io">
-                                    <field name="formio_version_id" placeholder="Select latest version only to try new form components." attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="formio_version_id" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="wizard" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="view_as_html" groups="formio.group_formio_admin"/>
                                 </group>
