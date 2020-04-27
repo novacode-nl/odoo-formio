@@ -34,7 +34,7 @@ See LICENSE file for full copyright and licensing details.
             <div class="formio_header mb-4">
                 <div class="row">
                     <div t-if="o.submission_data" class="col-6">
-                        <strong>Submission:</strong> <span t-field="o.submission_partner_name"/>
+                        <strong>Submission by:</strong> <span t-field="o.submission_partner_name"/>
                     </div>
                     <div t-if="o.submission_data" class="col-4">
                         <strong>Date:</strong> <span t-field="o.submission_date"/>

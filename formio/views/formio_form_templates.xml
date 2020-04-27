@@ -36,7 +36,7 @@ See LICENSE file for full licensing details. -->
                             <strong>Assigned:</strong> <span t-esc="form.assigned_partner_name"/>
                         </li>
                         <li t-if="form.submission_data" class="submission">
-                            <strong>Submission:</strong> <span t-esc="form.submission_partner_name"/> (<span t-field="form.submission_date"/>)
+                            <strong>Submission by:</strong> <span t-esc="form.submission_partner_name"/> (<span t-field="form.submission_date"/>)
                         </li>
                         <li class="form_id">
                             <strong>ID:</strong> <span t-esc="form.id"/>
