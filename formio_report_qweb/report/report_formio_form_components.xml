@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <template id="component">
+        <t t-if="o._formio.components.get(component['key'])">
+            <t t-if="component['type'] in ['textarea', 'textfield']">
+                <t t-call="formio_report_qweb.text_component"/>
+            </t>
+            <t t-elif="component['type'] == 'selectboxes'">
+                <t t-call="formio_report_qweb.selectboxes_component"/>
+            </t>
+            <t t-elif="component['type'] == 'checkbox'">
+                <t t-call="formio_report_qweb.checkbox_component"/>
+            </t>
+        </t>
+        <t t-elif="component['type'] == 'columns'">
+            <t t-call="formio_report_qweb.column_component"/>
+        </t>
+        <t t-elif="component['type'] == 'panel'">
+            <t t-call="formio_report_qweb.panel_component"/>
+        </t>
+    </template>
+
+    <!-- Input components -->
+    <template id="text_component">
+        <t t-set="value" t-value="o._formio.components[component['key']].value.replace('\n', '&lt;br/&gt;')"/>
+        <div class="mw-100 mb-2 formio_text_component">
+            <span><t t-raw="component['_object'].label"/></span>
+            <p><t t-raw="value"/></p>
+        </div>
+    </template>
+
+    <template id="selectboxes_component">
+        <div class="mw-100 mb-2">
+            <span><t t-raw="component['_object'].label"/></span>
+            <t t-foreach="o._formio.components[component['key']].value" t-as="sbox">
+                <div>
+                    <t t-if="o._formio.components[component['key']].value[sbox] == true">
+                        <input type="checkbox" checked="checked" disable="disabled"/>
+                    </t>
+                    <t t-else="">
+                        <input type="checkbox"/>
+                    </t>
+                    <span><t t-esc="sbox"/></span>
+                </div>
+            </t>
+        </div>
+    </template>
+
+    <template id="checkbox_component">
+        <div class="mw-100 mb-2">
+            <t t-if="o._formio.components[component['key']].value == true">
+                <input type="checkbox" checked="checked" disabled="disabled"/>
+            </t>
+            <t t-else="">
+                <input type="checkbox" disabled="disabled"/>
+            </t>
+            <span><t t-raw="component['_object'].label"/></span>
+        </div>
+    </template>
+
+    <!-- Layout components -->
+    <template id="column_component">
+        <table class="table">
+            <tr>
+                <t t-foreach="component['columns']" t-as="col">
+                    <td>
+                        <t t-foreach="col['components']" t-as="component">
+                            <t t-call="formio_report_qweb.component"/>
+                        </t>
+                    </td>
+                </t>
+            </tr>
+        </table>
+    </template>
+
+    <template id="panel_component">
+        <div class="formio_panel_component mb-4">
+            <p><t t-esc="component['_object'].label"/></p>
+            <t t-set="panel_component" t-value="component"/>
+            <div class="formio_panel_components ml-4">
+                <t t-foreach="panel_component['components']" t-as="component">
+                    <t t-call="formio_report_qweb.component"/>
+                </t>
+            </div>
+        </div>
+    </template>
+</odoo>
