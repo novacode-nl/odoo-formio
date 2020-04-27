@@ -16,5 +16,7 @@
         'report/report_formio_form_components.xml',
     ],
     "application": False,
-    "installable": True,
+    'images': [
+        'static/description/banner.png',
+    ],
 }
