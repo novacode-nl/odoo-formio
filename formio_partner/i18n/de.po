@@ -1,0 +1,56 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* formio_partner
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-07 13:52+0000\n"
+"PO-Revision-Date: 2020-04-07 17:34+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: \n"
+"Language: de\n"
+
+#. module: formio_partner
+#: model:ir.model,name:formio_partner.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: formio_partner
+#: model:ir.model.fields,field_description:formio_partner.field_res_partner_formio_forms
+#: model:ir.model.fields,field_description:formio_partner.field_res_users_formio_forms
+msgid "Form.io Forms"
+msgstr "Form.io Formulare"
+
+#. module: formio_partner
+#: model:ir.model,name:formio_partner.model_formio_form
+msgid "Formio Form"
+msgstr "Form.io Formular"
+
+#. module: formio_partner
+#: model:ir.model.fields,field_description:formio_partner.field_res_partner_formio_forms_count
+#: model:ir.model.fields,field_description:formio_partner.field_res_users_formio_forms_count
+msgid "Formio Forms Count"
+msgstr "Formio Formulare Anzahl"
+
+#. module: formio_partner
+#: model:ir.model.fields,field_description:formio_partner.field_res_partner_formio_this_model_id
+#: model:ir.model.fields,field_description:formio_partner.field_res_users_formio_this_model_id
+msgid "Formio This Model"
+msgstr "Formio Dieses Modell"
+
+#. module: formio_partner
+#: model:ir.ui.view,arch_db:formio_partner.view_partner_form_formio_partner
+msgid "Forms"
+msgstr "Formulare"
+
+#. module: formio_partner
+#: model:ir.model.fields,field_description:formio_partner.field_formio_form_base_res_partner_id
+msgid "Partner"
+msgstr "Partner"

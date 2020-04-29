@@ -1,0 +1,58 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* formio_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-07 13:53+0000\n"
+"PO-Revision-Date: 2020-04-07 17:34+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: \n"
+"Language: de\n"
+
+#. module: formio_sale
+#: model:ir.model.fields,field_description:formio_sale.field_sale_order_formio_forms
+msgid "Form.io Forms"
+msgstr "Form.io Formulare"
+
+#. module: formio_sale
+#: model:ir.model,name:formio_sale.model_formio_form
+msgid "Formio Form"
+msgstr "Formio Formular"
+
+#. module: formio_sale
+#: model:ir.model.fields,field_description:formio_sale.field_sale_order_formio_forms_count
+msgid "Formio Forms Count"
+msgstr "Formio Formulare Anzahl"
+
+#. module: formio_sale
+#: model:ir.model.fields,field_description:formio_sale.field_sale_order_formio_this_model_id
+msgid "Formio This Model"
+msgstr "Formio Dieses Modell"
+
+#. module: formio_sale
+#: model:ir.ui.view,arch_db:formio_sale.view_order_form_formio_sale
+msgid "Forms"
+msgstr "Formulare"
+
+#. module: formio_sale
+#: model:ir.model,name:formio_sale.model_sale_order
+msgid "Quotation"
+msgstr "Angebot"
+
+#. module: formio_sale
+#: model:ir.model.fields,field_description:formio_sale.field_formio_form_sale_order_id
+msgid "Sale Order"
+msgstr "Auftrag"
+
+#. module: formio_sale
+#: model:ir.model,name:formio_sale.model_formio_form_sale
+msgid "formio.form.sale"
+msgstr "formio.form.sale"
