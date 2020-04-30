@@ -32,6 +32,8 @@ $(document).ready(function() {
                 options['hooks'] = hooks;
 
                 Formio.createForm(document.getElementById('formio_form'), schema, options).then(function(form) {
+                    init_resizer();
+
                     // Language
                     if ('language' in options) {
                         form.language = options['language'];
@@ -66,4 +68,52 @@ $(document).ready(function() {
             });
         }
     });
+
+    var init_resizer = function() {
+        /* HACK
+           This is a hacky workaround regarding issue https://github.com/novacode-nl/odoo-formio/issues/20
+           The iframeResizer library doen't get triggered upon using the component-types below.
+
+           TODO
+           .formio-component-day (months dropdown) doesn't trigger.
+        */
+        var initial_height = $(document.getElementById('formio_form')).height();
+        var observer = new MutationObserver(function(mutations) {
+            var new_height = false;
+            mutations.forEach(function(mutation) {
+                if ($(mutation.target).hasClass('is-open') || $(mutation.target).hasClass('active')) {
+                    // Classes used in compoenents (as far as I know):
+                    // - is-open: select components
+                    // - active: datetime components
+                    if (new_height != initial_height) {
+                        // Update height
+                        if ($(mutation.target).parents('.formio-component-select').length) {
+                            new_height = initial_height + 200;
+                            $('.formio_form_embed_container').height(new_height);
+                        } else if ($(mutation.target).parents('.formio-component-datetime').length) {
+                            new_height = initial_height + 300;
+                            $('.formio_form_embed_container').height(new_height);
+                        } else {
+                            $('.formio_form_embed_container').height(initial_height);
+                        }
+                        console.log('Updated #formio_form height to fix expandbles (dropdowns) positioning.');
+                    }
+                    else {
+                        $(document.getElementById('formio_form')).height(initial_height);
+                    }
+                }
+            });
+        });
+
+        // Such last 3 component-types on form cause issues.
+        var last_n = -3;
+        var components = $("#formio_form .formio-component-select, #formio_form .formio-component-datetime, #formio_form .formio-component-day [ref='month']");
+        $.each(components.slice(-3), function(i, el) {
+            observer.observe(el, {
+                attributes: true,
+                attributeFilter: ["class"],
+                subtree: true
+            });
+        });
+    };
 });
