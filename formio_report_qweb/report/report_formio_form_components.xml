@@ -15,6 +15,9 @@ See LICENSE file for full copyright and licensing details.
             <t t-elif="component['type'] == 'checkbox'">
                 <t t-call="formio_report_qweb.checkbox_component"/>
             </t>
+            <t t-elif="component['type'] == 'select'">
+                <t t-call="formio_report_qweb.select_component"/>
+            </t>
         </t>
         <t t-elif="component['type'] == 'columns'">
             <t t-call="formio_report_qweb.column_component"/>
@@ -28,14 +31,14 @@ See LICENSE file for full copyright and licensing details.
     <template id="text_component">
         <t t-set="value" t-value="o._formio.components[component['key']].value.replace('\n', '&lt;br/&gt;')"/>
         <div class="mw-100 mb-2 formio_text_component">
-            <span><t t-raw="component['_object'].label"/></span>
+            <div class="label mb-2"><t t-raw="component['_object'].label"/></div>
             <p><t t-raw="value"/></p>
         </div>
     </template>
 
     <template id="selectboxes_component">
         <div class="mw-100 mb-2">
-            <span><t t-raw="component['_object'].label"/></span>
+            <div class="label mb-2"><t t-raw="component['_object'].label"/></div>
             <t t-foreach="o._formio.components[component['key']].value" t-as="sbox">
                 <div>
                     <t t-if="o._formio.components[component['key']].value[sbox] == true">
@@ -62,6 +65,24 @@ See LICENSE file for full copyright and licensing details.
         </div>
     </template>
 
+    <template id="select_component">
+        <div class="mw-100 mb-2 formio_select_component">
+            <div class="label mb-2"><t t-raw="component['_object'].label"/></div>
+            <t t-if="component.get('multiple')">
+                <div class="value_container">
+                    <t t-foreach="o._formio.components[component['key']].value_labels" t-as="val_label">
+                        <span class="badge badge-light"><t t-raw="val_label"/></span>
+                    </t>
+                </div>
+            </t>
+            <t t-else="">
+                <div class="value_container">
+                    <span><t t-raw="o._formio.components[component['key']].value_label"/></span>
+                </div>
+            </t>
+        </div>
+    </template>
+
     <!-- Layout components -->
     <template id="column_component">
         <table class="table">
@@ -81,7 +102,7 @@ See LICENSE file for full copyright and licensing details.
         <div class="formio_panel_component mb-4">
             <p><t t-esc="component['_object'].label"/></p>
             <t t-set="panel_component" t-value="component"/>
-            <div class="formio_panel_components ml-4">
+            <div class="formio_panel_components ml-4 mr-4">
                 <t t-foreach="panel_component['components']" t-as="component">
                     <t t-call="formio_report_qweb.component"/>
                 </t>
