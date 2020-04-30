@@ -72,7 +72,7 @@ See LICENSE file for full copyright and licensing details.
             </div>
 
             <div class="formio_components">
-                <t t-foreach="o._formio.builder.components" t-as="component">
+                <t t-foreach="o._formio.builder.raw_components" t-as="component">
                     <t t-call="formio_report_qweb.component"/>
                 </t>
             </div>

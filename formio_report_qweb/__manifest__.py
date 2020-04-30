@@ -4,7 +4,7 @@
 {
     "name": "Form.io Reports Generator",
     'summary': 'Out-of-the-box printing Form.io webforms to (QWeb) formats e.g. PDF',
-    "version": "0.2",
+    "version": "0.3",
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     "license": "LGPL-3",
