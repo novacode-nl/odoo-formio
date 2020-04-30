@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-07 12:13+0000\n"
-"PO-Revision-Date: 2020-04-07 17:35+0200\n"
+"PO-Revision-Date: 2020-04-30 14:28+0200\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -483,7 +483,7 @@ msgstr "Formular ist zugänglich für den zugewiesenen Portal-Benutzer."
 #: model:ir.ui.view,arch_db:formio.view_formio_builder_formio
 #: model:ir.ui.view,arch_db:formio.view_formio_form_formio
 msgid "Form.io"
-msgstr "Formulare"
+msgstr ""
 
 #. module: formio
 #. flectra-web
