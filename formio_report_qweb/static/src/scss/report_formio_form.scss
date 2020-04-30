@@ -5,7 +5,9 @@
 
 /* Input components */
 
-.formio_text_component p, .formio_select_component div.value_container {
+.formio_text_component p,
+.formio_select_component div.value_container,
+.formio_component_not_implemented div.raw_value {
     border: 1px solid #d8d8d8;
     padding: 4px;
     padding-left: 8px;
@@ -30,4 +32,11 @@
 .formio_panel_component p {
     padding: 8px;
     background-color: #f0f0f0;
+}
+
+/* Component not implemented */
+
+.formio_component_not_implemented small {
+    color: #808080;
+    font-style: italic;
 }
