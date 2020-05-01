@@ -17,7 +17,7 @@
         id="action_report_formio_form_assigned_user"
         string="Form (Assigned user preferences)"
         model="formio.form"
-        report_type="qweb-html"
+        report_type="qweb-pdf"
         file="formio_report_qweb.report_formio_form_assigned_user"
         name="formio_report_qweb.report_formio_form_assigned_user"
         print_report_name="'Form.io Form - %s - %s' % (object.title, object.id)"
