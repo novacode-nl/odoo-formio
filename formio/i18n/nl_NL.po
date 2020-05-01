@@ -325,8 +325,8 @@ msgstr "Maak nieuwe versie"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
-msgid "Create a Form"
-msgstr "Formulier aanmaken"
+msgid "Submit a Form"
+msgstr "Formulier indienen"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__create_uid

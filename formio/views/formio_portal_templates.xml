@@ -48,7 +48,7 @@ See LICENSE file for full licensing details. -->
             <t t-if="builders_create_form">
                 <div class="o_dropdown_kanban dropdown mt8 mb8">
                     <button class="dropdown-toggle btn btn-primary" role="button" data-toggle="dropdown" href="#" aria-label="Dropdown menu" title="Dropdown menu">
-                        Create a Form
+                        Submit a Form
                     </button>
                     <div class="dropdown-menu" role="menu">
                         <t t-foreach="builders_create_form" t-as="builder">

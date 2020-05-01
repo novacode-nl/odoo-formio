@@ -326,8 +326,8 @@ msgstr "Erstelle eine neue Version"
 
 #. module: formio
 #: model:ir.ui.view,arch_db:formio.portal_my_formio
-msgid "Create a Form"
-msgstr "Erstelle ein Formular"
+msgid "Submit a Form"
+msgstr "Senden ein Formular"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder_create_uid
