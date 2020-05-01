@@ -54,7 +54,7 @@
                 <div class="formio_form_iframe_container">
                     <iframe t-attf-src="/formio/form/#{form.uuid}/root" class="formio_form_embed"/>
                     <script>
-                        iFrameResize({heightCalculationMethod: 'max'}, '.formio_form_embed');
+                        iFrameResize({heightCalculationMethod: 'grow'}, '.formio_form_embed');
                     </script>
                 </div>
             </div>
