@@ -12,7 +12,7 @@
                     <sheet>
                         <h2><field name="builder_id" readonly="1"/></h2>
                         <group>
-                            <field name="ir_actions_report_id"/>
+                            <field name="ir_actions_report_id" options="{'no_quick_create': True, 'no_create_edit': True}"/>
                         </group>
                         <group string="Settings">
                             <div class="o_td_label">
