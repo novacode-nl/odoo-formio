@@ -18,7 +18,7 @@ See LICENSE file for full copyright and licensing details.
             <t t-elif="component['type'] == 'select'">
                 <t t-call="formio_report_qweb.select_component"/>
             </t>
-            <t t-else="">
+            <t t-elif="show_components_not_implemented">
                 <t t-call="formio_report_qweb.component_not_implemented"/>
             </t>
         </t>

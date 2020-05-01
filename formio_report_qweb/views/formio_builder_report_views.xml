@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+     See LICENSE file for full licensing details. -->
+
+<odoo>
+    <data>
+        <record id="formio_builder_report_form" model="ir.ui.view">
+            <field name="name">formio.builder.report.form</field>
+            <field name="model">formio.builder.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <h2><field name="builder_id" readonly="1"/></h2>
+                        <group>
+                            <field name="ir_actions_report_id"/>
+                        </group>
+                        <group string="Settings">
+                            <div class="o_td_label">
+                                <label for="show_components_not_implemented" string="Show not implemented components"/>
+                                <field name="show_components_not_implemented" nolabel="1" class="ml-4"/>
+                            </div>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
