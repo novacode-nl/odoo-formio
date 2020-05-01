@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full copyright and licensing details. -->
+
+<odoo>
+    <data>
+        <record id="access_formio_builder_report_admin" model="ir.model.access">
+            <field name="name">formio.builder.report: Admin</field>
+            <field name="model_id" ref="formio_report_qweb.model_formio_builder_report"/>
+            <field name="group_id" ref="formio.group_formio_admin"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="access_formio_builder_report_user_all_forms" model="ir.model.access">
+            <field name="name">formio.builder.report: User all forms</field>
+            <field name="model_id" ref="formio_report_qweb.model_formio_builder_report"/>
+            <field name="group_id" ref="formio.group_formio_user_all_forms"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record id="access_formio_builder_report_user" model="ir.model.access">
+            <field name="name">formio.builder.report: User assigned forms</field>
+            <field name="model_id" ref="formio_report_qweb.model_formio_builder_report"/>
+            <field name="group_id" ref="formio.group_formio_user"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record id="access_formio_builder_report_portal_user" model="ir.model.access">
+            <field name="name">formio.builder.report: Portal User</field>
+            <field name="model_id" ref="formio_report_qweb.model_formio_builder_report"/>
+            <field name="group_id" ref="base.group_portal"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+    </data>
+</odoo>

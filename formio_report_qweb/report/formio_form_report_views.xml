@@ -6,7 +6,7 @@
 <odoo>
     <report
         id="action_report_formio_form"
-        string="Form - My preferences"
+        string="Form (My preferences)"
         model="formio.form"
         report_type="qweb-pdf"
         file="formio_report_qweb.report_formio_form"
@@ -15,7 +15,7 @@
         />
     <report
         id="action_report_formio_form_assigned_user"
-        string="Form - Assigned user preferences"
+        string="Form (Assigned user preferences)"
         model="formio.form"
         report_type="qweb-html"
         file="formio_report_qweb.report_formio_form_assigned_user"

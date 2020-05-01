@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+     See LICENSE file for full licensing details. -->
+
+<odoo>
+    <data>
+        <record id="formio_builder_report_form" model="ir.ui.view">
+            <field name="name">formio.builder.report.form</field>
+            <field name="model">formio.builder.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="formio_builder_ids">
+                        <field name="formio_builder_id" string="Name"/>
+                    </field>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

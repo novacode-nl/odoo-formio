@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <data>
+        <record id="view_formio_builder_form_inherit" model="ir.ui.view">
+            <field name="name">formio.builder.form report</field>
+            <field name="model">formio.builder</field>
+            <field name="inherit_id" ref="formio.view_formio_builder_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <page name="translations" position="after">
+                        <page name="qweb_reports" string="Reports">
+                            <field name="report_ids" context="{'default_builder_id': id}">
+                                <tree>
+                                    <field name="builder_id" invisible="1"/>
+                                    <field name="ir_actions_report_id" string="Report"/>
+                                    <field name="show_components_not_implemented"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </page>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>
