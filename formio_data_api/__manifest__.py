@@ -3,7 +3,7 @@
 
 {
     'name': 'Form.io Data API',
-    'summary': 'Python API for Form.io data (form submission).',
+    'summary': 'Python API for Form.io data (builder, form/submission).',
     'version': '0.2',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
