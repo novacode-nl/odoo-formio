@@ -3,7 +3,7 @@
 
 {
     'name': 'Form.io Reporting Engine',
-    'summary': 'Generate a (PDF) report for every Form',
+    'summary': 'Generate (PDF) reports for every Form',
     'version': '0.4',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
