@@ -3,7 +3,7 @@
 
 {
     'name': 'Form.io',
-    'summary': 'Build, deploy and store web forms in with the "Form.io" Form Builder',
+    'summary': 'Build, deploy and store web forms with the "Form.io" Form Builder',
     'version': '2.2',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
