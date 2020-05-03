@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io Reporting Engine',
+    'name': 'Form.io Reports Generator',
     'summary': 'Generate (PDF) reports for every Form',
     'version': '0.4',
     'author': 'Nova Code',
