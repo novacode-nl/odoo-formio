@@ -5,12 +5,18 @@
 
 /* Input components */
 
-.formio_text_component p,
+.formio_textfield_component p,
+.formio_textarea_component p,
 .formio_select_component div.value_container,
 .formio_component_not_implemented div.raw_value {
     border: 1px solid #d8d8d8;
     padding: 4px;
     padding-left: 8px;
+    min-height: 32px;
+}
+
+.formio_textarea_component p {
+    min-height: 64px;
 }
 
 .formio_select_component div span.badge {

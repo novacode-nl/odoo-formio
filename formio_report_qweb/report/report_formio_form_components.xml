@@ -5,22 +5,22 @@ See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
     <template id="component">
-        <t t-if="o._formio.components.get(component['key']) and component.get('type') not in ['button']">
-            <t t-if="component['type'] in ['textarea', 'textfield']">
-                <t t-call="formio_report_qweb.text_component"/>
-            </t>
-            <t t-elif="component['type'] == 'selectboxes'">
-                <t t-call="formio_report_qweb.selectboxes_component"/>
-            </t>
-            <t t-elif="component['type'] == 'checkbox'">
-                <t t-call="formio_report_qweb.checkbox_component"/>
-            </t>
-            <t t-elif="component['type'] == 'select'">
-                <t t-call="formio_report_qweb.select_component"/>
-            </t>
-            <t t-elif="show_components_not_implemented">
-                <t t-call="formio_report_qweb.component_not_implemented"/>
-            </t>
+        <t t-set="key_stored" t-value="component['key'] in o._formio.components"/>
+
+        <t t-if="component['type'] == 'textfield'">
+            <t t-call="formio_report_qweb.textfield_component"/>
+        </t>
+        <t t-elif="component['type'] == 'textarea'">
+            <t t-call="formio_report_qweb.textarea_component"/>
+        </t>
+        <t t-elif="component['type'] == 'selectboxes'">
+            <t t-call="formio_report_qweb.selectboxes_component"/>
+        </t>
+        <t t-elif="component['type'] == 'checkbox'">
+            <t t-call="formio_report_qweb.checkbox_component"/>
+        </t>
+        <t t-elif="component['type'] == 'select'">
+            <t t-call="formio_report_qweb.select_component"/>
         </t>
         <t t-elif="component['type'] == 'columns'">
             <t t-call="formio_report_qweb.columns_component"/>
@@ -28,21 +28,51 @@ See LICENSE file for full copyright and licensing details.
         <t t-elif="component['type'] == 'panel'">
             <t t-call="formio_report_qweb.panel_component"/>
         </t>
+        <t t-elif="show_components_not_implemented and component['type'] not in ['button']">
+            <t t-call="formio_report_qweb.component_not_implemented"/>
+        </t>
+    </template>
+
+    <template id="component_label">
+        <t t-if="component.get('validate') and component['validate'].get('required')">
+            <t t-esc="component['_object'].label"/> *
+        </t>
+        <t t-else="">
+            <t t-esc="component['_object'].label"/>
+        </t>
     </template>
 
     <!-- Input components -->
-    <template id="text_component">
-        <t t-set="value" t-value="o._formio.components[component['key']].value.replace('\n', '&lt;br/&gt;')"/>
-        <div class="mw-100 mb-2 formio_text_component">
-            <div class="label mb-2"><t t-esc="component['_object'].label"/></div>
+    <template id="textfield_component">
+        <t t-if="key_stored">
+            <t t-set="value" t-value="o._formio.components[component['key']].value"/>
+        </t>
+        <t t-else="">
+            <t t-set="value" t-value=""/>
+        </t>
+        <div class="mw-100 mb-3 formio_textfield_component">
+            <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
+            <p><t t-esc="value"/></p>
+        </div>
+    </template>
+
+    <template id="textarea_component">
+        <t t-if="key_stored">
+            <t t-set="value" t-value="o._formio.components[component['key']].value.replace('\n', '&lt;br/&gt;')"/>
+        </t>
+        <t t-else="">
+            <t t-set="value" t-value=""/>
+        </t>
+        <div class="mw-100 mb-3 formio_textarea_component">
+            <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
             <!-- TODO FIX (security): split and loop lines, each with <t t-esc=...> -->
             <p><t t-raw="value"/></p>
         </div>
     </template>
 
     <template id="selectboxes_component">
-        <div class="mw-100 mb-2">
-            <div class="label mb-2"><t t-esc="component['_object'].label"/></div>
+        <div class="mw-100 mb-3">
+            <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
             <t t-foreach="o._formio.components[component['key']].value" t-as="sbox">
                 <div>
                     <t t-if="o._formio.components[component['key']].value[sbox] == true">
@@ -58,19 +88,19 @@ See LICENSE file for full copyright and licensing details.
     </template>
 
     <template id="checkbox_component">
-        <div class="mw-100 mb-2">
-            <t t-if="o._formio.components[component['key']].value == true">
+        <div class="mw-100 mb-3">
+            <t t-if="key_stored and o._formio.components[component['key']].value == true">
                 <input type="checkbox" checked="checked" disabled="disabled"/>
             </t>
             <t t-else="">
                 <input type="checkbox" disabled="disabled"/>
             </t>
-            <span><t t-esc="component['_object'].label"/></span>
+            <span><t t-call="formio_report_qweb.component_label"/></span>
         </div>
     </template>
 
     <template id="select_component">
-        <div class="mw-100 mb-2 formio_select_component">
+        <div class="mw-100 mb-3 formio_select_component">
             <div class="label mb-2"><t t-esc="component['_object'].label"/></div>
             <t t-if="component.get('multiple')">
                 <div class="value_container">
@@ -81,33 +111,36 @@ See LICENSE file for full copyright and licensing details.
             </t>
             <t t-else="">
                 <div class="value_container">
-                    <span><t t-esc="o._formio.components[component['key']].value_label"/></span>
+                    <t t-if="key_stored">
+                        <span><t t-esc="o._formio.components[component['key']].value_label"/></span>
+                    </t>
                 </div>
             </t>
         </div>
     </template>
 
     <template id="component_not_implemented">
-        <div class="mw-100 mb-2 formio_component_not_implemented">
-            <div class="label mb-2"><t t-esc="component['_object'].label"/></div>
-            <div class="raw_value"><t t-esc="o._formio.components[component['key']].value"/></div>
+        <div class="mw-100 mb-3 formio_component_not_implemented">
+            <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
+            <t t-if="key_stored">
+                <div class="raw_value"><t t-esc="o._formio.components[component['key']].value"/></div>
+            </t>
             <small>WARNING: component not implemented (showing raw data)</small>
         </div>
     </template>
 
     <!-- Layout components -->
     <template id="columns_component">
-        <table class="table">
-            <tr>
-                <t t-foreach="component['columns']" t-as="col">
-                    <td>
-                        <t t-foreach="col['components']" t-as="component">
-                            <t t-call="formio_report_qweb.component"/>
-                        </t>
-                    </td>
-                </t>
-            </tr>
-        </table>
+        <t t-set="col_width" t-value="int(12 / len(component['columns']))"/>
+        <div class="row mb-2">
+            <t t-foreach="component['columns']" t-as="col">
+                <div t-attf-class="col-{{ col_width }} mb-2">
+                    <t t-foreach="col['components']" t-as="component">
+                        <t t-call="formio_report_qweb.component"/>
+                    </t>
+                </div>
+            </t>
+        </div>
     </template>
 
     <template id="panel_component">
