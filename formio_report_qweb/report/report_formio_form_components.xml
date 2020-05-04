@@ -23,7 +23,7 @@ See LICENSE file for full copyright and licensing details.
             </t>
         </t>
         <t t-elif="component['type'] == 'columns'">
-            <t t-call="formio_report_qweb.column_component"/>
+            <t t-call="formio_report_qweb.columns_component"/>
         </t>
         <t t-elif="component['type'] == 'panel'">
             <t t-call="formio_report_qweb.panel_component"/>
@@ -96,7 +96,7 @@ See LICENSE file for full copyright and licensing details.
     </template>
 
     <!-- Layout components -->
-    <template id="column_component">
+    <template id="columns_component">
         <table class="table">
             <tr>
                 <t t-foreach="component['columns']" t-as="col">
