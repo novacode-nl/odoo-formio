@@ -1,5 +1,9 @@
+.formio_builder_container.o_form_sheet {
+    width: 100% !important;
+}
+
 .formio_builder_container .formio_builder_dock {
-    margin-bottom: 20px;
+    margin-bottom: 8px;
 }
 
 .formio_builder_container .formio_builder_dock * {
@@ -45,13 +49,13 @@
 
 @media screen and (max-height: 1440px) {
     .formio_builder_iframe_container iframe{
-        height: 1000px;
+        height: 840px;
     }
 }
 
 @media screen and (max-height: 1200px) {
     .formio_builder_iframe_container iframe{
-        height: 800px;
+        height: 760px;
     }
 }
 
