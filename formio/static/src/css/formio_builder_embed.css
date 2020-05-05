@@ -1,3 +1,7 @@
+body {
+    margin-right: 12px;
+}
+
 .formio_builder_embed_container {
     margin: 0 auto;
     padding-left: 4px;
