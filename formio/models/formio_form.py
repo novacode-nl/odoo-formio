@@ -89,7 +89,6 @@ class Form(models.Model):
     def _get_builder_from_id(self, builder_id):
         return self.env['formio.builder'].browse(builder_id)
 
-    @api.multi
     @api.depends('state')
     def _compute_kanban_group_state(self):
         for r in self:
@@ -115,7 +114,6 @@ class Form(models.Model):
         for r in self:
             r.display_state = get_field_selection_label(r, 'state')
 
-    @api.multi
     @api.depends('title')
     def name_get(self):
         res = []
@@ -141,10 +139,7 @@ class Form(models.Model):
             data = ast.literal_eval(data)
         return data
 
-    @api.multi
     def action_view_formio(self):
-        self.ensure_one()
-
         return {
             "name": self.name,
             "type": "ir.actions.act_window",
@@ -156,9 +151,7 @@ class Form(models.Model):
             "context": {}
         }
 
-    @api.multi
     def action_draft(self):
-        self.ensure_one()
         vals = {'state': STATE_DRAFT}
         submission_data = self._decode_data(self.submission_data)
         if 'submit' in submission_data:
@@ -167,20 +160,13 @@ class Form(models.Model):
 
         self.write(vals)
 
-    @api.multi
     def action_complete(self):
-        self.ensure_one()
         self.write({'state': STATE_COMPLETE})
 
-    @api.multi
     def action_cancel(self):
-        self.ensure_one()
         self.write({'state': STATE_CANCEL})
 
-    @api.multi
     def action_send_invitation_mail(self):
-        self.ensure_one()
-
         compose_form_id = self.env.ref('mail.email_compose_message_wizard_form').id
         if self.portal:
             template_id = self.env.ref('formio.mail_invitation_portal_user').id
@@ -265,9 +251,11 @@ class Form(models.Model):
 
     @api.depends('res_id')
     def _compute_res_fields(self):
-        pass
+        self.res_act_window_url = False
+        self.res_name = False
+        self.res_info = False
+        self.res_partner_id = False
         
-    @api.multi
     def action_open_res_act_window(self):
         return {
             'type': 'ir.actions.act_window',

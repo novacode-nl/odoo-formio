@@ -85,7 +85,6 @@ class Builder(models.Model):
         if re.search(r"[^a-zA-Z0-9_-]", self.name) is not None:
             raise ValidationError('Name is invalid. Use ASCII letters, digits, "-" or "_".')
 
-    @api.one
     @api.constrains("name", "state")
     def constraint_one_current(self):
         """ Per name there can be only 1 record with state current at
@@ -100,7 +99,6 @@ class Builder(models.Model):
                 name=self.name)
             raise ValidationError(msg)
 
-    @api.one
     @api.constrains("name", "version")
     def constraint_one_version(self):
         """ Per name there can be only 1 record with same version at a
@@ -142,7 +140,6 @@ class Builder(models.Model):
                 del schema['display']
                 self.schema = json.dumps(schema)
 
-    @api.one
     @api.depends('formio_res_model_id')
     def _compute_res_model_id(self):
         if self.formio_res_model_id:
@@ -177,9 +174,7 @@ class Builder(models.Model):
                 action=action.id)
             r.act_window_url = url
 
-    @api.multi
     def action_view_formio(self):
-        self.ensure_one()
         view_id = self.env.ref('formio.view_formio_builder_formio').id
         return {
             "name": self.name,
@@ -192,22 +187,17 @@ class Builder(models.Model):
             "context": {}
         }
 
-    @api.multi
     def action_draft(self):
-        self.ensure_one()
         self.write({'state': STATE_DRAFT})
 
-    @api.multi
     def action_current(self):
         self.ensure_one()
         self.write({'state': STATE_CURRENT})
 
-    @api.multi
     def action_obsolete(self):
         self.ensure_one()
         self.write({'state': STATE_OBSOLETE})
 
-    @api.multi
     @api.returns('self', lambda value: value)
     def copy_as_new_version(self):
         """Get last version for builder-forms by traversing-up on parent_id"""
@@ -227,7 +217,6 @@ class Builder(models.Model):
         res = super(Builder, self).copy(alter)
         return res
 
-    @api.multi
     def action_new_builder_version(self):
         self.ensure_one()
         res = self.copy_as_new_version()

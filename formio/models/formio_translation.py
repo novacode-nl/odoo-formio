@@ -14,7 +14,6 @@ class Translation(models.Model):
     property = fields.Text(related='source_id.property', string='Property', readonly=True)
     value = fields.Text(string='Translation Value', required=True)
 
-    @api.multi
     @api.depends('lang_id', 'source_id', 'value')
     def name_get(self):
         res = []
