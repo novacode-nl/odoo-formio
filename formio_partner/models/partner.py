@@ -20,7 +20,6 @@ class ResPartner(models.Model):
         model_id = self.env.ref('base.model_res_partner').id
         self.formio_this_model_id = model_id
 
-    @api.multi
     def action_formio_forms(self):
         self.ensure_one()
         res_model_id = self.env.ref('base.model_res_partner').id
