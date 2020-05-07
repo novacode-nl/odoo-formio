@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io CRM Lead',
+    'name': 'Form.io CRM',
     'summary': 'Form.io webforms on CRM Leads',
     'version': '0.1',
     'author': 'Nova Code',
@@ -19,8 +19,8 @@
         'static/description/banner.png',
     ],
     'description': """
-Form.io - CRM Lead
-==================
+Form.io - CRM
+=============
 
 Build and publish (Form.io) forms for Leads.
 """

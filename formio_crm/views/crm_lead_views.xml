@@ -3,10 +3,10 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
-    <record id="crm_case_form_view_oppor_formio_crm_lead" model="ir.ui.view">
-        <field name="name">crm.lead.form.opportunity.formio.partner</field>
+    <record id="crm_lead_view_form_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit</field>
         <field name="model">crm.lead</field>
-        <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
                 <button
