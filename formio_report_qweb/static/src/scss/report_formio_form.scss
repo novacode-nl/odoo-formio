@@ -7,7 +7,10 @@
 
 .formio_textfield_component p,
 .formio_textarea_component p,
+.formio_number_component p,
 .formio_select_component div.value_container,
+.formio_phoneNumber_component p,
+.formio_email_component p,
 .formio_component_not_implemented div.raw_value {
     border: 1px solid #d8d8d8;
     padding: 4px;
@@ -32,10 +35,10 @@
 }
 
 .formio_panel_component {
-    border: 1px solid #f0f0f0;
+    border: 1px solid #d8d8d8;
 }
 
-.formio_panel_component p {
+.formio_panel_component > p {
     padding: 8px;
     background-color: #f0f0f0;
 }

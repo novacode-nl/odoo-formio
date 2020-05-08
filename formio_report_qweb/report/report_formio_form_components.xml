@@ -13,6 +13,9 @@ See LICENSE file for full copyright and licensing details.
         <t t-elif="component['type'] == 'textarea'">
             <t t-call="formio_report_qweb.textarea_component"/>
         </t>
+        <t t-elif="component['type'] == 'number'">
+            <t t-call="formio_report_qweb.number_component"/>
+        </t>
         <t t-elif="component['type'] == 'selectboxes'">
             <t t-call="formio_report_qweb.selectboxes_component"/>
         </t>
@@ -21,6 +24,18 @@ See LICENSE file for full copyright and licensing details.
         </t>
         <t t-elif="component['type'] == 'select'">
             <t t-call="formio_report_qweb.select_component"/>
+        </t>
+        <t t-elif="component['type'] == 'phoneNumber'">
+            <t t-call="formio_report_qweb.phoneNumber_component"/>
+        </t>
+        <t t-elif="component['type'] == 'email'">
+            <t t-call="formio_report_qweb.email_component"/>
+        </t>
+        <t t-elif="component['type'] == 'signature'">
+            <t t-call="formio_report_qweb.signature_component"/>
+        </t>
+        <t t-elif="component['type'] == 'content'">
+            <t t-call="formio_report_qweb.content_component"/>
         </t>
         <t t-elif="component['type'] == 'columns'">
             <t t-call="formio_report_qweb.columns_component"/>
@@ -70,19 +85,36 @@ See LICENSE file for full copyright and licensing details.
         </div>
     </template>
 
+    <template id="number_component">
+        <t t-if="key_stored">
+            <t t-set="value" t-value="o._formio.components[component['key']].value"/>
+        </t>
+        <t t-else="">
+            <t t-set="value" t-value=""/>
+        </t>
+        <div class="mw-100 mb-3 formio_number_component">
+            <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
+            <p><t t-esc="value"/></p>
+        </div>
+    </template>
+
     <template id="selectboxes_component">
         <div class="mw-100 mb-3">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
             <t t-foreach="o._formio.components[component['key']].value" t-as="sbox">
-                <div>
-                    <t t-if="o._formio.components[component['key']].value[sbox] == true">
-                        <input type="checkbox" checked="checked" disable="disabled"/>
-                    </t>
-                    <t t-else="">
-                        <input type="checkbox"/>
-                    </t>
-                    <span><t t-esc="sbox"/></span>
-                </div>
+                <t t-if="len(sbox) > 0">
+                    <!-- Workaround: sometimes key seems unspecified (empty string)? 
+                         Due to (afterwards) changed component data in Form Builder? -->
+                    <div>
+                        <t t-if="o._formio.components[component['key']].value[sbox] == true">
+                            <input type="checkbox" checked="checked" disable="disabled"/>
+                        </t>
+                        <t t-else="">
+                            <input type="checkbox"/>
+                        </t>
+                        <span><t t-esc="sbox"/></span>
+                    </div>
+                </t>
             </t>
         </div>
     </template>
@@ -116,6 +148,48 @@ See LICENSE file for full copyright and licensing details.
                     </t>
                 </div>
             </t>
+        </div>
+    </template>
+
+    <template id="phoneNumber_component">
+        <t t-if="key_stored">
+            <t t-set="value" t-value="o._formio.components[component['key']].value"/>
+        </t>
+        <t t-else="">
+            <t t-set="value" t-value=""/>
+        </t>
+        <div class="mw-100 mb-3 formio_phoneNumber_component">
+            <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
+            <p><t t-esc="value"/></p>
+        </div>
+    </template>
+
+    <template id="email_component">
+        <t t-if="key_stored">
+            <t t-set="value" t-value="o._formio.components[component['key']].value"/>
+        </t>
+        <t t-else="">
+            <t t-set="value" t-value=""/>
+        </t>
+        <div class="mw-100 mb-3 formio_email_component">
+            <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
+            <p><t t-esc="value"/></p>
+        </div>
+    </template>
+
+    <template id="signature_component">
+        <div class="mw-100 mb-3 formio_signature_component">
+            <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
+            <t t-if="key_stored">
+                <img t-att-src="o._formio.components[component['key']].value" t-att-alt="component['_object'].label"/>
+                <br/>
+            </t>
+        </div>
+    </template>
+
+    <template id="content_component">
+        <div class="mw-100 mb-3 formio_content_component">
+            <p><t t-raw="component['html']"/></p>
         </div>
     </template>
 
