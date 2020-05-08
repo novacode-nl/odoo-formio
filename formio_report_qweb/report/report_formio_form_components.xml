@@ -101,20 +101,16 @@ See LICENSE file for full copyright and licensing details.
     <template id="selectboxes_component">
         <div class="mw-100 mb-3">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-            <t t-foreach="o._formio.components[component['key']].value" t-as="sbox">
-                <t t-if="len(sbox) > 0">
-                    <!-- Workaround: sometimes key seems unspecified (empty string)? 
-                         Due to (afterwards) changed component data in Form Builder? -->
-                    <div>
-                        <t t-if="o._formio.components[component['key']].value[sbox] == true">
-                            <input type="checkbox" checked="checked" disable="disabled"/>
-                        </t>
-                        <t t-else="">
-                            <input type="checkbox"/>
-                        </t>
-                        <span><t t-esc="sbox"/></span>
-                    </div>
-                </t>
+            <t t-foreach="component['_object'].values_labels" t-as="sbox">
+                <div>
+                    <t t-if="key_stored and component['_object'].values_labels[sbox]['value'] == true">
+                        <input type="checkbox" checked="checked" disable="disabled"/>
+                    </t>
+                    <t t-else="">
+                        <input type="checkbox" disable="disabled"/>
+                    </t>
+                    <span><t t-esc="component['_object'].values_labels[sbox]['label']"/></span>
+                </div>
             </t>
         </div>
     </template>
