@@ -223,6 +223,7 @@ class Builder(models.Model):
         alter["parent_id"] = self.id
         alter["state"] = STATE_DRAFT
         alter["version"] = builder.version + 1
+        alter["version_comment"] = _('Write comment about version %s ...') % alter["version"]
 
         res = super(Builder, self).copy(alter)
         return res

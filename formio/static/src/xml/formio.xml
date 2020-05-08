@@ -11,9 +11,11 @@
                         <li class="version">
                             <strong>Version: </strong><span t-esc="builder.version"/>
                         </li>
-                        <li class="parent">
-                            <strong>Parent version: </strong><span t-esc="builder.parent_version"/>
-                        </li>
+                        <t t-if="builder.parent_version">
+                            <li class="parent">
+                                <strong>Parent version: </strong><span t-esc="builder.parent_version"/>
+                            </li>
+                        </t>
                         <li class="formio_version">
                             <strong>Form.io version: </strong><span t-esc="builder.formio_version_name"/>
                         </li>
