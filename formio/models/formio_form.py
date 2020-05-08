@@ -265,7 +265,11 @@ class Form(models.Model):
 
     @api.depends('res_id')
     def _compute_res_fields(self):
-        pass
+        for r in self:
+            r.res_act_window_url = False
+            r.res_name = False
+            r.res_info = False
+            r.res_partner_id = False
         
     @api.multi
     def action_open_res_act_window(self):
