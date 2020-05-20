@@ -4,7 +4,7 @@
 {
     'name': 'Form.io Sales',
     'summary': 'Form.io webforms on Sale Orders/Quotes',
-    'version': '0.2',
+    'version': '0.3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',

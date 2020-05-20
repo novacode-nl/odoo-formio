@@ -4,7 +4,7 @@
 {
     'name': 'Form.io CRM',
     'summary': 'Form.io webforms on CRM Leads',
-    'version': '0.1',
+    'version': '0.2',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
