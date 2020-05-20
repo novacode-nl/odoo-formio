@@ -20,6 +20,13 @@ class SaleOrder(models.Model):
         model_id = self.env.ref('sale.model_sale_order').id
         self.formio_this_model_id = model_id
 
+    def write(self, vals):
+        res = super(SaleOrder, self).write(vals)
+        if vals.get('state') and self.formio_forms:
+            forms_vals['res_info'] = '%s (%s)' % (self.name, get_field_selection_label(self, 'state'))
+            self.formio_forms.write(forms_vals)
+        return res
+
     def action_formio_forms(self):
         self.ensure_one()
         res_model_id = self.env.ref('sale.model_sale_order').id
