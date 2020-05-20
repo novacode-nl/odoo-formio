@@ -5,7 +5,7 @@ See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
     <template id="component">
-        <t t-set="key_stored" t-value="component['key'] in o._formio.components"/>
+        <t t-set="key_stored" t-value="component.get('key') and component['key'] in o._formio.components"/>
 
         <t t-if="component['type'] == 'textfield'">
             <t t-call="formio_report_qweb.textfield_component"/>
