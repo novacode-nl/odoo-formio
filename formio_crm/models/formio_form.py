@@ -19,8 +19,8 @@ class Form(models.Model):
         if not builder or not builder.res_model_id.model == 'crm.lead' or not res_id:
             return vals
 
-        lead = self.env['crm.lead'].search([('id', '=', res_id)])
-        action = self.env.ref('crm.crm_lead_opportunities_tree_view')
+        lead = self.env['crm.lead'].browse(res_id)
+        action = self.env.ref('crm.crm_case_tree_view_oppor')
         url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
             id=res_id,
             model='crm.lead',
@@ -31,8 +31,7 @@ class Form(models.Model):
         vals['res_partner_id'] = lead.partner_id.id
         vals['res_act_window_url'] = url
         vals['res_name'] = res_model_name
-        vals['res_info'] = '%s / %s / %s' % (res_model_name, lead.stage_id.name, lead.name)
-
+        vals['res_info'] = '%s / %s' % (res_model_name, lead.name)
         return vals
 
     @api.onchange('builder_id')

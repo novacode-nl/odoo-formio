@@ -19,26 +19,20 @@ class Form(models.Model):
         if not builder or not builder.res_model_id.model == 'res.partner' or not res_id:
             return vals
 
+        partner = self.env['res.partner'].browse(res_id)
+        action = self.env.ref('contacts.action_contacts')
+        url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
+            id=res_id,
+            model='res.partner',
+            action=action.id)
+        res_model_name = builder.res_model_id.name
+
+        vals['res_act_window_url'] = url
+        vals['res_name'] = res_model_name
+        vals['res_info'] = partner.name
         vals['base_res_partner_id'] = res_id
+        vals['res_partner_id'] = res_id
         return vals
-
-    @api.depends('base_res_partner_id')
-    def _compute_res_fields(self):
-        super(Form, self)._compute_res_fields()
-        for r in self:
-            if r.res_model == 'res.partner':
-                partner = self.env['res.partner'].search([('id', '=', r.res_id)])
-                r.base_res_partner_id = partner.id
-                r.res_partner_id = partner.id
-
-                action = self.env.ref('contacts.action_contacts')
-                url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
-                    id=r.res_id,
-                    model='res.partner',
-                    action=action.id)
-                r.res_act_window_url = url
-                r.res_name = r.res_model_name
-                r.res_info = partner.name
 
     @api.onchange('builder_id')
     def _onchange_builder_domain(self):

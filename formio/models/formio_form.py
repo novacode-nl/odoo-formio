@@ -51,10 +51,10 @@ class Form(models.Model):
     res_model = fields.Char(related='res_model_id.model', readonly=True, string='Resource Model Name')
     res_id = fields.Integer("Record ID", ondelete='restrict',
         help="Database ID of the record in res_model to which this applies")
-    res_act_window_url = fields.Char(compute='_compute_res_fields', readonly=True)
-    res_name = fields.Char(compute='_compute_res_fields', string='Resource Name', store=True)
-    res_info = fields.Char(compute='_compute_res_fields', string='Resource Info', readonly=True)
-    res_partner_id = fields.Many2one('res.partner', compute='_compute_res_fields', store=True, readonly=True, string='Resource Partner')
+    res_act_window_url = fields.Char(readonly=True)
+    res_name = fields.Char(string='Resource Name', reaonly=True)
+    res_info = fields.Char(string='Resource Info', readonly=True)
+    res_partner_id = fields.Many2one('res.partner', readonly=True, string='Resource Partner')
     user_id = fields.Many2one(
         'res.users', string='Assigned user',
         index=True, track_visibility='onchange')
@@ -263,10 +263,6 @@ class Form(models.Model):
                 action=action.id)
             r.act_window_url = url
 
-    @api.depends('res_id')
-    def _compute_res_fields(self):
-        pass
-        
     @api.multi
     def action_open_res_act_window(self):
         return {

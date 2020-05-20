@@ -23,9 +23,11 @@ class CrmLead(models.Model):
     @api.multi
     def write(self, vals):
         res = super(CrmLead, self).write(vals)
-        if (vals.get('stage_id') or vals.get('partner_id')) and self.formio_forms:
+        if vals.get('partner_id') and self.formio_forms:
             res_model_name = self.formio_forms[0].res_model_name
-            forms_vals = '%s / %s / %s' % (res_model_name, self.stage_id.name, self.name)
+            forms_vals = {
+                'res_info': '%s / %ss' % (res_model_name, self.name)
+            }
             self.formio_forms.write(forms_vals)
         return res
 
