@@ -22,8 +22,11 @@ class SaleOrder(models.Model):
 
     def write(self, vals):
         res = super(SaleOrder, self).write(vals)
-        if vals.get('state') and self.formio_forms:
-            forms_vals['res_info'] = '%s (%s)' % (self.name, get_field_selection_label(self, 'state'))
+        if vals.get('name') and self.formio_forms:
+            res_model_name = self.formio_forms[0].res_model_name
+            forms_vals = {
+                'res_info': self.name
+            }
             self.formio_forms.write(forms_vals)
         return res
 

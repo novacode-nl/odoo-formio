@@ -28,12 +28,13 @@ class Form(models.Model):
         else:
             action = self.env.ref('sale.action_orders')
         url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
-            id=r.res_id,
+            id=res_id,
             model='sale.order',
             action=action.id)
+        res_model_name = builder.res_model_id.name
+
         vals['res_act_window_url'] = url
-        vals['res_name'] = sale_order.name
-        vals['res_info'] = '%s (%s)' % (sale_order.name, get_field_selection_label(order, 'state'))
+        vals['res_info'] = sale_order.name
         return vals
 
     @api.onchange('builder_id')

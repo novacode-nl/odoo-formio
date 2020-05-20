@@ -84,6 +84,8 @@ class Form(models.Model):
         return res
 
     def _prepare_create_vals(self, vals):
+        builder = self._get_builder_from_id(vals.get('builder_id'))
+        vals['res_name'] = builder.res_model_id.name
         return vals
 
     def _get_builder_from_id(self, builder_id):
