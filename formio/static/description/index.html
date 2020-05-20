@@ -120,6 +120,14 @@
 <section class="oe_container oe_dark">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">3.0</h4>
+    <ul>
+      <li>
+        Changed the way <strong>Resource Fields</strong> are determined and stored. Not by dependent/computed fields anymore, which caused all kind of troubles.<br/>
+        Affected fields: <code>res_name</code>, <code>res_info</code>, <code>res_act_window_url</code> and <code>res_partner_id</code>.<br/>
+        <strong>!! CAUTION, BEFORE UPGRADE: Test first and be sure all Forms data (regarding these fields) has been migrated properly.</strong>
+      </li>
+    </ul>
     <h4 class="oe_mb16">2.3</h4>
     <ul>
       <li>Form Builder layout improvements: full width, remove horizontal scrollbar.</li>
