@@ -24,7 +24,10 @@ class ResPartner(models.Model):
     def write(self, vals):
         res = super(ResPartner, self).write(vals)
         if vals.get('name') and self.formio_forms:
-            forms_vals = {'res_info': self.name}
+            res_model_name = self.formio_forms[0].res_model_name
+            forms_vals = {
+                'res_info': self.name
+            }
             self.formio_forms.write(forms_vals)
         return res
 
