@@ -21,14 +21,23 @@ class CrmLead(models.Model):
         self.formio_this_model_id = model_id
 
     def write(self, vals):
+        # Simpler to maintain and less risk with extending, than
+        # computed field(s) in the formio.form object.
         res = super(CrmLead, self).write(vals)
-        if vals.get('name') and self.formio_forms:
-            res_model_name = self.formio_forms[0].res_model_name
-            forms_vals = {
+        if self.formio_forms:
+            form_vals = self._prepare_write_formio_form_vals(vals)
+            if form_vals:
+                self.formio_forms.write(form_vals)
+        return res
+
+    def _prepare_write_formio_form_vals(self, vals):
+        if vals.get('name'):
+            form_vals = {
                 'res_name': self.name
             }
-            self.formio_forms.write(forms_vals)
-        return res
+            return form_vals
+        else:
+            return False
 
     def action_formio_forms(self):
         self.ensure_one()
