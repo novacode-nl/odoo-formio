@@ -30,7 +30,7 @@ class Form(models.Model):
         vals['crm_lead_id'] = res_id
         vals['res_partner_id'] = lead.partner_id.id
         vals['res_act_window_url'] = url
-        vals['res_info'] = lead.name
+        vals['res_name'] = lead.name
         return vals
 
     @api.onchange('builder_id')

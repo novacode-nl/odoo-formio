@@ -25,10 +25,9 @@ class Form(models.Model):
             id=res_id,
             model='res.partner',
             action=action.id)
-        res_model_name = builder.res_model_id.name
 
         vals['res_act_window_url'] = url
-        vals['res_info'] = partner.name
+        vals['res_name'] = partner.name
         vals['base_res_partner_id'] = res_id
         vals['res_partner_id'] = res_id
         return vals

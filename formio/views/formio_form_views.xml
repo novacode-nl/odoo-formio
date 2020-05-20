@@ -20,8 +20,8 @@ See LICENSE file for full licensing details. -->
                 <field name="state"/>
                 <button string="Form" class="btn-sm btn-secondary" name="action_view_formio" type="object"/>
                 <field name="portal"/>
+                <field name="res_model_name" string="Resource Type"/>
                 <field name="res_name"/>
-                <field name="res_info"/>
                 <field name="res_partner_id"/>
                 <field name="create_date"/>
             </tree>
@@ -58,7 +58,7 @@ See LICENSE file for full licensing details. -->
                                     <t t-if="record.res_model_id.raw_value and record.res_id.raw_value">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <t t-if="record.res_info.raw_value"><field name="res_info"/>: </t><a class="btn btn-default" t-att-href="record.res_act_window_url.raw_value" role="button"><field name="res_name"/></a>
+                                                <t t-if="record.res_name.raw_value"><field name="res_name"/>: </t><a class="btn btn-default" t-att-href="record.res_act_window_url.raw_value" role="button"><field name="res_model_name"/></a>
                                             </div>
                                         </div>
                                     </t>
@@ -149,7 +149,7 @@ See LICENSE file for full licensing details. -->
                         <button name="action_view_formio" type="object" string="Form"
                                 class="oe_stat_button" icon="fa-rocket" aria-label="Form"/>
                         <button name="action_open_res_act_window" type="object"
-                                attrs="{'invisible': [('res_info', '=', False)]}"
+                                attrs="{'invisible': [('res_id', '=', False)]}"
                                 class="oe_stat_button" icon="fa-link" aria-label="Resource">
                             <field name="res_name"/>
                         </button>
@@ -157,14 +157,13 @@ See LICENSE file for full licensing details. -->
                     <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}"/></h1>
                     <group name="general">
                         <group>
-                            <field name="res_info" string="Resource" attrs="{'invisible': [('res_info', '=', False)]}"/>
-                            <field name="builder_id"
-                                   attrs="{'readonly': [('id', '!=', False)]}"/>
-                            <!-- <strong attrs="{'invisible': [('res_name', '=', False)]}"><field name="res_info"/></strong> <field nolabel="1" name="res_name" attrs="{'invisible': [('res_name', '=', False)]}"/> -->
+                            <field name="res_name" string="Resource" attrs="{'invisible': [('res_name', '=', False)]}"/>
+                            <field name="builder_id" attrs="{'readonly': [('id', '!=', False)]}"/>
                         </group>
                         <group>
                             <field name="id" attrs="{'invisible': [('id', '=', False)]}"/>
                             <field name="uuid" attrs="{'invisible': [('id', '=', False)]}"/>
+                            <field name="res_id" invisible="1"/>
                         </group>
                     </group>
                     <group name="assignment">
