@@ -20,6 +20,13 @@ class ResPartner(models.Model):
         model_id = self.env.ref('base.model_res_partner').id
         self.formio_this_model_id = model_id
 
+    def write(self, vals):
+        res = super(ResPartner, self).write(vals)
+        if vals.get('name') and self.formio_forms:
+            forms_vals = {'res_info': self.name}
+            self.formio_forms.write(forms_vals)
+        return res
+
     def action_formio_forms(self):
         self.ensure_one()
         res_model_id = self.env.ref('base.model_res_partner').id
