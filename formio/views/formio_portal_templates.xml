@@ -125,8 +125,10 @@ See LICENSE file for full licensing details. -->
                     </div>
                     <iframe t-attf-src="/formio/form/#{form.uuid}/root" class="formio_form_embed"/>
                     <script type="text/javascript">
-                        // TODO move to Javascript file.
-                        iFrameResize({}, '.formio_form_embed')
+                        // TODO move to Javascript file
+                        $(document).ready(function() {
+                            iFrameResize({}, '.formio_form_embed');
+                        });
                         window.addEventListener('message', function(event) {
                             var base_url = window.location.protocol + '//' + window.location.host;
                             if (event.origin == base_url &amp;&amp; event.data == 'formioSubmitDone') {
