@@ -21,6 +21,15 @@ class CrmLead(models.Model):
         self.formio_this_model_id = model_id
 
     @api.multi
+    def write(self, vals):
+        res = super(CrmLead, self).write(vals)
+        if (vals.get('stage_id') or vals.get('partner_id')) and self.formio_forms:
+            res_model_name = self.formio_forms[0].res_model_name
+            forms_vals = '%s / %s / %s' % (res_model_name, self.stage_id.name, self.name)
+            self.formio_forms.write(forms_vals)
+        return res
+
+    @api.multi
     def action_formio_forms(self):
         self.ensure_one()
         res_model_id = self.env.ref('base.model_res_partner').id

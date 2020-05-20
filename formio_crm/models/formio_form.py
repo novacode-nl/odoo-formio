@@ -19,25 +19,21 @@ class Form(models.Model):
         if not builder or not builder.res_model_id.model == 'crm.lead' or not res_id:
             return vals
 
+        lead = self.env['crm.lead'].search([('id', '=', res_id)])
+        action = self.env.ref('crm.crm_lead_opportunities_tree_view')
+        url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
+            id=res_id,
+            model='crm.lead',
+            action=action.id)
+        res_model_name = builder.res_model_id.name
+
         vals['crm_lead_id'] = res_id
+        vals['res_partner_id'] = lead.partner_id.id
+        vals['res_act_window_url'] = url
+        vals['res_name'] = res_model_name
+        vals['res_info'] = '%s / %s / %s' % (res_model_name, lead.stage_id.name, lead.name)
+
         return vals
-
-    @api.depends('crm_lead_id', 'crm_lead_id.partner_id')
-    def _compute_res_fields(self):
-        super(Form, self)._compute_res_fields()
-        for r in self:
-            if r.res_model == 'crm.lead' and r.res_id:
-                lead = self.env['crm.lead'].search([('id', '=', r.res_id)])
-                r.res_partner_id = r.crm_lead_id.partner_id
-
-                action = self.env.ref('crm.crm_lead_opportunities_tree_view')
-                url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
-                    id=r.res_id,
-                    model='crm.lead',
-                    action=action.id)
-                r.res_act_window_url = url
-                r.res_name = r.res_model_name
-                r.res_info = '%s / %s / %s' % (r.res_model_name, r.crm_lead_id.stage_id.name, r.crm_lead_id.name)
 
     @api.onchange('builder_id')
     def _onchange_builder_domain(self):
