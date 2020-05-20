@@ -72,7 +72,7 @@ See LICENSE file for full licensing details. -->
                             <span t-field="form.title"/> <small class="text-muted">#<span t-field="form.id"/></small>
                         </td>
                         <td>
-                            <span t-field="form.res_info"/>
+                            <span t-field="form.res_name"/>
                         </td>
                         <td>
                             <span t-field="form.create_date"/>

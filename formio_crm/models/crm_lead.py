@@ -26,7 +26,7 @@ class CrmLead(models.Model):
         if vals.get('name') and self.formio_forms:
             res_model_name = self.formio_forms[0].res_model_name
             forms_vals = {
-                'res_info': self.name
+                'res_name': self.name
             }
             self.formio_forms.write(forms_vals)
         return res

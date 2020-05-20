@@ -34,7 +34,7 @@ class Form(models.Model):
         res_model_name = builder.res_model_id.name
 
         vals['res_act_window_url'] = url
-        vals['res_info'] = sale_order.name
+        vals['res_name'] = sale_order.name
         return vals
 
     @api.onchange('builder_id')
