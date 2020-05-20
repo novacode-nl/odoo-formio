@@ -23,7 +23,7 @@ class CrmLead(models.Model):
     @api.multi
     def write(self, vals):
         res = super(CrmLead, self).write(vals)
-        if vals.get('partner_id') and self.formio_forms:
+        if vals.get('name') and self.formio_forms:
             res_model_name = self.formio_forms[0].res_model_name
             forms_vals = {
                 'res_info': self.name
