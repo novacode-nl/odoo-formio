@@ -56,40 +56,10 @@ class FormioCustomerPortal(CustomerPortal):
         return values
 
     def _formio_form_get_page_view_values(self, form, **kwargs):
-        # Needed to update language
-        context = request.env.context.copy()
-        context.update({'lang': request.env.user.lang})
-        request.env.context = context
-
-        # Get active languages used in Builder translations.
-        query = """
-            SELECT
-              DISTINCT(fbt.lang_id) AS lang_id
-            FROM
-              formio_builder_translation AS fbt
-              INNER JOIN res_lang AS l ON l.id = fbt.lang_id
-            WHERE
-              fbt.builder_id = {builder_id}
-              AND l.active = True
-        """.format(builder_id=form.builder_id.id)
-
-        request.env.cr.execute(query)
-        builder_lang_ids = [r[0] for r in request.env.cr.fetchall()]
-
-        # Always include english (en_US).
-        domain = ['|', ('id', 'in', builder_lang_ids), ('code', 'in', [request.env.user.lang, 'en_US'])]
-        languages = request.env['res.lang'].with_context(active_test=False).search(domain, order='name asc')
-        languages = languages.filtered(lambda r: r.id in builder_lang_ids or r.code == 'en_US')
-
         values = {
-            'languages': [], # initialize, otherwise template/view crashes.
-            'user': request.env.user,
             'form': form,
             'page_name': 'formio',
         }
-        if len(languages) > 1:
-            values['languages'] = languages
-
         return self._get_page_view_values(form, False, values, 'my_formio', False, **kwargs)
 
     def _get_form(self, uuid, mode):
