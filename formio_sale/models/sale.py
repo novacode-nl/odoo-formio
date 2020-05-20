@@ -22,13 +22,23 @@ class SaleOrder(models.Model):
 
     @api.multi
     def write(self, vals):
+        # Simpler to maintain and less risk with extending, than
+        # computed field(s) in the formio.form object.
         res = super(SaleOrder, self).write(vals)
-        if vals.get('name') and self.formio_forms:
-            forms_vals = {
+        if self.formio_forms:
+            form_vals = self._prepare_write_formio_form_vals(vals)
+            if form_vals:
+                self.formio_forms.write(form_vals)
+        return res
+
+    def _prepare_write_formio_form_vals(self, vals):
+        if vals.get('name'):
+            form_vals = {
                 'res_name': self.name
             }
-            self.formio_forms.write(forms_vals)
-        return res
+            return form_vals
+        else:
+            return False
 
     @api.multi
     def action_formio_forms(self):
