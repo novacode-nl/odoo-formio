@@ -19,28 +19,22 @@ class Form(models.Model):
         if not builder or not builder.res_model_id.model == 'sale.order' or not res_id:
             return vals
 
+        sale_order = self.env['sale.order'].search([('id', '=', res_id)])
         vals['sale_order_id'] = res_id
+        vals['res_partner_id'] = sale_order.partner_id.id
+
+        if sale_order.state in ('draft', 'sent'):
+            action = self.env.ref('sale.action_quotations')
+        else:
+            action = self.env.ref('sale.action_orders')
+        url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
+            id=r.res_id,
+            model='sale.order',
+            action=action.id)
+        vals['res_act_window_url'] = url
+        vals['res_name'] = sale_order.name
+        vals['res_info'] = '%s (%s)' % (sale_order.name, get_field_selection_label(order, 'state'))
         return vals
-
-    @api.depends('sale_order_id', 'sale_order_id.partner_id')
-    def _compute_res_fields(self):
-        super(Form, self)._compute_res_fields()
-        for r in self:
-            if r.res_model == 'sale.order' and r.res_id:
-                order = self.env['sale.order'].search([('id', '=', r.res_id)])
-                r.res_partner_id = order.partner_id.id
-
-                if order.state in ('draft', 'sent'):
-                    action = self.env.ref('sale.action_quotations')
-                else:
-                    action = self.env.ref('sale.action_orders')
-                url = '/web?#id={id}&view_type=form&model={model}&action={action}'.format(
-                    id=r.res_id,
-                    model='sale.order',
-                    action=action.id)
-                r.res_act_window_url = url
-                r.res_name = order.name
-                r.res_info = '%s (%s)' % (order.name, get_field_selection_label(order, 'state'))
 
     @api.onchange('builder_id')
     def _onchange_builder_domain(self):
