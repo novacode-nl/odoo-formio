@@ -9,6 +9,7 @@ See LICENSE file for full licensing details. -->
         </xpath>
         <xpath expr="//script[last()]" position="after">
             <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.min.js"></script>
+            <script type="text/javascript" src="/formio/static/src/js/formio_form_container.js"/>
         </xpath>
     </template>
 
@@ -114,7 +115,7 @@ See LICENSE file for full licensing details. -->
         </t>
     </template>
 
-    <template id="portal_my_formio_edit" name="Form.io Form">
+    <template id="portal_my_formio_edit" name="Form.io Form" priority="40">
         <t t-call="portal.portal_layout">
             <div t-attf-class="formio_form_container mt16 {{ form.state }}">
                 <div class="formio_form_iframe_container">
@@ -124,24 +125,6 @@ See LICENSE file for full licensing details. -->
                         </h1>
                     </div>
                     <iframe t-attf-src="/formio/form/#{form.uuid}/root" class="formio_form_embed"/>
-                    <script type="text/javascript">
-                        // TODO move to Javascript file
-                        $(document).ready(function() {
-                            iFrameResize({}, '.formio_form_embed');
-                        });
-                        window.addEventListener('message', function(event) {
-                            var base_url = window.location.protocol + '//' + window.location.host;
-                            if (event.origin == base_url &amp;&amp; event.data == 'formioSubmitDone') {
-                                var portal_submit_done_url = document.getElementById('portal_submit_done_url').value;
-                                if (portal_submit_done_url &amp;&amp; portal_submit_done_url.length > 0) {
-                                    window.location = portal_submit_done_url;
-                                }
-                                else {
-                                    window.location.reload();
-                                }
-                            }
-                        }, false);
-                    </script>
                     <input type="hidden" id="portal_submit_done_url" name="portal_submit_done_url" t-att-value="form.portal_submit_done_url"/>
                 </div>
             </div>
