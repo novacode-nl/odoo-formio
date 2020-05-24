@@ -78,6 +78,13 @@ class Form(models.Model):
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
 
     @api.model
+    def default_get(self, fields):
+        result = super(Form, self).default_get(fields)
+        # XXX Override (ORM) default value 0 (zero) for Integer field.
+        result['res_id'] = False
+        return result
+
+    @api.model
     def create(self, vals):
         vals = self._prepare_create_vals(vals)
         res = super(Form, self).create(vals)
