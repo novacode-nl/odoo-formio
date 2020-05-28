@@ -75,6 +75,10 @@ class Builder(models.Model):
     wizard = fields.Boolean("Wizard", track_visibility='onchange')
     portal_submit_done_url = fields.Char()
     translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations')
+    allow_force_update_state_group_ids = fields.Many2many(
+        'res.groups', string='Allow groups to force update State',
+        help="User groups allowed to manually force an update of the Form state."
+             "If no groups are specified it's allowed for every user.")
 
     def _states_selection(self):
         return STATES

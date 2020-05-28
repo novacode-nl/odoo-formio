@@ -8,7 +8,7 @@ import requests
 import uuid
 
 from odoo import api, fields, models, _
-from odoo.exceptions import AccessError
+from odoo.exceptions import AccessError, UserError
 
 from ..utils import get_field_selection_label
 
@@ -75,6 +75,7 @@ class Form(models.Model):
     portal = fields.Boolean("Portal", related='builder_id.portal', readonly=True, help="Form is accessible by assigned portal user")
     portal_submit_done_url = fields.Char(related='builder_id.portal_submit_done_url')
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
+    allow_force_update_state = fields.Boolean("Allow force update State", compute='_compute_access')
 
     @api.model
     def default_get(self, fields):
@@ -111,12 +112,23 @@ class Form(models.Model):
                 r.kanban_group_state = 'D'
 
     def _compute_access(self):
-        for r in self:
-            unlink_form = self.get_form(r.uuid, 'unlink')
+        user_groups = self.env.user.groups_id
+        for form in self:
+            # allow_unlink
+            unlink_form = self.get_form(form.uuid, 'unlink')
             if unlink_form:
-                r.allow_unlink = True
+                form.allow_unlink = True
             else:
-                r.allow_unlink = False
+                form.allow_unlink = False
+
+            # allow_state_update
+            if self.env.user.has_group('formio.group_formio_admin'):
+                form.allow_force_update_state = True
+            elif form.builder_id.allow_force_update_state_group_ids and \
+                 (user_groups & form.builder_id.allow_force_update_state_group_ids):
+                form.allow_force_update_state = True
+            else:
+                form.allow_force_update_state = False
 
     @api.depends('state')
     def _compute_display_fields(self):
@@ -167,6 +179,9 @@ class Form(models.Model):
     @api.multi
     def action_draft(self):
         self.ensure_one()
+        if not self.allow_force_update_state:
+            raise UserError(_("You're not allowed to (force) update the Form into Draft state."))
+
         vals = {'state': STATE_DRAFT}
         submission_data = self._decode_data(self.submission_data)
         if 'submit' in submission_data:
@@ -178,11 +193,15 @@ class Form(models.Model):
     @api.multi
     def action_complete(self):
         self.ensure_one()
+        if not self.allow_force_update_state:
+            raise UserError(_("You're not allowed to (force) update the Form into Complete state."))
         self.write({'state': STATE_COMPLETE})
 
     @api.multi
     def action_cancel(self):
         self.ensure_one()
+        if not self.allow_force_update_state:
+            raise UserError(_("You're not allowed to (force) update the Form into Cancel state."))
         self.write({'state': STATE_CANCEL})
 
     @api.multi
