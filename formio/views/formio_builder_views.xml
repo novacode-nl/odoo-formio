@@ -120,6 +120,14 @@ See LICENSE file for full licensing details. -->
                         <page string="Schema" name="schema" groups="formio.group_formio_admin">
                             <field name="schema" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                         </page>
+                        <page string="Forms Permissions" name="forms_permissions" groups="formio.group_formio_admin">
+                            <div class="mb-3">
+                                <i class="fa fa-info-circle" title="info"/><em> Specific permissions on Forms</em>
+                            </div>
+                            <group>
+                                <field name="allow_force_update_state_group_ids" />
+                            </group>
+                        </page>
                         <page string="Forms" name="forms" groups="formio.group_formio_admin">
                             <field name="forms"/>
                         </page>
