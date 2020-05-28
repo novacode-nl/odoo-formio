@@ -135,13 +135,13 @@ See LICENSE file for full licensing details. -->
                         class="btn-primary"/>
                     <button
                        name="action_draft" type="object" string="Draft"
-                        attrs="{'invisible': [('state', 'in', ['PENDING', 'DRAFT'])]}"/>
+                        attrs="{'invisible': ['|', ('state', 'in', ['PENDING', 'DRAFT']), ('allow_force_update_state', '=', False)]}"/>
                     <button
                         name="action_complete" type="object" string="Complete"
-                        attrs="{'invisible': [('state', '!=', 'DRAFT')]}"/>
+                        attrs="{'invisible': ['|', ('state', '!=', 'DRAFT'), ('allow_force_update_state', '=', False)]}"/>
                     <button
                         name="action_cancel" type="object" string="Cancel"
-                        attrs="{'invisible': [('state', 'in', ['CANCEL'])]}"/>
+                        attrs="{'invisible': ['|', ('state', 'in', ['CANCEL']), ('allow_force_update_state', '=', False)]}"/>
                     <field name="state" widget="statusbar" statusbar_visible="PENDING,DRAFT,COMPLETE,CANCEL"/>
                 </header>
                 <sheet>
@@ -165,6 +165,8 @@ See LICENSE file for full licensing details. -->
                         <group>
                             <field name="id" attrs="{'invisible': [('id', '=', False)]}"/>
                             <field name="uuid" attrs="{'invisible': [('id', '=', False)]}"/>
+                            <field name="res_id" invisible="1"/>
+                            <field name="allow_force_update_state" invisible="1"/>
                         </group>
                     </group>
                     <group name="assignment">
