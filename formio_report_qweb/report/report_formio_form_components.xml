@@ -43,6 +43,12 @@ See LICENSE file for full copyright and licensing details.
         <t t-elif="component['type'] == 'panel'">
             <t t-call="formio_report_qweb.panel_component"/>
         </t>
+        <t t-elif="component['type'] == 'table'">
+            <t t-call="formio_report_qweb.table_component"/>
+        </t>
+        <t t-elif="component['type'] == 'tabs'">
+            <t t-call="formio_report_qweb.tabs_component"/>
+        </t>
         <t t-elif="show_components_not_implemented and component['type'] not in ['button']">
             <t t-call="formio_report_qweb.component_not_implemented"/>
         </t>
@@ -220,6 +226,45 @@ See LICENSE file for full copyright and licensing details.
             <div class="formio_panel_components ml-4 mr-4">
                 <t t-foreach="panel_component['components']" t-as="component">
                     <t t-call="formio_report_qweb.component"/>
+                </t>
+            </div>
+        </div>
+    </template>
+
+    <template id="table_component">
+        <div class="formio_table_component mb-4">
+            <table>
+                <!-- XXX thead to render from builder? -->
+                <tbody>
+                    <t t-foreach="component['rows']" t-as="row">
+                        <tr>
+                            <t t-foreach="row" t-as="row_inner">
+                                <t t-foreach="row_inner['components']" t-as="component">
+                                    <td>
+                                        <t t-call="formio_report_qweb.component"/>
+                                    </td>
+                                </t>
+                            </t>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+    <template id="tabs_component">
+        <div class="formio_tabs_component mb-4">
+            <t t-set="tabs_component" t-value="component"/>
+            <div class="formio_tabs_components ml-4 mr-4">
+                <t t-foreach="tabs_component['components']" t-as="tab_inner_components">
+                    <div class="formio_tab_component">
+                        <div class="mb-2">
+                            <strong><t t-raw="tab_inner_components['label']"/></strong>
+                        </div>
+                        <t t-foreach="tab_inner_components['components']" t-as="component">
+                            <t t-call="formio_report_qweb.component"/>
+                        </t>
+                    </div>
                 </t>
             </div>
         </div>
