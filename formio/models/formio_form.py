@@ -92,7 +92,10 @@ class Form(models.Model):
         return res
 
     def _prepare_create_vals(self, vals):
+        res_id = self._context.get('active_id')
         builder = self._get_builder_from_id(vals.get('builder_id'))
+
+        vals['res_id'] = res_id
         vals['res_name'] = builder.res_model_id.name
         return vals
 
