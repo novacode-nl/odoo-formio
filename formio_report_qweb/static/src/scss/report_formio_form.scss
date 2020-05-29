@@ -43,6 +43,22 @@
     background-color: #f0f0f0;
 }
 
+.formio_tab_components  {
+    border: 1px solid #d8d8d8;
+}
+
+.formio_tab_component strong  {
+    padding: 2px 4px 6px 4px;
+    background-color: #f0f0f0;
+    border-top: 1px solid #d8d8d8;
+    border-left: 1px solid #d8d8d8;
+    border-right: 1px solid #d8d8d8;
+}
+
+.formio_table_component table  {
+    width: 100%;
+}
+
 /* Component not implemented */
 
 .formio_component_not_implemented small {
