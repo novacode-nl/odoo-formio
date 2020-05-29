@@ -149,7 +149,7 @@ See LICENSE file for full licensing details. -->
                         <button name="action_view_formio" type="object" string="Form"
                                 class="oe_stat_button" icon="fa-rocket" aria-label="Form"/>
                         <button name="action_open_res_act_window" type="object"
-                                attrs="{'invisible': [('res_info', '=', False)]}"
+                                attrs="{'invisible': ['|', ('res_id', '=', False), ('res_id', '=', 0)]}"
                                 class="oe_stat_button" icon="fa-link" aria-label="Resource">
                             <field name="res_name"/>
                         </button>
