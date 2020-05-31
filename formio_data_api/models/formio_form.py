@@ -54,13 +54,13 @@ class FormioForm(models.Model):
 
     def _etl_odoo_data(self):
         data = super(FormioForm, self)._etl_odoo_data()
-        model_object = self.env[self.builder_id.res_model_id.model].browse(self.res_id)
-
-        for comp_name, comp in self._formio.builder.form_components.items():
-            if comp_name.startswith(ODOO_REFRESH_PREFIX) or \
-               (comp_name.startswith(ODOO_PREFIX) and self.state in [STATE_PENDING, STATE_DRAFT]):
-                val = self._etl_odoo_field_val(model_object, comp_name, comp)
-                data[comp_name] = val
+        if self.builder_id.res_model_id:
+            model_object = self.env[self.builder_id.res_model_id.model].browse(self.res_id)
+            for comp_name, comp in self._formio.builder.form_components.items():
+                if comp_name.startswith(ODOO_REFRESH_PREFIX) or \
+                   (comp_name.startswith(ODOO_PREFIX) and self.state in [STATE_PENDING, STATE_DRAFT]):
+                    val = self._etl_odoo_field_val(model_object, comp_name, comp)
+                    data[comp_name] = val
         return data
 
     def _etl_odoo_field_val(self, res_model_object, formio_component_name, formio_component):
