@@ -126,13 +126,13 @@ class FormioForm(models.Model):
 
     def _split_fields_token(self, split_str):
         if split_str.startswith(ODOO_REFRESH_PREFIX):
-            re_pattern = r'^%s\-' % ODOO_REFRESH_PREFIX
-            res = re.sub(re_pattern, '', split_str).split('-')
+            re_pattern = r'^%s\__' % ODOO_REFRESH_PREFIX
+            res = re.sub(re_pattern, '', split_str).split('__')
         elif split_str.startswith(ODOO_PREFIX):
-            re_pattern = r'^%s\-' % ODOO_PREFIX
-            res = re.sub(re_pattern, '', split_str).split('-')
+            re_pattern = r'^%s\__' % ODOO_PREFIX
+            res = re.sub(re_pattern, '', split_str).split('__')
         else:
-            res = split_str.split('-')
+            res = split_str.split('__')
         return res
 
 
