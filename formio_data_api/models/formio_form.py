@@ -17,6 +17,7 @@ _logger = logging.getLogger(__name__)
 
 ODOO_PREFIX = 'Odoo'
 ODOO_REFRESH_PREFIX = 'OdooRF'
+ODOO_FIELD_DELIM = '.'
 
 UNKNOWN_ODOO_FIELD = 'UNKNOWN Odoo field'
 
@@ -126,13 +127,13 @@ class FormioForm(models.Model):
 
     def _split_fields_token(self, split_str):
         if split_str.startswith(ODOO_REFRESH_PREFIX):
-            re_pattern = r'^%s\__' % ODOO_REFRESH_PREFIX
-            res = re.sub(re_pattern, '', split_str).split('__')
+            re_pattern = r'^%s\%s' % (ODOO_REFRESH_PREFIX, ODOO_FIELD_DELIM)
+            res = re.sub(re_pattern, '', split_str).split(ODOO_FIELD_DELIM)
         elif split_str.startswith(ODOO_PREFIX):
-            re_pattern = r'^%s\__' % ODOO_PREFIX
-            res = re.sub(re_pattern, '', split_str).split('__')
+            re_pattern = r'^%s\%s' % (ODOO_PREFIX, ODOO_FIELD_DELIM)
+            res = re.sub(re_pattern, '', split_str).split(ODOO_FIELD_DELIM)
         else:
-            res = split_str.split('__')
+            res = split_str.split(ODOO_FIELD_DELIM)
         return res
 
 
