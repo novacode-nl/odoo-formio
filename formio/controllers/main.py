@@ -12,7 +12,8 @@ from ..models.formio_builder import \
     STATE_CURRENT as BUILDER_STATE_CURRENT, STATE_OBSOLETE as BUILDER_STATE_OBSOLETE
 
 from ..models.formio_form import \
-    STATE_DRAFT as FORM_STATE_DRAFT, STATE_COMPLETE as FORM_STATE_COMPLETE, STATE_CANCEL as FORM_STATE_CANCEL
+    STATE_PENDING as FORM_STATE_PENDING, STATE_DRAFT as FORM_STATE_DRAFT, \
+    STATE_COMPLETE as FORM_STATE_COMPLETE, STATE_CANCEL as FORM_STATE_CANCEL
 
 _logger = logging.getLogger(__name__)
 
@@ -163,10 +164,18 @@ class FormioController(http.Controller):
     @http.route('/formio/form/<string:uuid>/submission', type='json', auth='user', website=True)
     def form_submission(self, uuid, **kwargs):
         form = self._get_form(uuid, 'read')
+
+        # Submission data
         if form and form.submission_data:
-            return form.submission_data
+            submission_data = json.loads(form.submission_data)
         else:
-            return {}
+            submission_data = {}
+
+        # ETL Odoo data
+        etl_odoo_data = form._etl_odoo_data()
+        submission_data.update(etl_odoo_data)
+
+        return json.dumps(submission_data)
 
     @http.route('/formio/form/<string:uuid>/submit', type='json', auth="user", methods=['POST'], website=True)
     def form_submit(self, uuid, **post):
