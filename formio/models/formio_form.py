@@ -322,6 +322,9 @@ class Form(models.Model):
                 return False
         return form
 
+    def _etl_odoo_data(self):
+        return {}
+
     def i18n_translations(self):
         i18n = {}
         # Formio GUI/API translations
