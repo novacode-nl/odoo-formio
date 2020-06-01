@@ -146,10 +146,11 @@ class Builder(models.Model):
 
     @api.depends('formio_res_model_id')
     def _compute_res_model_id(self):
-        if self.formio_res_model_id:
-            self.res_model_id = self.formio_res_model_id.ir_model_id.id
-        else:
-            self.res_model_id = False
+        for r in self:
+            if r.formio_res_model_id:
+                r.res_model_id = r.formio_res_model_id.ir_model_id.id
+            else:
+                r.res_model_id = False
 
     @api.depends('title', 'name', 'version', 'state')
     def _compute_display_fields(self):
