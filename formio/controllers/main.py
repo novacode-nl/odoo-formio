@@ -147,9 +147,9 @@ class FormioController(http.Controller):
                 options['viewAsHtml'] = True # backwards compatible (version < 4.x)?
 
         lang = Lang._lang_get(request.env.user.lang)
-        options['language'] = lang.iso_code
-        options['i18n'] = form.i18n_translations()
-
+        if lang:
+            options['language'] = lang.iso_code[:2]
+            options['i18n'] = form.i18n_translations()
         return options
 
     @http.route('/formio/form/<string:uuid>/options', type='json', auth='user', website=True)
