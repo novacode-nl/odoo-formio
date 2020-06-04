@@ -49,7 +49,7 @@ See LICENSE file for full copyright and licensing details.
         <t t-elif="component['type'] == 'tabs'">
             <t t-call="formio_report_qweb.tabs_component"/>
         </t>
-        <t t-elif="show_components_not_implemented and component['type'] not in ['button']">
+        <t t-elif="show_components_not_implemented and component['type'] not in ['button', 'file']">
             <t t-call="formio_report_qweb.component_not_implemented"/>
         </t>
     </template>
