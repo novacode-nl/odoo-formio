@@ -93,10 +93,10 @@ class Form(models.Model):
     def _prepare_create_vals(self, vals):
         builder = self._get_builder_from_id(vals.get('builder_id'))
 
-        if 'res_id' not in vals:
+        if not vals.get('res_id'):
             vals['res_id'] = self._context.get('active_id')
 
-        if 'res_name' not in vals:
+        if not vals.get('res_name'):
             vals['res_name'] = builder.res_model_id.name
         return vals
 
