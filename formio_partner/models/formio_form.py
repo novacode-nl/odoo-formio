@@ -16,7 +16,7 @@ class Form(models.Model):
         builder = self._get_builder_from_id(vals.get('builder_id'))
         res_id = self._context.get('active_id')
 
-        if not builder or not builder.res_model_id.model == 'res.partner' or not res_id:
+        if not builder or not builder.res_model_id.model == 'res.partner':
             return vals
 
         partner = self.env['res.partner'].browse(res_id)
