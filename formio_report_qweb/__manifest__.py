@@ -4,7 +4,7 @@
 {
     'name': 'Form.io Reports Generator',
     'summary': 'Generate (PDF) reports for every Form',
-    'version': '0.7',
+    'version': '0.8',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
@@ -18,7 +18,7 @@
         'views/formio_builder_views.xml',
         'views/formio_builder_report_views.xml'
     ],
-    'application': False,
+    'application': True,
     'images': [
         'static/description/banner.png',
     ],
