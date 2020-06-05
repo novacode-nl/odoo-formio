@@ -76,6 +76,7 @@ class Form(models.Model):
     portal_submit_done_url = fields.Char(related='builder_id.portal_submit_done_url')
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
     allow_force_update_state = fields.Boolean("Allow force update State", compute='_compute_access')
+    readonly_submission_data = fields.Boolean("Data is readonly", compute='_compute_access')
 
     @api.model
     def default_get(self, fields):
@@ -134,6 +135,12 @@ class Form(models.Model):
                 form.allow_force_update_state = True
             else:
                 form.allow_force_update_state = False
+
+            # readonly_submission_data
+            if self.env.user.has_group('formio.group_formio_admin'):
+                form.readonly_submission_data = False
+            else:
+                form.readonly_submission_data = True
 
     @api.depends('state')
     def _compute_display_fields(self):
