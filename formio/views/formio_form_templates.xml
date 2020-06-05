@@ -68,6 +68,9 @@ See LICENSE file for full licensing details. -->
                 <div class="formio_form_embed_container">
                     <div id="formio_form"></div>
                 </div>
+                <div t-if="form.show_id" class="float-right">
+                    <small class="text-muted">UUID: <span t-esc="form.uuid"/></small>
+                </div>
                 <input type="hidden" id="form_uuid" name="uuid" t-att-value="form.uuid"/>
             </body>
         </html>
