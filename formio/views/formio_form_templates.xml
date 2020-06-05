@@ -33,7 +33,7 @@ See LICENSE file for full licensing details. -->
                 <div class="formio_form_dock float-right">
                     <ul>
                         <li t-if="form.assigned_partner_id and form.show_user_metadata" class="assigned">
-                            <strong>Assigned:</strong> <span t-esc="form.assigned_partner_name"/>
+                            <strong>Assigned to:</strong> <span t-esc="form.assigned_partner_name"/>
                         </li>
                         <li t-if="form.submission_data and form.show_user_metadata" class="submission">
                             <strong>Submission by:</strong> <span t-esc="form.submission_partner_name"/> (<span t-field="form.submission_date"/>)
