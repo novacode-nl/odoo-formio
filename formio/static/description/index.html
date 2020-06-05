@@ -120,6 +120,22 @@
 <section class="oe_container oe_dark">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">3.6</h4>
+    <ul>
+      <li>
+        Import formio.js version 3.x assets and bootstrap (CSS) instead of CDN.
+      </li>
+      <li>
+        Fix silly Javascript bug: <code>_.extend</code> (underscore.js ain't loaded here). Use jQuery extend.
+      </li>
+      <li>
+        Add help text regarding issue with (Formio.js) and <code>view_as_html</code> setting <a href="https://github.com/formio/formio.js/issues/1545" target="_blank">select component rendering error in viewAsHtml model #1545</a>
+      </li>
+      <li>
+        Add setting (in Form Builder) which instructs the Form whether to show/hide some metadata: assigned user, submission user &amp; date, ID, state.<br/>
+        The default is to show all these metadata fields (for backwards compatibility and no data migration needed).
+      </li>
+    </ul>
     <h4 class="oe_mb16">3.5</h4>
     <ul>
       <li>Add formio.js <strong><a href="https://github.com/formio/formio.js/releases/tag/v4.9.26" target="_blank">v4.9.26</a></strong> assets.</li>
