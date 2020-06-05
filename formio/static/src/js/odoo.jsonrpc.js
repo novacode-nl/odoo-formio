@@ -61,7 +61,7 @@
                 // original function is jsonRpc
                 settings = settings || {};
                 return this.genericJsonRpc(fct_name, params, settings, function(data) {
-                    return $.ajax(url, _.extend({}, settings, {
+                    return $.ajax(url, $.extend({}, settings, {
                         url: url,
                         dataType: 'json',
                         type: 'POST',
