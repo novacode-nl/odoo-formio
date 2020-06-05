@@ -98,6 +98,10 @@ See LICENSE file for full licensing details. -->
                                 </group>
                                 <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
                             </group>
+                            <div class="mb-3 text-muted">
+                                <i class="fa fa-info-circle" title="info"/><strong> View as HTML</strong> setting (still) doesn't work since version 4.x<br/>
+                                For more info see Formio.js GitHub issue: <a href="https://github.com/formio/formio.js/issues/1545" target="_blank">select component rendering error in viewAsHtml model #1545</a>
+                            </div>
                         </page>
                         <page string="Resource Settings" name="res_model_settings" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
                         <page string="Portal Settings" name="portal_settings" attrs="{'invisible': [('portal', '=', False)]}">
@@ -121,8 +125,8 @@ See LICENSE file for full licensing details. -->
                             <field name="schema" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                         </page>
                         <page string="Forms Permissions" name="forms_permissions" groups="formio.group_formio_admin">
-                            <div class="mb-3">
-                                <i class="fa fa-info-circle" title="info"/><em> Specific permissions on Forms</em>
+                            <div class="mb-3 text-muted">
+                                <i class="fa fa-info-circle" title="info"/> Specific permissions on Forms
                             </div>
                             <group>
                                 <field name="allow_force_update_state_group_ids" />
