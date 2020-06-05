@@ -4,6 +4,9 @@ See LICENSE file for full licensing details. -->
 
 <odoo>
     <data>
+        <record id="version_4_9_26" model="formio.version">
+            <field name="name">4.9.26</field>
+        </record>
         <record id="version_4_9_23" model="formio.version">
             <field name="name">4.9.23</field>
         </record>

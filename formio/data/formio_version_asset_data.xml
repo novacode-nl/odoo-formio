@@ -20,6 +20,41 @@ See LICENSE file for full licensing details. -->
             <field name="url">/formio/static/lib/bootstrap/4.1.3/bootstrap.min.css</field>
         </record>
 
+        <!-- 4.9.26 -->
+        <record id="css_formio_4_9_26" model="ir.attachment">
+            <field name="name">formio 4.9.26 formio.full.min.css</field>
+            <field name="type">url</field>
+            <field name="res_model">formio.version.asset</field>
+            <field name="public" eval="True"/>
+            <field name="url">/formio/static/lib/formiojs/4.9.26/formio.full.min.css</field>
+        </record>
+        <record id="js_formio_4_9_26" model="ir.attachment">
+            <field name="name">formio 4.9.26 formio.full.min.js</field>
+            <field name="type">url</field>
+            <field name="res_model">formio.version.asset</field>
+            <field name="public" eval="True"/>
+            <field name="url">/formio/static/lib/formiojs/4.9.26/formio.full.min.js</field>
+        </record>
+
+        <record id="asset_4_9_26_bootstrap_css" model="formio.version.asset">
+            <field name="version_id" ref="formio.version_4_9_26"/>
+            <field name="sequence">1</field>
+            <field name="type">css</field>
+            <field name="attachment_id" ref="formio.css_bootstrap_4_1_3"/>
+        </record>
+        <record id="asset_4_9_26_css" model="formio.version.asset">
+            <field name="version_id" ref="formio.version_4_9_26"/>
+            <field name="sequence">2</field>
+            <field name="type">css</field>
+            <field name="attachment_id" ref="formio.css_formio_4_9_26"/>
+        </record>
+        <record id="asset_4_9_26_js" model="formio.version.asset">
+            <field name="version_id" ref="formio.version_4_9_26"/>
+            <field name="sequence">2</field>
+            <field name="type">js</field>
+            <field name="attachment_id" ref="formio.js_formio_4_9_26"/>
+        </record>
+
         <!-- 4.9.23 -->
         <record id="css_formio_4_9_23" model="ir.attachment">
             <field name="name">formio 4.9.23 formio.full.min.css</field>
