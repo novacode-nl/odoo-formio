@@ -162,18 +162,18 @@ See LICENSE file for full licensing details. -->
 
         <!-- 3.27.3 -->
         <record id="css_formio_3_27_3" model="ir.attachment">
-            <field name="name">https://unpkg.com/formiojs@3.27.3/dist/formio.full.min.css</field>
+            <field name="name">formio 3.27.3 formio.full.min.css</field>
             <field name="type">url</field>
             <field name="res_model">formio.version.asset</field>
             <field name="public" eval="True"/>
-            <field name="url">https://unpkg.com/formiojs@3.27.3/dist/formio.full.min.css</field>
+            <field name="url">/formio/static/lib/formiojs/3.27.3/formio.full.min.css</field>
         </record>
         <record id="js_formio_3_27_3" model="ir.attachment">
-            <field name="name">https://unpkg.com/formiojs@3.27.3/dist/formio.full.min.js</field>
+            <field name="name">formio 3.27.3 formio.full.min.js</field>
             <field name="type">url</field>
             <field name="res_model">formio.version.asset</field>
             <field name="public" eval="True"/>
-            <field name="url">https://unpkg.com/formiojs@3.27.3/dist/formio.full.min.js</field>
+            <field name="url">/formio/static/lib/formiojs/3.27.3/formio.full.min.js</field>
         </record>
 
         <record id="asset_3_27_3_bootstrap_css" model="formio.version.asset">
@@ -197,18 +197,18 @@ See LICENSE file for full licensing details. -->
 
         <!-- 3.6.6 -->
         <record id="css_formio_3_6_6" model="ir.attachment">
-            <field name="name">https://unpkg.com/formiojs@3.6.6/dist/formio.full.min.css</field>
+            <field name="name">formio 3.6.6 formio.full.min.css</field>
             <field name="type">url</field>
             <field name="res_model">formio.version.asset</field>
             <field name="public" eval="True"/>
-            <field name="url">https://unpkg.com/formiojs@3.6.6/dist/formio.full.min.css</field>
+            <field name="url">/formio/static/lib/formiojs/3.6.6/formio.full.min.css</field>
         </record>
         <record id="js_formio_3_6_6" model="ir.attachment">
-            <field name="name">https://unpkg.com/formiojs@3.6.6/dist/formio.full.min.js</field>
+            <field name="name">formio 3.6.6 formio.full.min.js</field>
             <field name="type">url</field>
             <field name="res_model">formio.version.asset</field>
             <field name="public" eval="True"/>
-            <field name="url">https://unpkg.com/formiojs@3.6.6/dist/formio.full.min.js</field>
+            <field name="url">/formio/static/lib/formiojs/3.6.6/formio.full.min.js</field>
         </record>
         
         <record id="asset_3_6_6_bootstrap_css" model="formio.version.asset">
