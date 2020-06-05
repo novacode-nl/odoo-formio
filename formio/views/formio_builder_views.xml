@@ -83,11 +83,16 @@ See LICENSE file for full licensing details. -->
                     </group>
                     <notebook>
                         <page string="Settings" name="settings">
-                            <group>
-                                <group name="form_settings" string="Form.io">
+                            <group name="settings">
+                                <group name="formio_settings" string="Form.io">
                                     <field name="formio_version_id" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="wizard" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="view_as_html" groups="formio.group_formio_admin"/>
+                                </group>
+                                <group name="form_settings" string="Form Appearance">
+                                    <field name="show_form_user_metadata" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="show_form_id" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="show_form_state" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
                                 <group name="integration_settings" string="Integration">
                                     <field name="portal" groups="formio.group_formio_admin"/>
