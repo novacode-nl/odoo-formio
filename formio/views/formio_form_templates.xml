@@ -32,16 +32,16 @@ See LICENSE file for full licensing details. -->
             <body>
                 <div class="formio_form_dock float-right">
                     <ul>
-                        <li t-if="form.assigned_partner_id" class="assigned">
+                        <li t-if="form.assigned_partner_id and form.show_user_metadata" class="assigned">
                             <strong>Assigned:</strong> <span t-esc="form.assigned_partner_name"/>
                         </li>
-                        <li t-if="form.submission_data" class="submission">
-                            <strong>Submission:</strong> <span t-esc="form.submission_partner_name"/> (<span t-field="form.submission_date"/>)
+                        <li t-if="form.submission_data and form.show_user_metadata" class="submission">
+                            <strong>Submission by:</strong> <span t-esc="form.submission_partner_name"/> (<span t-field="form.submission_date"/>)
                         </li>
-                        <li class="form_id">
+                        <li t-if="form.show_id" class="form_id">
                             <strong>ID:</strong> <span t-esc="form.id"/>
                         </li>
-                        <li class="form_state">
+                        <li t-if="form.show_state" class="form_state">
                             <t t-if="form.state == 'PENDING'">
                                 <span t-attf-class="badge mb-1 badge-pill badge-info">State: <strong><t t-esc="form.display_state"/></strong></span>
                             </t>
