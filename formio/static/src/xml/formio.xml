@@ -52,7 +52,6 @@
     <t t-name="formio.form">
         <div class="o_form_sheet_bg">
             <div t-attf-class="clearfix o_form_sheet formio_form_container {{ form.state }}">
-                <h1><span name="title" t-esc="form.title"/></h1>
                 <div class="formio_form_iframe_container">
                     <iframe t-attf-src="/formio/form/#{form.uuid}/root" class="formio_form_embed"/>
                     <script>

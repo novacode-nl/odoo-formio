@@ -2,11 +2,6 @@
     background:url('/web/static/lib/select2/select2-spinner.gif') center center no-repeat;
 }
 
-.formio_form_iframe_container .formio_title h1 {
-    background-color: #fff;
-    margin-bottom: 0;
-}
-
 .formio_form_iframe_container iframe{
     width: 1px;
     min-width: 100%;

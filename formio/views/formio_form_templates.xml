@@ -30,7 +30,8 @@ See LICENSE file for full licensing details. -->
                 <link rel="stylesheet" href="/formio/static/src/css/formio_form_embed.css"/>
             </head>
             <body>
-                <div class="formio_form_dock float-right">
+                <h3 t-if="form.show_title" class="formio_form_title"><span name="title" t-esc="form.title"/></h3>
+                <div t-if="form.show_id or form.show_state or form.show_user_metadata" class="formio_form_dock float-right">
                     <ul>
                         <li t-if="form.assigned_partner_id and form.show_user_metadata" class="assigned">
                             <strong>Assigned to:</strong> <span t-esc="form.assigned_partner_name"/>
