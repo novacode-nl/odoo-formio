@@ -21,6 +21,10 @@
     margin-left: 20px;
 }
 
+h3.formio_form_title {
+    color: #000;
+}
+
 .formio_languages {
     clear: both;
     margin-bottom: 20px;

@@ -74,9 +74,10 @@ class Form(models.Model):
         help='Datetime when the form was last submitted.')
     portal = fields.Boolean("Portal", related='builder_id.portal', readonly=True, help="Form is accessible by assigned portal user")
     portal_submit_done_url = fields.Char(related='builder_id.portal_submit_done_url')
+    show_id = fields.Boolean("Show ID", related='builder_id.show_form_id')
+    show_title = fields.Boolean("Show Title", related='builder_id.show_form_title')
+    show_state = fields.Boolean("Show State", related='builder_id.show_form_state')
     show_user_metadata = fields.Boolean("Show User Metadata", related='builder_id.show_form_user_metadata')
-    show_id = fields.Boolean("Show Form ID", related='builder_id.show_form_id')
-    show_state = fields.Boolean("Show Form Atate", related='builder_id.show_form_state')
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
     allow_force_update_state = fields.Boolean("Allow force update State", compute='_compute_access')
     readonly_submission_data = fields.Boolean("Data is readonly", compute='_compute_access')
@@ -339,6 +340,7 @@ class Form(models.Model):
             else:
                 i18n[trans.lang_id.iso_code[:2]][trans.source] = trans.value
         return i18n
+
 
 class IrAttachment(models.Model):
     _inherit = 'ir.attachment'

@@ -90,9 +90,10 @@ See LICENSE file for full licensing details. -->
                                     <field name="view_as_html" groups="formio.group_formio_admin"/>
                                 </group>
                                 <group name="form_settings" string="Form Appearance">
+                                    <field name="show_form_title" string="Show Title" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="show_form_state" string="Show State" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="show_form_id" string="Show ID &amp; UUID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="show_form_user_metadata" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                    <field name="show_form_id" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                    <field name="show_form_state" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
                                 <group name="integration_settings" string="Integration">
                                     <field name="portal" groups="formio.group_formio_admin"/>
