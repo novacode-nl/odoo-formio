@@ -120,8 +120,22 @@
 <section class="oe_container oe_dark">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">3.7</h4>
+    <ul>
+      <li>
+        New setting (in Form Builder) which instructs the Form whether to <strong>show/hide</strong> the <strong>Title</strong>.
+      </li>
+      <li>
+        Moved the Form Title from the main HTML-document into the embeded document (iframe).<br/>
+        This improves a real embedded Form experience.
+      </li>
+    </ul>
     <h4 class="oe_mb16">3.6</h4>
     <ul>
+      <li>
+        New settings (in Form Builder) which instructs the Form whether to <strong>show/hide</strong> some metadata: <strong>Assigned user, Submission user &amp; date, ID, State</strong>.<br/>
+        The default is to show all these metadata fields (for backwards compatibility and no data migration needed).
+      </li>
       <li>
         Import formio.js version 3.x assets and bootstrap (CSS) instead of CDN.
       </li>
@@ -130,10 +144,6 @@
       </li>
       <li>
         Add help text regarding issue with (Formio.js) and <code>view_as_html</code> setting <a href="https://github.com/formio/formio.js/issues/1545" target="_blank">select component rendering error in viewAsHtml model #1545</a>
-      </li>
-      <li>
-        Add setting (in Form Builder) which instructs the Form whether to show/hide some metadata: assigned user, submission user &amp; date, ID, state.<br/>
-        The default is to show all these metadata fields (for backwards compatibility and no data migration needed).
       </li>
     </ul>
     <h4 class="oe_mb16">3.5</h4>
