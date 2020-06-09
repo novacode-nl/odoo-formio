@@ -41,7 +41,7 @@ class Builder(models.Model):
         'formio.version', string='Form.io Version', required=True,
         track_visibility='onchange',
         help="""Loads the specific Form.io Javascript API/libraries version (sourcecode: \https://github.com/formio/formio.js)""")
-    formio_version_name = fields.Char(related='formio_version_id.name')
+    formio_version_name = fields.Char(related='formio_version_id.name', string='Form.io version')
     formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='Form.io CSS')
     formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='Form.io Javascript')
     res_model_id = fields.Many2one(
