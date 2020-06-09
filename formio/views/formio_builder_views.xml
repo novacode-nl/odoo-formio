@@ -10,14 +10,15 @@ See LICENSE file for full licensing details. -->
             <tree string="Form Builders">
                 <field name="title"/>
                 <field name="name"/>
-                <field name="state"/>
                 <field name="version"/>
-                <field name="parent_id"/>
+                <field name="state"/>
+                <field name="formio_res_model_id"/>
+                <field name="portal"/>
+                <field name="public"/>
                 <field name="formio_version_id"/>
                 <field name="user_id"/>
+                <field name="parent_id"/>
                 <field name="write_date"/>
-                <field name="portal"/>
-                <field name="formio_res_model_id"/>
                 <field name="forms"/>
             </tree>
         </field>
@@ -92,15 +93,19 @@ See LICENSE file for full licensing details. -->
                                 <group name="form_settings" string="Form Appearance">
                                     <field name="show_form_title" string="Show Title" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="show_form_state" string="Show State" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                    <field name="show_form_id" string="Show ID &amp; UUID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="show_form_user_metadata" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="show_form_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="show_form_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
                                 <group name="integration_settings" string="Integration">
-                                    <field name="portal" groups="formio.group_formio_admin"/>
                                     <field name="formio_res_model_id" groups="formio.group_formio_admin"
                                            attrs="{'readonly': [('state', '!=', 'DRAFT')]}"
                                            edit="false" create="false" quick_create="false"
                                            options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                </group>
+                                <group name="access_settings" string="Access">
+                                    <field name="portal" groups="formio.group_formio_admin"/>
+                                    <field name="public" string="Public (e.g. website)" groups="formio.group_formio_admin"/>
                                 </group>
                                 <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
                             </group>

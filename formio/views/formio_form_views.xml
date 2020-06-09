@@ -20,6 +20,8 @@ See LICENSE file for full licensing details. -->
                 <field name="state"/>
                 <button string="Form" class="btn-sm btn-secondary" name="action_view_formio" type="object"/>
                 <field name="portal"/>
+                <field name="public"/>
+                <field name="res_model_name" string="Resource Type"/>
                 <field name="res_name"/>
                 <field name="res_info"/>
                 <field name="res_partner_id"/>
@@ -39,6 +41,7 @@ See LICENSE file for full licensing details. -->
                 <field name="res_act_window_url"/>
                 <field name="user_id"/>
                 <field name="portal"/>
+                <field name="public"/>
                 <templates>
                     <t t-name="kanban-box">
                         <!-- <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click"> -->
@@ -169,19 +172,32 @@ See LICENSE file for full licensing details. -->
                             <field name="allow_force_update_state" invisible="1"/>
                         </group>
                     </group>
-                    <group name="assignment">
+                    <group name="assignment_and_submission">
                         <group attrs="{'invisible': [('builder_id', '=', False)]}">
                             <field name="invitation_mail_template_id" invisible="1"/>
                             <field name="user_id" groups="formio.group_formio_user_all_forms" attrs="{'readonly': [('state', 'in', ['COMPLETE', 'CANCEL'])]}"/>
-                            <field name="portal" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                            <field name="submission_partner_id" string="Submission Partner"/>
+                            <field name="submission_user_id" groups="base.group_erp_manager" string="Submission User"/>
+                            <field name="submission_date" string="Submission Date"/>
                         </group>
                     </group>
                     <notebook>
-                        <page string="Submission" name="submission">
+                        <page string="Settings" name="settings">
                             <group>
-                                <field name="submission_partner_id" string="Partner"/>
-                                <field name="submission_user_id" groups="base.group_erp_manager" string="User"/>
-                                <field name="submission_date" string="Date"/>
+                                <group string="Appearance" name="appearance_settings">
+                                    <field name="show_title" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                    <field name="show_state" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                    <field name="show_user_metadata" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                    <field name="show_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                    <field name="show_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                </group>
+                                <group string="Access" name="readonly_settings">
+                                    <field name="portal" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                    <field name="public" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                    <div class="text-muted">
+                                        <i class="fa fa-info-circle" title="info"/> Access settings configured in Form Builder (readonly here).
+                                    </div>
+                                </group>
                             </group>
                         </page>
                         <page string="Data" name="data" groups="formio.group_formio_admin">

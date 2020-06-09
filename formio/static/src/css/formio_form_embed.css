@@ -2,10 +2,11 @@
     margin: 0 auto;
     padding-left: 4px;
     padding-right: 4px;
+    clear: both;
 }
 
 .formio_form_dock {
-    margin-bottom: 20px;
+    margin-bottom: .5rem;
 }
 
 .formio_form_dock * {

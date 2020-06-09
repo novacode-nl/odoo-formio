@@ -7,8 +7,8 @@ $(document).ready(function() {
     window.addEventListener('message', function(event) {
         var base_url = window.location.protocol + '//' + window.location.host;
         if (event.origin == base_url && event.data == 'formioSubmitDone') {
-            var portal_submit_done_url = document.getElementById('portal_submit_done_url').value;
-            if (portal_submit_done_url && portal_submit_done_url.length > 0) {
+            var portal_submit_done_url = document.getElementById('portal_submit_done_url');
+            if (portal_submit_done_url && portal_submit_done_url.value.length > 0) {
                 window.location = portal_submit_done_url;
             }
             else {

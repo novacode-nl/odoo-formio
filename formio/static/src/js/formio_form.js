@@ -3,12 +3,18 @@
 
 $(document).ready(function() {
     var uuid = document.getElementById('form_uuid').value,
+        public = document.getElementById('form_public').value,
         base_url = window.location.protocol + '//' + window.location.host,
-        formio_uuid = '/formio/form/' + uuid,
-        schema_url = formio_uuid + '/schema/',
-        options_url = formio_uuid + '/options/',
-        submission_url = formio_uuid + '/submission/',
-        submit_url = formio_uuid + '/submit/',
+        form_url_uuid = '/formio/form/' + uuid;
+
+    if (public) {
+        form_url_uuid = '/formio/public/form/' + uuid;
+    }
+
+    var schema_url = form_url_uuid + '/schema/',
+        options_url = form_url_uuid + '/options/',
+        submission_url = form_url_uuid + '/submission/',
+        submit_url = form_url_uuid + '/submit/',
         schema = {},
         options = {};
 
@@ -50,7 +56,7 @@ $(document).ready(function() {
                         });
                     });
                     form.on('submitDone', function(submission) {
-                        if (submission.state == 'submitted') {
+                        if (submission.state == 'submitted' && !options.hasOwnProperty('embedded') && !options['embedded']) {
                             window.parent.postMessage('formioSubmitDone', base_url);
                         }
                         window.location.reload();
