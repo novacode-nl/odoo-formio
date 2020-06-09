@@ -124,7 +124,7 @@ class FormioForm(models.Model):
                     fields_done.append(field)
                 except:
                     msg = "field not found"
-                    error = EtlOdooFieldException(formio_component_name, field, msg)
+                    error = EtlOdooFieldError(formio_component_name, field, msg)
                     _logger.error(error.message)
                     odoo_field_val = error.message
         return odoo_field_val
