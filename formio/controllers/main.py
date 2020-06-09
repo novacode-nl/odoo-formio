@@ -73,10 +73,10 @@ class FormioController(http.Controller):
         schema = json.dumps(post['schema'])
         builder.write({'schema': schema})
 
-    def _get_form(self, uuid, mode):
-        return request.env['formio.form'].get_form(uuid, mode)
+    ##################
+    # Form - user auth
+    ##################
 
-    # Form
     @http.route('/formio/form/<string:uuid>/root', type='http', auth='user', website=True)
     def form_root(self, uuid, **kwargs):
         form = self._get_form(uuid, 'read')
@@ -127,31 +127,6 @@ class FormioController(http.Controller):
         else:
             return {}
 
-    def _prepare_builder_options(self, builder):
-        options = {}
-
-        if builder.state in [BUILDER_STATE_CURRENT, BUILDER_STATE_OBSOLETE]:
-            options['readOnly'] = True
-        return options
-
-    def _prepare_form_options(self, form):
-        options = {}
-        context = request.env.context
-        Lang  = request.env['res.lang']
-
-        if form.state in [FORM_STATE_COMPLETE, FORM_STATE_CANCEL]:
-            options['readOnly'] = True
-
-            if form.builder_id.view_as_html:
-                options['renderMode'] = 'html'
-                options['viewAsHtml'] = True # backwards compatible (version < 4.x)?
-
-        lang = Lang._lang_get(request.env.user.lang)
-        if lang:
-            options['language'] = lang.iso_code[:2]
-            options['i18n'] = form.i18n_translations()
-        return options
-
     @http.route('/formio/form/<string:uuid>/options', type='json', auth='user', website=True)
     def form_options(self, uuid, **kwargs):
         form = self._get_form(uuid, 'read')
@@ -174,7 +149,6 @@ class FormioController(http.Controller):
         # ETL Odoo data
         etl_odoo_data = form._etl_odoo_data()
         submission_data.update(etl_odoo_data)
-
         return json.dumps(submission_data)
 
     @http.route('/formio/form/<string:uuid>/submit', type='json', auth="user", methods=['POST'], website=True)
@@ -198,6 +172,114 @@ class FormioController(http.Controller):
             vals['state'] = FORM_STATE_COMPLETE
 
         form.write(vals)
+
+    ####################
+    # Form - public auth
+    ####################
+
+    @http.route('/formio/public/form/<string:uuid>/root', type='http', auth='public', website=True)
+    def public_form_root(self, uuid, **kwargs):
+        form = self._get_public_form(uuid)
+        if not form:
+            msg = 'Form UUID %s' % uuid
+            return request.not_found(msg)
+
+        ## TODO languages ##
+        #
+        # Needed to update language
+        # context = request.env.context.copy()
+        # context.update({'lang': request.env.user.lang})
+        # request.env.context = context
+
+        # # Get active languages used in Builder translations.
+        # query = """
+        #     SELECT
+        #       DISTINCT(fbt.lang_id) AS lang_id
+        #     FROM
+        #       formio_builder_translation AS fbt
+        #       INNER JOIN res_lang AS l ON l.id = fbt.lang_id
+        #     WHERE
+        #       fbt.builder_id = {builder_id}
+        #       AND l.active = True
+        # """.format(builder_id=form.builder_id.id)
+
+        # request.env.cr.execute(query)
+        # builder_lang_ids = [r[0] for r in request.env.cr.fetchall()]
+
+        # # Always include english (en_US).
+        # domain = ['|', ('id', 'in', builder_lang_ids), ('code', 'in', [request.env.user.lang, 'en_US'])]
+        # languages = request.env['res.lang'].with_context(active_test=False).search(domain, order='name asc')
+        # languages = languages.filtered(lambda r: r.id in builder_lang_ids or r.code == 'en_US')
+
+        values = {
+            'languages': [], # initialize, otherwise template/view crashes.
+            'form': form,
+            'formio_css_assets': form.builder_id.formio_css_assets,
+            'formio_js_assets': form.builder_id.formio_js_assets,
+        }
+        # if len(languages) > 1:
+        #     values['languages'] = languages
+        return request.render('formio.formio_form_embed', values)
+
+    @http.route('/formio/public/form/<string:uuid>/schema', type='json', auth='public', website=True)
+    def public_form_schema(self, uuid, **kwargs):
+        form = self._get_public_form(uuid)
+        if form and form.builder_id.schema:
+            return form.builder_id.schema
+        else:
+            return {}
+
+    @http.route('/formio/public/form/<string:uuid>/options', type='json', auth='public', website=True)
+    def public_form_options(self, uuid, **kwargs):
+        form = self._get_public_form(uuid)
+        if form:
+            options = self._prepare_form_options(form)
+        else:
+            options = {}
+        options['embedded'] = True
+        return json.dumps(options)
+
+    @http.route('/formio/public/form/<string:uuid>/submission', type='json', auth='public', website=True)
+    def public_form_submission(self, uuid, **kwargs):
+        form = self._get_public_form(uuid)
+
+        # Submission data
+        if form and form.submission_data:
+            submission_data = json.loads(form.submission_data)
+        else:
+            submission_data = {}
+
+        # ETL Odoo data
+        etl_odoo_data = form._etl_odoo_data()
+        submission_data.update(etl_odoo_data)
+
+        return json.dumps(submission_data)
+
+    @http.route('/formio/public/form/<string:uuid>/submit', type='json', auth="public", methods=['POST'], website=True)
+    def public_form_submit(self, uuid, **post):
+        """ POST with ID instead of uuid, to get the model object right away """
+
+        form = self._get_public_form(uuid)
+        if not form:
+            # TODO raise or set exception (in JSON resonse) ?
+            return
+
+        vals = {
+            'submission_data': json.dumps(post['data']),
+            'submission_user_id': request.env.user.id,
+            'submission_date': fields.Datetime.now(),
+        }
+
+        if post['data'].get('saveDraft') and not post['data'].get('submit'):
+            vals['state'] = FORM_STATE_DRAFT
+        else:
+            vals['state'] = FORM_STATE_COMPLETE
+
+        form.write(vals)
+
+    ########################
+    # Form - fetch Odoo data
+    ########################
 
     @http.route('/formio/form/<string:uuid>/data', type='http', auth='user', website=True)
     def form_data(self, uuid, **kwargs):
@@ -301,3 +383,34 @@ class FormioController(http.Controller):
             return data
         except Exception as e:
             _logger.error("Exception: %s" % e)
+
+    def _prepare_builder_options(self, builder):
+        options = {}
+
+        if builder.state in [BUILDER_STATE_CURRENT, BUILDER_STATE_OBSOLETE]:
+            options['readOnly'] = True
+        return options
+
+    def _prepare_form_options(self, form):
+        options = {}
+        context = request.env.context
+        Lang  = request.env['res.lang']
+
+        if form.state in [FORM_STATE_COMPLETE, FORM_STATE_CANCEL]:
+            options['readOnly'] = True
+
+            if form.builder_id.view_as_html:
+                options['renderMode'] = 'html'
+                options['viewAsHtml'] = True # backwards compatible (version < 4.x)?
+
+        lang = Lang._lang_get(request.env.user.lang)
+        if lang:
+            options['language'] = lang.iso_code[:2]
+            options['i18n'] = form.i18n_translations()
+        return options
+
+    def _get_form(self, uuid, mode):
+        return request.env['formio.form'].get_form(uuid, mode)
+
+    def _get_public_form(self, uuid):
+        return request.env['formio.form'].get_public_form(uuid)

@@ -31,7 +31,7 @@ See LICENSE file for full licensing details. -->
             </head>
             <body>
                 <h3 t-if="form.show_title" class="formio_form_title"><span name="title" t-esc="form.title"/></h3>
-                <div t-if="form.show_id or form.show_state or form.show_user_metadata" class="formio_form_dock float-right">
+                <div t-if="form.show_id or form.show_uuid or form.show_state or form.show_user_metadata" class="formio_form_dock float-right">
                     <ul>
                         <li t-if="form.assigned_partner_id and form.show_user_metadata" class="assigned">
                             <strong>Assigned to:</strong> <span t-esc="form.assigned_partner_name"/>
@@ -61,18 +61,22 @@ See LICENSE file for full licensing details. -->
                         </li>
                     </ul>
                 </div>
-                <div class="formio_languages">
-                    <t t-foreach="languages" t-as="lang">
-                        <button class="btn btn-sm btn-default" t-attf-onclick="setLanguage('{{ lang.iso_code }}')"><span t-field="lang.name"/></button>
-                    </t>
-                </div>
+                <t t-if="languages">
+                    <div class="formio_languages">
+                        <t t-foreach="languages" t-as="lang">
+                            <button class="btn btn-sm btn-default" t-attf-onclick="setLanguage('{{ lang.iso_code }}')"><span t-field="lang.name"/></button>
+                        </t>
+                    </div>
+                </t>
                 <div class="formio_form_embed_container">
                     <div id="formio_form"></div>
                 </div>
-                <div t-if="form.show_id" class="float-right">
+                <div t-if="form.show_uuid" class="float-right">
                     <small class="text-muted">UUID: <span t-esc="form.uuid"/></small>
                 </div>
                 <input type="hidden" id="form_uuid" name="uuid" t-att-value="form.uuid"/>
+                <!-- This is a just hint. Security by any means is checked in the (backend) request handler -->
+                <input type="hidden" id="form_public" name="form_public" t-att-value="form.public"/>
             </body>
         </html>
     </template>

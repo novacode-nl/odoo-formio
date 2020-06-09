@@ -72,12 +72,15 @@ class Form(models.Model):
     submission_date = fields.Datetime(
         string='Submission Date', readonly=True, track_visibility='onchange',
         help='Datetime when the form was last submitted.')
+    sequence = fields.Integer(help="Usefull when storing and listing forms in an ordered way")
     portal = fields.Boolean("Portal", related='builder_id.portal', readonly=True, help="Form is accessible by assigned portal user")
     portal_submit_done_url = fields.Char(related='builder_id.portal_submit_done_url')
-    show_id = fields.Boolean("Show ID", related='builder_id.show_form_id')
-    show_title = fields.Boolean("Show Title", related='builder_id.show_form_title')
-    show_state = fields.Boolean("Show State", related='builder_id.show_form_state')
-    show_user_metadata = fields.Boolean("Show User Metadata", related='builder_id.show_form_user_metadata')
+    public = fields.Boolean("Public", related='builder_id.public', readonly=True, help="Form is public")
+    show_title = fields.Boolean("Show Title")
+    show_state = fields.Boolean("Show State")
+    show_id = fields.Boolean("Show ID")
+    show_uuid = fields.Boolean("Show UUID")
+    show_user_metadata = fields.Boolean("Show User Metadata")
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
     allow_force_update_state = fields.Boolean("Allow force update State", compute='_compute_access')
     readonly_submission_data = fields.Boolean("Data is readonly", compute='_compute_access')
@@ -97,6 +100,12 @@ class Form(models.Model):
 
     def _prepare_create_vals(self, vals):
         builder = self._get_builder_from_id(vals.get('builder_id'))
+
+        vals['show_title'] = builder.show_form_title
+        vals['show_state'] = builder.show_form_state
+        vals['show_id'] = builder.show_form_id
+        vals['show_uuid'] = builder.show_form_uuid
+        vals['show_user_metadata'] = builder.show_form_user_metadata
 
         if not vals.get('res_id'):
             vals['res_id'] = self._context.get('active_id')
@@ -261,6 +270,11 @@ class Form(models.Model):
         if not self.env.user.has_group('formio.group_formio_user_all_forms'):
             self.user_id = self.env.user.id
         self.title = self.builder_id.title
+        self.show_title = self.builder_id.show_form_title
+        self.show_state = self.builder_id.show_form_state
+        self.show_id = self.builder_id.show_form_id
+        self.show_uuid = self.builder_id.show_form_uuid
+        self.show_user_metadata = self.builder_id.show_form_user_metadata
 
     @api.onchange('portal')
     def _onchange_portal(self):
@@ -317,7 +331,7 @@ class Form(models.Model):
 
     @api.model
     def get_form(self, uuid, mode):
-        """ Verifies access to form and return form or False (if no access). """
+        """ Verifies access to form and return form or False. """
 
         if not self.env['formio.form'].check_access_rights(mode, False):
             return False
@@ -334,6 +348,22 @@ class Form(models.Model):
             if not form or form.builder_id.portal is False or form.user_id.id != self.env.user.id:
                 return False
         return form
+
+    @api.model
+    def get_public_form(self, uuid):
+        """ Verifies public (e.g. website) access to form and return form or False. """
+
+        # TODO when to assign and check the public user?
+        # (user_id = self.env.ref('base.public_user'))
+        domain = [
+            ('uuid', '=', uuid),
+            ('builder_id.public', '=', True),
+        ]
+        form = self.sudo().search(domain, limit=1)
+        if form:
+            return form
+        else:
+            return False
 
     def _etl_odoo_data(self):
         return {}
