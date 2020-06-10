@@ -147,7 +147,7 @@ class FormioController(http.Controller):
             submission_data = {}
 
         # ETL Odoo data
-        etl_odoo_data = form._etl_odoo_data()
+        etl_odoo_data = form.sudo()._etl_odoo_data()
         submission_data.update(etl_odoo_data)
         return json.dumps(submission_data)
 
@@ -250,7 +250,7 @@ class FormioController(http.Controller):
             submission_data = {}
 
         # ETL Odoo data
-        etl_odoo_data = form._etl_odoo_data()
+        etl_odoo_data = form.sudo()._etl_odoo_data()
         submission_data.update(etl_odoo_data)
 
         return json.dumps(submission_data)
