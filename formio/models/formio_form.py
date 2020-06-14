@@ -263,7 +263,13 @@ class Form(models.Model):
 
     @api.onchange('builder_id')
     def _onchange_builder_domain(self):
-        res = {}
+        domain = [
+            ('state', '=', BUILDER_STATE_CURRENT),
+            ('res_model_id', '=', False),
+        ]
+        res = {
+            'domain': {'builder_id': domain}
+        }
         return res
 
     @api.onchange('builder_id')
