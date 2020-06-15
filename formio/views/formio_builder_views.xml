@@ -12,14 +12,15 @@ See LICENSE file for full licensing details. -->
                 <field name="name"/>
                 <field name="version"/>
                 <field name="state"/>
-                <field name="formio_res_model_id"/>
-                <field name="portal"/>
-                <field name="public"/>
+                <field name="formio_res_model_id" optional="show"/>
+                <field name="portal" optional="show"/>
+                <field name="public" optional="show"/>
                 <field name="formio_version_id"/>
-                <field name="user_id"/>
-                <field name="parent_id"/>
-                <field name="write_date"/>
-                <field name="forms"/>
+                <field name="user_id" optional="hide"/>
+                <field name="parent_id" optional="hide"/>
+                <field name="write_date" optional="hide"/>
+                <field name="create_date" optional="hide"/>
+                <field name="forms" optional="show"/>
             </tree>
         </field>
     </record>
