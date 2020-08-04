@@ -91,7 +91,7 @@ class FormioForm(models.Model):
             except:
                 error_msg = "field not found in model"
                 error = EtlOdooFieldError(formio_component_name, field, error_msg)
-                _logger.error(error.message)
+                _logger.info(error.message)
                 return error.odoo_field_val
 
             if field_def.type == 'one2many':
@@ -119,7 +119,7 @@ class FormioForm(models.Model):
                 else:
                     error_msg = "One2many field % expects a Form.io datagrid component %s" % model_object
                     error = EtlOdooFieldError(formio_component_name, field, msg)
-                    _logger.error(error.message)
+                    _logger.info(error.message)
                     return error.odoo_field_val
             elif field_def.type == 'many2one':
                 try:
@@ -128,7 +128,7 @@ class FormioForm(models.Model):
                 except:
                     error_msg = "field not found in model"
                     error = EtlOdooFieldError(formio_component_name, field, error_msg)
-                    _logger.error(error.message)
+                    _logger.info(error.message)
                     return error.odoo_field_val
             else:
                 try:
@@ -137,7 +137,7 @@ class FormioForm(models.Model):
                 except:
                     msg = "field not found"
                     error = EtlOdooFieldError(formio_component_name, field, msg)
-                    _logger.error(error.message)
+                    _logger.info(error.message)
                     odoo_field_val = error.message
         return odoo_field_val
 
