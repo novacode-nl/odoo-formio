@@ -22,6 +22,7 @@ See LICENSE file for full licensing details. -->
                 <field name="portal" optional="show"/>
                 <field name="public" optional="show"/>
                 <field name="res_model_name" string="Resource Type" optional="show"/>
+                <field name="final_res_model_name" string="Final Resource Type" optional="show"/>
                 <field name="res_name" optional="show"/>
                 <field name="res_partner_id" optional="show"/>
                 <field name="write_date" optional="hide"/>
@@ -227,7 +228,9 @@ See LICENSE file for full licensing details. -->
                 <field name="res_name" string="Resource Name"/>
                 <field name="res_partner_id"/>
                 <field name="res_model_id"/>
+                <field name="final_res_model_id"/>
                 <field name="res_id"/>
+                <field name="final_res_id"/>
                 <separator/>
                 <filter string="My Forms" name="my_forms"
                         domain="[('user_id', '=', uid)]"/>

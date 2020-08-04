@@ -47,6 +47,7 @@ class Builder(models.Model):
     res_model_id = fields.Many2one(
         "ir.model", compute='_compute_res_model_id', store=True,
         string="Model", help="Model as resource this form represents or acts on")
+    res_model = fields.Char(compute='_compute_res_model_id', store=True)
     formio_res_model_id = fields.Many2one(
         "formio.res.model",
         string="Resource Model",
@@ -155,8 +156,10 @@ class Builder(models.Model):
         for r in self:
             if r.formio_res_model_id:
                 r.res_model_id = r.formio_res_model_id.ir_model_id.id
+                r.res_model = r.formio_res_model_id.ir_model_id.model
             else:
                 r.res_model_id = False
+                r.res_model = False
 
     @api.depends('title', 'name', 'version', 'state')
     def _compute_display_fields(self):
