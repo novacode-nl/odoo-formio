@@ -17,6 +17,7 @@ _logger = logging.getLogger(__name__)
 
 ODOO_PREFIX = 'Odoo'
 ODOO_REFRESH_PREFIX = 'OdooRF'
+ODOO_MODEL_PREFIX = 'OdooModel'
 
 # IMPORTANT regarding the delimiter choice:
 # - A dot "." results in undesired submission data, due to
@@ -60,10 +61,21 @@ class FormioForm(models.Model):
 
     def _etl_odoo_data(self):
         data = super(FormioForm, self)._etl_odoo_data()
-        if self.builder_id.res_model_id:
-            model_object = self.env[self.builder_id.res_model_id.model].browse(self.res_id)
+
+        model = False
+        if self.final_res_model_id:
+            model = self.final_res_model_id.model
+            res_id = self.final_res_id
+        elif self.builder_id.res_model_id:
+            model = self.builder_id.res_model_id.model
+            res_id = self.res_id
+
+        if model:
+            model_object = self.env[model].browse(res_id)
             for comp_name, comp in self._formio.builder.form_components.items():
-                if comp_name.startswith(ODOO_REFRESH_PREFIX) or (comp_name.startswith(ODOO_PREFIX) and self.state == STATE_PENDING):
+                if comp_name == ODOO_MODEL_PREFIX:
+                    data[comp_name] = model
+                elif comp_name.startswith(ODOO_REFRESH_PREFIX) or (comp_name.startswith(ODOO_PREFIX) and self.state == STATE_PENDING):
                     val = self._etl_odoo_field_val(model_object, comp_name, comp)
                     data[comp_name] = val
         return data
