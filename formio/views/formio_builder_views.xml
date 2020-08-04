@@ -98,6 +98,7 @@ See LICENSE file for full licensing details. -->
                                     <field name="show_form_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
                                 <group name="integration_settings" string="Integration">
+                                    <field name="res_model"/>
                                     <field name="formio_res_model_id" groups="formio.group_formio_admin"
                                            attrs="{'readonly': [('state', '!=', 'DRAFT')]}"
                                            edit="false" create="false" quick_create="false"
