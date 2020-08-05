@@ -63,15 +63,13 @@ class FormioForm(models.Model):
         data = super(FormioForm, self)._etl_odoo_data()
 
         model = False
-        if self.final_res_model_id:
-            model = self.final_res_model_id.model
-            res_id = self.final_res_id
-        elif self.builder_id.res_model_id:
-            model = self.builder_id.res_model_id.model
-            res_id = self.res_id
+        if not self.res_model_id:
+            model = self.initial_res_model_id.model
+        else:
+            model = self.res_model_id.model
 
         if model:
-            model_object = self.env[model].browse(res_id)
+            model_object = self.env[model].browse(self.res_id)
             for comp_name, comp in self._formio.builder.form_components.items():
                 if comp_name == ODOO_MODEL_PREFIX:
                     data[comp_name] = model
