@@ -22,7 +22,7 @@ See LICENSE file for full licensing details. -->
                 <field name="portal" optional="show"/>
                 <field name="public" optional="show"/>
                 <field name="res_model_name" string="Resource Type" optional="show"/>
-                <field name="initial_res_model_name" string="Resource Type #1" optional="show"/>
+                <field name="initial_res_model_name" string="Resource Type #1" optional="hide"/>
                 <field name="res_name" optional="show"/>
                 <field name="res_partner_id" optional="show"/>
                 <field name="write_date" optional="hide"/>
@@ -163,6 +163,7 @@ See LICENSE file for full licensing details. -->
                         <group>
                             <field name="res_name" string="Resource" attrs="{'invisible': [('res_name', '=', False)]}"/>
                             <field name="builder_id" attrs="{'readonly': [('id', '!=', False)]}"/>
+                            <field name="parent_id"/>
                         </group>
                         <group>
                             <field name="id" attrs="{'invisible': [('id', '=', False)]}"/>
@@ -228,8 +229,8 @@ See LICENSE file for full licensing details. -->
                 <field name="res_name" string="Resource Name"/>
                 <field name="res_partner_id"/>
                 <field name="res_model_id"/>
-                <field name="initial_res_model_id"/>
                 <field name="res_id"/>
+                <field name="initial_res_model_id"/>
                 <field name="initial_res_id"/>
                 <separator/>
                 <filter string="My Forms" name="my_forms"

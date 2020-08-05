@@ -215,7 +215,7 @@ class Form(models.Model):
             del submission_data['submit']
             vals['submission_data'] = json.dumps(submission_data)
 
-        self.write(vals)
+        self.with_context(formio_form_action_draft=True).write(vals)
 
     def action_complete(self):
         if not self.allow_force_update_state:
