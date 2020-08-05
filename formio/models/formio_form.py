@@ -47,8 +47,8 @@ class Form(models.Model):
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     act_window_multi_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     initial_res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model #1')
-    initial_res_model_name = fields.Char(related='res_model_id.name', readonly=True, string='Resource Name #1')
-    initial_res_model = fields.Char(related='res_model_id.model', readonly=True, string='Resource Model Name #1')
+    initial_res_model_name = fields.Char(related='initial_res_model_id.name', readonly=True, string='Resource Name #1')
+    initial_res_model = fields.Char(related='initial_res_model_id.model', readonly=True, string='Resource Model Name #1')
     initial_res_id = fields.Integer("Record ID #1", ondelete='restrict',
         help="Database ID of the record in res_model to which this applies")
     res_model_id = fields.Many2one('ir.model', readonly=True, string='Resource Model')
@@ -111,6 +111,8 @@ class Form(models.Model):
         vals['show_id'] = builder.show_form_id
         vals['show_uuid'] = builder.show_form_uuid
         vals['show_user_metadata'] = builder.show_form_user_metadata
+
+        vals['res_model_id'] = builder.res_model_id.id
 
         if not vals.get('res_id'):
             vals['res_id'] = self._context.get('active_id')
