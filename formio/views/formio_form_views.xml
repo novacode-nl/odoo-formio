@@ -163,7 +163,6 @@ See LICENSE file for full licensing details. -->
                         <group>
                             <field name="res_name" string="Resource" attrs="{'invisible': [('res_name', '=', False)]}"/>
                             <field name="builder_id" attrs="{'readonly': [('id', '!=', False)]}"/>
-                            <field name="parent_id"/>
                         </group>
                         <group>
                             <field name="id" attrs="{'invisible': [('id', '=', False)]}"/>
