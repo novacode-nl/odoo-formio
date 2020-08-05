@@ -46,16 +46,16 @@ class Form(models.Model):
     url = fields.Char(compute='_compute_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     act_window_multi_url = fields.Char(compute='_compute_act_window_url', readonly=True)
-    res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model')
+    initial_res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model #1')
+    initial_res_model_name = fields.Char(related='res_model_id.name', readonly=True, string='Resource Name #1')
+    initial_res_model = fields.Char(related='res_model_id.model', readonly=True, string='Resource Model Name #1')
+    initial_res_id = fields.Integer("Record ID #1", ondelete='restrict',
+        help="Database ID of the record in res_model to which this applies")
+    res_model_id = fields.Many2one('ir.model', readonly=True, string='Resource Model')
     res_model_name = fields.Char(related='res_model_id.name', readonly=True, string='Resource Name')
     res_model = fields.Char(related='res_model_id.model', readonly=True, string='Resource Model Name')
-    res_id = fields.Integer("Record ID", ondelete='restrict',
+    res_id = fields.Integer("Final Record ID", ondelete='restrict',
         help="Database ID of the record in res_model to which this applies")
-    final_res_model_id = fields.Many2one('ir.model', readonly=True, string='Final Resource Model')
-    final_res_model_name = fields.Char(related='final_res_model_id.name', readonly=True, string='Final Resource Name')
-    final_res_model = fields.Char(related='final_res_model_id.model', readonly=True, string='Final Resource Model Name')
-    final_res_id = fields.Integer("Final Record ID", ondelete='restrict',
-        help="Database ID of the record in final_res_model to which this applies")
     res_act_window_url = fields.Char(readonly=True)
     res_name = fields.Char(string='Record  Name', readonly=True)
     res_partner_id = fields.Many2one('res.partner', readonly=True, string='Resource Partner')
@@ -114,6 +114,8 @@ class Form(models.Model):
 
         if not vals.get('res_id'):
             vals['res_id'] = self._context.get('active_id')
+
+        vals['initial_res_id'] = vals['res_id']
 
         if not vals.get('res_name'):
             vals['res_name'] = builder.res_model_id.name

@@ -120,11 +120,19 @@
 <section class="oe_container oe_dark">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">4.4</h4>
+    <ul>
+      <li>CHANGE 4.3 <code>final_res</code> fields implementation, which was rather confusing:<br/>
+        Remove the <code>final_res_model</code>, <code>final_res_id</code> fields.<br/>
+        Instead: in model <code>formio.form</code> added fields <code>initial_res_model_id</code>, <code>initial_res_id</code>.<br/>
+        These fields store the initial (referenced) resource record. So swapping the <code>res_model_id</code> and <code>res_id</code> afterwards is supported, for specific implementation requirements.<br/>
+        Add migration to update <code>formio_form</code> records: <code>res_model_id</code> (determined by <code>formio_builder</code>), copy <code>res_id</code> to <code>initial_res_id</code>.
+    </ul>
     <h4 class="oe_mb16">4.3</h4>
     <ul>
-      <li>In model <code>formio.builder</code> added field <code>res_model</code>, which represents the technical model-name.</li>
       <li>In model <code>formio.form</code> added fields <code>final_res_model</code>, <code>final_res_id</code>.<br/>
         These fields can be used to swap the (referenced) resource record, for specific implementation requirements.
+      <li>In model <code>formio.builder</code> added field <code>res_model</code>, which represents the technical model-name.</li>
     </ul>
     <h4 class="oe_mb16">4.2</h4>
     <ul>
