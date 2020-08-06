@@ -12,6 +12,7 @@ See LICENSE file for full licensing details. -->
                   decoration-success="state in ('COMPLETE')"
                   decoration-muted="state in ('CANCEL')">
                 <field name="id"/>
+                <field name="uuid" optional="hide"/>
                 <field name="title"/>
                 <field name="builder_id"/>
                 <field name="user_id"/>
