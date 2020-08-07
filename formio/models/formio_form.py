@@ -54,7 +54,7 @@ class Form(models.Model):
     res_model_id = fields.Many2one('ir.model', readonly=True, string='Resource Model')
     res_model_name = fields.Char(related='res_model_id.name', readonly=True, string='Resource Name')
     res_model = fields.Char(related='res_model_id.model', readonly=True, string='Resource Model Name')
-    res_id = fields.Integer("Final Record ID", ondelete='restrict',
+    res_id = fields.Integer("Record ID", ondelete='restrict',
         help="Database ID of the record in res_model to which this applies")
     res_act_window_url = fields.Char(readonly=True)
     res_name = fields.Char(string='Record  Name', readonly=True)
