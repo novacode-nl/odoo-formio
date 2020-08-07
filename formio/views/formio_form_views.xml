@@ -11,9 +11,9 @@ See LICENSE file for full licensing details. -->
                   decoration-info="state in ('DRAFT')"
                   decoration-success="state in ('COMPLETE')"
                   decoration-muted="state in ('CANCEL')">
-                <field name="sequence" optional="hide"/>
                 <field name="id"/>
                 <field name="uuid" optional="hide"/>
+                <field name="sequence" optional="hide"/>
                 <field name="title"/>
                 <field name="builder_id"/>
                 <field name="user_id"/>
