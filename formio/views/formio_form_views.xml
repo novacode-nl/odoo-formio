@@ -19,8 +19,10 @@ See LICENSE file for full licensing details. -->
                 <field name="submission_date"/>
                 <field name="state"/>
                 <button string="Form" class="btn-sm btn-secondary" name="action_view_formio" type="object"/>
-                <field name="portal"/>
-                <field name="public"/>
+                <field name="portal_share"/>
+                <field name="public_share"/>
+                <field name="public_access"/>
+                <field name="public_create"/>
                 <field name="res_model_name" string="Resource Type"/>
                 <field name="res_name"/>
                 <field name="res_partner_id"/>
@@ -181,19 +183,29 @@ See LICENSE file for full licensing details. -->
                     <notebook>
                         <page string="Settings" name="settings">
                             <group>
-                                <group string="Appearance" name="appearance_settings">
-                                    <field name="show_title" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
-                                    <field name="show_state" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
-                                    <field name="show_user_metadata" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
-                                    <field name="show_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
-                                    <field name="show_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                <group string="Appearance" name="appearance_settings" colspan="2">
+                                    <group>
+                                        <field name="show_title" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                        <field name="show_state" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                        <field name="show_user_metadata" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="show_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                        <field name="show_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                    </group>
                                 </group>
-                                <group string="Access" name="readonly_settings">
-                                    <field name="portal" attrs="{'invisible': [('builder_id', '=', False)]}"/>
-                                    <field name="public" attrs="{'invisible': [('builder_id', '=', False)]}"/>
-                                    <div class="text-muted">
-                                        <i class="fa fa-info-circle" title="info"/> Access settings configured in Form Builder (readonly here).
+                                <group name="access_settings" string="Access">
+                                    <field name="portal_share" groups="formio.group_formio_admin"/>
+                                </group>
+                                <group name="public_access_settings" string="Public Access">
+                                    <field name="public_share" groups="formio.group_formio_admin"/>
+                                    <field name="public_access_date_from" groups="formio.group_formio_admin" attrs="{'required': [('public_share', '=', True)]}"/>
+                                    <label for="public_access_interval_number" string="Public Access Expire"/>
+                                    <div>
+                                        <field name="public_access_interval_number" class="oe_inline" groups="formio.group_formio_admin" attrs="{'required': [('public_share', '=', True)]}"/>
+                                        <field name="public_access_interval_type" class="oe_inline ml-2" groups="formio.group_formio_admin" attrs="{'required': [('public_share', '=', True)]}"/>
                                     </div>
+                                    <field name="public_access" groups="formio.group_formio_admin"/>
                                 </group>
                             </group>
                         </page>

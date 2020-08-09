@@ -4,7 +4,7 @@
 {
     'name': 'Form.io',
     'summary': 'Build, deploy and store web forms with the "Form.io" Form Builder',
-    'version': '4.4',
+    'version': '5.0',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
@@ -38,6 +38,8 @@
         'views/formio_builder_templates.xml',
         'views/formio_form_templates.xml',
         'views/formio_portal_templates.xml',
+        'views/formio_public_templates.xml',
+
     ],
     'installable': True,
     'application': True,

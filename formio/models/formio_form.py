@@ -7,6 +7,8 @@ import re
 import requests
 import uuid
 
+from dateutil.relativedelta import relativedelta
+
 from odoo import api, fields, models, _
 from odoo.exceptions import AccessError, UserError
 
@@ -26,6 +28,13 @@ class Form(models.Model):
     _inherit = ['mail.thread']
 
     _order = 'id DESC'
+
+    _interval_selection = {'minutes': 'Minutes', 'hours': 'Hours', 'days': 'Days'}
+    _interval_types = {
+        'minutes': lambda interval: relativedelta(minutes=interval),
+        'hours': lambda interval: relativedelta(hours=interval),
+        'days': lambda interval: relativedelta(days=interval),
+    }
 
     builder_id = fields.Many2one(
         'formio.builder', string='Form builder', required=True,
@@ -78,9 +87,17 @@ class Form(models.Model):
         string='Submission Date', readonly=True, track_visibility='onchange',
         help='Datetime when the form was last submitted.')
     sequence = fields.Integer(help="Usefull when storing and listing forms in an ordered way")
-    portal = fields.Boolean("Portal", related='builder_id.portal', readonly=True, help="Form is accessible by assigned portal user")
+    portal = fields.Boolean("Portal (Builder)", related='builder_id.portal', readonly=True, help="Form is accessible by assigned portal user")
+    portal_share = fields.Boolean("Portal")
     portal_submit_done_url = fields.Char(related='builder_id.portal_submit_done_url')
-    public = fields.Boolean("Public", related='builder_id.public', readonly=True, help="Form is public")
+    public = fields.Boolean("Public (Builder)", related='builder_id.public', readonly=True)
+    public_share = fields.Boolean("Public", track_visibility='onchange', help="Share form in public? (with access expiration check).")
+    public_access_date_from = fields.Datetime(
+        string='Public Access From', track_visibility='onchange', help='Datetime from when the form is public shared until it expires.')
+    public_access_interval_number = fields.Integer(track_visibility='onchange')
+    public_access_interval_type = fields.Selection(list(_interval_selection.items()), track_visibility='onchange')
+    public_access = fields.Boolean("Public Access", compute='_compute_access', help="The Public Access check. Computed public access by checking whether (field) Public Access From has been expired.")
+    public_create = fields.Boolean("Public Created", readonly=True, help="Form was public created")
     show_title = fields.Boolean("Show Title")
     show_state = fields.Boolean("Show State")
     show_id = fields.Boolean("Show ID")
@@ -112,6 +129,17 @@ class Form(models.Model):
         vals['show_uuid'] = builder.show_form_uuid
         vals['show_user_metadata'] = builder.show_form_user_metadata
 
+        # access
+        vals['portal_share'] = builder.portal
+        if builder.public or self.env.user.id == self.env.ref('base.public_user').id:
+            vals['public_access'] = True
+            vals['public_access_date_from'] = fields.Datetime.now()
+
+        # public_share exiration fields (store always)
+        vals['public_access_interval_number'] = builder.public_access_interval_number
+        vals['public_access_interval_type'] = builder.public_access_interval_type
+
+        # resource model, id
         vals['res_model_id'] = builder.res_model_id.id
 
         if not vals.get('res_id'):
@@ -163,6 +191,23 @@ class Form(models.Model):
                 form.readonly_submission_data = False
             else:
                 form.readonly_submission_data = True
+
+            # public
+            form.public_access = form._public_access()
+            
+    def _public_access(self):
+        if self.public_share and self.public_access_date_from:
+            now = fields.Datetime.now()
+            expire_on = self.public_access_date_from + self._interval_types[self.public_access_interval_type](self.public_access_interval_number)
+            
+            if self.public_access_interval_number == 0:
+                return False
+            elif self.public_access_date_from > now:
+                return False
+            else:
+                return expire_on >= now
+        else:
+            return False
 
     @api.depends('state')
     def _compute_display_fields(self):
@@ -291,6 +336,14 @@ class Form(models.Model):
         self.show_uuid = self.builder_id.show_form_uuid
         self.show_user_metadata = self.builder_id.show_form_user_metadata
 
+        # public share
+        self.public_share = self.builder_id.public
+        self.public_access_interval_number = self.builder_id.public_access_interval_number
+        self.public_access_interval_type = self.builder_id.public_access_interval_type
+        
+        if self.builder_id.public:
+            self.public_access_date_from = fields.Datetime.now()
+
     @api.onchange('portal')
     def _onchange_portal(self):
         res = {}
@@ -351,31 +404,32 @@ class Form(models.Model):
         if not self.env['formio.form'].check_access_rights(mode, False):
             return False
 
-        form = self.search([('uuid', '=', uuid)], limit=1)
+        # check access rules
+        form = self.sudo().search([('uuid', '=', uuid)], limit=1)
         if form:
             try:
                 # Catch the deny access exception
                 form.check_access_rule(mode)
             except AccessError as e:
                 return False
-        elif self.env.user.has_group('base.group_portal'):
+
+        # portal user
+        if self.env.user.has_group('base.group_portal'):
             form = self.sudo().search([('uuid', '=', uuid)], limit=1)
-            if not form or form.builder_id.portal is False or form.user_id.id != self.env.user.id:
+            if not form or not form.portal_share or form.user_id.id != self.env.user.id:
                 return False
         return form
 
     @api.model
-    def get_public_form(self, uuid):
-        """ Verifies public (e.g. website) access to form and return form or False. """
+    def get_public_form(self, uuid, public_share=False):
+        """ Check access and return public form or False. """
 
-        # TODO when to assign and check the public user?
-        # (user_id = self.env.ref('base.public_user'))
         domain = [
             ('uuid', '=', uuid),
-            ('builder_id.public', '=', True),
+            ('public_share', '=', public_share)
         ]
         form = self.sudo().search(domain, limit=1)
-        if form:
+        if form and form.public_access:
             return form
         else:
             return False

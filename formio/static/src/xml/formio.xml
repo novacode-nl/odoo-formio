@@ -53,7 +53,7 @@
         <div class="o_form_sheet_bg">
             <div t-attf-class="clearfix o_form_sheet formio_form_container {{ form.state }}">
                 <div class="formio_form_iframe_container">
-                    <iframe t-attf-src="/formio/form/#{form.uuid}/root" class="formio_form_embed"/>
+                    <iframe t-attf-src="/formio/form/#{form.uuid}" class="formio_form_embed"/>
                     <script>
                         iFrameResize({heightCalculationMethod: 'grow'}, '.formio_form_embed');
                     </script>

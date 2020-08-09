@@ -120,13 +120,28 @@
 <section class="oe_container oe_dark">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">5.0</h4>
+    <ul>
+      <li>
+        Public Forms - Access configuration and check (by interval expiration settings: minutes, hours, days).
+      </li>
+      <li>
+        Public Forms - Improvements in (web)controller, templating and JavaScript:<br/>
+        - Split up JavaScript files, which implement the Form handling (backend, public, public new).<br/>
+        - This change is subjected to redundant code (DRY), but works for now and shall be addressed by using a JavaScript framework (probably Owl).
+      </li>
+      <li>
+        Change <code>formio.form</code> toplevel URLs: remove the <code>/root</code> suffix.<br/>
+        This was introduced in 1.8. Seems not to be an issue anymore.
+      </li>
+    </ul>
     <h4 class="oe_mb16">4.4</h4>
     <ul>
-      <li>CHANGE 4.3 <code>final_res</code> fields implementation, which was rather confusing:<br/>
-        Remove the <code>final_res_model</code>, <code>final_res_id</code> fields.<br/>
-        Instead: in model <code>formio.form</code> added fields <code>initial_res_model_id</code>, <code>initial_res_id</code>.<br/>
-        These fields store the initial (referenced) resource record. So swapping the <code>res_model_id</code> and <code>res_id</code> afterwards is supported, for specific implementation requirements.<br/>
-        Add migration to update <code>formio_form</code> records: <code>res_model_id</code> (determined by <code>formio_builder</code>), copy <code>res_id</code> to <code>initial_res_id</code>.
+      <li>Change 4.3 implementation (<code>final_res</code> fields), which was rather confusing:<br/>
+        - Remove the <code>final_res_model</code>, <code>final_res_id</code> fields.<br/>
+        - Instead: in model <code>formio.form</code> added fields <code>initial_res_model_id</code>, <code>initial_res_id</code>.<br/>
+        - These fields store the initial (referenced) resource record. So swapping the <code>res_model_id</code> and <code>res_id</code> afterwards is supported, for specific implementation requirements.<br/>
+        - Add migration to update <code>formio_form</code> records: <code>res_model_id</code> (determined by <code>formio_builder</code>), copy <code>res_id</code> to <code>initial_res_id</code>.
     </ul>
     <h4 class="oe_mb16">4.3</h4>
     <ul>

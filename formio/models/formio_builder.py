@@ -29,6 +29,8 @@ class Builder(models.Model):
     _rec_name = 'display_name_full'
     _order = 'name ASC, version DESC'
 
+    _interval_selection = {'minutes': 'Minutes', 'hours': 'Hours', 'days': 'Days'}
+
     name = fields.Char(
         "Name", required=True, track_visibility='onchange',
         help="""Identifies this specific form. This name can be used in APIs. \
@@ -74,6 +76,8 @@ class Builder(models.Model):
     portal = fields.Boolean("Portal", track_visibility='onchange', help="Form is accessible by assigned portal user")
     portal_submit_done_url = fields.Char()
     public = fields.Boolean("Public", track_visibility='onchange', help="Form is public accessible (e.g. used in Shop checkout, Events registration")
+    public_access_interval_number = fields.Integer(default=30, track_visibility='onchange')
+    public_access_interval_type = fields.Selection(list(_interval_selection.items()), default='minutes')
     view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
     show_form_title = fields.Boolean("Show Form Title", track_visibility='onchange', help="Show Form Title in the Form header.", default=True)
     show_form_id = fields.Boolean("Show Form ID", track_visibility='onchange', help="Show Form ID in the Form header.", default=True)
@@ -268,3 +272,17 @@ class Builder(models.Model):
             "res_id": res.id,
             "context": {}
         }
+
+    @api.model
+    def get_public_builder(self, id):
+        """ Verifies public (e.g. website) access to forms and return builder or False. """
+
+        domain = [
+            ('id', '=', id),
+            ('public', '=', True),
+        ]
+        builder = self.sudo().search(domain, limit=1)
+        if builder:
+            return builder
+        else:
+            return False

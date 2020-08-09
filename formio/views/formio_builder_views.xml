@@ -97,22 +97,32 @@ See LICENSE file for full licensing details. -->
                                     <field name="show_form_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="show_form_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
-                                <group name="integration_settings" string="Integration">
+                                <group name="integration_settings" string="Integration" colspan="2">
+                                    <group>
                                     <field name="res_model"/>
                                     <field name="formio_res_model_id" groups="formio.group_formio_admin"
                                            attrs="{'readonly': [('state', '!=', 'DRAFT')]}"
                                            edit="false" create="false" quick_create="false"
                                            options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                    </group>
                                 </group>
                                 <group name="access_settings" string="Access">
                                     <field name="portal" groups="formio.group_formio_admin"/>
-                                    <field name="public" string="Public (e.g. website)" groups="formio.group_formio_admin"/>
+                                </group>
+                                <group name="public_access_settings" string="Public Access">
+                                    <field name="public" groups="formio.group_formio_admin"/>
+                                    <label for="public_access_interval_number" string="Public Expire After"/>
+                                    <div>
+                                        <field name="public_access_interval_number" class="oe_inline" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
+                                        <field name="public_access_interval_type" class="oe_inline ml-2" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
+                                    </div>
                                 </group>
                                 <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
                             </group>
                             <div class="mb-3 text-muted">
                                 <i class="fa fa-info-circle" title="info"/><strong> View as HTML</strong> setting (still) doesn't work since version 4.x<br/>
-                                For more info see Formio.js GitHub issue: <a href="https://github.com/formio/formio.js/issues/1545" target="_blank">select component rendering error in viewAsHtml model #1545</a>
+                                For more info see Formio.js GitHub issue: <a href="https://github.com/formio/formio.js/issues/1545" target="_blank">select component rendering error in viewAsHtml model #1545</a><br/>
+                                <i class="fa fa-info-circle" title="info"/><strong> Public Expire After</strong> is applicable on the <strong>Form</strong> it's (datimetime field) <strong>Public Access From</strong>.
                             </div>
                         </page>
                         <page string="Resource Settings" name="res_model_settings" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
