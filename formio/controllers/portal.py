@@ -77,7 +77,7 @@ class FormioCustomerPortal(CustomerPortal):
     def portal_forms(self, sortby=None, search=None, search_in='content',  **kwargs):
         domain = [
             ('user_id', '=', request.env.user.id),
-            ('builder_id.portal', '=', True)
+            ('portal_share', '=', True)
         ]
         res_model = kwargs.get('res_model')
         res_id = kwargs.get('res_id')

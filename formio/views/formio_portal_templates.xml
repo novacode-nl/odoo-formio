@@ -119,7 +119,7 @@ See LICENSE file for full licensing details. -->
         <t t-call="portal.portal_layout">
             <div t-attf-class="formio_form_container mt16 {{ form.state }}">
                 <div class="formio_form_iframe_container">
-                    <iframe t-attf-src="/formio/form/#{form.uuid}/root" class="formio_form_embed"/>
+                    <iframe t-attf-src="/formio/form/#{form.uuid}" class="formio_form_embed"/>
                     <input type="hidden" id="portal_submit_done_url" name="portal_submit_done_url" t-att-value="form.portal_submit_done_url"/>
                 </div>
             </div>

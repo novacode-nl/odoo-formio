@@ -4,19 +4,13 @@
 $(document).ready(function() {
     // TODO Get rid of callbacks and refactor in a classy way.
     // Do init the Form object with schema_url and options_url.
-    var uuid = document.getElementById('form_uuid').value,
-        public = document.getElementById('form_public').value,
+    var uuid = uuid = document.getElementById('form_uuid'),
         base_url = window.location.protocol + '//' + window.location.host,
-        form_url_uuid = '/formio/form/' + uuid;
-
-    if (public) {
-        form_url_uuid = '/formio/public/form/' + uuid;
-    }
-
-    var schema_url = form_url_uuid + '/schema/',
-        options_url = form_url_uuid + '/options/',
-        submission_url = form_url_uuid + '/submission/',
-        submit_url = form_url_uuid + '/submit/',
+        form_url = '/formio/public/form/' + uuid.value,
+        schema_url = form_url + '/schema/',
+        options_url = form_url + '/options/',
+        submission_url = form_url + '/submission/',
+        submit_url = form_url + '/submit/',
         schema = {},
         options = {};
 
@@ -53,23 +47,32 @@ $(document).ready(function() {
                         $.jsonRpc.request(submit_url, 'call', {
                             'uuid': uuid,
                             'data': submission.data
-                        }).then(function() {
-                            form.emit('submitDone', submission);
+                        }).then(function(res) {
+                            form.emit('submitDone', submission, res);
                         });
                     });
-                    form.on('submitDone', function(submission) {
-                        if (submission.state == 'submitted' && !options.hasOwnProperty('embedded') && !options['embedded']) {
-                            window.parent.postMessage('formioSubmitDone', base_url);
+                    form.on('submitDone', function(submission, res) {
+                        if (res !== undefined && res.hasOwnProperty('form_uuid')) {
+                                setTimeout(function() {
+                                    window.location.reload();
+                                }, 500);
                         }
-                        window.location.reload();
+                        else {
+                            if (submission.state == 'submitted' && !options.hasOwnProperty('embedded') && !options['embedded']) {
+                                window.parent.postMessage('formioSubmitDone', base_url);
+                            }
+                            window.location.reload();
+                        }
                     });
                     // Set the Submission (data)
                     // https://github.com/formio/formio.js/wiki/Form-Renderer#setting-the-submission
-                    $.jsonRpc.request(submission_url, 'call', {}).then(function(result) {
-                        if (!$.isEmptyObject(result)) {
-                            form.submission = {'data': JSON.parse(result)};
-                        }
-                    });
+                    if (!options.hasOwnProperty('public_form_new') || !options['public_form_new']) {
+                        $.jsonRpc.request(submission_url, 'call', {}).then(function(result) {
+                            if (!$.isEmptyObject(result)) {
+                                form.submission = {'data': JSON.parse(result)};
+                            }
+                        });
+                    }
                 });
             });
         }
