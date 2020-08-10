@@ -98,13 +98,13 @@ See LICENSE file for full licensing details. -->
                                     <field name="show_form_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="show_form_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
-                                <group name="integration_settings" string="Integration" attrs="{'invisible': [('public', '=', True)]}" colspan="2">
+                                <group name="integration_settings" string="Integration" colspan="2">
                                     <group>
-                                    <field name="formio_res_model_id" groups="formio.group_formio_admin"
-                                           attrs="{'readonly': [('state', '!=', 'DRAFT')]}"
-                                           edit="false" create="false" quick_create="false"
-                                           options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
-                                    <field name="res_model" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
+                                        <field name="formio_res_model_id" groups="formio.group_formio_admin"
+                                               attrs="{'readonly': [('state', '!=', 'DRAFT')]}"
+                                               edit="false" create="false" quick_create="false"
+                                               options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                        <field name="res_model" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
                                     </group>
                                 </group>
                                 <group name="access_settings" string="Access">
@@ -121,12 +121,13 @@ See LICENSE file for full licensing details. -->
                                 <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
                             </group>
                             <div class="mb-3 text-muted">
-                                <i class="fa fa-info-circle" title="info"/><strong> View as HTML</strong> setting (still) doesn't work since version 4.x<br/>
+                                <i class="fa fa-info-circle" title="info"/><strong> View as HTML</strong> - This setting (still) doesn't work since version 4.x<br/>
                                 For more info see Formio.js GitHub issue: <a href="https://github.com/formio/formio.js/issues/1545" target="_blank">select component rendering error in viewAsHtml model #1545</a><br/>
-                                <i class="fa fa-info-circle" title="info"/><strong> Public Expire After</strong> is applicable on the <strong>Form</strong> it's (datimetime field) <strong>Public Access From</strong>.
+                                <i class="fa fa-info-circle" title="info"/><strong> Integration / Resource settings</strong> - Enables integration of Form and ERP/Odoo objects.<br/>
+                                <i class="fa fa-info-circle" title="info"/><strong> Public Expire After</strong> - Applicable on the <strong>Form</strong> it's (datimetime field) <strong>Public Access From</strong>.
                             </div>
                         </page>
-                        <page string="Resource Settings" name="res_model_settings" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
+                        <page string="Resource Settings" name="res_model_settings" attrs="{'invisible': ['|', ('formio_res_model_id', '=', False)]}"/>
                         <page string="Portal Settings" name="portal_settings" attrs="{'invisible': [('portal', '=', False)]}">
                             <group>
                                 <group name="portal_submit_done" string="Redirect after Submission">
