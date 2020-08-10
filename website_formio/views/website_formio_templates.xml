@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="website_formio_editor" inherit_id="website.assets_editor">
+        <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript" src="/website_formio/static/src/js/website_formio_editor.js"/>
+        </xpath>
+    </template>
+</odoo>
