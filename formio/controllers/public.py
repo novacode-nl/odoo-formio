@@ -131,7 +131,7 @@ class FormioPublicController(http.Controller):
         formio_builder = self._get_public_builder(builder_id)
 
         if not formio_builder or not formio_builder.public or formio_builder.state != BUILDER_STATE_CURRENT:
-            msg = 'Form Builder ID %s' % formio_builder.id
+            msg = 'Form Builder ID %s' % builder_id
             return request.not_found(msg)
 
         ## TODO languages ##
