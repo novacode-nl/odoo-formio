@@ -4,7 +4,7 @@
 {
     'name': 'Form.io Website',
     'summary': 'Redirect to website-page or URL - after form submission.',
-    'version': '1.0',
+    'version': '1.1',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
@@ -13,8 +13,10 @@
     'data': [
         'data/website_data.xml',
         'views/formio_builder_views.xml',
+        'views/website_formio_templates.xml',
+        'views/website_formio_snippets.xml',
     ],
-    'application': False,
+    'application': True,
     'images': [
         'static/description/banner.png',
     ],
