@@ -12,6 +12,7 @@
     'depends': ['formio', 'website'],
     'data': [
         'data/website_data.xml',
+        'data/website_formio_demo_data.xml',
         'views/formio_builder_views.xml',
         'views/website_formio_templates.xml',
         'views/website_formio_snippets.xml',
