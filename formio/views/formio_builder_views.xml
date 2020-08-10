@@ -97,13 +97,13 @@ See LICENSE file for full licensing details. -->
                                     <field name="show_form_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="show_form_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
-                                <group name="integration_settings" string="Integration" colspan="2">
+                                <group name="integration_settings" string="Integration" attrs="{'invisible': [('public', '=', True)]}" colspan="2">
                                     <group>
-                                    <field name="res_model"/>
                                     <field name="formio_res_model_id" groups="formio.group_formio_admin"
                                            attrs="{'readonly': [('state', '!=', 'DRAFT')]}"
                                            edit="false" create="false" quick_create="false"
                                            options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                    <field name="res_model" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
                                     </group>
                                 </group>
                                 <group name="access_settings" string="Access">
