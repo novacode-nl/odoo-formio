@@ -5,9 +5,10 @@
     'name': 'Form.io',
     'summary': 'Build, deploy and store web forms with the "Form.io" Form Builder',
     'version': '5.0',
+    'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
-    'license': 'LGPL-3',
+    'live_test_url': 'https://demo13.novacode.nl',
     'category': 'Extra Tools',
     'depends': ['web', 'portal', 'mail'],
     'qweb': [
@@ -16,7 +17,6 @@
     'data': [
         'data/formio_version_data.xml',
         'data/formio_version_asset_data.xml',
-        'data/formio_demo_data.xml',
         'data/mail_template_data.xml',
         # translations
         'data/formio_translations_sources.xml',
@@ -40,6 +40,9 @@
         'views/formio_portal_templates.xml',
         'views/formio_public_templates.xml',
 
+    ],
+    'demo': [
+        'data/formio_demo_data.xml',
     ],
     'installable': True,
     'application': True,
