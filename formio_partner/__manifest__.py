@@ -5,9 +5,10 @@
     'name': 'Form.io Partner',
     'summary': 'Form.io webforms on Partners',
     'version': '0.2',
+    'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
-    'license': 'LGPL-3',
+    'live_test_url': 'https://demo13.novacode.nl',
     'category': 'Contacts',
     'depends': ['contacts', 'formio'],
     'data': [
