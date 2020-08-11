@@ -5,9 +5,10 @@
     'name': 'Form.io Website',
     'summary': 'Form Snippet, Other website integration',
     'version': '1.1',
+    'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
-    'license': 'LGPL-3',
+    'live_test_url': 'https://demo13.novacode.nl',
     'category': 'Extra Tools',
     'depends': ['formio', 'website'],
     'data': [
