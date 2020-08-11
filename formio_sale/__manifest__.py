@@ -5,9 +5,10 @@
     'name': 'Form.io Sales',
     'summary': 'Form.io webforms on Sale Orders/Quotes',
     'version': '0.4',
+    'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
-    'license': 'LGPL-3',
+    'live_test_url': 'https://demo13.novacode.nl',
     'category': 'Sales',
     'depends': ['sale_management', 'formio', 'formio_data_api'],
     'data': [
