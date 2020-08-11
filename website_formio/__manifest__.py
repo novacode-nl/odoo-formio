@@ -5,9 +5,10 @@
     'name': 'Form.io Website',
     'summary': 'Website integration (redirect to website page or URL after form submission)',
     'version': '1.0',
+    'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
-    'license': 'LGPL-3',
+    'live_test_url': 'https://demo13.novacode.nl',
     'category': 'Extra Tools',
     'depends': ['formio', 'website'],
     'data': [
