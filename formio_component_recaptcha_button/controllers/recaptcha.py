@@ -17,7 +17,7 @@ class FormioRecaptchaController(http.Controller):
     def verification(self, **post):
         url = 'https://www.google.com/recaptcha/api/siteverify';
 
-        secret = request.env['ir.config_parameter'].sudo().get_param('formio.recaptcha.secret')
+        secret = request.env['ir.config_parameter'].sudo().get_param('formio.recaptcha_button.secret')
         data = {
             'secret': secret,
             'response': post['token']
