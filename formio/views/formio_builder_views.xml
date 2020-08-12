@@ -127,6 +127,9 @@ See LICENSE file for full licensing details. -->
                                 <i class="fa fa-info-circle" title="info"/><strong> Public Expire After</strong> - Applicable on the <strong>Form</strong> it's (datimetime field) <strong>Public Access From</strong>.
                             </div>
                         </page>
+                        <page string="Form.io Components" name="formio_components_page">
+                            <group name="formio_components"/>
+                        </page>
                         <page string="Resource Settings" name="res_model_settings" attrs="{'invisible': ['|', ('formio_res_model_id', '=', False)]}"/>
                         <page string="Portal Settings" name="portal_settings" attrs="{'invisible': [('portal', '=', False)]}">
                             <group>
