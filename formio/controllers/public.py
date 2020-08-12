@@ -211,6 +211,7 @@ class FormioPublicController(http.Controller):
         Form = request.env['formio.form']
         vals = {
             'builder_id': builder_id,
+            'title': formio_builder.title,
             'public_create': True,
             'submission_data': json.dumps(post['data']),
             'submission_user_id': request.env.ref('base.public_user').id,
