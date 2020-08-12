@@ -23,6 +23,7 @@ See LICENSE file for full licensing details. -->
                     </div>
                 </div>
                 <group name="recaptcha_button" colspan="2">
+                    <field name="component_recaptcha_button_active" string="Active" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                     <field name="component_recaptcha_button_site_key" string="Site Key"/>
                     <field name="component_recaptcha_button_secret_key" string="Secret Key"/>
                 </group>

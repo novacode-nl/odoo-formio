@@ -9,6 +9,7 @@ class Builder(models.Model):
 
     component_recaptcha_button_site_key = fields.Char(string='(odoo) reCAPTCHA Site Key', compute='_compute_recaptcha_button')
     component_recaptcha_button_secret_key = fields.Char(string='(odoo) reCAPTCHA Secret Key', compute='_compute_recaptcha_button')
+    component_recaptcha_button_active = fields.Boolean(string='(odoo) reCAPTCHA Active')
 
     def _compute_recaptcha_button(self):
         Config = self.env['ir.config_parameter'].sudo()
