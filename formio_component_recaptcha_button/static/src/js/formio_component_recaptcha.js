@@ -37,7 +37,7 @@ $(document).ready(function() {
                 grecaptcha.ready(function() {
                     grecaptcha.execute(siteKey, {action: actionName}).then(function(token) {
                         // sendVerificationRequest
-                        const verify_url = '/formio/public/recaptcha';
+                        const verify_url = '/formio/component/recaptcha';
                         $.jsonRpc.request(verify_url, 'call', {'token': token}).then(function(verificationResult) {
                             return resolve(verificationResult);
                         });

@@ -13,7 +13,7 @@ _logger = logging.getLogger(__name__)
 
 class FormioRecaptchaController(http.Controller):
 
-    @http.route('/formio/public/recaptcha', type='json', auth="none", methods=['POST'], website=True)
+    @http.route('/formio/component/recaptcha', type='json', auth="none", methods=['POST'], website=True)
     def verification(self, **post):
         url = 'https://www.google.com/recaptcha/api/siteverify';
 
