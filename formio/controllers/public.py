@@ -126,13 +126,19 @@ class FormioPublicController(http.Controller):
     # Form - public create
     ######################
 
-    @http.route('/formio/public/form/create/<int:builder_id>', type='http', auth='public', methods=['GET'], website=True)
-    def public_form_create_root(self, builder_id, **kwargs):
-        formio_builder = self._get_public_builder(builder_id)
+    @http.route('/formio/public/form/create/<string:builder_uuid>', type='http', auth='public', methods=['GET'], website=True)
+    def public_form_create_root(self, builder_uuid, **kwargs):
+        formio_builder = self._get_public_builder(builder_uuid)
 
-        if not formio_builder or not formio_builder.public or formio_builder.state != BUILDER_STATE_CURRENT:
-            msg = 'Form Builder ID %s' % builder_id
+        if not formio_builder:
+            msg = 'Form Builder UUID %s: not found' % builder_uuid
             return request.not_found(msg)
+        elif not formio_builder.public:
+            msg = 'Form Builder UUID %s: not public' % builder_uuid
+            return request.not_found(msg)
+        # elif not formio_builder.state != BUILDER_STATE_CURRENT:
+        #     msg = 'Form Builder UUID %s not current/published' % builder_uuid
+        #     return request.not_found(msg)
 
         ## TODO languages ##
         ## Determine lang.iso from request.__dict__
@@ -150,9 +156,9 @@ class FormioPublicController(http.Controller):
         #       formio_builder_translation AS fbt
         #       INNER JOIN res_lang AS l ON l.id = fbt.lang_id
         #     WHERE
-        #       fbt.builder_id = {builder_id}
+        #       fbt.builder_uuid = {builder_uuid}
         #       AND l.active = True
-        # """.format(builder_id=form.builder_id.id)
+        # """.format(builder_uuid=form.builder_uuid.id)
 
         # request.env.cr.execute(query)
         # builder_lang_ids = [r[0] for r in request.env.cr.fetchall()]
@@ -166,7 +172,7 @@ class FormioPublicController(http.Controller):
             'languages': [], # initialize, otherwise template/view crashes.
             'builder': formio_builder,
             'public_form_create': True,
-            'formio_builder_id': formio_builder.id,
+            'formio_builder_uuid': formio_builder.uuid,
             'formio_css_assets': formio_builder.formio_css_assets,
             'formio_js_assets': formio_builder.formio_js_assets,
         }
@@ -176,9 +182,9 @@ class FormioPublicController(http.Controller):
         return request.render('formio.formio_form_public_create_embed', values)
 
 
-    @http.route('/formio/public/form/create/<int:builder_id>/schema', type='json', auth='none', website=True)
-    def public_form_create_schema(self, builder_id, **kwargs):
-        formio_builder = self._get_public_builder(builder_id)
+    @http.route('/formio/public/form/create/<string:builder_uuid>/schema', type='json', auth='none', website=True)
+    def public_form_create_schema(self, builder_uuid, **kwargs):
+        formio_builder = self._get_public_builder(builder_uuid)
         if not formio_builder or not formio_builder.public or formio_builder.state != BUILDER_STATE_CURRENT:
             return {}
 
@@ -187,9 +193,9 @@ class FormioPublicController(http.Controller):
         else:
             return {}
 
-    @http.route('/formio/public/form/create/<int:builder_id>/options', type='json', auth='none', website=True)
-    def public_form_create_options(self, builder_id, **kwargs):
-        formio_builder = self._get_public_builder(builder_id)
+    @http.route('/formio/public/form/create/<string:builder_uuid>/options', type='json', auth='none', website=True)
+    def public_form_create_options(self, builder_uuid, **kwargs):
+        formio_builder = self._get_public_builder(builder_uuid)
         if not formio_builder.public and formio_builder.state == BUILDER_STATE_CURRENT:
             return {}
 
@@ -201,16 +207,16 @@ class FormioPublicController(http.Controller):
         options = {'public_create': True, 'embedded': True}
         return json.dumps(options)
 
-    @http.route('/formio/public/form/create/<int:builder_id>/submit', type='json', auth="none", methods=['POST'], website=True)
-    def public_form_create_submit(self, builder_id, **post):
-        formio_builder = self._get_public_builder(builder_id)
+    @http.route('/formio/public/form/create/<string:builder_uuid>/submit', type='json', auth="none", methods=['POST'], website=True)
+    def public_form_create_submit(self, builder_uuid, **post):
+        formio_builder = self._get_public_builder(builder_uuid)
         if not formio_builder:
             # TODO raise or set exception (in JSON resonse) ?
             return
 
         Form = request.env['formio.form']
         vals = {
-            'builder_id': builder_id,
+            'builder_id': formio_builder.id,
             'title': formio_builder.title,
             'public_create': True,
             'submission_data': json.dumps(post['data']),
@@ -244,11 +250,11 @@ class FormioPublicController(http.Controller):
             options['i18n'] = form.i18n_translations()
         return options
 
-    def _get_public_form(self, uuid, public_share=False):
-        return request.env['formio.form'].get_public_form(uuid, public_share)
+    def _get_public_form(self, form_uuid, public_share=False):
+        return request.env['formio.form'].get_public_form(form_uuid, public_share)
 
-    def _get_public_builder(self, id):
-        return request.env['formio.builder'].get_public_builder(id)
+    def _get_public_builder(self, builder_uuid):
+        return request.env['formio.builder'].get_public_builder(builder_uuid)
 
     def _check_public_form(self):
         return request._uid == request.env.ref('base.public_user').id or request._uid

@@ -5,6 +5,7 @@ import ast
 import json
 import re
 import requests
+import uuid
 
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
@@ -27,7 +28,6 @@ class Builder(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     _rec_name = 'display_name_full'
-    _order = 'name ASC, version DESC'
 
     _interval_selection = {'minutes': 'Minutes', 'hours': 'Hours', 'days': 'Days'}
 
@@ -35,6 +35,9 @@ class Builder(models.Model):
         "Name", required=True, track_visibility='onchange',
         help="""Identifies this specific form. This name can be used in APIs. \
         Use only ASCII letters, digits, "-" or "_".""")
+    uuid = fields.Char(
+        default=lambda self: self._default_uuid(), required=True, readonly=True, copy=False,
+        string='UUID')
     title = fields.Char(
         "Title", required=True,
         help="The form title in the current language", track_visibility='onchange')
@@ -93,6 +96,10 @@ class Builder(models.Model):
 
     def _states_selection(self):
         return STATES
+
+    @api.model
+    def _default_uuid(self):
+        return str(uuid.uuid4())
 
     @api.constrains('name')
     def constaint_check_name(self):
@@ -264,11 +271,11 @@ class Builder(models.Model):
         }
 
     @api.model
-    def get_public_builder(self, id):
+    def get_public_builder(self, uuid):
         """ Verifies public (e.g. website) access to forms and return builder or False. """
 
         domain = [
-            ('id', '=', id),
+            ('uuid', '=', uuid),
             ('public', '=', True),
         ]
         builder = self.sudo().search(domain, limit=1)

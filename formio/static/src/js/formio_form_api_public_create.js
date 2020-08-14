@@ -4,7 +4,7 @@
 $(document).ready(function() {
     // TODO Get rid of callbacks and refactor in a classy way.
     // Do init the Form object with schema_url and options_url.
-    var form_url = '/formio/public/form/create/' + document.getElementById('formio_builder_id').value,
+    var form_url = '/formio/public/form/create/' + document.getElementById('formio_builder_uuid').value,
         base_url = window.location.protocol + '//' + window.location.host,
         schema_url = form_url + '/schema/',
         options_url = form_url + '/options/',

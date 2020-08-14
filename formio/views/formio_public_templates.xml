@@ -103,8 +103,8 @@ See LICENSE file for full licensing details. -->
                     <div id="formio_form"></div>
                 </div>
 
-                <t t-if="formio_builder_id">
-                    <input type="hidden" id="formio_builder_id" name="formio_builder_id" t-att-value="formio_builder_id"/>
+                <t t-if="formio_builder_uuid">
+                    <input type="hidden" id="formio_builder_uuid" name="formio_builder_uuid" t-att-value="formio_builder_uuid"/>
                 </t>
                 <!-- This is a just hint. Security by any means is checked in the (backend) request handler -->
                 <input type="hidden" id="public_form_create" name="public_form_create" t-att-value="public_form_create"/>

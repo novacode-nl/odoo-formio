@@ -14,28 +14,28 @@ odoo.define('website_formio_editor', function (require) {
 
         select_formio_builder: function (previewMode, value) {
             var self = this;
-            var def = wUtils.prompt({
-                'id': this.popup_template_id,
-                'window_title': this.popup_title,
-                'select': _t("Form"),
-                'init': function (field, dialog) {
-                    return rpc.query({
-                        model: 'formio.builder',
-                        method: 'name_search',
-                        args: ['', [['public', '=', true]]],
-                        context: self.options.recordInfo.context,
-                    }).then(function (data) {
-                        $(dialog).find('.btn-primary').prop('disabled', !data.length);
-                        return data;
-                    });
-                },
+            return rpc.query({
+                model: 'formio.builder',
+                method: 'search_read',
+                args: [[['public', '=', true]],['uuid', 'display_name_full']],
+                context: self.options.recordInfo.context,
+            }).then(function (formio_builders) {
+                var def = wUtils.prompt({
+                    'id': self.popup_template_id,
+                    'window_title': self.popup_title,
+                    'select': _t("Form"),
+                    'init': function (field) {
+                        return _.map(formio_builders, function (formio_builder) {
+                            return [formio_builder['uuid'], formio_builder['display_name_full']];
+                        });
+                    },
+                });
+                def.then(function (result) {
+                    var form_iframe = self.$target.find('.formio_form_iframe_container iframe'),
+                        iframe_src = '/formio/public/form/create/' + result.val;
+                    form_iframe.attr("src", iframe_src);
+                });
             });
-            def.then(function (result) {
-                var form_iframe = self.$target.find('.formio_form_iframe_container iframe'),
-                    iframe_src = '/formio/public/form/create/' + result.val;
-                form_iframe.attr("src", iframe_src);
-            });
-            return def;
         },
 
         onBuilt: function () {

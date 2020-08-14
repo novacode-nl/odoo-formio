@@ -7,7 +7,9 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.builder.tree</field>
         <field name="model">formio.builder</field>
         <field name="arch" type="xml">
-            <tree string="Form Builders">
+            <tree string="Form Builders" default_order="state, title">
+                <field name="id" optional="hide"/>
+                <field name="uuid" optional="hide"/>
                 <field name="title"/>
                 <field name="name"/>
                 <field name="version"/>
@@ -80,6 +82,7 @@ See LICENSE file for full licensing details. -->
                             <field name="parent_id" string="Parent Version"/>
                         </group>
                         <group>
+                            <field name="uuid" attrs="{'invisible': [('id', '=', False)]}"/>
                             <field name="user_id"/>
                         </group>
                     </group>
