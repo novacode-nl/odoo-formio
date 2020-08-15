@@ -4,13 +4,13 @@
 {
     'name': 'Form.io Website (Snippet etc)',
     'summary': 'Form Snippet, Other website integration',
-    'version': '1.2',
+    'version': '1.3',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'live_test_url': 'https://demo13.novacode.nl',
     'category': 'Extra Tools',
-    'depends': ['formio', 'website'],
+    'depends': ['formio', 'website', 'website_editor_unsanitize_html_field'],
     'data': [
         'data/website_data.xml',
         'data/website_formio_demo_data.xml',

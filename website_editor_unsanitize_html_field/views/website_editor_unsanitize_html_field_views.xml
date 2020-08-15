@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <record id="view_website_editor_unsanitize_html_field_tree" model="ir.ui.view">
+        <field name="name">website.editor.unsanitize.html.field.tree</field>
+        <field name="model">website.editor.unsanitize.html.field</field>
+        <field name="arch" type="xml">
+            <tree string="Website Editor Unsanitize HTML Field">
+                <field name="model"/>
+                <field name="field"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_website_editor_unsanitize_html_field_form" model="ir.ui.view">
+        <field name="name">website.editor.unsanitize.html.field.form</field>
+        <field name="model">website.editor.unsanitize.html.field</field>
+        <field name="arch" type="xml">
+	    <form string="Website Editor Unsanitize HTML Field">
+                <sheet>
+                    <group>                    
+                        <group name="settings" string="Settings">
+                            <field name="model"/>
+                            <field name="field"/>
+                            <field name="active"/>
+                        </group>
+                        <group name="preselect" string="Lookup Wizard">
+                            <field name="ir_model_id"/>
+                            <field name="ir_model_field_id" attrs="{'invisible': [('ir_model_id', '=', False)]}"/>
+                        </group>
+                        <group name="extra">
+                            <field name="model_field"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_website_editor_unsanitize_html_field" model="ir.actions.act_window">
+        <field name="name">Website Editor Unsanitize HTML Field</field>
+        <field name="res_model">website.editor.unsanitize.html.field</field>
+        <field name="context">{'active_test': False}</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_website_editor_unsanitize_html_field_tree"/>
+    </record>
+
+    <menuitem name="Website Editor Unsanitize HTML Field"
+              id="menu_website_editor_unsanitize_html_field"
+              action="action_website_editor_unsanitize_html_field"
+              parent="website.menu_website_global_configuration"
+              sequence="30"
+              groups="base.group_no_one"/>
+</odoo>

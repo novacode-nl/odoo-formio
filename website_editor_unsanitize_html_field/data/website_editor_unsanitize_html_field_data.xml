@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <data>
+        <record id="event_event_description" model="website.editor.unsanitize.html.field">
+            <field name="model">event.event</field>
+            <field name="field">description</field>
+        </record>
+        <record id="product_template_website_description" model="website.editor.unsanitize.html.field">
+            <field name="model">product.template</field>
+            <field name="field">website_description</field>
+        </record>
+    </data>
+</odoo>

@@ -25,6 +25,12 @@ odoo.define('website_formio_editor', function (require) {
                     'window_title': self.popup_title,
                     'select': _t("Form"),
                     'init': function (field) {
+                        var $add = $('<div/>', {'class': 'form-group row mt-4 mb0'})
+                            .append($('<div/>', {'class': 'col-md-12 text-left'})
+                                    .append($('<em>' +
+                                              _t("IMPORTANT: in case the Form won't appear, add the affected (website page) Model and Field into configuration of the \"Website Editor Unsanitize HTML Field\" (in menu: Website / Configuration).") +
+                                              '</em></strong>')));
+                        this.$dialog.find('form div.form-group').after($add);
                         return _.map(formio_builders, function (formio_builder) {
                             return [formio_builder['uuid'], formio_builder['display_name_full']];
                         });
