@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io Website',
+    'name': 'Form.io Website (Snippet etc)',
     'summary': 'Form Snippet, Other website integration',
     'version': '1.2',
     'license': 'LGPL-3',
