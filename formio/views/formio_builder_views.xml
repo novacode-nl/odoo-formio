@@ -141,8 +141,8 @@ See LICENSE file for full licensing details. -->
                         <page string="Components API" name="formio_components_api">
                             <group string="Partner" name="partner" colspan="2">
                                 <div class="mb-2" colspan="2">
-                                    <i class="fa fa-info-circle" title="info"/> To create a Partner from a Form submission, specify the fields (Email, Name) from the Components API / Property Names.<br/>
-                                    Especially useful for public Forms.
+                                    <i class="fa fa-info-circle" title="info"/> To create or link (existing) Partner with a Form submission, specify the fields (Email, Name) from the Components API / Property Names.<br/>
+                                    Partner determination/match shall be done by Email. This API is especially useful for public Forms.
                                 </div>
                                 <group>
                                     <field name="component_partner_email" string="Email" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
