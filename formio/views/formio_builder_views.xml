@@ -130,17 +130,25 @@ See LICENSE file for full licensing details. -->
                                 <i class="fa fa-info-circle" title="info"/><strong> Public Expire After</strong> - Applicable on the <strong>Form</strong> it's (datimetime field) <strong>Public Access From</strong>.
                             </div>
                         </page>
-                        <page string="Form.io Components" name="formio_components_page">
-                            <div>
-                                <i class="fa fa-info-circle" title="info"/> Settings for Form.io Custom Components
-                            </div>
-                            <group name="formio_components"/>
-                        </page>
                         <page string="Resource Settings" name="res_model_settings" attrs="{'invisible': ['|', ('formio_res_model_id', '=', False)]}"/>
                         <page string="Portal Settings" name="portal_settings" attrs="{'invisible': [('portal', '=', False)]}">
                             <group>
                                 <group name="portal_submit_done" string="Redirect after Submission">
                                     <field name="portal_submit_done_url" string="URL" groups="formio.group_formio_admin" readonly="0"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Components API" name="formio_components_api">
+                            <group string="Partner" name="partner" colspan="2">
+                                <div class="mb-2" colspan="2">
+                                    <i class="fa fa-info-circle" title="info"/> Specify the components (API-properties) to create a partner from the Form submission.
+                                </div>
+                                <group>
+                                    <field name="component_partner_email" string="Email" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="component_partner_name" string="Name" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                </group>
+                                <group>
+                                    <field name="component_partner_add_follower" string="Add to Followers" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
                             </group>
                         </page>
@@ -154,9 +162,6 @@ See LICENSE file for full licensing details. -->
                                 </tree>
                             </field>
                         </page>
-                        <page string="Schema" name="schema" groups="formio.group_formio_admin">
-                            <field name="schema" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                        </page>
                         <page string="Forms Permissions" name="forms_permissions" groups="formio.group_formio_admin">
                             <div class="mb-3 text-muted">
                                 <i class="fa fa-info-circle" title="info"/> Specific permissions on Forms
@@ -164,6 +169,9 @@ See LICENSE file for full licensing details. -->
                             <group>
                                 <field name="allow_force_update_state_group_ids" />
                             </group>
+                        </page>
+                        <page string="Schema" name="schema" groups="formio.group_formio_admin">
+                            <field name="schema" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                         </page>
                         <page string="Forms" name="forms" groups="formio.group_formio_admin">
                             <field name="forms"/>
