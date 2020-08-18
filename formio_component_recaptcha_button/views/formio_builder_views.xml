@@ -8,25 +8,20 @@ See LICENSE file for full licensing details. -->
         <field name="model">formio.builder</field>
         <field name="inherit_id" ref="formio.view_formio_builder_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='formio_components']" position="inside">
-                <div attrs="{'invisible': [('id', '=', False)]}">
-                    <separator string="reCAPTCHA Button"/>
-                    <div>
-                        <i class="fa fa-info-circle" title="info"/> Put the <strong>Site Key</strong> in the <strong>API property</strong> (tab) in the Form.io Builder <strong>(odoo) reCAPTCHA Component</strong>
-                    </div>
-                    <div>
-                        <i class="fa fa-info-circle" title="info"/> Configure in (menu) <strong>Technical / System Paramaters</strong>:
-                        <ul>
-                            <li>formio_recaptcha_button.site_key</li>
-                            <li>formio_recaptcha_button.secret_key</li>
-                        </ul>
-                    </div>
-                </div>
-                <group name="recaptcha_button" colspan="2">
-                    <field name="component_recaptcha_button_active" string="Active" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                    <field name="component_recaptcha_button_site_key" string="Site Key"/>
-                    <field name="component_recaptcha_button_secret_key" string="Secret Key"/>
-                </group>
+            <xpath expr="//page[@name='formio_components_api']/group[@name='partner']" position="inside">
+                    <group string="reCAPTCHA Button" colspan="2">
+                        <div colspan="2">
+                            <i class="fa fa-info-circle" title="info"/> Put the Site Key in the API (tab) property, in the Form.io Builder Component: (odoo) reCAPTCHA
+                        </div>
+                        <div colspan="2">
+                            <i class="fa fa-info-circle" title="info"/> Configure in (menu) Technical / System Paramaters: <code>formio_recaptcha_button.site_key</code>, <code>formio_recaptcha_button.secret_key</code>
+                        </div>
+                        <group name="recaptcha_button" colspan="2">
+                            <field name="component_recaptcha_button_active" string="Active" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                            <field name="component_recaptcha_button_site_key" string="Site Key"/>
+                            <field name="component_recaptcha_button_secret_key" string="Secret Key"/>
+                        </group>
+                    </group>
             </xpath>
         </field>
     </record>
