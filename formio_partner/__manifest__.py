@@ -4,7 +4,7 @@
 {
     'name': 'Form.io Partner',
     'summary': 'Form.io webforms on Partners',
-    'version': '0.2',
+    'version': '1.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
