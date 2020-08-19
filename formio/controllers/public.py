@@ -229,7 +229,14 @@ class FormioPublicController(http.Controller):
         else:
             vals['state'] = FORM_STATE_COMPLETE
 
-        res = Form.with_context(tracking_disable=True).sudo().create(vals)
+        context = {'tracking_disable': True}
+
+        if not request.env.user:
+            public_user = request.env.ref('base.public_user').sudo()
+            context['force_company'] = public_user.sudo().company_id.id
+
+        form_model = Form.with_context(**context)
+        res = form_model.sudo().create(vals)
         return {'form_uuid': res.uuid}
 
     def _prepare_form_options(self, form):
