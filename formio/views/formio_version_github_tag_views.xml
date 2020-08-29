@@ -37,9 +37,9 @@ See LICENSE file for full licensing details. -->
                 <sheet>
                     <group>
                         <field name="name"/>
-                        <field name="formio_version_id"/>
-                        <field name="changelog_url" widget="url"/>
-                        <field name="archive_url" widget="url"/>
+                        <field name="formio_version_id" readonly="1"/>
+                        <field name="changelog_url" widget="url" attrs="{'invisible': [('changelog_url', '=', False)]}"/>
+                        <field name="archive_url" widget="url" attrs="{'invisible': [('archive_url', '=', False)]}"/>
                     </group>
                 </sheet>
             </form>

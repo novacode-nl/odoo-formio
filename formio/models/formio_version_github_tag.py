@@ -40,12 +40,17 @@ class VersionGitHubTag(models.Model):
         - Registered: Not downloaded and installed yet.
         - Installed: Downloaded and installed.""")
 
+    @api.depends('name')
     def _compute_fields(self):
         for r in self:
-            r.archive_url = 'https://github.com/formio/formio.js/archive/%s.tar.gz' % r.name
-            r.changelog_url = 'https://github.com/formio/formio.js/blob/%s/Changelog.md' % r.name
-            r.version_name = r.name[1:]
-            r.installed = r.formio_version_id is not False
+            if r.name:
+                r.archive_url = 'https://github.com/formio/formio.js/archive/%s.tar.gz' % r.name
+                r.changelog_url = 'https://github.com/formio/formio.js/blob/%s/Changelog.md' % r.name
+                r.version_name = r.name[1:]
+            else:
+                r.archive_url = False
+                r.changelog_url = False
+                r.version_name = False
 
     @api.model
     def import_new_versions(self):
