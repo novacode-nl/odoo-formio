@@ -11,10 +11,10 @@ from odoo import api, fields, models, modules
 
 logger = logging.getLogger(__name__)
 
-STATE_REGISTERD = 'registered'
+STATE_AVAILABLE = 'available'
 STATE_INSTALLED = 'installed'
 
-STATES = [(STATE_REGISTERD, "Registered"), (STATE_INSTALLED, "Installed")]
+STATES = [(STATE_AVAILABLE, "Available"), (STATE_INSTALLED, "Installed")]
 
 
 class VersionGitHubTag(models.Model):
@@ -30,14 +30,14 @@ class VersionGitHubTag(models.Model):
 
     name = fields.Char(required=True)
     version_name = fields.Char('_compute_fields')
-    formio_version_id = fields.Many2one('formio.version', string='Installed Formio.io version')
+    formio_version_id = fields.Many2one('formio.version')
     archive_url = fields.Char(compute='_compute_fields')
     changelog_url = fields.Char(compute='_compute_fields')
     state = fields.Selection(
         selection=STATES, string="State",
-        default=STATE_REGISTERD, required=True, track_visibility='onchange',
+        default=STATE_AVAILABLE, required=True, track_visibility='onchange',
         help="""\
-        - Registered: Not downloaded and installed yet.
+        - Available: Not downloaded and installed yet.
         - Installed: Downloaded and installed.""")
 
     @api.depends('name')
@@ -53,7 +53,7 @@ class VersionGitHubTag(models.Model):
                 r.version_name = False
 
     @api.model
-    def import_new_versions(self):
+    def check_and_register_available_versions(self):
         # all tags (just commits in respone), because the other one is limited to 30.
         # response = requests.get('https://api.github.com/repos/formio/formio.js/git/refs/tags')
         response = requests.get('https://api.github.com/repos/formio/formio.js/tags')

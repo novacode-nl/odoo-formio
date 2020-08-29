@@ -24,5 +24,5 @@ class Version(models.Model):
 
     def unlink(self):
         domain = [('formio_version_id', '=', self.ids)]
-        self.env['formio.version.github.tag'].search(domain).write({'state': 'registered'})
+        self.env['formio.version.github.tag'].search(domain).write({'state': 'available'})
         return super(Version, self).unlink()

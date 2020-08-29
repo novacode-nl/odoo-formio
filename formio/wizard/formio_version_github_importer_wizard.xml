@@ -9,7 +9,7 @@ See LICENSE file for full licensing details. -->
         <field name="arch" type="xml">
             <form string="Form.io Version GitHub Importer">
                 <sheet>
-                    <group name="version_github_tags" string="Releases (versions) registered">
+                    <group name="version_github_tags" string="Available Versions (releases)">
                         <field name="github_tag_ids" nolabel="1">
                             <tree default_order="name desc" limit="15">
                                 <field name="name"/>
@@ -18,19 +18,12 @@ See LICENSE file for full licensing details. -->
                             </tree>
                         </field>
                     </group>
-                    <!-- <field name="installed_version_ids"> -->
-                    <!--     <tree> -->
-                    <!--         <field name="name"/> -->
-                    <!--     </tree> -->
-                    <!-- </field> -->
-
-                    <!-- <button string="Cancel" class="oe_link" special="cancel"/> -->
                     <div>
-                        <strong>Check and import the latest 30 new Releases (versions)</strong>
+                        <strong>Check and register the latest 30 available Versions (releases)</strong>
                     </div>
                 </sheet>
                 <footer>
-                    <button name="action_import_new_versions" string="Check and Import new Releases" type="object" class="btn btn-primary"/>
+                    <button name="action_check_and_register_available_versions" string="Check and register available Versions" type="object" class="btn btn-primary"/>
                     <button string="Cancel" class="oe_link" special="cancel"/>
                 </footer>
             </form>

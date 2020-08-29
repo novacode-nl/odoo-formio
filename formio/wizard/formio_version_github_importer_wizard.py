@@ -15,8 +15,8 @@ class VersionGitHubImporter(models.TransientModel):
         self.installed_version_ids = [(6, False, self.env['formio.version'].search([]).ids)]
         self.github_tag_ids = [(6, False, self.env['formio.version.github.tag'].search([]).ids)]
 
-    def action_import_new_versions(self):
-        self.env['formio.version.github.tag'].import_new_versions()
+    def action_check_and_register_available_versions(self):
+        self.env['formio.version.github.tag'].check_and_register_available_versions()
         action = {
             'name': _('Versions GitHub tags'),
             'type': 'ir.actions.act_window',

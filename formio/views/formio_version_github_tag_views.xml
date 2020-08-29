@@ -7,12 +7,11 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.version.github.tag.tree</field>
         <field name="model">formio.version.github.tag</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree create="0" edit="0" delete="0">
                 <field name="name"/>
-                <field name="formio_version_id"/>
-                <field name="changelog_url" widget="url"/>
-                <field name="archive_url" widget="url"/>
                 <field name="state"/>
+                <field name="changelog_url" widget="url"/>
+                <field name="archive_url" widget="url" optional="hide"/>
             </tree>
         </field>
     </record>
@@ -21,7 +20,7 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.version.github.tag.form</field>
         <field name="model">formio.version.github.tag</field>
         <field name="arch" type="xml">
-            <form>
+            <form create="0" edit="0" delete="0">
                 <header>
                     <button
                         name="action_download_install" type="object" string="Download and Install"
@@ -37,12 +36,30 @@ See LICENSE file for full licensing details. -->
                 <sheet>
                     <group>
                         <field name="name"/>
-                        <field name="formio_version_id" readonly="1"/>
+                        <field name="formio_version_id"/>
                         <field name="changelog_url" widget="url" attrs="{'invisible': [('changelog_url', '=', False)]}"/>
                         <field name="archive_url" widget="url" attrs="{'invisible': [('archive_url', '=', False)]}"/>
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <record id="view_formio_version_github_tag_search" model="ir.ui.view">
+        <field name="name">formio.version.github.tag.search</field>
+        <field name="model">formio.version.github.tag</field>
+        <field name="arch" type="xml">
+            <search string="Version GitHub tags">
+                <field name="name"/>
+                <separator/>
+                <filter string="Installed" name="state_installed"
+                        domain="[('state', '=', 'installed')]"/>
+                <filter string="Available" name="state_available"
+                        domain="[('state', '=', 'available')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
+                </group>
+            </search>
         </field>
     </record>
 
