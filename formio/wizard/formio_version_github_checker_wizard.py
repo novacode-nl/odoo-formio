@@ -38,23 +38,6 @@ class VersionGitHubChecker(models.TransientModel):
     @api.model
     def create(self, vals):
         tags_vals_list = self.check_new_versions()
-        # response = requests.get('https://api.github.com/repos/formio/formio.js/tags')
-
-        # if response.status_code == 200:
-        #     tags = response.json()
-        #     available_tag_vals_list = []
-
-        #     existing = self.env['formio.version.github.tag'].search([]).mapped('name')
-
-        #     for t in tags:
-        #         if t['name'] not in existing:
-        #             tag_vals = {
-        #                 'name': t['name'],
-        #             }
-        #             available_tag_vals_list.append((False, False, tag_vals))
-        #     if available_tag_vals_list:
-        #         vals['available_version_github_tag_ids'] = available_tag_vals_listp
-
         if tags_vals_list:
             vals['available_version_github_tag_ids'] = [(False, False, tag_vals) for tag_vals in tags_vals_list]
         return super(VersionGitHubChecker, self).create(vals)
@@ -71,11 +54,11 @@ class VersionGitHubChecker(models.TransientModel):
         return action
 
 
-class Available(models.TransientModel):
+class VersionGitHubTagAvailable(models.TransientModel):
     _name = 'formio.version.github.tag.available'
 
     name = fields.Char(required=True)
-    changelog_url = fields.Char(compute='_compute_fields')
+    changelog_url = fields.Char(compute='_compute_fields', string='Changelog URL')
     version_checker_wizard_id = fields.Many2one('formio.version.github.cheker.wizard')
 
     @api.depends('name')

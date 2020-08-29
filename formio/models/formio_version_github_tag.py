@@ -54,25 +54,6 @@ class VersionGitHubTag(models.Model):
 
     @api.model
     def check_and_register_available_versions(self):
-        # all tags (just commits in respone), because the other one is limited to 30.
-        # response = requests.get('https://api.github.com/repos/formio/formio.js/git/refs/tags')
-        # response = requests.get('https://api.github.com/repos/formio/formio.js/tags')
-
-        # if response.status_code == 200:
-        #     tags = response.json()
-        #     vals_list = []
-
-        #     existing = self.search([]).mapped('name')
-
-        #     for t in tags:
-        #         if t['name'] not in existing:
-        #             vals = {
-        #                 'name': t['name'],
-        #             }
-        #             vals_list.append(vals)
-        #     if vals_list:
-        #         self.create(vals_list)
-
         vals_list = self.env['formio.version.github.checker.wizard'].check_new_versions()
         if vals_list:
             self.create(vals_list)
