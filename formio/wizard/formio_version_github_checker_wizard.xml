@@ -17,22 +17,11 @@ See LICENSE file for full licensing details. -->
                             </tree>
                         </field>
                     </group>
-                    
-                    <!-- <group name="version_github_tags" string="Available Versions (releases)"> -->
-                    <!--     <field name="github_tag_ids" nolabel="1"> -->
-                    <!--         <tree default_order="name desc" limit="15"> -->
-                    <!--             <field name="name"/> -->
-                    <!--             <field name="state"/> -->
-                    <!--             <field name="archive_url" widget="url"/> -->
-                    <!--         </tree> -->
-                    <!--     </field> -->
-                    <!-- </group> -->
-                    <div>
-                        <strong>Register available Versions (releases)</strong>
-                    </div>
                 </sheet>
                 <footer>
-                    <button name="action_register_available_versions" string="Register Available Versions" type="object" class="btn btn-primary"/>
+                    <button
+                        name="action_register_available_versions" string="Register Available Versions" type="object"
+                        class="btn btn-primary" attrs="{'invisible': [('available_version_github_tag_ids', '=', [])]}"/>
                     <button string="Cancel" class="oe_link" special="cancel"/>
                 </footer>
             </form>
