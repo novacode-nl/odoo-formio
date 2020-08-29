@@ -43,7 +43,7 @@
         'views/formio_portal_templates.xml',
         'views/formio_public_templates.xml',
         # wizards
-        'wizard/formio_version_github_importer_wizard.xml'
+        'wizard/formio_version_github_checker_wizard.xml'
     ],
     'demo': [
         'data/formio_demo_data.xml',

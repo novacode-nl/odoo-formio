@@ -27,13 +27,15 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                         <div class="col-12 col-md-6 o_setting_box">
                             <div class="o_setting_left_pane"/>
                             <div class="o_setting_right_pane">
-                                <strong>Check, import and install the latest 30 new Versions</strong>
+                                <strong>Check, register and install the latest 30 available Versions</strong>
                                 <div class="text-muted">
                                     Source: <a href="https://github.com/formio/formio.js/releases" target="_blank">https://github.com/formio/formio.js/releases</a><br/>
                                     (TODO: Scheduled check and import by Cron)
                                 </div>
                                 <div class="mt-4">
-                                    <button name="action_formio_version_github_importer" type="object" string="Version Checker &amp; Installer" class="ml-2 btn btn-primary" icon="fa-cog"/>
+                                    <button name="action_formio_version_github_importer" type="object"
+                                            confirm="Are you sure to check for available versions? This could take some time to load, please be patient."
+                                            string="Check and Register available Versions" class="ml-2 btn btn-primary" icon="fa-cog"/>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +43,7 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                     <h2>Default CSS assets</h2>
                     <div class="row mt16 o_settings_container formio_assets">
                         <div class="text-muted">
-                            Add additional CSS files to be included for every Form.io client/library installed with the Installer tool (button above).
+                            Add additional CSS files to be included for every new installed Form.io client/library.
                         </div>
                         <div class="o_setting_left_pane"/>
                         <div class="o_setting_right_pane">

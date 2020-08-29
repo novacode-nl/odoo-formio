@@ -53,16 +53,16 @@ class ResConfigSettings(models.TransientModel):
                 self.env['formio.default.asset.css'].create(vals)
 
     def action_formio_version_github_importer(self):
-        wizard = self.env['formio.version.github.importer.wizard']
+        wizard = self.env['formio.version.github.checker.wizard']
         res = wizard.create({})
         action = {
-            'name': _('Check and Import version(s)'),
+            'name': _('Check and Register new Versions'),
             'type': 'ir.actions.act_window',
             'target': 'new',
             'view_type': 'form',
             'view_mode': 'form',
-            'view_id': self.env.ref('formio.view_formio_version_github_importer_wizard').id,
-            'res_model': 'formio.version.github.importer.wizard',
+            'view_id': self.env.ref('formio.view_formio_version_github_checker_wizard').id,
+            'res_model': 'formio.version.github.checker.wizard',
             'res_id': res.id
         }
         return action

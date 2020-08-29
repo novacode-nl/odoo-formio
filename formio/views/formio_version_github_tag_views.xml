@@ -25,7 +25,7 @@ See LICENSE file for full licensing details. -->
                     <button
                         name="action_download_install" type="object" string="Download and Install"
                         attrs="{'invisible': [('formio_version_id', '!=', False)]}"
-                        confirm="Are you sure to download and install? This could take some time to load, pleae be patient."
+                        confirm="Are you sure to download and install? This could take some time to load, please be patient."
                         class="btn-primary"/>
                     <button
                         name="action_reset_installed" type="object" string="Reset (Download and Install again)"
