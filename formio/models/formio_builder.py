@@ -44,7 +44,7 @@ class Builder(models.Model):
     description = fields.Text("Description")
     formio_version_id = fields.Many2one(
         'formio.version', string='Form.io Version', required=True,
-        track_visibility='onchange',
+        default=lambda self: self._default_formio_version_id(), track_visibility='onchange',
         help="""Loads the specific Form.io Javascript API/libraries version (sourcecode: \https://github.com/formio/formio.js)""")
     formio_version_name = fields.Char(related='formio_version_id.name', string='Form.io version')
     formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='Form.io CSS')
@@ -103,6 +103,20 @@ class Builder(models.Model):
     @api.model
     def _default_uuid(self):
         return str(uuid.uuid4())
+
+    @api.model
+    def _default_formio_version_id(self):
+        Param = self.env['ir.config_parameter'].sudo()
+        default_version = Param.get_param('formio.default_version')
+        if default_version:
+            domain = [('name', '=', default_version)]
+            version = self.env['formio.version'].search(domain, limit=1)
+            if version:
+                return version.id
+            else:
+                return False
+        else:
+            return False
 
     @api.constrains('name')
     def constaint_check_name(self):

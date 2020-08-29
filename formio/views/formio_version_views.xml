@@ -36,7 +36,7 @@ See LICENSE file for full licensing details. -->
                                 </tree>
                             </field>
                         </page>
-                        <page string="Assets" name="assets" groups="formio.group_formio_admin">
+                        <page string="Assets (JavaScript, CSS)" name="assets" groups="formio.group_formio_admin">
                             <field name="assets" context="{'default_version_id': id}">
                                 <tree>
                                     <field name="sequence" widget="handle"/>

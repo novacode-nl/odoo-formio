@@ -27,19 +27,24 @@ See LICENSE file for full licensing details. -->
         name="Configuration"
         parent="formio.menu_formio_root"
         sequence="100"/>
-    <!-- Settings like: Hide the Form.io logo -->
+    <!-- Settings -->
     <menuitem
-        id="menu_formio_settings"
-        name="Settings"
+        id="menu_formio_version_root"
+        name="Versions"
         parent="formio.menu_formio_configuration"
         sequence="30"/>
-    <!-- action="formio.action_formio_settings"/> -->
     <menuitem
         id="menu_formio_version"
         name="Versions"
-        parent="formio.menu_formio_configuration"
-        sequence="30"
+        parent="formio.menu_formio_version_root"
+        sequence="10"
         action="formio.action_formio_version"/>
+    <menuitem
+        id="menu_formio_version_github_tag"
+        name="GitHub tags"
+        parent="formio.menu_formio_version_root"
+        sequence="30"
+        action="formio.action_formio_version_github_tag"/>
     <menuitem
         id="menu_formio_res_model"
         name="Resource Models"

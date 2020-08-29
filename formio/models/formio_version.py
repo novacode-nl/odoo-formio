@@ -21,3 +21,8 @@ class Version(models.Model):
     js_assets = fields.One2many(
         'formio.version.asset', 'version_id', domain=[('type', '=', 'js')],
         string='Javascript Assets')
+
+    def unlink(self):
+        domain = [('formio_version_id', '=', self.ids)]
+        self.env['formio.version.github.tag'].search(domain).write({'state': 'registered'})
+        return super(Version, self).unlink()
