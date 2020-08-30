@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io Reports Generator',
+    'name': 'Form.io QWeb Reports',
     'summary': 'Generate (PDF) reports for every Form',
     'version': '0.9',
     'author': 'Nova Code',
