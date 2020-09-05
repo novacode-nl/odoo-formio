@@ -19,7 +19,7 @@ STATES = [(STATE_AVAILABLE, "Available"), (STATE_INSTALLED, "Installed")]
 
 class VersionGitHubTag(models.Model):
     _name = 'formio.version.github.tag'
-    _order = 'create_date desc, id desc'
+    _order = 'create_date desc, id asc'
 
     # IMPORTANT NOTES
     # ===============
