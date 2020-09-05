@@ -29,8 +29,8 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                             <div class="o_setting_right_pane">
                                 <strong>Check, register and install the latest 30 available Versions</strong>
                                 <div class="text-muted">
-                                    Source: <a href="https://github.com/formio/formio.js/releases" target="_blank">https://github.com/formio/formio.js/releases</a><br/>
-                                    (TODO: Scheduled check and import by Cron)
+                                    A scheduled action (daily cron) is available and already active.<br/>
+                                    Source: <a href="https://github.com/formio/formio.js/releases" target="_blank">https://github.com/formio/formio.js/releases</a>
                                 </div>
                                 <div class="mt-4">
                                     <button name="action_formio_version_github_importer" type="object"
