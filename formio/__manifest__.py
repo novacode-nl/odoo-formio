@@ -4,7 +4,7 @@
 {
     'name': 'Form.io',
     'summary': 'Build, deploy and store web forms with the "Form.io" Form Builder',
-    'version': '6.0',
+    'version': '6.1',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -18,6 +18,7 @@
         'data/formio_default_asset_css_data.xml',
         'data/formio_version_data.xml',
         'data/formio_version_asset_data.xml',
+        'data/ir_cron_data.xml',
         'data/mail_template_data.xml',
         # translations
         'data/formio_translations_sources.xml',

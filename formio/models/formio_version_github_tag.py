@@ -19,6 +19,7 @@ STATES = [(STATE_AVAILABLE, "Available"), (STATE_INSTALLED, "Installed")]
 
 class VersionGitHubTag(models.Model):
     _name = 'formio.version.github.tag'
+    _order = 'create_date desc, id desc'
 
     # IMPORTANT NOTES
     # ===============
@@ -31,14 +32,15 @@ class VersionGitHubTag(models.Model):
     name = fields.Char(required=True)
     version_name = fields.Char('_compute_fields')
     formio_version_id = fields.Many2one('formio.version')
-    archive_url = fields.Char(compute='_compute_fields')
-    changelog_url = fields.Char(compute='_compute_fields')
+    archive_url = fields.Char(compute='_compute_fields', string="Archive URL")
+    changelog_url = fields.Char(compute='_compute_fields', string="Changelog URL")
     state = fields.Selection(
         selection=STATES, string="State",
         default=STATE_AVAILABLE, required=True, track_visibility='onchange',
         help="""\
         - Available: Not downloaded and installed yet.
         - Installed: Downloaded and installed.""")
+    install_date = fields.Datetime(string='Installed on', compute='_compute_install_date', store=True)
 
     @api.depends('name')
     def _compute_fields(self):
@@ -52,6 +54,14 @@ class VersionGitHubTag(models.Model):
                 r.changelog_url = False
                 r.version_name = False
 
+    @api.depends('state')
+    def _compute_install_date(self):
+        for r in self:
+            if r.state == STATE_INSTALLED:
+                r.install_date = fields.Datetime.now()
+            else:
+                r.install_date = False
+        
     @api.model
     def check_and_register_available_versions(self):
         vals_list = self.env['formio.version.github.checker.wizard'].check_new_versions()
