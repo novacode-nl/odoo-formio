@@ -65,15 +65,14 @@ See LICENSE file for full copyright and licensing details.
 
     <!-- Input components -->
     <template id="textfield_component">
-        <t t-if="key_stored">
-            <t t-set="value" t-value="o._formio.components[component['key']].value"/>
-        </t>
-        <t t-else="">
-            <t t-set="value" t-value=""/>
-        </t>
         <div class="mw-100 mb-3 formio_textfield_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-            <p><t t-esc="value"/></p>
+            <t t-if="key_stored">
+                <p><t t-esc="o._formio.components[component['key']].value"/></p>
+            </t>
+            <t t-else="">
+                <p/>
+            </t>
         </div>
     </template>
 
