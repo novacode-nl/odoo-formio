@@ -6,6 +6,8 @@ See LICENSE file for full licensing details. -->
     <template id="assets_backend_formio_form" name="formio_form assets" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
             <link rel="stylesheet" type="text/css" href="/formio/static/src/css/formio_form.css"/>
+        </xpath>
+        <xpath expr="//script[last()]" position="after">
             <script type="text/javascript" src="/formio/static/src/js/views/formio_form_view.js"></script>
             <script type="text/javascript" src="/formio/static/src/js/views/formio_form_controller.js"></script>
             <script type="text/javascript" src="/formio/static/src/js/views/formio_form_renderer.js"></script>

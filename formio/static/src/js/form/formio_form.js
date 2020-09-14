@@ -48,7 +48,6 @@ export class OdooFormioForm extends Component {
         const self = this;
 
         $.jsonRpc.request(self.config_url, 'call', {}).then(function(result) {
-            console.log(result);
             if (!$.isEmptyObject(result)) {
                 self.schema = result.schema;
                 self.options = result.options;
