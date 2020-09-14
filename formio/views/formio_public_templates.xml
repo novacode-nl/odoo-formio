@@ -80,6 +80,7 @@ See LICENSE file for full licensing details. -->
                 <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.contentWindow.min.js"></script>
                 <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
                 <script type="text/javascript" src="/formio/static/lib/owl.min.js"></script>
+                <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
                 <script type="text/javascript" src="/formio/static/src/js/odoo.jsonrpc.js"/>
                 <script type="module" src="/formio/static/src/js/form/formio_form.js"/>
                 <script type="module" src="/formio/static/src/js/form/public_create_app.js"/>
