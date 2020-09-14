@@ -23,7 +23,7 @@ var BuilderRenderer = BasicRenderer.extend({
         var self = this;
         var builder = $(qweb.render('formio.builder', {builder: self.state.data, context: self.state.context}));
         return $.when.apply($).then(function() {
-            self.$el.html(builder);        
+            self.$el.html(builder);
         });
     }
 });

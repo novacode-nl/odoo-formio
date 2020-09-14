@@ -23,7 +23,7 @@ var FormRenderer = BasicRenderer.extend({
         var self = this;
         var form = $(qweb.render('formio.form', {form: self.state.data, context: self.state.context}));
         return $.when.apply($).then(function() {
-            self.$el.html(form);        
+            self.$el.html(form);
         });
     }
 });

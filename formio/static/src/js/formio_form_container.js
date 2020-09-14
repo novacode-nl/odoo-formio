@@ -11,9 +11,6 @@ $(document).ready(function() {
             if (portal_submit_done_url && portal_submit_done_url.value.length > 0) {
                 window.location = portal_submit_done_url;
             }
-            else {
-                window.location.reload();
-            }
         }
     }, false);
 });
