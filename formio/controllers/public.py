@@ -65,23 +65,16 @@ class FormioPublicController(http.Controller):
         #     values['languages'] = languages
         return request.render('formio.formio_form_public_embed', values)
 
-    @http.route('/formio/public/form/<string:uuid>/schema', type='json', auth='public', website=True)
-    def public_form_schema(self, uuid, **kwargs):
-        form = self._get_public_form(uuid, self._check_public_form())
-        if form and form.builder_id.schema:
-            return form.builder_id.schema
-        else:
-            return {}
+    @http.route('/formio/public/form/<string:form_uuid>/config', type='json', auth='public', website=True)
+    def form_config(self, form_uuid, **kwargs):
+        form = self._get_public_form(form_uuid, self._check_public_form())
+        res = {'schema': {}, 'options': {}}
 
-    @http.route('/formio/public/form/<string:uuid>/options', type='json', auth='public', website=True)
-    def public_form_options(self, uuid, **kwargs):
-        form = self._get_public_form(uuid, self._check_public_form())
-        if form:
-            options = self._prepare_form_options(form)
-        else:
-            options = {}
-        options['embedded'] = True
-        return json.dumps(options)
+        if form and form.builder_id.schema:
+            res['schema'] = json.loads(form.builder_id.schema)
+            res['options'] = self._prepare_form_options(form)
+
+        return res
 
     @http.route('/formio/public/form/<string:uuid>/submission', type='json', auth='public', website=True)
     def public_form_submission(self, uuid, **kwargs):
@@ -182,30 +175,20 @@ class FormioPublicController(http.Controller):
         return request.render('formio.formio_form_public_create_embed', values)
 
 
-    @http.route('/formio/public/form/create/<string:builder_uuid>/schema', type='json', auth='none', website=True)
-    def public_form_create_schema(self, builder_uuid, **kwargs):
+    @http.route('/formio/public/form/create/<string:builder_uuid>/config', type='json', auth='none', website=True)
+    def public_form_create_config(self, builder_uuid, **kwargs):
         formio_builder = self._get_public_builder(builder_uuid)
+        res = {'schema': {}, 'options': {}}
+
         if not formio_builder or not formio_builder.public or formio_builder.state != BUILDER_STATE_CURRENT:
-            return {}
+            return res
 
         if formio_builder.schema:
-            return formio_builder.schema
-        else:
-            return {}
+            res['schema'] = json.loads(formio_builder.schema)
+            #res['options'] = self._prepare_form_options(form)
+            res['options'] = {'public_create': True, 'embedded': True}
 
-    @http.route('/formio/public/form/create/<string:builder_uuid>/options', type='json', auth='none', website=True)
-    def public_form_create_options(self, builder_uuid, **kwargs):
-        formio_builder = self._get_public_builder(builder_uuid)
-        if not formio_builder.public and formio_builder.state == BUILDER_STATE_CURRENT:
-            return {}
-
-        # TODO add new function (copy likewise the language options)
-        # if formio_builder:
-        #     options = self._prepare_form_options(form)
-        # else:
-        #     options = {}
-        options = {'public_create': True, 'embedded': True}
-        return json.dumps(options)
+        return res
 
     @http.route('/formio/public/form/create/<string:builder_uuid>/submit', type='json', auth="none", methods=['POST'], website=True)
     def public_form_create_submit(self, builder_uuid, **post):

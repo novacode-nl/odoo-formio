@@ -26,13 +26,13 @@ See LICENSE file for full licensing details. -->
                 
                 <!-- Odoo JS dependencies could cause clashes with Form.io JS -->
                 <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
+                <script type="text/javascript" src="/formio/static/lib/owl.min.js"></script>
                 <script type="text/javascript" src="/formio/static/src/js/odoo.jsonrpc.js"/>
-                <script type="text/javascript" src="/formio/static/src/js/formio_builder.js"/>
+                <script type="text/javascript" src="/formio/static/src/js/builder/app.js"/>
             </head>
             <body>
-                <div class="formio_builder_embed_container">
-                    <div id="formio_builder"></div>
-                </div>
+                <!-- Form shall be mounted here -->
+                <div id="formio_builder_app"/>
                 <input type="hidden" id="builder_id" name="builder_id" t-att-value="builder.id"/>
             </body>
         </html>
