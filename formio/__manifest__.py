@@ -4,7 +4,7 @@
 {
     'name': 'Form.io',
     'summary': 'Build, deploy and store web forms with the "Form.io" Form Builder',
-    'version': '7.0',
+    'version': '7.1',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',

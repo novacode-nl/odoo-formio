@@ -7,9 +7,12 @@ const { xml } = owl.tags;
 const { whenReady } = owl.utils;
 
 class App extends OdooFormioForm {
-    static template = xml`<div/>`;
+    static template = xml`<div id="formio_form"></div>`;
 
-    setUrls() {
+    initForm() {
+        if (!!document.getElementById('formio_builder_uuid')) {
+            this.builder_uuid = document.getElementById('formio_builder_uuid').value;
+        }
         this.config_url = '/formio/public/form/create/' + this.builder_uuid + '/config';
         this.submission_url = false;
         this.submit_url = '/formio/public/form/create/' + this.builder_uuid + '/submit';
@@ -18,7 +21,7 @@ class App extends OdooFormioForm {
 
 function setup() {
     const app = new App();
-    app.mount(document.body);
+    app.mount(document.getElementById('formio_form_app'));
 }
 
 whenReady(setup);

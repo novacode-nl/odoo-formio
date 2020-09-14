@@ -9,7 +9,10 @@ const { whenReady } = owl.utils;
 class App extends OdooFormioForm {
     static template = xml`<div id="formio_form"></div>`;
 
-    setUrls() {
+    initForm() {
+        if (!!document.getElementById('formio_form_uuid')) {
+            this.form_uuid = document.getElementById('formio_form_uuid').value;
+        }
         this.config_url = '/formio/form/' + this.form_uuid + '/config';
         this.submission_url = '/formio/form/' + this.form_uuid + '/submission';
         this.submit_url = '/formio/form/' + this.form_uuid + '/submit';

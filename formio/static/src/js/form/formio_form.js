@@ -17,46 +17,44 @@ export class OdooFormioForm extends Component {
     constructor(parent, props) {
         super(parent, props);
 
-        this.builder_uuid = false;
-        this.form_uuid = false;
+        this.schema = {};
+        this.options = {};
+        this.base_url = window.location.protocol + '//' + window.location.host;
 
-        this.state = useState({
-            public: window.location.pathname.startsWith('/formio/public'),
-            pathname: window.location.pathname
-        });
+        // by initForm
+        this.builder_uuid = null;
+        this.form_uuid = null;
+        this.config_url = null;
+        this.submission_url = null;
+        this.submit_url = null;
     }
 
     willStart() {
+        this.initForm();
+    }
+
+    mounted() {
         this.loadForm();
+    }
+
+    initForm() {
+        // Implemented in specific (app) class, e.g:
+        // - backend_app.js
+        // - public_app.js
+        // - public_create_app.js
     }
 
     loadForm() {
         const self = this;
 
-        if (!!document.getElementById('formio_form_uuid')) {
-            self.form_uuid = document.getElementById('formio_form_uuid').value;
-        }
-        if (!!document.getElementById('formio_builder_uuid')) {
-            self.builder_uuid = document.getElementById('formio_builder_uuid').value;
-        }
-
-        self.base_url = window.location.protocol + '//' + window.location.host;
-        self.schema = {};
-        self.options = {};
-
-        self.setUrls();
-
         $.jsonRpc.request(self.config_url, 'call', {}).then(function(result) {
+            console.log(result);
             if (!$.isEmptyObject(result)) {
                 self.schema = result.schema;
                 self.options = result.options;
                 self.createForm();
             }
         });
-    }
-
-    setUrls() {
-        // Implemented in specific `app_` class.
     }
 
     createForm() {
@@ -77,7 +75,7 @@ export class OdooFormioForm extends Component {
         }
 
         Formio.createForm(document.getElementById('formio_form'), self.schema, self.options).then(function(form) {
-            self.init_resizer();
+            //self.init_resizer();
 
             // Language
             if ('language' in self.options) {
@@ -166,10 +164,3 @@ export class OdooFormioForm extends Component {
         });
     }
 }
-
-// function setup() {
-//     const app = new App();
-//     app.mount(document.body);
-// }
-
-// whenReady(setup);
