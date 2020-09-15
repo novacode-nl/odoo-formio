@@ -77,29 +77,26 @@ See LICENSE file for full copyright and licensing details.
     </template>
 
     <template id="textarea_component">
-        <t t-if="key_stored">
-            <t t-set="value" t-value="o._formio.components[component['key']].value.replace('\n', '&lt;br/&gt;')"/>
-        </t>
-        <t t-else="">
-            <t t-set="value" t-value=""/>
-        </t>
         <div class="mw-100 mb-3 formio_textarea_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-            <!-- TODO FIX (security): split and loop lines, each with <t t-esc=...> -->
-            <p><t t-raw="value"/></p>
+            <t t-if="key_stored">
+                <p><t t-esc="o._formio.components[component['key']].value.replace('\n', '&lt;br/&gt;')"/></p>
+            </t>
+            <t t-else="">
+                <p/>
+            </t>
         </div>
     </template>
 
     <template id="number_component">
-        <t t-if="key_stored">
-            <t t-set="value" t-value="o._formio.components[component['key']].value"/>
-        </t>
-        <t t-else="">
-            <t t-set="value" t-value=""/>
-        </t>
         <div class="mw-100 mb-3 formio_number_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-            <p><t t-esc="value"/></p>
+            <t t-if="key_stored">
+                <p><t t-esc="o._formio.components[component['key']].value"/></p>
+            </t>
+            <t t-else="">
+                <p/>
+            </t>
         </div>
     </template>
 
@@ -157,28 +154,26 @@ See LICENSE file for full copyright and licensing details.
     </template>
 
     <template id="phoneNumber_component">
-        <t t-if="key_stored">
-            <t t-set="value" t-value="o._formio.components[component['key']].value"/>
-        </t>
-        <t t-else="">
-            <t t-set="value" t-value=""/>
-        </t>
         <div class="mw-100 mb-3 formio_phoneNumber_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-            <p><t t-esc="value"/></p>
+            <t t-if="key_stored">
+                <p><t t-esc="o._formio.components[component['key']].value"/></p>
+            </t>
+            <t t-else="">
+                <p/>
+            </t>
         </div>
     </template>
 
     <template id="email_component">
-        <t t-if="key_stored">
-            <t t-set="value" t-value="o._formio.components[component['key']].value"/>
-        </t>
-        <t t-else="">
-            <t t-set="value" t-value=""/>
-        </t>
         <div class="mw-100 mb-3 formio_email_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-            <p><t t-esc="value"/></p>
+            <t t-if="key_stored">
+                <p><t t-esc="o._formio.components[component['key']].value"/></p>
+            </t>
+            <t t-else="">
+                <p/>
+            </t>
         </div>
     </template>
 
