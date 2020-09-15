@@ -59,7 +59,7 @@ class VersionGitHubTagAvailable(models.TransientModel):
 
     name = fields.Char(required=True)
     changelog_url = fields.Char(compute='_compute_fields', string='Changelog URL')
-    version_checker_wizard_id = fields.Many2one('formio.version.github.cheker.wizard')
+    version_checker_wizard_id = fields.Many2one('formio.version.github.checker.wizard')
 
     @api.depends('name')
     def _compute_fields(self):
