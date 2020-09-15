@@ -104,6 +104,9 @@ See LICENSE file for full licensing details. -->
                                     <field name="show_form_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
                                 <group name="integration_settings" string="Integration" colspan="2">
+                                    <div class="text-muted" colspan="2">
+                                        <i class="fa fa-info-circle" title="info"/> This doesn't make any sense with Public (Access) Forms.
+                                    </div>
                                     <group>
                                         <field name="formio_res_model_id" groups="formio.group_formio_admin"
                                                attrs="{'readonly': [('state', '!=', 'DRAFT')]}"
@@ -111,17 +114,6 @@ See LICENSE file for full licensing details. -->
                                                options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
                                         <field name="res_model" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
                                     </group>
-                                </group>
-                                <group name="access_settings" string="Access">
-                                    <field name="portal" groups="formio.group_formio_admin"/>
-                                </group>
-                                <group name="public_access_settings" string="Public Access">
-                                    <field name="public" groups="formio.group_formio_admin"/>
-                                    <label for="public_access_interval_number" string="Public Expire After"/>
-                                    <div>
-                                        <field name="public_access_interval_number" class="oe_inline" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
-                                        <field name="public_access_interval_type" class="oe_inline ml-2" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
-                                    </div>
                                 </group>
                                 <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
                             </group>
@@ -133,10 +125,19 @@ See LICENSE file for full licensing details. -->
                             </div>
                         </page>
                         <page string="Resource Settings" name="res_model_settings" attrs="{'invisible': ['|', ('formio_res_model_id', '=', False)]}"/>
-                        <page string="Portal Settings" name="portal_settings" attrs="{'invisible': [('portal', '=', False)]}">
+                        <page string="Access Settings" name="access_settings">
                             <group>
-                                <group name="portal_submit_done" string="Redirect after Submission">
+                                <group name="portal_access_settings" string="Portal Access">
+                                    <field name="portal" groups="formio.group_formio_admin"/>
                                     <field name="portal_submit_done_url" string="URL" groups="formio.group_formio_admin" readonly="0"/>
+                                </group>
+                                <group name="public_access_settings" string="Public Access">
+                                    <field name="public" groups="formio.group_formio_admin"/>
+                                    <label for="public_access_interval_number" string="Public Expire After"/>
+                                    <div>
+                                        <field name="public_access_interval_number" class="oe_inline" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
+                                        <field name="public_access_interval_type" class="oe_inline ml-2" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
+                                    </div>
                                 </group>
                             </group>
                         </page>

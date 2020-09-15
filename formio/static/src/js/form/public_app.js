@@ -4,19 +4,24 @@
 import { OdooFormioForm } from "./formio_form.js";
 
 /**
-FIX / WORKAROUND (known) browser incompatibility errors.
-Wrap Component class and bootstrap into functions.
+FIX / WORKAROUND browser compatibility error.
+Wrap Component class and bootstrap into functions and put template in
+Component env.
 
 OS/platform: browsers
 =====================
 - Mac: Safari 13.1
-- iOS: Safari, Chrome
+- iOS: Safari, Firefox
 
-Errors
-======
+Error
+=====
 - Safari 13.1 on Mac experiences error:
   unexpected token '='. expected an opening '(' before a method's parameter list
 - iOS not debugged yet. Dev Tools not present in browser.
+
+More info
+=========
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Browser_compatibility
 */
 
 function app() {
