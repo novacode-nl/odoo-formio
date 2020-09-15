@@ -77,26 +77,28 @@ class Builder(models.Model):
     user_id = fields.Many2one('res.users', string='Assigned user', track_visibility='onchange')
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal", track_visibility='onchange', help="Form is accessible by assigned portal user")
-    portal_submit_done_url = fields.Char(string='Portal Submit-done URL')
+    portal_submit_done_url = fields.Char(string='Portal Submit-done URL', track_visibility='onchange')
     public = fields.Boolean("Public", track_visibility='onchange', help="Form is public accessible (e.g. used in Shop checkout, Events registration")
-    public_submit_done_url = fields.Char(string='Public Submit-done URL')
-    public_access_interval_number = fields.Integer(default=30, track_visibility='onchange')
-    public_access_interval_type = fields.Selection(list(_interval_selection.items()), default='minutes')
+    public_submit_done_url = fields.Char(string='Public Submit-done URL', track_visibility='onchange')
+    public_access_interval_number = fields.Integer(default=30, track_visibility='onchange', help="Public access to submitted Form shall be rejected after expiration of the configured time interval.")
+    public_access_interval_type = fields.Selection(list(_interval_selection.items()), default='minutes', track_visibility='onchange')
     view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
     show_form_title = fields.Boolean("Show Form Title", track_visibility='onchange', help="Show Form Title in the Form header.", default=True)
     show_form_id = fields.Boolean("Show Form ID", track_visibility='onchange', help="Show Form ID in the Form header.", default=True)
     show_form_uuid = fields.Boolean("Show Form UUID", track_visibility='onchange', help="Show Form UUID in the Form.", default=True)
     show_form_state = fields.Boolean("Show Form State", track_visibility='onchange', help="Show the state in the Form header.", default=True)
-    show_form_user_metadata = fields.Boolean("Show User Metadata", track_visibility='onchange', help="Show submission and assigned user metadata in the Form header.", default=True)
+    show_form_user_metadata = fields.Boolean(
+        "Show User Metadata", track_visibility='onchange', help="Show submission and assigned user metadata in the Form header.", default=True)
     wizard = fields.Boolean("Wizard", track_visibility='onchange')
     translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations')
     allow_force_update_state_group_ids = fields.Many2many(
         'res.groups', string='Allow groups to force update State',
         help="User groups allowed to manually force an update of the Form state."
              "If no groups are specified it's allowed for every user.")
-    component_partner_name = fields.Char(string='Component Partner Name')
-    component_partner_email = fields.Char(string='Component Partner Email')
-    component_partner_add_follower = fields.Boolean(string='Component Partner Add to Followers', help='Add determined partner to followers of the Form.')
+    component_partner_name = fields.Char(string='Component Partner Name', track_visibility='onchange')
+    component_partner_email = fields.Char(string='Component Partner Email', track_visibility='onchange')
+    component_partner_add_follower = fields.Boolean(
+        string='Component Partner Add to Followers', track_visibility='onchange', help='Add determined partner to followers of the Form.')
 
     def _states_selection(self):
         return STATES

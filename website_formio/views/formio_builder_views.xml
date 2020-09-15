@@ -8,16 +8,22 @@ See LICENSE file for full licensing details. -->
         <field name="model">formio.builder</field>
         <field name="inherit_id" ref="formio.view_formio_builder_form"/>
         <field name="arch" type="xml">
+            <page name="public_settings" position="attributes">
+                <attribute name="string">Public / Website</attribute>
+            </page>
+            <field name="public" position="attributes">
+                <attribute name="string">Publish on Website</attribute>
+            </field>
             <!-- portal_submit_done -->
             <field name="portal_submit_done_url" position="before">
-                <field name="portal_submit_done_page_id" string="Page" groups="formio.group_formio_admin"/>
+                <field name="portal_submit_done_page_id" string="Redirect Page" groups="formio.group_formio_admin"/>
             </field>
             <field name="portal_submit_done_url" position="attributes">
                 <attribute name="attrs">{'readonly': [('portal_submit_done_page_id', '!=', False)]}</attribute>
             </field>
             <!-- public_submit_done -->
             <field name="public_submit_done_url" position="before">
-                <field name="public_submit_done_page_id" string="Page" groups="formio.group_formio_admin"/>
+                <field name="public_submit_done_page_id" string="Redirect Page" groups="formio.group_formio_admin"/>
             </field>
             <field name="public_submit_done_url" position="attributes">
                 <attribute name="attrs">{'readonly': [('public_submit_done_page_id', '!=', False)]}</attribute>

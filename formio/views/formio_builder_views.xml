@@ -89,7 +89,7 @@ See LICENSE file for full licensing details. -->
                         </group>
                     </group>
                     <notebook>
-                        <page string="Settings" name="settings">
+                        <page string="General" name="settings">
                             <group name="settings">
                                 <group name="formio_settings" string="Form.io">
                                     <field name="formio_version_id" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
@@ -124,28 +124,32 @@ See LICENSE file for full licensing details. -->
                                 <i class="fa fa-info-circle" title="info"/><strong> Public Expire After</strong> - Applicable on the <strong>Form</strong> it's (datimetime field) <strong>Public Access From</strong>.
                             </div>
                         </page>
-                        <page string="Resource Settings" name="res_model_settings" attrs="{'invisible': ['|', ('formio_res_model_id', '=', False)]}"/>
-                        <page string="Portal Settings" name="portal_settings">
+                        <page string="Resource" name="res_model_settings" attrs="{'invisible': ['|', ('formio_res_model_id', '=', False)]}"/>
+                        <page string="Portal" name="portal_settings">
                             <group>
                                 <group>
-                                    <field name="portal" groups="formio.group_formio_admin"/>
-                                    <field name="portal_submit_done_url" groups="formio.group_formio_admin" string="Submit-done URL" readonly="0"/>
+                                    <field name="portal" groups="formio.group_formio_admin" string="Publish on Portal"/>
+                                </group>
+                                <group string="Redirect After Submit">
+                                    <field name="portal_submit_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
                                 </group>
                             </group>
                         </page>
-                        <page string="Public Settings" name="public_settings">
+                        <page string="Public" name="public_settings">
                             <div class="text-muted" colspan="2">
-                                <i class="fa fa-info-circle" title="info"/> Website features configuration shall also be done here.
+                                <i class="fa fa-info-circle" title="info"/> Configuration of Website features shall also be done here.
                             </div>
                             <group>
                                 <group>
-                                    <field name="public" groups="formio.group_formio_admin"/>
-                                    <label for="public_access_interval_number" string="Public Expire After"/>
+                                    <field name="public" groups="formio.group_formio_admin" string="Publish to Public"/>
+                                    <label for="public_access_interval_number" string="Expire After"/>
                                     <div>
                                         <field name="public_access_interval_number" class="oe_inline" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
                                         <field name="public_access_interval_type" class="oe_inline ml-2" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
                                     </div>
-                                    <field name="public_submit_done_url" groups="formio.group_formio_admin" string="Submit-done URL" readonly="0"/>
+                                </group>
+                                <group string="Redirect After Submit">
+                                    <field name="public_submit_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
                                 </group>
                             </group>
                         </page>
