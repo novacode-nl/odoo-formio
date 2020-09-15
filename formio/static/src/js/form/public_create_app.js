@@ -28,11 +28,28 @@ function app() {
     class App extends OdooFormioForm {
         initForm() {
             if (!!document.getElementById('formio_builder_uuid')) {
-                this.builder_uuid = document.getElementById('formio_builder_uuid').value;
+                this.builderUuid = document.getElementById('formio_builder_uuid').value;
             }
-            this.config_url = '/formio/public/form/create/' + this.builder_uuid + '/config';
-            this.submission_url = false;
-            this.submit_url = '/formio/public/form/create/' + this.builder_uuid + '/submit';
+            this.configUrl = '/formio/public/form/create/' + this.builderUuid + '/config';
+            this.submissionUrl = false;
+            this.submitUrl = '/formio/public/form/create/' + this.builderUuid + '/submit';
+        }
+
+        publicSubmitDoneUrl() {
+            return this.config.hasOwnProperty('public_submit_done_url') && this.config.public_submit_done_url;
+        }
+
+        submitDone(submission) {
+            if (submission.state == 'submitted') {
+                if (this.publicSubmitDoneUrl()) {
+                    const config = {submit_done_url: this.publicSubmitDoneUrl()};
+                    window.parent.postMessage({odooFormioMessage: 'formioSubmitDone', config: config});
+                }
+            }
+            // If the window.parent doesn't receive and handle the postMessage.
+            setTimeout(function() {
+                window.location.reload();
+            }, 1000);
         }
     }
 

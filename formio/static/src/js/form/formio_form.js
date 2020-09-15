@@ -19,14 +19,17 @@ export class OdooFormioForm extends Component {
 
         this.schema = {};
         this.options = {};
-        this.base_url = window.location.protocol + '//' + window.location.host;
+        this.config = {}; // extra config from Odoo backend
+
+        this.baseUrl = window.location.protocol + '//' + window.location.host;
+        this.urlParams = new URLSearchParams(window.location.search);
 
         // by initForm
-        this.builder_uuid = null;
-        this.form_uuid = null;
-        this.config_url = null;
-        this.submission_url = null;
-        this.submit_url = null;
+        this.builderUuid = null;
+        this.formUuid = null;
+        this.configUrl = null;
+        this.submissionUrl = null;
+        this.submitUrl = null;
     }
 
     willStart() {
@@ -38,19 +41,21 @@ export class OdooFormioForm extends Component {
     }
 
     initForm() {
-        // Implemented in specific (app) class, e.g:
-        // - backend_app.js
-        // - public_app.js
-        // - public_create_app.js
+        // Implemented in specific (*_app.js) classes.
+    }
+
+    submitDone(submission) {
+        // Implemented in specific (*_app.js) classes.
     }
 
     loadForm() {
         const self = this;
 
-        $.jsonRpc.request(self.config_url, 'call', {}).then(function(result) {
+        $.jsonRpc.request(self.configUrl, 'call', {}).then(function(result) {
             if (!$.isEmptyObject(result)) {
                 self.schema = result.schema;
                 self.options = result.options;
+                self.config = result.config;
                 self.createForm();
             }
         });
@@ -59,13 +64,13 @@ export class OdooFormioForm extends Component {
     createForm() {
         const self = this;
 
-        // Maybe avoid URL (check) on self.form_uuid
-        if (self.form_uuid) {
+        // Maybe avoid URL (check) on self.formUuid
+        if (self.formUuid) {
             const hooks = {
                 'addComponent': function(component, comp, parent) {
                     if (component.hasOwnProperty('data') &&
                         component.data.hasOwnProperty('url') && !$.isEmptyObject(component.data.url)) {
-                        component.data.url = self.base_url.concat('/formio/form', component.data.url, '/', self.form_uuid);
+                        component.data.url = self.baseUrl.concat('/formio/form', component.data.url, '/', self.formUuid);
                     }
                     return component;
                 }
@@ -85,26 +90,21 @@ export class OdooFormioForm extends Component {
             // Events
             form.on('submit', function(submission) {
                 const data = {'data': submission.data};
-                if (self.form_uuid) {
-                    data['form_uuid'] = self.form_uuid;
+                if (self.formUuid) {
+                    data['form_uuid'] = self.formUuid;
                 }
-                $.jsonRpc.request(self.submit_url, 'call', data).then(function() {
+                $.jsonRpc.request(self.submitUrl, 'call', data).then(function() {
                     form.emit('submitDone', submission);
                 });
             });
             form.on('submitDone', function(submission) {
-                if (submission.state == 'submitted') {
-                    window.parent.postMessage('formioSubmitDone', self.base_url);
-                }
-                setTimeout(function() {
-                    window.location.reload();
-                }, 500);
+                self.submitDone(submission);
             });
 
             // Set the Submission (data)
             // https://github.com/formio/formio.js/wiki/Form-Renderer#setting-the-submission
-            if (self.submission_url) {
-                $.jsonRpc.request(self.submission_url, 'call', {}).then(function(result) {
+            if (self.submissionUrl) {
+                $.jsonRpc.request(self.submissionUrl, 'call', {}).then(function(result) {
                     if (!$.isEmptyObject(result)) {
                     form.submission = {'data': JSON.parse(result)};
                     }

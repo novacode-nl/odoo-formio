@@ -28,14 +28,21 @@ function app() {
     class App extends OdooFormioForm {
         initForm() {
             if (!!document.getElementById('formio_form_uuid')) {
-                this.form_uuid = document.getElementById('formio_form_uuid').value;
+                this.formUuid = document.getElementById('formio_form_uuid').value;
             }
 
-            this.config_url = '/formio/public/form/' + this.form_uuid + '/config';
-            this.submission_url = '/formio/public/form/' + this.form_uuid + '/submission';
-            this.submit_url = '/formio/public/form/' + this.form_uuid + '/submit';
+            this.configUrl = '/formio/public/form/' + this.formUuid + '/config';
+            this.submissionUrl = '/formio/public/form/' + this.formUuid + '/submission';
+            this.submitUrl = '/formio/public/form/' + this.formUuid + '/submit';
+        }
+
+        submitDone() {
+            setTimeout(function() {
+                window.location.reload();
+            }, 1000);
         }
     }
+
     const app = new App();
     app.mount(document.getElementById('formio_form_app'));
 }

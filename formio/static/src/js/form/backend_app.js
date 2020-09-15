@@ -28,11 +28,28 @@ function app() {
     class App extends OdooFormioForm {
         initForm() {
             if (!!document.getElementById('formio_form_uuid')) {
-                this.form_uuid = document.getElementById('formio_form_uuid').value;
+                this.formUuid = document.getElementById('formio_form_uuid').value;
             }
-            this.config_url = '/formio/form/' + this.form_uuid + '/config';
-            this.submission_url = '/formio/form/' + this.form_uuid + '/submission';
-            this.submit_url = '/formio/form/' + this.form_uuid + '/submit';
+            this.configUrl = '/formio/form/' + this.formUuid + '/config';
+            this.submissionUrl = '/formio/form/' + this.formUuid + '/submission';
+            this.submitUrl = '/formio/form/' + this.formUuid + '/submit';
+        }
+
+        portalSubmitDoneUrl() {
+            return this.config.hasOwnProperty('portal_submit_done_url') && this.config.portal_submit_done_url;
+        }
+
+        submitDone(submission) {
+            if (submission.state == 'submitted') {
+                if (this.urlParams.get('portal') === 'true' && this.portalSubmitDoneUrl()) {
+                    const config = {submit_done_url: this.portalSubmitDoneUrl()};
+                    window.parent.postMessage({odooFormioMessage: 'formioSubmitDone', config: config});
+                }
+            }
+            // If the window.parent doesn't receive and handle the postMessage.
+            setTimeout(function() {
+                window.location.reload();
+            }, 500);
         }
     }
 

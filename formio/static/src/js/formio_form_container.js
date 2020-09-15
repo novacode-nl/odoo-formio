@@ -5,11 +5,15 @@ $(document).ready(function() {
     iFrameResize({}, '.formio_form_embed');
 
     window.addEventListener('message', function(event) {
-        var base_url = window.location.protocol + '//' + window.location.host;
-        if (event.origin == base_url && event.data == 'formioSubmitDone') {
-            var portal_submit_done_url = document.getElementById('portal_submit_done_url');
-            if (portal_submit_done_url && portal_submit_done_url.value.length > 0) {
-                window.location = portal_submit_done_url;
+        const baseUrl = window.location.protocol + '//' + window.location.host;
+
+        if (event.data.hasOwnProperty('odooFormioMessage')) {
+            const msg = event.data.odooFormioMessage,
+                  config = event.data.config,
+                  submitDoneUrl = config.hasOwnProperty('submit_done_url') && config.submit_done_url;
+
+            if (event.origin == baseUrl && msg == 'formioSubmitDone' && submitDoneUrl) {
+                window.location = submitDoneUrl;
             }
         }
     }, false);

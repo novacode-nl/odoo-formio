@@ -12,13 +12,13 @@ class App extends Component {
 
     loadBuilder() {
         const self = this;
-        self.builder_id = document.getElementById('builder_id').value;
-        self.config_url = '/formio/builder/' + self.builder_id + '/config';
-        self.save_url = '/formio/builder/' + self.builder_id + '/save';
+        self.builderId = document.getElementById('builder_id').value;
+        self.configUrl = '/formio/builder/' + self.builderId + '/config';
+        self.saveUrl = '/formio/builder/' + self.builderId + '/save';
         self.schema = {};
         self.options = {};
 
-        $.jsonRpc.request(self.config_url, 'call', {}).then(function(result) {
+        $.jsonRpc.request(self.configUrl, 'call', {}).then(function(result) {
             if (!$.isEmptyObject(result)) {
                 self.schema = result.schema;
                 self.options = result.options;
@@ -37,8 +37,8 @@ class App extends Component {
                 }
                 else {
                     console.log('[Form.io] Saving Builder...');
-                    $.jsonRpc.request(self.save_url, 'call', {
-                        'builder_id': self.builder_id,
+                    $.jsonRpc.request(self.saveUrl, 'call', {
+                        'builder_id': self.builderId,
                         'schema': self.schema
                     }).then(function() {
                         console.log('[Form.io] Builder sucessfully saved.');

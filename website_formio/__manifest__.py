@@ -4,7 +4,7 @@
 {
     'name': 'Form.io Website (Snippet etc)',
     'summary': 'Form Snippet, Other website integration',
-    'version': '1.3',
+    'version': '1.4',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',

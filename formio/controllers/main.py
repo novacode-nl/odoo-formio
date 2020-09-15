@@ -114,11 +114,12 @@ class FormioController(http.Controller):
     @http.route('/formio/form/<string:form_uuid>/config', type='json', auth='user', website=True)
     def form_config(self, form_uuid, **kwargs):
         form = self._get_form(form_uuid, 'read')
-        res = {'schema': {}, 'options': {}}
+        res = {'schema': {}, 'options': {}, 'config': {}}
 
         if form and form.builder_id.schema:
             res['schema'] = json.loads(form.builder_id.schema)
             res['options'] = self._prepare_form_options(form)
+            res['config'] = self._prepare_form_config(form)
 
         return res
 
@@ -304,6 +305,12 @@ class FormioController(http.Controller):
             options['language'] = lang.iso_code[:2]
             options['i18n'] = form.i18n_translations()
         return options
+
+    def _prepare_form_config(self, form):
+        config = {
+            'portal_submit_done_url': form.portal_submit_done_url
+        }
+        return config
 
     def _get_form(self, uuid, mode):
         return request.env['formio.form'].get_form(uuid, mode)

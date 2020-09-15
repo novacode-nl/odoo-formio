@@ -125,19 +125,27 @@ See LICENSE file for full licensing details. -->
                             </div>
                         </page>
                         <page string="Resource Settings" name="res_model_settings" attrs="{'invisible': ['|', ('formio_res_model_id', '=', False)]}"/>
-                        <page string="Access Settings" name="access_settings">
+                        <page string="Portal Settings" name="portal_settings">
                             <group>
-                                <group name="portal_access_settings" string="Portal Access">
+                                <group>
                                     <field name="portal" groups="formio.group_formio_admin"/>
-                                    <field name="portal_submit_done_url" string="URL" groups="formio.group_formio_admin" readonly="0"/>
+                                    <field name="portal_submit_done_url" groups="formio.group_formio_admin" string="Submit-done URL" readonly="0"/>
                                 </group>
-                                <group name="public_access_settings" string="Public Access">
+                            </group>
+                        </page>
+                        <page string="Public Settings" name="public_settings">
+                            <div class="text-muted" colspan="2">
+                                <i class="fa fa-info-circle" title="info"/> Website features configuration shall also be done here.
+                            </div>
+                            <group>
+                                <group>
                                     <field name="public" groups="formio.group_formio_admin"/>
                                     <label for="public_access_interval_number" string="Public Expire After"/>
                                     <div>
                                         <field name="public_access_interval_number" class="oe_inline" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
                                         <field name="public_access_interval_type" class="oe_inline ml-2" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
                                     </div>
+                                    <field name="public_submit_done_url" groups="formio.group_formio_admin" string="Submit-done URL" readonly="0"/>
                                 </group>
                             </group>
                         </page>

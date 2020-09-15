@@ -7,7 +7,12 @@ from odoo import api, fields, models
 class Builder(models.Model):
     _inherit = 'formio.builder'
 
-    portal_submit_done_page_id = fields.Many2one('website.page', domain=[('is_published', '=', True), ('url', '!=', '/')])
+    portal_submit_done_page_id = fields.Many2one(
+        'website.page', domain=[('is_published', '=', True), ('url', '!=', '/')],
+        string='Portal Submit-done Page')
+    public_submit_done_page_id = fields.Many2one(
+        'website.page', domain=[('is_published', '=', True), ('url', '!=', '/')],
+        string='Public Submit-done Page')
 
     @api.model
     def create(self, vals):
@@ -15,6 +20,12 @@ class Builder(models.Model):
         if portal_submit_done_page_id:
             portal_submit_done_page = self.env['website.page'].browse(portal_submit_done_page_id)
             vals['portal_submit_done_url'] = portal_submit_done_page.url
+
+        public_submit_done_page_id = vals.get('public_submit_done_page_id')
+        if public_submit_done_page_id:
+            public_submit_done_page = self.env['website.page'].browse(public_submit_done_page_id)
+            vals['public_submit_done_url'] = public_submit_done_page.url
+
         return super(Builder, self).create(vals)
 
     def write(self, vals):
@@ -22,6 +33,12 @@ class Builder(models.Model):
         if portal_submit_done_page_id:
             portal_submit_done_page = self.env['website.page'].browse(portal_submit_done_page_id)
             vals['portal_submit_done_url'] = portal_submit_done_page.url
+
+        public_submit_done_page_id = vals.get('public_submit_done_page_id')
+        if public_submit_done_page_id:
+            public_submit_done_page = self.env['website.page'].browse(public_submit_done_page_id)
+            vals['public_submit_done_url'] = public_submit_done_page.url
+
         return super(Builder, self).write(vals)
 
     @api.onchange('portal_submit_done_page_id')
@@ -30,3 +47,10 @@ class Builder(models.Model):
             self.portal_submit_done_url = False
         else:
             self.portal_submit_done_url = self.portal_submit_done_page_id.url
+
+    @api.onchange('public_submit_done_page_id')
+    def _onchange_public_submit_done_page(self):
+        if not self.public_submit_done_page_id:
+            self.public_submit_done_url = False
+        else:
+            self.public_submit_done_url = self.public_submit_done_page_id.url

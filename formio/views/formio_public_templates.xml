@@ -67,8 +67,6 @@ See LICENSE file for full licensing details. -->
                     <small class="text-muted">UUID: <span t-esc="form.uuid"/></small>
                 </div>
                 <input type="hidden" id="formio_form_uuid" name="uuid" t-att-value="form.uuid"/>
-                <!-- This is a just hint. Security by any means is checked in the (backend) request handler -->
-                <input type="hidden" id="form_public" name="form_public" t-att-value="form.public"/>
             </body>
         </html>
     </template>
@@ -111,8 +109,6 @@ See LICENSE file for full licensing details. -->
                 <t t-if="formio_builder_uuid">
                     <input type="hidden" id="formio_builder_uuid" name="formio_builder_uuid" t-att-value="formio_builder_uuid"/>
                 </t>
-                <!-- This is a just hint. Security by any means is checked in the (backend) request handler -->
-                <input type="hidden" id="public_form_create" name="public_form_create" t-att-value="public_form_create"/>
             </body>
         </html>
     </template>

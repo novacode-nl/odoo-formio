@@ -68,7 +68,7 @@ class FormioPublicController(http.Controller):
     @http.route('/formio/public/form/<string:form_uuid>/config', type='json', auth='public', website=True)
     def form_config(self, form_uuid, **kwargs):
         form = self._get_public_form(form_uuid, self._check_public_form())
-        res = {'schema': {}, 'options': {}}
+        res = {'schema': {}, 'options': {}, 'config': {}}
 
         if form and form.builder_id.schema:
             res['schema'] = json.loads(form.builder_id.schema)
@@ -187,6 +187,7 @@ class FormioPublicController(http.Controller):
             res['schema'] = json.loads(formio_builder.schema)
             #res['options'] = self._prepare_form_options(form)
             res['options'] = {'public_create': True, 'embedded': True}
+            res['config'] = self._prepare_form_config(formio_builder)
 
         return res
 
@@ -239,6 +240,12 @@ class FormioPublicController(http.Controller):
             options['language'] = lang.iso_code[:2]
             options['i18n'] = form.i18n_translations()
         return options
+
+    def _prepare_form_config(self, builder):
+        config = {
+            'public_submit_done_url': builder.public_submit_done_url
+        }
+        return config
 
     def _get_public_form(self, form_uuid, public_share=False):
         return request.env['formio.form'].get_public_form(form_uuid, public_share)
