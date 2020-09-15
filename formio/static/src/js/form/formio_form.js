@@ -70,7 +70,7 @@ export class OdooFormioForm extends Component {
                 'addComponent': function(component, comp, parent) {
                     if (component.hasOwnProperty('data') &&
                         component.data.hasOwnProperty('url') && !$.isEmptyObject(component.data.url)) {
-                        component.data.url = self.baseUrl.concat('/formio/form', component.data.url, '/', self.formUuid);
+                        component.data.url = self.baseUrl.concat('/formio/form/',  self.formUuid, component.data.url);
                     }
                     return component;
                 }

@@ -189,7 +189,7 @@ class FormioController(http.Controller):
 
         Form.io configuration (in "Data" tab)
         -------------------------------------
-        - Data Source URL: data
+        - Data Source URL: /data
         - Filter Query: model=res.partner&label=name&domain_fields=city&city=Sittard
         """
 
@@ -243,7 +243,7 @@ class FormioController(http.Controller):
 
         Form.io configuration (in "Data" tab)
         -------------------------------------
-        - Data Source URL: res_data
+        - Data Source URL: /res_data
         - Filter Query: field=order_line.product_id&label=name
         """
 
