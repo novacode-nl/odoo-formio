@@ -56,7 +56,7 @@ var BuilderController = BasicController.extend({
      * @param {Object} [state]
      */
     _pushState: function (state) {
-        state = state || {};
+        var state = state || {};
         var env = this.model.get(this.handle, {env: true});
         state.id = env.currentId;
         this._super(state);

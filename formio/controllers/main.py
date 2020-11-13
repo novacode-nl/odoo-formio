@@ -40,29 +40,21 @@ class FormioController(http.Controller):
         }
         return request.render('formio.formio_builder_embed', values)
 
-    @http.route('/formio/builder/options/<int:builder_id>', type='json', auth='user', website=True)
-    def builder_options(self, builder_id, **kwargs):
+    @http.route('/formio/builder/<int:builder_id>/config', type='json', auth='user', website=True)
+    def builder_config(self, builder_id, **kwargs):
         if not request.env.user.has_group('formio.group_formio_admin'):
             return
         builder = request.env['formio.builder'].browse(builder_id)
+        res = {'schema': {}, 'options': {}}
+
         if builder:
-            options = self._prepare_builder_options(builder)
-        else:
-            options = {}
-        return json.dumps(options)
+            if builder.schema:
+                res['schema'] = json.loads(builder.schema)
+            res['options'] = self._prepare_builder_options(builder)
 
-    @http.route('/formio/builder/schema/<int:builder_id>', type='json', auth='user', website=True)
-    def builder_schema(self, builder_id, **kwargs):
-        if not request.env.user.has_group('formio.group_formio_admin'):
-            return
-        
-        builder = request.env['formio.builder'].browse(builder_id)
-        if builder and builder.schema:
-            return builder.schema
-        else:
-            return {}
+        return res
 
-    @http.route('/formio/builder/save/<model("formio.builder"):builder>', type='json', auth="user", methods=['POST'], website=True)
+    @http.route('/formio/builder/<model("formio.builder"):builder>/save', type='json', auth="user", methods=['POST'], website=True)
     def builder_save(self, builder, **post):
         if not request.env.user.has_group('formio.group_formio_admin'):
             return
@@ -119,22 +111,29 @@ class FormioController(http.Controller):
             values['languages'] = languages
         return request.render('formio.formio_form_embed', values)
 
-    @http.route('/formio/form/<string:uuid>/schema', type='json', auth='user', website=True)
-    def form_schema(self, uuid, **kwargs):
-        form = self._get_form(uuid, 'read')
+    @http.route('/formio/form/<string:form_uuid>/config', type='json', auth='user', website=True)
+    def form_config(self, form_uuid, **kwargs):
+        form = self._get_form(form_uuid, 'read')
+        res = {'schema': {}, 'options': {}, 'config': {}}
+
         if form and form.builder_id.schema:
-            return form.builder_id.schema
-        else:
+            res['schema'] = json.loads(form.builder_id.schema)
+            res['options'] = self._prepare_form_options(form)
+            res['config'] = self._prepare_form_config(form)
+
+        return res
+
+    @http.route('/formio/form/create/<string:builder_uuid>', type='json', auth='user', website=True)
+    def form_config_builder(self, builder_uuid, **kwargs):
+        domain = [('uuid', '=', builder_uuid)]
+        formio_builder = request.env['formio.builder'].sudo().search(domain, limit=1)
+        if not formio_builder or formio_builder.state != BUILDER_STATE_CURRENT:
             return {}
 
-    @http.route('/formio/form/<string:uuid>/options', type='json', auth='user', website=True)
-    def form_options(self, uuid, **kwargs):
-        form = self._get_form(uuid, 'read')
-        if form:
-            options = self._prepare_form_options(form)
+        if formio_builder.schema:
+            return json.loads(formio_builder.schema)
         else:
-            options = {}
-        return json.dumps(options)
+            return {}
 
     @http.route('/formio/form/<string:uuid>/submission', type='json', auth='user', website=True)
     def form_submission(self, uuid, **kwargs):
@@ -190,7 +189,7 @@ class FormioController(http.Controller):
 
         Form.io configuration (in "Data" tab)
         -------------------------------------
-        - Data Source URL: data
+        - Data Source URL: /data
         - Filter Query: model=res.partner&label=name&domain_fields=city&city=Sittard
         """
 
@@ -244,7 +243,7 @@ class FormioController(http.Controller):
 
         Form.io configuration (in "Data" tab)
         -------------------------------------
-        - Data Source URL: res_data
+        - Data Source URL: /res_data
         - Filter Query: field=order_line.product_id&label=name
         """
 
@@ -306,6 +305,12 @@ class FormioController(http.Controller):
             options['language'] = lang.iso_code[:2]
             options['i18n'] = form.i18n_translations()
         return options
+
+    def _prepare_form_config(self, form):
+        config = {
+            'portal_submit_done_url': form.portal_submit_done_url
+        }
+        return config
 
     def _get_form(self, uuid, mode):
         return request.env['formio.form'].get_form(uuid, mode)

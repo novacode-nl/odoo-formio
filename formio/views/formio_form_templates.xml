@@ -6,6 +6,8 @@ See LICENSE file for full licensing details. -->
     <template id="assets_backend_formio_form" name="formio_form assets" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
             <link rel="stylesheet" type="text/css" href="/formio/static/src/css/formio_form.css"/>
+        </xpath>
+        <xpath expr="//script[last()]" position="after">
             <script type="text/javascript" src="/formio/static/src/js/views/formio_form_view.js"></script>
             <script type="text/javascript" src="/formio/static/src/js/views/formio_form_controller.js"></script>
             <script type="text/javascript" src="/formio/static/src/js/views/formio_form_renderer.js"></script>
@@ -17,10 +19,6 @@ See LICENSE file for full licensing details. -->
         &lt;!DOCTYPE html&gt;
         <html>
             <head>
-                <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.contentWindow.min.js"></script>
-                <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
-                <script type="text/javascript" src="/formio/static/src/js/odoo.jsonrpc.js"/>
-                <script type="text/javascript" src="/formio/static/src/js/formio_form_api_backend.js"/>
                 <t t-foreach="formio_css_assets" t-as="css">
                     <link rel="stylesheet" type="text/css" t-att-href="css.url"/>
                 </t>
@@ -28,6 +26,13 @@ See LICENSE file for full licensing details. -->
                     <script type="text/javascript" t-att-src="js.url"></script>
                 </t>
                 <link rel="stylesheet" href="/formio/static/src/css/formio_form_embed.css"/>
+
+                <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.contentWindow.min.js"></script>
+                <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
+                <script type="text/javascript" src="/formio/static/lib/owl.min.js"></script>
+                <script type="text/javascript" src="/formio/static/src/js/odoo.jsonrpc.js"/>
+                <script type="module" src="/formio/static/src/js/form/formio_form.js"/>
+                <script type="module" src="/formio/static/src/js/form/backend_app.js"/>
             </head>
             <body>
                 <t t-if="form">
@@ -74,18 +79,17 @@ See LICENSE file for full licensing details. -->
                         </t>
                     </div>
                 </t>
-                <div class="formio_form_embed_container">
-                    <div id="formio_form"></div>
-                </div>
+                <!-- Form shall be mounted here -->
+                <div id="formio_form_app"/>
                 <div t-if="form and form.show_uuid" class="float-right">
                     <small class="text-muted">UUID: <span t-esc="form.uuid"/></small>
                 </div>
 
                 <t t-if="form">
-                    <input type="hidden" id="form_uuid" name="uuid" t-att-value="form.uuid"/>
+                    <input type="hidden" id="formio_form_uuid" name="uuid" t-att-value="form.uuid"/>
                 </t>
-                <t t-elif="formio_builder_id">
-                    <input type="hidden" id="formio_builder_id" name="formio_builder_id" t-att-value="formio_builder_id"/>
+                <t t-elif="formio_builder_uuid">
+                    <input type="hidden" id="formio_builder_uuid" name="formio_builder_uuid" t-att-value="formio_builder_uuid"/>
                 </t>
             </body>
         </html>

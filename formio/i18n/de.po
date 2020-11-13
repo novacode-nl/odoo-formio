@@ -221,7 +221,7 @@ msgstr "Erlaube löschen"
 #. module: formio
 #: model:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid ""
-"Are you sure? Modifying the Builder causes existing forms to be invalid."
+"Are you sure? Modifying the Form Builder causes existing forms to be invalid."
 msgstr ""
 "Sind Sie sich sicher? Wenn Sie diese Vorlage bearbeiten, werden vorhandene "
 "Formulare ungültig."

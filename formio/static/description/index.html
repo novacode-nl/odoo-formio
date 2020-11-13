@@ -174,6 +174,102 @@
 <section class="oe_container">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">7.3</h4>
+    <ul>
+      <li>
+        Configurable redirect, after (submit) submission of Portal and Public (website) Form:<br/>
+        - Configuration in Form Builder<br/>
+        - Handle whether to redirect or reload (new) Form.
+      </li>
+      <li>
+        Redirect after Submit-done configuration for Portal and Public (website) Forms.
+      </li>
+    </ul>
+    <h4 class="oe_mb16">7.2</h4>
+    <ul>
+      <li>
+        Fix Form not loaded. Javascript workaround (known) browser incompatibility errors.<br/>
+        - Mac: Safari 12.x, 13.1<br/>
+        - iOS: Safari<br/><br/>
+        Issues:<br/>
+        - Safari 13.1 on Mac experienced error: &quot;unexpected token '='. expected an opening '(' before a method's parameter list&quot;<br/>
+        - iOS issue solved, but details not debugged. Dev Tools not ready/present in iOS browsers.
+      </li>
+    </ul>
+    <h4 class="oe_mb16">7.1</h4>
+    <ul>
+      <li>
+        Fix frontend JavaScript: Execute <code>loadForm()</code> after the DOM has been <code>mounted()</code>, not upon (async) <code>willStart()</code>.<br/>
+        (This of course failed to bootstrap the (formio) App when the DOM wasn't loaded, which results in nothing).
+      </li>
+      <li>
+        Improve frontend JavaScript: Add <code>initForm()</code> hook and implement specific constructor/object properties in the App classes (backend_app.js, public_app.js, public_create_app.js).<br/>
+        E.g. to set <code>config_url = '/formio/public/form/' + this.form_uuid + '/config';</code>
+      </li>
+    </ul>
+    <h4 class="oe_mb16">7.0</h4>
+    <ul>
+      <li>
+        Frontend rebuild with Owl (Javascript framework) - Form Builder and Form:<br/>
+        - Use the Owl JavaScript framework, to abstract the Form component into a Component class.<br/>
+        (Owl: <code>https://odoo.github.io/owl</code>)<br/>
+        - JavaScript modules (export/import) to bind the Owl classes into specific backend and public Form (Owl) Apps.<br/>
+        - This also breaks/ends support for Internet Explorer, which is already published EOL.
+      </li>
+      <li>
+        Changed some endpoint URLs (again, to improve URL conventions).
+      </li>
+    </ul>
+    <h4 class="oe_mb16">6.1</h4>
+    <ul>
+      <li>
+        Version GitHub tags: Add scheduled action (ir.cron daily) which checks and registers new client/library Versions (GitHub tags).
+      </li>
+      <li>
+        Version GitHub tags: Add field "Installed on", which stores the installation datetime.
+      </li>
+      <li>
+        Version GitHub tags: Highlight installed version records with color (success/green).
+      </li>
+    </ul>
+    <h4 class="oe_mb16">6.0</h4>
+    <ul>
+      <li>
+        New feature: Form.io (client/library) Version Checker, Importer and Installer tool.<br/>
+        Now administrators can check, import (from GitHub) and install new releases/versions by a single click in Odoo.<br/>
+        Soon a scheduled Cron action shall be implemeneted which does the (default daily) checking and importing.
+      </li>
+      <li>
+        New feature: Configuration setting to specify the default Form.io (client/library) Version for any new Form Builder.
+      </li>
+    </ul>
+    <h4 class="oe_mb16">5.3</h4>
+    <ul>
+      <li>
+        New Components API feature: create a Partner after Form submission. Possibility to add the Partner to Followers of the Form record.<br/>
+        Configuration in Form Builder: Partner field/component (email, name), Add to Followers (checkbox/boolean).
+      </li>
+    </ul>
+    <h4 class="oe_mb16">5.2</h4>
+    <ul>
+      <li>
+        Add Form Builder UUID (field).
+      </li>
+      <li>
+        Data migration: update all <code>formio_builder</code> records, set UUID (field) with generated value.
+      </li>
+      <li>
+        Change the public Form loading and submit (URLs, handling) from ID to UUID.<br/>
+        This slightly protects from abuse of public Forms (some obfuscation of the real id).
+        <code>https://github.com/novacode-nl/odoo-formio/issues/46</code>
+      </li>
+    </ul>
+    <h4 class="oe_mb16">5.1</h4>
+    <ul>
+      <li>
+        New tab <em>Form.io Components</em> in Form Builder form-view.
+      </li>
+    </ul>
     <h4 class="oe_mb16">5.0</h4>
     <ul>
       <li>
@@ -188,6 +284,10 @@
         Change <code>formio.form</code> toplevel URLs: remove the <code>/root</code> suffix.<br/>
         This was introduced in 1.8. Seems not to be an issue anymore.
       </li>
+    </ul>
+    <h4 class="oe_mb16">4.5</h4>
+    <ul>
+      <li>Add optional UUID (field) into Forms list view</li>
     </ul>
     <h4 class="oe_mb16">4.4</h4>
     <ul>
@@ -264,7 +364,7 @@
     <h4 class="oe_mb16">3.5</h4>
     <ul>
       <li>Add formio.js <strong>v4.9.26</strong> assets <code>https://github.com/formio/formio.js/releases/tag/v4.9.26</code></li>
-      <li>User in group <em>"Form.io Admin</em> can edit the Form it's submission data, for a new Form (if ain't stored).
+      <li>User in group <em>"Form.io Admin"</em> can edit the Form it's submission data, for a new Form (if ain't stored).
     </ul>
     <h4 class="oe_mb16">3.4</h4>
     <ul>
@@ -504,7 +604,7 @@
     </ul>
     <h4 class="oe_mb16">0.1</h4>
     <ul>
-      <li>Initial version</li>
+      <li>Initial version.</li>
     </ul>
   </div>
 </section>

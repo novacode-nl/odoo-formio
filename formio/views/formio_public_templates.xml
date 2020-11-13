@@ -9,8 +9,10 @@ See LICENSE file for full licensing details. -->
             <head>
                 <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.contentWindow.min.js"></script>
                 <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
+                <script type="text/javascript" src="/formio/static/lib/owl.min.js"></script>
                 <script type="text/javascript" src="/formio/static/src/js/odoo.jsonrpc.js"/>
-                <script type="text/javascript" src="/formio/static/src/js/formio_form_api_public.js"/>
+                <script type="module" src="/formio/static/src/js/form/formio_form.js"/>
+                <script type="module" src="/formio/static/src/js/form/public_app.js"/>
                 <t t-foreach="formio_css_assets" t-as="css">
                     <link rel="stylesheet" type="text/css" t-att-href="css.url"/>
                 </t>
@@ -58,15 +60,13 @@ See LICENSE file for full licensing details. -->
                         </t>
                     </div>
                 </t>
-                <div class="formio_form_embed_container">
-                    <div id="formio_form"></div>
-                </div>
+                <!-- Form shall be mounted here -->
+                <div id="formio_form_app"/>
+
                 <div t-if="form.show_uuid" class="float-right">
                     <small class="text-muted">UUID: <span t-esc="form.uuid"/></small>
                 </div>
-                <input type="hidden" id="form_uuid" name="uuid" t-att-value="form.uuid"/>
-                <!-- This is a just hint. Security by any means is checked in the (backend) request handler -->
-                <input type="hidden" id="form_public" name="form_public" t-att-value="form.public"/>
+                <input type="hidden" id="formio_form_uuid" name="uuid" t-att-value="form.uuid"/>
             </body>
         </html>
     </template>
@@ -77,8 +77,11 @@ See LICENSE file for full licensing details. -->
             <head>
                 <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.contentWindow.min.js"></script>
                 <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
+                <script type="text/javascript" src="/formio/static/lib/owl.min.js"></script>
+                <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
                 <script type="text/javascript" src="/formio/static/src/js/odoo.jsonrpc.js"/>
-                <script type="text/javascript" src="/formio/static/src/js/formio_form_api_public_create.js"/>
+                <script type="module" src="/formio/static/src/js/form/formio_form.js"/>
+                <script type="module" src="/formio/static/src/js/form/public_create_app.js"/>
                 <t t-foreach="formio_css_assets" t-as="css">
                     <link rel="stylesheet" type="text/css" t-att-href="css.url"/>
                 </t>
@@ -99,15 +102,13 @@ See LICENSE file for full licensing details. -->
                         </t>
                     </div>
                 </t>
-                <div class="formio_form_embed_container">
-                    <div id="formio_form"></div>
-                </div>
 
-                <t t-if="formio_builder_id">
-                    <input type="hidden" id="formio_builder_id" name="formio_builder_id" t-att-value="formio_builder_id"/>
+                <!-- Form shall be mounted here -->
+                <div id="formio_form_app"/>
+
+                <t t-if="formio_builder_uuid">
+                    <input type="hidden" id="formio_builder_uuid" name="formio_builder_uuid" t-att-value="formio_builder_uuid"/>
                 </t>
-                <!-- This is a just hint. Security by any means is checked in the (backend) request handler -->
-                <input type="hidden" id="public_form_create" name="public_form_create" t-att-value="public_form_create"/>
             </body>
         </html>
     </template>

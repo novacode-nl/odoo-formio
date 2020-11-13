@@ -5,6 +5,7 @@ import ast
 import json
 import re
 import requests
+import uuid
 
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
@@ -27,7 +28,6 @@ class Builder(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     _rec_name = 'display_name_full'
-    _order = 'name ASC, version DESC'
 
     _interval_selection = {'minutes': 'Minutes', 'hours': 'Hours', 'days': 'Days'}
 
@@ -35,13 +35,16 @@ class Builder(models.Model):
         "Name", required=True, track_visibility='onchange',
         help="""Identifies this specific form. This name can be used in APIs. \
         Use only ASCII letters, digits, "-" or "_".""")
+    uuid = fields.Char(
+        default=lambda self: self._default_uuid(), required=True, readonly=True, copy=False,
+        string='UUID')
     title = fields.Char(
         "Title", required=True,
         help="The form title in the current language", track_visibility='onchange')
     description = fields.Text("Description")
     formio_version_id = fields.Many2one(
         'formio.version', string='Form.io Version', required=True,
-        track_visibility='onchange',
+        default=lambda self: self._default_formio_version_id(), track_visibility='onchange',
         help="""Loads the specific Form.io Javascript API/libraries version (sourcecode: \https://github.com/formio/formio.js)""")
     formio_version_name = fields.Char(related='formio_version_id.name', string='Form.io version')
     formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='Form.io CSS')
@@ -74,25 +77,49 @@ class Builder(models.Model):
     user_id = fields.Many2one('res.users', string='Assigned user', track_visibility='onchange')
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal", track_visibility='onchange', help="Form is accessible by assigned portal user")
-    portal_submit_done_url = fields.Char()
+    portal_submit_done_url = fields.Char(string='Portal Submit-done URL', track_visibility='onchange')
     public = fields.Boolean("Public", track_visibility='onchange', help="Form is public accessible (e.g. used in Shop checkout, Events registration")
-    public_access_interval_number = fields.Integer(default=30, track_visibility='onchange')
-    public_access_interval_type = fields.Selection(list(_interval_selection.items()), default='minutes')
+    public_submit_done_url = fields.Char(string='Public Submit-done URL', track_visibility='onchange')
+    public_access_interval_number = fields.Integer(default=30, track_visibility='onchange', help="Public access to submitted Form shall be rejected after expiration of the configured time interval.")
+    public_access_interval_type = fields.Selection(list(_interval_selection.items()), default='minutes', track_visibility='onchange')
     view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
     show_form_title = fields.Boolean("Show Form Title", track_visibility='onchange', help="Show Form Title in the Form header.", default=True)
     show_form_id = fields.Boolean("Show Form ID", track_visibility='onchange', help="Show Form ID in the Form header.", default=True)
     show_form_uuid = fields.Boolean("Show Form UUID", track_visibility='onchange', help="Show Form UUID in the Form.", default=True)
     show_form_state = fields.Boolean("Show Form State", track_visibility='onchange', help="Show the state in the Form header.", default=True)
-    show_form_user_metadata = fields.Boolean("Show User Metadata", track_visibility='onchange', help="Show submission and assigned user metadata in the Form header.", default=True)
+    show_form_user_metadata = fields.Boolean(
+        "Show User Metadata", track_visibility='onchange', help="Show submission and assigned user metadata in the Form header.", default=True)
     wizard = fields.Boolean("Wizard", track_visibility='onchange')
     translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations')
     allow_force_update_state_group_ids = fields.Many2many(
         'res.groups', string='Allow groups to force update State',
         help="User groups allowed to manually force an update of the Form state."
              "If no groups are specified it's allowed for every user.")
+    component_partner_name = fields.Char(string='Component Partner Name', track_visibility='onchange')
+    component_partner_email = fields.Char(string='Component Partner Email', track_visibility='onchange')
+    component_partner_add_follower = fields.Boolean(
+        string='Component Partner Add to Followers', track_visibility='onchange', help='Add determined partner to followers of the Form.')
 
     def _states_selection(self):
         return STATES
+
+    @api.model
+    def _default_uuid(self):
+        return str(uuid.uuid4())
+
+    @api.model
+    def _default_formio_version_id(self):
+        Param = self.env['ir.config_parameter'].sudo()
+        default_version = Param.get_param('formio.default_version')
+        if default_version:
+            domain = [('name', '=', default_version)]
+            version = self.env['formio.version'].search(domain, limit=1)
+            if version:
+                return version.id
+            else:
+                return False
+        else:
+            return False
 
     @api.constrains('name')
     def constaint_check_name(self):
@@ -274,11 +301,11 @@ class Builder(models.Model):
         }
 
     @api.model
-    def get_public_builder(self, id):
+    def get_public_builder(self, uuid):
         """ Verifies public (e.g. website) access to forms and return builder or False. """
 
         domain = [
-            ('id', '=', id),
+            ('uuid', '=', uuid),
             ('public', '=', True),
         ]
         builder = self.sudo().search(domain, limit=1)

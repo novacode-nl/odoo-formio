@@ -2,7 +2,7 @@ body {
     margin-right: 12px;
 }
 
-.formio_builder_embed_container {
+#formio_builder_app {
     margin: 0 auto;
     padding-left: 4px;
     padding-right: 4px;

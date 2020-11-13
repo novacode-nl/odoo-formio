@@ -12,6 +12,8 @@ See LICENSE file for full licensing details. -->
                   decoration-success="state in ('COMPLETE')"
                   decoration-muted="state in ('CANCEL')">
                 <field name="id"/>
+                <field name="uuid"/>
+                <field name="sequence"/>
                 <field name="title"/>
                 <field name="builder_id"/>
                 <field name="user_id"/>
@@ -24,8 +26,10 @@ See LICENSE file for full licensing details. -->
                 <field name="public_access"/>
                 <field name="public_create"/>
                 <field name="res_model_name" string="Resource Type"/>
+                <field name="initial_res_model_name" string="Resource Type #1"/>
                 <field name="res_name"/>
                 <field name="res_partner_id"/>
+                <field name="write_date"/>
                 <field name="create_date"/>
             </tree>
         </field>
@@ -183,21 +187,7 @@ See LICENSE file for full licensing details. -->
                     <notebook>
                         <page string="Settings" name="settings">
                             <group>
-                                <group string="Appearance" name="appearance_settings" colspan="2">
-                                    <group>
-                                        <field name="show_title" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
-                                        <field name="show_state" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
-                                        <field name="show_user_metadata" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
-                                    </group>
-                                    <group>
-                                        <field name="show_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
-                                        <field name="show_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
-                                    </group>
-                                </group>
                                 <group name="access_settings" string="Access">
-                                    <field name="portal_share" groups="formio.group_formio_admin"/>
-                                </group>
-                                <group name="public_access_settings" string="Public Access">
                                     <field name="public_share" groups="formio.group_formio_admin"/>
                                     <field name="public_access_date_from" groups="formio.group_formio_admin" attrs="{'required': [('public_share', '=', True)]}"/>
                                     <label for="public_access_interval_number" string="Public Access Expire"/>
@@ -206,6 +196,13 @@ See LICENSE file for full licensing details. -->
                                         <field name="public_access_interval_type" class="oe_inline ml-2" groups="formio.group_formio_admin" attrs="{'required': [('public_share', '=', True)]}"/>
                                     </div>
                                     <field name="public_access" groups="formio.group_formio_admin"/>
+                                </group>
+                                <group string="Appearance" name="appearance_settings">
+                                    <field name="show_title" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                    <field name="show_state" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                    <field name="show_user_metadata" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                    <field name="show_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                    <field name="show_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
                                 </group>
                             </group>
                         </page>

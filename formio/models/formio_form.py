@@ -55,6 +55,7 @@ class Form(models.Model):
     url = fields.Char(compute='_compute_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     act_window_multi_url = fields.Char(compute='_compute_act_window_url', readonly=True)
+    partner_id = fields.Many2one('res.partner', readonly=True, string='Partner')
     initial_res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model #1')
     initial_res_model_name = fields.Char(related='initial_res_model_id.name', readonly=True, string='Resource Name #1')
     initial_res_model = fields.Char(related='initial_res_model_id.model', readonly=True, string='Resource Model Name #1')
@@ -118,6 +119,13 @@ class Form(models.Model):
     def create(self, vals):
         vals = self._prepare_create_vals(vals)
         res = super(Form, self).create(vals)
+        res._after_create(vals)
+        return res
+
+    @api.multi
+    def write(self, vals):
+        res = super(Form, self).write(vals)
+        self._after_write(vals)
         return res
 
     def _prepare_create_vals(self, vals):
@@ -150,6 +158,36 @@ class Form(models.Model):
         if not vals.get('res_name'):
             vals['res_name'] = builder.res_model_id.name
         return vals
+
+    def _after_create(self, vals):
+        self._process_api_components(vals)
+
+    def _after_write(self, vals):
+        self._process_api_components(vals)
+
+    def _process_api_components(self, vals):
+        if vals.get('submission_data') and self.builder_id.component_partner_email:
+            submission_data = self._decode_data(vals['submission_data'])
+
+            if submission_data.get(self.builder_id.component_partner_email):
+                partner_email = submission_data.get(self.builder_id.component_partner_email)
+                partner_model = self.env['res.partner']
+                partner = partner_model.search([('email', '=', partner_email)])
+
+                if not partner:
+                    # Only create partner, don't update fields if exist already!
+                    default_partner_vals = {'email': partner_email}
+                    partner_vals = self._prepare_partner_vals(submission_data, default_partner_vals)
+                    partner = partner_model.create(partner_vals)
+                self.write({'partner_id': partner.id})
+
+                if self.builder_id.component_partner_add_follower:
+                    self.message_subscribe(partner_ids=partner.ids)
+
+    def _prepare_partner_vals(self, submission_data, partner_vals):
+        if submission_data.get(self.builder_id.component_partner_name):
+            partner_vals['name'] = submission_data.get(self.builder_id.component_partner_name)
+        return partner_vals
 
     def _get_builder_from_id(self, builder_id):
         return self.env['formio.builder'].browse(builder_id)
