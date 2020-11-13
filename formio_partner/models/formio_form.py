@@ -9,8 +9,6 @@ from odoo.addons.formio.utils import get_field_selection_label
 class Form(models.Model):
     _inherit = 'formio.form'
 
-    base_res_partner_id = fields.Many2one('res.partner', readonly=True, string='Partner')
-
     def _prepare_create_vals(self, vals):
         vals = super(Form, self)._prepare_create_vals(vals)
         builder = self._get_builder_from_id(vals.get('builder_id'))
@@ -28,7 +26,7 @@ class Form(models.Model):
 
         vals['res_act_window_url'] = url
         vals['res_name'] = partner.name
-        vals['base_res_partner_id'] = res_id
+        vals['partner_id'] = res_id
         vals['res_partner_id'] = res_id
         return vals
 

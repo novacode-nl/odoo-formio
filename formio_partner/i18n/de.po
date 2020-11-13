@@ -51,6 +51,6 @@ msgid "Forms"
 msgstr "Formulare"
 
 #. module: formio_partner
-#: model:ir.model.fields,field_description:formio_partner.field_formio_form_base_res_partner_id
+#: model:ir.model.fields,field_description:formio_partner.field_formio_form_partner_id
 msgid "Partner"
 msgstr "Partner"
