@@ -4,7 +4,7 @@
 {
     'name': 'Form.io QWeb Reports',
     'summary': 'Generate (PDF) reports for every Form',
-    'version': '0.9',
+    'version': '0.10',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
