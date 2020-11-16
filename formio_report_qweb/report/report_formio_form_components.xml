@@ -200,7 +200,7 @@ See LICENSE file for full copyright and licensing details.
 
     <template id="file_component">
         <t t-if="o._formio.components[component['key']].raw['image']">
-            <t t-foreach=" o._formio.components[component['key']].value" t-as="image">
+            <t t-foreach="o._formio.components[component['key']].value" t-as="image">
                 <div>
                     <img t-att-src="image['url']" t-att-style="'width: ' + str(o._formio.components[component['key']].raw['imageSize']) + 'px;'"/>
                 </div>
