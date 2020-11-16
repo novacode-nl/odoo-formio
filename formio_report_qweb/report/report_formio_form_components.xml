@@ -202,13 +202,16 @@ See LICENSE file for full copyright and licensing details.
     </template>
 
     <template id="file_component">
-        <t t-if="o._formio.components[component['key']].raw['image']">
-            <t t-foreach="o._formio.components[component['key']].value" t-as="image">
-                <div>
-                    <img t-att-src="image['url']" t-att-style="'width: ' + str(o._formio.components[component['key']].raw['imageSize']) + 'px;'"/>
-                </div>
+        <div class="mw-100 mb-3 formio_file_component">
+            <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
+            <t t-if="o._formio.components[component['key']].raw['image']">
+                <t t-foreach="o._formio.components[component['key']].value" t-as="image">
+                    <div>
+                        <img t-att-src="image['url']" t-att-style="'width: ' + str(o._formio.components[component['key']].raw['imageSize']) + 'px;'"/>
+                    </div>
+                </t>
             </t>
-        </t>
+        </div>
     </template>
 
     <template id="component_not_implemented">
