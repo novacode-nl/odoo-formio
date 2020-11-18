@@ -152,10 +152,8 @@ class Builder(models.Model):
             raise ValidationError("%s already has a record with version: %d. Use button/action: Create New Version."
                                   % (self.name, self.version))
 
-    @api.multi
     @api.returns('self', lambda value: value.id)
     def copy(self, default=None):
-        self.ensure_one()
         name_suffix = fields.Datetime.to_string(fields.Datetime.now())
         name_suffix = name_suffix.replace(' ', '_')
         name_suffix = name_suffix.replace(':', '-')
