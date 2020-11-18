@@ -152,6 +152,16 @@ class Builder(models.Model):
             raise ValidationError("%s already has a record with version: %d. Use button/action: Create New Version."
                                   % (self.name, self.version))
 
+    @api.returns('self', lambda value: value.id)
+    def copy(self, default=None):
+        name_suffix = fields.Datetime.to_string(fields.Datetime.now())
+        name_suffix = name_suffix.replace(' ', '_')
+        name_suffix = name_suffix.replace(':', '-')
+
+        default = default or {}
+        default['name'] = '%s_%s' % (self.name, name_suffix)
+        return super(Builder, self).copy(default=default)
+
     def _decode_schema(self, schema):
         """ Convert schema (str) to dictionary
 
