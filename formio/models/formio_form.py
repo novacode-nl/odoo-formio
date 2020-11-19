@@ -203,6 +203,11 @@ class Form(models.Model):
         }
 
     @api.multi
+    def action_submit(self):
+        """ Function is called everytime a form is submitted. """
+        pass
+
+    @api.multi
     def action_draft(self):
         self.ensure_one()
         if not self.allow_force_update_state:
