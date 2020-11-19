@@ -7,6 +7,7 @@ See LICENSE file for full licensing details. -->
         &lt;!DOCTYPE html&gt;
         <html>
             <head>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
                 <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.contentWindow.min.js"></script>
                 <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
                 <script type="text/javascript" src="/formio/static/lib/owl.min.js"></script>
@@ -75,6 +76,7 @@ See LICENSE file for full licensing details. -->
         &lt;!DOCTYPE html&gt;
         <html>
             <head>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
                 <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.contentWindow.min.js"></script>
                 <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
                 <script type="text/javascript" src="/formio/static/lib/owl.min.js"></script>

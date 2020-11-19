@@ -19,6 +19,7 @@ See LICENSE file for full licensing details. -->
         &lt;!DOCTYPE html&gt;
         <html>
             <head>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
                 <t t-foreach="formio_css_assets" t-as="css">
                     <link rel="stylesheet" type="text/css" t-att-href="css.url"/>
                 </t>
