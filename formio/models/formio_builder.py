@@ -182,7 +182,7 @@ class Builder(models.Model):
         if self.wizard:
             if self.schema:
                 schema = self._decode_schema(self.schema)
-                schema['display'] = '"wizard"'
+                schema['display'] = "wizard"
                 self.schema = json.dumps(schema)
             else:
                 self.schema = '{"display": "wizard"}'
