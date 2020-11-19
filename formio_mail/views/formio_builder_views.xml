@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <record id="view_formio_builder_form_inherit" model="ir.ui.view">
+        <field name="name">formio.builder.inherit</field>
+        <field name="model">formio.builder</field>
+        <field name="inherit_id" ref="formio.view_formio_builder_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[last()]" position="after">
+                <page name="mail" string="Mail">
+                    <group name="mail_recipients" string="Recipients" colspan="2">
+                        <field name="mail_recipients_partner" string="Partner" widget="many2many_tags"/>
+                        <field name="mail_recipients" string="Addresses"/>
+                        <field name="mail_recipients_form" string="Form"/>
+                    </group>
+                    <group name="message" string="Message" col="6" colspan="2">
+                        <field name="mail_subject" string="Subject" colspan="6"/>
+                        <br/>
+                        <field name="mail_body_html" string="Body" widget="html" nolabel="1" colspan="6"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
