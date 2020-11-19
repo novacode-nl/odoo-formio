@@ -39,7 +39,7 @@ class App extends Component {
                     console.log('[Form.io] Saving Builder...');
                     $.jsonRpc.request(self.saveUrl, 'call', {
                         'builder_id': self.builderId,
-                        'schema': self.schema
+                        'schema': res
                     }).then(function() {
                         console.log('[Form.io] Builder sucessfully saved.');
                     });
