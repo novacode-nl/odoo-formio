@@ -464,17 +464,17 @@ class Form(models.Model):
         # Formio GUI/API translations
         for trans in self.builder_id.formio_version_id.translations:
             if trans.lang_id.iso_code not in i18n:
-                i18n[trans.lang_id.iso_code[:2]] = {trans.property: trans.value}
+                i18n[trans.lang_id.iso_code] = {trans.property: trans.value}
             else:
-                i18n[trans.lang_id.iso_code[:2]][trans.property] = trans.value
+                i18n[trans.lang_id.iso_code][trans.property] = trans.value
         # Form Builder translations (labels etc).
         # These could override the former GUI/API translations, but
         # that's how the Javascript API works.
         for trans in self.builder_id.translations:
             if trans.lang_id.iso_code not in i18n:
-                i18n[trans.lang_id.iso_code[:2]] = {trans.source: trans.value}
+                i18n[trans.lang_id.iso_code] = {trans.source: trans.value}
             else:
-                i18n[trans.lang_id.iso_code[:2]][trans.source] = trans.value
+                i18n[trans.lang_id.iso_code][trans.source] = trans.value
         return i18n
 
 

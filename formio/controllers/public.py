@@ -27,42 +27,16 @@ class FormioPublicController(http.Controller):
             msg = 'Form UUID %s' % uuid
             return request.not_found(msg)
 
-        ## TODO languages ##
-        ## Determine lang.iso from request.__dict__
-
-        # Needed to update language
-        # context = request.env.context.copy()
-        # context.update({'lang': request.env.user.lang})
-        # request.env.context = context
-
-        # # Get active languages used in Builder translations.
-        # query = """
-        #     SELECT
-        #       DISTINCT(fbt.lang_id) AS lang_id
-        #     FROM
-        #       formio_builder_translation AS fbt
-        #       INNER JOIN res_lang AS l ON l.id = fbt.lang_id
-        #     WHERE
-        #       fbt.builder_id = {builder_id}
-        #       AND l.active = True
-        # """.format(builder_id=form.builder_id.id)
-
-        # request.env.cr.execute(query)
-        # builder_lang_ids = [r[0] for r in request.env.cr.fetchall()]
-
-        # # Always include english (en_US).
-        # domain = ['|', ('id', 'in', builder_lang_ids), ('code', 'in', [request.env.user.lang, 'en_US'])]
-        # languages = request.env['res.lang'].with_context(active_test=False).search(domain, order='name asc')
-        # languages = languages.filtered(lambda r: r.id in builder_lang_ids or r.code == 'en_US')
-
         values = {
             'languages': [], # initialize, otherwise template/view crashes.
             'form': form,
             'formio_css_assets': form.builder_id.formio_css_assets,
             'formio_js_assets': form.builder_id.formio_js_assets,
         }
-        # if len(languages) > 1:
-        #     values['languages'] = languages
+
+        languages = self._get_active_languages(form_uuid=uuid).get('languages')
+        if len(languages) > 1:
+            values['languages'] = languages
         return request.render('formio.formio_form_public_embed', values)
 
     @http.route('/formio/public/form/<string:form_uuid>/config', type='json', auth='public', website=True)
@@ -133,34 +107,6 @@ class FormioPublicController(http.Controller):
         #     msg = 'Form Builder UUID %s not current/published' % builder_uuid
         #     return request.not_found(msg)
 
-        ## TODO languages ##
-        ## Determine lang.iso from request.__dict__
-
-        # Needed to update language
-        # context = request.env.context.copy()
-        # context.update({'lang': request.env.user.lang})
-        # request.env.context = context
-
-        # # Get active languages used in Builder translations.
-        # query = """
-        #     SELECT
-        #       DISTINCT(fbt.lang_id) AS lang_id
-        #     FROM
-        #       formio_builder_translation AS fbt
-        #       INNER JOIN res_lang AS l ON l.id = fbt.lang_id
-        #     WHERE
-        #       fbt.builder_uuid = {builder_uuid}
-        #       AND l.active = True
-        # """.format(builder_uuid=form.builder_uuid.id)
-
-        # request.env.cr.execute(query)
-        # builder_lang_ids = [r[0] for r in request.env.cr.fetchall()]
-
-        # # Always include english (en_US).
-        # domain = ['|', ('id', 'in', builder_lang_ids), ('code', 'in', [request.env.user.lang, 'en_US'])]
-        # languages = request.env['res.lang'].with_context(active_test=False).search(domain, order='name asc')
-        # languages = languages.filtered(lambda r: r.id in builder_lang_ids or r.code == 'en_US')
-
         values = {
             'languages': [], # initialize, otherwise template/view crashes.
             'builder': formio_builder,
@@ -169,11 +115,12 @@ class FormioPublicController(http.Controller):
             'formio_css_assets': formio_builder.formio_css_assets,
             'formio_js_assets': formio_builder.formio_js_assets,
         }
-        # if len(languages) > 1:
-        #     values['languages'] = languages
-        
-        return request.render('formio.formio_form_public_create_embed', values)
 
+        languages = self._get_active_languages(builder_uuid=builder_uuid).get('languages')
+        if len(languages) > 1:
+            values['languages'] = languages
+
+        return request.render('formio.formio_form_public_create_embed', values)
 
     @http.route('/formio/public/form/create/<string:builder_uuid>/config', type='json', auth='none', website=True)
     def public_form_create_config(self, builder_uuid, **kwargs):
@@ -185,8 +132,7 @@ class FormioPublicController(http.Controller):
 
         if formio_builder.schema:
             res['schema'] = json.loads(formio_builder.schema)
-            #res['options'] = self._prepare_form_options(form)
-            res['options'] = {'public_create': True, 'embedded': True}
+            res['options'] = self._prepare_form_builder_options(formio_builder)
             res['config'] = self._prepare_form_config(formio_builder)
 
         return res
@@ -225,8 +171,6 @@ class FormioPublicController(http.Controller):
 
     def _prepare_form_options(self, form):
         options = {}
-        context = request.env.context
-        Lang  = request.env['res.lang']
 
         if form.state in [FORM_STATE_COMPLETE, FORM_STATE_CANCEL]:
             options['readOnly'] = True
@@ -235,10 +179,19 @@ class FormioPublicController(http.Controller):
                 options['renderMode'] = 'html'
                 options['viewAsHtml'] = True # backwards compatible (version < 4.x)?
 
-        lang = Lang._lang_get(request.env.user.lang)
+        lang = self._get_active_languages(form_uuid=form.uuid).get('lang')
         if lang:
-            options['language'] = lang.iso_code[:2]
+            options['language'] = lang.iso_code
             options['i18n'] = form.i18n_translations()
+        return options
+
+    def _prepare_form_builder_options(self, formio_builder):
+        options = {'public_create': True, 'embedded': True}
+        lang = self._get_active_languages(builder_uuid=formio_builder.uuid).get('lang')
+        if lang:
+            options['language'] = lang.iso_code
+            options['i18n'] = formio_builder.i18n_translations()
+
         return options
 
     def _prepare_form_config(self, builder):
@@ -255,3 +208,30 @@ class FormioPublicController(http.Controller):
 
     def _check_public_form(self):
         return request._uid == request.env.ref('base.public_user').id or request._uid
+
+    def _get_active_languages(self, form_uuid=None, builder_uuid=None):
+        form = self._get_public_form(form_uuid, self._check_public_form())
+        formio_builder = self._get_public_builder(builder_uuid)
+
+        # Get active languages used in Builder translations.
+        query = """
+            SELECT
+              DISTINCT(fbt.lang_id) AS lang_id
+            FROM
+              formio_builder_translation AS fbt
+              INNER JOIN res_lang AS l ON l.id = fbt.lang_id
+            WHERE
+              fbt.builder_id = {builder_id}
+              AND l.active = True
+        """.format(builder_id=form.builder_id.id if form else formio_builder.id)
+
+        request.env.cr.execute(query)
+        builder_lang_ids = [r[0] for r in request.env.cr.fetchall()]
+
+        # Always include english (en_US).
+        domain = ['|', ('id', 'in', builder_lang_ids), ('code', '=', 'en_US')]
+        languages = request.env['res.lang'].with_context(active_test=False).search(domain, order='name asc')
+        languages = languages.filtered(lambda r: r.id in builder_lang_ids or r.code == 'en_US')
+        # TODO If more than one language translation file exists, how to choose the preferred language?
+        lang = request.env['res.lang'].with_context(active_test=False).search([('id', 'in', builder_lang_ids)], order='name asc', limit=1)
+        return {'languages': languages, 'lang': lang}
