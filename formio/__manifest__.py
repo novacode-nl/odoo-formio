@@ -30,6 +30,7 @@
         'security/ir_rule.xml',
         # views
         'views/formio_builder_views.xml',
+        'views/formio_builder_js_options_views.xml',
         'views/formio_form_views.xml',
         'views/formio_res_model_views.xml',
         'views/formio_translation_source_views.xml',

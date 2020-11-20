@@ -353,5 +353,16 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_write" eval="0"/>
             <field name="perm_unlink" eval="0"/>
         </record>
+
+        <!-- Formio Builder JavaScript Options -->
+        <record id="access_formio_builder_js_options_admin" model="ir.model.access">
+            <field name="name">formio.builder.js.options: Admin</field>
+            <field name="model_id" ref="formio.model_formio_builder_js_options"/>
+            <field name="group_id" ref="formio.group_formio_admin"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
     </data>
 </odoo>

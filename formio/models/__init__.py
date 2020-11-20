@@ -2,6 +2,7 @@
 # See LICENSE file for full licensing details.
 
 from . import formio_builder
+from . import formio_builder_js_options
 from . import formio_builder_translation
 from . import formio_default_asset_css
 from . import formio_form

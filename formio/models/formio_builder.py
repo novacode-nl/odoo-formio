@@ -127,7 +127,9 @@ class Builder(models.Model):
     @api.model
     def _default_formio_js_options(self):
         Param = self.env['ir.config_parameter'].sudo()
-        return Param.get_param('formio.default_builder_js_options')
+        default_builder_js_options_id = Param.get_param('formio.default_builder_js_options_id')
+        builder_js_options = self.env['formio.builder.js.options'].browse(int(default_builder_js_options_id))
+        return builder_js_options.value
 
     @api.constrains('name')
     def constaint_check_name(self):
