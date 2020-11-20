@@ -49,9 +49,10 @@ class Builder(models.Model):
     formio_version_name = fields.Char(related='formio_version_id.name', string='Form.io version')
     formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='Form.io CSS')
     formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='Form.io Javascript')
+    formio_js_options_id = fields.Many2one('formio.builder.js.options', string='Form.io Javascript Options template', store=False)
     formio_js_options = fields.Text(
         default=lambda self: self._default_formio_js_options(),
-        string='Form.io Javascript options')
+        string='Form.io Javascript Options')
     res_model_id = fields.Many2one(
         "ir.model", compute='_compute_res_model_id', store=True,
         string="Model", help="Model as resource this form represents or acts on")
@@ -186,6 +187,11 @@ class Builder(models.Model):
         except:
             schema = ast.literal_eval(schema)
         return schema
+
+    @api.onchange('formio_js_options_id')
+    def _onchange_formio_js_options_id(self):
+        if self.formio_js_options_id:
+            self.formio_js_options = self.formio_js_options_id.value
 
     @api.onchange('wizard')
     def _onchange_wizard(self):
