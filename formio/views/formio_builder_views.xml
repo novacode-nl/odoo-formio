@@ -195,6 +195,27 @@ See LICENSE file for full licensing details. -->
                         </page>
                         <page string="JavaScript Options" name="javascript_options" groups="formio.group_formio_admin">
                             <field name="formio_js_options" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                            <div class="text-muted">
+                                For example, Options could contain the Form Builder editForm with some File component settings:<br/>
+                                <a href="https://github.com/formio/formio.js/blob/master/src/components/file/editForm/File.edit.file.js" target="_blank">
+                                    https://github.com/formio/formio.js/blob/master/src/components/file/editForm/File.edit.file.js
+                                </a>
+                            </div>
+                            <div>
+                                <pre style="background-color: #e9ecef;">{
+  'editForm': {
+    'file': [
+      {
+        'key': 'file',
+        'components': [
+          {'key': 'webcam', 'defaultValue': True},
+          {'key': 'storage', 'defaultValue': 'base64'}
+        ]
+      }
+    ]
+  }
+}</pre>
+                            </div>
                         </page>
                         <page string="Schema" name="schema" groups="formio.group_formio_admin">
                             <field name="schema" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
