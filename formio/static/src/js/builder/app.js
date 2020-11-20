@@ -17,11 +17,13 @@ class App extends Component {
         self.saveUrl = '/formio/builder/' + self.builderId + '/save';
         self.schema = {};
         self.options = {};
+        self.mode = {};
 
         $.jsonRpc.request(self.configUrl, 'call', {}).then(function(result) {
             if (!$.isEmptyObject(result)) {
                 self.schema = result.schema;
                 self.options = result.options;
+                self.config = result.config;
                 self.createBuilder();
             }
         });
@@ -29,9 +31,9 @@ class App extends Component {
 
     createBuilder() {
         const self = this;
-        Formio.builder(document.getElementById('formio_builder'), self.schema).then(function(builder) {
+        Formio.builder(document.getElementById('formio_builder'), self.schema, self.options).then(function(builder) {
             builder.on('change', function(res) {
-                if ('readOnly' in self.options && self.options['readOnly'] == true) {
+                if ('readOnly' in self.mode && self.mode['readOnly'] == true) {
                     alert("This Form Builder is readonly. It's state is either Current or Obsolete. Refresh the page again.");
                     return;
                 }

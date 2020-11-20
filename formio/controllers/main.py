@@ -50,7 +50,8 @@ class FormioController(http.Controller):
         if builder:
             if builder.schema:
                 res['schema'] = json.loads(builder.schema)
-            res['options'] = self._prepare_builder_options(builder)
+            res['options'] = builder.get_js_options()
+            res['mode'] = builder.get_js_mode()
 
         return res
 
@@ -280,13 +281,6 @@ class FormioController(http.Controller):
             return data
         except Exception as e:
             _logger.error("Exception: %s" % e)
-
-    def _prepare_builder_options(self, builder):
-        options = {}
-
-        if builder.state in [BUILDER_STATE_CURRENT, BUILDER_STATE_OBSOLETE]:
-            options['readOnly'] = True
-        return options
 
     def _prepare_form_options(self, form):
         options = {}

@@ -49,6 +49,9 @@ class Builder(models.Model):
     formio_version_name = fields.Char(related='formio_version_id.name', string='Form.io version')
     formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='Form.io CSS')
     formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='Form.io Javascript')
+    formio_js_options = fields.Text(
+        default=lambda self: self._default_formio_js_options(),
+        string='Form.io Javascript options')
     res_model_id = fields.Many2one(
         "ir.model", compute='_compute_res_model_id', store=True,
         string="Model", help="Model as resource this form represents or acts on")
@@ -120,6 +123,11 @@ class Builder(models.Model):
                 return False
         else:
             return False
+
+    @api.model
+    def _default_formio_js_options(self):
+        Param = self.env['ir.config_parameter'].sudo()
+        return Param.get_param('formio.default_builder_js_options')
 
     @api.constrains('name')
     def constaint_check_name(self):
@@ -299,6 +307,24 @@ class Builder(models.Model):
             "res_id": res.id,
             "context": {}
         }
+
+    @api.multi
+    def get_js_options(self):
+        self.ensure_one()
+        try:
+            options = json.loads(self.formio_js_options)
+        except:
+            options = ast.literal_eval(self.formio_js_options)
+        return options
+
+    @api.multi
+    def get_js_mode(self):
+        self.ensure_one()
+
+        mode = {}
+        if self.state in [STATE_CURRENT, STATE_OBSOLETE]:
+            mode['readOnly'] = True
+        return mode
 
     @api.model
     def get_public_builder(self, uuid):
