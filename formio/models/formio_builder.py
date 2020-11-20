@@ -308,19 +308,14 @@ class Builder(models.Model):
             "context": {}
         }
 
-    @api.multi
     def get_js_options(self):
-        self.ensure_one()
         try:
             options = json.loads(self.formio_js_options)
         except:
             options = ast.literal_eval(self.formio_js_options)
         return options
 
-    @api.multi
     def get_js_mode(self):
-        self.ensure_one()
-
         mode = {}
         if self.state in [STATE_CURRENT, STATE_OBSOLETE]:
             mode['readOnly'] = True
