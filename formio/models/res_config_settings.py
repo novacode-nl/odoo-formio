@@ -9,13 +9,18 @@ class ResConfigSettings(models.TransientModel):
 
     formio_default_version_id = fields.Many2one('formio.version', string='Form.io Version')
     formio_default_asset_css_ids = fields.Many2many('formio.default.asset.css', string='Form.io CSS assets')
+    formio_default_builder_js_options = fields.Text(string='Form.io Builder JS options')
 
     @api.model
     def get_values(self):
         res = super(ResConfigSettings, self).get_values()
         Param = self.env['ir.config_parameter'].sudo()
-        param_version = Param.get_param('formio.default_version')
 
+        res.update(
+            formio_default_builder_js_options=Param.get_param('formio.default_builder_js_options')
+        )
+
+        param_version = Param.get_param('formio.default_version')
         domain = [('name', '=', param_version)]
         version = self.env['formio.version'].search(domain, limit=1)
         if version:
@@ -33,9 +38,14 @@ class ResConfigSettings(models.TransientModel):
 
     def set_values(self):
         super(ResConfigSettings, self).set_values()
-        self.env['ir.config_parameter'].sudo().set_param(
+        Param = self.env['ir.config_parameter'].sudo()
+        Param.set_param(
             "formio.default_version",
             self.formio_default_version_id.name)
+        Param.sudo().set_param(
+            "formio.default_builder_js_options",
+            self.formio_default_builder_js_options
+        )
 
         context = {'active_test': False}
         defaults = self.env['formio.default.asset.css'].with_context(context).search([])
