@@ -194,6 +194,16 @@ See LICENSE file for full licensing details. -->
                             </group>
                         </page>
                         <page string="JavaScript Options" name="javascript_options" groups="formio.group_formio_admin">
+                            <div style="background-color: #e9ecef; padding: 0 10px;">
+                                <group>
+                                    <field
+                                        name="formio_js_options_id"
+                                        string="Select Form.io Javascript Options"
+                                        attrs="{'readonly': [('state', '!=', 'DRAFT')]}"
+                                        style="height: 100%"/>
+                                </group>
+                            </div>
+                            
                             <field name="formio_js_options" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                             <div class="text-muted">
                                 For example, Options could contain the Form Builder editForm with some File component settings:<br/>
