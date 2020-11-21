@@ -30,11 +30,13 @@ class Builder(models.Model):
         return res
 
     def _get_mail_recipients_form(self, form):
-        components = self.mail_recipients_form.split(',')
+        mail_recipients_form = self.mail_recipients_form
         res = []
-        for c in components:
-            if self.is_mail(c):
-                res.append(form._formio.components[c].value)
+        if mail_recipients_form:
+            components = mail_recipients_form.split(',')
+            for c in components:
+                if self.is_mail(c):
+                    res.append(form._formio.components[c].value)
         return res
 
     def _get_mail_recipients_partner(self):
