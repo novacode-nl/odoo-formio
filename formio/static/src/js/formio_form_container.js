@@ -9,8 +9,8 @@ $(document).ready(function() {
 
         if (event.data.hasOwnProperty('odooFormioMessage')) {
             const msg = event.data.odooFormioMessage,
-                  config = event.data.config,
-                  submitDoneUrl = config.hasOwnProperty('submit_done_url') && config.submit_done_url;
+                  params = event.data.params,
+                  submitDoneUrl = params.hasOwnProperty('submit_done_url') && params.submit_done_url;
 
             if (event.origin == baseUrl && msg == 'formioSubmitDone' && submitDoneUrl) {
                 window.location = submitDoneUrl;
