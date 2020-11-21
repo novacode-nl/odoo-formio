@@ -4,7 +4,7 @@
 {
     'name': 'Form.io',
     'summary': 'Build, deploy and store web forms with the "Form.io" Form Builder',
-    'version': '7.5',
+    'version': '7.6',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -30,6 +30,7 @@
         'security/ir_rule.xml',
         # views
         'views/formio_builder_views.xml',
+        'views/formio_builder_js_options_views.xml',
         'views/formio_form_views.xml',
         'views/formio_res_model_views.xml',
         'views/formio_translation_source_views.xml',

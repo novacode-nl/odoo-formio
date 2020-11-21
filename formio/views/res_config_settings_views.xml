@@ -71,6 +71,47 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                             </div>
                         </div>
                     </div>
+                    <h2>Default Form Builder JavaScript Options Template</h2>
+                    <div class="row mt16 o_settings_container formio_default_builder_js_options">
+                        <div class="text-muted">
+                            Select a default Form Builder JavaScript Options Template.<br/>
+                            It's contents, the Form Builder JavaScript Options, shall be show below.
+                        </div>
+                        
+                        <div class="col-12 col-md-12 o_setting_box">
+                            <div class="row">
+                                <label for="formio_default_builder_js_options_id" string="Options Template"/>
+                                <field name="formio_default_builder_js_options_id"/>
+                            </div>
+                            <div class="row">
+                                <field name="formio_default_builder_js_options"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-12 col-md-12 text-muted">
+                                See the example below... Options could contain the Form Builder editForm with some File component settings:<br/>
+                                <a href="https://github.com/formio/formio.js/blob/master/src/components/file/editForm/File.edit.file.js" target="_blank">
+                                    https://github.com/formio/formio.js/blob/master/src/components/file/editForm/File.edit.file.js
+                                </a>
+                            </div>
+                            <div class="col-12 col-md-12">
+                                <pre style="background-color: #e9ecef;">{
+  'editForm': {
+    'file': [
+      {
+        'key': 'file',
+        'components': [
+          {'key': 'webcam', 'defaultValue': True},
+          {'key': 'storage', 'defaultValue': 'base64'}
+        ]
+      }
+    ]
+  }
+}</pre>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </xpath>
         </field>
