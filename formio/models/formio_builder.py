@@ -340,10 +340,14 @@ class Builder(models.Model):
 
     def _get_js_options(self):
         """ formio JS (API) options """
-        try:
-            options = json.loads(self.formio_js_options)
-        except:
-            options = ast.literal_eval(self.formio_js_options)
+
+        if self.formio_js_options:
+            try:
+                options = json.loads(self.formio_js_options)
+            except:
+                options = ast.literal_eval(self.formio_js_options)
+        else:
+            options = {}
 
         # default language
         if self.env.user.lang in self.languages.mapped('iso_code'):
