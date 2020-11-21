@@ -9,6 +9,7 @@ from odoo import fields, models, api, _
 class Builder(models.Model):
     _inherit = 'formio.builder'
 
+    mail_active = fields.Boolean(string='Mailings active', help='Check this box to send submitted forms to recipients.')
     mail_recipients = fields.Char(string='Recipients', help='Comma-separated list of email addresses.')
     mail_recipients_form = fields.Char(string='Formio Component',
                                        help='Comma-separated list of formio components. '

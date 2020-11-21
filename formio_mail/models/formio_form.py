@@ -13,6 +13,8 @@ class Form(models.Model):
     @api.multi
     def action_submit(self):
         super(Form, self).action_submit()
+        if self.builder_id.mail_active:
+            self.action_send_mail()
         print(self.state)
 
     @api.multi
