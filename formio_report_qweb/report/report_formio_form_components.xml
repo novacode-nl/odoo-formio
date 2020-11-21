@@ -83,7 +83,7 @@ See LICENSE file for full copyright and licensing details.
         <div class="mw-100 mb-3 formio_textarea_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
             <t t-if="key_stored">
-                <p><t t-esc="o._formio.components[component['key']].value.replace('\n', '&lt;br/&gt;')"/></p>
+                <p><t t-raw="o._formio.components[component['key']].value.replace('\n', '&lt;br\&gt;')"/></p>
             </t>
             <t t-else="">
                 <p/>
