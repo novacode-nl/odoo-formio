@@ -81,9 +81,23 @@ class Builder(models.Model):
     user_id = fields.Many2one('res.users', string='Assigned user', track_visibility='onchange')
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal", track_visibility='onchange', help="Form is accessible by assigned portal user")
-    portal_submit_done_url = fields.Char(string='Portal Submit-done URL', track_visibility='onchange')
+    portal_submit_done_url = fields.Char(
+        string='Portal Submit-done URL', track_visibility='onchange',
+        help="""\
+        IMPORTANT:
+        - Absolute URL should contain a protocol (https://, http://)
+        - Relative URL is also supported e.g. /web/login
+        """
+    )
     public = fields.Boolean("Public", track_visibility='onchange', help="Form is public accessible (e.g. used in Shop checkout, Events registration")
-    public_submit_done_url = fields.Char(string='Public Submit-done URL', track_visibility='onchange')
+    public_submit_done_url = fields.Char(
+        string='Public Submit-done URL', track_visibility='onchange',
+        help="""\
+        IMPORTANT:
+        - Absolute URL should contain a protocol (https://, http://)
+        - Relative URL is also supported e.g. /web/login
+        """
+    )
     public_access_interval_number = fields.Integer(default=30, track_visibility='onchange', help="Public access to submitted Form shall be rejected after expiration of the configured time interval.")
     public_access_interval_type = fields.Selection(list(_interval_selection.items()), default='minutes', track_visibility='onchange')
     view_as_html = fields.Boolean("View as HTML", track_visibility='onchange', help="View submission as a HTML view instead of disabled webform.")
@@ -95,6 +109,7 @@ class Builder(models.Model):
         "Show User Metadata", track_visibility='onchange', help="Show submission and assigned user metadata in the Form header.", default=True)
     wizard = fields.Boolean("Wizard", track_visibility='onchange')
     translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations')
+    languages = fields.One2many('res.lang', compute='_compute_languages', string='Languages')
     allow_force_update_state_group_ids = fields.Many2many(
         'res.groups', string='Allow groups to force update State',
         help="User groups allowed to manually force an update of the Form state."
@@ -232,6 +247,13 @@ class Builder(models.Model):
                 r.display_name_full = _("{title} (state: {state} - version: {version})").format(
                     title=r.title, state=r.display_state, version=r.version)
 
+    @api.depends('translations')
+    def _compute_languages(self):
+        for r in self:
+            languages = r.translations.mapped('lang_id')
+            languages |= self.env.ref('base.lang_en')
+            r.languages = languages.sorted('name')
+
     def _compute_edit_url(self):
         # sudo() is needed for regular users.
         for r in self:
@@ -329,22 +351,44 @@ class Builder(models.Model):
         }
 
     @api.multi
-    def get_js_options(self):
+    def _get_js_options(self):
+        """ formio JS (API) options """
         self.ensure_one()
-        try:
-            options = json.loads(self.formio_js_options)
-        except:
-            options = ast.literal_eval(self.formio_js_options)
+
+        if self.formio_js_options:
+            try:
+                options = json.loads(self.formio_js_options)
+            except:
+                options = ast.literal_eval(self.formio_js_options)
+        else:
+            options = {}
+
+        # default language
+        if self.env.user.lang in self.languages.mapped('iso_code'):
+            language = self.env.user.lang
+        else:
+            language = self._context['lang']
+        options['language'] = language.replace('_', '-')
+
+        options['i18n'] = self.i18n_translations()
         return options
 
     @api.multi
-    def get_js_mode(self):
+    def _get_js_params(self):
+        """ Odoo JS (Owl component) misc. params """
         self.ensure_one()
 
-        mode = {}
+        params = {}
         if self.state in [STATE_CURRENT, STATE_OBSOLETE]:
-            mode['readOnly'] = True
-        return mode
+            params['readOnly'] = True
+        return params
+
+    def _get_public_form_js_params(self):
+        """ Form: Odoo JS (Owl component) misc. params """
+        params = {
+            'public_submit_done_url': self.public_submit_done_url
+        }
+        return params
 
     @api.model
     def get_public_builder(self, uuid):
@@ -359,3 +403,21 @@ class Builder(models.Model):
             return builder
         else:
             return False
+
+    def i18n_translations(self):
+        i18n = {}
+        # Formio GUI/API translations
+        for trans in self.formio_version_id.translations:
+            if trans.lang_id.iso_code not in i18n:
+                i18n[trans.lang_id.iso_code] = {trans.property: trans.value}
+            else:
+                i18n[trans.lang_id.iso_code][trans.property] = trans.value
+        # Form Builder translations (labels etc).
+        # These could override the former GUI/API translations, but
+        # that's how the Javascript API works.
+        for trans in self.translations:
+            if trans.lang_id.iso_code not in i18n:
+                i18n[trans.lang_id.iso_code] = {trans.source: trans.value}
+            else:
+                i18n[trans.lang_id.iso_code][trans.source] = trans.value
+        return i18n
