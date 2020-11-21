@@ -37,6 +37,9 @@ See LICENSE file for full copyright and licensing details.
         <t t-elif="component['type'] == 'content'">
             <t t-call="formio_report_qweb.content_component"/>
         </t>
+        <t t-elif="component['type'] == 'file'">
+            <t t-call="formio_report_qweb.file_component"/>
+        </t>
         <t t-elif="component['type'] == 'columns'">
             <t t-call="formio_report_qweb.columns_component"/>
         </t>
@@ -190,6 +193,19 @@ See LICENSE file for full copyright and licensing details.
     <template id="content_component">
         <div class="mw-100 mb-3 formio_content_component">
             <p><t t-raw="component['html']"/></p>
+        </div>
+    </template>
+
+    <template id="file_component">
+        <div class="mw-100 mb-3 formio_file_component">
+            <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
+            <t t-if="o._formio.components.get(component['key']) and o._formio.components[component['key']].raw['image']">
+                <t t-foreach="o._formio.components[component['key']].value" t-as="image">
+                    <div>
+                        <img t-att-src="image['url']" t-att-style="'width: ' + str(o._formio.components[component['key']].raw['imageSize']) + 'px;'"/>
+                    </div>
+                </t>
+            </t>
         </div>
     </template>
 
