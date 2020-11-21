@@ -12,8 +12,7 @@
     'category': 'Extra Tools',
     'depends': ['contacts', 'formio_report_qweb'],
     'data': [
-        'views/formio_form_views.xml',
-        'views/formio_builder_views.xml'
+        'views/formio_builder_views.xml',
     ],
     'application': True,
     'images': [
