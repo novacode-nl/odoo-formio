@@ -15,9 +15,13 @@ class Builder(models.Model):
                                        help='Comma-separated list of formio components. '
                                             'Please, specify here the key of the component.')
     mail_recipients_partner = fields.Many2many('res.partner', help='Use mail address from partner record.')
-    mail_subject = fields.Char(default=lambda s: _('Test Subject'),
+    mail_subject = fields.Char(default=lambda s: _('Form.Io - You\'ve received a Form'),
                                string='Subject')
-    mail_body_html = fields.Html(default=lambda s: _('Dear Sirs and Mesdames, this needs to be replaced.'),
+    mail_body_html = fields.Html(default=lambda s: _('''Dear Recipient, <br/>
+                                                        you've received a filled form. In the attachments, you'll find 
+                                                        the report in pdf format. <br/>
+                                                        Greetings <br/>
+                                                        Your form system'''),
                                  string='Body',
                                  sanitize_attributes=False)
 
