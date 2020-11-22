@@ -113,12 +113,6 @@ class FormioPublicController(http.Controller):
         }
         return request.render('formio.formio_form_public_create_embed', values)
 
-        languages = self._get_active_languages(builder_uuid=builder_uuid).get('languages')
-        if len(languages) > 1:
-            values['languages'] = languages
-
-        return request.render('formio.formio_form_public_create_embed', values)
-
     @http.route('/formio/public/form/create/<string:builder_uuid>/config', type='json', auth='none', website=True)
     def public_form_create_config(self, builder_uuid, **kwargs):
         formio_builder = self._get_public_builder(builder_uuid)
@@ -203,29 +197,3 @@ class FormioPublicController(http.Controller):
     def _check_public_form(self):
         return request._uid == request.env.ref('base.public_user').id or request._uid
 
-    def _get_active_languages(self, form_uuid=None, builder_uuid=None):
-        form = self._get_public_form(form_uuid, self._check_public_form())
-        formio_builder = self._get_public_builder(builder_uuid)
-
-        # Get active languages used in Builder translations.
-        query = """
-            SELECT
-              DISTINCT(fbt.lang_id) AS lang_id
-            FROM
-              formio_builder_translation AS fbt
-              INNER JOIN res_lang AS l ON l.id = fbt.lang_id
-            WHERE
-              fbt.builder_id = {builder_id}
-              AND l.active = True
-        """.format(builder_id=form.builder_id.id if form else formio_builder.id)
-
-        request.env.cr.execute(query)
-        builder_lang_ids = [r[0] for r in request.env.cr.fetchall()]
-
-        # Always include english (en_US).
-        domain = ['|', ('id', 'in', builder_lang_ids), ('code', '=', 'en_US')]
-        languages = request.env['res.lang'].with_context(active_test=False).search(domain, order='name asc')
-        languages = languages.filtered(lambda r: r.id in builder_lang_ids or r.code == 'en_US')
-        # TODO If more than one language translation file exists, how to choose the preferred language?
-        lang = request.env['res.lang'].with_context(active_test=False).search([('id', 'in', builder_lang_ids)], order='name asc', limit=1)
-        return {'languages': languages, 'lang': lang}
