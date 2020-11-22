@@ -43,7 +43,7 @@ See LICENSE file for full licensing details. -->
         <record id="i18n_nl_BE_max" model="formio.translation">
             <field name="lang_id" ref="base.lang_nl_BE"/>
             <field name="source_id" ref="formio.i18n_max"/>
-            <field name="value">{{field}} kan niet groter zijn dan {{min}}.</field>
+            <field name="value">{{field}} kan niet groter zijn dan {{max}}.</field>
         </record>
         <record id="i18n_nl_BE_maxDate" model="formio.translation">
             <field name="lang_id" ref="base.lang_nl_BE"/>
