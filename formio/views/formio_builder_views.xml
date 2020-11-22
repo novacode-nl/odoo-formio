@@ -132,7 +132,7 @@ See LICENSE file for full licensing details. -->
                                 <i class="fa fa-info-circle" title="info"/><strong> Integration / Resource settings</strong> - Enables integration of Form and ERP/Odoo objects.<br/>
                             </div>
                         </page>
-                        <page string="Resource" name="res_model_settings" attrs="{'invisible': ['|', ('formio_res_model_id', '=', False)]}"/>
+                        <page string="Resource" name="res_model_settings" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
                         <page string="Portal" name="portal_settings">
                             <group>
                                 <group string="Redirect After Submit">

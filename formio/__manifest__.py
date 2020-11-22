@@ -24,6 +24,7 @@
         'data/formio_translations_sources.xml',
         'data/formio_translations_nl.xml',
         'data/formio_translations_nl_BE.xml',
+        'data/formio_translations_zh_CN.xml',
         # security
         'security/formio_security.xml',
         'security/ir_model_access.xml',

@@ -113,7 +113,6 @@ class FormioPublicController(http.Controller):
         }
         return request.render('formio.formio_form_public_create_embed', values)
 
-
     @http.route('/formio/public/form/create/<string:builder_uuid>/config', type='json', auth='none', website=True)
     def public_form_create_config(self, builder_uuid, **kwargs):
         formio_builder = self._get_public_builder(builder_uuid)
@@ -197,3 +196,4 @@ class FormioPublicController(http.Controller):
 
     def _check_public_form(self):
         return request._uid == request.env.ref('base.public_user').id or request._uid
+
