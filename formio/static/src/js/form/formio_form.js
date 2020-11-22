@@ -19,7 +19,7 @@ export class OdooFormioForm extends Component {
 
         this.schema = {};
         this.options = {};
-        this.config = {}; // extra config from Odoo backend
+        this.params = {}; // extra params from Odoo backend
 
         this.baseUrl = window.location.protocol + '//' + window.location.host;
         this.urlParams = new URLSearchParams(window.location.search);
@@ -55,7 +55,7 @@ export class OdooFormioForm extends Component {
             if (!$.isEmptyObject(result)) {
                 self.schema = result.schema;
                 self.options = result.options;
-                self.config = result.config;
+                self.params = result.params;
                 self.createForm();
             }
         });

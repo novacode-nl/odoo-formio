@@ -36,14 +36,14 @@ function app() {
         }
 
         portalSubmitDoneUrl() {
-            return this.config.hasOwnProperty('portal_submit_done_url') && this.config.portal_submit_done_url;
+            return this.params.hasOwnProperty('portal_submit_done_url') && this.params.portal_submit_done_url;
         }
 
         submitDone(submission) {
             if (submission.state == 'submitted') {
                 if (this.urlParams.get('portal') === 'true' && this.portalSubmitDoneUrl()) {
-                    const config = {submit_done_url: this.portalSubmitDoneUrl()};
-                    window.parent.postMessage({odooFormioMessage: 'formioSubmitDone', config: config});
+                    const params = {submit_done_url: this.portalSubmitDoneUrl()};
+                    window.parent.postMessage({odooFormioMessage: 'formioSubmitDone', params: params});
                 }
             }
             // If the window.parent doesn't receive and handle the postMessage.

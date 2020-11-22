@@ -4,7 +4,6 @@
 import ast
 import json
 import re
-import requests
 import uuid
 
 from dateutil.relativedelta import relativedelta
@@ -104,6 +103,7 @@ class Form(models.Model):
     show_id = fields.Boolean("Show ID")
     show_uuid = fields.Boolean("Show UUID")
     show_user_metadata = fields.Boolean("Show User Metadata")
+    languages = fields.One2many('res.lang', related='builder_id.languages', string='Languages')
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
     allow_force_update_state = fields.Boolean("Allow force update State", compute='_compute_access')
     readonly_submission_data = fields.Boolean("Data is readonly", compute='_compute_access')
@@ -456,25 +456,31 @@ class Form(models.Model):
         else:
             return False
 
+    def _get_js_options(self):
+        """ formio JS (API) options """
+        options = {
+            'i18n': self.i18n_translations()
+        }
+        if self.state in [STATE_COMPLETE, STATE_CANCEL]:
+            options['readOnly'] = True
+
+            if self.builder_id.view_as_html:
+                options['renderMode'] = 'html'
+                options['viewAsHtml'] = True # backwards compatible (version < 4.x)?
+        return options
+
+    def _get_js_params(self):
+        """ Odoo JS (Owl component) misc. params """
+        params = {
+            'portal_submit_done_url': self.portal_submit_done_url
+        }
+        return params
+
     def _etl_odoo_data(self):
         return {}
 
     def i18n_translations(self):
-        i18n = {}
-        # Formio GUI/API translations
-        for trans in self.builder_id.formio_version_id.translations:
-            if trans.lang_id.iso_code not in i18n:
-                i18n[trans.lang_id.iso_code] = {trans.property: trans.value}
-            else:
-                i18n[trans.lang_id.iso_code][trans.property] = trans.value
-        # Form Builder translations (labels etc).
-        # These could override the former GUI/API translations, but
-        # that's how the Javascript API works.
-        for trans in self.builder_id.translations:
-            if trans.lang_id.iso_code not in i18n:
-                i18n[trans.lang_id.iso_code] = {trans.source: trans.value}
-            else:
-                i18n[trans.lang_id.iso_code][trans.source] = trans.value
+        i18n = self.builder_id.i18n_translations()
         return i18n
 
 

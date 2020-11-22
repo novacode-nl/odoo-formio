@@ -36,14 +36,14 @@ function app() {
         }
 
         publicSubmitDoneUrl() {
-            return this.config.hasOwnProperty('public_submit_done_url') && this.config.public_submit_done_url;
+            return this.params.hasOwnProperty('public_submit_done_url') && this.params.public_submit_done_url;
         }
 
         submitDone(submission) {
             if (submission.state == 'submitted') {
                 if (this.publicSubmitDoneUrl()) {
-                    const config = {submit_done_url: this.publicSubmitDoneUrl()};
-                    window.parent.postMessage({odooFormioMessage: 'formioSubmitDone', config: config});
+                    const params = {submit_done_url: this.publicSubmitDoneUrl()};
+                    window.parent.postMessage({odooFormioMessage: 'formioSubmitDone', params: params});
                 }
             }
             // If the window.parent doesn't receive and handle the postMessage.
