@@ -46,12 +46,6 @@ See LICENSE file for full licensing details. -->
         sequence="30"
         action="formio.action_formio_version_github_tag"/>
     <menuitem
-        id="menu_formio_res_model"
-        name="Resource Models"
-        parent="formio.menu_formio_configuration"
-        sequence="40"
-        action="formio.action_formio_res_model"/>
-    <menuitem
         id="menu_formio_translation_root"
         name="Translations"
         parent="formio.menu_formio_configuration"
@@ -74,4 +68,11 @@ See LICENSE file for full licensing details. -->
         parent="formio.menu_formio_configuration"
         sequence="100"
         action="formio.action_formio_builder_js_options"/>
+    <menuitem
+        id="menu_formio_res_model"
+        name="Resource Models"
+        parent="formio.menu_formio_configuration"
+        sequence="200"
+        action="formio.action_formio_res_model"/>
+
 </odoo>
