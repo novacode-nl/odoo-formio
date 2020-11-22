@@ -28,6 +28,16 @@
     font-size: 0.9em;
 }
 
+.formio_component_signature_empty {
+    border: 1px solid #d8d8d8;
+    min-height: 62px;
+}
+
+.formio_components .label {
+    color: inherit;
+    font-size: 100%;
+}
+
 /* Layout components */
 
 .formio_components > table td {
