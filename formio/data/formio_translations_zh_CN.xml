@@ -23,17 +23,17 @@ See LICENSE file for full licensing details. -->
         <record id="i18n_zh_CN_pattern" model="formio.translation">
             <field name="lang_id" ref="base.lang_zh_CN"/>
             <field name="source_id" ref="formio.i18n_pattern"/>
-            <field name="value">{{field}} 不匹配模式：{{pattern}}</field>
+            <field name="value">{{field}} 不符合 {{pattern}} 格式</field>
         </record>
         <record id="i18n_zh_CN_minLength" model="formio.translation">
             <field name="lang_id" ref="base.lang_zh_CN"/>
             <field name="source_id" ref="formio.i18n_minLength"/>
-            <field name="value">{{field}} 必须至少 {{length}} 字符.</field>
+            <field name="value">{{field}} 必须至少 {{length}} 个字符.</field>
         </record>
         <record id="i18n_zh_CN_maxLength" model="formio.translation">
             <field name="lang_id" ref="base.lang_zh_CN"/>
             <field name="source_id" ref="formio.i18n_maxLength"/>
-            <field name="value">{{field}} 不能超过 {{length}} 字符.</field>
+            <field name="value">{{field}} 不能超过 {{length}} 个字符.</field>
         </record>
         <record id="i18n_zh_CN_min" model="formio.translation">
             <field name="lang_id" ref="base.lang_zh_CN"/>
@@ -43,7 +43,7 @@ See LICENSE file for full licensing details. -->
         <record id="i18n_zh_CN_max" model="formio.translation">
             <field name="lang_id" ref="base.lang_zh_CN"/>
             <field name="source_id" ref="formio.i18n_max"/>
-            <field name="value">{{field}} 不能大于 {{min}}.</field>
+            <field name="value">{{field}} 不能大于 {{max}}.</field>
         </record>
         <record id="i18n_zh_CN_maxDate" model="formio.translation">
             <field name="lang_id" ref="base.lang_zh_CN"/>
@@ -78,7 +78,7 @@ See LICENSE file for full licensing details. -->
         <record id="i18n_zh_CN_invalid_day" model="formio.translation">
             <field name="lang_id" ref="base.lang_zh_CN"/>
             <field name="source_id" ref="formio.i18n_invalid_day"/>
-            <field name="value">{{field}} 不是有效的日期格式（天）.</field>
+            <field name="value">{{field}} 不是有效的日期.</field>
         </record>
         <record id="i18n_zh_CN_mask" model="formio.translation">
             <field name="lang_id" ref="base.lang_zh_CN"/>
