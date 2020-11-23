@@ -11,13 +11,13 @@ class Form(models.Model):
     _inherit = 'formio.form'
 
     @api.multi
-    def action_submit(self):
+    def after_submit(self):
         super(Form, self).action_submit()
         if self.builder_id.mail_active:
-            self.action_send_mail()
+            self.send_mail()
 
     @api.multi
-    def action_send_mail(self):
+    def send_mail(self):
         self.ensure_one()
         context = self._context
         current_uid = context.get('uid')

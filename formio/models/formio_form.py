@@ -188,6 +188,11 @@ class Form(models.Model):
         return data
 
     @api.multi
+    def after_submit(self):
+        """ Function is called everytime a form is submitted. """
+        pass
+
+    @api.multi
     def action_view_formio(self):
         self.ensure_one()
 
@@ -201,11 +206,6 @@ class Form(models.Model):
             "res_id": self.id,
             "context": {}
         }
-
-    @api.multi
-    def action_submit(self):
-        """ Function is called everytime a form is submitted. """
-        pass
 
     @api.multi
     def action_draft(self):

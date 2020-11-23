@@ -1,9 +1,11 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-import re
+import logging
 
-from odoo import fields, models, api, _
+from odoo import fields, models, api, tools, _
+
+_logger = logging.getLogger(__name__)
 
 
 class Builder(models.Model):
@@ -26,11 +28,7 @@ class Builder(models.Model):
                                  sanitize_attributes=False)
 
     def _get_mail_recipients(self):
-        mail = self.mail_recipients.split(',')
-        res = []
-        for m in mail:
-            if self.is_mail(m):
-                res.append(m)
+        res = tools.email_split_and_format(self.mail_recipients)
         return res
 
     def _get_mail_recipients_form(self, form):
@@ -39,15 +37,17 @@ class Builder(models.Model):
         if mail_recipients_form:
             components = mail_recipients_form.split(',')
             for c in components:
-                if self.is_mail(c):
-                    res.append(form._formio.components[c].value)
+                try:
+                    res.extend(tools.email_split_and_format(form._formio.components[c].value))
+                except KeyError as e:
+                    _logger.error("Exception: %s" % e)
         return res
 
+    @api.multi
     def _get_mail_recipients_partner(self):
         res = []
         for p in self.mail_recipients_partner:
-            if self.is_mail(p.email):
-                res.append(p.email)
+            res.extend(tools.email_split_and_format(p.email))
         return res
 
     def get_mail_recipients(self, form):
@@ -56,12 +56,3 @@ class Builder(models.Model):
         res.extend(self._get_mail_recipients_form(form))
         res.extend(self._get_mail_recipients_partner())
         return res
-
-    @api.onchange('email_id')
-    def is_mail(self, mail):
-        if mail:
-            match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', mail)
-        if match is None:
-            return False
-        else:
-            return True

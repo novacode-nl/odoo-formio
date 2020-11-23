@@ -174,7 +174,7 @@ class FormioController(http.Controller):
         form.write(vals)
 
         if post['data'].get('submit'):
-            form.action_submit()
+            form.after_submit()
 
     ####################
     # Form - public auth
