@@ -62,7 +62,7 @@ class Builder(models.Model):
         string="Resource Model",
         ondelete='restrict', track_visibility='onchange',
         help="Model as resource this form represents or acts on")
-    schema = fields.Text()
+    schema = fields.Text("JSON Schema")
     edit_url = fields.Char(compute='_compute_edit_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     state = fields.Selection(

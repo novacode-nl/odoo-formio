@@ -440,7 +440,7 @@ msgstr "可用版本（发行版）"
 #: code:addons/formio/static/src/js/views/formio_builder_view.js:0
 #, python-format
 msgid "Builder"
-msgstr "表单构建器"
+msgstr "构建器"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version__css_assets
@@ -553,7 +553,7 @@ msgstr "创建者"
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__create_date
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag_available__create_date model_terms:ir.ui.view,arch_db:formio.portal_my_formio
 msgid "Created on"
-msgstr "创建于"
+msgstr "创建日期"
 
 #. module: formio
 #: model:ir.model.fields.selection,name:formio.selection__formio_builder__state__current model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
@@ -682,7 +682,7 @@ msgstr "剩余到期时间"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_follower_ids model:ir.model.fields,field_description:formio.field_formio_form__message_follower_ids
 msgid "Followers"
-msgstr "粉丝"
+msgstr "关注者"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_channel_ids model:ir.model.fields,field_description:formio.field_formio_form__message_channel_ids
@@ -702,7 +702,7 @@ msgstr "Font Awesome 图标，如：fa-tasks"
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "For example, Options could contain the Form Builder editForm with some File component settings:<br/>"
-msgstr "例如，“选项”可能包含带有某些“文件”组件设置的表单构建器"
+msgstr "例如，JS选项可以让构建器包含某些文件组件设置:"
 
 #. module: formio
 #. openerp-web
@@ -722,7 +722,7 @@ msgstr "界面"
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__builder_id model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Form Builder"
-msgstr "表单构建器"
+msgstr "构建器"
 
 #. module: formio
 #: model:ir.actions.act_window,name:formio.action_formio_builder_js_options model_terms:ir.ui.view,arch_db:formio.view_formio_builder_js_options_form
@@ -739,12 +739,12 @@ msgstr "构建器JS选项"
 #: model:ir.actions.act_window,name:formio.action_formio_builder model:ir.ui.menu,name:formio.menu_formio_builder model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search model_terms:ir.ui.view,arch_db:formio.view_formio_builder_tree
 msgid "Form Builders"
-msgstr "表单构建器"
+msgstr "构建器"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__builder_id
 msgid "Form builder"
-msgstr "表单构建器"
+msgstr "构建器"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__portal model:ir.model.fields,help:formio.field_formio_form__portal
@@ -819,7 +819,7 @@ msgstr "Form.io JS选项模板"
 #: model:ir.model.fields,field_description:formio.field_formio_builder__formio_version_id
 #: model:ir.model.fields,field_description:formio.field_res_config_settings__formio_default_version_id
 msgid "Form.io Version"
-msgstr "Formio 版本"
+msgstr "Formio.js 版本"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_github_checker_wizard
@@ -932,7 +932,7 @@ msgstr "全屏（按ESC退出）"
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "General"
-msgstr "常规设置"
+msgstr "常规"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_checker_wizard__github_tag_ids
@@ -1004,7 +1004,7 @@ msgstr "如果勾选此项， 某些消息将会产生传递错误。"
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "Insert a meaningful title here"
-msgstr "在此处插入有意义的标题"
+msgstr "在此处填入有意义的标题"
 
 #. module: formio
 #: model:ir.model.fields.selection,name:formio.selection__formio_version_github_tag__state__installed model_terms:ir.ui.view,arch_db:formio.view_formio_version_github_tag_search
@@ -1039,12 +1039,12 @@ msgstr "关注者"
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "JavaScript Options"
-msgstr "JS 选项"
+msgstr "JS选项"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version__js_assets
 msgid "Javascript Assets"
-msgstr "JS 资源"
+msgstr "JS资源"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__kanban_group_state
@@ -1146,7 +1146,7 @@ msgstr "模块依赖性"
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 msgid "My Form Builders"
-msgstr "我的表单构建器"
+msgstr "我的构建器"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
@@ -1308,7 +1308,7 @@ msgstr "公开访问"
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
 msgid "Public Access Expire"
-msgstr "公开访问截止"
+msgstr "公开访问到期"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__public_access_date_from
@@ -1395,7 +1395,7 @@ msgstr ""
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__res_model
 msgid "Res Model"
-msgstr "Res模型"
+msgstr "模型"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_github_tag_form
@@ -1469,18 +1469,18 @@ msgstr "短信发送错误"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__schema model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "Schema"
-msgstr "构建数据"
+msgid "JSON Schema"
+msgstr "JSON模式数据"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
 msgid "See the example below... Options could contain the Form Builder editForm with some File component settings:<br/>"
-msgstr "请参阅下面的示例... 该选项可以包含带有某些文件组件设置:<br/>"
+msgstr "请参阅下面的示例... 该选项可以让构建器包含某些文件组件设置:<br/>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "Select Form.io Javascript Options"
-msgstr "选择Form.io 的JS选项"
+msgstr "选择构建器的JS选项"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
@@ -1707,7 +1707,7 @@ msgstr "翻译值"
 #: model:ir.ui.menu,name:formio.menu_formio_translation_root model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_translation_tree model_terms:ir.ui.view,arch_db:formio.view_formio_version_form
 msgid "Translations"
-msgstr "翻译包"
+msgstr "翻译"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__type
