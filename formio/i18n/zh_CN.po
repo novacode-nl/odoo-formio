@@ -1038,7 +1038,7 @@ msgstr "关注者"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "JavaScript Options"
+msgid "JS Options"
 msgstr "选项JSON"
 
 #. module: formio
