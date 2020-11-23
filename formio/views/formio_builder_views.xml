@@ -194,7 +194,7 @@ See LICENSE file for full licensing details. -->
                             </group>
                         </page>
                         <page string="JS Options" name="javascript_options" groups="formio.group_formio_admin">
-                            <div class="mb-4" style="background-color: #e9ecef; padding: 0 10px;">
+                            <div style="background-color: #e9ecef; padding: 0 10px;">
                                 <group>
                                     <field
                                         name="formio_js_options_id"
