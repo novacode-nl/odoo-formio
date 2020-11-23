@@ -193,7 +193,7 @@ See LICENSE file for full licensing details. -->
                                 <field name="allow_force_update_state_group_ids" />
                             </group>
                         </page>
-                        <page string="JavaScript Options" name="javascript_options" groups="formio.group_formio_admin">
+                        <page string="JS Options" name="javascript_options" groups="formio.group_formio_admin">
                             <div style="background-color: #e9ecef; padding: 0 10px;">
                                 <group>
                                     <field
@@ -229,9 +229,6 @@ See LICENSE file for full licensing details. -->
                         </page>
                         <page string="JSON Schema" name="schema" groups="formio.group_formio_admin">
                             <field name="schema" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                        </page>
-                        <page string="Forms" name="forms" groups="formio.group_formio_admin">
-                            <field name="forms"/>
                         </page>
                     </notebook>
                 </sheet>
