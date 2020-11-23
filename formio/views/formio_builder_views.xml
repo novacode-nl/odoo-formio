@@ -227,7 +227,7 @@ See LICENSE file for full licensing details. -->
 }</pre>
                             </div>
                         </page>
-                        <page string="Schema" name="schema" groups="formio.group_formio_admin">
+                        <page string="JSON Schema" name="schema" groups="formio.group_formio_admin">
                             <field name="schema" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                         </page>
                         <page string="Forms" name="forms" groups="formio.group_formio_admin">
