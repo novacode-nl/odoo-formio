@@ -568,7 +568,7 @@ msgstr "自定义和第三方组件设置。"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__submission_data model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
 msgid "Data"
-msgstr "数据"
+msgstr "提交数据"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__readonly_submission_data
@@ -1039,7 +1039,7 @@ msgstr "关注者"
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "JavaScript Options"
-msgstr "JS选项"
+msgstr "选项JSON"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version__js_assets
@@ -1470,7 +1470,7 @@ msgstr "短信发送错误"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__schema model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "JSON Schema"
-msgstr "JSON模式数据"
+msgstr "表单JSON"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
