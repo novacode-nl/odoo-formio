@@ -12,7 +12,7 @@ class Form(models.Model):
 
     @api.multi
     def after_submit(self):
-        super(Form, self).action_submit()
+        super(Form, self).after_submit()
         if self.builder_id.mail_active:
             self.send_mail()
 
@@ -45,8 +45,7 @@ class Form(models.Model):
 
     @api.multi
     def generate_attachment(self):
-        REPORT_ID = 'formio_report_qweb.action_report_formio_form'
-        pdf = self.env.ref(REPORT_ID).render_qweb_pdf(self.ids)
+        pdf = self.builder_id.mail_report_id.render_qweb_pdf(self.ids)
         b64_pdf = base64.b64encode(pdf[0])
 
         ATTACHMENT_NAME = 'Form.io Form -' + self.title

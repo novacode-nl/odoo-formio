@@ -26,6 +26,7 @@ class Builder(models.Model):
                                                         Your form system'''),
                                  string='Body',
                                  sanitize_attributes=False)
+    mail_report_id = fields.Many2one('ir.actions.report', string="Report", domain=[('model', '=', 'formio.form')])
 
     def _get_mail_recipients(self):
         res = tools.email_split_and_format(self.mail_recipients)
