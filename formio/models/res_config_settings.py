@@ -11,7 +11,7 @@ class ResConfigSettings(models.TransientModel):
     formio_default_asset_css_ids = fields.Many2many('formio.default.asset.css', string='Form.io CSS assets')
     formio_default_builder_js_options_id = fields.Many2one('formio.builder.js.options', string='Form.io Builder JS options ID')
     formio_default_builder_js_options = fields.Text(related='formio_default_builder_js_options_id.value', string='Form.io Builder JS options')
-    formio_github_personal_access_token = fields.Char(string='Github personal access token')
+    formio_github_personal_access_token = fields.Char(string='GitHub personal access token')
 
     @api.model
     def get_values(self):
