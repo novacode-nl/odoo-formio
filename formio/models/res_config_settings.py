@@ -11,6 +11,7 @@ class ResConfigSettings(models.TransientModel):
     formio_default_asset_css_ids = fields.Many2many('formio.default.asset.css', string='Form.io CSS assets')
     formio_default_builder_js_options_id = fields.Many2one('formio.builder.js.options', string='Form.io Builder JS options ID')
     formio_default_builder_js_options = fields.Text(related='formio_default_builder_js_options_id.value', string='Form.io Builder JS options')
+    github_personal_access_token = fields.Char(string='Github personal access token')
 
     @api.model
     def get_values(self):
@@ -37,7 +38,12 @@ class ResConfigSettings(models.TransientModel):
         default_asset_css = self.env['formio.default.asset.css'].with_context(context).search([])
         if default_asset_css:
             res.update(
-                formio_default_asset_css_ids=default_asset_css.ids
+                formio_default_asset_css_ids=default_asset_css
+            )
+        default_github_personal_access_token = Param.get_param('github.personal.access.token')
+        if default_github_personal_access_token:
+            res.update(
+                github_personal_access_token=default_github_personal_access_token
             )
         return res
 
@@ -50,6 +56,10 @@ class ResConfigSettings(models.TransientModel):
         Param.sudo().set_param(
             "formio.default_builder_js_options_id",
             self.formio_default_builder_js_options_id.id
+        )
+        Param.sudo().set_param(
+            "github.personal.access.token",
+            self.github_personal_access_token
         )
 
         context = {'active_test': False}
