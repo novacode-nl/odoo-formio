@@ -33,7 +33,7 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                                     Source: <a href="https://github.com/formio/formio.js/releases" target="_blank">https://github.com/formio/formio.js/releases</a>
                                 </div>
                                 <strong>Github personal access token</strong><br/>
-                                <field name="github_personal_access_token"/><br/>
+                                <field name="formio_github_personal_access_token"/><br/>
                                 <i class="fa fa-info-circle" title="info"/>
                                 <a href="https://github.com/settings/tokens" target="_blank">Token</a> is not required, but it can get a higher rate limit.
                                 <div class="mt-4">
