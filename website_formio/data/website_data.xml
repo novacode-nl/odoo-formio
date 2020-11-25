@@ -5,11 +5,11 @@ See LICENSE file for full licensing details. -->
 <odoo>
     <data noupdate="1">
         <record id="formio_thankyou" model="ir.ui.view">
-            <field name="name">Form.io: Thank you (form submission)</field>
+            <field name="name">Forms: Thank you (form submission)</field>
             <field name="type">qweb</field>
             <field name="key">website_formio.formio_thankyou</field>
             <field name="arch" type="xml">
-                <t name="Form.io: Thank you (form submission)" t-name="website_formio.formio_thankyou">
+                <t name="Forms: Thank you (form submission)" t-name="website_formio.formio_thankyou">
                     <t t-call="website.layout">
                         <div id="wrap" class="oe_structure oe_empty">
                             <section class="s_text_block pt32 pb0">

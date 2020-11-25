@@ -10,7 +10,7 @@ odoo.define('website_formio_editor', function (require) {
 
     options.registry.website_formio_editor = options.Class.extend({
         popup_template_id: "editor_new_formio_form_popup",
-        popup_title: _t("Add a Form.io Form"),
+        popup_title: _t("Add a Form"),
 
         select_formio_builder: function (previewMode, value) {
             var self = this;

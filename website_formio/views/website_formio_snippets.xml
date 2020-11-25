@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="s_website_formio" name="Form.io Form">
+    <template id="s_website_formio" name="Form">
         <section class="s_website_formio bg-200 pt48 pb24">
             <div class="container">
                 <div class="formio_form_iframe_container">
