@@ -2,8 +2,8 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io Sales',
-    'summary': 'Form.io webforms on Sale Orders/Quotes',
+    'name': 'Forms Sales',
+    'summary': 'Formio webforms on Sale Orders/Quotes',
     'version': '0.4',
     'license': 'LGPL-3',
     'author': 'Nova Code',
@@ -21,9 +21,9 @@
         'static/description/banner.png',
     ],
     'description': """
-Form.io - Sales
-===============
+Forms - Sales
+=============
 
-Build and publish (Form.io) forms for Sale Orders/Quotes.
+Build and publish (Formio) forms for Sale Orders/Quotes.
 """
 }
