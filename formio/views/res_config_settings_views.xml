@@ -10,7 +10,7 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('settings')]" position="inside">
                 <div class="app_settings_block" data-string="Form.io" data-key="formio">
-                    <h2>Form.io client/library version importer</h2>
+                    <h2>Form.io JS/library version importer</h2>
                     <div class="row mt16 o_settings_container formio_version">
                         <div class="col-12 col-md-6 o_setting_box">
                             <div class="o_setting_left_pane"/>
@@ -75,7 +75,7 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                     <div class="row mt16 o_settings_container formio_default_builder_js_options">
                         <div class="text-muted">
                             Select a default Form Builder JavaScript Options Template.<br/>
-                            It's contents, the Form Builder JavaScript Options, shall be show below.
+                            It's contents, the Form Builder JavaScript Options, shall be shown below.
                         </div>
                         
                         <div class="col-12 col-md-12 o_setting_box">

@@ -5,7 +5,7 @@ See LICENSE file for full licensing details. -->
 <odoo>
     <menuitem
         id="menu_formio_root"
-        name="Form.io"
+        name="Forms"
         sequence="2"
         web_icon="formio,static/description/icon.png"
         groups="base.group_user"/>

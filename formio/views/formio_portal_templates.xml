@@ -115,7 +115,7 @@ See LICENSE file for full licensing details. -->
         </t>
     </template>
 
-    <template id="portal_my_formio_edit" name="Form.io Form" priority="40">
+    <template id="portal_my_formio_edit" name="Portal Form" priority="40">
         <t t-call="portal.portal_layout">
             <div t-attf-class="formio_form_container mt16 {{ form.state }}">
                 <div class="formio_form_iframe_container">

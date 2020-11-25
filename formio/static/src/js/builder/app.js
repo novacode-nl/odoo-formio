@@ -52,12 +52,12 @@ class App extends Component {
                 return;
             }
             else {
-                console.log('[Form.io] Saving Builder...');
+                console.log('[Forms] Saving Builder...');
                 $.jsonRpc.request(self.saveUrl, 'call', {
                     'builder_id': self.builderId,
                     'schema': res
                 }).then(function() {
-                    console.log('[Form.io] Builder sucessfully saved.');
+                    console.log('[Forms] Builder sucessfully saved.');
                 });
             }
         });
