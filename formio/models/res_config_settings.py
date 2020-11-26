@@ -8,7 +8,7 @@ class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
     formio_default_version_id = fields.Many2one('formio.version', string='Form.io Version')
-    formio_default_asset_css_ids = fields.Many2many('formio.default.asset.css', string='Form.io CSS assets')
+    formio_default_asset_css_ids = fields.Many2many('formio.default.asset.css', string='Form.io CSS assets', context={'active_test': False})
     formio_default_builder_js_options_id = fields.Many2one('formio.builder.js.options', string='Form.io Builder JS options ID')
     formio_default_builder_js_options = fields.Text(related='formio_default_builder_js_options_id.value', string='Form.io Builder JS options')
     formio_github_personal_access_token = fields.Char(string='GitHub personal access token')
@@ -38,7 +38,7 @@ class ResConfigSettings(models.TransientModel):
         default_asset_css = self.env['formio.default.asset.css'].with_context(context).search([])
         if default_asset_css:
             res.update(
-                formio_default_asset_css_ids=default_asset_css.ids
+                formio_default_asset_css_ids=[(6, False, default_asset_css.ids)]
             )
         github_personal_access_token = Param.get_param('formio.github.personal.access.token')
         if github_personal_access_token:
