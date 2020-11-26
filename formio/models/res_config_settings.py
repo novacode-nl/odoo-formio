@@ -38,7 +38,7 @@ class ResConfigSettings(models.TransientModel):
         default_asset_css = self.env['formio.default.asset.css'].with_context(context).search([])
         if default_asset_css:
             res.update(
-                formio_default_asset_css_ids=default_asset_css
+                formio_default_asset_css_ids=default_asset_css.ids
             )
         default_github_personal_access_token = Param.get_param('formio.github.personal.access.token')
         if default_github_personal_access_token:
