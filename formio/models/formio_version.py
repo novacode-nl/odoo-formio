@@ -10,7 +10,7 @@ class Version(models.Model):
     _order = 'name DESC'
 
     name = fields.Char(
-        "Name", required=True, track_visibility='onchange',
+        "Name", required=True, tracking=True,
         help="""Form.io release/version.""")
     description = fields.Text("Description")
     translations = fields.Many2many('formio.translation', string='Translations')

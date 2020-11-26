@@ -37,7 +37,7 @@ class VersionGitHubTag(models.Model):
     changelog_url = fields.Char(compute='_compute_fields', string="Changelog URL")
     state = fields.Selection(
         selection=STATES, string="State",
-        default=STATE_AVAILABLE, required=True, track_visibility='onchange',
+        default=STATE_AVAILABLE, required=True, tracking=True,
         help="""\
         - Available: Not downloaded and installed yet.
         - Installed: Downloaded and installed.""")
