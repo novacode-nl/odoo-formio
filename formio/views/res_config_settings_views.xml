@@ -93,13 +93,13 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                                 <field name="formio_default_builder_js_options_id"/>
                             </div>
                             <div class="row">
-                                <field name="formio_default_builder_js_options"/>
+                                <code><field name="formio_default_builder_js_options"/></code>
                             </div>
                         </div>
                         
                         <div class="row">
                             <div class="col-12 col-md-12 text-muted">
-                                See the example below... Options could contain the Form Builder editForm with some File component settings:<br/>
+                                <strong>Example below</strong>. Options could contain the Form Builder "editForm" with some "File" component settings:<br/>
                                 <a href="https://github.com/formio/formio.js/blob/master/src/components/file/editForm/File.edit.file.js" target="_blank">
                                     https://github.com/formio/formio.js/blob/master/src/components/file/editForm/File.edit.file.js
                                 </a>
