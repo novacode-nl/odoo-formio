@@ -59,6 +59,7 @@ class VersionGitHubChecker(models.TransientModel):
 
 class VersionGitHubTagAvailable(models.TransientModel):
     _name = 'formio.version.github.tag.available'
+    _description = 'Formio Version GitHub Tag Available'
 
     name = fields.Char(required=True)
     changelog_url = fields.Char(compute='_compute_fields', string='Changelog URL')
