@@ -6,6 +6,7 @@ import os
 import requests
 import shutil
 import tarfile
+import sys
 
 from odoo import api, fields, models, modules
 
@@ -76,17 +77,24 @@ class VersionGitHubTag(models.Model):
         response = requests.get(self.archive_url, stream=True)
         logger.info('download => %s' % self.archive_url)
         tar_path = '/tmp/%s.tar.gz' % self.version_name
-
+        static_path = modules.get_module_resource('formio', 'static/installed')
+        if sys.platform == 'win32':
+            tar_path = '%s\\%s.tar.gz' % (static_path, self.version_name)
         if response.status_code == 200:
             with open(tar_path, 'wb') as f:
                 f.write(response.raw.read())
                 tar = tarfile.open(tar_path)
-                tar.extractall('/tmp', members=self._tar_extract_members(tar))
+                if sys.platform == 'win32':
+                    tar.extractall('%s' % static_path, members=self._tar_extract_members(tar))
+                else:
+                    tar.extractall('/tmp', members=self._tar_extract_members(tar))
                 tar.close()
 
             extract_path = '/tmp/formio.js-%s/dist' % self.version_name
+            if sys.platform == 'win32':
+                extract_path = '%s\\formio.js-%s\\dist' % (static_path, self.version_name)
 
-            static_path = modules.get_module_resource('formio', 'static/installed')
+            # static_path = modules.get_module_resource('formio', 'static/installed')
             static_version_dir = '%s/%s' % (static_path, self.version_name)
             os.makedirs(static_version_dir, exist_ok=True)
 
@@ -155,13 +163,17 @@ class VersionGitHubTag(models.Model):
 
             # cleanup and update
             os.remove(tar_path)
-            shutil.rmtree(extract_path)
+            tmp_path = '/tmp/formio.js-%s' % self.version_name
+            if sys.platform == 'win32':
+                tmp_path = '%s\\formio.js-%s' % (static_path, self.version_name)
+            shutil.rmtree(tmp_path)
             self.write({'state': STATE_INSTALLED, 'formio_version_id': version.id})
 
     def action_reset_installed(self):
         if self.formio_version_id:
-            vals = {'formio_version_id': False, 'state': STATE_REGISTERD}
+            vals = {'formio_version_id': False, 'state': STATE_AVAILABLE}
             self.write(vals)
+            self.action_download_install()
 
     def _tar_extract_members(self, members):
         full_todo = ['formio.full.min.js', 'formio.full.min.css']
