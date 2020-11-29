@@ -28,22 +28,44 @@ class Builder(models.Model):
                                  sanitize_attributes=False)
     mail_report_id = fields.Many2one('ir.actions.report', string="Report", domain=[('model', '=', 'formio.form')])
 
+    """
+    Get all recipients (comma separated) from the field mail_recipients.
+    """
     def _get_mail_recipients(self):
         res = tools.email_split_and_format(self.mail_recipients)
         return res
 
+    """
+    Compute comma separated list of formio components and get the mail recipients from submitted form.
+    """
     def _get_mail_recipients_form(self, form):
         mail_recipients_form = self.mail_recipients_form
-        res = []
+        recipients = []
         if mail_recipients_form:
             components = mail_recipients_form.split(',')
             for c in components:
-                try:
-                    res.extend(tools.email_split_and_format(form._formio.components[c].value))
-                except KeyError as e:
-                    _logger.error("Exception: %s" % e)
+                component = c.split('->')
+                if len(component) >= 2:
+                    try:
+                        outer_component = form._formio.components[component[0]]
+                    except KeyError as e:
+                        _logger.error("Exception: %s" % e)
+                    inner_component = component[1]
+                    recipients.extend(self._get_component(outer_component, inner_component))
+                else:
+                    try:
+                        outer_component = form._formio.components[c]
+                    except KeyError as e:
+                        _logger.error("Exception: %s" % e)
+                    recipients.extend(self._get_component(outer_component))
+        res = []
+        for r in recipients:
+            res.extend(tools.email_split_and_format(r))
         return res
 
+    """
+    Get mail recipients from specified partners in the form.builder.
+    """
     @api.multi
     def _get_mail_recipients_partner(self):
         res = []
@@ -51,9 +73,52 @@ class Builder(models.Model):
             res.extend(tools.email_split_and_format(p.email))
         return res
 
+    """
+    This function collects all mail recipients from form components, partner entries and mail_recipients field. 
+    """
     def get_mail_recipients(self, form):
         res = []
         res.extend(self._get_mail_recipients())
         res.extend(self._get_mail_recipients_form(form))
         res.extend(self._get_mail_recipients_partner())
+        return res
+
+    """
+    Supported form.io components are:
+     - datagrid
+     - email
+     - select
+     - selectboxes
+     - textfield
+    """
+    def _get_component(self, outer_component, inner_component=[]):
+        res = []
+        if outer_component.type == 'datagrid':
+            for row in outer_component.rows:
+                for obj in row:
+                    inner_component = row[obj]['_object']
+                    res.extend(self._get_component(inner_component))
+            return res
+        elif outer_component.type == 'email':
+            res.append(self._get_value_simple(outer_component))
+            return res
+        elif outer_component.type == 'select':
+            res.append(self._get_value_simple(outer_component))
+            return res
+        elif outer_component.type == 'selectboxes':
+            res.extend(self._get_value_selectboxes(outer_component))
+            return res
+        elif outer_component.type == 'textfield':
+            res.append(self._get_value_simple(outer_component))
+            return res
+        return res
+
+    def _get_value_simple(self, component):
+        return component.value
+
+    def _get_value_selectboxes(self, component):
+        res = []
+        for key, value in component.value.items():
+            if value:
+                res.append(key)
         return res
