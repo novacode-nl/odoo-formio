@@ -7,7 +7,7 @@ from odoo import api, fields, models, _
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
 
-    formio_forms = fields.One2many('formio.form', 'crm_lead_id', string='Form.io Forms')
+    formio_forms = fields.One2many('formio.form', 'crm_lead_id', string='Forms')
     formio_forms_count = fields.Integer(compute='_compute_formio_forms_count')
     formio_this_model_id = fields.Many2one('ir.model', compute='_compute_formio_this_model_id')
 

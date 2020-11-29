@@ -2,8 +2,8 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io',
-    'summary': 'Build, deploy and store web forms with the "Form.io" Form Builder',
+    'name': 'Forms',
+    'summary': 'Build, deploy and store Forms',
     'version': '7.9',
     'license': 'LGPL-3',
     'author': 'Nova Code',
@@ -57,29 +57,9 @@
         'static/description/banner.png',
     ],
     'description': """
-Form.io
-=======
+Forms
+=====
 
-Build, deploy and store web forms in with the "Form.io" Form Builder.
-
-http://form.io
-
-The "Form.io" GUI/renderer and data are hosted on-premise (your hosting). So you're under control.
-
-After installation of the module you can start right away.
-No extra setup and requirements are needed.
-
-Form Builder
-------------
-
-* Form Building starts in Odoo, by create a record and open the Form Builder right away.
-* All Form data (schema) is stored on-premise, in your Odoo database
-
-Form
-----
-
-* Users can create, edit and fill-in Forms.
-* Forms are stored in the Odoo database.
-
+Build, deploy and Forms.
 """
 }
