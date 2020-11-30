@@ -11,7 +11,7 @@ See LICENSE file for full licensing details. -->
             <xpath expr="//page[@name='formio_components_api']/group[@name='partner']" position="inside">
                     <group string="reCAPTCHA Button" colspan="2">
                         <div colspan="2">
-                            <i class="fa fa-info-circle" title="info"/> Put the Site Key in the API (tab) property, in the Form.io Builder Component: (odoo) reCAPTCHA
+                            <i class="fa fa-info-circle" title="info"/> Put the Site Key in the API (tab) property, in the Form Builder Component: (odoo) reCAPTCHA
                         </div>
                         <div colspan="2">
                             <i class="fa fa-info-circle" title="info"/> Configure in (menu) Technical / System Paramaters: <code>formio_recaptcha_button.site_key</code>, <code>formio_recaptcha_button.secret_key</code>
