@@ -1,24 +1,22 @@
-Formio Mail Extension
-=================================
+# Formio Mail Extension
 
 This module aims to extend the Odoo form.io stack with features, such as:
 
-* Send submitted forms as pdf to mail recipients
+* Send submitted forms as PDF to mail recipients
 * Mail recipients can be specified in three ways:
     * Static mail address
     * Use partner mail address (contacts)
     * A user can specify the recipient in a form component
 * Every form builder can have a own mail body and subject line
     
-Specify Recipients
-=================================
+# Specify Recipients
 
 There are the following three ways to specify a recipient:
 
 ![Mail settings](./static/description/formio_builder_mail_settings.png)
 
-Using Partner Entry
------------
+## Using Partner Entry
+
 By selecting one or multiple partner entries in:
 
 ``
@@ -29,8 +27,8 @@ The extension tries to access the partner.email field.
 If the partner has a valid mail address the plugin will send the
 form after submission, to specified partner's.
 
-Using Fixed Addresses
------------
+## Using Fixed Addresses
+
 By specifying one or multiple **(comma-separated)** mail addresses in:
 
 ``
@@ -43,8 +41,8 @@ to specified recipients.
 
 It's a great feature for fixed, group or shared mail addresses.
 
-Using Form Components
------------
+## Using Form Components
+
 By specifying one or multiple **(comma-separated)** form components in:
 
 ``
@@ -53,7 +51,7 @@ formio -> builder -> mail -> Form
 
 The extension computes the value of the specified form components
 after submission and if the value of a components holds a valid
-mail address it tries to send a pdf report.
+mail address it tries to send a PDF report.
 
 Form components need to be specified by it's key:
 
@@ -76,8 +74,7 @@ dataGrid->textField1
 The first value is the key of the datagrid where as the second value 
 the key of the inner component of the datagrid is.
 
-Supported Fields
------------
+## Supported Fields
 
 The following form components are supported and working:
 
@@ -87,8 +84,7 @@ The following form components are supported and working:
  - selectboxes
  - textfield
 
-Authors and Contributors
-=======
+# Authors and Contributors
 
 - Nova Code
 - Yannik Lieblinger
