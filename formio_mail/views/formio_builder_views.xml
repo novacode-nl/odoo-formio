@@ -15,9 +15,9 @@ See LICENSE file for full licensing details. -->
                         <field name="mail_report_id" string="Report" attrs="{'required': [('mail_active', '!=', False)]}"/>
                     </group>
                     <group name="mail_recipients" string="Recipients" colspan="2">
-                        <field name="mail_recipients_partner" string="Partner" widget="many2many_tags"/>
+                        <field name="mail_recipients_partner_ids" string="Partner" widget="many2many_tags"/>
                         <field name="mail_recipients" string="Addresses"/>
-                        <field name="mail_recipients_form" string="Form"/>
+                        <field name="mail_recipients_form_components" string="Form"/>
                     </group>
                     <group name="message" string="Message" col="6" colspan="2">
                         <field name="mail_subject" string="Subject" colspan="6"/>

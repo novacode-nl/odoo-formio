@@ -13,10 +13,10 @@ class Builder(models.Model):
 
     mail_active = fields.Boolean(string='Mailings active', help='Check this box to send submitted forms to recipients.')
     mail_recipients = fields.Char(string='Recipients', help='Comma-separated list of email addresses.')
-    mail_recipients_form = fields.Char(string='Formio Component',
+    mail_recipients_form_components = fields.Char(string='Formio Component',
                                        help='Comma-separated list of formio components. '
                                             'Please, specify here the key of the component.')
-    mail_recipients_partner = fields.Many2many('res.partner', help='Use mail address from partner record.')
+    mail_recipients_partner_ids = fields.Many2many('res.partner', help='Use mail address from partner record.')
     mail_subject = fields.Char(default=lambda s: _('Form.Io - You\'ve received a Form'),
                                string='Subject')
     mail_body_html = fields.Html(default=lambda s: _('''Dear Recipient, <br/>
@@ -38,11 +38,11 @@ class Builder(models.Model):
     """
     Compute comma separated list of formio components and get the mail recipients from submitted form.
     """
-    def _get_mail_recipients_form(self, form):
-        mail_recipients_form = self.mail_recipients_form
+    def _get_mail_recipients_form_components(self, form):
+        mail_recipients_form_components = self.mail_recipients_form_components
         recipients = []
-        if mail_recipients_form:
-            components = mail_recipients_form.split(',')
+        if mail_recipients_form_components:
+            components = mail_recipients_form_components.split(',')
             for c in components:
                 component = c.split('->')
                 if len(component) >= 2:
@@ -67,9 +67,9 @@ class Builder(models.Model):
     Get mail recipients from specified partners in the form.builder.
     """
     @api.multi
-    def _get_mail_recipients_partner(self):
+    def _get_mail_recipients_partner_ids(self):
         res = []
-        for p in self.mail_recipients_partner:
+        for p in self.mail_recipients_partner_ids:
             res.extend(tools.email_split_and_format(p.email))
         return res
 
@@ -79,8 +79,8 @@ class Builder(models.Model):
     def get_mail_recipients(self, form):
         res = []
         res.extend(self._get_mail_recipients())
-        res.extend(self._get_mail_recipients_form(form))
-        res.extend(self._get_mail_recipients_partner())
+        res.extend(self._get_mail_recipients_form_components(form))
+        res.extend(self._get_mail_recipients_partner_ids())
         return res
 
     """
