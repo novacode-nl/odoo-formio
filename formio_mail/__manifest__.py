@@ -10,7 +10,7 @@
     'website': 'https://www.novacode.nl',
     'live_test_url': 'https://demo13.novacode.nl',
     'category': 'Extra Tools',
-    'depends': ['contacts', 'formio_report_qweb'],
+    'depends': ['contacts', 'mail', 'formio_report_qweb'],
     'data': [
         'views/formio_builder_views.xml',
     ],
