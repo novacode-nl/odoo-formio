@@ -271,7 +271,7 @@ class FormioController(http.Controller):
             language = request.env.user.lang
         else:
             language = request._context['lang']
-        options['language'] = language.replace('_', '-')
+        options['language'] = language
         return options
 
     def _get_form_js_params(self, form):
