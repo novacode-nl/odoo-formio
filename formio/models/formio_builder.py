@@ -354,7 +354,7 @@ class Builder(models.Model):
             language = self.env.user.lang
         else:
             language = self._context['lang']
-        options['language'] = language.replace('_', '-')
+        options['language'] = language
             
         options['i18n'] = self.i18n_translations()
         return options
