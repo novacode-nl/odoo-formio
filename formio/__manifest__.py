@@ -4,7 +4,7 @@
 {
     'name': 'Forms',
     'summary': 'Build, deploy and store Forms',
-    'version': '7.9',
+    'version': '8.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
