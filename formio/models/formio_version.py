@@ -7,6 +7,7 @@ from odoo import api, fields, models, _
 class Version(models.Model):
     _name = 'formio.version'
     _description = 'Formio Version'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'name DESC'
 
     name = fields.Char(

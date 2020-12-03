@@ -19,6 +19,7 @@ STATES = [(STATE_AVAILABLE, "Available"), (STATE_INSTALLED, "Installed")]
 
 class VersionGitHubTag(models.Model):
     _name = 'formio.version.github.tag'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Formio Version GitHub Tag'
     #_order = 'create_date desc, id asc'
 
