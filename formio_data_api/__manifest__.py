@@ -16,7 +16,7 @@
     },
     'application': False,
     'images': [
-        'static/description/banner.png',
+        'static/description/banner.gif',
     ],
     'description': """
 Form.io Data API

@@ -17,7 +17,7 @@
     ],
     'application': True,
     'images': [
-        'static/description/banner.png',
+        'static/description/banner.gif',
     ],
     'description': """
 Form.io - Partners
