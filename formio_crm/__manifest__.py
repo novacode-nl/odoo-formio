@@ -2,8 +2,8 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io CRM',
-    'summary': 'Form.io webforms on CRM Leads',
+    'name': 'Forms CRM',
+    'summary': 'Formio webforms on CRM Leads',
     'version': '0.2',
     'license': 'LGPL-3',
     'author': 'Nova Code',
@@ -17,12 +17,12 @@
     ],
     'application': True,
     'images': [
-        'static/description/banner.png',
+        'static/description/banner.gif',
     ],
     'description': """
-Form.io - CRM
-=============
+Forms - CRM
+===========
 
-Build and publish (Form.io) forms for Leads.
+Build and publish (Formio) forms for Leads.
 """
 }

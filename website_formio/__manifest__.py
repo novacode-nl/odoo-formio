@@ -2,8 +2,8 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io Website (Snippet etc)',
-    'summary': 'Form Snippet, Other website integration',
+    'name': 'Forms Website (Snippet etc)',
+    'summary': 'Forms Snippet, Other website integration',
     'version': '1.4',
     'license': 'LGPL-3',
     'author': 'Nova Code',
@@ -20,6 +20,6 @@
     ],
     'application': True,
     'images': [
-        'static/description/banner.png',
+        'static/description/banner.gif',
     ],
 }

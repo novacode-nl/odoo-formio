@@ -7,10 +7,11 @@ from odoo import api, fields, models, _
 class Version(models.Model):
     _name = 'formio.version'
     _description = 'Formio Version'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'name DESC'
 
     name = fields.Char(
-        "Name", required=True, track_visibility='onchange',
+        "Name", required=True, tracking=True,
         help="""Form.io release/version.""")
     description = fields.Text("Description")
     translations = fields.Many2many('formio.translation', string='Translations')

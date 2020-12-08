@@ -6,6 +6,7 @@ from odoo import api, fields, models
 
 class UnsanitizeHtmlField(models.Model):
     _name = 'website.editor.unsanitize.html.field'
+    _description = 'Unsanitize HTML Field (for Model)'
 
     ir_model_id = fields.Many2one("ir.model", string="Select Model")
     ir_model_field_id = fields.Many2one("ir.model.fields", string="Select Field")    

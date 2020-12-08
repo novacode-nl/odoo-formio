@@ -2,8 +2,8 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io Data API',
-    'summary': 'Python API for Form.io data (builder, form/submission).',
+    'name': 'Forms Data API',
+    'summary': 'Python API for Forms data (builder, form/submission).',
     'version': '0.5',
     'license': 'LGPL-3',
     'author': 'Nova Code',
@@ -17,11 +17,11 @@
     },
     'application': False,
     'images': [
-        'static/description/banner.png',
+        'static/description/banner.gif',
     ],
     'description': """
-Form.io Data API
-================
+Forms Data API
+==============
 
 """
 }

@@ -9,10 +9,10 @@ class Builder(models.Model):
 
     portal_submit_done_page_id = fields.Many2one(
         'website.page', domain=[('is_published', '=', True), ('url', '!=', '/')],
-        string='Portal Submit-done Page', track_visibility='onchange')
+        string='Portal Submit-done Page', tracking=True)
     public_submit_done_page_id = fields.Many2one(
         'website.page', domain=[('is_published', '=', True), ('url', '!=', '/')],
-        string='Public Submit-done Page', track_visibility='onchange')
+        string='Public Submit-done Page', tracking=True)
 
     @api.model
     def create(self, vals):

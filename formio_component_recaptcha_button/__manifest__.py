@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io reCAPTCHA Button Component',
+    'name': 'Forms reCAPTCHA Button Component',
     'summary': 'Drag & drop a reCAPTCHA component with (server)verification on a Form.',
     'version': '1.0',
     'license': 'LGPL-3',
@@ -20,11 +20,11 @@
     'installable': True,
     'application': True,
     'images': [
-        'static/description/banner.png',
+        'static/description/banner.gif',
     ],
     'description': """
-Form.io reCAPTCHA Button Component
-==================================
+Forms reCAPTCHA Button Component
+================================
 
 """
 }

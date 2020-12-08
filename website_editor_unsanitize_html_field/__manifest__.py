@@ -18,6 +18,6 @@
     ],
     'application': False,
     'images': [
-        'static/description/banner.png',
+        'static/description/banner.gif',
     ],
 }

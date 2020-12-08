@@ -2,8 +2,8 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io Partner',
-    'summary': 'Form.io webforms on Partners',
+    'name': 'Forms Partner',
+    'summary': 'Forms on Partners',
     'version': '1.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
@@ -18,12 +18,12 @@
     ],
     'application': True,
     'images': [
-        'static/description/banner.png',
+        'static/description/banner.gif',
     ],
     'description': """
-Form.io - Partners
-==================
+Forms - Partners
+================
 
-Build and publish (Form.io) forms for Partners.
+Build and publish Forms for Partners.
 """
 }
