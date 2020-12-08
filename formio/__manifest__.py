@@ -2,10 +2,9 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io',
-    'summary': 'Build, deploy and store web forms with the "Form.io" Form Builder',
+    'name': 'Forms',
+    'summary': 'Build easy-to-use, professional and versatile Forms to integrate and collect any information you need for your business.',
     'version': '4.3',
-    'version': '7.8',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
