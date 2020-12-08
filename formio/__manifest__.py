@@ -3,7 +3,7 @@
 
 {
     'name': 'Forms',
-    'summary': 'Build, deploy and store Forms',
+    'summary': 'Build easy-to-use, professional and versatile Forms to integrate and collect any information you need for your business.',
     'version': '8.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
