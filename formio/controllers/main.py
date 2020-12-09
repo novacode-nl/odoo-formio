@@ -34,8 +34,10 @@ class FormioController(http.Controller):
         request.env.context = context
 
         builder = request.env['formio.builder'].browse(builder_id)
+        languages = builder.languages
+
         values = {
-            'languages': builder.languages,
+            'languages': languages,
             'builder': builder,
             'formio_css_assets': builder.formio_css_assets,
             'formio_js_assets': builder.formio_js_assets,
@@ -85,8 +87,12 @@ class FormioController(http.Controller):
         context.update({'lang': request.env.user.lang})
         request.env.context = context
 
+        languages = form.builder_id.languages
+        # if 'en_US' not in languages.mapped('code'):
+        #     languages |= request.env.ref('base.lang_en')
+
         values = {
-            'languages': form.builder_id.languages,
+            'languages': languages.sorted('name'),
             'form': form,
             'formio_css_assets': form.builder_id.formio_css_assets,
             'formio_js_assets': form.builder_id.formio_js_assets,
