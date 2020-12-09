@@ -247,7 +247,6 @@ class Builder(models.Model):
     def _compute_languages(self):
         for r in self:
             languages = r.translations.mapped('lang_id')
-            languages |= self.env.ref('base.lang_en')
             r.languages = languages.sorted('name')
 
     def _compute_edit_url(self):
@@ -349,14 +348,18 @@ class Builder(models.Model):
         else:
             options = {}
 
+        options['i18n'] = self.i18n_translations()
+
         # default language
         if self.env.user.lang in self.languages.mapped('iso_code'):
             language = self.env.user.lang
         else:
             language = self._context['lang']
-        options['language'] = language
+
+        # only set default language if exist in i18n translations
+        if options['i18n'].get(language):
+            options['language'] = language
             
-        options['i18n'] = self.i18n_translations()
         return options
 
     def _get_js_params(self):
