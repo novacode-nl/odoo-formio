@@ -2,9 +2,9 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io Website',
-    'summary': 'Website integration (redirect to website page or URL after form submission)',
-    'version': '1.0',
+    'name': 'Forms | Website (Snippet etc)',
+    'summary': 'Forms Snippet, Other website integration',
+    'version': '1.4',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',

@@ -2,8 +2,8 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms CRM',
-    'summary': 'Formio webforms on CRM Leads',
+    'name': 'Forms | CRM',
+    'summary': 'Forms integration with CRM Leads',
     'version': '0.2',
     'license': 'LGPL-3',
     'author': 'Nova Code',
@@ -20,9 +20,8 @@
         'static/description/banner.gif',
     ],
     'description': """
-Forms - CRM
+Forms | CRM
 ===========
 
-Build and publish (Formio) forms for Leads.
 """
 }
