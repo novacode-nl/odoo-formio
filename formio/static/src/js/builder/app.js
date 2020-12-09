@@ -36,6 +36,7 @@ class App extends Component {
         builder.instance.ready.then(function() {
             if ('language' in self.options) {
                 builder.language = self.options['language'];
+                // builder.instance.webform.language = self.options['language'];
             }
             window.setLanguage = function(lang) {
                 builder.instance.webform.language = lang;
