@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms Website (Snippet etc)',
+    'name': 'Forms | Website (Snippet etc)',
     'summary': 'Forms Snippet, Other website integration',
     'version': '1.4',
     'license': 'LGPL-3',

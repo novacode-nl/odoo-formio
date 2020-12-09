@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms reCAPTCHA Button Component',
+    'name': 'Forms | reCAPTCHA Button Component',
     'summary': 'Drag & drop a reCAPTCHA component with (server)verification on a Form.',
     'version': '1.0',
     'license': 'LGPL-3',
@@ -23,8 +23,8 @@
         'static/description/banner.gif',
     ],
     'description': """
-Forms reCAPTCHA Button Component
-================================
+Forms | reCAPTCHA Button Component
+==================================
 
 """
 }
