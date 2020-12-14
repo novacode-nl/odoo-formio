@@ -3,8 +3,8 @@
 
 {
     'name': 'Forms',
-    'summary': 'Build, deploy and store Forms',
-    'version': '7.9',
+    'summary': 'Form Builder & integration of professional and versatile Forms to collect any information you need for your business.',
+    'version': '8.2',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -24,6 +24,7 @@
         'data/formio_translations_sources.xml',
         'data/formio_translations_nl.xml',
         'data/formio_translations_nl_BE.xml',
+        'data/formio_translations_pt_BR.xml',
         'data/formio_translations_zh_CN.xml',
         # security
         'security/formio_security.xml',
@@ -54,7 +55,7 @@
     'installable': True,
     'application': True,
     'images': [
-        'static/description/banner.png',
+        'static/description/banner.gif',
     ],
     'description': """
 Forms

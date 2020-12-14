@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms QWeb Reports',
+    'name': 'Forms | QWeb Reports',
     'summary': 'Generate (PDF) reports for every Form',
     'version': '0.11',
     'author': 'Nova Code',
@@ -20,6 +20,6 @@
     ],
     'application': True,
     'images': [
-        'static/description/banner.png',
+        'static/description/banner.gif',
     ],
 }
