@@ -278,11 +278,12 @@ class FormioController(http.Controller):
     def _get_form_js_options(self, form):
         options = form._get_js_options()
 
-        # default language
+        # language
+        Lang = request.env['res.lang']
         if request.env.user.lang in form.languages.mapped('code'):
-            language = request.env.user.lang
+            language = Lang._formio_ietf_code(request.env.user.lang)
         else:
-            language = request._context['lang']
+            language = Lang._formio_ietf_code(request._context['lang'])
         options['language'] = language
         return options
 

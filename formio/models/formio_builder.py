@@ -356,13 +356,14 @@ class Builder(models.Model):
 
         options['i18n'] = self.i18n_translations()
 
-        # default language
+        # language
+        Lang = self.env['res.lang']
         if self.env.user.lang in self.languages.mapped('code'):
-            language = self.env.user.lang
+            language = Lang._formio_ietf_code(self.env.user.lang)
         else:
-            language = self._context['lang']
+            language = Lang._formio_ietf_code(self._context['lang'])
 
-        # only set default language if exist in i18n translations
+        # only set language if exist in i18n translations
         if options['i18n'].get(language):
             options['language'] = language
             
@@ -400,16 +401,18 @@ class Builder(models.Model):
         i18n = {}
         # Formio GUI/API translations
         for trans in self.formio_version_id.translations:
+            code = trans.lang_id.formio_ietf_code
             if trans.lang_id.code not in i18n:
-                i18n[trans.lang_id.code] = {trans.property: trans.value}
+                i18n[code] = {trans.property: trans.value}
             else:
-                i18n[trans.lang_id.code][trans.property] = trans.value
+                i18n[code][trans.property] = trans.value
         # Form Builder translations (labels etc).
         # These could override the former GUI/API translations, but
         # that's how the Javascript API works.
         for trans in self.translations:
+            code = trans.lang_id.formio_ietf_code
             if trans.lang_id.code not in i18n:
-                i18n[trans.lang_id.code] = {trans.source: trans.value}
+                i18n[code] = {trans.source: trans.value}
             else:
-                i18n[trans.lang_id.code][trans.source] = trans.value
+                i18n[code][trans.source] = trans.value
         return i18n
