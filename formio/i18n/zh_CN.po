@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-22 06:10+0000\n"
-"PO-Revision-Date: 2020-11-22 14:46+0800\n"
+"POT-Creation-Date: 2020-12-16 01:02+0000\n"
+"PO-Revision-Date: 2020-12-16 10:23+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "Language: zh_CN\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #. module: formio
 #: model:mail.template,body_html:formio.mail_invitation_internal_user
@@ -155,6 +155,11 @@ msgid "<i class=\"fa fa-globe text-muted\"/><span class=\"text-muted\"> portal</
 msgstr "<i class=\"fa fa-globe text-muted\"/><span class=\"text-muted\"> 门户</span>"
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
+msgid "<i class=\"fa fa-info-circle\" title=\"info\"/>"
+msgstr ""
+
+#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "<i class=\"fa fa-info-circle\" title=\"info\"/> Configuration of Website features shall also be done here."
 msgstr "<i class=\"fa fa-info-circle\" title=\"info\"/> 网站功能的配置也应在此处进行。"
@@ -188,6 +193,15 @@ msgid ""
 msgstr ""
 "<i class=\"fa fa-info-circle\" title=\"info\"/> 要创建或链接（现有）合作伙伴与表单提交，请从“组件API” /“属性名称”中指定字段（“电子邮件”，“名称”）。<br/>\n"
 "                                    合作伙伴确定/匹配应通过电子邮件完成。 该API对于公共表单特别有用"
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Documentation</strong><br/>\n"
+"                                For example, Options could contain the Form Builder editForm with some File component settings:<br/>"
+msgstr ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Documentation</strong><br/>\n"
+"                                如下示例. 该选项可以让构建器包含某些文件组件的设置:<br/>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
@@ -234,6 +248,11 @@ msgid "<strong>Check, register and install the latest 30 available Versions</str
 msgstr "<strong>检查，注册并安装最新的30个可用版本</strong>"
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
+msgid "<strong>Example below</strong>. Options could contain the Form Builder \"editForm\" with some \"File\" component settings:<br/>"
+msgstr "<strong>如下示例</strong>. 该选项可以让构建器包含某些文件组件的设置:<br/>"
+
+#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
 msgid "<strong>Submission:</strong>"
 msgstr "<strong>提交:</strong>"
@@ -264,6 +283,8 @@ msgstr "窗口动作Url"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_needaction model:ir.model.fields,field_description:formio.field_formio_form__message_needaction
+#: model:ir.model.fields,field_description:formio.field_formio_version__message_needaction
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_needaction
 msgid "Action Needed"
 msgstr "需要设置行为"
 
@@ -283,29 +304,34 @@ msgid "Active"
 msgstr "有效"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_ids
+#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_ids model:ir.model.fields,field_description:formio.field_formio_version__activity_ids
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__activity_ids
 msgid "Activities"
 msgstr "活动"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__activity_exception_decoration
+#: model:ir.model.fields,field_description:formio.field_formio_version__activity_exception_decoration
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__activity_exception_decoration
 msgid "Activity Exception Decoration"
 msgstr "活动异常符号"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_state
+#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_state model:ir.model.fields,field_description:formio.field_formio_version__activity_state
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__activity_state
 msgid "Activity State"
 msgstr "活动状态"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_type_icon
+#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_type_icon model:ir.model.fields,field_description:formio.field_formio_version__activity_type_icon
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__activity_type_icon
 msgid "Activity Type Icon"
 msgstr "活动类型图标"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
 msgid "Add additional CSS files to be included for every new installed Form.io client/library."
-msgstr "为新版Formio.js添加其他CSS文件。"
+msgstr "为新安装的Formio.js添加匹配的CSS文件。"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__component_partner_add_follower
@@ -409,8 +435,9 @@ msgid "Attachment"
 msgstr "附件"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__message_attachment_count
-#: model:ir.model.fields,field_description:formio.field_formio_form__message_attachment_count
+#: model:ir.model.fields,field_description:formio.field_formio_builder__message_attachment_count model:ir.model.fields,field_description:formio.field_formio_form__message_attachment_count
+#: model:ir.model.fields,field_description:formio.field_formio_version__message_attachment_count
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_attachment_count
 msgid "Attachment Count"
 msgstr "附件数量"
 
@@ -427,7 +454,7 @@ msgstr "可用"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_checker_wizard__available_version_github_tag_ids
-msgid "Available Version GitHub Tag"
+msgid "Available Version Github Tag"
 msgstr "可用版本GitHub标签"
 
 #. module: formio
@@ -604,7 +631,7 @@ msgstr "默认CSS资源"
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
 msgid "Default Form Builder JavaScript Options Template"
-msgstr "默认表单构建器JS选项模板"
+msgstr "表单构建器默认JS选项模板"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
@@ -633,6 +660,7 @@ msgstr "描述..."
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag_available__display_name
 #: model:ir.model.fields,field_description:formio.field_ir_actions_act_window_view__display_name model:ir.model.fields,field_description:formio.field_ir_attachment__display_name
 #: model:ir.model.fields,field_description:formio.field_ir_ui_view__display_name model:ir.model.fields,field_description:formio.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:formio.field_res_lang__display_name
 msgid "Display Name"
 msgstr "显示名称"
 
@@ -675,34 +703,41 @@ msgid "Email"
 msgstr "电子邮件"
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__language_en_enable
+msgid "English Enabled"
+msgstr "多语言时显示英文"
+
+#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "Expire After"
 msgstr "剩余到期时间"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_follower_ids model:ir.model.fields,field_description:formio.field_formio_form__message_follower_ids
+#: model:ir.model.fields,field_description:formio.field_formio_version__message_follower_ids
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_follower_ids
 msgid "Followers"
 msgstr "关注者"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_channel_ids model:ir.model.fields,field_description:formio.field_formio_form__message_channel_ids
+#: model:ir.model.fields,field_description:formio.field_formio_version__message_channel_ids
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_channel_ids
 msgid "Followers (Channels)"
 msgstr "关注者（频道）"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_partner_ids model:ir.model.fields,field_description:formio.field_formio_form__message_partner_ids
+#: model:ir.model.fields,field_description:formio.field_formio_version__message_partner_ids
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "关注者(业务伙伴)"
 
 #. module: formio
-#: model:ir.model.fields,help:formio.field_formio_builder__activity_type_icon
+#: model:ir.model.fields,help:formio.field_formio_builder__activity_type_icon model:ir.model.fields,help:formio.field_formio_version__activity_type_icon
+#: model:ir.model.fields,help:formio.field_formio_version_github_tag__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
 msgstr "Font Awesome 图标，如：fa-tasks"
-
-#. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "For example, Options could contain the Form Builder editForm with some File component settings:<br/>"
-msgstr "例如，JS选项可以让构建器包含某些文件组件设置:"
 
 #. module: formio
 #. openerp-web
@@ -728,12 +763,12 @@ msgstr "构建器"
 #: model:ir.actions.act_window,name:formio.action_formio_builder_js_options model_terms:ir.ui.view,arch_db:formio.view_formio_builder_js_options_form
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_js_options_tree
 msgid "Form Builder JS Options"
-msgstr "构建器JS选项"
+msgstr "构建器JS选项模板"
 
 #. module: formio
 #: model:ir.ui.menu,name:formio.menu_formio_builder_js_options
 msgid "Form Builder JS options"
-msgstr "构建器JS选项"
+msgstr "构建器JS选项模板"
 
 #. module: formio
 #: model:ir.actions.act_window,name:formio.action_formio_builder model:ir.ui.menu,name:formio.menu_formio_builder model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
@@ -762,15 +797,8 @@ msgid "Form was public created"
 msgstr "表单为公众而建"
 
 #. module: formio
-#: model:ir.module.category,description:formio.module_category_formio model:ir.module.category,name:formio.module_category_formio model:ir.ui.menu,name:formio.menu_formio_root
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form model_terms:ir.ui.view,arch_db:formio.view_formio_builder_formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_formio
-msgid "Form.io"
-msgstr "Form.io"
-
-#. module: formio
 #: model:ir.model.fields.selection,name:formio.selection__ir_actions_act_window_view__view_mode__formio_builder
-#: model:ir.model.fields.selection,name:formio.selection__ir_ui_view__type__formio_builder
+#: model:ir.model.fields.selection,name:formio.selection__ir_ui_view__type__formio_builder model_terms:ir.ui.view,arch_db:formio.view_formio_builder_formio
 msgid "Form.io Builder"
 msgstr "Form.io构建器"
 
@@ -787,7 +815,7 @@ msgstr "构建器JS选项ID"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__formio_css_assets
 msgid "Form.io CSS"
-msgstr "Form.io CSS"
+msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_res_config_settings__formio_default_asset_css_ids
@@ -796,9 +824,19 @@ msgstr "Form.io CSS源"
 
 #. module: formio
 #: model:ir.model.fields.selection,name:formio.selection__ir_actions_act_window_view__view_mode__formio_form
-#: model:ir.model.fields.selection,name:formio.selection__ir_ui_view__type__formio_form
+#: model:ir.model.fields.selection,name:formio.selection__ir_ui_view__type__formio_form model_terms:ir.ui.view,arch_db:formio.view_formio_form_formio
 msgid "Form.io Form"
 msgstr "Form.io 表单"
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
+msgid "Form.io JS/library version importer"
+msgstr "Formio.js版本导入"
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid "Form.io JavaScript (JS)"
+msgstr "Form.io JavaScript (JS)"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__formio_js_assets
@@ -819,17 +857,12 @@ msgstr "Form.io JS选项模板"
 #: model:ir.model.fields,field_description:formio.field_formio_builder__formio_version_id
 #: model:ir.model.fields,field_description:formio.field_res_config_settings__formio_default_version_id
 msgid "Form.io Version"
-msgstr "Formio.js 版本"
+msgstr "版本"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_github_checker_wizard
 msgid "Form.io Version GitHub Importer"
 msgstr "Form.io 版本 GitHub导入"
-
-#. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-msgid "Form.io client/library version importer"
-msgstr "Formio.js 版本导入"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__formio_version_name model:ir.model.fields,help:formio.field_formio_version__name
@@ -847,12 +880,6 @@ msgstr "Formio 版本"
 #, python-format
 msgid "Form.io version:"
 msgstr "Formio 版本："
-
-#. module: formio
-#: model:ir.actions.server,name:formio.ir_cron_formio_version_github_tag_check_and_register_ir_actions_server
-#: model:ir.cron,cron_name:formio.ir_cron_formio_version_github_tag_check_and_register model:ir.cron,name:formio.ir_cron_formio_version_github_tag_check_and_register
-msgid "Form.io: Check and register new Versions (GitHub tags)"
-msgstr "Form.io：检查并注册新版本（GitHub标签）"
 
 #. module: formio
 #: model:ir.model,name:formio.model_formio_default_asset_css
@@ -900,6 +927,16 @@ msgid "Formio Version GitHub Checker Wizard"
 msgstr "Formio版本 GitHub 检查向导"
 
 #. module: formio
+#: model:ir.model,name:formio.model_formio_version_github_tag
+msgid "Formio Version GitHub Tag"
+msgstr "Formio版本GitHub标签"
+
+#. module: formio
+#: model:ir.model,name:formio.model_formio_version_github_tag_available
+msgid "Formio Version GitHub Tag Available"
+msgstr "Formio版本GitHub标签(可用的)"
+
+#. module: formio
 #: model:ir.model,name:formio.model_formio_translation
 msgid "Formio Version Translation"
 msgstr "Formio版本翻译包"
@@ -907,13 +944,13 @@ msgstr "Formio版本翻译包"
 #. module: formio
 #: model:ir.model,name:formio.model_formio_translation_source
 msgid "Formio Version Translation Source"
-msgstr "Formio 版本翻译源"
+msgstr "Formio版本翻译源"
 
 #. module: formio
-#: model:ir.actions.act_window,name:formio.action_formio_form model:ir.model.fields,field_description:formio.field_formio_builder__forms model:ir.ui.menu,name:formio.menu_formio_form
-#: model_terms:ir.ui.view,arch_db:formio.portal_layout model_terms:ir.ui.view,arch_db:formio.portal_my_formio model_terms:ir.ui.view,arch_db:formio.portal_my_home
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_tree
+#: model:ir.actions.act_window,name:formio.action_formio_form model:ir.model.fields,field_description:formio.field_formio_builder__forms
+#: model:ir.module.category,description:formio.module_category_formio model:ir.module.category,name:formio.module_category_formio model:ir.ui.menu,name:formio.menu_formio_form
+#: model:ir.ui.menu,name:formio.menu_formio_root model_terms:ir.ui.view,arch_db:formio.portal_layout model_terms:ir.ui.view,arch_db:formio.portal_my_formio
+#: model_terms:ir.ui.view,arch_db:formio.portal_my_home model_terms:ir.ui.view,arch_db:formio.view_formio_form_search model_terms:ir.ui.view,arch_db:formio.view_formio_form_tree
 msgid "Forms"
 msgstr "表单"
 
@@ -921,6 +958,12 @@ msgstr "表单"
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "Forms Permissions"
 msgstr "表单权限"
+
+#. module: formio
+#: model:ir.actions.server,name:formio.ir_cron_formio_version_github_tag_check_and_register_ir_actions_server
+#: model:ir.cron,cron_name:formio.ir_cron_formio_version_github_tag_check_and_register model:ir.cron,name:formio.ir_cron_formio_version_github_tag_check_and_register
+msgid "Forms: Check and register new Versions (GitHub tags)"
+msgstr "表单：检查和注册新版本(GitHub标签)"
 
 #. module: formio
 #. openerp-web
@@ -937,12 +980,17 @@ msgstr "常规"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_checker_wizard__github_tag_ids
 msgid "GitHub Tags"
-msgstr "GitHub 标签"
+msgstr "GitHub标签"
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_res_config_settings__formio_github_personal_access_token model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
+msgid "GitHub personal access token"
+msgstr "GitHub个人密钥"
 
 #. module: formio
 #: model:ir.ui.menu,name:formio.menu_formio_version_github_tag
 msgid "GitHub releases (tags)"
-msgstr "GitHub 版本（标签）"
+msgstr "GitHub版本（标签）"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
@@ -965,9 +1013,9 @@ msgstr "小时"
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_checker_wizard__id model:ir.model.fields,field_description:formio.field_formio_version_github_tag__id
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag_available__id model:ir.model.fields,field_description:formio.field_ir_actions_act_window_view__id
 #: model:ir.model.fields,field_description:formio.field_ir_attachment__id model:ir.model.fields,field_description:formio.field_ir_ui_view__id
-#: model:ir.model.fields,field_description:formio.field_res_config_settings__id
+#: model:ir.model.fields,field_description:formio.field_res_config_settings__id model:ir.model.fields,field_description:formio.field_res_lang__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
@@ -975,12 +1023,20 @@ msgid "ID:"
 msgstr "ID："
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_res_lang__formio_ietf_code
+msgid "IETF Code"
+msgstr ""
+
+#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__activity_exception_icon
+#: model:ir.model.fields,field_description:formio.field_formio_version__activity_exception_icon
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__activity_exception_icon
 msgid "Icon"
 msgstr "图标"
 
 #. module: formio
-#: model:ir.model.fields,help:formio.field_formio_builder__activity_exception_icon
+#: model:ir.model.fields,help:formio.field_formio_builder__activity_exception_icon model:ir.model.fields,help:formio.field_formio_version__activity_exception_icon
+#: model:ir.model.fields,help:formio.field_formio_version_github_tag__activity_exception_icon
 msgid "Icon to indicate an exception activity."
 msgstr "表示一个例外活动的图标。"
 
@@ -992,12 +1048,14 @@ msgstr "标识此特定表单，此名称可以在API中使用。 仅使用ASCII
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__message_needaction model:ir.model.fields,help:formio.field_formio_builder__message_unread
 #: model:ir.model.fields,help:formio.field_formio_form__message_needaction model:ir.model.fields,help:formio.field_formio_form__message_unread
+#: model:ir.model.fields,help:formio.field_formio_version__message_needaction model:ir.model.fields,help:formio.field_formio_version__message_unread
+#: model:ir.model.fields,help:formio.field_formio_version_github_tag__message_needaction model:ir.model.fields,help:formio.field_formio_version_github_tag__message_unread
 msgid "If checked, new messages require your attention."
 msgstr "确认后, 出现提示消息."
 
 #. module: formio
-#: model:ir.model.fields,help:formio.field_formio_builder__message_has_error model:ir.model.fields,help:formio.field_formio_builder__message_has_sms_error
-#: model:ir.model.fields,help:formio.field_formio_form__message_has_error model:ir.model.fields,help:formio.field_formio_form__message_has_sms_error
+#: model:ir.model.fields,help:formio.field_formio_builder__message_has_error model:ir.model.fields,help:formio.field_formio_form__message_has_error
+#: model:ir.model.fields,help:formio.field_formio_version__message_has_error model:ir.model.fields,help:formio.field_formio_version_github_tag__message_has_error
 msgid "If checked, some messages have a delivery error."
 msgstr "如果勾选此项， 某些消息将会产生传递错误。"
 
@@ -1033,6 +1091,8 @@ msgstr "邀请邮件"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_is_follower model:ir.model.fields,field_description:formio.field_formio_form__message_is_follower
+#: model:ir.model.fields,field_description:formio.field_formio_version__message_is_follower
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_is_follower
 msgid "Is Follower"
 msgstr "关注者"
 
@@ -1040,6 +1100,11 @@ msgstr "关注者"
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "JS Options"
 msgstr "选项JSON"
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__schema model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid "JSON Schema"
+msgstr "表单JSON"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version__js_assets
@@ -1057,7 +1122,8 @@ msgid "Language"
 msgstr "语言"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__languages model:ir.model.fields,field_description:formio.field_formio_form__languages
+#: model:ir.model,name:formio.model_res_lang model:ir.model.fields,field_description:formio.field_formio_builder__languages
+#: model:ir.model.fields,field_description:formio.field_formio_form__languages
 msgid "Languages"
 msgstr "语言"
 
@@ -1073,6 +1139,7 @@ msgstr "语言"
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag_available____last_update
 #: model:ir.model.fields,field_description:formio.field_ir_actions_act_window_view____last_update model:ir.model.fields,field_description:formio.field_ir_attachment____last_update
 #: model:ir.model.fields,field_description:formio.field_ir_ui_view____last_update model:ir.model.fields,field_description:formio.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:formio.field_res_lang____last_update
 msgid "Last Modified on"
 msgstr "修改日期"
 
@@ -1108,16 +1175,20 @@ msgstr "加载特定的Form.io JS API /库版本（源代码： \\https://github
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_main_attachment_id
 #: model:ir.model.fields,field_description:formio.field_formio_form__message_main_attachment_id
+#: model:ir.model.fields,field_description:formio.field_formio_version__message_main_attachment_id
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_main_attachment_id
 msgid "Main Attachment"
 msgstr "主要附件"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_has_error model:ir.model.fields,field_description:formio.field_formio_form__message_has_error
+#: model:ir.model.fields,field_description:formio.field_formio_version__message_has_error model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_has_error
 msgid "Message Delivery error"
 msgstr "消息发送出错"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_ids model:ir.model.fields,field_description:formio.field_formio_form__message_ids
+#: model:ir.model.fields,field_description:formio.field_formio_version__message_ids model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_ids
 msgid "Messages"
 msgstr "消息"
 
@@ -1136,7 +1207,7 @@ msgstr "模型"
 #: model:ir.model.fields,help:formio.field_formio_builder__formio_res_model_id model:ir.model.fields,help:formio.field_formio_builder__res_model_id
 #: model:ir.model.fields,help:formio.field_formio_form__initial_res_model_id
 msgid "Model as resource this form represents or acts on"
-msgstr ""
+msgstr "此表单关联的源模型"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_res_model__module_dependency
@@ -1162,17 +1233,20 @@ msgid "Name"
 msgstr "名称"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_date_deadline
+#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_date_deadline model:ir.model.fields,field_description:formio.field_formio_version__activity_date_deadline
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__activity_date_deadline
 msgid "Next Activity Deadline"
 msgstr "下次活动截止日期"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_summary
+#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_summary model:ir.model.fields,field_description:formio.field_formio_version__activity_summary
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__activity_summary
 msgid "Next Activity Summary"
 msgstr "下次活动摘要"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_type_id
+#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_type_id model:ir.model.fields,field_description:formio.field_formio_version__activity_type_id
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__activity_type_id
 msgid "Next Activity Type"
 msgstr "下次活动类型"
 
@@ -1194,27 +1268,34 @@ msgstr "非向导"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_needaction_counter
 #: model:ir.model.fields,field_description:formio.field_formio_form__message_needaction_counter
+#: model:ir.model.fields,field_description:formio.field_formio_version__message_needaction_counter
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_needaction_counter
 msgid "Number of Actions"
 msgstr "操作次数"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_has_error_counter
 #: model:ir.model.fields,field_description:formio.field_formio_form__message_has_error_counter
+#: model:ir.model.fields,field_description:formio.field_formio_version__message_has_error_counter
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_has_error_counter
 msgid "Number of errors"
 msgstr "错误数"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__message_needaction_counter model:ir.model.fields,help:formio.field_formio_form__message_needaction_counter
+#: model:ir.model.fields,help:formio.field_formio_version__message_needaction_counter model:ir.model.fields,help:formio.field_formio_version_github_tag__message_needaction_counter
 msgid "Number of messages which requires an action"
 msgstr "需要操作的消息数"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__message_has_error_counter model:ir.model.fields,help:formio.field_formio_form__message_has_error_counter
+#: model:ir.model.fields,help:formio.field_formio_version__message_has_error_counter model:ir.model.fields,help:formio.field_formio_version_github_tag__message_has_error_counter
 msgid "Number of messages with delivery error"
 msgstr "递送错误的消息数"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__message_unread_counter model:ir.model.fields,help:formio.field_formio_form__message_unread_counter
+#: model:ir.model.fields,help:formio.field_formio_version__message_unread_counter model:ir.model.fields,help:formio.field_formio_version_github_tag__message_unread_counter
 msgid "Number of unread messages"
 msgstr "未读取的消息数"
 
@@ -1267,6 +1348,11 @@ msgstr "此用户的业务伙伴相关数据"
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Pending"
 msgstr "等待中"
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
+msgid "Personal access token"
+msgstr "个人密钥"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__portal model:ir.model.fields,field_description:formio.field_formio_form__portal_share
@@ -1395,7 +1481,7 @@ msgstr ""
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__res_model
 msgid "Res Model"
-msgstr "模型"
+msgstr "模型名称"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_github_tag_form
@@ -1458,38 +1544,24 @@ msgid "Resource Type #1"
 msgstr "资源类型#1"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_user_id
+#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_user_id model:ir.model.fields,field_description:formio.field_formio_version__activity_user_id
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__activity_user_id
 msgid "Responsible User"
 msgstr "责任人"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__message_has_sms_error model:ir.model.fields,field_description:formio.field_formio_form__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "短信发送错误"
-
-#. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__schema model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "JSON Schema"
-msgstr "表单JSON"
-
-#. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-msgid "See the example below... Options could contain the Form Builder editForm with some File component settings:<br/>"
-msgstr "请参阅下面的示例... 该选项可以让构建器包含某些文件组件设置:<br/>"
-
-#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "Select Form.io Javascript Options"
-msgstr "选择构建器的JS选项"
+msgid "Select Form.io JS Options"
+msgstr "选择JS选项模板"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
 msgid ""
 "Select a default Form Builder JavaScript Options Template.<br/>\n"
-"                            It's contents, the Form Builder JavaScript Options, shall be show below."
+"                            It's contents, the Form Builder JavaScript Options, shall be shown below."
 msgstr ""
-"选择默认的表单构建器 JavaScript选项模板。<br/>\n"
-"                            此内容，即“表单构建器JavaScript选项”将在下面显示。"
+"给表单构建器指定一个默认的JS选项模板.<br/>\n"
+"                            内容如下所示："
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
@@ -1606,7 +1678,8 @@ msgid "State:"
 msgstr "状态："
 
 #. module: formio
-#: model:ir.model.fields,help:formio.field_formio_builder__activity_state
+#: model:ir.model.fields,help:formio.field_formio_builder__activity_state model:ir.model.fields,help:formio.field_formio_version__activity_state
+#: model:ir.model.fields,help:formio.field_formio_version_github_tag__activity_state
 msgid ""
 "Status based on activities\n"
 "Overdue: Due date is already passed\n"
@@ -1715,7 +1788,8 @@ msgid "Type"
 msgstr "类型"
 
 #. module: formio
-#: model:ir.model.fields,help:formio.field_formio_builder__activity_exception_decoration
+#: model:ir.model.fields,help:formio.field_formio_builder__activity_exception_decoration model:ir.model.fields,help:formio.field_formio_version__activity_exception_decoration
+#: model:ir.model.fields,help:formio.field_formio_version_github_tag__activity_exception_decoration
 msgid "Type of the exception activity on record."
 msgstr "记录的例外活动类型。"
 
@@ -1731,11 +1805,14 @@ msgstr "UUID"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_unread model:ir.model.fields,field_description:formio.field_formio_form__message_unread
+#: model:ir.model.fields,field_description:formio.field_formio_version__message_unread model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_unread
 msgid "Unread Messages"
 msgstr "未读消息"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_unread_counter model:ir.model.fields,field_description:formio.field_formio_form__message_unread_counter
+#: model:ir.model.fields,field_description:formio.field_formio_version__message_unread_counter
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_unread_counter
 msgid "Unread Messages Counter"
 msgstr "未读消息数"
 
@@ -1788,7 +1865,7 @@ msgstr "版本"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag_available__version_checker_wizard_id
 msgid "Version Checker Wizard"
-msgstr "版本检查器向导"
+msgstr "版本检查向导"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__version_comment
@@ -1841,11 +1918,14 @@ msgstr "以HTML视图而不是禁用的Webform形式查看提交。"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__website_message_ids model:ir.model.fields,field_description:formio.field_formio_form__website_message_ids
+#: model:ir.model.fields,field_description:formio.field_formio_version__website_message_ids
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__website_message_ids
 msgid "Website Messages"
 msgstr "网站消息"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__website_message_ids model:ir.model.fields,help:formio.field_formio_form__website_message_ids
+#: model:ir.model.fields,help:formio.field_formio_version__website_message_ids model:ir.model.fields,help:formio.field_formio_version_github_tag__website_message_ids
 msgid "Website communication history"
 msgstr "网站讨论历史"
 
@@ -1857,7 +1937,7 @@ msgstr "创建新的表单构建器时，将默认使用此Formio.js版本。"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__wizard model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 msgid "Wizard"
-msgstr "向导"
+msgstr "页面向导"
 
 #. module: formio
 #: code:addons/formio/models/formio_builder.py:0
@@ -1904,16 +1984,6 @@ msgid "css"
 msgstr ""
 
 #. module: formio
-#: model:ir.model,name:formio.model_formio_version_github_tag
-msgid "formio.version.github.tag"
-msgstr ""
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_version_github_tag_available
-msgid "formio.version.github.tag.available"
-msgstr ""
-
-#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "https://github.com/formio/formio.js/blob/master/src/components/file/editForm/File.edit.file.js"
 msgstr ""
@@ -1922,6 +1992,15 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
 msgid "https://github.com/formio/formio.js/releases"
 msgstr ""
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
+msgid ""
+"is not required, but it can get a higher rate limit.\n"
+"                                        This prevents timeouts and authorization errors."
+msgstr ""
+"非必须，但是可以获得更高的速率限制。\n"
+"                                        这样可以避免超时和授权错误。"
 
 #. module: formio
 #: model:ir.model.fields.selection,name:formio.selection__formio_version_asset__type__js
