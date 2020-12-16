@@ -163,7 +163,7 @@ class FormioPublicController(http.Controller):
 
         lang = request.env['res.lang']._lang_get(request.env.user.lang)
         if lang:
-            options['language'] = lang.iso_code
+            options['language'] = lang.code
             options['i18n'] = form.i18n_translations()
         return options
 
@@ -176,7 +176,7 @@ class FormioPublicController(http.Controller):
 
         lang = request.env['res.lang']._lang_get(request.env.user.lang)
         if lang:
-            options['language'] = lang.iso_code
+            options['language'] = lang.code
         else:
             context = request.env.context
             options['language'] = context['lang'] if context.get('lang') else self.env.ref('base.lang_en')

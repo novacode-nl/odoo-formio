@@ -116,6 +116,9 @@ class Builder(models.Model):
              "If no groups are specified it's allowed for every user.")
     component_partner_name = fields.Char(string='Component Partner Name', tracking=True)
     component_partner_email = fields.Char(string='Component Partner Email', tracking=True)
+    language_en_enable = fields.Boolean(default=True, string='English Enabled')
+    component_partner_name = fields.Char(string='Component Partner Name', track_visibility='onchange')
+    component_partner_email = fields.Char(string='Component Partner Email', track_visibility='onchange')
     component_partner_add_follower = fields.Boolean(
         string='Component Partner Add to Followers', tracking=True, help='Add determined partner to followers of the Form.')
 
@@ -247,6 +250,9 @@ class Builder(models.Model):
     def _compute_languages(self):
         for r in self:
             languages = r.translations.mapped('lang_id')
+            lang_en = self.env.ref('base.lang_en')
+            if lang_en.active and r.language_en_enable and 'en_US' not in languages.mapped('code'):
+                languages |= lang_en
             r.languages = languages.sorted('name')
 
     def _compute_edit_url(self):
@@ -350,13 +356,14 @@ class Builder(models.Model):
 
         options['i18n'] = self.i18n_translations()
 
-        # default language
-        if self.env.user.lang in self.languages.mapped('iso_code'):
-            language = self.env.user.lang
+        # language
+        Lang = self.env['res.lang']
+        if self.env.user.lang in self.languages.mapped('code'):
+            language = Lang._formio_ietf_code(self.env.user.lang)
         else:
-            language = self._context['lang']
+            language = Lang._formio_ietf_code(self._context['lang'])
 
-        # only set default language if exist in i18n translations
+        # only set language if exist in i18n translations
         if options['i18n'].get(language):
             options['language'] = language
             
@@ -394,16 +401,18 @@ class Builder(models.Model):
         i18n = {}
         # Formio GUI/API translations
         for trans in self.formio_version_id.translations:
-            if trans.lang_id.iso_code not in i18n:
-                i18n[trans.lang_id.iso_code] = {trans.property: trans.value}
+            code = trans.lang_id.formio_ietf_code
+            if trans.lang_id.code not in i18n:
+                i18n[code] = {trans.property: trans.value}
             else:
-                i18n[trans.lang_id.iso_code][trans.property] = trans.value
+                i18n[code][trans.property] = trans.value
         # Form Builder translations (labels etc).
         # These could override the former GUI/API translations, but
         # that's how the Javascript API works.
         for trans in self.translations:
-            if trans.lang_id.iso_code not in i18n:
-                i18n[trans.lang_id.iso_code] = {trans.source: trans.value}
+            code = trans.lang_id.formio_ietf_code
+            if trans.lang_id.code not in i18n:
+                i18n[code] = {trans.source: trans.value}
             else:
-                i18n[trans.lang_id.iso_code][trans.source] = trans.value
+                i18n[code][trans.source] = trans.value
         return i18n

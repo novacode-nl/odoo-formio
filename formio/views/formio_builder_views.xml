@@ -176,6 +176,9 @@ See LICENSE file for full licensing details. -->
                             </group>
                         </page>
                         <page string="Translations" name="translations" groups="formio.group_formio_admin">
+                            <group>
+                                <field name="language_en_enable"/>
+                            </group>
                             <field name="translations" context="{'default_builder_id': id}">
                                 <tree editable="bottom">
                                     <field name="builder_id" invisible="1"/>
