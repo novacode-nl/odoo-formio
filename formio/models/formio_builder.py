@@ -115,8 +115,8 @@ class Builder(models.Model):
         help="User groups allowed to manually force an update of the Form state."
              "If no groups are specified it's allowed for every user.")
     language_en_enable = fields.Boolean(default=True, string='English Enabled')
-    component_partner_name = fields.Char(string='Component Partner Name', track_visibility='onchange')
-    component_partner_email = fields.Char(string='Component Partner Email', track_visibility='onchange')
+    component_partner_name = fields.Char(string='Component Partner Name', tracking=True)
+    component_partner_email = fields.Char(string='Component Partner Email', tracking=True)
     component_partner_add_follower = fields.Boolean(
         string='Component Partner Add to Followers', tracking=True, help='Add determined partner to followers of the Form.')
 
