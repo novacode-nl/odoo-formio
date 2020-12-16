@@ -30,7 +30,7 @@ See LICENSE file for full licensing details. -->
     </record>
 
     <record id="action_formio_res_model" model="ir.actions.act_window">
-        <field name="name">Versions</field>
+        <field name="name">Resource Models</field>
         <field name="res_model">formio.res.model</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="view_formio_res_model_tree"/>
