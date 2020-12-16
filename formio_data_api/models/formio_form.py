@@ -33,12 +33,7 @@ class FormioForm(models.Model):
 
     def __getattr__(self, name):
         if name == '_formio':
-            # TODO implement caching on the model object
-            # self._cache or self.env.cache API only works for model fields, not Python attr.
-
-            # if '_formio' not in self.__dict__:
-            no_cache = True
-            if no_cache:
+            if '_formio' not in self.__dict__:
                 context = self._context
                 if 'lang' in context:
                     lang = context['lang']
@@ -60,14 +55,10 @@ class FormioForm(models.Model):
 
                 if self.submission_data is False:
                     # HACK masquerade empty Form object
-                    # TODO implement caching on the model object
-                    # self._formio = Form('{}', builder_obj)
-                    form = Form('{}', builder_obj)
+                    self._formio = Form('{}', builder_obj)
                 else:
-                    # TODO implement caching on the model object
-                    # self._formio = Form(self.submission_data, builder_obj)
-                    form = Form(self.submission_data, builder_obj)
-                return form
+                    self._formio = Form(self.submission_data, builder_obj)
+                return self._formio
         else:
             return self.__getattribute__(name)
 

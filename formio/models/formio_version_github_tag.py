@@ -20,7 +20,6 @@ STATES = [(STATE_AVAILABLE, "Available"), (STATE_INSTALLED, "Installed")]
 
 class VersionGitHubTag(models.Model):
     _name = 'formio.version.github.tag'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Formio Version GitHub Tag'
     #_order = 'create_date desc, id asc'
 
@@ -39,7 +38,7 @@ class VersionGitHubTag(models.Model):
     changelog_url = fields.Char(compute='_compute_fields', string="Changelog URL")
     state = fields.Selection(
         selection=STATES, string="State",
-        default=STATE_AVAILABLE, required=True, tracking=True,
+        default=STATE_AVAILABLE, required=True, track_visibility='onchange',
         help="""\
         - Available: Not downloaded and installed yet.
         - Installed: Downloaded and installed.""")

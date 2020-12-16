@@ -46,7 +46,7 @@ class Form(models.Model):
     state = fields.Selection(
         [(STATE_PENDING, 'Pending'), (STATE_DRAFT, 'Draft'),
          (STATE_COMPLETE, 'Completed'), (STATE_CANCEL, 'Canceled')],
-        string="State", default=STATE_PENDING, tracking=True, index=True)
+        string="State", default=STATE_PENDING, track_visibility='onchange', index=True)
     display_state = fields.Char("Display State", compute='_compute_display_fields', store=False)
     kanban_group_state = fields.Selection(
         [('A', 'Pending'), ('B', 'Draft'), ('C', 'Completed'), ('D', 'Canceled')],
@@ -58,17 +58,19 @@ class Form(models.Model):
     initial_res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model #1')
     initial_res_model_name = fields.Char(related='initial_res_model_id.name', readonly=True, string='Resource Name #1')
     initial_res_model = fields.Char(related='initial_res_model_id.model', readonly=True, string='Resource Model Name #1')
-    initial_res_id = fields.Integer("Record ID #1", help="Database ID of the record in res_model to which this applies")
+    initial_res_id = fields.Integer("Record ID #1", ondelete='restrict',
+        help="Database ID of the record in res_model to which this applies")
     res_model_id = fields.Many2one('ir.model', readonly=True, string='Resource Model')
     res_model_name = fields.Char(related='res_model_id.name', readonly=True, string='Resource Name')
     res_model = fields.Char(related='res_model_id.model', readonly=True, string='Resource Model Name')
-    res_id = fields.Integer("Record ID", help="Database ID of the record in res_model to which this applies")
+    res_id = fields.Integer("Record ID", ondelete='restrict',
+        help="Database ID of the record in res_model to which this applies")
     res_act_window_url = fields.Char(readonly=True)
     res_name = fields.Char(string='Record  Name', readonly=True)
     res_partner_id = fields.Many2one('res.partner', readonly=True, string='Resource Partner')
     user_id = fields.Many2one(
         'res.users', string='Assigned user',
-        index=True, tracking=True)
+        index=True, track_visibility='onchange')
     assigned_partner_id = fields.Many2one('res.partner', related='user_id.partner_id', string='Assigned Partner')
     assigned_partner_name = fields.Char(related='assigned_partner_id.name', string='Assigned Partner Name')
     invitation_mail_template_id = fields.Many2one(
@@ -82,18 +84,18 @@ class Form(models.Model):
     submission_partner_id = fields.Many2one('res.partner', related='submission_user_id.partner_id', string='Submission Partner')
     submission_partner_name = fields.Char(related='submission_partner_id.name', string='Submission Partner Name')
     submission_date = fields.Datetime(
-        string='Submission Date', readonly=True, tracking=True,
+        string='Submission Date', readonly=True, track_visibility='onchange',
         help='Datetime when the form was last submitted.')
     sequence = fields.Integer(help="Usefull when storing and listing forms in an ordered way")
     portal = fields.Boolean("Portal (Builder)", related='builder_id.portal', readonly=True, help="Form is accessible by assigned portal user")
     portal_share = fields.Boolean("Portal")
     portal_submit_done_url = fields.Char(related='builder_id.portal_submit_done_url')
     public = fields.Boolean("Public (Builder)", related='builder_id.public', readonly=True)
-    public_share = fields.Boolean("Public", tracking=True, help="Share form in public? (with access expiration check).")
+    public_share = fields.Boolean("Public", track_visibility='onchange', help="Share form in public? (with access expiration check).")
     public_access_date_from = fields.Datetime(
-        string='Public Access From', tracking=True, help='Datetime from when the form is public shared until it expires.')
-    public_access_interval_number = fields.Integer(tracking=True)
-    public_access_interval_type = fields.Selection(list(_interval_selection.items()), tracking=True)
+        string='Public Access From', track_visibility='onchange', help='Datetime from when the form is public shared until it expires.')
+    public_access_interval_number = fields.Integer(track_visibility='onchange')
+    public_access_interval_type = fields.Selection(list(_interval_selection.items()), track_visibility='onchange')
     public_access = fields.Boolean("Public Access", compute='_compute_access', help="The Public Access check. Computed public access by checking whether (field) Public Access From has been expired.")
     public_create = fields.Boolean("Public Created", readonly=True, help="Form was public created")
     show_title = fields.Boolean("Show Title")
