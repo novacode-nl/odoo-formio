@@ -114,8 +114,6 @@ class Builder(models.Model):
         'res.groups', string='Allow groups to force update State',
         help="User groups allowed to manually force an update of the Form state."
              "If no groups are specified it's allowed for every user.")
-    component_partner_name = fields.Char(string='Component Partner Name', tracking=True)
-    component_partner_email = fields.Char(string='Component Partner Email', tracking=True)
     language_en_enable = fields.Boolean(default=True, string='English Enabled')
     component_partner_name = fields.Char(string='Component Partner Name', track_visibility='onchange')
     component_partner_email = fields.Char(string='Component Partner Email', track_visibility='onchange')
