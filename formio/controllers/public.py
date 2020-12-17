@@ -177,12 +177,14 @@ class FormioPublicController(http.Controller):
             'i18n': builder.i18n_translations()
         }
 
-        lang = request.env['res.lang']._lang_get(request.env.user.lang)
-        if lang:
-            options['language'] = lang.code
+        # language
+        Lang = request.env['res.lang']
+        if request.env.user.lang:
+            options['language'] = Lang._formio_ietf_code(request.env.user.lang)
+        elif request.context.get('lang'):
+            options['language'] = Lang._formio_ietf_code(request.context.get('lang'))
         else:
-            context = request.env.context
-            options['language'] = context['lang'] if context.get('lang') else self.env.ref('base.lang_en')
+            options['language'] = request.env.ref('base.lang_en').formio_ietf_code
 
         return options
 
