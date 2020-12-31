@@ -1,15 +1,16 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* formio
+# 	* formio
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-03 20:48+0000\n"
-"PO-Revision-Date: 2020-12-03 20:48+0000\n"
+"POT-Creation-Date: 2020-12-31 09:24+0000\n"
+"PO-Revision-Date: 2020-12-31 10:31+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -17,17 +18,21 @@ msgstr ""
 
 #. module: formio
 #: model:mail.template,body_html:formio.mail_invitation_internal_user
-msgid "\n"
+msgid ""
+"\n"
 "\n"
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hello ${object.user_id.partner_id.name},<br/><br/>\n"
 "        You have been invited to fill-in the form: ${object.title}<br/>\n"
 "        Your response would be appreciated.<br/><br/>\n"
-"        Click the button to go to the form (record), which requires you're logged in.\n"
+"        Click the button to go to the form (record), which requires you're "
+"logged in.\n"
 "        <div style=\"margin: 16px 0px 16px 0px;\">\n"
 "            <a href=\"${object.act_window_url}\"\n"
-"                style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                style=\"background-color: #875A7B; padding: 8px 16px 8px "
+"16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+"\">\n"
 "                Form\n"
 "            </a>\n"
 "        </div>\n"
@@ -35,17 +40,21 @@ msgid "\n"
 "</div>\n"
 "\n"
 "            "
-msgstr "\n"
+msgstr ""
+"\n"
 "\n"
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Olá ${object.user_id.partner_id.name},<br/><br/>\n"
 "        Você foi convidado a preencher o formulário: ${object.title}<br/>\n"
 "        Sua resposta seria apreciada.<br/><br/>\n"
-"        Clique no botão para ir para o formulário (record), o que exige que você esteja logado.\n"
+"        Clique no botão para ir para o formulário (record), o que exige que "
+"você esteja logado.\n"
 "        <div style=\"margin: 16px 0px 16px 0px;\">\n"
 "            <a href=\"${object.act_window_url}\"\n"
-"                style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                style=\"background-color: #875A7B; padding: 8px 16px 8px "
+"16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+"\">\n"
 "                Formulário\n"
 "            </a>\n"
 "        </div>\n"
@@ -56,40 +65,50 @@ msgstr "\n"
 
 #. module: formio
 #: model:mail.template,body_html:formio.mail_invitation_portal_user
-msgid "\n"
+msgid ""
+"\n"
 "\n"
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hello ${object.user_id.partner_id.name},<br/><br/>\n"
 "        You have been invited to fill-in the form: ${object.title}<br/>\n"
 "        Your response would be appreciated.<br/><br/>\n"
-"        Click the button to go to the form, which requires you're logged in.\n"
+"        Click the button to go to the form, which requires you're logged "
+"in.\n"
 "        <div style=\"margin: 16px 0px 16px 0px;\">\n"
 "            <a href=\"/my/formio/form/${object.uuid}\"\n"
-"                style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                style=\"background-color: #875A7B; padding: 8px 16px 8px "
+"16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+"\">\n"
 "                Form\n"
 "            </a>\n"
 "        </div>\n"
-"        Your assigned forms are listed on the page <a href=\"/my/formio\">My Forms</a> \n"
+"        Your assigned forms are listed on the page <a href=\"/my/formio\">My "
+"Forms</a> \n"
 "    </p>\n"
 "</div>\n"
 "\n"
 "            "
-msgstr "\n"
+msgstr ""
+"\n"
 "\n"
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Olá ${object.user_id.partner_id.name},<br/><br/>\n"
 "        Você foi convidado a preencher o formulário: ${object.title}<br/>\n"
 "        Sua resposta seria apreciada.<br/><br/>\n"
-"        Clique no botão para ir para o formulário, que exige que você esteja logado.\n"
+"        Clique no botão para ir para o formulário, que exige que você esteja "
+"logado.\n"
 "        <div style=\"margin: 16px 0px 16px 0px;\">\n"
 "            <a href=\"/my/formio/form/${object.uuid}\"\n"
-"                style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"                style=\"background-color: #875A7B; padding: 8px 16px 8px "
+"16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;"
+"\">\n"
 "                Formulário\n"
 "            </a>\n"
 "        </div>\n"
-"        Seus formulários atribuídos estão listados na página <a href=\"/my/formio\">My Forms</a> \n"
+"        Seus formulários atribuídos estão listados na página <a href=\"/my/"
+"formio\">My Forms</a> \n"
 "    </p>\n"
 "</div>\n"
 "\n"
@@ -97,17 +116,21 @@ msgstr "\n"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_version_github_tag__state
-msgid "        - Available: Not downloaded and installed yet.\n"
+msgid ""
+"        - Available: Not downloaded and installed yet.\n"
 "        - Installed: Downloaded and installed."
-msgstr "        - Disponível: ainda não baixado e instalado.\n"
+msgstr ""
+"        - Disponível: ainda não baixado e instalado.\n"
 "        - Instalado: baixado e instalado."
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__state
-msgid "        - Draft: In draft / design.\n"
+msgid ""
+"        - Draft: In draft / design.\n"
 "        - Current: Live and in use (publisehd).\n"
 "        - Obsolete: Was current but obsolete (unpublished)"
-msgstr "        - Rascunho: Em rascunho / design.\n"
+msgstr ""
+"        - Rascunho: Em rascunho / design.\n"
 "        - Atual: Ao vivo e em uso (publicado).\n"
 "        - Obsoleto: era atual, mas obsoleto (não publicado)"
 
@@ -115,30 +138,44 @@ msgstr "        - Rascunho: Em rascunho / design.\n"
 #: model:ir.model.fields,help:formio.field_formio_builder__portal_submit_done_url
 #: model:ir.model.fields,help:formio.field_formio_builder__public_submit_done_url
 #: model:ir.model.fields,help:formio.field_formio_form__portal_submit_done_url
-msgid "        IMPORTANT:\n"
+msgid ""
+"        IMPORTANT:\n"
 "        - Absolute URL should contain a protocol (https://, http://)\n"
 "        - Relative URL is also supported e.g. /web/login\n"
 "        "
-msgstr "        IMPORTANTE:\n"
+msgstr ""
+"        IMPORTANTE:\n"
 "        - O URL absoluto deve conter um protocolo (https://, http://)\n"
 "        - URL relativo também é compatível, por exemplo, /web/login\n"
 "        "
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "<br/>\n"
-"                                <i class=\"fa fa-info-circle\" title=\"info\"/><strong> Integration / Resource settings</strong> - Enables integration of Form and ERP/Odoo objects.<br/>"
-msgstr "<br/>\n"
-"                                <i class=\"fa fa-info-circle\" title=\"info\"/><strong> Integração / Configuração de Recursos</strong> - Permite a integração de objetos Form.io e MultiERP.<br/>"
+msgid ""
+"<br/>\n"
+"                                <i class=\"fa fa-info-circle\" title=\"info"
+"\"/><strong> Integration / Resource settings</strong> - Enables integration "
+"of Form and ERP/Odoo objects.<br/>"
+msgstr ""
+"<br/>\n"
+"                                <i class=\"fa fa-info-circle\" title=\"info"
+"\"/><strong> Integração / Configuração de Recursos</strong> - Permite a "
+"integração de objetos Form.io e MultiERP.<br/>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
-msgid "<i class=\"fa fa-clock-o\" title=\"Submission date\" aria-label=\"Submission date\"/>"
-msgstr "<i class=\"fa fa-clock-o\" title=\"Data do envio\" aria-label=\"Data do envio\"/>"
+msgid ""
+"<i class=\"fa fa-clock-o\" title=\"Submission date\" aria-label=\"Submission "
+"date\"/>"
+msgstr ""
+"<i class=\"fa fa-clock-o\" title=\"Data do envio\" aria-label=\"Data do envio"
+"\"/>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
-msgid "<i class=\"fa fa-globe text-muted\"/><span class=\"text-muted\"> portal</span>"
+msgid ""
+"<i class=\"fa fa-globe text-muted\"/><span class=\"text-muted\"> portal</"
+"span>"
 msgstr ""
 
 #. module: formio
@@ -148,89 +185,157 @@ msgstr ""
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "<i class=\"fa fa-info-circle\" title=\"info\"/> Configuration of Website features shall also be done here."
-msgstr "<i class=\"fa fa-info-circle\" title=\"info\"/> A configuração dos recursos do site também deve ser feita aqui."
+msgid ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Configuration of Website "
+"features shall also be done here."
+msgstr ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> A configuração dos recursos "
+"do site também deve ser feita aqui."
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "<i class=\"fa fa-info-circle\" title=\"info\"/> Configure in Resource tab (if settings are available)"
-msgstr "<i class=\"fa fa-info-circle\" title=\"info\"/> Configurar na guia Recursos (se as configurações estiverem disponíveis)"
+msgid ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Configure in Resource tab "
+"(if settings are available)"
+msgstr ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Configurar na guia Recursos "
+"(se as configurações estiverem disponíveis)"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "<i class=\"fa fa-info-circle\" title=\"info\"/> Configure in related tabs (Portal, Public / Website)"
-msgstr "<i class=\"fa fa-info-circle\" title=\"info\"/> Configurar nas guias relacionadas (Portal, Público / Site)"
+msgid ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Configure in related tabs "
+"(Portal, Public / Website)"
+msgstr ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Configurar nas guias "
+"relacionadas (Portal, Público / Site)"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "<i class=\"fa fa-info-circle\" title=\"info\"/> Specific permissions on Forms"
-msgstr "<i class=\"fa fa-info-circle\" title=\"info\"/> Permissões específicas em formulários"
+msgid ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Specific permissions on Forms"
+msgstr ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Permissões específicas em "
+"formulários"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "<i class=\"fa fa-info-circle\" title=\"info\"/> This doesn't make any sense with Public (published) Forms, which are standalone."
-msgstr "<i class=\"fa fa-info-circle\" title=\"info\"/> Isso não faz sentido com formulários públicos (publicados), que são independentes."
+msgid ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> This doesn't make any sense "
+"with Public (published) Forms, which are standalone."
+msgstr ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Isso não faz sentido com "
+"formulários públicos (publicados), que são independentes."
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "<i class=\"fa fa-info-circle\" title=\"info\"/> To create or link (existing) Partner with a Form submission, specify the fields (Email, Name) from the Components API / Property Names.<br/>\n"
-"                                    Partner determination/match shall be done by Email. This API is especially useful for public Forms."
-msgstr "<i class=\"fa fa-info-circle\" title=\"info\"/> Para criar ou vincular o parceiro (existente) a um envio de formulário, especifique os campos (e-mail, nome) da API de Componentes/Propriedades.<br/>\n"
-"                                    A determinação/correspondência do parceiro deve ser feita por e-mail. Esta API é especialmente útil para formulários públicos."
+msgid ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> To create or link (existing) "
+"Partner with a Form submission, specify the fields (Email, Name) from the "
+"Components API / Property Names.<br/>\n"
+"                                    Partner determination/match shall be "
+"done by Email. This API is especially useful for public Forms."
+msgstr ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Para criar ou vincular o "
+"parceiro (existente) a um envio de formulário, especifique os campos (e-"
+"mail, nome) da API de Componentes/Propriedades.<br/>\n"
+"                                    A determinação/correspondência do "
+"parceiro deve ser feita por e-mail. Esta API é especialmente útil para "
+"formulários públicos."
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Documentation</strong><br/>\n"
-"                                For example, Options could contain the Form Builder editForm with some File component settings:<br/>"
-msgstr "<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Documentação</strong><br/>\n"
-"                                Por exemplo, Opções podem conter o editForm com algumas configurações do arquivo do componente:<br/>"
+msgid ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Documentation</"
+"strong><br/>\n"
+"                                For example, Options could contain the Form "
+"Builder editForm with some File component settings:<br/>"
+msgstr ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Documentação</"
+"strong><br/>\n"
+"                                Por exemplo, Opções podem conter o editForm "
+"com algumas configurações do arquivo do componente:<br/>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Expire After:</strong> - Applicable on the Form it's (datimetime field) <strong>Public Access From</strong>."
-msgstr "<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Expira após:</strong> - Aplicável no formulário é (datimetime field) <strong>Acesso público de</strong>."
+msgid ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Expire After:</"
+"strong> - Applicable on the Form it's (datimetime field) <strong>Public "
+"Access From</strong>."
+msgstr ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Expira após:</"
+"strong> - Aplicável no formulário é (datimetime field) <strong>Acesso "
+"público de</strong>."
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "<i class=\"fa fa-info-circle\" title=\"info\"/><strong> View as HTML</strong> - This setting (still) doesn't work since version 4.x<br/>\n"
+msgid ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/><strong> View as HTML</"
+"strong> - This setting (still) doesn't work since version 4.x<br/>\n"
 "                                For more info see Formio.js GitHub issue:"
-msgstr "<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Ver como HTML</strong> - Esta configuração (ainda) não funciona desde a versão 4.x<br/>\n"
-"                                Para obter mais informações, consulte Formio.js no problema do GitHub:"
+msgstr ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Ver como HTML</"
+"strong> - Esta configuração (ainda) não funciona desde a versão 4.x<br/>\n"
+"                                Para obter mais informações, consulte Formio."
+"js no problema do GitHub:"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
-msgid "<i class=\"fa fa-user\" title=\"Submission partner\" aria-label=\"Submission partner\"/>"
-msgstr "<i class=\"fa fa-user\" title=\"Parceiro de envio\" aria-label=\"Parceiro de envio\"/>"
+msgid ""
+"<i class=\"fa fa-user\" title=\"Submission partner\" aria-label=\"Submission "
+"partner\"/>"
+msgstr ""
+"<i class=\"fa fa-user\" title=\"Parceiro de envio\" aria-label=\"Parceiro de "
+"envio\"/>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
-msgid "<span aria-label=\"Cancel &amp; close Form\" title=\"Cancel &amp; close Form\" confirm=\"Are you sure?\">Cancel Form</span>"
-msgstr "<span aria-label=\"Cancelar &amp; Fechar Formulário\" title=\"Cancelar &amp; Fechar Formulário\" confirm=\"Você tem certeza?\">Cancelar Formulário</span>"
+msgid ""
+"<span aria-label=\"Cancel &amp; close Form\" title=\"Cancel &amp; close Form"
+"\" confirm=\"Are you sure?\">Cancel Form</span>"
+msgstr ""
+"<span aria-label=\"Cancelar &amp; Fechar Formulário\" title=\"Cancelar &amp; "
+"Fechar Formulário\" confirm=\"Você tem certeza?\">Cancelar Formulário</span>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
-msgid "<span aria-label=\"Delete form\" title=\"Delete form\" confirm=\"Are you sure?\">Delete Form</span>"
-msgstr "<span aria-label=\"Apagar Formulário\" title=\"Apagar Formulário\" confirm=\"Você tem certeza?\">Apagar Formulário</span>"
+msgid ""
+"<span aria-label=\"Delete form\" title=\"Delete form\" confirm=\"Are you "
+"sure?\">Delete Form</span>"
+msgstr ""
+"<span aria-label=\"Apagar Formulário\" title=\"Apagar Formulário\" confirm="
+"\"Você tem certeza?\">Apagar Formulário</span>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
 msgid "<span aria-label=\"Edit form\" title=\"Edit form\">Edit Form</span>"
-msgstr "<span aria-label=\"Editar Formulário\" title=\"Editar Formulário\">Editar Formulário</span>"
+msgstr ""
+"<span aria-label=\"Editar Formulário\" title=\"Editar Formulário\">Editar "
+"Formulário</span>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
 msgid "<span aria-label=\"View form\" title=\"View form\">View Form</span>"
-msgstr "<span aria-label=\"Visualizar Formulário\" title=\"Visualizar Formulário\">Visualizar Formulário</span>"
+msgstr ""
+"<span aria-label=\"Visualizar Formulário\" title=\"Visualizar Formulário"
+"\">Visualizar Formulário</span>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-msgid "<strong>Check, register and install the latest 30 available Versions</strong>"
-msgstr "<strong>Verifique, registre e instale as últimas 30 versões disponíveis</strong>"
+msgid ""
+"<strong>Check, register and install the latest 30 available Versions</strong>"
+msgstr ""
+"<strong>Verifique, registre e instale as últimas 30 versões disponíveis</"
+"strong>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-msgid "<strong>Example below</strong>. Options could contain the Form Builder \"editForm\" with some \"File\" component settings:<br/>"
-msgstr "<strong>Exemplo abaixo</strong>. As opções podem conter o Form Builder \"editForm\" com algum \"Arquivo\" configurações de componentes:<br/>"
+msgid ""
+"<strong>Example below</strong>. Options could contain the Form Builder "
+"\"editForm\" with some \"File\" component settings:<br/>"
+msgstr ""
+"<strong>Exemplo abaixo</strong>. As opções podem conter o Form Builder "
+"\"editForm\" com algum \"Arquivo\" configurações de componentes:<br/>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
@@ -239,9 +344,11 @@ msgstr "<strong>Enviado:</strong>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-msgid "A scheduled action (daily cron) is available and already active.<br/>\n"
+msgid ""
+"A scheduled action (daily cron) is available and already active.<br/>\n"
 "                                    Source:"
-msgstr "Uma ação programada (cron diário) está disponível e já está ativa.<br/>\n"
+msgstr ""
+"Uma ação programada (cron diário) está disponível e já está ativa.<br/>\n"
 "                                    Fonte:"
 
 #. module: formio
@@ -287,8 +394,7 @@ msgid "Activities"
 msgstr "Atividades"
 
 #. module: formio
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Activity"
 msgstr "Atividade"
 
@@ -299,8 +405,12 @@ msgstr "Estado de Atividade"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-msgid "Add additional CSS files to be included for every new installed Form.io client/library."
-msgstr "Adicione arquivos CSS adicionais a serem incluídos para cada novo cliente/biblioteca Form.io instalado."
+msgid ""
+"Add additional CSS files to be included for every new installed Form.io "
+"client/library."
+msgstr ""
+"Adicione arquivos CSS adicionais a serem incluídos para cada novo cliente/"
+"biblioteca Form.io instalado."
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__component_partner_add_follower
@@ -344,18 +454,29 @@ msgstr "URL do arquivo"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-msgid "Are you sure to check for available versions? This could take some time to load, please be patient."
-msgstr "Tem certeza de que deseja verificar as versões disponíveis? Isso pode levar algum tempo para carregar, seja paciente."
+msgid ""
+"Are you sure to check for available versions? This could take some time to "
+"load, please be patient."
+msgstr ""
+"Tem certeza de que deseja verificar as versões disponíveis? Isso pode levar "
+"algum tempo para carregar, seja paciente."
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_github_tag_form
-msgid "Are you sure to download and install? This could take some time to load, please be patient."
-msgstr "Tem certeza de que deseja baixar e instalar? Isso pode levar algum tempo para carregar, seja paciente."
+msgid ""
+"Are you sure to download and install? This could take some time to load, "
+"please be patient."
+msgstr ""
+"Tem certeza de que deseja baixar e instalar? Isso pode levar algum tempo "
+"para carregar, seja paciente."
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "Are you sure? Modifying the Form Builder causes existing forms to be invalid."
-msgstr "Você tem certeza? A modificação do Construtor faz com que os formulários existentes sejam inválidos."
+msgid ""
+"Are you sure? Modifying the Form Builder causes existing forms to be invalid."
+msgstr ""
+"Você tem certeza? A modificação do Construtor faz com que os formulários "
+"existentes sejam inválidos."
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
@@ -447,8 +568,7 @@ msgid "CSS Assets"
 msgstr "Recursos CSS"
 
 #. module: formio
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Calendar"
 msgstr "Calendário"
 
@@ -459,8 +579,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: formio
-#: selection:formio.form,kanban_group_state:0
-#: selection:formio.form,state:0
+#: selection:formio.form,kanban_group_state:0 selection:formio.form,state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Canceled"
 msgstr "Cancelada"
@@ -488,8 +607,7 @@ msgid "Complete"
 msgstr "Completo"
 
 #. module: formio
-#: selection:formio.form,kanban_group_state:0
-#: selection:formio.form,state:0
+#: selection:formio.form,kanban_group_state:0 selection:formio.form,state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Completed"
 msgstr "Concluída"
@@ -605,7 +723,9 @@ msgstr "ID do banco de dados do registro em res_model ao qual isso se aplica"
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_form__public_access_date_from
 msgid "Datetime from when the form is public shared until it expires."
-msgstr "Data e hora de quando o formulário é compartilhado publicamente até que expire"
+msgstr ""
+"Data e hora de quando o formulário é compartilhado publicamente até que "
+"expire"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_form__submission_date
@@ -683,8 +803,7 @@ msgid "Download and Install"
 msgstr "Baixar e Instalar"
 
 #. module: formio
-#: selection:formio.builder,state:0
-#: selection:formio.form,kanban_group_state:0
+#: selection:formio.builder,state:0 selection:formio.form,kanban_group_state:0
 #: selection:formio.form,state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
@@ -707,6 +826,11 @@ msgstr "Editar URL"
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "Email"
 msgstr "E-mail"
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__language_en_enable
+msgid "English Enabled"
+msgstr ""
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
@@ -792,8 +916,11 @@ msgstr "O formulário pode ser acessado pelo usuário do portal designado"
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__public
 #: model:ir.model.fields,help:formio.field_formio_form__public
-msgid "Form is public accessible (e.g. used in Shop checkout, Events registration"
-msgstr "O formulário é acessível ao público (por exemplo, usado no checkout da loja, registro de eventos"
+msgid ""
+"Form is public accessible (e.g. used in Shop checkout, Events registration"
+msgstr ""
+"O formulário é acessível ao público (por exemplo, usado no checkout da loja, "
+"registro de eventos"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_form__public_create
@@ -801,17 +928,8 @@ msgid "Form was public created"
 msgstr "O formulário foi criado publicamente"
 
 #. module: formio
-#: model:ir.module.category,description:formio.module_category_formio
-#: model:ir.module.category,name:formio.module_category_formio
-#: model:ir.ui.menu,name:formio.menu_formio_root
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_formio
-msgid "Form.io"
-msgstr "Formulários"
-
-#. module: formio
 #: selection:ir.actions.act_window.view,view_mode:0
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_formio
 #: selection:ir.ui.view,type:0
 msgid "Form.io Builder"
 msgstr "Construtor de Formulários"
@@ -838,9 +956,20 @@ msgstr "Recursos CSS Form.io"
 
 #. module: formio
 #: selection:ir.actions.act_window.view,view_mode:0
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_formio
 #: selection:ir.ui.view,type:0
 msgid "Form.io Form"
 msgstr ""
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
+msgid "Form.io JS/library version importer"
+msgstr "Form.io JS importador de versão de biblioteca"
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid "Form.io JavaScript (JS)"
+msgstr "Form.io Javascript (JS)"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__formio_js_assets
@@ -869,11 +998,6 @@ msgid "Form.io Version GitHub Importer"
 msgstr ""
 
 #. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-msgid "Form.io client/library version importer"
-msgstr ""
-
-#. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__formio_version_name
 #: model:ir.model.fields,help:formio.field_formio_version__name
 msgid "Form.io release/version."
@@ -890,13 +1014,6 @@ msgstr "Versão Form.io"
 #, python-format
 msgid "Form.io version:"
 msgstr "Versão Form.io:"
-
-#. module: formio
-#: model:ir.actions.server,name:formio.ir_cron_formio_version_github_tag_check_and_register_ir_actions_server
-#: model:ir.cron,cron_name:formio.ir_cron_formio_version_github_tag_check_and_register
-#: model:ir.cron,name:formio.ir_cron_formio_version_github_tag_check_and_register
-msgid "Form.io: Check and register new Versions (GitHub tags)"
-msgstr "Form.io: Verifique e registre novas versões (tags GitHub)"
 
 #. module: formio
 #: model:ir.model,name:formio.model_formio_default_asset_css
@@ -967,7 +1084,10 @@ msgstr "Fonte de tradução da versão do Formio"
 #. module: formio
 #: model:ir.actions.act_window,name:formio.action_formio_form
 #: model:ir.model.fields,field_description:formio.field_formio_builder__forms
+#: model:ir.module.category,description:formio.module_category_formio
+#: model:ir.module.category,name:formio.module_category_formio
 #: model:ir.ui.menu,name:formio.menu_formio_form
+#: model:ir.ui.menu,name:formio.menu_formio_root
 #: model_terms:ir.ui.view,arch_db:formio.portal_layout
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_home
@@ -982,6 +1102,13 @@ msgid "Forms Permissions"
 msgstr "Permissões de Formulários"
 
 #. module: formio
+#: model:ir.actions.server,name:formio.ir_cron_formio_version_github_tag_check_and_register_ir_actions_server
+#: model:ir.cron,cron_name:formio.ir_cron_formio_version_github_tag_check_and_register
+#: model:ir.cron,name:formio.ir_cron_formio_version_github_tag_check_and_register
+msgid "Forms: Check and register new Versions (GitHub tags)"
+msgstr "Forms: Verifique e registre novas versões (tags GitHub)"
+
+#. module: formio
 #. openerp-web
 #: code:addons/formio/static/src/xml/formio.xml:9
 #, python-format
@@ -989,8 +1116,7 @@ msgid "Fullscreen (Exit with ESC)"
 msgstr "Tela Cheia (sair com ESC)"
 
 #. module: formio
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Gantt"
 msgstr ""
 
@@ -1016,8 +1142,7 @@ msgid "GitHub releases (tags)"
 msgstr ""
 
 #. module: formio
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Graph"
 msgstr "Gráfico"
 
@@ -1057,10 +1182,19 @@ msgid "ID:"
 msgstr ""
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_res_lang__formio_ietf_code
+msgid "IETF Code"
+msgstr ""
+
+#. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__name
 #: model:ir.model.fields,help:formio.field_formio_form__name
-msgid "Identifies this specific form. This name can be used in APIs.         Use only ASCII letters, digits, \"-\" or \"_\"."
-msgstr "Identifica este formulário específico. Este nome pode ser usado nas APIs.         Use apenas letras, dígitos ASCII, \"-\" or \"_\"."
+msgid ""
+"Identifies this specific form. This name can be used in APIs.         Use "
+"only ASCII letters, digits, \"-\" or \"_\"."
+msgstr ""
+"Identifica este formulário específico. Este nome pode ser usado nas "
+"APIs.         Use apenas letras, dígitos ASCII, \"-\" or \"_\"."
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__message_unread
@@ -1134,8 +1268,7 @@ msgid "Javascript Assets"
 msgstr ""
 
 #. module: formio
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Kanban"
 msgstr ""
 
@@ -1151,6 +1284,7 @@ msgid "Language"
 msgstr "Idioma"
 
 #. module: formio
+#: model:ir.model,name:formio.model_res_lang
 #: model:ir.model.fields,field_description:formio.field_formio_builder__languages
 #: model:ir.model.fields,field_description:formio.field_formio_form__languages
 msgid "Languages"
@@ -1209,8 +1343,12 @@ msgstr "Última atualização em"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__formio_version_id
-msgid "Loads the specific Form.io Javascript API/libraries version (sourcecode: \\https://github.com/formio/formio.js)"
-msgstr "Carrega a versão específica da API/bibliotecas Form.io Javascript (sourcecode: \\https://github.com/formio/formio.js)"
+msgid ""
+"Loads the specific Form.io Javascript API/libraries version (sourcecode: "
+"\\https://github.com/formio/formio.js)"
+msgstr ""
+"Carrega a versão específica da API/bibliotecas Form.io Javascript "
+"(sourcecode: \\https://github.com/formio/formio.js)"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_main_attachment_id
@@ -1344,7 +1482,7 @@ msgid "Obsolete"
 msgstr "Obsoleto"
 
 #. module: formio
-#: code:addons/formio/models/formio_builder.py:167
+#: code:addons/formio/models/formio_builder.py:168
 #, python-format
 msgid "Only one Form Builder with name \"{name}\" can be in state Current."
 msgstr "Apenas um Formulário com nome \"{name}\" pode estar no estado Atual."
@@ -1390,8 +1528,7 @@ msgid "Partner-related data of the user"
 msgstr "Dados do usuário relacionado ao Parceiro"
 
 #. module: formio
-#: selection:formio.form,kanban_group_state:0
-#: selection:formio.form,state:0
+#: selection:formio.form,kanban_group_state:0 selection:formio.form,state:0
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
 msgid "Pending"
 msgstr "Pendente"
@@ -1402,8 +1539,7 @@ msgid "Personal access token"
 msgstr "Token de acesso pessoal"
 
 #. module: formio
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Pivot"
 msgstr "Pivô"
 
@@ -1488,8 +1624,12 @@ msgstr "URL de envio público feito"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__public_access_interval_number
-msgid "Public access to submitted Form shall be rejected after expiration of the configured time interval."
-msgstr "O acesso público ao Formulário enviado será rejeitado após o término do intervalo de tempo configurado."
+msgid ""
+"Public access to submitted Form shall be rejected after expiration of the "
+"configured time interval."
+msgstr ""
+"O acesso público ao Formulário enviado será rejeitado após o término do "
+"intervalo de tempo configurado."
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
@@ -1566,6 +1706,7 @@ msgstr "Recurso"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__formio_res_model_id
 #: model:ir.model.fields,field_description:formio.field_formio_form__res_model_id
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_res_model_tree
 msgid "Resource Model"
 msgstr "Modelo de Recurso"
 
@@ -1585,6 +1726,7 @@ msgid "Resource Model Name #1"
 msgstr "Nome do Modelo de Recurso #1"
 
 #. module: formio
+#: model:ir.actions.act_window,name:formio.action_formio_res_model
 #: model:ir.ui.menu,name:formio.menu_formio_res_model
 msgid "Resource Models"
 msgstr "Modelos de Recursos"
@@ -1632,10 +1774,15 @@ msgstr "Selecione as opções de Form.io JS"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-msgid "Select a default Form Builder JavaScript Options Template.<br/>\n"
-"                            It's contents, the Form Builder JavaScript Options, shall be show below."
-msgstr "Selecione um modelo padrão de opções de JavaScript do criador de formulários.<br/>\n"
-"                            Seu conteúdo, as opções JavaScript do Form Builder, será mostrado a seguir."
+msgid ""
+"Select a default Form Builder JavaScript Options Template.<br/>\n"
+"                            It's contents, the Form Builder JavaScript "
+"Options, shall be shown below."
+msgstr ""
+"Selecione um modelo padrão de opções de JavaScript do criador de formulários."
+"<br/>\n"
+"                            Seu conteúdo, as opções JavaScript do Form "
+"Builder, será mostrado a seguir."
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
@@ -1658,7 +1805,8 @@ msgstr "Configurações"
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_form__public_share
 msgid "Share form in public? (with access expiration check)."
-msgstr "Compartilhar formulário em público? (com verificação de expiração de acesso)."
+msgstr ""
+"Compartilhar formulário em público? (com verificação de expiração de acesso)."
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__show_form_id
@@ -1730,7 +1878,9 @@ msgstr "Mostrar metadados do usuário"
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__show_form_user_metadata
 msgid "Show submission and assigned user metadata in the Form header."
-msgstr "Mostra o envio e os metadados do usuário atribuídos no cabeçalho do formulário."
+msgstr ""
+"Mostra o envio e os metadados do usuário atribuídos no cabeçalho do "
+"formulário."
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__show_form_state
@@ -1768,11 +1918,13 @@ msgstr "Estado:"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__activity_state
-msgid "Status based on activities\n"
+msgid ""
+"Status based on activities\n"
 "Overdue: Due date is already passed\n"
 "Today: Activity date is today\n"
 "Planned: Future activities."
-msgstr "Status baseado em atividades\n"
+msgstr ""
+"Status baseado em atividades\n"
 "Atrasado: Data definida já passou\n"
 "Hoje: Data de atividade é hoje\n"
 "Planejado: Atividades futuras."
@@ -1813,8 +1965,12 @@ msgstr "Formulário de Envio"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_form__public_access
-msgid "The Public Access check. Computed public access by checking whether (field) Public Access From has been expired."
-msgstr "A verificação de acesso público. Acesso público computado verificando se (campo) Acesso público de expirou."
+msgid ""
+"The Public Access check. Computed public access by checking whether (field) "
+"Public Access From has been expired."
+msgstr ""
+"A verificação de acesso público. Acesso público computado verificando se "
+"(campo) Acesso público de expirou."
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__title
@@ -1828,8 +1984,12 @@ msgstr "Não há formulários."
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_form__invitation_mail_template_id
-msgid "This e-mail template will be sent on user assignment. Leave empty to send nothing."
-msgstr "Este modelo de email será enviado na atribuição do usuário. Deixe em branco para não enviar nada."
+msgid ""
+"This e-mail template will be sent on user assignment. Leave empty to send "
+"nothing."
+msgstr ""
+"Este modelo de email será enviado na atribuição do usuário. Deixe em branco "
+"para não enviar nada."
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__title
@@ -1884,8 +2044,7 @@ msgid "Translations"
 msgstr "Traduções"
 
 #. module: formio
-#: selection:ir.actions.act_window.view,view_mode:0
-#: selection:ir.ui.view,type:0
+#: selection:ir.actions.act_window.view,view_mode:0 selection:ir.ui.view,type:0
 msgid "Tree"
 msgstr "Visão em árvore"
 
@@ -1935,8 +2094,13 @@ msgstr "Útil ao armazenar e listar formulários de forma ordenada"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__allow_force_update_state_group_ids
-msgid "User groups allowed to manually force an update of the Form state.If no groups are specified it's allowed for every user."
-msgstr "Os grupos de usuários têm permissão para forçar manualmente uma atualização do formulário. Se nenhum grupo for especificado, é permitido para todos os usuários."
+msgid ""
+"User groups allowed to manually force an update of the Form state.If no "
+"groups are specified it's allowed for every user."
+msgstr ""
+"Os grupos de usuários têm permissão para forçar manualmente uma atualização "
+"do formulário. Se nenhum grupo for especificado, é permitido para todos os "
+"usuários."
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_form__submission_user_id
@@ -1961,7 +2125,6 @@ msgstr "Valor (JSON)"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__version
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__version_id
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_res_model_tree
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_tree
 msgid "Version"
 msgstr "Versão"
@@ -1989,7 +2152,6 @@ msgid "Version:"
 msgstr "Versão:"
 
 #. module: formio
-#: model:ir.actions.act_window,name:formio.action_formio_res_model
 #: model:ir.actions.act_window,name:formio.action_formio_version
 #: model:ir.ui.menu,name:formio.menu_formio_version
 #: model:ir.ui.menu,name:formio.menu_formio_version_root
@@ -2022,7 +2184,9 @@ msgstr "Ver como HTML"
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__view_as_html
 msgid "View submission as a HTML view instead of disabled webform."
-msgstr "Veja o envio como uma exibição HTML em vez de um formulário da web desabilitado."
+msgstr ""
+"Veja o envio como uma exibição HTML em vez de um formulário da web "
+"desabilitado."
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__website_message_ids
@@ -2038,8 +2202,10 @@ msgstr "Histórico de Comunicação do Site"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-msgid "When adding a new Form Builder, use this Form.io client/library version."
-msgstr "Ao adicionar um novo Form Builder, use esta versão cliente/biblioteca Form.io"
+msgid ""
+"When adding a new Form Builder, use this Form.io client/library version."
+msgstr ""
+"Ao adicionar um novo Form Builder, use esta versão cliente/biblioteca Form.io"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__wizard
@@ -2048,7 +2214,7 @@ msgid "Wizard"
 msgstr "Assistente"
 
 #. module: formio
-#: code:addons/formio/models/formio_builder.py:320
+#: code:addons/formio/models/formio_builder.py:323
 #, python-format
 msgid "Write comment about version %s ..."
 msgstr "Escreva um comentário sobre a versão %s ..."
@@ -2056,26 +2222,36 @@ msgstr "Escreva um comentário sobre a versão %s ..."
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_default_asset_css__attachment_type
 #: model:ir.model.fields,help:formio.field_formio_version_asset__attachment_type
-msgid "You can either upload a file from your computer or copy/paste an internet link to your file."
-msgstr "Você pode enviar um arquivo diretamente de seu computador ou dispositivo ou pode copiar e colar o link para seu arquivo na internet."
+msgid ""
+"You can either upload a file from your computer or copy/paste an internet "
+"link to your file."
+msgstr ""
+"Você pode enviar um arquivo diretamente de seu computador ou dispositivo ou "
+"pode copiar e colar o link para seu arquivo na internet."
 
 #. module: formio
 #: code:addons/formio/models/formio_form.py:321
 #, python-format
 msgid "You're not allowed to (force) update the Form into Cancel state."
-msgstr "Você não tem permissão para (forçar) a atualização do formulário para o estado Cancelar."
+msgstr ""
+"Você não tem permissão para (forçar) a atualização do formulário para o "
+"estado Cancelar."
 
 #. module: formio
 #: code:addons/formio/models/formio_form.py:314
 #, python-format
 msgid "You're not allowed to (force) update the Form into Complete state."
-msgstr "Você não tem permissão para (forçar) a atualização do formulário para o estado completo."
+msgstr ""
+"Você não tem permissão para (forçar) a atualização do formulário para o "
+"estado completo."
 
 #. module: formio
 #: code:addons/formio/models/formio_form.py:300
 #, python-format
 msgid "You're not allowed to (force) update the Form into Draft state."
-msgstr "Você não tem permissão para (forçar) a atualização do formulário para o estado Rascunho."
+msgstr ""
+"Você não tem permissão para (forçar) a atualização do formulário para o "
+"estado Rascunho."
 
 #. module: formio
 #: model:mail.template,subject:formio.mail_invitation_internal_user
@@ -2096,7 +2272,9 @@ msgstr ""
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "https://github.com/formio/formio.js/blob/master/src/components/file/editForm/File.edit.file.js"
+msgid ""
+"https://github.com/formio/formio.js/blob/master/src/components/file/editForm/"
+"File.edit.file.js"
 msgstr ""
 
 #. module: formio
@@ -2106,10 +2284,14 @@ msgstr ""
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-msgid "is not required, but it can get a higher rate limit.\n"
-"                                        This prevents timeouts and authorization errors."
-msgstr "não é obrigatório, mas pode obter um limite de taxa mais alto.\n"
-"                                        Isso evita tempos limite e erros de autorização."
+msgid ""
+"is not required, but it can get a higher rate limit.\n"
+"                                        This prevents timeouts and "
+"authorization errors."
+msgstr ""
+"não é obrigatório, mas pode obter um limite de taxa mais alto.\n"
+"                                        Isso evita tempos limite e erros de "
+"autorização."
 
 #. module: formio
 #: selection:formio.version.asset,type:0
@@ -2119,12 +2301,14 @@ msgstr ""
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "select component rendering error in viewAsHtml model #1545"
-msgstr "selecionar erro de renderização de componente no modelo viewAsHtml #1545"
+msgstr ""
+"selecionar erro de renderização de componente no modelo viewAsHtml #1545"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "{\n"
+msgid ""
+"{\n"
 "  'editForm': {\n"
 "    'file': [\n"
 "      {\n"
@@ -2140,7 +2324,7 @@ msgid "{\n"
 msgstr ""
 
 #. module: formio
-#: code:addons/formio/models/formio_builder.py:247
+#: code:addons/formio/models/formio_builder.py:248
 #, python-format
 msgid "{title} (state: {state} - version: {version})"
 msgstr "{title} (state: {state} - versão: {version})"

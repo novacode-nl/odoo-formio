@@ -1,0 +1,146 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* formio_report_qweb
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-31 09:38+0000\n"
+"PO-Revision-Date: 2020-12-31 10:40+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.component_not_implemented
+msgid "<small>WARNING: component not implemented (showing raw data)</small>"
+msgstr ""
+"<small>AVISO: componente não implementado (mostrando dados brutos)</small>"
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.report_formio_form_template
+msgid "<strong>Assigned:</strong>"
+msgstr "<strong>Atribuídas:</strong>"
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.report_formio_form_template
+msgid "<strong>Date:</strong>"
+msgstr "<strong>Data:</strong>"
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.report_formio_form_template
+msgid "<strong>ID:</strong>"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.report_formio_form_template
+msgid "<strong>Submission by:</strong>"
+msgstr "<strong>Submissão por:</strong>"
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__display_name
+msgid "Display Name"
+msgstr "Nome exibido"
+
+#. module: formio_report_qweb
+#: model:ir.actions.report,name:formio_report_qweb.action_report_formio_form_assigned_user
+msgid "Form (Assigned user preferences)"
+msgstr "Formulário (preferências atribuídas ao usuário)"
+
+#. module: formio_report_qweb
+#: model:ir.actions.report,name:formio_report_qweb.action_report_formio_form
+msgid "Form (My preferences)"
+msgstr "Formulário (minhas preferências)"
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__builder_id
+msgid "Form Builder"
+msgstr "Construtor de Formulários"
+
+#. module: formio_report_qweb
+#: model:ir.model,name:formio_report_qweb.model_formio_builder
+msgid "Formio Builder"
+msgstr "Construtor Form.io"
+
+#. module: formio_report_qweb
+#: model:ir.model,name:formio_report_qweb.model_formio_builder_report
+#: model:ir.model.fields,field_description:formio_report_qweb.field_ir_actions_report__formio_builder_report_ids
+msgid "Formio Builder Reports"
+msgstr "Relatórios Formio Builder"
+
+#. module: formio_report_qweb
+#: model:ir.model,name:formio_report_qweb.model_formio_form
+msgid "Formio Form"
+msgstr "Formulário Form.io"
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__id
+msgid "ID"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report____last_update
+msgid "Last Modified on"
+msgstr "Última modificação em"
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__write_uid
+msgid "Last Updated by"
+msgstr "Última atualização por"
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__write_date
+msgid "Last Updated on"
+msgstr "Última atualização em"
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__ir_actions_report_id
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.view_formio_builder_form_inherit
+msgid "Report"
+msgstr "Relatório"
+
+#. module: formio_report_qweb
+#: model:ir.model,name:formio_report_qweb.model_ir_actions_report
+msgid "Report Action"
+msgstr "Reportar Ação"
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder__report_ids
+msgid "Reports"
+msgstr "Relatórios"
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.view_formio_builder_form_inherit
+msgid "Reports Config"
+msgstr "Configuração de Relatórios"
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.formio_builder_report_form
+msgid "Settings"
+msgstr "Configurações"
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__show_components_not_implemented
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.formio_builder_report_form
+msgid "Show not implemented components"
+msgstr "Mostrar componentes não implementados"
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.report_formio_form_template
+msgid "State:"
+msgstr "Estado:"
