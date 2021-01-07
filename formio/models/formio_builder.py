@@ -4,11 +4,11 @@
 import ast
 import json
 import re
-import requests
 import uuid
 
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+from odoo.http import request
 
 from ..utils import get_field_selection_label
 
@@ -90,6 +90,7 @@ class Builder(models.Model):
         """
     )
     public = fields.Boolean("Public", track_visibility='onchange', help="Form is public accessible (e.g. used in Shop checkout, Events registration")
+    public_url = fields.Char(string='Public URL', compute='_compute_public_url', store=True, copy=False)
     public_submit_done_url = fields.Char(
         string='Public Submit-done URL', track_visibility='onchange',
         help="""\
@@ -247,6 +248,15 @@ class Builder(models.Model):
             else:
                 r.display_name_full = _("{title} (state: {state} - version: {version})").format(
                     title=r.title, state=r.display_state, version=r.version)
+
+    @api.depends('public')
+    def _compute_public_url(self):
+        for r in self:
+            if r.public:
+                url_root = request.httprequest.url_root
+                self.public_url = '%s%s/%s' % (url_root, 'formio/public/form/create', r.uuid)
+            else:
+                r.public_url = False
 
     @api.depends('translations')
     def _compute_languages(self):

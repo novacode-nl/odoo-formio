@@ -145,7 +145,10 @@ See LICENSE file for full licensing details. -->
                                 <i class="fa fa-info-circle" title="info"/> Configuration of Website features shall also be done here.
                             </div>
                             <group>
-                                <group string="General">
+                                <group name="public_url" colspan="2" attrs="{'invisible': [('public_url', '=', False)]}">
+                                    <field name="public_url" widget="CopyClipboardChar"/>
+                                </group>
+                                <group name="general" string="General">
                                     <label for="public_access_interval_number" string="Expire After"/>
                                     <div>
                                         <field name="public_access_interval_number" class="oe_inline" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
