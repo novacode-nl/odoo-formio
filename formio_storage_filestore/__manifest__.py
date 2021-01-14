@@ -4,7 +4,7 @@
 {
     'name': 'Forms | Storage Filestore Provider',
     'summary': 'Store uploads/files by URL in Odoo filestore (attachments)',
-    'version': '0.1',
+    'version': '0.2',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -12,7 +12,8 @@
     'category': 'Extra Tools',
     'depends': ['formio', 'formio_data_api'],
     'data': [
-        'data/formio_storage_filestore_data.xml'
+        'data/formio_storage_filestore_data.xml',
+        'data/ir_cron_data.xml'
     ],
     'installable': True,
     'application': True,
@@ -21,7 +22,7 @@
     ],
     'description': """
 Forms | Storage Filestore Provider
-=================================
+==================================
 
 """
 }
