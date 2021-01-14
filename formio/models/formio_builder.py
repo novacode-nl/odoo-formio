@@ -248,7 +248,7 @@ class Builder(models.Model):
     @api.depends('public')
     def _compute_public_url(self):
         for r in self:
-            if r.public:
+            if r.public and request:
                 url_root = request.httprequest.url_root
                 self.public_url = '%s%s/%s' % (url_root, 'formio/public/form/create', r.uuid)
             else:
