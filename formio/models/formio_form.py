@@ -480,17 +480,3 @@ class Form(models.Model):
     def i18n_translations(self):
         i18n = self.builder_id.i18n_translations()
         return i18n
-
-
-class IrAttachment(models.Model):
-    _inherit = 'ir.attachment'
-
-    @api.model
-    def check(self, mode, values=None):
-        to_check = self
-        if self.ids:
-            self._cr.execute("SELECT id FROM ir_attachment WHERE res_model = 'formio.version.asset' AND id IN %s", [tuple(self.ids)])
-            asset_ids = [r[0] for r in self._cr.fetchall()]
-            if asset_ids:
-                to_check = self - self.browse(asset_ids)
-        super(IrAttachment, to_check).check(mode, values)
