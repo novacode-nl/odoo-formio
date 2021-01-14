@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <data>
+        <!-- formio.builder.js.options -->
+        <record id="formio_builder_js_options_storage_filestore" model="formio.builder.js.options">
+            <field name="name">Storage in Filestore (file component etc)</field>
+            <field name="value">{
+    'editForm': {
+        'file': [
+            {
+                'key': 'file',
+                'components': [
+                    {'key': 'storage', 'defaultValue': 'url'},
+                    {'key': 'url', 'defaultValue': '/formio/storage/filestore'},
+                ]
+            }
+        ]
+    }
+}</field>
+        <!-- NOTE:
+             Unfortunately the following editForm options don't work.
+             However since formio.js version >= 5 the default/only storage providers are: base64, url.
+
+             editForm options:
+             {'key': 'storage', 'defaultValue': 'url', 'dataSrc': 'values', 'data': {'custom': '', 'values': [{'label': 'Base64', 'value': 'base64'}, {'label': 'Url', 'value': 'url'}]}
+        -->
+        </record>
+    </data>
+</odoo>

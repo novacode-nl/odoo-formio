@@ -66,5 +66,16 @@ See LICENSE file for full copyright and licensing details. -->
                 ('builder_id.portal', '=', True), ('create_uid', '=', user.id), ('user_id', '=', user.id), ('state', '!=', 'COMPLETE')]
             </field>
         </record>
+
+        <!-- ir.attachment -->
+        <record id="ir_attachment_unlink_formio_form" model="ir.rule">
+            <field name="name">Attachments of completed Forms can't be deleted</field>
+            <field name="model_id" ref="model_ir_attachment"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="domain_force">[('res_model', '=', 'formio.form'), ('formio_form_id.state', '!=', 'COMPLETE')]</field>
+        </record>
     </data>
 </odoo>
