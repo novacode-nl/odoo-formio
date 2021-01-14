@@ -36,6 +36,7 @@ class FormioStorageFilestoreController(http.Controller):
 
         vals = {
             'name': kwargs.get('name'),
+            'formio_storage_filestore_user_id': request._context.get('uid'),
             'datas': base64.b64encode(kwargs.get('file').read()),
         }
         attachment = IrAttachment.create(vals)
@@ -65,7 +66,8 @@ class FormioStorageFilestoreController(http.Controller):
 
         if file_name:
             domain = [
-                ('name', '=', file_name)
+                ('name', '=', file_name),
+                ('formio_storage_filestore_user_id', '!=', False)
             ]
             attachment = IrAttachment.search(domain)
             if not attachment:
