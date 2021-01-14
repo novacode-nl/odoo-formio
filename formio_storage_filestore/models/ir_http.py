@@ -19,11 +19,11 @@ class IrHttp(models.AbstractModel):
             log = {
                 'request_path': request.httprequest.path,
                 'auth_method': auth_method,
-                'request_user_id': request.env.user.id
+                'request_user_id': request._context.get('uid')
             }
             _logger.debug(log)
 
-            if auth_method == 'user' and request.env.user:
+            if auth_method == 'user' and request._context.get('uid'):
                 auth_method = super(IrHttp, cls)._authenticate(auth_method)
                 return auth_method
             else:
