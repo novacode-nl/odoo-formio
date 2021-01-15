@@ -77,7 +77,7 @@ export class OdooFormioForm extends Component {
             };
             self.options['hooks'] = hooks;
         }
-
+        Formio.setBaseUrl(window.location.href);
         Formio.createForm(document.getElementById('formio_form'), self.schema, self.options).then(function(form) {
             // Language
             if ('language' in self.options) {
