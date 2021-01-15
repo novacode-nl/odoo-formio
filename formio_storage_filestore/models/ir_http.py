@@ -5,6 +5,7 @@ import logging
 import os
 
 from odoo import models
+from odoo.exceptions import AccessDenied
 from odoo.http import request
 
 _logger = logging.getLogger(__name__)
@@ -34,7 +35,7 @@ class IrHttp(models.AbstractModel):
             # endpoint.
             base_url = request.httprequest.args.get('baseUrl')
             if not base_url:
-                return False
+                raise AccessDenied()
 
             if '/formio/public/form/create' in base_url:
                 uuid = os.path.basename(os.path.normpath(base_url))
