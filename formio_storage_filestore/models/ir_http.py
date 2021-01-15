@@ -26,9 +26,16 @@ class IrHttp(models.AbstractModel):
         if auth_method == 'user' and request._context.get('uid'):
             return super(IrHttp, cls)._authenticate(endpoint)
         else:
-            # Security measurement for public POST/uploads,
-            # because CSRF is disabled (needed) for this endpoint.
+            # Security measurement for public POST/uploads, because
+            # CSRF is disabled (needed) for this endpoint.
+
+            # The baseUrl param was set on the Formio (JavaScript)
+            # object and send by the XMLHttpRequest to this
+            # endpoint.
             base_url = request.httprequest.args.get('baseUrl')
+            if not base_url:
+                return False
+
             if '/formio/public/form/create' in base_url:
                 uuid = os.path.basename(os.path.normpath(base_url))
                 domain = [('uuid', '=', uuid), ('public', '=', True)]
