@@ -34,9 +34,10 @@ class FormioStorageFilestoreController(http.Controller):
         if not request.env.user.has_group('base.group_user'):
             IrAttachment = IrAttachment.sudo().with_context(binary_field_real_user=IrAttachment.env.user)
 
+        uid = request._context.get('uid') or request.env.ref('base.public_user').id
         vals = {
             'name': kwargs.get('name'),
-            'formio_storage_filestore_user_id': request._context.get('uid'),
+            'formio_storage_filestore_user_id': uid,
             'datas': base64.b64encode(kwargs.get('file').read()),
         }
         attachment = IrAttachment.create(vals)
