@@ -22,7 +22,7 @@ See LICENSE file for full licensing details. -->
                 <field name="state"/>
                 <button string="Form" class="btn-sm btn-secondary" name="action_view_formio" type="object"/>
                 <field name="portal_share" optional="show"/>
-                <field name="public_share" optional="hide"/>
+                <field name="public_share" optional="show"/>
                 <field name="public_access" optional="show"/>
                 <field name="public_create" optional="hide"/>
                 <field name="res_model_name" string="Resource Type" optional="show"/>
