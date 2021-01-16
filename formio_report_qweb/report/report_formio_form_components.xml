@@ -23,6 +23,9 @@ See LICENSE file for full copyright and licensing details.
         <t t-elif="component['_object'].type == 'select'">
             <t t-call="formio_report_qweb.select_component"/>
         </t>
+        <t t-elif="component['_object'].type == 'radio'">
+            <t t-call="formio_report_qweb.radio_component"/>
+        </t>
         <t t-elif="component['_object'].type == 'phoneNumber'">
             <t t-call="formio_report_qweb.phoneNumber_component"/>
         </t>
@@ -145,6 +148,23 @@ See LICENSE file for full copyright and licensing details.
         </div>
     </template>
 
+    <template id="radio_component">
+        <div class="mw-100 mb-3">
+            <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
+            <t t-foreach="component['_object'].values_labels" t-as="radio">
+                <div>
+                    <t t-if="component['_object'].values_labels[radio]['value'] == true">
+                        <input type="radio" checked="checked" disable="disabled"/>
+                    </t>
+                    <t t-else="">
+                        <input type="radio" disable="disabled"/>
+                    </t>
+                    <span><t t-esc="component['_object'].values_labels[radio]['label']"/></span>
+                </div>
+            </t>
+        </div>
+    </template>
+
     <template id="phoneNumber_component">
         <div class="mw-100 mb-3 formio_phoneNumber_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
@@ -182,9 +202,13 @@ See LICENSE file for full copyright and licensing details.
     <template id="file_component">
         <div class="mw-100 mb-3 formio_file_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
+            <!-- Determine storage:
+                 component['_object'].storage == 'base64'
+                 component['_object'].storage == 'url'
+            -->
             <t t-if="component['_object'].value and component['image']">
                 <t t-foreach="component['_object'].value" t-as="image">
-                    <div>
+                    <div class="mb-2">
                         <img t-att-src="image['url']" t-att-style="'width: ' + str(component['imageSize']) + 'px;'"/>
                     </div>
                 </t>
