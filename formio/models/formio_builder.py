@@ -24,7 +24,7 @@ STATES = [
 
 class Builder(models.Model):
     _name = 'formio.builder'
-    _description = 'Formio Builder'
+    _description = 'Form Builder'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     _rec_name = 'display_name_full'
