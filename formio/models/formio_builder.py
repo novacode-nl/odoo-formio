@@ -46,7 +46,7 @@ class Builder(models.Model):
         'formio.version', string='Form.io Version', required=True,
         default=lambda self: self._default_formio_version_id(), tracking=True,
         help="""Loads the specific Form.io Javascript API/libraries version (sourcecode: \https://github.com/formio/formio.js)""")
-    formio_version_name = fields.Char(related='formio_version_id.name', string='Form.io version')
+    formio_version_name = fields.Char(related='formio_version_id.name', string='Form.io version', tracking=False) # silly, but avoids duplicate tracking message
     formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='Form.io CSS')
     formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='Form.io Javascript')
     formio_js_options_id = fields.Many2one('formio.builder.js.options', string='Form.io Javascript Options template', store=False)
