@@ -4,7 +4,7 @@
 {
     'name': 'Forms',
     'summary': 'Form Builder & integration of professional and versatile Forms to collect any information you need for your business.',
-    'version': '8.10',
+    'version': '8.11',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -19,6 +19,7 @@
         'data/formio_version_data.xml',
         'data/formio_version_asset_data.xml',
         'data/ir_cron_data.xml',
+        'data/mail_activity_data.xml',
         'data/mail_template_data.xml',
         # translations
         'data/formio_translations_sources.xml',
@@ -41,6 +42,7 @@
         'views/formio_version_github_tag_views.xml',
         'views/formio_menu.xml',
         'views/res_config_settings_views.xml',
+        'views/mail_activity_views.xml',
         # formio templates
         'views/formio_builder_templates.xml',
         'views/formio_form_templates.xml',
