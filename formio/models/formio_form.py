@@ -23,7 +23,7 @@ STATE_CANCEL = 'CANCEL'
 
 class Form(models.Model):
     _name = 'formio.form'
-    _description = 'Formio Form'
+    _description = 'Form'
     _inherit = ['mail.thread']
 
     _order = 'id DESC'
@@ -54,7 +54,7 @@ class Form(models.Model):
     url = fields.Char(compute='_compute_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     act_window_multi_url = fields.Char(compute='_compute_act_window_url', readonly=True)
-    partner_id = fields.Many2one('res.partner', readonly=True, string='Partner')
+    partner_id = fields.Many2one('res.partner', string='Partner', track_visibility='onchange')
     initial_res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model #1')
     initial_res_model_name = fields.Char(related='initial_res_model_id.name', readonly=True, string='Resource Name #1')
     initial_res_model = fields.Char(related='initial_res_model_id.model', readonly=True, string='Resource Model Name #1')
