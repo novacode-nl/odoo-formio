@@ -120,6 +120,7 @@ class Builder(models.Model):
     component_partner_email = fields.Char(string='Component Partner Email', track_visibility='onchange')
     component_partner_add_follower = fields.Boolean(
         string='Component Partner Add to Followers', track_visibility='onchange', help='Add determined partner to followers of the Form.')
+    component_partner_activity_user_id = fields.Many2one('res.users', track_visibility='onchange')
 
     def _states_selection(self):
         return STATES

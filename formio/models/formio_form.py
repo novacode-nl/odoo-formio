@@ -24,7 +24,7 @@ STATE_CANCEL = 'CANCEL'
 class Form(models.Model):
     _name = 'formio.form'
     _description = 'Form'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     _order = 'id DESC'
 
@@ -179,10 +179,12 @@ class Form(models.Model):
                     default_partner_vals = {'email': partner_email}
                     partner_vals = self._prepare_partner_vals(submission_data, default_partner_vals)
                     partner = partner_model.create(partner_vals)
-                self.write({'partner_id': partner.id})
-
-                if self.builder_id.component_partner_add_follower:
-                    self.message_subscribe(partner_ids=partner.ids)
+                if len(partner) == 1:
+                    self.write({'partner_id': partner.id})
+                    if self.builder_id.component_partner_add_follower:
+                        self.message_subscribe(partner_ids=partner.ids)
+                elif len(partner) > 1:
+                    self.mail_activity_partner_linking(partner_email, record=self)
 
     def _prepare_partner_vals(self, submission_data, partner_vals):
         if submission_data.get(self.builder_id.component_partner_name):
@@ -498,3 +500,17 @@ class Form(models.Model):
     def i18n_translations(self):
         i18n = self.builder_id.i18n_translations()
         return i18n
+
+    def mail_activity_partner_linking(self, partner_email, record=False, user_id=False):
+        if not user_id:
+            user_id = self.builder_id.component_partner_activity_user_id
+        if user_id:
+            rec = record or self
+            rec.activity_schedule(
+                'formio.mail_act_partner_linking',
+                user_id=user_id.id,
+                summary=_('Link the Form to the appropriate Partner'),
+                note=_('Found multiple Partners with email <strong>%s</strong> submitted in the Form.') % partner_email
+            )
+        else:
+            _logger.error('No user configured (in settings) for mail_activity_partner_linking')

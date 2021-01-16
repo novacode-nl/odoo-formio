@@ -175,6 +175,7 @@ See LICENSE file for full licensing details. -->
                                 </group>
                                 <group>
                                     <field name="component_partner_add_follower" string="Add to Followers" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="component_partner_activity_user_id" string="Activity User" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
                             </group>
                         </page>
