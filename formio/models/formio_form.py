@@ -42,7 +42,7 @@ class Form(models.Model):
     uuid = fields.Char(
         default=lambda self: self._default_uuid(), required=True, readonly=True, copy=False,
         string='UUID')
-    title = fields.Char(string='Title', required=True, index=True, tracking=True)
+    title = fields.Char(string='Title', required=True, index=True, track_visibility='onchange')
     state = fields.Selection(
         [(STATE_PENDING, 'Pending'), (STATE_DRAFT, 'Draft'),
          (STATE_COMPLETE, 'Completed'), (STATE_CANCEL, 'Canceled')],
