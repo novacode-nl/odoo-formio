@@ -13,7 +13,7 @@
     'depends': ['formio'],
     'data': [],
     'external_dependencies': {
-        'python': ['formiodata'],
+        'python': ['formio-data'],
     },
     'application': False,
     'images': [
