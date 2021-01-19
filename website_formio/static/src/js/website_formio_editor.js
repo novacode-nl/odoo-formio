@@ -17,7 +17,7 @@ odoo.define('website_formio_editor', function (require) {
             return rpc.query({
                 model: 'formio.builder',
                 method: 'search_read',
-                args: [[['public', '=', true]],['uuid', 'display_name_full']],
+                args: [[['public', '=', true], ['state', '=', 'CURRENT']],['uuid', 'display_name_full']],
                 context: self.options.recordInfo.context,
             }).then(function (formio_builders) {
                 var def = wUtils.prompt({
@@ -40,6 +40,7 @@ odoo.define('website_formio_editor', function (require) {
                     var form_iframe = self.$target.find('.formio_form_iframe_container iframe'),
                         iframe_src = '/formio/public/form/create/' + result.val;
                     form_iframe.attr("src", iframe_src);
+                    iFrameResize({}, '.formio_form_embed');
                 });
             });
         },
