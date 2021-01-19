@@ -4,7 +4,8 @@
 {
     'name': 'Forms | Sales',
     'summary': 'Forms integration with Sale Orders/Quotes',
-    'version': '0.4',
+    'version': '0.5',
+    'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
@@ -13,6 +14,7 @@
     'data': [
         'data/formio_sale_data.xml',
         'data/formio_demo_data.xml',
+        'views/formio_form_views.xml',
         'views/sale_views.xml',
     ],
     'application': True,
