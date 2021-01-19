@@ -4,7 +4,7 @@
 {
     'name': 'Forms | Sales',
     'summary': 'Forms integration with Sale Orders/Quotes',
-    'version': '0.5',
+    'version': '0.6',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
