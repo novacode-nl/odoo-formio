@@ -10,7 +10,10 @@
     'license': 'LGPL-3',
     'category': 'Extra Tools',
     'depends': ['formio'],
-    'data': [],
+    'data': [
+        'views/formio_component_views.xml',
+        'views/formio_menu.xml',
+    ],
     'external_dependencies': {
         'python': ['formiodata'],
     },
