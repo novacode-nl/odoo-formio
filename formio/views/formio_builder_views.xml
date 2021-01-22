@@ -106,6 +106,9 @@ See LICENSE file for full licensing details. -->
                                         <i class="fa fa-info-circle" title="info"/> Configure in related tabs (Portal, Public / Website)
                                     </div>
                                 </group>
+                                <group name="actions_settings" string="Actions">
+                                    <field name="form_allow_copy" groups="formio.group_formio_admin" />
+                                </group>
                                 <group name="integration_settings" string="Integration">
                                     <field name="formio_res_model_id" groups="formio.group_formio_admin"
                                            attrs="{'readonly': [('state', '!=', 'DRAFT')]}"

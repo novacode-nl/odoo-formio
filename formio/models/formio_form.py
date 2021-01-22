@@ -107,6 +107,7 @@ class Form(models.Model):
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
     allow_force_update_state = fields.Boolean("Allow force update State", compute='_compute_access')
     readonly_submission_data = fields.Boolean("Data is readonly", compute='_compute_access')
+    allow_copy = fields.Boolean(string='Allow copies', help='Allow copying form submissions.', default=False)
 
     @api.model
     def default_get(self, fields):
@@ -135,6 +136,7 @@ class Form(models.Model):
         vals['show_id'] = builder.show_form_id
         vals['show_uuid'] = builder.show_form_uuid
         vals['show_user_metadata'] = builder.show_form_user_metadata
+        vals['allow_copy'] = builder.form_allow_copy
 
         # access
         vals['portal_share'] = builder.portal
@@ -310,6 +312,17 @@ class Form(models.Model):
         if not self.allow_force_update_state:
             raise UserError(_("You're not allowed to (force) update the Form into Cancel state."))
         self.write({'state': STATE_CANCEL})
+
+    def action_copy(self):
+        if not self.allow_copy:
+            raise UserError(_("You're not allowed to copy this form."))
+
+        latest_builder = self.env['formio.builder'].get_builder_by_name(self.builder_id.name)
+        if not latest_builder:
+            raise UserError(_("There is no Form Builder available to link this form to."))
+
+        new_form_data = self.copy_data(default={'state': STATE_DRAFT, 'builder_id': latest_builder.id})
+        return self.create(new_form_data)
 
     def action_send_invitation_mail(self):
         compose_form_id = self.env.ref('mail.email_compose_message_wizard_form').id

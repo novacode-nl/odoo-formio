@@ -99,13 +99,18 @@ See LICENSE file for full licensing details. -->
                                 <span aria-label="View form" title="View form">View Form</span>
                             </a>
 
+                            <a t-if="form.allow_copy and form.state == 'COMPLETE'" role="button" class="btn btn-sm btn-dark"
+                               t-attf-href="/my/formio/form/{{ form.uuid }}/copy?{{ keep_query() }}">
+                                <span aria-label="Copy form" title="Copy form">Copy Form</span>
+                            </a>
+
                             <a t-if="form.allow_unlink" role="button" class="btn btn-sm btn-danger"
-                               t-attf-href="/my/formio/form/delete/{{ form.uuid }}?{{ keep_query() }}"
+                               t-attf-href="/my/formio/form/{{ form.uuid }}/delete?{{ keep_query() }}"
                                style="margin-right: 8px">
                                 <span aria-label="Delete form" title="Delete form" confirm="Are you sure?">Delete Form</span>
                             </a>
                             <a t-elif="not form.allow_unlink and form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-warning"
-                               t-attf-href="/my/formio/form/cancel/{{ form.uuid }}?{{ keep_query() }}" style="margin-right: 8px">
+                               t-attf-href="/my/formio/form/{ form.uuid }}/cancel?{{ keep_query() }}" style="margin-right: 8px">
                                 <span aria-label="Cancel &amp; close Form" title="Cancel &amp; close Form" confirm="Are you sure?">Cancel Form</span>
                             </a>
                         </td>
