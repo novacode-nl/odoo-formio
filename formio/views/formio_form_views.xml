@@ -204,6 +204,9 @@ See LICENSE file for full licensing details. -->
                                     <field name="show_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
                                     <field name="show_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
                                 </group>
+                                <group name="actions_settings" string="Actions">
+                                    <field name="allow_copy" groups="formio.group_formio_admin" />
+                                </group>
                             </group>
                         </page>
                         <page string="Data" name="data" groups="formio.group_formio_admin">

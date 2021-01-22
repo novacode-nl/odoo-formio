@@ -121,6 +121,7 @@ class Builder(models.Model):
     component_partner_add_follower = fields.Boolean(
         string='Component Partner Add to Followers', tracking=True, help='Add determined partner to followers of the Form.')
     component_partner_activity_user_id = fields.Many2one('res.users', tracking=True)
+    form_allow_copy = fields.Boolean(string='Allow copies', help='Allow copying form submissions.', default=False)
 
     def _states_selection(self):
         return STATES
@@ -405,6 +406,17 @@ class Builder(models.Model):
             return builder
         else:
             return False
+
+    @api.model
+    def get_builder_by_name(self, name):
+        """ Get the latest version of a builder by name. """
+
+        domain = [
+            ('name', '=', name),
+            ('state', '=', STATE_CURRENT)
+        ]
+        builder = self.sudo().search(domain, limit=1)
+        return builder or False
 
     def i18n_translations(self):
         i18n = {}
