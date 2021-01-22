@@ -107,7 +107,8 @@ class Form(models.Model):
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
     allow_force_update_state = fields.Boolean("Allow force update State", compute='_compute_access')
     readonly_submission_data = fields.Boolean("Data is readonly", compute='_compute_access')
-    allow_copy = fields.Boolean(string='Allow copies', help='Allow copying form submissions.', default=False)
+    allow_copy = fields.Boolean(string='Allow copies', help='Allow copying form submissions.', default=True)
+    copy_to_current = fields.Boolean(string='Copy to current', help='When copying a form, always link it to the current version of the builder instead of the original builder.', default=True)
 
     @api.model
     def default_get(self, fields):
@@ -137,6 +138,7 @@ class Form(models.Model):
         vals['show_uuid'] = builder.show_form_uuid
         vals['show_user_metadata'] = builder.show_form_user_metadata
         vals['allow_copy'] = builder.form_allow_copy
+        vals['copy_to_current'] = builder.copy_to_current
 
         # access
         vals['portal_share'] = builder.portal
@@ -317,11 +319,14 @@ class Form(models.Model):
         if not self.allow_copy:
             raise UserError(_("You're not allowed to copy this form."))
 
-        latest_builder = self.env['formio.builder'].get_builder_by_name(self.builder_id.name)
-        if not latest_builder:
+        builder = self.builder_id
+        if self.copy_to_current:
+            builder = self.env['formio.builder'].get_builder_by_name(self.builder_id.name)
+
+        if not builder:
             raise UserError(_("There is no Form Builder available to link this form to."))
 
-        new_form_data = self.copy_data(default={'state': STATE_DRAFT, 'builder_id': latest_builder.id})
+        new_form_data = self.copy_data(default={'state': STATE_DRAFT, 'builder_id': builder.id})
         return self.create(new_form_data)
 
     def action_send_invitation_mail(self):
