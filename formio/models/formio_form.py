@@ -138,7 +138,7 @@ class Form(models.Model):
         vals['show_uuid'] = builder.show_form_uuid
         vals['show_user_metadata'] = builder.show_form_user_metadata
         vals['allow_copy'] = builder.form_allow_copy
-        vals['copy_to_current'] = builder.copy_to_current
+        vals['copy_to_current'] = builder.form_copy_to_current
 
         # access
         vals['portal_share'] = builder.portal
