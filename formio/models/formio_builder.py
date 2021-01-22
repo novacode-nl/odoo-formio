@@ -79,9 +79,6 @@ class Builder(models.Model):
     version = fields.Integer("Version", required=True, readonly=True, default=1)
     version_comment = fields.Text("Version Comment")
     user_id = fields.Many2one('res.users', string='Assigned user', track_visibility='onchange')
-    partner_ids = fields.Many2many('res.partner', string='Exclusive to partners',
-                                   help='Give access only to users related to this partner (either linked directly to the partner or to its children). If left empty, this restriction doesn\'t apply.')
-    allowed_user_ids = fields.Many2many('res.users', compute='_compute_allowed_user_ids', store=True)
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal", track_visibility='onchange', help="Form is accessible by assigned portal user")
     portal_submit_done_url = fields.Char(
@@ -249,18 +246,6 @@ class Builder(models.Model):
             else:
                 r.display_name_full = _("{title} (state: {state} - version: {version})").format(
                     title=r.title, state=r.display_state, version=r.version)
-
-    @api.depends('partner_ids')
-    def _compute_allowed_user_ids(self):
-        for r in self:
-            user_domain = []
-
-            if r.partner_ids:
-                partner_ids = r.partner_ids.mapped('commercial_partner_id.id') + r.partner_ids.mapped('id')
-                user_domain = [('partner_id', 'in', partner_ids)]
-
-            user_ids = self.env['res.users'].search(user_domain)
-            r.allowed_user_ids = [(6, 0, user_ids.ids)]
 
     @api.depends('public')
     def _compute_public_url(self):

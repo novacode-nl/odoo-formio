@@ -4,7 +4,6 @@ See LICENSE file for full copyright and licensing details. -->
 
 <odoo>
     <data>
-        <!-- formio.form -->
         <record id="formio_form_user_all" model="ir.rule">
             <field name="name">formio.form: User all forms</field>
             <field name="model_id" ref="model_formio_form"/>
@@ -25,17 +24,6 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="False"/>
             <field name="groups" eval="[(4, ref('formio.group_formio_user'))]"/>
             <field name="domain_force">[('user_id', '=', user.id)]</field>
-        </record>
-
-        <record id="formio_form_user_partner" model="ir.rule">
-            <field name="name">formio.form: User partner forms</field>
-            <field name="model_id" ref="model_formio_form"/>
-            <field name="perm_read" eval="True"/>
-            <field name="perm_write" eval="False"/>
-            <field name="perm_create" eval="False"/>
-            <field name="perm_unlink" eval="False"/>
-            <field name="groups" eval="[(4, ref('formio.group_formio_user_partner'))]"/>
-            <field name="domain_force">[('builder_id.allowed_user_ids', '=', user.id)]</field>
         </record>
 
         <record id="formio_form_unlink_user_assigned" model="ir.rule">
@@ -77,18 +65,6 @@ See LICENSE file for full copyright and licensing details. -->
                 '&amp;',
                 ('builder_id.portal', '=', True), ('create_uid', '=', user.id), ('user_id', '=', user.id), ('state', '!=', 'COMPLETE')]
             </field>
-        </record>
-
-        <!-- formio.builder -->
-        <record id="formio_form_builder_user_partner" model="ir.rule">
-            <field name="name">formio.builder: User partner forms</field>
-            <field name="model_id" ref="model_formio_builder"/>
-            <field name="perm_read" eval="True"/>
-            <field name="perm_write" eval="False"/>
-            <field name="perm_create" eval="False"/>
-            <field name="perm_unlink" eval="False"/>
-            <field name="groups" eval="[(4, ref('formio.group_formio_user_partner'))]"/>
-            <field name="domain_force">[('allowed_user_ids', '=', user.id)]</field>
         </record>
 
         <!-- ir.attachment -->

@@ -22,7 +22,6 @@ See LICENSE file for full licensing details. -->
                 <field name="public_url" optional="hide"/>
                 <field name="formio_version_id"/>
                 <field name="user_id" optional="hide"/>
-                <field name="partner_ids" optional="hide" widget="many2many_tags"/>
                 <field name="parent_id" optional="hide"/>
                 <field name="write_date" optional="hide"/>
                 <field name="create_date" optional="hide"/>
@@ -88,7 +87,6 @@ See LICENSE file for full licensing details. -->
                         <group>
                             <field name="uuid" attrs="{'invisible': [('id', '=', False)]}"/>
                             <field name="user_id"/>
-                            <field name="partner_ids" widget="many2many_tags"/>
                         </group>
                     </group>
                     <notebook>

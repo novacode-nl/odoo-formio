@@ -36,16 +36,6 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="0"/>
         </record>
 
-        <record id="access_formio_builder_user_partner" model="ir.model.access">
-            <field name="name">formio.builder: Partner forms</field>
-            <field name="model_id" ref="formio.model_formio_builder"/>
-            <field name="group_id" ref="formio.group_formio_user_partner"/>
-            <field name="perm_read" eval="1"/>
-            <field name="perm_create" eval="0"/>
-            <field name="perm_write" eval="0"/>
-            <field name="perm_unlink" eval="0"/>
-        </record>
-
         <record id="access_formio_builder_portal_user" model="ir.model.access">
             <field name="name">formio.builder: Portal User</field>
             <field name="model_id" ref="formio.model_formio_builder"/>
@@ -81,16 +71,6 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="name">formio.form: User assigned forms</field>
             <field name="model_id" ref="formio.model_formio_form"/>
             <field name="group_id" ref="formio.group_formio_user"/>
-            <field name="perm_read" eval="1"/>
-            <field name="perm_create" eval="1"/>
-            <field name="perm_write" eval="1"/>
-            <field name="perm_unlink" eval="1"/>
-        </record>
-
-        <record id="access_formio_form_user_partner" model="ir.model.access">
-            <field name="name">formio.form: Partner forms</field>
-            <field name="model_id" ref="formio.model_formio_form"/>
-            <field name="group_id" ref="formio.group_formio_user_partner"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="1"/>
             <field name="perm_write" eval="1"/>
@@ -138,16 +118,6 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="0"/>
         </record>
 
-        <record id="access_formio_version_user_partner" model="ir.model.access">
-            <field name="name">formio.version: User partner forms</field>
-            <field name="model_id" ref="formio.model_formio_version"/>
-            <field name="group_id" ref="formio.group_formio_user_partner"/>
-            <field name="perm_read" eval="1"/>
-            <field name="perm_create" eval="0"/>
-            <field name="perm_write" eval="0"/>
-            <field name="perm_unlink" eval="0"/>
-        </record>
-
         <record id="access_formio_version_portal_user" model="ir.model.access">
             <field name="name">formio.version: Portal User</field>
             <field name="model_id" ref="formio.model_formio_version"/>
@@ -183,16 +153,6 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="name">formio.version.asset: User assigned forms</field>
             <field name="model_id" ref="formio.model_formio_version_asset"/>
             <field name="group_id" ref="formio.group_formio_user"/>
-            <field name="perm_read" eval="1"/>
-            <field name="perm_create" eval="0"/>
-            <field name="perm_write" eval="0"/>
-            <field name="perm_unlink" eval="0"/>
-        </record>
-
-        <record id="access_formio_version_asset_user_partner" model="ir.model.access">
-            <field name="name">formio.version.asset: User partner forms</field>
-            <field name="model_id" ref="formio.model_formio_version_asset"/>
-            <field name="group_id" ref="formio.group_formio_user_partner"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="0"/>
             <field name="perm_write" eval="0"/>
@@ -282,16 +242,6 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="0"/>
         </record>
 
-        <record id="access_formio_translation_source_user_partner" model="ir.model.access">
-            <field name="name">formio.translation.source: User partner forms</field>
-            <field name="model_id" ref="formio.model_formio_translation_source"/>
-            <field name="group_id" ref="formio.group_formio_user_partner"/>
-            <field name="perm_read" eval="1"/>
-            <field name="perm_create" eval="0"/>
-            <field name="perm_write" eval="0"/>
-            <field name="perm_unlink" eval="0"/>
-        </record>
-
         <record id="access_formio_translation_source_portal_user" model="ir.model.access">
             <field name="name">formio.translation.source: Portal User</field>
             <field name="model_id" ref="formio.model_formio_translation_source"/>
@@ -326,16 +276,6 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="name">formio.translation: User assigned forms</field>
             <field name="model_id" ref="formio.model_formio_translation"/>
             <field name="group_id" ref="formio.group_formio_user"/>
-            <field name="perm_read" eval="1"/>
-            <field name="perm_create" eval="0"/>
-            <field name="perm_write" eval="0"/>
-            <field name="perm_unlink" eval="0"/>
-        </record>
-
-        <record id="access_formio_translation_user_partner" model="ir.model.access">
-            <field name="name">formio.translation: User partner forms</field>
-            <field name="model_id" ref="formio.model_formio_translation"/>
-            <field name="group_id" ref="formio.group_formio_user_partner"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="0"/>
             <field name="perm_write" eval="0"/>
@@ -383,16 +323,6 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="0"/>
         </record>
 
-        <record id="access_formio_res_model_user_partner" model="ir.model.access">
-            <field name="name">formio.res.model: User partner forms</field>
-            <field name="model_id" ref="formio.model_formio_res_model"/>
-            <field name="group_id" ref="formio.group_formio_user_partner"/>
-            <field name="perm_read" eval="1"/>
-            <field name="perm_create" eval="0"/>
-            <field name="perm_write" eval="0"/>
-            <field name="perm_unlink" eval="0"/>
-        </record>
-
         <record id="access_formio_res_model_portal_user" model="ir.model.access">
             <field name="name">formio.res.model: Portal User</field>
             <field name="model_id" ref="formio.model_formio_res_model"/>
@@ -428,16 +358,6 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="name">formio.builder.translation: User assigned forms</field>
             <field name="model_id" ref="formio.model_formio_builder_translation"/>
             <field name="group_id" ref="formio.group_formio_user"/>
-            <field name="perm_read" eval="1"/>
-            <field name="perm_create" eval="0"/>
-            <field name="perm_write" eval="0"/>
-            <field name="perm_unlink" eval="0"/>
-        </record>
-
-        <record id="access_formio_builder_translation_user_partner" model="ir.model.access">
-            <field name="name">formio.builder.translation: User partner forms</field>
-            <field name="model_id" ref="formio.model_formio_builder_translation"/>
-            <field name="group_id" ref="formio.group_formio_user_partner"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="0"/>
             <field name="perm_write" eval="0"/>
