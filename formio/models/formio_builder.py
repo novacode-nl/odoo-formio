@@ -121,7 +121,8 @@ class Builder(models.Model):
     component_partner_add_follower = fields.Boolean(
         string='Component Partner Add to Followers', tracking=True, help='Add determined partner to followers of the Form.')
     component_partner_activity_user_id = fields.Many2one('res.users', tracking=True)
-    form_allow_copy = fields.Boolean(string='Allow copies', help='Allow copying form submissions.', default=False)
+    form_allow_copy = fields.Boolean(string='Allow copies', help='Allow copying form submissions.', default=True)
+    copy_to_current = fields.Boolean(string='Copy to current', help='When copying a form, always link it to the current version of the builder instead of the original builder.', default=True)
 
     def _states_selection(self):
         return STATES
