@@ -112,7 +112,8 @@ class FormioCustomerPortal(CustomerPortal):
         vals = {
             'builder_id': builder.id,
             'title': builder.title,
-            'user_id': request.env.user.id
+            'user_id': request.env.user.id,
+            'partner_id': request.env.user.partner_id.id
         }
         form = request.env['formio.form'].create(vals)
         url = '/my/formio/form/{uuid}'.format(uuid=form.uuid)
