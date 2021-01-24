@@ -4,12 +4,12 @@
 {
     'name': 'Forms',
     'summary': 'Form Builder & integration of professional and versatile Forms to collect any information you need for your business.',
-    'version': '8.12',
+    'version': '8.13',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'live_test_url': 'https://demo13.novacode.nl',
-    'category': 'Extra Tools',
+    'category': 'Forms/Forms',
     'depends': ['web', 'portal', 'mail'],
     'qweb': [
         'static/src/xml/formio.xml',
