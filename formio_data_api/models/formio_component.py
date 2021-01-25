@@ -19,19 +19,22 @@ COMPONENT_TYPES = [
 
 class FormioComponent(models.Model):
     _name = 'formio.component'
+    _rec_name = 'display_name'
     _description = 'Formio Component'
 
     # ----------------------------------------------------------
     # Database
     # ----------------------------------------------------------
 
-    name = fields.Char(
-        string="Name"
+    label = fields.Char(
+        string="Label"
     )
 
     display_name = fields.Char(
         string="Display Name",
-        compute='_compute_display_name'
+        compute='_compute_display_name',
+        readonly=True,
+        store=True
     )
 
     key = fields.Char(
@@ -45,7 +48,14 @@ class FormioComponent(models.Model):
 
     parent_id = fields.Many2one(
         'formio.component',
-        string='Parent Component'
+        string='Parent Component ID',
+        index=True
+    )
+
+    parent_name = fields.Char(
+        related='parent_id.display_name',
+        string='Parent Component',
+        readonly=True
     )
 
     child_ids = fields.One2many(
@@ -90,14 +100,18 @@ class FormioComponent(models.Model):
         }
         return result
 
-    def _get_components(self, component_keys):
+    def _get_components(self, builder_id, component_keys):
         """
-        Returns multiple component_objs from component keys.
+        Returns multiple formio.component obj from component keys.
 
+        :param int builder_id: the builder id to which the components are belongs,
         :param array component_keys keys of components,
         :return tulp: with the component_ids.
         """
-        return self.search([("key", '=', component_keys)])
+        return self.search([
+            ("builder_id", '=', builder_id),
+            ("key", '=', component_keys)
+        ])
 
     def _get_builder(self, builder_id):
         """
@@ -117,9 +131,9 @@ class FormioComponent(models.Model):
         """
         result = []
         builder_obj = self._get_builder(builder_id)
-        for key, component in builder_obj._formio.components.keys():
+        for key, component in builder_obj._formio.components.items():
             if component.raw.get('input') and component.type != 'button':
-                if key in COMPONENT_TYPES:
+                if any(component.type in i for i in COMPONENT_TYPES):
                     result.append(key)
         return result
 
@@ -136,68 +150,134 @@ class FormioComponent(models.Model):
             result.append(record.key)
         return result
 
-    def _compute_parents(self, builder_id):
+    def _has_datagrid(self, builder_id):
         """
-        Computes the parent and child dependency of an formio.component object.
+        Check builder schema for datagrid.
 
-        :param int builder_id: the id of the builder_id to compute,
+        :param int builder_id: the builder id where the components are located,
+        :return boolean: True if builder_obj has a datagrid component else false.
         """
         builder_obj = self._get_builder(builder_id)
-        component_obj = builder_obj.component_ids
+        for key, component in builder_obj._formio.components.items():
+            if component.raw.get('input') and component.type == 'datagrid':
+                return True
+        return False
 
-        datagrid_obj = {}
-        for obj in component_obj:
-            if 'datagrid' in obj.type:
-                datagrid_obj.append(obj)
+    def _in_datagrid(self, builder_id, component_key):
+        """
+        Checks if a component is in any datagrid.
 
-        for datagrid in datagrid_obj:
-            # TODO: Need to check if this function returns the desired value.
-            components = datagrid._formio.items()
-            for comp in components:
-                component = self._get_components(comp)
-                if component.id not in datagrid.child_ids:
-                    datagrid.child_id += component.id
-                if datagrid.id not in component.parent_id:
-                    component.parent_id = datagrid.id
+        :param int builder_id: According builder_id to the component.
+        :param int component_key: Component key to check.
+        :return boolean: False if component isn't in any datagrid.
+        :return string: Key of the parent datagrid.
+        """
+        builder_obj = self._get_builder(builder_id)
+        datagrid = []
 
+        for key, component in builder_obj._formio.components.items():
+            if component.raw.get('input') and component.type == 'datagrid':
+                datagrid.append(component)
+        for grid in datagrid:
+            if component_key in grid.labels.keys():
+                return grid.key
+        return False
+
+    def _compute_parent_id(self, builder_id):
+        """
+        Computes the parent and child dependency of an formio.component object.
+        """
+        if not self._has_datagrid(builder_id):
+            return
+
+        keys = self._get_model_components_keys(builder_id)
+        objects = self._get_components(builder_id, keys)
+
+        for datagrid in objects:
+            if datagrid.type != 'datagrid':
+                return
+            builder_id = datagrid.builder_id.id
+            builder_obj = datagrid.builder_id
+            datagrid_children = list(builder_obj._formio.components[datagrid.key].labels.keys())
+            model_components = self._get_components(builder_id, datagrid_children)
+
+            for component in model_components:
+                if component not in datagrid.child_ids:
+                    datagrid.child_ids += component
+
+    @api.one
+    @api.depends('label', 'parent_id')
     def _compute_display_name(self):
         """
         Computes the display name of formio.component.
         If it has parent it adds parents name to the display name.
         """
         if self.parent_id:
-            self.display_name = '%s.%s' % (self.parent_id.name, self.name)
+            self.display_name = '%s.%s (%s)' % (self.parent_id.key, self.key, self.label)
         else:
-            self.display_name = self.name
+            self.display_name = '%s (%s)' % (self.key, self.label)
 
-    def _write_components(self, components, builder_id):
+    def _write_components(self, builder_id, component_keys):
         """
         Writes the components with all required data to formio.component model.
 
+        :param int builder_id: the builder id where the components are located,
         :param array component_keys: components which should be added to this model.
         """
-        compute_parents = False
-
-        for component in components:
+        builder_obj = self._get_builder(builder_id)
+        for component in component_keys:
+            obj = builder_obj._formio.form_components[component]
             self.create({
-                'name': component['name'],
-                'key': component['key'],
-                'type': component['type'],
+                'label': obj.label,
+                'key': obj.key,
+                'type': obj.type,
                 'builder_id': builder_id,
             })
-            if component.type == 'datagrid':
-                compute_parents = True
 
-        if compute_parents:
-            self._compute_parents(builder_id)
+        if self._has_datagrid(builder_id):
+            self._compute_parent_id(builder_id)
 
-    def _delete_components(self, component_keys):
+    def _update_components(self, builder_id):
+        """
+        Checks for label changes and component position changes in datagrid.
+
+        :param int builder_id: the builder id where the components are located,
+        """
+        builder_obj = self._get_builder(builder_id)
+
+        for key, comp in builder_obj._formio.components.items():
+            if not comp.raw.get('input') or comp.type == 'button':
+                return
+
+            component = self._get_components(builder_id, key)
+
+            """
+            Updating datagrid
+            """
+            grid = self._in_datagrid(builder_id, key)
+            grid_record = self._get_components(builder_id, grid)
+            if component.parent_id and grid != component.parent_id.key:
+                component.parent_id = grid_record
+            elif not component.parent_id and grid:
+                component.parent_id = grid_record
+            elif not grid:
+                component.parent_id = ()
+
+            """
+            Updating component attributes
+            """
+            for obj in component:
+                if obj.label != comp.label:
+                    obj.label = comp.label
+
+    def _delete_components(self, builder_id, component_keys):
         """
         Removes components from formio.component model.
 
+        :param int builder_id: the builder id where the components are located,
         :param array component_keys: components which should be removed from this model.
         """
-        components = self._get_components(component_keys)
+        components = self._get_components(builder_id, component_keys)
         components.unlink()
 
     # ----------------------------------------------------------
@@ -217,6 +297,7 @@ class FormioComponent(models.Model):
             components_dict = self._compare_components(old_components, new_components)
 
             if components_dict['added']:
-                self._write_components(components_dict['added'])
+                self._write_components(builder_id, components_dict['added'])
             if components_dict['deleted']:
-                self._delete_components(components_dict['deleted'])
+                self._delete_components(builder_id, components_dict['deleted'])
+            self._update_components(builder_id)

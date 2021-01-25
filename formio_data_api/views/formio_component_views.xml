@@ -9,10 +9,10 @@ See LICENSE file for full licensing details. -->
         <field name="arch" type="xml">
             <tree string="Component">
                 <field name="display_name"/>
-                <field name="name"/>
+                <field name="label"/>
                 <field name="key"/>
                 <field name="type"/>
-                <field name="parent_id"/>
+                <field name="parent_name"/>
                 <field name="child_ids"/>
                 <field name="builder_id"/>
             </tree>
@@ -25,8 +25,8 @@ See LICENSE file for full licensing details. -->
         <field name="arch" type="xml">
 	    <form string="Form" create="false" delete="true" editable="false">
                 <sheet>
-                    <label for="name" class="oe_edit_only"/>
-                    <h1><field name="name"/></h1>
+                    <label for="label" class="oe_edit_only"/>
+                    <h1><field name="label"/></h1>
                     <group>
                         <field name="display_name"/>
                     </group>
