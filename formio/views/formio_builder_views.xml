@@ -202,7 +202,7 @@ See LICENSE file for full licensing details. -->
                             </group>
                             <group name="actions_settings" string="Actions">
                                 <field name="form_allow_copy" groups="formio.group_formio_admin" />
-                                <field name="form_copy_to_current" groups="formio.group_formio_admin" />
+                                <field name="form_copy_to_current" groups="formio.group_formio_admin" attrs="{'invisible': [('form_allow_copy', '=', False)]}" />
                             </group>
                         </page>
                         <page string="JS Options" name="javascript_options" groups="formio.group_formio_admin">
