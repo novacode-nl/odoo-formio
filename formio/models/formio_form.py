@@ -105,8 +105,8 @@ class Form(models.Model):
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
     allow_force_update_state = fields.Boolean("Allow force update State", compute='_compute_access')
     readonly_submission_data = fields.Boolean("Data is readonly", compute='_compute_access')
-    allow_copy = fields.Boolean(string='Allow copies', help='Allow copying form submissions.', default=True)
-    copy_to_current = fields.Boolean(string='Copy to current', help='When copying a form, always link it to the current version of the builder instead of the original builder.', default=True)
+    allow_copy = fields.Boolean(string='Allow Copies', help='Allow copying form submissions.', tracking=True, default=True)
+    copy_to_current = fields.Boolean(string='Copy To Current', help='When copying a form, always link it to the current version of the builder instead of the original builder.', tracking=True, default=True)
 
     @api.model
     def default_get(self, fields):
