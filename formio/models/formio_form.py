@@ -315,18 +315,29 @@ class Form(models.Model):
             raise UserError(_("You're not allowed to (force) update the Form into Cancel state."))
         self.write({'state': STATE_CANCEL})
 
-    def action_copy(self):
+    def action_copy(self, force_copy_to_current=False):
         if not self.allow_copy:
             raise UserError(_("You're not allowed to copy this form."))
 
         builder = self.builder_id
-        if self.copy_to_current:
+        if self.copy_to_current or force_copy_to_current:
             builder = self.env['formio.builder'].get_builder_by_name(self.builder_id.name)
 
         if not builder:
             raise UserError(_("There is no Form Builder available to link this form to."))
 
         return self.copy(default={'state': STATE_DRAFT, 'builder_id': builder.id})
+
+    def action_copy_to_current(self):
+        new_form = self.action_copy(force_copy_to_current=True)
+
+        return {
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'formio.form',
+            'target': 'current',
+            'res_id': new_form.id,
+        }
 
     def action_send_invitation_mail(self):
         compose_form_id = self.env.ref('mail.email_compose_message_wizard_form').id

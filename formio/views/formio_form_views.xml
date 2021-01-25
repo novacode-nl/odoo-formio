@@ -150,6 +150,9 @@ See LICENSE file for full licensing details. -->
                     <button
                         name="action_cancel" type="object" string="Cancel"
                         attrs="{'invisible': ['|', ('state', 'in', ['CANCEL']), ('allow_force_update_state', '=', False)]}"/>
+                    <button 
+                        name="action_copy_to_current" type="object" string="Copy To Current" 
+                        attrs="{'invisible': ['|', ('allow_copy', '=', False), ('copy_to_current', '=', False)]}"/>
                     <field name="state" widget="statusbar" statusbar_visible="PENDING,DRAFT,COMPLETE,CANCEL"/>
                 </header>
                 <sheet>
