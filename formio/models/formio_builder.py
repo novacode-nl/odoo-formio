@@ -409,12 +409,12 @@ class Builder(models.Model):
             return False
 
     @api.model
-    def get_builder_by_name(self, name):
+    def get_builder_by_name(self, name, state=STATE_CURRENT):
         """ Get the latest version of a builder by name. """
 
         domain = [
             ('name', '=', name),
-            ('state', '=', STATE_CURRENT)
+            ('state', '=', state)
         ]
         builder = self.sudo().search(domain, limit=1)
         return builder or False
