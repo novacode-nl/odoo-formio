@@ -209,7 +209,7 @@ See LICENSE file for full licensing details. -->
                                 </group>
                                 <group name="actions_settings" string="Actions">
                                     <field name="allow_copy" groups="formio.group_formio_admin" />
-                                    <field name="copy_to_current" groups="formio.group_formio_admin" />
+                                    <field name="copy_to_current" groups="formio.group_formio_admin" attrs="{'invisible': [('allow_copy', '=', False)]}" />
                                 </group>
                             </group>
                         </page>
