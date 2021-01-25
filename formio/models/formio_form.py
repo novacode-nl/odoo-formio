@@ -324,8 +324,8 @@ class Form(models.Model):
         if not builder:
             raise UserError(_("There is no Form Builder available to link this form to."))
 
-        new_form_data = self.copy_data(default={'state': STATE_DRAFT, 'builder_id': builder.id})
-        return self.create(new_form_data)
+        return self.copy(default={'state': STATE_DRAFT, 'builder_id': builder.id})
+
 
     def action_send_invitation_mail(self):
         compose_form_id = self.env.ref('mail.email_compose_message_wizard_form').id
