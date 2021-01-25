@@ -326,7 +326,6 @@ class Form(models.Model):
 
         return self.copy(default={'state': STATE_DRAFT, 'builder_id': builder.id})
 
-
     def action_send_invitation_mail(self):
         compose_form_id = self.env.ref('mail.email_compose_message_wizard_form').id
         if self.portal:

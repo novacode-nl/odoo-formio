@@ -104,10 +104,6 @@ See LICENSE file for full licensing details. -->
                                         <i class="fa fa-info-circle" title="info"/> Configure in related tabs (Portal, Public / Website)
                                     </div>
                                 </group>
-                                <group name="actions_settings" string="Actions">
-                                    <field name="form_allow_copy" groups="formio.group_formio_admin" />
-                                    <field name="form_copy_to_current" groups="formio.group_formio_admin" />
-                                </group>
                                 <group name="integration_settings" string="Integration">
                                     <field name="formio_res_model_id" groups="formio.group_formio_admin"
                                            attrs="{'readonly': [('state', '!=', 'DRAFT')]}"
@@ -203,6 +199,10 @@ See LICENSE file for full licensing details. -->
                             </div>
                             <group>
                                 <field name="allow_force_update_state_group_ids" />
+                            </group>
+                            <group name="actions_settings" string="Actions">
+                                <field name="form_allow_copy" groups="formio.group_formio_admin" />
+                                <field name="form_copy_to_current" groups="formio.group_formio_admin" />
                             </group>
                         </page>
                         <page string="JS Options" name="javascript_options" groups="formio.group_formio_admin">
