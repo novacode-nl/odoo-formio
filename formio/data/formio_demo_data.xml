@@ -3,7 +3,7 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
-    <data>
+    <data noupdate="1">
         <record id="formio_builder_demo" model="formio.builder">
             <field name="name">demo_1</field>
             <field name="title">Demo 1</field>
