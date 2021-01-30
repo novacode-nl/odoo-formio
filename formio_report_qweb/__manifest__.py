@@ -7,6 +7,7 @@
     'version': '0.12',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
+    'live_test_url': 'https://demo13.novacode.nl',
     'license': 'LGPL-3',
     'category': 'Extra Tools',
     'depends': ['formio', 'formio_data_api'],
