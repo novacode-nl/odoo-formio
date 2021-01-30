@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full copyright and licensing details. -->
+
+<odoo>
+    <data>
+        <record id="ir_attachment_unlink_formio_form_storage_filestore" model="ir.rule">
+            <field name="name">Forms: Files in completed Forms cannot be deleted</field>
+            <field name="model_id" ref="model_ir_attachment"/>
+            <field name="perm_read" eval="False"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="domain_force">
+                ['&amp;', ('res_model', '=', 'formio.form'), '|', ('formio_storage_filestore_user_id', '=', False), ('formio_form_id.state', '!=', 'COMPLETE')]
+            </field>
+        </record>
+    </data>
+</odoo>
