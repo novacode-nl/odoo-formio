@@ -57,7 +57,7 @@ class FormReportQwebWizard(models.TransientModel):
             formio_form = line.wizard_id.formio_form_id
             formio_forms |= formio_form
             report = line.ir_actions_report_id
-            content, report_type = report._render([formio_form.id])
+            content, report_type = report.render([formio_form.id])
 
             if report_type == 'pdf':
                 pdf_content_stream = io.BytesIO(content)
