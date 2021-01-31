@@ -147,7 +147,7 @@ See LICENSE file for full licensing details. -->
                             </div>
                             <group>
                                 <group name="public_url" colspan="2" attrs="{'invisible': [('public_url', '=', False)]}">
-                                    <field name="public_url" widget="CopyClipboardChar"/>
+                                    <field name="public_url" widget="CopyClipboardChar" style="font-size: 1.0em;"/>
                                 </group>
                                 <group name="general" string="General">
                                     <label for="public_access_interval_number" string="Expire After"/>

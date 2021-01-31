@@ -3,7 +3,7 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
-    <data>
+    <data noupdate="1">
         <record id="formio_res_model_sale_order" model="formio.res.model">
             <field name="ir_model_id" ref="sale.model_sale_order"/>
         </record>
