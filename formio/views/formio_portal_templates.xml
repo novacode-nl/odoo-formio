@@ -99,6 +99,11 @@ See LICENSE file for full licensing details. -->
                                 <span aria-label="View form" title="View form">View Form</span>
                             </a>
 
+                            <a t-if="form.allow_copy and form.state == 'COMPLETE'" role="button" class="btn btn-sm btn-dark"
+                               t-attf-href="/my/formio/form/{{ form.uuid }}/copy?{{ keep_query() }}">
+                                <span aria-label="Copy form" title="Copy form">Copy Form</span>
+                            </a>
+
                             <a t-if="form.allow_unlink" role="button" class="btn btn-sm btn-danger"
                                t-attf-href="/my/formio/form/{{ form.uuid }}/delete?{{ keep_query() }}"
                                style="margin-right: 8px">

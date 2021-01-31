@@ -150,6 +150,9 @@ See LICENSE file for full licensing details. -->
                     <button
                         name="action_cancel" type="object" string="Cancel"
                         attrs="{'invisible': ['|', ('state', 'in', ['CANCEL']), ('allow_force_update_state', '=', False)]}"/>
+                    <button 
+                        name="action_copy_to_current" type="object" string="Copy To Current" 
+                        attrs="{'invisible': ['|', ('allow_copy', '=', False), ('copy_to_current', '=', False)]}"/>
                     <field name="state" widget="statusbar" statusbar_visible="PENDING,DRAFT,COMPLETE,CANCEL"/>
                 </header>
                 <sheet>
@@ -203,6 +206,10 @@ See LICENSE file for full licensing details. -->
                                     <field name="show_user_metadata" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
                                     <field name="show_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
                                     <field name="show_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                                </group>
+                                <group name="actions_settings" string="Actions">
+                                    <field name="allow_copy" groups="formio.group_formio_admin" />
+                                    <field name="copy_to_current" groups="formio.group_formio_admin" attrs="{'invisible': [('allow_copy', '=', False)]}" />
                                 </group>
                             </group>
                         </page>

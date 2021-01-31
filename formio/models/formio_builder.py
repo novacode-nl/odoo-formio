@@ -121,6 +121,8 @@ class Builder(models.Model):
     component_partner_add_follower = fields.Boolean(
         string='Component Partner Add to Followers', track_visibility='onchange', help='Add determined partner to followers of the Form.')
     component_partner_activity_user_id = fields.Many2one('res.users', tracking=True)
+    form_allow_copy = fields.Boolean(string='Allow Copies', help='Allow copying form submissions.', tracking=True, default=True)
+    form_copy_to_current = fields.Boolean(string='Copy To Current', help='When copying a form, always link it to the current version of the builder instead of the original builder.', tracking=True, default=True)
 
     def _states_selection(self):
         return STATES
@@ -308,7 +310,7 @@ class Builder(models.Model):
     @api.returns('self', lambda value: value)
     def copy_as_new_version(self):
         """Get last version for builder-forms by traversing-up on parent_id"""
-        
+
         self.ensure_one()
         builder = self
 
@@ -375,7 +377,7 @@ class Builder(models.Model):
         # only set language if exist in i18n translations
         if options['i18n'].get(language):
             options['language'] = language
-            
+
         return options
 
     def _get_js_params(self):
@@ -405,6 +407,17 @@ class Builder(models.Model):
             return builder
         else:
             return False
+
+    @api.model
+    def get_builder_by_name(self, name, state=STATE_CURRENT):
+        """ Get the latest version of a builder by name. """
+
+        domain = [
+            ('name', '=', name),
+            ('state', '=', state)
+        ]
+        builder = self.sudo().search(domain, limit=1)
+        return builder or False
 
     def i18n_translations(self):
         i18n = {}

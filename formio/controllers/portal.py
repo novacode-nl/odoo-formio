@@ -145,3 +145,15 @@ class FormioCustomerPortal(CustomerPortal):
         form.action_cancel()
         # TODO call method (website_formio page) with message?
         return request.redirect(redirect_url)
+
+    @http.route(['/my/formio/form/<string:uuid>/copy'], type='http', auth="user", method=['GET'], website=True)
+    def portal_copy_form(self, uuid, **kwargs):
+        form = request.env['formio.form'].get_form(uuid, 'read')
+        redirect_url = self._redirect_url(**kwargs)
+        if not form:
+            # TODO call method (website_formio page) with message?
+            return request.redirect(redirect_url)
+        form.action_copy()
+        # TODO call method (website_formio page) with message?
+
+        return request.redirect(redirect_url)
