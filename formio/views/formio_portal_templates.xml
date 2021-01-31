@@ -84,9 +84,9 @@ See LICENSE file for full licensing details. -->
                         <td>
                             <span t-field="form.state"/>
                         </td>
-                        <td>
+                        <td class="formio_form_actions">
                             <a t-if="form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-primary"
-                               t-attf-href="/my/formio/form/{{ form.uuid }}?{{ keep_query() }}" style="margin-right: 8px">
+                               t-attf-href="/my/formio/form/{{ form.uuid }}?{{ keep_query() }}">
                                 <span aria-label="Edit form" title="Edit form">Edit Form</span>
                             </a>
 
@@ -104,13 +104,13 @@ See LICENSE file for full licensing details. -->
                                 <span aria-label="Copy form" title="Copy form">Copy Form</span>
                             </a>
 
-                            <a t-if="form.allow_unlink" role="button" class="btn btn-sm btn-danger"
-                               t-attf-href="/my/formio/form/{{ form.uuid }}/delete?{{ keep_query() }}"
-                               style="margin-right: 8px">
-                                <span aria-label="Delete form" title="Delete form" confirm="Are you sure?">Delete Form</span>
+                            <a t-if="form.allow_unlink" role="button" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')"
+                               t-attf-href="/my/formio/form/{{ form.uuid }}/delete?{{ keep_query() }}">
+                                <span aria-label="Delete form" title="Delete form">Delete Form</span>
                             </a>
+
                             <a t-elif="not form.allow_unlink and form.state in ['PENDING', 'DRAFT']" role="button" class="btn btn-sm btn-warning"
-                               t-attf-href="/my/formio/form/{{ form.uuid }}/cancel?{{ keep_query() }}" style="margin-right: 8px">
+                               t-attf-href="/my/formio/form/{{ form.uuid }}/cancel?{{ keep_query() }}">
                                 <span aria-label="Cancel &amp; close Form" title="Cancel &amp; close Form" confirm="Are you sure?">Cancel Form</span>
                             </a>
                         </td>
