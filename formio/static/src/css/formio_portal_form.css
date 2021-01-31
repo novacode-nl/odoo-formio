@@ -19,3 +19,8 @@
     min-width: 100%;
     border: 0;
 }
+
+.formio_form_actions a {
+    float: left;
+    margin: 4px 8px 4px 0;
+}
