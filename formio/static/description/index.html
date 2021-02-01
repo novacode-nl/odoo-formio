@@ -173,6 +173,13 @@
 <section class="oe_container">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">8.16</h4>
+    <ul>
+      <li>
+        Fix: Error when uninstall and installing again. <code>Record does not exist or has been deleted. (Record: formio.builder.js.options(1,), User: 2)</code><br/>
+        Uninstall now deletes the system parameter (record) with key <code>formio.default_builder_js_options_id</code>
+      </li>
+    </ul>
     <h4 class="oe_mb16">8.15</h4>
     <ul>
       <li>
