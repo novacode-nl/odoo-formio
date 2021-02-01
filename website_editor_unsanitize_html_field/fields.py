@@ -19,7 +19,7 @@ def convert_to_cache(self, value, record, validate=True):
         return convert_to_cache.super(self, value, record, validate=True)
     else:
         try:
-            unsanitize_config_model = record.env['website.editor.unsanitize.html.field']
+            unsanitize_config_model = record.env['website.editor.unsanitize.html.field'].sudo()
         except:
             return convert_to_cache.super(self, value, record, validate=True)
 
