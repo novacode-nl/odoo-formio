@@ -1,8 +1,10 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from odoo import api, fields, models, tools, _
 import base64
+
+from odoo import api, fields, models, tools, _
+from odoo.exceptions import UserError
 
 STATE_COMPLETE = 'COMPLETE'
 
@@ -19,29 +21,31 @@ class Form(models.Model):
     @api.multi
     def send_mail(self):
         self.ensure_one()
-        context = self._context
-        current_uid = context.get('uid')
-        user = self.env['res.users'].browse(current_uid)
-
+        template = self.builder_id.mail_template_id
         recipients = self.builder_id.get_mail_recipients(self)
         attachment_ids = self.generate_attachment()
-        mails = self.env['mail.mail']
-        for mail in recipients:
-            mail_values = {
-                'email_from': user.email,
-                'reply_to': user.email,
-                'email_to': mail,
-                'subject': self.builder_id.mail_subject,
-                'body_html': tools.html_sanitize(self.builder_id.mail_body_html, sanitize_attributes=True,
-                                                 sanitize_style=True, strip_classes=True),
-                'notification': True,
-                'attachment_ids': [(4, attachment.id) for attachment in attachment_ids],
-                'auto_delete': True,
-            }
-            mail = self.env['mail.mail'].create(mail_values)
-            mails |= mail
-        mails.send()
-        return True
+        context = self._context
+        if 'lang' in context:
+            lang = context['lang']
+        elif 'lang' not in context and 'uid' in context:
+            lang = self.env['res.users'].browse(context['uid']).lang
+        elif 'lang' not in context and 'uid' not in context:
+            lang = self.env['res.users'].browse(self.write_uid).lang
+        else:
+            raise UserError("The form can't be loaded. No (user) language was set.")
+
+        for recipient in recipients:
+            if recipient['lang']:
+                lang = recipient['lang']
+            template.with_context(lang=lang).send_mail(
+                self.id,
+                force_send=True,
+                email_values={
+                    'email_to': recipient,
+                    'attachment_ids': [attachment.id for attachment in attachment_ids],
+                    'auto_delete': True
+                }
+            )
 
     @api.multi
     def generate_attachment(self):

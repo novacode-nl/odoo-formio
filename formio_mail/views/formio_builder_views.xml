@@ -13,16 +13,12 @@ See LICENSE file for full licensing details. -->
                     <group name="mail_settings" string="Mail Settings" colspan="2">
                         <field name="mail_active" string="Mailings active"/>
                         <field name="mail_report_id" string="Report" attrs="{'required': [('mail_active', '!=', False)]}"/>
+                        <field name="mail_template_id" string="Mail Template" attrs="{'required': [('mail_active', '!=', False)]}"/>
                     </group>
                     <group name="mail_recipients" string="Recipients" colspan="2">
                         <field name="mail_recipients_partner_ids" string="Partner" widget="many2many_tags"/>
                         <field name="mail_recipients" string="Addresses"/>
-                        <field name="mail_recipients_form_components" string="Form"/>
-                    </group>
-                    <group name="message" string="Message" col="6" colspan="2">
-                        <field name="mail_subject" string="Subject" colspan="6"/>
-                        <br/>
-                        <field name="mail_body_html" string="Body" widget="html" nolabel="1" colspan="6"/>
+                        <field name="mail_formio_components" string="Form Components" widget="many2many_tags"/>
                     </group>
                 </page>
             </xpath>
