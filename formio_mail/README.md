@@ -26,6 +26,7 @@ formio -> builder -> mail -> Partner
 The extension tries to access the partner.email field.
 If the partner has a valid mail address the plugin will send the
 form after submission, to specified partner's.
+Also partner's language will be selected in template context.
 
 ## Using Fixed Addresses
 
@@ -43,7 +44,7 @@ It's a great feature for fixed, group or shared mail addresses.
 
 ## Using Form Components
 
-By specifying one or multiple **(comma-separated)** form components in:
+Select form components from the many2many field.
 
 ``
 formio -> builder -> mail -> Form
@@ -52,27 +53,6 @@ formio -> builder -> mail -> Form
 The extension computes the value of the specified form components
 after submission and if the value of a components holds a valid
 mail address it tries to send a PDF report.
-
-Form components need to be specified by it's key:
-
-``
-"label": "Text Field", "spellcheck": true, "tableView": true, "calculateServer": false, "key": "textField2", "type": "textfield", "input": true},
-``
-
-The key of the Text Field component above is: ``textField2``. So, if wanted to use this
-component you had to enter the key ``textField2`` into the form field. 
-It's also possible adding multiple components to the form field, 
-but keep in mind, that these needs to be comma-separated.
-
-Datagrid components are only supported with the depth of one. You have 
-to specify this component as follow:
-
-``
-dataGrid->textField1
-``
-
-The first value is the key of the datagrid where as the second value 
-the key of the inner component of the datagrid is.
 
 ## Supported Fields
 
