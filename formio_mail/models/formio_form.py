@@ -6,8 +6,6 @@ import base64
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import UserError
 
-STATE_COMPLETE = 'COMPLETE'
-
 
 class Form(models.Model):
     _inherit = 'formio.form'
