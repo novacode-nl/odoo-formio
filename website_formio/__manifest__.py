@@ -2,9 +2,10 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io Website',
-    'summary': 'Redirect to website-page or URL - after form submission.',
+    'name': 'Forms | Website (Snippet etc)',
+    'summary': 'Forms Snippet, Other website integration',
     'version': '1.0',
+    'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
@@ -16,6 +17,6 @@
     ],
     'application': False,
     'images': [
-        'static/description/banner.png',
+        'static/description/banner.gif',
     ],
 }

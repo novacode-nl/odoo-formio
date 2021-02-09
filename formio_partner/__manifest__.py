@@ -2,8 +2,8 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io Partner',
-    'summary': 'Form.io webforms on Partners',
+    'name': 'Forms | Partner',
+    'summary': 'Forms integration with Partners e.g. contacts, clients, customers, suppliers',
     'version': '0.2',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -17,12 +17,11 @@
     ],
     'application': True,
     'images': [
-        'static/description/banner.png',
+        'static/description/banner.gif',
     ],
     'description': """
-Form.io - Partners
-==================
+Forms | Partners
+================
 
-Build and publish (Form.io) forms for Partners.
 """
 }

@@ -2,9 +2,10 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io CRM Lead',
-    'summary': 'Form.io webforms on CRM Leads',
-    'version': '0.2',
+    'name': 'Forms | CRM',
+    'summary': 'Forms integration with CRM Leads',
+    'version': '0.3',
+    'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
@@ -13,15 +14,15 @@
     'data': [
         'data/formio_crm_data.xml',
         'views/crm_lead_views.xml',
+        'views/formio_form_views.xml',
     ],
     'application': True,
     'images': [
-        'static/description/banner.png',
+        'static/description/banner.gif',
     ],
     'description': """
-Form.io - CRM Lead
-==================
+Forms | CRM
+===========
 
-Build and publish (Form.io) forms for Leads.
 """
 }

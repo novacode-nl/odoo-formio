@@ -2,9 +2,9 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io QWeb Reports',
+    'name': 'Forms | QWeb Reports',
     'summary': 'Generate (PDF) reports for every Form',
-    'version': '0.10',
+    'version': '0.12',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'license': 'LGPL-3',
@@ -20,6 +20,6 @@
     ],
     'application': True,
     'images': [
-        'static/description/banner.png',
+        'static/description/banner.gif',
     ],
 }

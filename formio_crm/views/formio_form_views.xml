@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <record id="view_formio_form_search" model="ir.ui.view">
+        <field name="name">formio.form.search.inherit</field>
+        <field name="model">formio.form</field>
+        <field name="inherit_id" ref="formio.view_formio_form_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='res_partner_id']" position="after">
+                <field name="crm_lead_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
