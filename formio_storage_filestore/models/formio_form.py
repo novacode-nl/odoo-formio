@@ -43,7 +43,8 @@ class Form(models.Model):
         if mode == 'write':
             domain = [
                 ('res_model', '=', 'formio.form'),
-                ('res_id', '=', self.id)
+                ('res_id', '=', self.id),
+                ('formio_storage_filestore_user_id', '!=', False)
             ]
             if attach_names:
                 domain.append(('name', 'not in', attach_names))
