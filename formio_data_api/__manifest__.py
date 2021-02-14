@@ -12,7 +12,6 @@
     'category': 'Extra Tools',
     'depends': ['formio'],
     'data': [
-        'data/cron.xml',
         'views/formio_component_views.xml',
         'views/formio_menu.xml',
     ],
