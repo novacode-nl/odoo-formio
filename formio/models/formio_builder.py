@@ -73,7 +73,7 @@ class Builder(models.Model):
         - Current: Live and in use (publisehd).
         - Obsolete: Was current but obsolete (unpublished)""")
     display_state = fields.Char("Display State", compute='_compute_display_fields', store=False)
-    display_name_full = fields.Char("Display Name Full", compute='_compute_display_fields', store=False)
+    display_name_full = fields.Char("Display Name Full", compute='_compute_display_fields', search='_search_display_name_full', store=False)
     parent_id = fields.Many2one('formio.builder', string='Parent Builder', readonly=True)
     parent_version = fields.Integer(related='parent_id.version', string='Parent Version', readonly=True)
     version = fields.Integer("Version", required=True, readonly=True, default=1)
@@ -208,6 +208,14 @@ class Builder(models.Model):
             schema = ast.literal_eval(schema)
         return schema
 
+    def _search_display_name_full(self, operator, value):
+        if value:
+            builders = self.search([('title', operator, value)])
+        if builders:
+            return [('id', 'in', builders.ids)]
+        else:
+            return [('id', '=', False)]
+
     @api.onchange('formio_js_options_id')
     def _onchange_formio_js_options_id(self):
         if self.formio_js_options_id:
@@ -245,7 +253,7 @@ class Builder(models.Model):
             if self._context.get('display_name_title'):
                 r.display_name_full = r.title
             else:
-                r.display_name_full = _("{title} (state: {state} - version: {version})").format(
+                r.display_name_full = _("{title} (state: {state}, version: {version})").format(
                     title=r.title, state=r.display_state, version=r.version)
 
     @api.depends('public')
