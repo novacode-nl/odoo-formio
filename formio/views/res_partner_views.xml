@@ -9,22 +9,42 @@ See LICENSE file for full licensing details. -->
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <page name="internal_notes" position="before">
-                <page name="formio_form_exclusive" string="Exclusive Forms">
+                <page name="formio_form_exclusive" string="Exclusive Portal Forms">
                     <div class="text-muted" colspan="2">
                         <i class="fa fa-info-circle" title="info"/> Forms exclusive accessible in the <strong>Portal</strong><br/>
                         Configuration (assign to partners, contacts) can be done per Form Builder.
                     </div>
-                    <field name="exclusive_formio_builder_form_rel_ids">
-                        <tree create="false" edit="false" delete="false" default_order="builder_title, builder_version desc">
-                            <field name="builder_uuid" optional="hide"/>
-                            <field name="builder_title" string="Title"/>
-                            <field name="builder_name" optional="show" string="Name"/>
-                            <field name="builder_version" optional="show" string="Version"/>
-                            <field name="builder_state" optional="show" string="State"/>
-                            <field name="partner_id" optional="hide" string="Partner"/>
-                            <field name="partner_company_type" optional="hide"/>
-                        </tree>
-                    </field>
+                    <group>
+                        <group colspan="2" name="formio_forms">
+                            <label string="Forms Direct Assignment" for="exclusive_formio_builder_form_rel_ids" colspan="2" class="mb16"/>
+                            <field name="exclusive_formio_builder_form_rel_ids" nolabel="1">
+                                <tree editable="bottom" default_order="builder_title, builder_version desc">
+                                    <field name="partner_id" invisible="1"/>
+                                    <field name="builder_id"/>
+                                    <field name="builder_uuid" string="UUID" optional="hide"/>
+                                    <field name="builder_title" string="Title"/>
+                                    <field name="builder_name" string="Name" optional="show"/>
+                                    <field name="builder_version" string="Version" optional="show"/>
+                                    <field name="builder_state" string="State" optional="show" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group colspan="2" name="formio_forms_determined">
+                            <label string="Forms Determined (direct or parent assignment)" for="exclusive_formio_builder_form_ids" colspan="2" class="mb16"/>
+                            <field name="exclusive_formio_builder_form_ids" nolabel="1">
+                                <tree create="false" edit="false" delete="false" default_order="builder_title, builder_version desc">
+                                    <field name="builder_id"/>
+                                    <field name="builder_uuid" optional="hide" string="UUID"/>
+                                    <field name="builder_title" string="Title"/>
+                                    <field name="builder_name" string="Name" optional="show"/>
+                                    <field name="builder_version" string="Version" optional="show"/>
+                                    <field name="builder_state" string="State" optional="show" />
+                                    <field name="partner_id" string="Partner" optional="hide"/>
+                                    <field name="partner_company_type" optional="hide"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
                 </page>
             </page>
         </field>

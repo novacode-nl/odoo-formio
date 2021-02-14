@@ -8,7 +8,11 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     exclusive_formio_builder_form_rel_ids = fields.One2many(
-        'formio.builder.form.exclusive.partner', compute='_compute_exclusive_formio_builder_form_ids', string='Exclusive Forms')
+        'formio.builder.form.exclusive.partner', 'partner_id',
+        string='Exclusive Forms',
+        help='Give access only to Forms this partner (either linked directly to the partner or to its children). If left empty, this restriction doesn\'t apply.')
+    exclusive_formio_builder_form_ids = fields.One2many(
+        'formio.builder.form.exclusive.partner', compute='_compute_exclusive_formio_builder_form_ids', string='Exclusive Forms determined')
 
     def _compute_exclusive_formio_builder_form_ids(self):
         for r in self:
@@ -16,6 +20,6 @@ class ResPartner(models.Model):
             res = self.env['formio.builder.form.exclusive.partner'].search(domain)
 
             if res:
-                r.exclusive_formio_builder_form_rel_ids = [(6, 0, res.ids)]
+                r.exclusive_formio_builder_form_ids = [(6, 0, res.ids)]
             else:
-                r.exclusive_formio_builder_form_rel_ids = False
+                r.exclusive_formio_builder_form_ids = False
