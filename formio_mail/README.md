@@ -11,7 +11,8 @@ This module aims to extend the Odoo form.io stack with features, such as:
     
 # Specify Recipients
 
-There are the following three ways to specify a recipient:
+In the <b>Form Builder "Mail" tab,</b> the recipients shall be determined by the following configuration possibilities.
+
 
 ![Mail settings](./static/description/formio_builder_mail_settings.png)
 

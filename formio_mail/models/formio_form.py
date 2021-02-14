@@ -33,7 +33,7 @@ class Form(models.Model):
             raise UserError("The form can't be loaded. No (user) language was set.")
 
         for recipient in recipients:
-            if recipient['lang']:
+            if 'lang' in recipient:
                 lang = recipient['lang']
             template.with_context(lang=lang).send_mail(
                 self.id,
@@ -58,6 +58,5 @@ class Form(models.Model):
             'store_fname': attachment_name,
             'res_model': self._name,
             'res_id': self.id,
-            'mimetype': 'application/x-pdf'
         })
 

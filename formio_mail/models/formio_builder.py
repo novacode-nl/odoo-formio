@@ -73,12 +73,12 @@ class FormioBuilder(models.Model):
 
     def _get_recipients_from_components(self, form):
         """
-        Computes all formio.components specified in the mail_formio_components field.
+        Computes all formio.components specified in the mail_formio_component_ids field.
 
         :param record formio.form: Form record to get the component values from.
         :return array: With mail recipients in a dictionary.
         """
-        formio_components = self.mail_formio_components
+        formio_components = self.mail_formio_component_ids
         recipients = []
         for component in formio_components:
             component_obj = form._formio.components[component.key]

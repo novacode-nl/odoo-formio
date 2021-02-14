@@ -8,7 +8,7 @@ See LICENSE file for full licensing details. -->
         <field name="model">formio.builder</field>
         <field name="inherit_id" ref="formio.view_formio_builder_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//page[@name='forms']" position="after">
+            <xpath expr="//page[@name='qweb_reports]" position="after">
                 <page name="mail" string="Mail">
                     <group name="mail_settings" string="Mail Settings" colspan="2">
                         <field name="mail_active" string="Mailings active"/>
