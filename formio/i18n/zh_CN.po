@@ -2265,5 +2265,5 @@ msgstr ""
 #. module: formio
 #: code:addons/formio/models/formio_builder.py:0
 #, python-format
-msgid "{title} (state: {state} - version: {version})"
-msgstr "{title} (状态: {state} - 版本号: {version})"
+msgid "{title} (state: {state}, version: {version})"
+msgstr "{title} (状态: {state}, 版本号: {version})"
