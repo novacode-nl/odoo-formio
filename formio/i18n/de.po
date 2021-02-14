@@ -1169,5 +1169,5 @@ msgstr "js"
 #: code:addons/formio/formio/models/formio_builder.py:160
 #: code:addons/formio/models/formio_builder.py:160
 #, python-format
-msgid "{title} (state: {state} - version: {version})"
-msgstr "{title} (Status: {state} - Version: {version})"
+msgid "{title} (state: {state}, version: {version})"
+msgstr "{title} (Status: {state}, Version: {version})"
