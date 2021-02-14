@@ -16,10 +16,10 @@ $(document).ready(function() {
 
         static get builderInfo() {
             return {
-                title: '(odoo) reCAPTCHA Button',
+                title: 'reCAPTCHA Button (odoo)',
                 group: 'advanced',
                 icon: 'stop',
-                weight: 1010,
+                weight: 1100,
                 documentation: '#',
                 schema: this.schema()
             };
