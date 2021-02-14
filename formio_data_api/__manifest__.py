@@ -12,6 +12,7 @@
     'category': 'Extra Tools',
     'depends': ['formio'],
     'data': [
+        'views/formio_builder_views.xml',
         'views/formio_component_views.xml',
         'views/formio_menu.xml',
     ],
