@@ -25,7 +25,7 @@ class FormioBuilder(models.Model):
         help='Comma-separated list of email addresses.'
     )
 
-    mail_formio_components = fields.Many2many(
+    mail_formio_component_ids = fields.Many2many(
         'formio.component',
         string='Formio Component',
         domain="[('builder_id', '=', id)]",

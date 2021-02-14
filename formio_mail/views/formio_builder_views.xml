@@ -18,7 +18,7 @@ See LICENSE file for full licensing details. -->
                     <group name="mail_recipients" string="Recipients" colspan="2">
                         <field name="mail_recipients_partner_ids" string="Partner" widget="many2many_tags"/>
                         <field name="mail_recipients" string="Addresses"/>
-                        <field name="mail_formio_components" string="Form Components" widget="many2many_tags"/>
+                        <field name="mail_formio_component_ids" string="Form Components" widget="many2many_tags"/>
                     </group>
                 </page>
             </xpath>
