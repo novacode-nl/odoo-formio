@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <record id="view_partner_form_formio_partner" model="ir.ui.view">
+        <field name="name">res.partner.form.formio.partner</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <page name="internal_notes" position="before">
+                <page name="formio_form_exclusive" string="Exclusive Forms">
+                    <div class="text-muted" colspan="2">
+                        <i class="fa fa-info-circle" title="info"/> Forms exclusive accessible in the <strong>Portal</strong><br/>
+                        Configuration (assign to partners, contacts) can be done per Form Builder.
+                    </div>
+                    <field name="exclusive_formio_builder_form_rel_ids">
+                        <tree create="false" edit="false" delete="false" default_order="builder_title, builder_version desc">
+                            <field name="builder_uuid" optional="hide"/>
+                            <field name="builder_title" string="Title"/>
+                            <field name="builder_name" optional="show" string="Name"/>
+                            <field name="builder_version" optional="show" string="Version"/>
+                            <field name="builder_state" optional="show" string="State"/>
+                            <field name="partner_id" optional="hide" string="Partner"/>
+                            <field name="partner_company_type" optional="hide"/>
+                        </tree>
+                    </field>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>

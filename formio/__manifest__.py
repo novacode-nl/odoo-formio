@@ -42,6 +42,7 @@
         'views/formio_version_github_tag_views.xml',
         'views/formio_menu.xml',
         'views/res_config_settings_views.xml',
+        'views/res_partner_views.xml',
         'views/mail_activity_views.xml',
         # formio templates
         'views/formio_builder_templates.xml',

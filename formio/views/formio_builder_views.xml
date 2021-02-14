@@ -135,6 +135,20 @@ See LICENSE file for full licensing details. -->
                         </page>
                         <page string="Resource" name="res_model_settings" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
                         <page string="Portal" name="portal_settings">
+                            <group name="exclusive_partners" string="Exclusive Forms" attrs="{'invisible': [('formio_res_model_id', '!=', False)]}">
+                                <div class="mb-3 text-muted" colspan="2">
+                                    <i class="fa fa-info-circle" title="info"/> Give access only to Users related to the Partners below, either linked directly to the Partner or to its children.<br/>
+                                    If left empty, this restriction doesn't apply and Forms are available by obtaining other configuration.
+                                </div>
+                                <field name="exclusive_partner_rel_ids" string="Partners">
+                                    <tree editable="bottom" default_order="partner_id asc">
+                                        <field name="builder_id" invisible="1"/>
+                                        <field name="partner_id"/>
+                                        <field name="partner_company_type"/>
+                                        <field name="partner_parent_id"/>
+                                    </tree>
+                                </field>
+                            </group>
                             <group>
                                 <group string="Redirect After Submit">
                                     <field name="portal_submit_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
@@ -261,6 +275,7 @@ See LICENSE file for full licensing details. -->
             <search string="Form Builders">
                 <field name="title"/>
                 <field name="name"/>
+                <field name="exclusive_partner_ids" filter_domain="[('exclusive_partner_ids.partner_id', 'ilike', self)]"/>
                 <field name="user_id"/>
                 <field name="formio_version_id"/>
                 <separator/>
@@ -278,6 +293,11 @@ See LICENSE file for full licensing details. -->
                         domain="[('portal', '=', True)]"/>
                 <filter string="Not Portal" name="not_portal"
                         domain="[('portal', '=', False)]"/>
+                <separator/>
+                <filter string="Exclusive assigned to Partners (in Portal)" name="exclusive_partners"
+                        domain="[('exclusive_partner_rel_ids', '!=', False)]"/>
+                <filter string="Not Exclusive assigned to Partners (in Portal)" name="not_exclusive_partners"
+                        domain="[('exclusive_partner_rel_ids', '=', False)]"/>
                 <separator/>
                 <filter string="Wizard" name="wizard"
                         domain="[('wizard', '=', True)]"/>

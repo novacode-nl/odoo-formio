@@ -4,6 +4,7 @@ See LICENSE file for full copyright and licensing details. -->
 
 <odoo>
     <data>
+        <!-- read, write, create -->
         <record id="formio_form_user_all" model="ir.rule">
             <field name="name">formio.form: User all forms</field>
             <field name="model_id" ref="model_formio_form"/>
@@ -26,6 +27,24 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="domain_force">[('user_id', '=', user.id)]</field>
         </record>
 
+        <record id="formio_form_portal_user" model="ir.rule">
+            <field name="name">formio.form: Portal user forms</field>
+            <field name="model_id" ref="model_formio_form"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">
+                [
+                '&amp;',
+                ('portal_share', '=', True),
+                '|', ('create_uid', '=', user.id), ('submission_partner_id', '=', user.partner_id.id)
+                ]
+            </field>
+        </record>
+
+        <!-- unlink (delete) -->
         <record id="formio_form_unlink_user_assigned" model="ir.rule">
             <field name="name">formio.form unlink: User assigned forms</field>
             <field name="model_id" ref="model_formio_form"/>
@@ -37,17 +56,6 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="domain_force">
                 [('create_uid', '=', user.id), ('user_id', '=', user.id), ('state', '!=', 'COMPLETE')]
             </field>
-        </record>
-
-        <record id="formio_form_portal_user" model="ir.rule">
-            <field name="name">formio.form read, write: Portal User</field>
-            <field name="model_id" ref="model_formio_form"/>
-            <field name="perm_read" eval="True"/>
-            <field name="perm_write" eval="True"/>
-            <field name="perm_create" eval="False"/>
-            <field name="perm_unlink" eval="False"/>
-            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
-            <field name="domain_force">[('builder_id.portal', '=', True), ('user_id', '=', user.id)]</field>
         </record>
 
         <record id="formio_form_unlink_portal_user" model="ir.rule">
@@ -63,7 +71,26 @@ See LICENSE file for full copyright and licensing details. -->
                 '&amp;',
                 '&amp;',
                 '&amp;',
-                ('builder_id.portal', '=', True), ('create_uid', '=', user.id), ('user_id', '=', user.id), ('state', '!=', 'COMPLETE')]
+                ('portal_share', '=', True), ('create_uid', '=', user.id), ('user_id', '=', user.id), ('state', '!=', 'COMPLETE')]
+            </field>
+        </record>
+
+        <!-- exclusive forms (portal) -->
+        <record id="formio_builder_read_exclusive_user_portal_user" model="ir.rule">
+            <field name="name">formio.builder read: Exclusive Users Portal User</field>
+            <field name="model_id" ref="model_formio_builder"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">
+                [
+                '|', '|',
+                '&amp;', ('portal', '=', True), ('exclusive_partner_ids', '=', False),
+                '&amp;', ('portal', '=', True), ('exclusive_partner_ids', '=', user.partner_id.id),
+                '&amp;', ('portal', '=', True), ('exclusive_partner_ids', '=', user.partner_id.parent_id.id)
+                ]
             </field>
         </record>
     </data>
