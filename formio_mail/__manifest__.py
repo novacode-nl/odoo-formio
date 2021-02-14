@@ -2,8 +2,8 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Form.io Mail',
-    'summary': 'Form.io Send webforms via mail',
+    'name': 'Forms | Mail',
+    'summary': 'Send Forms via mail',
     'version': '0.1',
     'license': 'LGPL-3',
     'author': 'Nova Code',
@@ -19,7 +19,7 @@
         'static/description/banner.png',
     ],
     'description': """
-Form.io - Mail
+Forms | Mail
 ==================
 
 Send forms via mail after completion.

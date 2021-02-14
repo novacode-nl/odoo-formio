@@ -40,8 +40,7 @@ class Form(models.Model):
                 force_send=True,
                 email_values={
                     'email_to': recipient,
-                    'attachment_ids': [attachment.id for attachment in attachment_ids],
-                    'auto_delete': True
+                    'attachment_ids': [attachment.id for attachment in attachment_ids]
                 }
             )
 
@@ -50,13 +49,13 @@ class Form(models.Model):
         pdf = self.builder_id.mail_report_id.render_qweb_pdf(self.ids)
         b64_pdf = base64.b64encode(pdf[0])
 
-        ATTACHMENT_NAME = 'Form.io Form -' + self.title
+        attachment_name = '%s - %s' % (_('Form'), self.title)
         return self.env['ir.attachment'].create({
-            'name': ATTACHMENT_NAME,
+            'name': attachment_name,
             'type': 'binary',
             'datas': b64_pdf,
-            'datas_fname': ATTACHMENT_NAME + '.pdf',
-            'store_fname': ATTACHMENT_NAME,
+            'datas_fname': attachment_name + '.pdf',
+            'store_fname': attachment_name,
             'res_model': self._name,
             'res_id': self.id,
             'mimetype': 'application/x-pdf'

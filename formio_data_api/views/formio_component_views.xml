@@ -23,7 +23,7 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.component.form</field>
         <field name="model">formio.component</field>
         <field name="arch" type="xml">
-	    <form string="Form" create="false" delete="true" editable="false">
+	    <form string="Form" create="false" delete="false" edit="false">
                 <sheet>
                     <label for="label" class="oe_edit_only"/>
                     <h1><field name="label"/></h1>

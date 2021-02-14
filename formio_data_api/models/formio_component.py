@@ -122,7 +122,7 @@ class FormioComponent(models.Model):
         """
         result = []
         for key, component in builder._formio.components.items():
-            if component.raw.get('input') and component.type != 'button':
+            if component.input and component.type != 'button':
                 if any(component.type in i for i in COMPONENT_TYPES):
                     result.append(key)
         return result
@@ -148,7 +148,7 @@ class FormioComponent(models.Model):
         :return boolean: True if builder_obj has a datagrid component else false.
         """
         for key, component in builder._formio.components.items():
-            if component.raw.get('input') and component.type == 'datagrid':
+            if component.input and component.type == 'datagrid':
                 return True
         return False
 
@@ -164,7 +164,7 @@ class FormioComponent(models.Model):
         datagrid = []
 
         for key, component in builder._formio.components.items():
-            if component.raw.get('input') and component.type == 'datagrid':
+            if component.input and component.type == 'datagrid':
                 datagrid.append(component)
         for grid in datagrid:
             if component_key in grid.labels.keys():
@@ -189,9 +189,10 @@ class FormioComponent(models.Model):
             datagrid_children = list(builder_obj._formio.components[datagrid.key].labels.keys())
             model_components = self._get_components(builder, datagrid_children)
 
+            child_ids = []
             for component in model_components:
-                if component not in datagrid.child_ids:
-                    datagrid.child_ids += component
+                child_ids.append(component.id)
+            datagrid.child_ids = [(6, 0, child_ids)]
 
     @api.one
     @api.depends('label', 'parent_id')
@@ -231,7 +232,7 @@ class FormioComponent(models.Model):
         :param tuple builder: the builder where the components are located,
         """
         for key, comp in builder._formio.components.items():
-            if not comp.raw.get('input') or comp.type == 'button':
+            if not comp.input or comp.type == 'button':
                 return
 
             component = self._get_components(builder, key)
@@ -241,12 +242,14 @@ class FormioComponent(models.Model):
             """
             grid = self._in_datagrid(builder, key)
             grid_record = self._get_components(builder, grid)
-            if component.parent_id and grid != component.parent_id.key:
+            if len(grid_record) > 1:
+                raise ValueError("Expected singleton: %s" % grid_record)
+            elif component.parent_id and grid != component.parent_id.key:
                 component.parent_id = grid_record
             elif not component.parent_id and grid:
                 component.parent_id = grid_record
             elif not grid:
-                component.parent_id = ()
+                component.parent_id = False
 
             """
             Updating component attributes
