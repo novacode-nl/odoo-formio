@@ -1,4 +1,4 @@
-# Formio Mail Extension
+# Forms | Mail
 
 This module aims to extend the Odoo form.io stack with features, such as:
 
