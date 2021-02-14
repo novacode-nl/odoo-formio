@@ -2326,5 +2326,5 @@ msgstr ""
 #. module: formio
 #: code:addons/formio/models/formio_builder.py:248
 #, python-format
-msgid "{title} (state: {state} - version: {version})"
-msgstr "{title} (state: {state} - versão: {version})"
+msgid "{title} (state: {state}, version: {version})"
+msgstr "{title} (state: {state}, versão: {version})"
