@@ -25,5 +25,7 @@ class FormioBuilder(models.Model):
 
     @api.multi
     def write(self, vals):
-        super(FormioBuilder, self).write(vals)
-        self.env['formio.component'].synchronize_components(self.ids)
+        res = super(FormioBuilder, self).write(vals)
+        if vals.get('schema'):
+            self.env['formio.component'].synchronize_formio_components(self)
+        return res

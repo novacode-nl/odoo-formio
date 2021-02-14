@@ -12,7 +12,7 @@ See LICENSE file for full licensing details. -->
                 <field name="label"/>
                 <field name="key"/>
                 <field name="type"/>
-                <field name="parent_name"/>
+                <field name="parent_name" string="Parent Component"/>
                 <field name="child_ids"/>
                 <field name="builder_id"/>
             </tree>
