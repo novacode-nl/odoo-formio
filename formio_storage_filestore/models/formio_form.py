@@ -10,14 +10,15 @@ class Form(models.Model):
     @api.model
     def create(self, vals):
         res = super(Form, self).create(vals)
-
-        res._process_storage_filestore_ir_attachments('create')
+        if vals.get('submission_data'):
+            res._process_storage_filestore_ir_attachments('create')
         return res
 
     def write(self, vals):
         submission_data = self.submission_data
         res = super(Form, self).write(vals)
-        self._process_storage_filestore_ir_attachments('write')
+        if vals.get('submission_data'):
+            self._process_storage_filestore_ir_attachments('write')
         return res
 
     def _process_storage_filestore_ir_attachments(self, mode):
@@ -30,7 +31,10 @@ class Form(models.Model):
 
         # update ir.attachment (link with formio.form)
         if attach_names:
-            domain = [('name', 'in', attach_names)]
+            domain = [
+                ('name', 'in', attach_names),
+                ('formio_storage_filestore_user_id', '!=', False)
+            ]
             attachments = self.env['ir.attachment'].search(domain)
             for attach in attachments:
                 vals = {
