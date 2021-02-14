@@ -8,7 +8,7 @@ $(document).ready(function() {
 
         static schema(...extend) {
             return super.schema({
-                "label": "(odoo) reCAPTCHA",
+                "label": "reCAPTCHA (odoo)",
                 "key": "odoo_recaptcha",
                 "type": "odoo_recaptcha",
                 "input": true
@@ -17,10 +17,10 @@ $(document).ready(function() {
 
         static get builderInfo() {
             return {
-                title: '(odoo) reCAPTCHA',
+                title: 'reCAPTCHA (odoo)',
                 group: 'advanced',
                 icon: 'refresh',
-                weight: 1010,
+                weight: 1100,
                 documentation: '#',
                 schema: this.schema()
             };
