@@ -28,7 +28,18 @@ See LICENSE file for full licensing details. -->
                     <label for="label" class="oe_edit_only"/>
                     <h1><field name="label"/></h1>
                     <group>
-                        <field name="display_name"/>
+                        <group>
+                            <field name="display_name"/>
+                            <field name="key"/>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <field name="builder_id"/>
+                            <field name="parent_name" string="Parent Component"/>
+                        </group>
+                    </group>
+                    <group string="Child Components" name="child">
+                        <field name="child_ids" nolabel="1"/>
                     </group>
                 </sheet>
             </form>
