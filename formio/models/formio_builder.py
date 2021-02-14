@@ -79,6 +79,11 @@ class Builder(models.Model):
     version = fields.Integer("Version", required=True, readonly=True, default=1)
     version_comment = fields.Text("Version Comment")
     user_id = fields.Many2one('res.users', string='Assigned user', track_visibility='onchange')
+    exclusive_partner_rel_ids = fields.One2many(
+        'formio.builder.form.exclusive.partner', 'builder_id',
+        string='Exclusive Partners',
+        help='Give access only to users related to this partner (either linked directly to the partner or to its children). If left empty, this restriction doesn\'t apply.')
+    exclusive_partner_ids = fields.Many2many('res.partner', compute='_compute_exclusive_partner_ids', search='_search_exclusive_partner_ids')
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal", track_visibility='onchange', help="Form is accessible by assigned portal user")
     portal_submit_done_url = fields.Char(
@@ -247,6 +252,29 @@ class Builder(models.Model):
             else:
                 r.display_name_full = _("{title} (state: {state} - version: {version})").format(
                     title=r.title, state=r.display_state, version=r.version)
+
+    @api.depends('exclusive_partner_rel_ids')
+    def _compute_exclusive_partner_ids(self):
+        for r in self:
+            if r.exclusive_partner_rel_ids:
+                exclusive_partner_ids = (r.exclusive_partner_rel_ids.mapped('partner_id').mapped('child_ids') | r.exclusive_partner_rel_ids.mapped('partner_id')).ids
+                r.exclusive_partner_ids = [(6, 0, exclusive_partner_ids)]
+            else:
+                r.exclusive_user_ids = False
+
+    def _search_exclusive_partner_ids(self, operator, value):
+        """
+        Search exclusive res.partner records
+
+        :param int value: id of res.partner
+        """
+        if operator == '=' and value:
+            domain = [('exclusive_partner_rel_ids.partner_id.id', '=', value)]
+        elif operator == '=' and not value:
+            domain = [('exclusive_partner_rel_ids', '=', False)]
+        else:
+            domain = [('id', '!=', False)]
+        return domain
 
     @api.depends('public')
     def _compute_public_url(self):

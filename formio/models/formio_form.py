@@ -211,7 +211,7 @@ class Form(models.Model):
 
     def _compute_access(self):
         user_groups = self.env.user.groups_id
-        for form in self:
+        for form in self.sudo():
             # allow_unlink
             unlink_form = self.get_form(form.uuid, 'unlink')
             if unlink_form:

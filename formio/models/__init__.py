@@ -5,6 +5,7 @@ from . import formio_builder
 from . import formio_builder_js_options
 from . import formio_builder_translation
 from . import formio_default_asset_css
+from . import formio_builder_form_exclusive_partner
 from . import formio_form
 from . import formio_res_model
 from . import formio_version
@@ -16,3 +17,4 @@ from . import ir_attachment
 from . import ir_view
 from . import res_config_settings
 from . import res_lang
+from . import res_partner
