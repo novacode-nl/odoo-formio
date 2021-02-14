@@ -171,7 +171,7 @@ class FormioComponent(models.Model):
                 return grid.key
         return False
 
-    def _compute_parent_id(self, builder):
+    def _write_child_ids(self, builder):
         """
         Computes the parent and child dependency of an formio.component object.
         """
@@ -223,7 +223,7 @@ class FormioComponent(models.Model):
             })
 
         if self._has_datagrid(builder):
-            self._compute_parent_id(builder)
+            self._write_child_ids(builder)
 
     def _update_components(self, builder):
         """
