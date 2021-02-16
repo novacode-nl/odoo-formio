@@ -25,7 +25,7 @@ class FormioBuilder(models.Model):
         help='Comma-separated list of email addresses.'
     )
 
-    mail_formio_component_ids = fields.Many2many(
+    mail_recipients_formio_component_ids = fields.Many2many(
         'formio.component',
         string='Formio Component',
         domain="[('builder_id', '=', id)]",
@@ -72,12 +72,12 @@ class FormioBuilder(models.Model):
 
     def _get_recipients_from_components(self, form):
         """
-        Computes all formio.components specified in the mail_formio_component_ids field.
+        Computes all formio.components specified in the mail_recipients_formio_component_ids field.
 
         :param record formio.form: Form record to get the component values from.
         :return array: With mail recipients in a dictionary.
         """
-        formio_components = self.mail_formio_component_ids
+        formio_components = self.mail_recipients_formio_component_ids
         recipients = []
         for component in formio_components:
             component_obj = form._formio.components[component.key]
