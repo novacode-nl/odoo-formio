@@ -47,7 +47,6 @@ class FormioBuilder(models.Model):
         'mail.template',
         string='Mail Template',
         domain=[('model', '=', 'formio.form')],
-        required=True,
         ondelete='restrict',
         help='This field contains the template of the mail that will be automatically sent'
     )

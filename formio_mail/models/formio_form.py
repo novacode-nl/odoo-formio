@@ -23,6 +23,10 @@ class Form(models.Model):
         recipients = self.builder_id.get_mail_recipients(self)
         attachment_ids = self.generate_attachment()
         context = self._context
+
+        if not template or not attachment_ids:
+            return
+
         if 'lang' in context:
             lang = context['lang']
         elif 'lang' not in context and 'uid' in context:
