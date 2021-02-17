@@ -36,14 +36,14 @@ class Form(models.Model):
         else:
             raise UserError("The form can't be loaded. No (user) language was set.")
 
-        for recipient in recipients:
-            if 'lang' in recipient:
-                lang = recipient['lang']
+        for mail_values in recipients:
+            if 'lang' in mail_values:
+                lang = mail_values['lang']
             template.with_context(lang=lang).send_mail(
                 self.id,
                 force_send=True,
                 email_values={
-                    'email_to': recipient,
+                    'email_to': mail_values['recipient'],
                     'attachment_ids': [attachment.id for attachment in attachment_ids]
                 }
             )
