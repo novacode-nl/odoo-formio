@@ -21,6 +21,19 @@ class Form(models.Model):
             self._process_storage_filestore_ir_attachments('write')
         return res
 
+    def unlink(self):
+        """
+        Workaround the ir.attachment its unlink implementation of this module.
+        Which blocks deletion of attachment still linked to a user upload
+        """
+        domain = [
+            ('res_model', '=', 'formio.form'),
+            ('res_id', 'in', self.ids)
+        ]
+        attachments = self.env['ir.attachment'].search(domain)
+        attachments.write({'formio_storage_filestore_user_id': False})
+        return super(Form, self).unlink()
+
     def _process_storage_filestore_ir_attachments(self, mode):
         attach_names = []
         for key, component in self._formio.components.items():

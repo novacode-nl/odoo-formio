@@ -60,6 +60,15 @@
 <section class="oe_container">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">0.7</h4>
+    <ul>
+      <li>
+        Fix: Deletion of other attachments was impossible due to a rigorous record rule, introduced in 0.4<br/>
+        - Removed the Record Rule (XML ID): <code>ir_attachment_unlink_formio_form_storage_filestore</code><br/>
+        - Implement <code>unlink</code> method in the <code>ir.attachment</code> model, which raises an error (message) upon deletion of attachments beloning to submitted Form(s).<br/>
+        - Implement <code>unlink</code> method in the <code>formio.form</code> model, which handles (kinda) cascade deletion of attachments upon deleting Form(s).
+      </li>
+    </ul>
     <h4 class="oe_mb16">0.6</h4>
     <ul>
       <li>
