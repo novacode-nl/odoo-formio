@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <record id="view_formio_component_tree" model="ir.ui.view">
+        <field name="name">formio.component.tree</field>
+        <field name="model">formio.component</field>
+        <field name="arch" type="xml">
+            <tree string="Component">
+                <field name="display_name"/>
+                <field name="label"/>
+                <field name="key"/>
+                <field name="type"/>
+                <field name="parent_name" string="Parent Component"/>
+                <field name="child_ids"/>
+                <field name="builder_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_formio_component_form" model="ir.ui.view">
+        <field name="name">formio.component.form</field>
+        <field name="model">formio.component</field>
+        <field name="arch" type="xml">
+	    <form string="Form" create="false" delete="false" edit="false">
+                <sheet>
+                    <label for="label" class="oe_edit_only"/>
+                    <h1><field name="label"/></h1>
+                    <group>
+                        <group>
+                            <field name="display_name"/>
+                            <field name="key"/>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <field name="builder_id"/>
+                            <field name="parent_name" string="Parent Component"/>
+                        </group>
+                    </group>
+                    <group string="Child Components" name="child">
+                        <field name="child_ids" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_formio_component" model="ir.actions.act_window">
+        <field name="name">Components</field>
+        <field name="res_model">formio.component</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_formio_component_tree"/>
+    </record>
+</odoo>
