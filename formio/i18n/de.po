@@ -466,7 +466,7 @@ msgstr "Vorlagen"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form_builder_id
-msgid "Form builder"
+msgid "Form Builder"
 msgstr "Vorlage"
 
 #. module: formio

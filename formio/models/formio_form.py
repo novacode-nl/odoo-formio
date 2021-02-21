@@ -36,7 +36,7 @@ class Form(models.Model):
     }
 
     builder_id = fields.Many2one(
-        'formio.builder', string='Form builder', required=True,
+        'formio.builder', string='Form Builder', required=True,
         ondelete='restrict', domain=[('state', '=', BUILDER_STATE_CURRENT)])
     name = fields.Char(related='builder_id.name', readonly=True)
     uuid = fields.Char(

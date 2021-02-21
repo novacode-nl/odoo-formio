@@ -463,7 +463,7 @@ msgstr "Form Builders"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__builder_id
-msgid "Form builder"
+msgid "Form Builder"
 msgstr ""
 
 #. module: formio
