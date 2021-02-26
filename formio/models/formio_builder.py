@@ -432,7 +432,7 @@ class Builder(models.Model):
         # Formio GUI/API translations
         for trans in self.formio_version_id.translations:
             code = trans.lang_id.formio_ietf_code
-            if trans.lang_id.code not in i18n:
+            if code not in i18n:
                 i18n[code] = {trans.property: trans.value}
             else:
                 i18n[code][trans.property] = trans.value
@@ -441,7 +441,7 @@ class Builder(models.Model):
         # that's how the Javascript API works.
         for trans in self.translations:
             code = trans.lang_id.formio_ietf_code
-            if trans.lang_id.code not in i18n:
+            if code not in i18n:
                 i18n[code] = {trans.source: trans.value}
             else:
                 i18n[code][trans.source] = trans.value
