@@ -76,8 +76,8 @@ See LICENSE file for full copyright and licensing details.
             </div>
 
             <div class="formio_components">
-                <t t-foreach="o._formio.builder.raw_components" t-as="component">
-                    <t t-if="component.get('hidden') != True">
+                <t t-foreach="o._formio.renderer.components" t-as="component">
+                    <t t-if="component.hidden != True">
                         <t t-call="formio_report_qweb.component"/>
                     </t>
                 </t>
