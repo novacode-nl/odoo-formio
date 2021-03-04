@@ -3,6 +3,15 @@
     <h2 class="oe_slogan" style="color:#875A7B;"><b>Forms | QWeb Reports</b></h2>
     <h3 class="oe_slogan">Generate (PDF) reports for every Form, in just a click</h3>
     <h3 class="oe_slogan"><small>Developed on the (Odoo) QWeb Reports engine</small></h3>
+    <div class="oe_row">
+      <h5>Installation Requirements</h5>
+      <ul>
+        <li>
+          PyPi package <code>formio-data</code> version >= 0.2.0<br/>
+          <code>pip3 install -U formio-data</code>
+        </li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -77,39 +86,61 @@
 <section class="oe_container oe_dark">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">1.0</h4>
+    <ul>
+      <li>
+        MAJOR IMPROVEMENT: <strong>Rendering of deeply nested components</strong> e.g. in datagrid, layout components.<br/>
+        Has been made possible by recent improvements in the Python formiodata library with the new <code>FormRenderer</code> class.
+      </li>
+      <li>
+        Improve <strong>datagrid component</strong> rendering (also simplifies).<br/>
+        Has been made possible by recent improvements in the Python formiodata library with the new <code>FormRenderer</code> class.
+      </li>
+      <li>
+        New <strong>datetime component</strong>
+      </li>
+      <li>
+        Improve <strong>columns component</strong>:<br/>
+        Now renders (complex) column grids/configuratin the same as in Form e.g. 3 rows with specified column widths [[6,6], [12], [8, 4]].
+      </li>
+      <li>
+        The <code>QWeb component (object)</code> now is the <code>Python formiodata Component</code> object, instead of a Dictionary <code>component['_object']</code>.<br/>
+        <strong>IMPORTANT: This release is backwards incompatible, in case of implemented custom QWeb Reports which inherit from this QWeb XML.
+      </li>
+    </ul>
     <h4 class="oe_mb16">0.12</h4>
     <ul>
-      <li>New component: radio (input)</li>
+      <li>New <strong>radio (input) component</strong></li>
     </ul>
     <h4 class="oe_mb16">0.11</h4>
     <ul>
-      <li>New component: datagrid</li>
+      <li>New <strong>datagrid component</strong></li>
       <li>Refactor component (object) loading/reader.</li>
     </ul>
     <h4 class="oe_mb16">0.10</h4>
     <ul>
-      <li>New component/field: file image (upload) with Storage Base64</li>
+      <li>New <strong>file upload component</strong> (storage: base64)</li>
     </ul>
     <h4 class="oe_mb16">0.9</h4>
     <ul>
-      <li>Don't print/render hidden components.</li>
+      <li>Don't print/render <strong>hidden components</strong>.</li>
       <li>Smaller report header (h3 instead of h2).</li>
     </ul>
     <h4 class="oe_mb16">0.8</h4>
     <ul>
-      <li>Avoid rendering/printing of file component.</li>
+      <li>Avoid rendering/printing of file component (no image, without diplaying).</li>
     </ul>
     <h4 class="oe_mb16">0.7</h4>
     <ul>
-      <li>New layout components: tabs, table</li>
+      <li>New layout components: <strong>tabs, table</strong></li>
     </ul>
     <h4 class="oe_mb16">0.6</h4>
     <ul>
-      <li>New components/fields: number, phoneNumber, email, signature (image), content</li>
+      <li>New components/fields: <strong>number, phoneNumber, email, signature (image), content</strong></li>
     </ul>
     <h4 class="oe_mb16">0.5</h4>
     <ul>
-      <li>Annotate required components/fields.</li>
+      <li>Annotate <strong>required components</strong>.</li>
       <li>Render not stored (optional and empty) components/fields.</li>
     </ul>
     <h4 class="oe_mb16">0.4</h4>
@@ -122,11 +153,11 @@
     </ul>
     <h4 class="oe_mb16">0.3</h4>
     <ul>
-      <li>Render not implemented components/fields (raw data) with a warning.</li>
+      <li>Render <strong>not implemented components</strong> (raw data) with a warning.</li>
     </ul>
     <h4 class="oe_mb16">0.2</h4>
     <ul>
-      <li>Component/field: Select (one, multiple).</li>
+      <li>New <strong>select (one, multiple) component</strong>.</li>
       <li>Some layout/design improvements.</li>      
     </ul>
     <h4 class="oe_mb16">0.1</h4>
