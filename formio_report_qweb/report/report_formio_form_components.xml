@@ -5,58 +5,61 @@ See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
     <template id="component">
-        <t t-if="component['_object'].type == 'textfield'">
+        <t t-if="component.type == 'textfield'">
             <t t-call="formio_report_qweb.textfield_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'textarea'">
+        <t t-elif="component.type == 'textarea'">
             <t t-call="formio_report_qweb.textarea_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'number'">
+        <t t-elif="component.type == 'number'">
             <t t-call="formio_report_qweb.number_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'selectboxes'">
+        <t t-elif="component.type == 'selectboxes'">
             <t t-call="formio_report_qweb.selectboxes_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'checkbox'">
+        <t t-elif="component.type == 'checkbox'">
             <t t-call="formio_report_qweb.checkbox_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'select'">
+        <t t-elif="component.type == 'select'">
             <t t-call="formio_report_qweb.select_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'radio'">
+        <t t-elif="component.type == 'radio'">
             <t t-call="formio_report_qweb.radio_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'phoneNumber'">
+        <t t-elif="component.type == 'phoneNumber'">
             <t t-call="formio_report_qweb.phoneNumber_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'email'">
+        <t t-elif="component.type == 'email'">
             <t t-call="formio_report_qweb.email_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'signature'">
+        <t t-elif="component.type == 'datetime'">
+            <t t-call="formio_report_qweb.datetime_component"/>
+        </t>
+        <t t-elif="component.type == 'signature'">
             <t t-call="formio_report_qweb.signature_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'content'">
+        <t t-elif="component.type == 'content'">
             <t t-call="formio_report_qweb.content_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'file'">
+        <t t-elif="component.type == 'file'">
             <t t-call="formio_report_qweb.file_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'columns'">
+        <t t-elif="component.type == 'columns'">
             <t t-call="formio_report_qweb.columns_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'panel'">
+        <t t-elif="component.type == 'panel'">
             <t t-call="formio_report_qweb.panel_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'table'">
+        <t t-elif="component.type == 'table'">
             <t t-call="formio_report_qweb.table_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'tabs'">
+        <t t-elif="component.type == 'tabs'">
             <t t-call="formio_report_qweb.tabs_component"/>
         </t>
-        <t t-elif="component['_object'].type == 'datagrid'">
+        <t t-elif="component.type == 'datagrid'">
             <t t-call="formio_report_qweb.datagrid_component"/>
         </t>
-        <t t-elif="show_components_not_implemented and component['_object'].type not in ['button', 'file']">
+        <t t-elif="show_components_not_implemented and component.type not in ['button', 'file']">
             <t t-call="formio_report_qweb.component_not_implemented"/>
         </t>
     </template>
@@ -64,11 +67,11 @@ See LICENSE file for full copyright and licensing details.
     <template id="component_label">
         <t t-if="nolabel">
         </t>
-        <t t-elif="component.get('validate') and component['validate'].get('required')">
-            <t t-esc="component['_object'].label"/> *
+        <t t-elif="component.required">
+            <t t-esc="component.label"/> *
         </t>
         <t t-else="">
-            <t t-esc="component['_object'].label"/>
+            <t t-esc="component.label"/>
         </t>
     </template>
 
@@ -76,7 +79,7 @@ See LICENSE file for full copyright and licensing details.
     <template id="textfield_component">
         <div class="mw-100 mb-3 formio_textfield_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-            <p><t t-esc="component['_object'].value"/></p>
+            <p><t t-esc="component.value"/></p>
         </div>
     </template>
 
@@ -85,8 +88,8 @@ See LICENSE file for full copyright and licensing details.
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
             <!-- TODO FIX (security): split and loop lines, each with <t t-esc=...> -->
             <p>
-                <t t-if="component['_object'].value">
-                    <t t-raw="component['_object'].value.replace('\n', '&lt;br/&gt;')"/>
+                <t t-if="component.value">
+                    <t t-raw="component.value.replace('\n', '&lt;br/&gt;')"/>
                 </t>
             </p>
         </div>
@@ -95,22 +98,22 @@ See LICENSE file for full copyright and licensing details.
     <template id="number_component">
         <div class="mw-100 mb-3 formio_number_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-            <p><t t-esc="component['_object'].value"/></p>
+            <p><t t-esc="component.value"/></p>
         </div>
     </template>
 
     <template id="selectboxes_component">
         <div class="mw-100 mb-3">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-            <t t-foreach="component['_object'].values_labels" t-as="sbox">
+            <t t-foreach="component.values_labels" t-as="sbox">
                 <div>
-                    <t t-if="component['_object'].values_labels[sbox]['value'] == true">
+                    <t t-if="component.values_labels[sbox]['value'] == true">
                         <input type="checkbox" checked="checked" disable="disabled"/>
                     </t>
                     <t t-else="">
                         <input type="checkbox" disable="disabled"/>
                     </t>
-                    <span><t t-esc="component['_object'].values_labels[sbox]['label']"/></span>
+                    <span><t t-esc="component.values_labels[sbox]['label']"/></span>
                 </div>
             </t>
         </div>
@@ -118,7 +121,7 @@ See LICENSE file for full copyright and licensing details.
 
     <template id="checkbox_component">
         <div class="mw-100 mb-3">
-            <t t-if="component['_object'].value == true">
+            <t t-if="component.value == true">
                 <input type="checkbox" checked="checked" disabled="disabled"/>
             </t>
             <t t-else="">
@@ -130,17 +133,17 @@ See LICENSE file for full copyright and licensing details.
 
     <template id="select_component">
         <div class="mw-100 mb-3 formio_select_component">
-            <div class="label mb-2"><t t-esc="component['_object'].label"/></div>
-            <t t-if="component.get('multiple')">
+            <div class="label mb-2"><t t-esc="component.label"/></div>
+            <t t-if="component.multiple">
                 <div class="value_container">
-                    <t t-foreach="component['_object'].value_labels" t-as="val_label">
+                    <t t-foreach="component.value_labels" t-as="val_label">
                         <span class="badge badge-light"><t t-esc="val_label"/></span>
                     </t>
                 </div>
             </t>
             <t t-else="">
                 <div class="value_container">
-                    <span><t t-esc="component['_object'].value_label"/></span>
+                    <span><t t-esc="component.value_label"/></span>
                 </div>
             </t>
         </div>
@@ -149,15 +152,15 @@ See LICENSE file for full copyright and licensing details.
     <template id="radio_component">
         <div class="mw-100 mb-3">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-            <t t-foreach="component['_object'].values_labels" t-as="radio">
+            <t t-foreach="component.values_labels" t-as="radio">
                 <div>
-                    <t t-if="component['_object'].values_labels[radio]['value'] == true">
+                    <t t-if="component.values_labels[radio]['value'] == true">
                         <input type="radio" checked="checked" disable="disabled"/>
                     </t>
                     <t t-else="">
                         <input type="radio" disable="disabled"/>
                     </t>
-                    <span><t t-esc="component['_object'].values_labels[radio]['label']"/></span>
+                    <span><t t-esc="component.values_labels[radio]['label']"/></span>
                 </div>
             </t>
         </div>
@@ -166,22 +169,29 @@ See LICENSE file for full copyright and licensing details.
     <template id="phoneNumber_component">
         <div class="mw-100 mb-3 formio_phoneNumber_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-            <p t-esc="component['_object'].value"/>
+            <p t-esc="component.value"/>
         </div>
     </template>
 
     <template id="email_component">
         <div class="mw-100 mb-3 formio_email_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-            <p t-esc="component['_object'].value"/>
+            <p t-esc="component.value"/>
+        </div>
+    </template>
+
+    <template id="datetime_component">
+        <div class="mw-100 mb-3 formio_datetime_component">
+            <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
+            <p t-esc="component.value"/>
         </div>
     </template>
 
     <template id="signature_component">
         <div class="mw-100 mb-3 formio_signature_component">
-            <t t-if="component['_object'].value">
+            <t t-if="component.value">
                 <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-                <img t-att-src="component['_object'].value" t-att-alt="component['_object'].label"/>
+                <img t-att-src="component.value" t-att-alt="component.label"/>
             </t>
             <t t-else="">
                 <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
@@ -201,11 +211,11 @@ See LICENSE file for full copyright and licensing details.
         <div class="mw-100 mb-3 formio_file_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
             <!-- Determine storage:
-                 component['_object'].storage == 'base64'
-                 component['_object'].storage == 'url'
+                 component.storage == 'base64'
+                 component.storage == 'url'
             -->
-            <t t-if="component['_object'].value and component['image']">
-                <t t-foreach="component['_object'].value" t-as="image">
+            <t t-if="component.value and component['image']">
+                <t t-foreach="component.value" t-as="image">
                     <div class="mb-2">
                         <img t-att-src="image['url']" t-att-style="'width: ' + str(component['imageSize']) + 'px;'"/>
                     </div>
@@ -217,31 +227,32 @@ See LICENSE file for full copyright and licensing details.
     <template id="component_not_implemented">
         <div class="mw-100 mb-3 formio_component_not_implemented">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-            <div class="raw_value"><t t-esc="component['_object'].value"/></div>
+            <div class="raw_value"><t t-esc="component.value"/></div>
             <small>WARNING: component not implemented (showing raw data)</small>
         </div>
     </template>
 
-    <!-- Layout components -->
     <template id="columns_component">
-        <t t-set="col_width" t-value="int(12 / len(component['columns']))"/>
-        <div class="row mb-2">
-            <t t-foreach="component['columns']" t-as="col">
-                <div t-attf-class="col-{{ col_width }} mb-2">
-                    <t t-foreach="col['components']" t-as="component">
-                        <t t-call="formio_report_qweb.component"/>
-                    </t>
-                </div>
-            </t>
-        </div>
+        <t t-foreach="component.rows" t-as="row">
+            <div class="row mb-2 mb8">
+                <!-- col['with'] max to 12.. so if exceeds override by 12 -->
+                <t t-foreach="row" t-as="col">
+                    <div t-attf-class="col-{{ col['column']['width'] }} col-xs-{{ col['column']['width'] }} mb-2">
+                        <t t-foreach="col['components']" t-as="component">
+                            <t t-call="formio_report_qweb.component"/>
+                        </t>
+                    </div>
+                </t>
+            </div>
+        </t>
     </template>
 
     <template id="panel_component">
-        <div class="formio_panel_component mb-4">
-            <p><t t-esc="component['_object'].title"/></p>
+        <div class="formio_panel_component mb-4 mb16">
+            <p><t t-esc="component.title"/></p>
             <t t-set="panel_component" t-value="component"/>
-            <div class="formio_panel_components ml-4 mr-4">
-                <t t-foreach="panel_component['components']" t-as="component">
+            <div class="formio_panel_components ml-4 mr-4 ml8 mr8 mb8">
+                <t t-foreach="panel_component.children" t-as="component">
                     <t t-call="formio_report_qweb.component"/>
                 </t>
             </div>
@@ -287,31 +298,24 @@ See LICENSE file for full copyright and licensing details.
         </div>
     </template>
 
-        <!-- Data components -->
+    <!-- Data components -->
     <template id="datagrid_component">
-        <div class="formio_datagrid_component mb-4">
-            <t t-set="datagrid_component" t-value="component"/>
+        <div class="formio_datagrid_component mb-4 mb16">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
             <table class="table table-bordered table-sm">
-                <thead>
-                    <t t-foreach="datagrid_component['_object'].labels" t-as="key">
-                        <th t-esc="datagrid_component['_object'].labels[key]"/>
-                    </t>
-                </thead>
-                <tbody>
-                    <t t-foreach="datagrid_component['_object'].rows" t-as="row">
-                        <tr>
-                            <t t-foreach="datagrid_component['_object'].labels" t-as="key">
-                                <td>
-                                    <t t-call="formio_report_qweb.component">
-                                        <t t-set="component" t-value="row[key]"/>
-                                        <t t-set="nolabel" t-value="True"/>
-                                    </t>
-                                </td>
-                            </t>
-                        </tr>
-                    </t>
-                </tbody>
+                <!-- <t t-set="nolabel" t-value="False"/> -->
+                <t t-foreach="component.rows" t-as="row_with_components">
+                    <tr>
+                        <t t-foreach="row_with_components" t-as="component">
+                            <td style="border: none;">
+                                <t t-call="formio_report_qweb.component"/>
+                                <!--     <t t-set="nolabel" t-value="nolabel"/> -->
+                                <!-- </t> -->
+                            </td>
+                        </t>
+                    </tr>
+                    <!-- <t t-set="nolabel" t-value="True"/> -->
+                </t>
             </table>
         </div>
     </template>
