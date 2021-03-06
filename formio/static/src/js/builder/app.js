@@ -24,14 +24,17 @@ class App extends Component {
                 self.schema = result.schema;
                 self.options = result.options;
                 self.params = result.params;
-                self.createBuilder();
+                // TODO change this hack, which (maybe) is a silly
+                // workaround when Formbuilder object is not ready.
+                // Issue reported: https://github.com/novacode-nl/odoo-formio/issues/128
+                setTimeout(function() {self.createBuilder();}, 200);
             }
         });
     }
 
     createBuilder() {
         const self = this;
-        const builder = new Formio.FormBuilder(document.getElementById('formio_builder'), self.schema, self.options);
+        let builder = new Formio.FormBuilder(document.getElementById('formio_builder'), self.schema, self.options);
 
         builder.instance.ready.then(function() {
             if ('language' in self.options) {
