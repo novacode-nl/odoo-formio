@@ -203,7 +203,7 @@ See LICENSE file for full copyright and licensing details.
 
     <template id="content_component">
         <div class="mw-100 mb-3 formio_content_component">
-            <p><t t-raw="component['html']"/></p>
+            <p><t t-raw="component.raw['html']"/></p>
         </div>
     </template>
 
@@ -214,10 +214,10 @@ See LICENSE file for full copyright and licensing details.
                  component.storage == 'base64'
                  component.storage == 'url'
             -->
-            <t t-if="component.value and component['image']">
+            <t t-if="component.value and component.raw['image']">
                 <t t-foreach="component.value" t-as="image">
                     <div class="mb-2">
-                        <img t-att-src="image['url']" t-att-style="'width: ' + str(component['imageSize']) + 'px;'"/>
+                        <img t-att-src="image['url']" t-att-style="'width: ' + str(component.raw['imageSize']) + 'px;'"/>
                     </div>
                 </t>
             </t>
@@ -262,16 +262,13 @@ See LICENSE file for full copyright and licensing details.
     <template id="table_component">
         <div class="formio_table_component mb-4">
             <table>
-                <!-- XXX thead to render from builder? -->
                 <tbody>
-                    <t t-foreach="component['rows']" t-as="row">
+                    <t t-foreach="component.rows" t-as="row">
                         <tr>
-                            <t t-foreach="row" t-as="row_inner">
-                                <t t-foreach="row_inner['components']" t-as="component">
-                                    <td>
-                                        <t t-call="formio_report_qweb.component"/>
-                                    </td>
-                                </t>
+                            <t t-foreach="row" t-as="component">
+                                <td>
+                                    <t t-call="formio_report_qweb.component"/>
+                                </td>
                             </t>
                         </tr>
                     </t>
@@ -282,14 +279,13 @@ See LICENSE file for full copyright and licensing details.
 
     <template id="tabs_component">
         <div class="formio_tabs_component mb-4">
-            <t t-set="tabs_component" t-value="component"/>
             <div class="formio_tabs_components ml-4 mr-4">
-                <t t-foreach="tabs_component['components']" t-as="tab_inner_components">
+                <t t-foreach="component.tabs" t-as="tab">
                     <div class="formio_tab_component">
                         <div class="mb-2">
-                            <strong><t t-raw="tab_inner_components['label']"/></strong>
+                            <strong><t t-raw="tab['tab']['label']"/></strong>
                         </div>
-                        <t t-foreach="tab_inner_components['components']" t-as="component">
+                        <t t-foreach="tab['components']" t-as="component">
                             <t t-call="formio_report_qweb.component"/>
                         </t>
                     </div>
