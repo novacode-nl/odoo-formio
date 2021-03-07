@@ -7,7 +7,7 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.builder.tree</field>
         <field name="model">formio.builder</field>
         <field name="arch" type="xml">
-            <tree string="Form Builders" default_order="state, title"
+            <tree string="Form Builders" default_order="id desc"
                   decoration-success="state in ('CURRENT')"
                   decoration-muted="state in ('OBSOLETE')">
                 <field name="id" optional="hide"/>
