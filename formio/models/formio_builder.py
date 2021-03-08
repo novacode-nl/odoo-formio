@@ -27,6 +27,7 @@ class Builder(models.Model):
     _description = 'Form Builder'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    _order = 'title'
     _rec_name = 'display_name_full'
 
     _interval_selection = {'minutes': 'Minutes', 'hours': 'Hours', 'days': 'Days'}
