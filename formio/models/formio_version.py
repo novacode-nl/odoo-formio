@@ -36,6 +36,7 @@ class Version(models.Model):
         self._update_versions_sequence()
         return res
 
+    @api.multi
     def write(self, vals):
         res = super(Version, self).write(vals)
         if 'name' in vals:
