@@ -3,7 +3,6 @@
 
 from pkg_resources import parse_version
 
-
 from odoo import api, fields, models
 
 
