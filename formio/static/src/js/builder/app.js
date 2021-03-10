@@ -27,7 +27,7 @@ class App extends Component {
                 // TODO change this hack, which (maybe) is a silly
                 // workaround when Formbuilder object is not ready.
                 // Issue reported: https://github.com/novacode-nl/odoo-formio/issues/128
-                setTimeout(function() {self.createBuilder();}, 200);
+                setTimeout(function() {self.createBuilder();}, 100);
             }
         });
     }
