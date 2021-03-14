@@ -26,6 +26,7 @@ See LICENSE file for full licensing details. -->
         id="menu_formio_configuration"
         name="Configuration"
         parent="formio.menu_formio_root"
+        groups="formio.group_formio_admin"
         sequence="100"/>
     <!-- Settings like: Hide the Form.io logo -->
     <menuitem
