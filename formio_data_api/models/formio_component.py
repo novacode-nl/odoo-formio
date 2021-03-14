@@ -37,6 +37,10 @@ class FormioComponent(models.Model):
         store=True
     )
 
+    component_id = fields.Char(
+        string='Component ID'
+    )
+
     key = fields.Char(
         string='Key'
     )
@@ -217,6 +221,7 @@ class FormioComponent(models.Model):
             obj = builder._formio.form_components[component]
             self.create({
                 'label': obj.label,
+                'component_id': obj.id,
                 'key': obj.key,
                 'type': obj.type,
                 'builder_id': builder.id,
@@ -249,7 +254,7 @@ class FormioComponent(models.Model):
             elif not component.parent_id and grid:
                 component.parent_id = grid_record
             elif not grid:
-                component.parent_id = False
+                component.parent_id = [(5, 0, 0)]
 
             """
             Updating component attributes
