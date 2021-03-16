@@ -43,7 +43,6 @@ class FormioPublicController(http.Controller):
         if form and form.builder_id.schema:
             res['schema'] = json.loads(form.builder_id.schema)
             res['options'] = self._get_public_form_js_options(form)
-
         return res
 
     @http.route('/formio/public/form/<string:uuid>/submission', type='json', auth='public', website=True)
@@ -163,9 +162,10 @@ class FormioPublicController(http.Controller):
     def _get_public_form_js_options(self, form):
         options = form._get_js_options()
 
-        lang = request.env['res.lang']._lang_get(request.env.user.lang)
-        if lang:
-            options['language'] = lang.code
+        Lang = request.env['res.lang']
+        language = Lang._formio_ietf_code(request.env.user.lang)
+        if language:
+            options['language'] = language
             options['i18n'] = form.i18n_translations()
         return options
 
