@@ -19,7 +19,7 @@ COMPONENT_TYPES = [
 
 class FormioComponent(models.Model):
     _name = 'formio.component'
-    _rec_name = 'display_name'
+    _rec_name = 'label'
     _description = 'Formio Component'
 
     # ----------------------------------------------------------
@@ -187,7 +187,7 @@ class FormioComponent(models.Model):
 
         for datagrid in objects:
             if datagrid.type != 'datagrid':
-                return
+                continue
             builder = datagrid.builder_id
             builder_obj = datagrid.builder_id
             datagrid_children = list(builder_obj._formio.components[datagrid.key].labels.keys())
@@ -238,9 +238,11 @@ class FormioComponent(models.Model):
         """
         for key, comp in builder._formio.components.items():
             if not comp.input or comp.type == 'button':
-                return
+                continue
 
             component = self._get_components(builder, key)
+            if not component:
+                continue
 
             """
             Updating datagrid
