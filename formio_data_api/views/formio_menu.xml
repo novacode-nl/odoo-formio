@@ -8,6 +8,5 @@ See LICENSE file for full licensing details. -->
         name="Components"
         parent="formio.menu_formio_configuration"
         sequence="35"
-        groups="formio.group_formio_admin"
         action="formio_data_api.action_formio_component"/>
 </odoo>
