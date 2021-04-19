@@ -64,19 +64,6 @@ export class OdooFormioForm extends Component {
     createForm() {
         const self = this;
 
-        // Maybe avoid URL (check) on self.formUuid
-        if (self.formUuid) {
-            const hooks = {
-                'addComponent': function(component, comp, parent) {
-                    if (component.hasOwnProperty('data') &&
-                        component.data.hasOwnProperty('url') && !$.isEmptyObject(component.data.url)) {
-                        component.data.url = self.baseUrl.concat('/formio/form/',  self.formUuid, component.data.url);
-                    }
-                    return component;
-                }
-            };
-            self.options['hooks'] = hooks;
-        }
         Formio.setBaseUrl(window.location.href);
         Formio.createForm(document.getElementById('formio_form'), self.schema, self.options).then(function(form) {
             // Language
@@ -86,6 +73,17 @@ export class OdooFormioForm extends Component {
             window.setLanguage = function(lang) {
                 form.language = lang;
             };
+
+            // Alter the data (Data Source) URL, prefix with Odoo controller endpoint.
+            // This also accounts nested components eg inside datagrid, editgrid.
+            FormioUtils.eachComponent(form.components, (component) => {
+                console.log(component.key);
+                let compObj = component.component;
+                if (compObj.hasOwnProperty('data') &&
+                    compObj.data.hasOwnProperty('url') && !$.isEmptyObject(compObj.data.url)) {
+                    compObj.data.url = self.baseUrl.concat('/formio/form/',  self.formUuid, compObj.data.url);
+                }
+            });
 
             // Events
             form.on('submit', function(submission) {
