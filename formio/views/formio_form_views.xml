@@ -221,8 +221,9 @@ See LICENSE file for full licensing details. -->
         <field name="arch" type="xml">
             <search string="Forms">
                 <field name="id"/>
-                <field name="uuid"/>
                 <field name="title"/>
+                <field name="builder_id"/>
+                <field name="uuid"/>
                 <field name="user_id" groups="base.group_erp_manager"/>
                 <field name="submission_partner_id"/>
                 <field name="submission_user_id" groups="base.group_erp_manager"/>
@@ -232,6 +233,8 @@ See LICENSE file for full licensing details. -->
                 <field name="res_id"/>
                 <separator/>
                 <filter string="My Forms" name="my_forms"
+                        domain="[('create_uid', '=', uid)]"/>
+                <filter string="Assigned Forms" name="assigned_forms"
                         domain="[('user_id', '=', uid)]"/>
                 <separator/>
                 <filter string="Pending" name="state_pending"
