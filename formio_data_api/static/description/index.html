@@ -20,6 +20,17 @@
 <section class="oe_container oe_dark">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">0.6</h4>
+    <ul>
+      <li>
+        New API feature, support for Mail Template:<br/>
+        Form model object (<code>formio.form</code>) can now be used in a Mail Template (Jinja template renderer), e.g. to show field value, select choices etc.<br/></br>
+        This extends the <em>Mail Render Mixin</em>, because the <em>Jinja Sandbox</em> object doesn't directly allow <code>${object._formio}</code>, which it treats as unsafe and throws an
+        exception.<br/><br/>
+        USAGE EXAMPLE (where <code>object</code> is a <code>formio.form</code> model object):<br/>
+        <code>${formio(object).data.firstName.value}</code>
+      </li>
+    </ul>
     <h4 class="oe_mb16">0.5</h4>
     <ul>
       <li>
