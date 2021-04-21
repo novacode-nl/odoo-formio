@@ -1,5 +1,4 @@
-# odoo-formio
-Odoo Forms modules
+# Odoo Forms modules
 
 ### Documentation
 
