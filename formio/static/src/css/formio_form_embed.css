@@ -30,6 +30,7 @@ h3.formio_form_title {
 .formio_languages {
     clear: both;
     margin-bottom: 20px;
+    padding-top: 4px;
     padding-left: 4px;
 }
 
