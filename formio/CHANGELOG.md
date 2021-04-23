@@ -2,9 +2,11 @@
 
 ### 8.24
 
-- Add translation for the alert message(s) in top of the Form.
+- Add translation for the alert message(s), in top of the Form.
   - Translated for language codes: nl, nl_BE, pt_BR, zh_CN.
   - Relates to: https://github.com/formio/formio.js/issues/3105, https://github.com/formio/formio.js/issues/2627
+- Add translation for the submitError message, near submit button of the Form.
+  - Translated for language codes: nl, nl_BE, pt_BR, zh_CN.
 
 ### 8.23
 
