@@ -190,5 +190,10 @@ See LICENSE file for full licensing details. -->
             <field name="source_id" ref="formio.i18n_submit"/>
             <field name="value">提交</field>
         </record>
+        <record id="i18n_zh_CN_submitError" model="formio.translation">
+            <field name="lang_id" ref="base.lang_zh_CN"/>
+            <field name="source_id" ref="formio.i18n_submitError"/>
+            <field name="value">提交前，请检查表格并更正所有错误</field>
+        </record>
     </data>
 </odoo>

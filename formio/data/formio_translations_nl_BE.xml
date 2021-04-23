@@ -190,5 +190,10 @@ See LICENSE file for full licensing details. -->
             <field name="source_id" ref="formio.i18n_submit"/>
             <field name="value">Verstuur formulier</field>
         </record>
+        <record id="i18n_nl_BE_submitError" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="source_id" ref="formio.i18n_submitError"/>
+            <field name="value">Controleer het formulier en corrigeer alle fouten voordat u het verzendt.</field>
+        </record>
     </data>
 </odoo>

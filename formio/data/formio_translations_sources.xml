@@ -156,5 +156,9 @@ See LICENSE file for full licensing details. -->
             <field name="property">submit</field>
             <field name="source">Submit</field>
         </record>
+        <record id="i18n_submitError" model="formio.translation.source">
+            <field name="property">submitError</field>
+            <field name="source">Please check the form and correct all errors before submitting.</field>
+        </record>
     </data>
 </odoo>
