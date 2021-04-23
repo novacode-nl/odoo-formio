@@ -15,6 +15,11 @@ See LICENSE file for full licensing details. -->
             <field name="source_id" ref="formio.i18n_error"/>
             <field name="value">Voordat u het formulier kunt opslaan, dient u de volgende fouten op te lossen.</field>
         </record>
+        <record id="i18n_nl_alertMessage" model="formio.translation">
+            <field name="lang_id" ref="base.lang_nl"/>
+            <field name="source_id" ref="formio.i18n_alertMessage"/>
+            <field name="value">{{message}}</field>
+        </record>
         <record id="i18n_nl_required" model="formio.translation">
             <field name="lang_id" ref="base.lang_nl"/>
             <field name="source_id" ref="formio.i18n_required"/>
