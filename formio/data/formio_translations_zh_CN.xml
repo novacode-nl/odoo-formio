@@ -15,6 +15,11 @@ See LICENSE file for full licensing details. -->
             <field name="source_id" ref="formio.i18n_error"/>
             <field name="value">请在提交前修正以下错误：</field>
         </record>
+        <record id="i18n_zh_CN_alertMessage" model="formio.translation">
+            <field name="lang_id" ref="base.lang_zh_CN"/>
+            <field name="source_id" ref="formio.i18n_alertMessage"/>
+            <field name="value">{{message}}</field>
+        </record>
         <record id="i18n_zh_CN_required" model="formio.translation">
             <field name="lang_id" ref="base.lang_zh_CN"/>
             <field name="source_id" ref="formio.i18n_required"/>

@@ -1,5 +1,11 @@
 # Change Log
 
+### 8.24
+
+- Add translation for the alert message(s) in top of the Form.
+  - Translated for language codes: nl, nl_BE, pt_BR, zh_CN.
+  - Relates to: https://github.com/formio/formio.js/issues/3105, https://github.com/formio/formio.js/issues/2627
+
 ### 8.23
 
 - Fix: Nested components (eg inside datagrid, editgrid) **Data Source URL**
@@ -25,23 +31,23 @@
 ### 8.18
 
 - Fix: Issue in Form (form-view) searching Builder(s) really didn't worked properly.\
-Technical details:\
-This change addresses the `formio.builder`, adding the `search` method for the computed field `display_name_full` which is used as `_rec_name`.
+  Technical details:\
+  This change addresses the `formio.builder`, adding the `search` method for the computed field `display_name_full` which is used as `_rec_name`.
 
 ### 8.17
 
 - Fix: Error when uninstall and installing again. `Record does not exist or has been deleted. (Record: formio.builder.js.options(1,), User: 2)`\
-Uninstall now deletes the system parameter (record) with key `formio.default_builder_js_options_id`
+  Uninstall now deletes the system parameter (record) with key `formio.default_builder_js_options_id`
 
 ### 8.16
 
 - New feature: Grant copy Forms persmission (button), also in portal, configured by Form Builder.\
-It's also possible to configure whether the Form should be copied and merged into the latest/current Form Builder schema (design).
+  It's also possible to configure whether the Form should be copied and merged into the latest/current Form Builder schema (design).
 
 ### 8.15
 
 - Removed rigorous record rule `ir_attachment_unlink_formio_form` (Attachments of completed Forms can't be deleted).\
-This was intended, now moved and improved in the module `formio_storage_filestore`.
+  This was intended, now moved and improved in the module `formio_storage_filestore`.
 
 ### 8.14
 
@@ -58,24 +64,25 @@ This was intended, now moved and improved in the module `formio_storage_filestor
 
 ### 8.11
 
-- Fix singleton error, when matching multiple Partners by email in the Form (e.g. for following and report emails). [\#109](https://github.com/novacode-nl/odoo-formio/pull/109)
+- Fix singleton error, when matching multiple Partners by email in the Form (e.g. for following and report emails).\
+  PR [\#109](https://github.com/novacode-nl/odoo-formio/pull/109)
 - Schedule Activity (on Form) if found multiple Partners with same email submitted in the Form.
 
 ### 8.10
 
 - JavaScript: Set the `baseUrl` (value: `window.location.href`) on the Formio object.\
-The `baseUrl` is the Form it's `<iframe src=.../>` attribute.\
-This can be used in other (integration) modules e.g. for security/access checking etc.
+  The `baseUrl` is the Form it's `<iframe src=.../>` attribute.\
+  This can be used in other (integration) modules e.g. for security/access checking etc.
 
 ### 8.9
 
 - Fix server crashing due to request unbound error, while installing or updating module.\
-Bug has been introduced in version 8.7, `formio.builder` function `_compute_public_url` of computed field `public_url`.
+  Bug has been introduced in version 8.7, `formio.builder` function `_compute_public_url` of computed field `public_url`.
 
 ### 8.8
 
 - In model `ir.attachment` define the relational field `formio_form_id = fields.Many2one('formio.form')`\
-Can be used for all kinds of integration e.g. files upload storage.
+  Can be used for all kinds of integration e.g. files upload storage.
 
 ### 8.7
 
@@ -83,42 +90,36 @@ Can be used for all kinds of integration e.g. files upload storage.
 
 ### 8.6
 
-- Fix: Language determination in Public Form (also used by `website_formio` module). [\#101](https://github.com/novacode-nl/odoo-formio/pull/101)
+- Fix: Language determination in Public Form (also used by `website_formio` module).\
+  PR [\#101](https://github.com/novacode-nl/odoo-formio/pull/101)
 
 ### 8.5
 
 - Fix (4): language switcher buttons and translations in public Forms (also used by `website_formio` module).\
-Convert the Odoo language code (underscore "_") to Formio JS/i18n expected IETF code (hyphen "-").\
-PR: [\#100](https://github.com/novacode-nl/odoo-formio/pull/100)
+  Convert the Odoo language code (underscore "_") to Formio JS/i18n expected IETF code (hyphen "-").\
+  PR: [\#100](https://github.com/novacode-nl/odoo-formio/pull/100)
 
 ### 8.4
 
 - Fix: formio.js version updates in Windows environments are not available.\
-PR: [\#92](https://github.com/novacode-nl/odoo-formio/pull/92)
+  PR: [\#92](https://github.com/novacode-nl/odoo-formio/pull/92)
 
 ### 8.3
 
 - Fix (3): language switcher buttons and translations in Form Builder and Forms.\
-Convert the Odoo language code (underscore "_") to Formio JS/i18n expected IETF code (hyphen "-").\
-Issues:\
-[\#91](https://github.com/novacode-nl/odoo-formio/issues/91)\
-[\#93](https://github.com/novacode-nl/odoo-formio/issues/93)\
-[\#95](https://github.com/novacode-nl/odoo-formio/issues/95)
+  Convert the Odoo language code (underscore "_") to Formio JS/i18n expected IETF code (hyphen "-").\
+  Issues: [\#91](https://github.com/novacode-nl/odoo-formio/issues/91), [\#93](https://github.com/novacode-nl/odoo-formio/issues/93), [\#95](https://github.com/novacode-nl/odoo-formio/issues/95)
 
 ### 8.2
 
 - Fix (2): language switcher buttons and translations in Form Builder and Forms.\
-Issues:\
-[\#91](https://github.com/novacode-nl/odoo-formio/issues/91)\
-[\#93](https://github.com/novacode-nl/odoo-formio/issues/93)\
+  Issues: [\#91](https://github.com/novacode-nl/odoo-formio/issues/91), [\#93](https://github.com/novacode-nl/odoo-formio/issues/93)
 
 ### 8.1
 
 - Fix (1): language switcher buttons in Form Builder and Forms.\
-Shown languages (buttons) are determined by configured languages in the Form Builder.\
-Issues:\
-[\#91](https://github.com/novacode-nl/odoo-formio/issues/91)\
-[\#93](https://github.com/novacode-nl/odoo-formio/issues/93)\
+  Shown languages (buttons) are determined by configured languages in the Form Builder.\
+  Issues: [\#91](https://github.com/novacode-nl/odoo-formio/issues/91), [\#93](https://github.com/novacode-nl/odoo-formio/issues/93)
 - Add translations pt_BR: Portuguese (BR)
 
 ### 8.0
@@ -128,12 +129,12 @@ Issues:\
 ### 7.9
 
 - Fix: obtaining the latest GitHub 30 release versions often get (HTTP) 403 errors.\
-Adds a _GitHub personal access token_ in the Settings, to get a higher rate limit.
+  Adds a **GitHub personal access token** in the Settings, to get a higher rate limit.
 
 ### 7.8
 
 - Fix: Forms should be accessible when user belongs to both groups: *User: Assigned forms* and *User: All forms*
-Group *User: All forms* takes precedence over *User: Assigned forms*.
+  Group *User: All forms* takes precedence over *User: Assigned forms*.
 
 ### 7.7
 
@@ -144,20 +145,20 @@ Group *User: All forms* takes precedence over *User: Assigned forms*.
 ### 7.6
 
 - New feature: specify Form Builder Javascript options API/argument.\
-Form Builder JavaScript options can be specified in the form-view (tab) and shall be stored in `formio.builder` record.\
-Default (global) JavasScript options can be specified in the Forms Settings, which are by default loaded while creating a Form Builder.\
-For example, the Form Builder editForm File component options: https://github.com/formio/formio.js/tree/master/src/components/file/editForm
+  Form Builder JavaScript options can be specified in the form-view (tab) and shall be stored in `formio.builder` record.\
+  Default (global) JavasScript options can be specified in the Forms Settings, which are by default loaded while creating a Form Builder.\
+  For example, the Form Builder editForm File component options: https://github.com/formio/formio.js/tree/master/src/components/file/editForm
 
 ### 7.5
 
 - Fix Form Builder save (JavaScript event handler).\
-Use the event handler its argument (schema/components) instead of `self.schema` (scary change/bug)\
-Issue: [\#66](https://github.com/novacode-nl/odoo-formio/issues/66)
+  Use the event handler its argument (schema/components) instead of `self.schema` (scary change/bug)\
+  Issue: [\#66](https://github.com/novacode-nl/odoo-formio/issues/66)
 
 ### 7.4
 
 - Implemented Form Builder `copy()` method, which previously was blocked / not possible. This due to unique contraint validation on fields `name` and `version`.\
-Upon copy, the new Form Builder its name (field value) shall be suffixed with a datetime-stamp.
+  Upon copy, the new Form Builder its name (field value) shall be suffixed with a datetime-stamp.
 
 ### 7.3
 
@@ -183,7 +184,7 @@ Upon copy, the new Form Builder its name (field value) shall be suffixed with a 
   E.g. to set `config_url = '/formio/public/form/' + this.form_uuid + '/config';`
 
 ### 7.0
-- Frontend rebuild with Owl (Javascript framework) - Form Builder and Form:
+- Frontend rebuild with **Owl (Odoo Javascript framework)** - Form Builder and Form:
   - Use the Owl - https://odoo.github.io/owl - JavaScript framework, to abstract the Form component into a Component class.
   - JavaScript modules (export/import) to bind the Owl classes into specific backend and public Form (Owl) Apps.
   - This also breaks/ends support for Internet Explorer, which is already published EOL.
@@ -234,7 +235,7 @@ Upon copy, the new Form Builder its name (field value) shall be suffixed with a 
 
 ### 4.4
 
-- Change 4.3 implementation (`>final_res` fields), which was rather confusing:\
+- Change 4.3 implementation (`>final_res` fields), which was rather confusing:
   - Remove the `final_res_model`, `final_res_id` fields.
   - Instead: in model `formio.form` added fields `initial_res_model_id`, `initial_res_id`.
   - These fields store the initial (referenced) resource record. So swapping the `res_model_id` and `res_id` afterwards is supported, for specific implementation requirements.
@@ -295,7 +296,8 @@ Upon copy, the new Form Builder its name (field value) shall be suffixed with a 
 
 ### 3.2
 
-- Optional configuration to allow specific User Group(s) to force update of a **Form state** field (draft, complete, cancel) e.g. by buttons. [\#36](https://github.com/novacode-nl/odoo-formio/issues/36)
+- Optional configuration to allow specific User Group(s) to force update of a **Form state** field (draft, complete, cancel) e.g. by buttons.\
+  Feature/issue: [\#36](https://github.com/novacode-nl/odoo-formio/issues/36)
 
 ### 3.1
 
@@ -313,7 +315,7 @@ Upon copy, the new Form Builder its name (field value) shall be suffixed with a 
 
 ### 2.2
 
-- Fix (workaround) to solve form height-resizing issues. [\#20](https://github.com/novacode-nl/odoo-formio/issues/20)
+- Fix (workaround) to solve form height-resizing issues [\#20](https://github.com/novacode-nl/odoo-formio/issues/20)
 
 ### 2.1
 
