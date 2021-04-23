@@ -15,6 +15,11 @@ See LICENSE file for full licensing details. -->
             <field name="source_id" ref="formio.i18n_error"/>
             <field name="value">Antes de salvar o formulário, você deve resolver os erros a seguir.</field>
         </record>
+        <record id="i18n_pt_BR_alertMessage" model="formio.translation">
+            <field name="lang_id" ref="base.lang_pt_BR"/>
+            <field name="source_id" ref="formio.i18n_alertMessage"/>
+            <field name="value">{{message}}</field>
+        </record>
         <record id="i18n_pt_BR_required" model="formio.translation">
             <field name="lang_id" ref="base.lang_pt_BR"/>
             <field name="source_id" ref="formio.i18n_required"/>

@@ -12,6 +12,10 @@ See LICENSE file for full licensing details. -->
             <field name="property">error</field>
             <field name="source">Please fix the following errors before submitting.</field>
         </record>
+        <record id="i18n_alertMessage" model="formio.translation.source">
+            <field name="property">alertMessage</field>
+            <field name="source">{{message}}</field>
+        </record>
         <record id="i18n_required" model="formio.translation.source">
             <field name="property">required</field>
             <field name="source">{{field}} is required</field>
