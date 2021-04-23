@@ -1,4 +1,4 @@
-# Change Log
+# Changelog
 
 ### 8.24
 
