@@ -19,7 +19,7 @@ COMPONENT_TYPES = [
 
 class FormioComponent(models.Model):
     _name = 'formio.component'
-    _rec_name = 'display_name'
+    _rec_name = 'label'
     _description = 'Formio Component'
 
     # ----------------------------------------------------------
@@ -35,6 +35,10 @@ class FormioComponent(models.Model):
         compute='_compute_display_name',
         readonly=True,
         store=True
+    )
+
+    component_id = fields.Char(
+        string='Component ID'
     )
 
     key = fields.Char(
@@ -183,7 +187,7 @@ class FormioComponent(models.Model):
 
         for datagrid in objects:
             if datagrid.type != 'datagrid':
-                return
+                continue
             builder = datagrid.builder_id
             builder_obj = datagrid.builder_id
             datagrid_children = list(builder_obj._formio.components[datagrid.key].labels.keys())
@@ -217,6 +221,7 @@ class FormioComponent(models.Model):
             obj = builder._formio.form_components[component]
             self.create({
                 'label': obj.label,
+                'component_id': obj.id,
                 'key': obj.key,
                 'type': obj.type,
                 'builder_id': builder.id,
@@ -233,9 +238,11 @@ class FormioComponent(models.Model):
         """
         for key, comp in builder._formio.components.items():
             if not comp.input or comp.type == 'button':
-                return
+                continue
 
             component = self._get_components(builder, key)
+            if not component:
+                continue
 
             """
             Updating datagrid
@@ -249,7 +256,7 @@ class FormioComponent(models.Model):
             elif not component.parent_id and grid:
                 component.parent_id = grid_record
             elif not grid:
-                component.parent_id = False
+                component.parent_id = [(5, 0, 0)]
 
             """
             Updating component attributes
