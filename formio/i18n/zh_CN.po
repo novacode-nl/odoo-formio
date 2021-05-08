@@ -1616,7 +1616,7 @@ msgstr "向公众发布"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__res_name
-msgid "Record  Name"
+msgid "Record Name"
 msgstr "记录名称"
 
 #. module: formio

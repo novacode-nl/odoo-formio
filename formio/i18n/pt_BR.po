@@ -1513,7 +1513,7 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__res_name
-msgid "Record  Name"
+msgid "Record Name"
 msgstr "Nome do Registro"
 
 #. module: formio

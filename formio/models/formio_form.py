@@ -66,7 +66,7 @@ class Form(models.Model):
     res_id = fields.Integer("Record ID", ondelete='restrict',
         help="Database ID of the record in res_model to which this applies")
     res_act_window_url = fields.Char(readonly=True)
-    res_name = fields.Char(string='Record  Name', readonly=True)
+    res_name = fields.Char(string='Record Name', readonly=True)
     res_partner_id = fields.Many2one('res.partner', readonly=True, string='Resource Partner')
     user_id = fields.Many2one(
         'res.users', string='Assigned user',
