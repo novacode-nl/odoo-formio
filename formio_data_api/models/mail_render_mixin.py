@@ -4,7 +4,7 @@
 from odoo.addons.mail.models.mail_render_mixin import MailRenderMixin
 
 
-def _formio(model_obj, print_label=False):
+def _formio(model_obj):
     """
     Return Form (or Builder) object by formio_data_api.
     
