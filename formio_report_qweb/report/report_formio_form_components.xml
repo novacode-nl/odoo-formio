@@ -68,10 +68,10 @@ See LICENSE file for full copyright and licensing details.
         <t t-if="nolabel">
         </t>
         <t t-elif="component.required">
-            <t t-esc="component.label"/> *
+            <t t-raw="component.label"/> *
         </t>
         <t t-else="">
-            <t t-esc="component.label"/>
+            <t t-raw="component.label"/>
         </t>
     </template>
 
@@ -228,7 +228,7 @@ See LICENSE file for full copyright and licensing details.
         <div class="mw-100 mb-3 formio_component_not_implemented">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
             <div class="raw_value"><t t-esc="component.value"/></div>
-            <small>WARNING: component not implemented (showing raw data)</small>
+            <small>WARNING: <span t-esc="component.type"/> component not implemented (showing raw data)</small>
         </div>
     </template>
 
@@ -252,7 +252,8 @@ See LICENSE file for full copyright and licensing details.
             <p><t t-esc="component.title"/></p>
             <t t-set="panel_component" t-value="component"/>
             <div class="formio_panel_components ml-4 mr-4 ml8 mr8 mb8">
-                <t t-foreach="panel_component.children" t-as="component">
+                <t t-foreach="panel_component.components.items()" t-as="component">
+                    <t t-set="component" t-value="component[1]"/>
                     <t t-call="formio_report_qweb.component"/>
                 </t>
             </div>
@@ -300,9 +301,9 @@ See LICENSE file for full copyright and licensing details.
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
             <table class="table table-bordered table-sm">
                 <!-- <t t-set="nolabel" t-value="False"/> -->
-                <t t-foreach="component.rows" t-as="row_with_components">
+                <t t-foreach="component.rows" t-as="grid_row">
                     <tr>
-                        <t t-foreach="row_with_components" t-as="component">
+                        <t t-foreach="grid_row.components.values()" t-as="component">
                             <td style="border: none;">
                                 <t t-call="formio_report_qweb.component"/>
                                 <!--     <t t-set="nolabel" t-value="nolabel"/> -->

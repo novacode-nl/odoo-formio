@@ -7,7 +7,7 @@
       <h5>Installation Requirements</h5>
       <ul>
         <li>
-          PyPi package <code>formio-data</code> version >= 0.2.0<br/>
+          PyPi package <code>formio-data</code> version >= 0.3.0<br/>
           - Install: <code>pip3 install -U formio-data</code><br/>
           - GitHub project: <code>https://github.com/novacode-nl/python-formio-data</code>
         </li>
@@ -87,6 +87,17 @@
 <section class="oe_container oe_dark">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">2.0</h4>
+    <ul>
+      <li>
+        <strong>MAJOR IMPROVEMENT: Rendering of nested components</strong> e.g. in datagrid, layout components.<br/>
+        Possible by recent improvements in the Python formiodata library (version: 0.3.0).<br/>
+        <strong>IMPORTANT: This release is backwards incompatible</strong> (eg in case of implemented custom QWeb Reports which inherit from this QWeb XML).
+      </li>
+      <li>
+        Don't escape a component label (lets' trust this). This ensures the label (inner) HTML/styling shall be preserved in reports.
+      </li>
+    </ul>
     <h4 class="oe_mb16">1.1</h4>
     <ul>
       <li>
@@ -96,12 +107,12 @@
     <h4 class="oe_mb16">1.0</h4>
     <ul>
       <li>
-        MAJOR IMPROVEMENT: <strong>Rendering of deeply nested components</strong> e.g. in datagrid, layout components.<br/>
-        Possible by recent improvements in the Python formiodata library by the new <code>FormRenderer</code> class.
+        Improves <strong>Rendering of nested components</strong> e.g. in datagrid, layout components.<br/>
+        Possible by recent improvements in the Python formiodata library (version: 0.2.0).
       </li>
       <li>
-        Improve <strong>datagrid component</strong> rendering.<br/>
-        Possible by recent improvements in the Python formiodata library by the new <code>FormRenderer</code> class.
+        Improves <strong>datagrid component</strong> rendering.<br/>
+        Possible by recent improvements in the Python formiodata library (version: 0.2.0).
       </li>
       <li>
         New <strong>datetime component</strong>
