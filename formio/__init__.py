@@ -18,4 +18,4 @@ def uninstall_hook(cr, registry):
             env = api.Environment(cr, SUPERUSER_ID, {})
             env['ir.config_parameter'].search(
                 [('key', '=', 'formio.default_builder_js_options_id')]).unlink()
-    cr.postcommit.add(partial(delete_config_parameter, cr.dbname))
+    cr.after("commit", partial(delete_config_parameter, cr.dbname))
