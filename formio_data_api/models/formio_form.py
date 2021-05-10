@@ -67,7 +67,7 @@ class FormioForm(models.Model):
 
         if self.res_model_id:
             model_object = self.env[self.res_model_id.model].browse(self.res_id)
-            for comp_name, comp in self._formio.builder.form_components.items():
+            for comp_name, comp in self._formio.builder.input_components.items():
                 if comp_name == ODOO_MODEL_PREFIX:
                     data[comp_name] = self.res_model_id.model
                 elif comp_name.startswith(ODOO_REFRESH_PREFIX) or (comp_name.startswith(ODOO_PREFIX) and self.state == STATE_PENDING):
