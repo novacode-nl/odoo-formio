@@ -10,10 +10,9 @@ odoo.define('formio.tour', function(require) {
         url: "/web",
         rainbowMan: false,
         sequence: 20,
-    }, [tour.stepUtils.showAppsMenuItem(), {
+    }, [{
         trigger: "button[name='action_view_formio']",
         content: _t("After save, click here (or the view switch) to open the Form Builder."),
         position: "bottom",
     }]);
-
 });
