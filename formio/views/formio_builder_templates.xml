@@ -10,6 +10,9 @@ See LICENSE file for full licensing details. -->
             <script type="text/javascript" src="/formio/static/src/js/views/formio_builder_controller.js"></script>
             <script type="text/javascript" src="/formio/static/src/js/views/formio_builder_renderer.js"></script>
         </xpath>
+        <xpath expr="script[last()]" position="after">
+            <script type="text/javascript" src="/formio/static/src/js/tours/formio.js"></script>
+        </xpath>
     </template>
 
     <template id="formio_builder_embed" name="Form.io Builder - Embed">
