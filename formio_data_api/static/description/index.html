@@ -26,6 +26,23 @@
 <section class="oe_container oe_dark">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">0.7</h4>
+    <ul>
+      <li>
+        New ETL API: <code>OdooUser</code><br/>
+        ETL a field from <strong>current user</strong> into the Form.<br/>
+        (could also be read as the logged-in user)
+      </li>
+      <li>
+        Change ETL API: <code>Odoo</code><br/>
+        This now ETL a field from the Resource model object into the Form, also when Form has <strong>state = DRAFT</strong>.
+      </li>
+      <li>
+        Change ETL API: <code>OdooModel</code><br/>
+        ETL a field from the linked <strong>Resource model object</strong> into the Form.<br/>
+        (!!) This is backwards incompatible and requires to change existing Form Builders to: <code>OdooModel__model</code>
+      </li>
+    </ul>
     <h4 class="oe_mb16">0.6</h4>
     <ul>
       <li>
@@ -43,7 +60,10 @@
     </ul>
     <h4 class="oe_mb16">0.4</h4>
     <ul>
-      <li>New API feature: ETL the Odoo model name into Forms (API Property Name: <code>OdooModel</code>).</li>
+      <li>
+        New API feature <code>OdooModel</code><br/>
+        ETL the Odoo model name into Forms (API Property Name: <code>OdooModel</code>).
+      </li>
     </ul>
     <h4 class="oe_mb16">0.3</h4>
     <ul>
@@ -55,7 +75,10 @@
     </ul>
     <h4 class="oe_mb16">0.2</h4>
     <ul>
-      <li>New API feature: ETL Odoo field-data into Forms.</li>
+      <li>
+        New API features <code>Odoo</code> and <code>OdooRF</code><br/>
+        ETL Odoo field-data into Forms.
+      </li>
     </ul>
     <h4 class="oe_mb16">0.1</h4>
     <ul>
