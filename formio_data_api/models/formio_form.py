@@ -17,6 +17,7 @@ _logger = logging.getLogger(__name__)
 
 ODOO_PREFIX = 'Odoo'
 ODOO_REFRESH_PREFIX = 'OdooRF'
+ODOO_USER_PREFIX = 'OdooUser'
 ODOO_MODEL_PREFIX = 'OdooModel'
 
 # IMPORTANT regarding the delimiter choice:
@@ -65,14 +66,30 @@ class FormioForm(models.Model):
     def _etl_odoo_data(self):
         data = super(FormioForm, self)._etl_odoo_data()
 
-        if self.res_model_id:
-            model_object = self.env[self.res_model_id.model].browse(self.res_id)
-            for comp_name, comp in self._formio.builder.input_components.items():
+        for comp_name, comp in self._formio.builder.input_components.items():
+            val = False
+            if comp_name.startswith(ODOO_USER_PREFIX) and self.state in (STATE_PENDING, STATE_DRAFT):
+                # Current user
+                val = self._etl_odoo_field_val(self.env.user, comp_name, comp)
+            elif self.res_model_id:
+                # Form is linked with a resource object (eg crm.lead, sale.order etc)
                 if comp_name == ODOO_MODEL_PREFIX:
-                    data[comp_name] = self.res_model_id.model
-                elif comp_name.startswith(ODOO_REFRESH_PREFIX) or (comp_name.startswith(ODOO_PREFIX) and self.state == STATE_PENDING):
+                    # Resource model: ir.model (object)
+                    val = self._etl_odoo_field_val(self.res_model_id, comp_name, comp)
+                elif comp_name.startswith(ODOO_REFRESH_PREFIX):
+                    # Resource model: always refresh/reload
+                    model_object = self.env[self.res_model_id.model].browse(self.res_id)
                     val = self._etl_odoo_field_val(model_object, comp_name, comp)
-                    data[comp_name] = val
+                elif comp_name.startswith(ODOO_PREFIX) and self.state in (STATE_PENDING, STATE_DRAFT):
+                    # Resource model: only load if form state in [PENDING, DRAFT]
+                    #
+                    # IMPORTANT !
+                    # Keep this one last, because it's the always matching `Odoo` prefix.
+                    model_object = self.env[self.res_model_id.model].browse(self.res_id)
+                    val = self._etl_odoo_field_val(model_object, comp_name, comp)
+
+            if val:
+                data[comp_name] = val
         return data
 
     def _etl_odoo_field_val(self, res_model_object, formio_component_name, formio_component):
@@ -119,6 +136,8 @@ class FormioForm(models.Model):
             elif field_def.type == 'many2one':
                 try:
                     model_object = getattr(model_object, field)
+                    if not model_object:
+                        return False
                     fields_done.append(field)
                 except:
                     error_msg = "field not found in model"
@@ -137,10 +156,15 @@ class FormioForm(models.Model):
         return odoo_field_val
 
     def _split_fields_token(self, split_str):
-        if split_str.startswith(ODOO_REFRESH_PREFIX):
+        if split_str.startswith(ODOO_USER_PREFIX):
+            re_pattern = r'^%s\%s' % (ODOO_USER_PREFIX, ODOO_FIELD_DELIM)
+            res = re.sub(re_pattern, '', split_str).split(ODOO_FIELD_DELIM)
+        elif split_str.startswith(ODOO_REFRESH_PREFIX):
             re_pattern = r'^%s\%s' % (ODOO_REFRESH_PREFIX, ODOO_FIELD_DELIM)
             res = re.sub(re_pattern, '', split_str).split(ODOO_FIELD_DELIM)
         elif split_str.startswith(ODOO_PREFIX):
+            # IMPORTANT !
+            # Keep this one last, because it's the always matching `Odoo` prefix.
             re_pattern = r'^%s\%s' % (ODOO_PREFIX, ODOO_FIELD_DELIM)
             res = re.sub(re_pattern, '', split_str).split(ODOO_FIELD_DELIM)
         else:
