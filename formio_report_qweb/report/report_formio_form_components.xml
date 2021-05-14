@@ -35,8 +35,14 @@ See LICENSE file for full copyright and licensing details.
         <t t-elif="component.type == 'datetime'">
             <t t-call="formio_report_qweb.datetime_component"/>
         </t>
+        <t t-elif="component.type == 'day'">
+            <t t-call="formio_report_qweb.day_component"/>
+        </t>
         <t t-elif="component.type == 'signature'">
             <t t-call="formio_report_qweb.signature_component"/>
+        </t>
+        <t t-elif="component.type == 'htmlelement'">
+            <t t-call="formio_report_qweb.htmlelement_component"/>
         </t>
         <t t-elif="component.type == 'content'">
             <t t-call="formio_report_qweb.content_component"/>
@@ -187,6 +193,32 @@ See LICENSE file for full copyright and licensing details.
         </div>
     </template>
 
+    <template id="day_component">
+        <div class="mw-100 mb-3 formio_day_component">
+            <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
+            <div class="row">
+                <t t-foreach="component.value.items()" t-as="date_part">
+                    <div class="col-4 col-xs-4">
+                        <div class="row">
+                            <t t-if="date_part[0] == 'month'">
+                                Month
+                            </t>
+                            <t t-elif="date_part[0] == 'day'">
+                                Day
+                            </t>
+                            <t t-elif="date_part[0] == 'year'">
+                                Year
+                            </t>
+                        </div>
+                        <div class="row date_input">
+                            <span t-esc="date_part[1]"/>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </template>
+
     <template id="signature_component">
         <div class="mw-100 mb-3 formio_signature_component">
             <t t-if="component.value">
@@ -198,6 +230,12 @@ See LICENSE file for full copyright and licensing details.
                 <div class="formio_component_signature_empty"/>
             </t>
             <br/>
+        </div>
+    </template>
+
+    <template id="htmlelement_component">
+        <div class="mw-100 mb-3 formio_htmlelement_component">
+            <t t-raw="component.html"/>
         </div>
     </template>
 
