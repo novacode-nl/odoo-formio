@@ -56,10 +56,14 @@ class FormioForm(models.Model):
 
                 if self.submission_data is False:
                     # HACK masquerade empty Form object
-                    self._formio = Form('{}', builder_obj)
+                    # TODO implement caching on the model object
+                    # self._formio = Form('{}', builder_obj)
+                    form = Form('{}', builder_obj, date_format=res_lang.date_format, time_format=res_lang.time_format)
                 else:
-                    self._formio = Form(self.submission_data, builder_obj)
-                return self._formio
+                    # TODO implement caching on the model object
+                    # self._formio = Form(self.submission_data, builder_obj)
+                    form = Form(self.submission_data, builder_obj, date_format=res_lang.date_format, time_format=res_lang.time_format)
+                return form
         else:
             return self.__getattribute__(name)
 
