@@ -30,6 +30,18 @@
     font-size: 0.9em;
 }
 
+/* START formio_day_component */
+.formio_day_component > div.row {
+    margin-left: 8px;
+}
+
+.formio_day_component .date_input {
+    border: 1px solid #d8d8d8;
+    margin-right: 4px;
+    padding: 4px;
+}
+/* END formio_day_component */
+
 .formio_component_signature_empty {
     border: 1px solid #d8d8d8;
     min-height: 62px;
