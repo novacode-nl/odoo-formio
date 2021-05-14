@@ -63,11 +63,11 @@ class FormioForm(models.Model):
                     # HACK masquerade empty Form object
                     # TODO implement caching on the model object
                     # self._formio = Form('{}', builder_obj)
-                    form = Form('{}', builder_obj)
+                    form = Form('{}', builder_obj, date_format=res_lang.date_format, time_format=res_lang.time_format)
                 else:
                     # TODO implement caching on the model object
                     # self._formio = Form(self.submission_data, builder_obj)
-                    form = Form(self.submission_data, builder_obj)
+                    form = Form(self.submission_data, builder_obj, date_format=res_lang.date_format, time_format=res_lang.time_format)
                 return form
         else:
             return self.__getattribute__(name)
