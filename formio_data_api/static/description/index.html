@@ -58,7 +58,7 @@
         This extends the <em>Mail Render Mixin</em>, because the <em>Jinja Sandbox</em> object doesn't directly allow <code>${object._formio}</code>, which it treats as unsafe and throws an
         exception.<br/><br/>
         USAGE EXAMPLE (where <code>object</code> is a <code>formio.form</code> model object):<br/>
-        <code>${formio(object).data.firstName.value}</code>
+        <code>${formio(object).input.firstName.value}</code>
       </li>
     </ul>
     <h4 class="oe_mb16">0.5</h4>
