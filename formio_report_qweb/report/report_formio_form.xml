@@ -77,10 +77,10 @@ See LICENSE file for full copyright and licensing details.
             </div>
 
             <div class="formio_components">
-                <!-- The `o._formio.components` is an OrderedDict -->
+                <!-- NOTE: `o._formio.components` is an OrderedDict -->
                 <t t-foreach="o._formio.components.items()" t-as="component">
                     <t t-set="component" t-value="component[1]"/>
-                    <t t-if="component.hidden != True">
+                    <t t-if="component.is_visible">
                         <t t-call="formio_report_qweb.component"/>
                     </t>
                 </t>

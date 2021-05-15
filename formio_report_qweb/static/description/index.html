@@ -7,7 +7,7 @@
       <h5>Installation Requirements</h5>
       <ul>
         <li>
-          PyPi package <code>formio-data</code> version >= 0.3.0<br/>
+          PyPi package <strong><code>formio-data</code> (version >= 0.3.3)</strong><br/>
           - Install: <code>pip3 install -U formio-data</code><br/>
           - GitHub project: <code>https://github.com/novacode-nl/python-formio-data</code>
         </li>
@@ -102,6 +102,17 @@
 <section class="oe_container">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">4.0</h4>
+    <ul>
+      <li>
+        <strong>MAJOR IMPROVEMENT: "Simple" conditional visibility of components</strong>, by checking new property <code>component.is_visible</code>.<br/>
+        Possible by recent improvements in the Python formiodata library (version: 0.3.3).<br/>
+        <em>This release is backwards incompatible in case of overrides/customizations, due to QWeb XML change:</em><br/>
+        (+) FROM: <code>&lt;t t-if="component.hidden != True"&gt;</code><br/>
+        (-) TO: <code>&lt;t t-if="component.is_visible"&gt;</code>
+      </li>
+      </li>
+    </ul>
     <h4 class="oe_mb16">3.1</h4>
     <ul>
       <li>
@@ -119,7 +130,7 @@
       <li>
         <strong>MAJOR IMPROVEMENT: Rendering of nested components</strong> e.g. in datagrid, layout components.<br/>
         Possible by recent improvements in the Python formiodata library (version: 0.3.0).<br/>
-        <strong>IMPORTANT: This release is backwards incompatible</strong> (eg in case of implemented custom QWeb Reports which inherit from this QWeb XML).
+        <em>This release is backwards incompatible (eg in case of implemented custom QWeb Reports which inherit from this QWeb XML).</em>
       </li>
       <li>
         Don't escape a component label (lets' trust this). This ensures the label (inner) HTML/styling shall be preserved in reports.
@@ -150,7 +161,7 @@
       </li>
       <li>
         The <code>QWeb component (object)</code> now is the <code>Python formiodata Component</code> object, instead of a Dictionary <code>component['_object']</code>.<br/>
-        <strong>IMPORTANT: This release is backwards incompatible, in case of implemented custom QWeb Reports which inherit from this QWeb XML.
+        <em>This release is backwards incompatible, in case of implemented custom QWeb Reports which inherit from this QWeb XML.</em>
       </li>
     </ul>
     <h4 class="oe_mb16">1.0</h4>
