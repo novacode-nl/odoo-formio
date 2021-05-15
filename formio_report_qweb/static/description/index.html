@@ -106,11 +106,11 @@
     <ul>
       <li>
         <strong>MAJOR IMPROVEMENT: "Simple" conditional visibility of components</strong>, by checking new property <code>component.is_visible</code>.<br/>
-        Possible by recent improvements in the Python formiodata library (version: 0.3.3).<br/>
-        <em>This release is backwards incompatible in case of overrides/customizations, due to QWeb XML change:</em><br/>
-        (-) FROM: <code>&lt;t t-if="component.hidden != True"&gt;</code><br/>
-        (+) TO: <code>&lt;t t-if="component.is_visible"&gt;</code>
-      </li>
+        Possible by recent improvements in the Python formiodata library (version: 0.3.3).<br/><br/>
+        <em>This release is backwards incompatible for overrides/customizations of the following QWeb XML.</em><br/>
+        Moved the visibility check:<br/>
+        - From: <code>&lt;template id="report_formio_form_template"&gt; ... &lt;t t-if="component.hidden != True"&gt;</code><br/>
+        - To: <code>&lt;template id="component"&gt; ... &lt;t t-if="component.is_visible"&gt;</code>
       </li>
     </ul>
     <h4 class="oe_mb16">3.1</h4>
