@@ -5,62 +5,64 @@ See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
     <template id="component">
-        <t t-if="component.type == 'textfield'">
-            <t t-call="formio_report_qweb.textfield_component"/>
-        </t>
-        <t t-elif="component.type == 'textarea'">
-            <t t-call="formio_report_qweb.textarea_component"/>
-        </t>
-        <t t-elif="component.type == 'number'">
-            <t t-call="formio_report_qweb.number_component"/>
-        </t>
-        <t t-elif="component.type == 'selectboxes'">
-            <t t-call="formio_report_qweb.selectboxes_component"/>
-        </t>
-        <t t-elif="component.type == 'checkbox'">
-            <t t-call="formio_report_qweb.checkbox_component"/>
-        </t>
-        <t t-elif="component.type == 'select'">
-            <t t-call="formio_report_qweb.select_component"/>
-        </t>
-        <t t-elif="component.type == 'radio'">
-            <t t-call="formio_report_qweb.radio_component"/>
-        </t>
-        <t t-elif="component.type == 'phoneNumber'">
-            <t t-call="formio_report_qweb.phoneNumber_component"/>
-        </t>
-        <t t-elif="component.type == 'email'">
-            <t t-call="formio_report_qweb.email_component"/>
-        </t>
-        <t t-elif="component.type == 'datetime'">
-            <t t-call="formio_report_qweb.datetime_component"/>
-        </t>
-        <t t-elif="component.type == 'signature'">
-            <t t-call="formio_report_qweb.signature_component"/>
-        </t>
-        <t t-elif="component.type == 'content'">
-            <t t-call="formio_report_qweb.content_component"/>
-        </t>
-        <t t-elif="component.type == 'file'">
-            <t t-call="formio_report_qweb.file_component"/>
-        </t>
-        <t t-elif="component.type == 'columns'">
-            <t t-call="formio_report_qweb.columns_component"/>
-        </t>
-        <t t-elif="component.type == 'panel'">
-            <t t-call="formio_report_qweb.panel_component"/>
-        </t>
-        <t t-elif="component.type == 'table'">
-            <t t-call="formio_report_qweb.table_component"/>
-        </t>
-        <t t-elif="component.type == 'tabs'">
-            <t t-call="formio_report_qweb.tabs_component"/>
-        </t>
-        <t t-elif="component.type == 'datagrid'">
-            <t t-call="formio_report_qweb.datagrid_component"/>
-        </t>
-        <t t-elif="show_components_not_implemented and component.type not in ['button', 'file']">
-            <t t-call="formio_report_qweb.component_not_implemented"/>
+        <t t-if="component.is_visible">
+            <t t-if="component.type == 'textfield'">
+                <t t-call="formio_report_qweb.textfield_component"/>
+            </t>
+            <t t-elif="component.type == 'textarea'">
+                <t t-call="formio_report_qweb.textarea_component"/>
+            </t>
+            <t t-elif="component.type == 'number'">
+                <t t-call="formio_report_qweb.number_component"/>
+            </t>
+            <t t-elif="component.type == 'selectboxes'">
+                <t t-call="formio_report_qweb.selectboxes_component"/>
+            </t>
+            <t t-elif="component.type == 'checkbox'">
+                <t t-call="formio_report_qweb.checkbox_component"/>
+            </t>
+            <t t-elif="component.type == 'select'">
+                <t t-call="formio_report_qweb.select_component"/>
+            </t>
+            <t t-elif="component.type == 'radio'">
+                <t t-call="formio_report_qweb.radio_component"/>
+            </t>
+            <t t-elif="component.type == 'phoneNumber'">
+                <t t-call="formio_report_qweb.phoneNumber_component"/>
+            </t>
+            <t t-elif="component.type == 'email'">
+                <t t-call="formio_report_qweb.email_component"/>
+            </t>
+            <t t-elif="component.type == 'datetime'">
+                <t t-call="formio_report_qweb.datetime_component"/>
+            </t>
+            <t t-elif="component.type == 'signature'">
+                <t t-call="formio_report_qweb.signature_component"/>
+            </t>
+            <t t-elif="component.type == 'content'">
+                <t t-call="formio_report_qweb.content_component"/>
+            </t>
+            <t t-elif="component.type == 'file'">
+                <t t-call="formio_report_qweb.file_component"/>
+            </t>
+            <t t-elif="component.type == 'columns'">
+                <t t-call="formio_report_qweb.columns_component"/>
+            </t>
+            <t t-elif="component.type == 'panel'">
+                <t t-call="formio_report_qweb.panel_component"/>
+            </t>
+            <t t-elif="component.type == 'table'">
+                <t t-call="formio_report_qweb.table_component"/>
+            </t>
+            <t t-elif="component.type == 'tabs'">
+                <t t-call="formio_report_qweb.tabs_component"/>
+            </t>
+            <t t-elif="component.type == 'datagrid'">
+                <t t-call="formio_report_qweb.datagrid_component"/>
+            </t>
+            <t t-elif="show_components_not_implemented and component.type not in ['button', 'file']">
+                <t t-call="formio_report_qweb.component_not_implemented"/>
+            </t>
         </t>
     </template>
 
