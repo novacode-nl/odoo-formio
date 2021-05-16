@@ -213,7 +213,12 @@ See LICENSE file for full copyright and licensing details.
                             </t>
                         </div>
                         <div class="row date_input">
-                            <span t-esc="date_part[1]"/>
+                            <t t-if="date_part[0] == 'month'">
+                                <p><t t-esc="component.month_name"/></p>
+                            </t>
+                            <t t-else="">
+                                <p><t t-esc="date_part[1]"/></p>
+                            </t>
                         </div>
                     </div>
                 </t>
