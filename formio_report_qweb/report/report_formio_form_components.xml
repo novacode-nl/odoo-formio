@@ -15,6 +15,9 @@ See LICENSE file for full copyright and licensing details.
             <t t-elif="component.type == 'number'">
                 <t t-call="formio_report_qweb.number_component"/>
             </t>
+            <t t-elif="component.type == 'password'">
+                <t t-call="formio_report_qweb.password_component"/>
+            </t>
             <t t-elif="component.type == 'selectboxes'">
                 <t t-call="formio_report_qweb.selectboxes_component"/>
             </t>
@@ -107,6 +110,17 @@ See LICENSE file for full copyright and licensing details.
         <div class="mw-100 mb-3 formio_number_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
             <p><t t-esc="component.value"/></p>
+        </div>
+    </template>
+
+    <template id="password_component">
+        <div class="mw-100 mb-3 formio_password_component">
+            <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
+            <p>
+                <t t-foreach="range(0, 10)" t-as="i">
+                    <i class="fa fa-circle" style="font-size:0.7em;"/>
+                </t>
+            </p>
         </div>
     </template>
 
