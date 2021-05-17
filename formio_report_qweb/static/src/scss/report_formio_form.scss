@@ -8,6 +8,7 @@
 .formio_textfield_component p,
 .formio_textarea_component p,
 .formio_number_component p,
+.formio_password_component p,
 .formio_select_component div.value_container,
 .formio_phoneNumber_component p,
 .formio_email_component p,
@@ -22,6 +23,10 @@
 
 .formio_textarea_component p {
     min-height: 64px;
+}
+
+.formio_password_component i {
+    color: #808080;
 }
 
 .formio_select_component div span.badge {
