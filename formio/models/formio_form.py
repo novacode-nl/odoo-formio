@@ -9,6 +9,7 @@ import uuid
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models, _
+from odoo.addons.base.models.res_partner import _tz_get
 from odoo.exceptions import AccessError, UserError
 
 from ..utils import get_field_selection_label
@@ -84,6 +85,7 @@ class Form(models.Model):
     submission_date = fields.Datetime(
         string='Submission Date', readonly=True, tracking=True,
         help='Datetime when the form was last submitted.')
+    submission_timezone = fields.Selection(_tz_get, string='Submission Timezone')
     sequence = fields.Integer(help="Usefull when storing and listing forms in an ordered way")
     portal = fields.Boolean("Portal (Builder)", related='builder_id.portal', readonly=True, help="Form is accessible by assigned portal user")
     portal_share = fields.Boolean("Portal")
@@ -124,6 +126,14 @@ class Form(models.Model):
 
     def write(self, vals):
         res = super(Form, self).write(vals)
+
+        # update timezone, if not provided and if changed by the partner.
+        if not vals.get('submission_timezone'):
+            if vals.get('partner_id') and vals.get('partner_id') != self.partner_id.id:
+                partner = self.env['res.partner'].browse(vals.get('partner_id'))
+                if partner_id.tz:
+                    vals['submission_timezone'] = partner_id.tz
+
         self._after_write(vals)
         return res
 
@@ -158,6 +168,15 @@ class Form(models.Model):
 
         if not vals.get('res_name'):
             vals['res_name'] = builder.res_model_id.name
+
+        # timezone (add if not provided already)
+        if not vals.get('submission_timezone'):
+            if vals.get('partner_id'):
+                partner = self.env['res.partner'].browse(vals.get('partner_id'))
+                if partner_id.tz:
+                    uvals['submission_timezone'] = partner_id.tz
+            elif self.env.user.partner_id.tz:
+                vals['submission_timezone'] = self.env.user.partner_id.tz
         return vals
 
     def _after_create(self, vals):

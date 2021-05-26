@@ -1,5 +1,9 @@
 # Changelog
 
+### 8.25
+
+- Store timezone (from the partner) of the Form submission.
+
 ### 8.24
 
 - Add translation for the alert message(s), in top of the Form.
