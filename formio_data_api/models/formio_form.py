@@ -114,8 +114,8 @@ class FormioForm(models.Model):
         ----------------
         Rules which determine whether the Formio Component value may be updated by the current res_field (value).
 
-        res_field_noupdate_res (domain filter)
-        --------------------------------------
+        res_field_noupdate (domain filter)
+        ----------------------------------
         Domain filter on the Resource Model object.
         If the domain applies, the Formio Component value may NOT be updated with the res_field (value).
 
@@ -129,7 +129,7 @@ class FormioForm(models.Model):
         | Key                              | Value                                            |
         ---------------------------------------------------------------------------------------
         | res_field                        | weight                                           |
-        | res_field_noupdate_res           | [('picking_type_id.code', 'in', ['EF', 'GH'])]   |
+        | res_field_noupdate               | [('picking_type_id.code', 'in', ['EF', 'GH'])]   |
         ---------------------------------------------------------------------------------------
 
         3. res_model_field
@@ -259,7 +259,7 @@ class FormioForm(models.Model):
         res_field_value = properties.get('res_field')
         
         noupdate_form_domain = properties.get('noupdate_form')
-        noupdate_res_domain = properties.get('res_field_noupdate_res')
+        res_field_noupdate_domain = properties.get('res_field_noupdate')
         update = True
 
         # first check formio.form whether to update
@@ -268,8 +268,8 @@ class FormioForm(models.Model):
 
         # if still may update, then check the resource model object
         if update:
-            if noupdate_res_domain:
-                update = not model_object.filtered_domain(safe_eval(noupdate_res_domain))
+            if res_field_noupdate_domain:
+                update = not model_object.filtered_domain(safe_eval(res_field_noupdate_domain))
 
             if update:
                 value = self._etl_odoo_field_val(model_object, res_field_value, formio_component)
