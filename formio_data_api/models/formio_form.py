@@ -83,25 +83,29 @@ class FormioForm(models.Model):
         - Open the tab: API
         - Use and fill in the API *Custom Properties* as shown in the overview below.
 
+        =====================
         API Custom Properties
         =====================
 
         1. user_field
-        --------------
+        =============
+
         Loads the field value from the current/logged-in user object. Eg:
         - Create date
         - Field from the related partner_id, eg birthdate
 
         Example:
-          Update the Formio Component (birthdate) value with the birthdate of the current user.
 
-            ---------------------------------------------------------------------------------------
-            | Key                              | Value                                            |
-            ---------------------------------------------------------------------------------------
-            | user_field                       | partner_id.birthdate                             |
+        Update the Formio Component (birthdate) value with the birthdate of the current user.
+
+        ---------------------------------------------------------------------------------------
+        | Key                              | Value                                            |
+        ---------------------------------------------------------------------------------------
+        | user_field                       | partner_id.birthdate                             |
 
         2. res_field
-        ------------
+        ============
+
         Loads the field value from the Resource Model object. Eg:
         - name of a sale order
         - customer info (field) of the sale order
@@ -110,67 +114,74 @@ class FormioForm(models.Model):
         ----------------
         Rules which determine whether the Formio Component value may be updated by the current res_field (value).
 
-            res_field_noupdate_res (domain filter)
-            --------------------------------------
-            Domain filter on the Resource Model object.
-            If the domain applies, the Formio Component value may NOT be updated with the res_field (value).
+        res_field_noupdate_res (domain filter)
+        --------------------------------------
+        Domain filter on the Resource Model object.
+        If the domain applies, the Formio Component value may NOT be updated with the res_field (value).
 
         Example:
-          The Resource Model is a stock.picking.
-          Don't update the Formio Component (weight) value with the Delivery Order email of the Lead, 
-          if the Picking Type code is either EF or GH.
 
-          ---------------------------------------------------------------------------------------
-          | Key                              | Value                                            |
-          ---------------------------------------------------------------------------------------
-          | res_field                        | weight                                           |
-          | res_field_noupdate_res           | [('picking_type_id.code', 'in', ['EF', 'GH'])]   |
-          ---------------------------------------------------------------------------------------
+        The Resource Model is a stock.picking.
+        Don't update the Formio Component (weight) value with the Delivery Order email of the Lead, 
+        if the Picking Type code is either EF or GH.
+
+        ---------------------------------------------------------------------------------------
+        | Key                              | Value                                            |
+        ---------------------------------------------------------------------------------------
+        | res_field                        | weight                                           |
+        | res_field_noupdate_res           | [('picking_type_id.code', 'in', ['EF', 'GH'])]   |
+        ---------------------------------------------------------------------------------------
 
         3. res_model_field
-        -------------------
+        ==================
+
         Loads the field value from the Resource Model (res_model_id) its [ir.model.model] object.
         Eg to show the model name or description.
 
         Example:
-          ---------------------------------------------------------------------------------------
-          | Key                              | Value                                            |
-          ---------------------------------------------------------------------------------------
-          | res_model_field                  | model                                            |
-          ---------------------------------------------------------------------------------------
+
+        ---------------------------------------------------------------------------------------
+        | Key                              | Value                                            |
+        ---------------------------------------------------------------------------------------
+        | res_model_field                  | model                                            |
+        ---------------------------------------------------------------------------------------
 
         4. noupdate rules
-        -----------------
+        =================
+
         Global noupdate rules with predenece above other noupdate rules, which cannot be bypassed.
 
         4.1 noupdate_user
         -----------------
+
         Global rule has predenece above other noupdate rules. It cannot be bypassed.
 
         Example:
-          Don't update the Formio Component value if the current user (partner) has function 'sales'
-          (aka salespersion).
 
-          ---------------------------------------------------------------------------------------
-          | Key                              | Value                                            |
-          ---------------------------------------------------------------------------------------
-          | noupdate_user                    | [('partner_id.function_id.name', '=', 'sales')]  |
-          ---------------------------------------------------------------------------------------
+        Don't update the Formio Component value if the current user (partner) has function 'sales'
+        (aka salespersion).
+
+        ---------------------------------------------------------------------------------------
+        | Key                              | Value                                            |
+        ---------------------------------------------------------------------------------------
+        | noupdate_user                    | [('partner_id.function_id.name', '=', 'sales')]  |
+        ---------------------------------------------------------------------------------------
 
         4.2 noupdate_form
-        ----------------
+        -----------------
+
         Domain filter on the [formio.form] object.
         If the domain applies, the Formio Component value may NOT be updated with the res_field (value).
 
         Example:
-          Don't update the Formio Component value if the Form state is Draft.
 
-          ---------------------------------------------------------------------------------------
-          | Key                              | Value                                            |
-          ---------------------------------------------------------------------------------------
-          | noupdate_form                    | [('state', '=', 'DRAFT')]                       |
-          ---------------------------------------------------------------------------------------
+        Don't update the Formio Component value if the Form state is Draft.
 
+        ---------------------------------------------------------------------------------------
+        | Key                              | Value                                            |
+        ---------------------------------------------------------------------------------------
+        | noupdate_form                    | [('state', '=', 'DRAFT')]                       |
+        ---------------------------------------------------------------------------------------
         """
 
         # TODO exception handling, if safe_eval(domain_str) or merge lists fail ?
@@ -348,8 +359,7 @@ class FormioForm(models.Model):
             ----------------------------------------------------------------
             | Key                              | Value                     |
             ----------------------------------------------------------------
-            | user_field                       | partner_id.name           |
-            | user_field_noupdate              | [('state', '=', 'DRAFT')] |
+            | user_field                       | partner_id.birthdate      |
             ----------------------------------------------------------------
 
             More info: https://github.com/novacode-nl/odoo-formio/wiki/Prefill-Form-components-with-data-from-Odoo-(model-field)
@@ -367,11 +377,11 @@ class FormioForm(models.Model):
                 Use API Custom Properties (key): res_field
 
                 EXAMPLE:
-                ------------------------------------------------------
-                | Key                              | Value           |
-                ------------------------------------------------------
-                | res_field                        | partner_id.name |
-                ------------------------------------------------------
+                -----------------------------------------------------------------
+                | Key                              | Value                      |
+                ----------------------------------------------------------------
+                | res_field                        | partner_shipping_id.street |
+                -----------------------------------------------------------------
 
                 More info: https://github.com/novacode-nl/odoo-formio/wiki/Prefill-Form-components-with-data-from-Odoo-(model-field)
                 """
@@ -388,13 +398,21 @@ class FormioForm(models.Model):
 
                 Use API Custom Properties (keys): res_field, res_field_noupdate
 
-                EXAMPLE:
+                EXAMPLE 1 - noupdate if form matches domain (filter):
+                -----------------------------------------------------------------
+                | Key                              | Value                      |
+                -----------------------------------------------------------------
+                | res_field                        | partner_shipping_id.street |
+                | nouppdate_form                   | [('state', '=', 'DRAFT')]  |
                 ----------------------------------------------------------------
-                | Key                              | Value                     |
-                ----------------------------------------------------------------
-                | res_field                        | partner_id.name           |
-                | res_field_nouppdate              | [('state', '=', 'DRAFT')] |
-                ----------------------------------------------------------------
+
+                EXAMPLE 2 - noupdate if res (resource object) matches domain (filter):
+                -----------------------------------------------------------------
+                | Key                              | Value                      |
+                -----------------------------------------------------------------
+                | res_field                        | partner_shipping_id.street |
+                | nouppdate_res                    | [('field_x', '=', True)]   |
+                -----------------------------------------------------------------
 
                 More info: https://github.com/novacode-nl/odoo-formio/wiki/Prefill-Form-components-with-data-from-Odoo-(model-field)
                 """
