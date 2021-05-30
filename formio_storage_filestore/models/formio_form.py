@@ -36,7 +36,7 @@ class Form(models.Model):
 
     def _process_storage_filestore_ir_attachments(self, mode):
         attach_names = []
-        for key, component in self._formio.components.items():
+        for key, component in self._formio.input_components.items():
             if hasattr(component, 'storage') and component.storage == 'url' \
                and '/formio/storage/filestore' in component.url:
                 for val in component.value:
