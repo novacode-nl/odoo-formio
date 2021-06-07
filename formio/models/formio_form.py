@@ -173,7 +173,7 @@ class Form(models.Model):
         if not vals.get('submission_timezone'):
             if vals.get('partner_id'):
                 partner = self.env['res.partner'].browse(vals.get('partner_id'))
-                if partner_id.tz:
+                if partner and partner.tz:
                     vals['submission_timezone'] = partner_id.tz
             elif self.env.user.partner_id.tz:
                 vals['submission_timezone'] = self.env.user.partner_id.tz
