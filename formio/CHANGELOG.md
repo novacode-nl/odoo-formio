@@ -1,5 +1,9 @@
 # Changelog
 
+### 8.26
+
+- Fix bug (regression) in `formio.form` create `_prepare_create_vals`, due to timezone feature added in version 8.25
+
 ### 8.25
 
 - Store timezone (from the partner) of the Form submission.
