@@ -1,8 +1,12 @@
 # Changelog
 
+### 8.27
+
+- Fix bug/regression in `formio.form` (create) `_prepare_create_vals` and `write`, due to timezone feature added in version 8.25
+
 ### 8.26
 
-- Fix bug (regression) in `formio.form` create `_prepare_create_vals`, due to timezone feature added in version 8.25
+- Fix bug/regression in `formio.form` (create) `_prepare_create_vals`, due to timezone feature added in version 8.25
 
 ### 8.25
 
