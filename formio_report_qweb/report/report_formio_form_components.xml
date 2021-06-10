@@ -117,9 +117,11 @@ See LICENSE file for full copyright and licensing details.
         <div class="mw-100 mb-3 formio_password_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
             <p>
-                <t t-set="password_range" t-value="range(0, 10)"/>
-                <t t-foreach="password_range" t-as="i">
-                    <i class="fa fa-circle" style="font-size:0.7em;"/>
+                <t t-if="component.value">
+                    <t t-set="password_range" t-value="range(0, 10)"/>
+                    <t t-foreach="password_range" t-as="i">
+                        <i class="fa fa-circle" style="font-size:0.7em;"/>
+                    </t>
                 </t>
             </p>
         </div>
