@@ -1,14 +1,14 @@
 # Changelog
 
-## 4.2
+## 3.2
 
 - Improve `password` component: show no mask (only empty input field) if value is empty.
 
-## 4.1
+## 3.1
 
 - Fix and improve `day` component to obtain format (position) of Month and Day.
 
-## 4.0
+## 3.0
 
 - MAJOR IMPROVEMENT: "Simple" conditional visibility of components, by checking new property `component.is_visible`\
   Possible by recent improvements in the Python formiodata library (version: 0.3.3).\
@@ -18,13 +18,13 @@ Moved the visibility check:\
 - From: `<template id="report_formio_form_template> ... <t t-if="component.hidden != True>`
 - To: `<template id="component"> ... <t t-if="component.is_visible">`
 
-## 3.1
+## 2.1
 
 - New input component: `day`
 - New component: `htmlelement`
 - Fix report "Form (My preferences)", to render in the current user language. (QWeb report: `report_formio_form_document`)
 
-## 3.0
+## 2.0
 
 - MAJOR IMPROVEMENT: Rendering of nested components e.g. in `datagrid`, `layout` components.\
   Possible by recent improvements in the Python `formiodata` library (version: 0.3.0).
@@ -32,11 +32,11 @@ Moved the visibility check:\
 
 This release is backwards incompatible (eg in case of implemented custom QWeb Reports which inherit from this QWeb XML).
 
-## 2.1
+## 1.1
 
 - Fix and re-implement components (file, content/html, table, tabs), which got broken after recent changes in 2.0.
 
-## 2.0
+## 1.0
 
 - New input component: `datetime`
 - Improve rendering of nested components e.g. in `datagrid`, `layout` components.\
@@ -48,14 +48,6 @@ This release is backwards incompatible (eg in case of implemented custom QWeb Re
   - The QWeb component (object) is now the Python `formiodata Component` object, instead of a Dictionary `component['_object']`.
   
 This release is backwards incompatible, in case of implemented custom QWeb Reports which inherit from this QWeb XML.
-
-## 1.0
-
-- New feature: Print custom QWeb Reports (PDF), configured per Form Builder.\
-  Implement and confgure custom QWeb Reports per Form Builder.\
-  In the Form, click on the new button "Print Reports", which opens a wizard window.\
-  One or multiple reports can be selected to print and/or saved as attachment.\
-  Multiple (selected) reports shall be merged into one PDF file.
 
 ## 0.12
 
