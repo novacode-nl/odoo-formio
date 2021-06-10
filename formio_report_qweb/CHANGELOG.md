@@ -11,10 +11,10 @@
 ## 4.0
 
 - MAJOR IMPROVEMENT: "Simple" conditional visibility of components, by checking new property `component.is_visible`\
-  Possible by recent improvements in the Python formiodata library (version: 0.3.3).\
+  Possible by recent improvements in the Python formiodata library (version: 0.3.3).
 
 This release is backwards incompatible for overrides/customizations of the following QWeb XML.\
-Moved the visibility check:\
+Moved the visibility check:
 - From: `<template id="report_formio_form_template> ... <t t-if="component.hidden != True>`
 - To: `<template id="component"> ... <t t-if="component.is_visible">`
 
@@ -51,11 +51,11 @@ This release is backwards incompatible, in case of implemented custom QWeb Repor
 
 ## 1.0
 
-- New feature: Print custom QWeb Reports (PDF), configured per Form Builder.\
-  Implement and confgure custom QWeb Reports per Form Builder.\
-  In the Form, click on the new button "Print Reports", which opens a wizard window.\
-  One or multiple reports can be selected to print and/or saved as attachment.\
-  Multiple (selected) reports shall be merged into one PDF file.
+- New feature: Print custom QWeb Reports (PDF), configured per Form Builder.
+  - Implement and confgure custom QWeb Reports per Form Builder.
+  - In the Form, click on the new button "Print Reports", which opens a wizard window.
+  - One or multiple reports can be selected to print and/or saved as attachment.
+  - Multiple (selected) reports shall be merged into one PDF file.
 
 ## 0.12
 
