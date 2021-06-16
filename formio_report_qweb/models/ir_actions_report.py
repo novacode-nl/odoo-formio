@@ -8,4 +8,4 @@ class IrActionsReportXml(models.Model):
     _inherit = 'ir.actions.report'
 
     formio_builder_report_ids = fields.One2many(
-        'formio.builder.report', 'ir_actions_report_id', string='Form Builder Reports')
+        'formio.builder.report', 'ir_actions_report_id', string='Form Builder Reports', groups='formio.group_formio_user')
