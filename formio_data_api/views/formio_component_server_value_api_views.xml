@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <record id="view_formio_component_server_value_api_form" model="ir.ui.view">
+        <field name="name">formio.component.server.value.api form</field>
+        <field name="model">formio.component.server.value.api</field>
+        <field name="arch" type="xml">
+	    <form string="Component value by Server Python Code Form" create="false">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                    <group colspan="2">
+                        <field name="code" widget="ace" options="{'mode': 'python'}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -5,7 +5,7 @@ import logging
 
 from formiodata.builder import Builder
 
-from odoo import models, _
+from odoo import fields, models, _
 from odoo.exceptions import ValidationError
 
 
@@ -15,8 +15,12 @@ _logger = logging.getLogger(__name__)
 class FormioBuilder(models.Model):
     _inherit = 'formio.builder'
 
+    component_server_value_api_ids = fields.One2many(
+        'formio.component.server.value.api', 'formio_builder_id',
+        string='Component value by Python Code', context={'active_test': False})
+
     def _component_api_keys(self):
-        return ['model_field', 'res_field', 'user_field']
+        return ['model_field', 'res_field', 'user_field', 'server_value_api']
 
     def action_current(self):
         self._validate_component_api_properties()
