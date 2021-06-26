@@ -10,7 +10,7 @@ from formiodata.form import Form
 
 from odoo import models
 from odoo.exceptions import UserError
-from odoo.tools.safe_eval import safe_eval
+from odoo.tools import safe_eval
 
 from odoo.addons.formio.models.formio_form import STATE_PENDING, STATE_DRAFT, STATE_COMPLETE
 
@@ -193,6 +193,7 @@ class FormioForm(models.Model):
         if self.state == STATE_COMPLETE:
             return data
 
+        # TODO-1: refactor both for (lopps) to separate functions
         for comp_key, comp in self._formio.input_components.items():
             value = False
             properties = comp.properties or {}
@@ -203,12 +204,12 @@ class FormioForm(models.Model):
 
             # API: noupdate check on formio.form (domain)
             noupdate_form_domain = properties.get('noupdate_form')
-            if noupdate_form_domain and self.filtered_domain(safe_eval(noupdate_form_domain)):
+            if noupdate_form_domain and self.filtered_domain(safe_eval.safe_eval(noupdate_form_domain)):
                 continue
 
             # API: noupdate check on current user (domain)
             noupdate_user_domain = properties.get('noupdate_user')
-            if noupdate_user_domain and self.env.user.filtered_domain(safe_eval(noupdate_user_domain)):
+            if noupdate_user_domain and self.env.user.filtered_domain(safe_eval.safe_eval(noupdate_user_domain)):
                 continue
 
             if self.res_model_id and self.id:
@@ -246,8 +247,43 @@ class FormioForm(models.Model):
 
             if value:
                 data[comp_key] = value
+
+        # ETL components by model formio.component.server.value.api
+        data.update(self._etl_component_server_value_api())
+
         return data
 
+    def _etl_component_server_value_api(self):
+        data = {}
+        server_values = {}
+        if self.builder_id.component_server_value_api_ids.filtered('active'):
+            for comp_key, comp in self._formio.input_components.items():
+                prop_server_value_api = comp.properties.get('server_value_api')
+                prop_server_value_dict = comp.properties.get('server_value_dict')
+                prop_server_value_dict_obj = comp.properties.get('server_value_dict_obj')
+                if comp_key not in data and prop_server_value_api and prop_server_value_dict:
+                    server_value_api = self.builder_id.component_server_value_api_ids.filtered(lambda x: x.active and x.name == prop_server_value_api)
+                    if server_value_api and server_values.get(server_value_api.name):
+                        value = server_values[server_value_api.name][prop_server_value_dict]
+                        if prop_server_value_dict_obj:
+                            # TODO-2: refactor DRY
+                            value_fields = prop_server_value_dict_obj.split('.')
+                            value = reduce(getattr, value_fields, value)
+                        data[comp_key] = value
+                    elif server_value_api:
+                        eval_context = self._get_formio_eval_context(comp)
+                        # nocopy allows to return 'value'
+                        safe_eval.safe_eval(server_value_api.code, eval_context, mode="exec", nocopy=True)
+                        value_dict = eval_context.get('value_dict')
+                        value = value_dict.get(prop_server_value_dict)
+                        if prop_server_value_dict_obj:
+                            # TODO-2: refactor DRY
+                            value_fields = prop_server_value_dict_obj.split('.')
+                            value = reduce(getattr, value_fields, value)
+                        server_values[server_value_api.name] = value_dict # caching
+                        data[comp_key] = value
+        return data
+    
     def _etl_res_field_value(self, model_object, formio_component):
         """
         :param model_object object: Model object
@@ -338,6 +374,20 @@ class FormioForm(models.Model):
                     _logger.info(error.message)
                     odoo_field_val = error.message
         return odoo_field_val
+
+    def _get_formio_eval_context(self, component):
+        """ Prepare the context used when evaluating python code
+            :returns: dict -- evaluation context given to safe_eval
+        """
+        return {
+            'value_dict': {},
+            'env': self.env,
+            'component': component,
+            'record': self,
+            'datetime': safe_eval.datetime,
+            'dateutil': safe_eval.dateutil,
+            'time': safe_eval.time,
+        }
 
     ###############################################################
     # DEPRECATION-1
