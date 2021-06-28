@@ -4,13 +4,18 @@
 import logging
 import re
 
+# date, time used in safe_eval (below)
+import datetime
+import dateutil
+import time
+
 from functools import reduce
 from formiodata.builder import Builder
 from formiodata.form import Form
 
 from odoo import models
 from odoo.exceptions import UserError
-from odoo.tools import safe_eval
+from odoo.tools.safe_eval import safe_eval
 
 from odoo.addons.formio.models.formio_form import STATE_PENDING, STATE_DRAFT, STATE_COMPLETE
 
@@ -268,7 +273,7 @@ class FormioForm(models.Model):
                     elif server_value_api:
                         eval_context = self._get_formio_eval_context(comp)
                         # nocopy allows to return 'value'
-                        safe_eval.safe_eval(server_value_api.code, eval_context, mode="exec", nocopy=True)
+                        safe_eval(server_value_api.code, eval_context, mode="exec", nocopy=True)
                         value_dict = eval_context.get('value_dict')
                         value = value_dict.get(prop_server_value_dict)
                         if prop_server_value_dict_obj:
@@ -379,9 +384,9 @@ class FormioForm(models.Model):
             'env': self.env,
             'component': component,
             'record': self,
-            'datetime': safe_eval.datetime,
-            'dateutil': safe_eval.dateutil,
-            'time': safe_eval.time,
+            'datetime': datetime,
+            'dateutil': dateutil,
+            'time': time,
         }
 
     ###############################################################
