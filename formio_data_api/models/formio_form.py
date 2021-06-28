@@ -263,6 +263,8 @@ class FormioForm(models.Model):
                 prop_server_value_dict_obj = comp.properties.get('server_value_dict_obj')
                 if comp_key not in data and prop_server_value_api and prop_server_value_dict:
                     server_value_api = self.builder_id.component_server_value_api_ids.filtered(lambda x: x.active and x.name == prop_server_value_api)
+                    if not server_value_api:
+                        _logger.error('NOT FOUND [formio.component.server.value.api] with name: %s' % prop_server_value_api)
                     if server_value_api and server_values.get(server_value_api.name):
                         value = server_values[server_value_api.name][prop_server_value_dict]
                         if prop_server_value_dict_obj:
