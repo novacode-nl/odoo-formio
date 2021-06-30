@@ -14,7 +14,7 @@
     'data': [
         'security/ir_model_access.xml',
         'views/formio_builder_views.xml',
-        'views/formio_component_code_api_views.xml'
+        'views/formio_component_server_api_views.xml'
     ],
     'external_dependencies': {
         'python': ['formio-data'],

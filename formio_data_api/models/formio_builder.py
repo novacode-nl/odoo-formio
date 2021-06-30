@@ -15,9 +15,9 @@ _logger = logging.getLogger(__name__)
 class FormioBuilder(models.Model):
     _inherit = 'formio.builder'
 
-    component_code_api_ids = fields.One2many(
-        'formio.component.code.api', 'formio_builder_id',
-        string='Component (Python) Code APIs', context={'active_test': False})
+    component_server_api_ids = fields.One2many(
+        'formio.component.server.api', 'formio_builder_id',
+        string='Component Server APIs', context={'active_test': False})
 
     def _component_api_keys(self):
         return ['model_field', 'res_field', 'user_field', 'code_api']
