@@ -49,7 +49,7 @@ class FormioForm(models.Model):
                 elif 'lang' not in context and 'uid' in context:
                     lang = self.env['res.users'].browse(context['uid']).lang
                 elif 'lang' not in context and 'uid' not in context:
-                    lang = self.env['res.users'].browse(self.write_uid).lang
+                    lang = self.write_uid.lang
                 else:
                     raise UserError("The form can't be loaded. No (user) language was set.")
 
