@@ -249,28 +249,30 @@ class FormioForm(models.Model):
                 data[comp_key] = value
 
         # ETL components by model formio.component.value.code.api
-        data.update(self._etl_component_code_api())
+        data.update(self._etl_component_server_api())
 
         return data
 
-    def _etl_component_code_api(self):
+    def _etl_component_server_api(self):
         data = {}
         api_values = {}
-        if self.builder_id.component_code_api_ids.filtered('active'):
+        if self.builder_id.component_server_api_ids.filtered('active'):
             for comp_key, comp in self._formio.input_components.items():
-                prop_api = comp.properties.get('code_api')
-                prop_value = comp.properties.get('code_api_value')
-                prop_value_obj = comp.properties.get('code_api_value_obj')
+                prop_api = comp.properties.get('server_api')
+                prop_value = comp.properties.get('server_api_value')
+                prop_value_obj = comp.properties.get('server_api_value_obj')
                 if comp_key not in data and prop_api and prop_value:
-                    api = self.builder_id.component_code_api_ids.filtered(lambda x: x.active and x.name == prop_api)
+                    api = self.builder_id.component_server_api_ids.filtered(lambda x: x.active and x.name == prop_api)
                     if not api:
                         _logger.error('NOT FOUND [formio.component.code.api] with name: %s' % prop_api)
+
                     if api and api_values.get(api.name):
-                        api_value = api_values[api.name][prop_value]
+                        value = api_values[api.name][prop_value]
                         if prop_value_obj:
+
                             # TODO-2: refactor DRY
                             value_fields = prop_value_obj.split('.')
-                            value = reduce(getattr, value_fields, api_value)
+                            value = reduce(getattr, value_fields, value)
                         data[comp_key] = value
                     elif api:
                         eval_context = self._get_formio_eval_context(comp)
@@ -278,11 +280,11 @@ class FormioForm(models.Model):
 
                         safe_eval(api.code, eval_context, mode="exec", nocopy=True)
                         context_values = eval_context.get('values')
-                        api_value = context_values.get(prop_value)
+                        value = context_values.get(prop_value)
                         if prop_value_obj:
                             # TODO-2: refactor DRY
                             value_fields = prop_value_obj.split('.')
-                            value = reduce(getattr, value_fields, api_value)
+                            value = reduce(getattr, value_fields, value)
                         api_values[api.name] = context_values # caching
                         data[comp_key] = value
         return data

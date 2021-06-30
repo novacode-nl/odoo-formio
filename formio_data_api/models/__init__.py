@@ -3,4 +3,4 @@
 
 from . import formio_builder
 from . import formio_form
-from . import formio_component_code_api
+from . import formio_component_server_api

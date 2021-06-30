@@ -4,9 +4,9 @@
 from odoo import fields, models
 
 
-class FormioComponentCodeApi(models.Model):
-    _name = 'formio.component.code.api'
-    _description = 'Formio Component Value Code API'
+class FormioComponentServerApi(models.Model):
+    _name = 'formio.component.server.api'
+    _description = 'Formio Component Server API'
 
     DEFAULT_PYTHON_CODE = """# Available variables:
 #  - values: Read by the Forms Data API to set the Component(s) value(s).
