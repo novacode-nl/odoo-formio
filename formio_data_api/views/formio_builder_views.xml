@@ -11,7 +11,7 @@
             <xpath expr="//page[@name='formio_components_api']/group[@name='partner']" position="before">
                 <group string="Component Value by Python Code" name="component_value_python_code" colspan="2">
                     <div class="mb-2 text-muted" colspan="2">
-                        <i class="fa fa-info-circle" title="info"/> Python code can assign Component(s) value (typed) or an object to the <code>values</code> dictionary<br/>
+                        <i class="fa fa-info-circle" title="info"/> Python code can assign Component(s) value(s) or an object to the <code>values</code> dictionary<br/>
                         In the Form Builder configure the applied Component(s) its API (tab) Custom Properties 
                         <a href="https://github.com/novacode-nl/odoo-formio/wiki/Populate-a-Form-Component-value,-with-data-from-Server-(Python)-Code" title="Documentation" class="o_doc_link" target="_blank">Documentation</a>
                     </div>

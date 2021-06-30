@@ -9,7 +9,7 @@ class FormioComponentCodeApi(models.Model):
     _description = 'Formio Component Value Code API'
 
     DEFAULT_PYTHON_CODE = """# Available variables:
-#  - value_dict: Read by the Forms Data API to set the Component value.
+#  - values: Read by the Forms Data API to set the Component(s) value(s).
 #  - env: Odoo Environment on which the action is triggered
 #  - component: Form component (formiodata.Component) object
 #  - record: formio.form record on which the action is triggered; may be void
