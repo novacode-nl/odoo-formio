@@ -276,8 +276,8 @@ class FormioForm(models.Model):
                         eval_context = self._get_formio_eval_context(comp)
                         # nocopy allows to return 'value'
                         safe_eval.safe_eval(api.code, eval_context, mode="exec", nocopy=True)
-                        context_value = eval_context.get('value')
-                        api_value = context_value.get(prop_value)
+                        context_values = eval_context.get('values')
+                        api_value = context_values.get(prop_value)
                         if prop_value_obj:
                             # TODO-2: refactor DRY
                             value_fields = prop_value_obj.split('.')
@@ -382,7 +382,7 @@ class FormioForm(models.Model):
             :returns: dict -- evaluation context given to safe_eval
         """
         return {
-            'value': {},
+            'values': {},
             'env': self.env,
             'component': component,
             'record': self,
