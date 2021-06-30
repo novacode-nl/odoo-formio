@@ -282,7 +282,7 @@ class FormioForm(models.Model):
                             # TODO-2: refactor DRY
                             value_fields = prop_value_obj.split('.')
                             value = reduce(getattr, value_fields, api_value)
-                        api_values[api.name] = context_value # caching
+                        api_values[api.name] = context_values # caching
                         data[comp_key] = value
         return data
     
