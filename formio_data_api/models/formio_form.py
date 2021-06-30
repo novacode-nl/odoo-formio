@@ -248,39 +248,41 @@ class FormioForm(models.Model):
             if value:
                 data[comp_key] = value
 
-        # ETL components by model formio.component.server.value.api
-        data.update(self._etl_component_server_value_api())
+        # ETL components by model formio.component.value.code.api
+        data.update(self._etl_component_code_api())
 
         return data
 
-    def _etl_component_server_value_api(self):
+    def _etl_component_code_api(self):
         data = {}
-        server_values = {}
-        if self.builder_id.component_server_value_api_ids.filtered('active'):
+        api_values = {}
+        if self.builder_id.component_code_api_ids.filtered('active'):
             for comp_key, comp in self._formio.input_components.items():
-                prop_server_value_api = comp.properties.get('server_value_api')
-                prop_server_value_dict = comp.properties.get('server_value_dict')
-                prop_server_value_dict_obj = comp.properties.get('server_value_dict_obj')
-                if comp_key not in data and prop_server_value_api and prop_server_value_dict:
-                    server_value_api = self.builder_id.component_server_value_api_ids.filtered(lambda x: x.active and x.name == prop_server_value_api)
-                    if server_value_api and server_values.get(server_value_api.name):
-                        value = server_values[server_value_api.name][prop_server_value_dict]
-                        if prop_server_value_dict_obj:
+                prop_api = comp.properties.get('code_api')
+                prop_value = comp.properties.get('code_api_value')
+                prop_value_obj = comp.properties.get('code_api_value_obj')
+                if comp_key not in data and prop_api and prop_value:
+                    api = self.builder_id.component_code_api_ids.filtered(lambda x: x.active and x.name == prop_api)
+                    if not api:
+                        _logger.error('NOT FOUND [formio.component.code.api] with name: %s' % prop_api)
+                    if api and api_values.get(api.name):
+                        api_value = api_values[api.name][prop_value]
+                        if prop_value_obj:
                             # TODO-2: refactor DRY
-                            value_fields = prop_server_value_dict_obj.split('.')
-                            value = reduce(getattr, value_fields, value)
+                            value_fields = prop_value_obj.split('.')
+                            value = reduce(getattr, value_fields, api_value)
                         data[comp_key] = value
-                    elif server_value_api:
+                    elif api:
                         eval_context = self._get_formio_eval_context(comp)
                         # nocopy allows to return 'value'
-                        safe_eval(server_value_api.code, eval_context, mode="exec", nocopy=True)
-                        value_dict = eval_context.get('value_dict')
-                        value = value_dict.get(prop_server_value_dict)
-                        if prop_server_value_dict_obj:
+                        safe_eval(api.code, eval_context, mode="exec", nocopy=True)
+                        context_value = eval_context.get('value')
+                        api_value = context_value.get(prop_value)
+                        if prop_value_obj:
                             # TODO-2: refactor DRY
-                            value_fields = prop_server_value_dict_obj.split('.')
-                            value = reduce(getattr, value_fields, value)
-                        server_values[server_value_api.name] = value_dict # caching
+                            value_fields = prop_value_obj.split('.')
+                            value = reduce(getattr, value_fields, api_value)
+                        api_values[api.name] = context_value # caching
                         data[comp_key] = value
         return data
     
@@ -380,7 +382,7 @@ class FormioForm(models.Model):
             :returns: dict -- evaluation context given to safe_eval
         """
         return {
-            'value_dict': {},
+            'value': {},
             'env': self.env,
             'component': component,
             'record': self,

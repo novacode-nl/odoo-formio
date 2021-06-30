@@ -4,9 +4,9 @@ See LICENSE file for full copyright and licensing details. -->
 
 <odoo>
     <data>
-        <record id="access_formio_component_server_value_api_admin" model="ir.model.access">
-            <field name="name">formio.component.server.value.api</field>
-            <field name="model_id" ref="formio_data_api.model_formio_component_server_value_api"/>
+        <record id="access_formio_component_code_api_admin" model="ir.model.access">
+            <field name="name">formio.component.code.api</field>
+            <field name="model_id" ref="formio_data_api.model_formio_component_code_api"/>
             <field name="group_id" ref="formio.group_formio_admin"/>
             <field name="perm_read" eval="1"/>
             <field name="perm_create" eval="1"/>

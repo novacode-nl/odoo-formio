@@ -1,12 +1,12 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from odoo import api, fields, models, _
+from odoo import fields, models
 
 
-class FormioComponentServerValueApi(models.Model):
-    _name = 'formio.component.server.value.api'
-    _description = 'Formio Component Server Value API'
+class FormioComponentCodeApi(models.Model):
+    _name = 'formio.component.code.api'
+    _description = 'Formio Component Value Code API'
 
     DEFAULT_PYTHON_CODE = """# Available variables:
 #  - value_dict: Read by the Forms Data API to set the Component value.
@@ -14,7 +14,7 @@ class FormioComponentServerValueApi(models.Model):
 #  - component: Form component (formiodata.Component) object
 #  - record: formio.form record on which the action is triggered; may be void
 #  - time, datetime, dateutil, timezone: useful Python libraries
-# Assign to value_dict, eg value_dict['foo'] = 'bar', value_dict.update({some_dict})"""
+# Assign to values (dict), eg values['foo'] = 'bar', values.update({some_dict})"""
 
     formio_builder_id = fields.Many2one(
         'formio.builder', string='Form Builder',
