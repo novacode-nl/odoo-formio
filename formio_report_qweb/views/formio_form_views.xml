@@ -11,8 +11,11 @@ See LICENSE file for full licensing details. -->
             <field name="arch" type="xml">
                 <data>
                     <button name="action_send_invitation_mail" position="after">
-                        <button name="action_report_wizard" type="object" string="Print Reports" attrs="{'invisible': ['|', ('reports_print_wizard_count', '=', 0), ('state', '=', 'COMPLETE')]}"/>
-                        <button name="action_report_wizard" type="object" class="btn-primary" string="Print Reports" attrs="{'invisible': ['|', ('reports_print_wizard_count', '=', 0), ('state', '!=', 'COMPLETE')]}"/>
+                        <button name="action_report_wizard"
+                                type="object" string="Print Reports" groups="formio.group_formio_user"
+                                attrs="{'invisible': ['|', ('reports_print_wizard_count', '=', 0), ('state', '=', 'COMPLETE')]}"/>
+                        <button name="action_report_wizard" groups="formio.group_formio_user"
+                                type="object" class="btn-primary" string="Print Reports" attrs="{'invisible': ['|', ('reports_print_wizard_count', '=', 0), ('state', '!=', 'COMPLETE')]}"/>
                     </button>
                     <field name="builder_id" position="after">
                         <field name="reports_print_wizard_count" invisible="1"/>

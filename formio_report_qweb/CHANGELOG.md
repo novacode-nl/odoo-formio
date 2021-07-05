@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3
+
+- (Fix) add group access to Print reports wizard.
+
 ## 4.2
 
 - Improve `password` component: show no mask (only empty input field) if value is empty.
