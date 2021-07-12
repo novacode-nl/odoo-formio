@@ -4,7 +4,7 @@
 {
     'name': 'Forms | Website (Snippet etc)',
     'summary': 'Forms Snippet, Other website integration',
-    'version': '1.6',
+    'version': '1.7',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
