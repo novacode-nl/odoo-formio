@@ -77,7 +77,6 @@ export class OdooFormioForm extends Component {
             // Alter the data (Data Source) URL, prefix with Odoo controller endpoint.
             // This also accounts nested components eg inside datagrid, editgrid.
             FormioUtils.eachComponent(form.components, (component) => {
-                console.log(component.key);
                 let compObj = component.component;
                 if (compObj.hasOwnProperty('data') &&
                     compObj.data.hasOwnProperty('url') && !$.isEmptyObject(compObj.data.url)) {
