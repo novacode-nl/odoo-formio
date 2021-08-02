@@ -44,16 +44,16 @@ class Builder(models.Model):
         help="The form title in the current language", track_visibility='onchange')
     description = fields.Text("Description")
     formio_version_id = fields.Many2one(
-        'formio.version', string='Form.io Version', required=True,
+        'formio.version', string='formio Version', required=True,
         default=lambda self: self._default_formio_version_id(), track_visibility='onchange',
-        help="""Loads the specific Form.io Javascript API/libraries version (sourcecode: \https://github.com/formio/formio.js)""")
-    formio_version_name = fields.Char(related='formio_version_id.name', string='Form.io version', track_visibility=False,)
-    formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='Form.io CSS')
-    formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='Form.io Javascript')
-    formio_js_options_id = fields.Many2one('formio.builder.js.options', string='Form.io Javascript Options template', store=False)
+        help="""Loads the specific formio Javascript API/libraries version (sourcecode: \https://github.com/formio/formio.js)""")
+    formio_version_name = fields.Char(related='formio_version_id.name', string='formio version', track_visibility=False,)
+    formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='formio CSS')
+    formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='formio Javascript')
+    formio_js_options_id = fields.Many2one('formio.builder.js.options', string='formio Javascript Options template', store=False)
     formio_js_options = fields.Text(
         default=lambda self: self._default_formio_js_options(),
-        string='Form.io Javascript Options')
+        string='formio Javascript Options')
     res_model_id = fields.Many2one(
         "ir.model", compute='_compute_res_model_id', store=True,
         string="Model", help="Model as resource this form represents or acts on")

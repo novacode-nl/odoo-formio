@@ -13,7 +13,7 @@ class Version(models.Model):
 
     name = fields.Char(
         "Name", required=True, track_visibility='onchange',
-        help="""Form.io release/version.""")
+        help="""formio release/version.""")
     sequence = fields.Integer()
     description = fields.Text("Description")
     translations = fields.Many2many('formio.translation', string='Translations')

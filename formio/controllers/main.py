@@ -181,7 +181,7 @@ class FormioController(http.Controller):
         This example loads data into Select Component, whereby choices
         are the Partner/Contact names with city "Sittard".
 
-        Form.io configuration (in "Data" tab)
+        formio configuration (in "Data" tab)
         -------------------------------------
         - Data Source URL: /data
         - Filter Query: model=res.partner&label=name&domain_fields=city&city=Sittard
@@ -235,7 +235,7 @@ class FormioController(http.Controller):
         are the product-names from a Sale Order.
         The Form(Builder) has the "Resource Model" set to "Quotation" (i.e. sale.order).
 
-        Form.io configuration (in "Data" tab)
+        formio configuration (in "Data" tab)
         -------------------------------------
         - Data Source URL: /res_data
         - Filter Query: field=order_line.product_id&label=name
