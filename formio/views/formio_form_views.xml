@@ -111,7 +111,7 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.form.formio</field>
         <field name="model">formio.form</field>
         <field name="arch" type="xml">
-            <formio_form string="Form.io">
+            <formio_form string="formio Form">
                 <field name="id"/>
                 <field name="uuid"/>
                 <field name="name"/>

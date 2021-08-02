@@ -17,7 +17,7 @@
                             </li>
                         </t>
                         <li class="formio_version">
-                            <strong>Form.io version: </strong><span t-esc="builder.formio_version_name"/>
+                            <strong>formio JS version: </strong><span t-esc="builder.formio_version_name"/>
                         </li>
                         <li class="builder_state">
                             <t t-if="builder.state == 'DRAFT'">

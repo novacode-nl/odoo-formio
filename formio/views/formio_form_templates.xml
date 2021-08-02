@@ -13,7 +13,7 @@ See LICENSE file for full licensing details. -->
         </xpath>
     </template>
 
-    <template id="formio_form_embed" name="Form.io Form - Embed">
+    <template id="formio_form_embed" name="formio form - embed">
         &lt;!DOCTYPE html&gt;
         <html>
             <head>
