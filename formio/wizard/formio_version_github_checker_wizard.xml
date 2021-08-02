@@ -7,7 +7,7 @@ See LICENSE file for full licensing details. -->
         <field name="name">Formio Version GitHub Checker Wizard</field>
         <field name="model">formio.version.github.checker.wizard</field>
         <field name="arch" type="xml">
-            <form string="Form.io Version GitHub Importer">
+            <form string="formio (js) Version GitHub Importer">
                 <sheet>
                     <group name="available_version_github_tags" string="Available Versions (releases)">
                         <field name="available_version_github_tag_ids" nolabel="1">

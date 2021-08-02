@@ -33,7 +33,7 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.builder.formio</field>
         <field name="model">formio.builder</field>
         <field name="arch" type="xml">
-            <formio_builder string="Form.io Builder">
+            <formio_builder string="formio Builder">
                 <field name="id"/>
                 <field name="name"/>
                 <field name="title"/>
@@ -91,7 +91,7 @@ See LICENSE file for full licensing details. -->
                     <notebook>
                         <page string="General" name="settings">
                             <group name="settings">
-                                <group name="formio_settings" string="Form.io JavaScript (JS)">
+                                <group name="formio_settings" string="formio (js)">
                                     <field name="formio_version_id" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="wizard" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="view_as_html" groups="formio.group_formio_admin"/>
@@ -205,7 +205,7 @@ See LICENSE file for full licensing details. -->
                                 <group>
                                     <field
                                         name="formio_js_options_id"
-                                        string="Select Form.io JS Options"
+                                        string="Select formio JS Options"
                                         attrs="{'readonly': [('state', '!=', 'DRAFT')]}"
                                         style="height: 100%"/>
                                 </group>

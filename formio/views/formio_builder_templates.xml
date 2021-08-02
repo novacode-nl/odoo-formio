@@ -12,7 +12,7 @@ See LICENSE file for full licensing details. -->
         </xpath>
     </template>
 
-    <template id="formio_builder_embed" name="Form.io Builder - Embed">
+    <template id="formio_builder_embed" name="formio builder - embed">
         &lt;!DOCTYPE html&gt;
         <html>
             <head>
@@ -25,7 +25,7 @@ See LICENSE file for full licensing details. -->
                 </t>
                 <link rel="stylesheet" href="/formio/static/src/css/formio_builder_embed.css"/>
                 
-                <!-- Odoo JS dependencies could cause clashes with Form.io JS -->
+                <!-- Odoo JS dependencies could cause clashes with formio JS -->
                 <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
                 <script type="text/javascript" src="/formio/static/lib/owl.min.js"></script>
                 <script type="text/javascript" src="/formio/static/src/js/odoo.jsonrpc.js"/>

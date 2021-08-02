@@ -1,5 +1,9 @@
 # Changelog
 
+### 8.25
+
+- Correct misunderstanding, leftover names regarding the formio JS library.
+
 ### 8.24
 
 - Add translation for the alert message(s), in top of the Form.
