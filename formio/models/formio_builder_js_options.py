@@ -6,7 +6,7 @@ from odoo import api, fields, models, _
 
 class BuilderJsOptions(models.Model):
     _name = 'formio.builder.js.options'
-    _description = 'Formio Builder JavaScript Options'
+    _description = 'formio.builder JavaScript Options'
     _order = 'name ASC'
 
     name = fields.Char(string="Name", required=True)

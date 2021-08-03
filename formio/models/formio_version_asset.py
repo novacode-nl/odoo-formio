@@ -6,7 +6,7 @@ from odoo import api, fields, models, _
 
 class VersionAsset(models.Model):
     _name = 'formio.version.asset'
-    _description = 'Formio Version Asset'
+    _description = 'formio.js Version Asset'
     _order = 'sequence ASC'
 
     version_id = fields.Many2one('formio.version', string='Version')

@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 class DefaultAssetCss(models.Model):
     _name = 'formio.default.asset.css'
-    _description = 'Formio Asset CSS'
+    _description = 'formio.js Default Asset CSS'
 
     attachment_id = fields.Many2one(
         'ir.attachment', string="Attachment",

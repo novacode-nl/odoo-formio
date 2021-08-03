@@ -2,7 +2,7 @@
 
 ### 8.28
 
-- Correct misunderstanding, leftover names regarding the formio JS library.
+- Correct misunderstanding, leftover names regarding the formio.js library.
 
 ### 8.27
 
