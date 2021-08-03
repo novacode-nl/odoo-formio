@@ -6,7 +6,7 @@ from odoo import api, fields, models, _
 
 class BuilderTranslation(models.Model):
     _name = 'formio.builder.translation'
-    _description = 'Formio Builder Translation'
+    _description = 'Form Builder Translation'
     _order = 'lang_id ASC'
 
     builder_id = fields.Many2one(

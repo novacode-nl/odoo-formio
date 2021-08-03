@@ -6,10 +6,10 @@ from odoo import api, fields, models, _
 
 class VersionAsset(models.Model):
     _name = 'formio.version.asset'
-    _description = 'Formio Version Asset'
+    _description = 'formio.js Version Asset'
     _order = 'sequence ASC'
 
-    version_id = fields.Many2one('formio.version', string='Version')
+    version_id = fields.Many2one('formio.version', string='formio.js Version')
     type = fields.Selection([('js', 'js'), ('css', 'css')], string='Type', required=True)
     attachment_id = fields.Many2one(
         'ir.attachment', string="Attachment",

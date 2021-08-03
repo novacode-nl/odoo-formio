@@ -22,7 +22,7 @@ STATE_CANCEL = 'CANCEL'
 
 class Form(models.Model):
     _name = 'formio.form'
-    _description = 'Formio Form'
+    _description = 'Form'
     _inherit = ['mail.thread']
 
     _order = 'id DESC'

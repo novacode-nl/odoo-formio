@@ -6,12 +6,12 @@ from odoo import api, fields, models, _
 
 class Version(models.Model):
     _name = 'formio.version'
-    _description = 'Formio Version'
+    _description = 'formio.js Version'
     _order = 'name DESC'
 
     name = fields.Char(
         "Name", required=True, track_visibility='onchange',
-        help="""formio release/version.""")
+        help="""formio.js release/version.""")
     description = fields.Text("Description")
     translations = fields.Many2many('formio.translation', string='Translations')
     assets = fields.One2many('formio.version.asset', 'version_id', string='Assets')

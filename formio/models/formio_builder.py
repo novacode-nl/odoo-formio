@@ -23,7 +23,7 @@ STATES = [
 
 class Builder(models.Model):
     _name = 'formio.builder'
-    _description = 'Formio Builder'
+    _description = 'Form Builder'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     _rec_name = 'display_name_full'
@@ -38,12 +38,12 @@ class Builder(models.Model):
         help="The form title in the current language", track_visibility='onchange')
     description = fields.Text("Description")
     formio_version_id = fields.Many2one(
-        'formio.version', string='formio Version', required=True,
+        'formio.version', string='formio.js Version', required=True,
         track_visibility='onchange',
-        help="""Loads the specific Form.io Javascript API/libraries version (sourcecode: \https://github.com/formio/formio.js)""")
-    formio_version_name = fields.Char(related='formio_version_id.name', string='formio version')
-    formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='formio CSS')
-    formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='formio Javascript')
+        help="""Loads the specific formio.js Javascript libraries version (sourcecode: https://github.com/formio/formio.js)""")
+    formio_version_name = fields.Char(related='formio_version_id.name', string='formio.js version')
+    formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='formio.js CSS')
+    formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='formio.js Javascript')
     res_model_id = fields.Many2one(
         "ir.model", compute='_compute_res_model_id', store=True,
         string="Model", help="Model as resource this form represents or acts on")

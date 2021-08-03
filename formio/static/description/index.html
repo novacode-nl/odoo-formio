@@ -41,7 +41,7 @@
 	  </li>
 	  <li>
 	    <i class="fa fa-check-square-o text-primary"></i>
-            <strong>Translations:</strong> Easy management of translations for "formio" its translatable terms.
+            <strong>Translations:</strong> Easy management of translations and translatable terms.
 	  </li>
 	  <li>
 	    <i class="fa fa-check-square-o text-primary"></i>
@@ -86,7 +86,7 @@
       <img class="oe_demo oe_picture oe_screenshot" src="builder-edit.png">
     </div>
     <div class="oe_row_img oe_centered">
-      <h4 class="oe_mb16 text-center">"formio" Form Builder</h4>
+      <h4 class="oe_mb16 text-center">Form Builder</h4>
       <img class="oe_demo oe_picture oe_screenshot" src="builder-formio.png">
     </div>
   </div>
@@ -100,7 +100,7 @@
       <img class="oe_demo oe_picture oe_screenshot" src="form-odoo-create.png">
     </div>
     <div class="oe_row_img oe_centered">
-      <h4 class="oe_mb16 text-center">"formio" Form <small>(to fill in)</small></h4>
+      <h4 class="oe_mb16 text-center">Form <small>(to fill in)</small></h4>
       <img class="oe_demo oe_picture oe_screenshot" src="form-formio.png">
     </div>
     <div class="oe_row_img oe_centered">
@@ -120,7 +120,7 @@
     <h4 class="oe_mb16">4.5</h4>
     <ul>
       <li>
-        Correct misunderstanding, leftover names regarding the formio JS library.
+        Correct misunderstanding, leftover names regarding the formio.js library.
       </li>
     </ul>
     <h4 class="oe_mb16">4.4</h4>
@@ -193,7 +193,7 @@
         Fix silly Javascript bug: <code>_.extend</code> (underscore.js ain't loaded here). Use jQuery extend.
       </li>
       <li>
-        Add help text regarding issue with (Formio.js) and <code>view_as_html</code> setting <a href="https://github.com/formio/formio.js/issues/1545" target="_blank">select component rendering error in viewAsHtml model #1545</a>
+        Add help text regarding issue with (formio.js) and <code>view_as_html</code> setting <a href="https://github.com/formio/formio.js/issues/1545" target="_blank">select component rendering error in viewAsHtml model #1545</a>
       </li>
     </ul>
     <h4 class="oe_mb16">3.5</h4>
@@ -215,7 +215,7 @@
         <ul>
           <li>Scalar fields e.g. Char, Text, Integer, Boolean, Date, Datetime</li>
           <li>Many2one field (load it's leaf/scalar field)</li>
-          <li>One2many field, supported by formio Datagrid component</li>
+          <li>One2many field, supported by formio.js Datagrid component</li>
         </ul>
         (documention and examples shall be added soon)
       </li>
@@ -296,7 +296,7 @@
     <ul>
       <li>
         Change URLs and controllers FROM <code>/formio/form/&lt;action&gt;/&lt;string:uuid&gt;</code> URLs TO <code>/formio/form/&lt;string:uuid&gt;/&lt;action&gt;</code>. This solves issues regarding relative URLs from a Formio Javascript perspective (components).
-        The UUID was stripped by the Formio Javascript client API.<br/>
+        The UUID was stripped by the formio.js Javascript client API.<br/>
         Should solve: <a href="https://github.com/novacode-nl/odoo-formio/issues/11" target="_blank">https://github.com/novacode-nl/odoo-formio/issues/11</a>
       </li>
       <li>
@@ -306,7 +306,7 @@
     <h4 class="oe_mb16">1.7</h4>
     <ul>
       <li>
-        Prevent Javascript clashes between Odoo and formio. Hence remove all Odoo Javascript (assets) loading in the formio iframe.
+        Prevent Javascript clashes between Odoo and formio.js. Hence remove all Odoo Javascript (assets) loading in the iframe.
       </li>
       <li>
         Add and load standalone JsonRPC client.
@@ -333,7 +333,7 @@
     <h4 class="oe_mb16">1.4</h4>
     <ul>
       <li>
-        Include and serve the Formio.js library assets (JS, CSS) within the module. Don't use CDN anymore.
+        Include and serve the formio.js library assets (JS, CSS) within the module. Don't use CDN anymore.
       </li>
       <li>
         Click button to display the <strong>Form Builder</strong> in <strong>Full Screen</strong>.
@@ -363,8 +363,8 @@
     </ul>
     <h4 class="oe_mb16">1.0</h4>
     <ul>
-      <li>formio embedded in iframe. This avoids clashes (Javascript and CSS) between Odoo and formio.</li>
-      <li>Redesign of formio templates</li>
+      <li>Form embedded in iframe. This avoids clashes (Javascript and CSS) between Odoo and formio.js</li>
+      <li>Redesign of view templates</li>
     </ul>
     <h4 class="oe_mb16">0.16</h4>
     <ul>
@@ -387,13 +387,13 @@
     <h4 class="oe_mb16">0.12</h4>
     <ul>
       <li>Redesign of Builder and Form templates. A simplification and improvement.</li>
-      <li>Hopefully fixed enough styling issues due to Bootstrap 4 VS 3 presence (Odoo, Formio) and differences.</li>
+      <li>Hopefully fixed enough styling issues due to Bootstrap 4 VS 3 presence (Odoo, form rendering) and differences.</li>
       <li>Other small improvements</li>
     </ul>
     <h4 class="oe_mb16">0.11</h4>
     <ul>
-      <li>Include new formio versions and assets (3.27.3, 4.0.8)</li>
-      <li>Add recommendation into the description of the "latest" formio version.</li>
+      <li>Include new formio.js versions and assets (3.27.3, 4.0.8)</li>
+      <li>Add recommendation into the description of the "latest" formio.js version.</li>
     </ul>
     <h4 class="oe_mb16">0.10</h4>
     <ul>
@@ -431,11 +431,11 @@
     </ul>
     <h4 class="oe_mb16">0.3</h4>
     <ul>
-      <li>Translations system to manage the formio translatable terms and load into the form.</li>
+      <li>Translations system to manage the translatable terms and load into the form.</li>
     </ul>
     <h4 class="oe_mb16">0.2</h4>
     <ul>
-      <li>formio (library: JS, CSS) version management and loading.</li>
+      <li>formio.js (library: JS, CSS) version management and loading.</li>
     </ul>
     <h4 class="oe_mb16">0.1</h4>
     <ul>

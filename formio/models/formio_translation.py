@@ -6,7 +6,7 @@ from odoo import api, fields, models, _
 
 class Translation(models.Model):
     _name = 'formio.translation'
-    _description = 'Formio Version Translation'
+    _description = 'Form Version Translation'
     _order = 'lang_id ASC'
 
     lang_id = fields.Many2one('res.lang', string='Language', required=True)
