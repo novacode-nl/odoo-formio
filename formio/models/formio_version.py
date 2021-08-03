@@ -8,12 +8,12 @@ from odoo import api, fields, models
 
 class Version(models.Model):
     _name = 'formio.version'
-    _description = 'Formio Version'
+    _description = 'formio.js Version'
     _order = 'sequence DESC'
 
     name = fields.Char(
         "Name", required=True, track_visibility='onchange',
-        help="""formio release/version.""")
+        help="""formio.js release/version.""")
     sequence = fields.Integer()
     description = fields.Text("Description")
     translations = fields.Many2many('formio.translation', string='Translations')

@@ -20,12 +20,12 @@ STATES = [(STATE_AVAILABLE, "Available"), (STATE_INSTALLED, "Installed")]
 
 class VersionGitHubTag(models.Model):
     _name = 'formio.version.github.tag'
-    _description = 'Formio Version GitHub Tag'
+    _description = 'formio.js Version GitHub Tag'
     #_order = 'create_date desc, id asc'
 
     # IMPORTANT NOTES
     # ===============
-    # Formio published release ain't available with the GitHub releases API
+    # formio.js published release ain't available with the GitHub releases API
     # https://developer.github.com/v3/repos/releases/#list-releases
     #
     # GitHub tags API
@@ -33,7 +33,7 @@ class VersionGitHubTag(models.Model):
 
     name = fields.Char(required=True)
     version_name = fields.Char('_compute_fields')
-    formio_version_id = fields.Many2one('formio.version')
+    formio_version_id = fields.Many2one('formio.version', string='formio.js Version')
     archive_url = fields.Char(compute='_compute_fields', string="Archive URL")
     changelog_url = fields.Char(compute='_compute_fields', string="Changelog URL")
     state = fields.Selection(

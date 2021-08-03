@@ -7,7 +7,7 @@ from odoo.exceptions import UserError
 
 class ResModel(models.Model):
     _name = 'formio.res.model'
-    _description = 'Formio Resource Model'
+    _description = 'Form Resource Model'
 
     _rec_name = 'ir_model_id'
 
