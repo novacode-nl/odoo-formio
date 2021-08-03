@@ -44,16 +44,16 @@ class Builder(models.Model):
         help="The form title in the current language", tracking=True)
     description = fields.Text("Description")
     formio_version_id = fields.Many2one(
-        'formio.version', string='formio Version', required=True,
+        'formio.version', string='formio.js Version', required=True,
         default=lambda self: self._default_formio_version_id(), tracking=True,
-        help="""Loads the specific formio Javascript API/libraries version (sourcecode: \https://github.com/formio/formio.js)""")
-    formio_version_name = fields.Char(related='formio_version_id.name', string='formio version', tracking=False) # silly, but avoids duplicate tracking message
-    formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='formio CSS')
-    formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='formio Javascript')
-    formio_js_options_id = fields.Many2one('formio.builder.js.options', string='formio Javascript Options template', store=False)
+        help="""Loads the specific formio.js Javascript libraries version (sourcecode: https://github.com/formio/formio.js)""")
+    formio_version_name = fields.Char(related='formio_version_id.name', string='formio.js version', tracking=False) # silly, but avoids duplicate tracking message
+    formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='formio.js CSS')
+    formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='formio.js Javascript')
+    formio_js_options_id = fields.Many2one('formio.builder.js.options', string='formio.js Javascript Options template', store=False)
     formio_js_options = fields.Text(
         default=lambda self: self._default_formio_js_options(),
-        string='formio Javascript Options')
+        string='formio.js Javascript Options')
     res_model_id = fields.Many2one(
         "ir.model", compute='_compute_res_model_id', store=True,
         string="Model", help="Model as resource this form represents or acts on")
@@ -364,7 +364,7 @@ class Builder(models.Model):
         }
 
     def _get_js_options(self):
-        """ formio JS (API) options """
+        """ formio.js (API) options """
 
         if self.formio_js_options:
             try:
@@ -430,7 +430,7 @@ class Builder(models.Model):
 
     def i18n_translations(self):
         i18n = {}
-        # Formio GUI/API translations
+        # formio.js translations
         for trans in self.formio_version_id.translations:
             code = trans.lang_id.formio_ietf_code
             if code not in i18n:
@@ -438,7 +438,7 @@ class Builder(models.Model):
             else:
                 i18n[code][trans.property] = trans.value
         # Form Builder translations (labels etc).
-        # These could override the former GUI/API translations, but
+        # These could override the former formio.js translations, but
         # that's how the Javascript API works.
         for trans in self.translations:
             code = trans.lang_id.formio_ietf_code

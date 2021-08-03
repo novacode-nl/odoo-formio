@@ -504,7 +504,7 @@ class Form(models.Model):
             return False
 
     def _get_js_options(self):
-        """ formio JS (API) options """
+        """ formio.js (API) options """
         options = {
             'i18n': self.i18n_translations()
         }
