@@ -357,13 +357,6 @@ msgid "Activity Type Icon"
 msgstr "活动类型图标"
 
 #. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-msgid ""
-"Add additional CSS files to be included for every new installed Form.io "
-"client/library."
-msgstr "为新安装的Formio.js添加匹配的CSS文件。"
-
-#. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__component_partner_add_follower
 msgid "Add determined partner to followers of the Form."
 msgstr "将已确定的合作伙伴添加为表单关注者。"
@@ -884,155 +877,103 @@ msgstr "表单为公众而建"
 #: model:ir.model.fields.selection,name:formio.selection__ir_actions_act_window_view__view_mode__formio_builder
 #: model:ir.model.fields.selection,name:formio.selection__ir_ui_view__type__formio_builder
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_formio
-msgid "Form.io Builder"
-msgstr "Form.io构建器"
-
-#. module: formio
-#: model:ir.model.fields,field_description:formio.field_res_config_settings__formio_default_builder_js_options
-msgid "Form.io Builder JS options"
-msgstr "构建器JS选项"
-
-#. module: formio
-#: model:ir.model.fields,field_description:formio.field_res_config_settings__formio_default_builder_js_options_id
-msgid "Form.io Builder JS options ID"
-msgstr "构建器JS选项ID"
-
-#. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__formio_css_assets
-msgid "Form.io CSS"
-msgstr ""
+msgid "Form Builder"
+msgstr "Form构建器"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_res_config_settings__formio_default_asset_css_ids
-msgid "Form.io CSS assets"
-msgstr "Form.io CSS源"
+msgid "formio.js CSS assets"
+msgstr "formio.js CSS源"
 
 #. module: formio
 #: model:ir.model.fields.selection,name:formio.selection__ir_actions_act_window_view__view_mode__formio_form
 #: model:ir.model.fields.selection,name:formio.selection__ir_ui_view__type__formio_form
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_formio
-msgid "Form.io Form"
-msgstr "Form.io 表单"
+msgid "Form"
+msgstr "表单"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-msgid "Form.io JS/library version importer"
-msgstr "Formio.js版本导入"
-
-#. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "Form.io JavaScript (JS)"
-msgstr ""
-
-#. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__formio_js_assets
-msgid "Form.io Javascript"
-msgstr ""
+msgid "formio.js JS/library version importer"
+msgstr "formio.js版本导入"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__formio_js_options
-msgid "Form.io Javascript Options"
-msgstr "Form.io JS选项"
+msgid "formio.js Javascript Options"
+msgstr "formio.js JS选项"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__formio_js_options_id
-msgid "Form.io Javascript Options template"
-msgstr "Formio JS选项模板"
-
-#. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__formio_version_id
-#: model:ir.model.fields,field_description:formio.field_res_config_settings__formio_default_version_id
-msgid "Form.io Version"
-msgstr "版本"
+msgid "formio.js Javascript Options template"
+msgstr "formio.js JS选项模板"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_github_checker_wizard
-msgid "Form.io Version GitHub Importer"
-msgstr "Formio版本 GitHub导入"
+msgid "formio.js Version GitHub Importer"
+msgstr "formio.js版本 GitHub导入"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__formio_version_name
 #: model:ir.model.fields,help:formio.field_formio_version__name
-msgid "Form.io release/version."
-msgstr "Form.io发行/版本"
+msgid "formio.js release/version."
+msgstr "formio.js发行/版本"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__formio_version_name
-msgid "Form.io version"
-msgstr "Formio版本"
+msgid "formio.js version"
+msgstr "formio.js版本"
 
 #. module: formio
 #. openerp-web
 #: code:addons/formio/static/src/xml/formio.xml:0
 #, python-format
-msgid "Form.io version:"
-msgstr "Formio版本："
+msgid "formio.js version:"
+msgstr "formio.js版本："
 
 #. module: formio
 #: model:ir.model,name:formio.model_formio_default_asset_css
-msgid "Formio Asset CSS"
-msgstr "Formio CSS源"
+msgid "formio.js Asset CSS"
+msgstr "formio.js CSS源"
 
 #. module: formio
 #: model:ir.model,name:formio.model_formio_builder
-msgid "Formio Builder"
-msgstr "Formio构建器"
+msgid "Form Builder"
+msgstr "Form构建器"
 
 #. module: formio
 #: model:ir.model,name:formio.model_formio_builder_js_options
-msgid "Formio Builder JavaScript Options"
-msgstr "Formio构建器JS选项"
+msgid "Form Builder formio.js Options"
+msgstr "Form构建器JS选项"
 
 #. module: formio
 #: model:ir.model,name:formio.model_formio_builder_translation
-msgid "Formio Builder Translation"
-msgstr "Formio构建器翻译包"
+msgid "Form Builder Translation"
+msgstr "Form构建器翻译包"
 
 #. module: formio
 #: model:ir.model,name:formio.model_formio_form
-msgid "Formio Form"
-msgstr "Formio表单"
+msgid "Form"
+msgstr "表单"
 
 #. module: formio
 #: model:ir.model,name:formio.model_formio_res_model
-msgid "Formio Resource Model"
-msgstr "Formio数据源模型"
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_version
-#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__formio_version_id
-msgid "Formio Version"
-msgstr "Formio版本"
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_version_asset
-msgid "Formio Version Asset"
-msgstr "Formio版本资源"
+msgid "Form Resource Model"
+msgstr "Form数据源模型"
 
 #. module: formio
 #: model:ir.model,name:formio.model_formio_version_github_checker_wizard
-msgid "Formio Version GitHub Checker Wizard"
-msgstr "Formio版本 GitHub 检查向导"
+msgid "formio.js Version GitHub Checker Wizard"
+msgstr "formio.js版本 GitHub 检查向导"
 
 #. module: formio
 #: model:ir.model,name:formio.model_formio_version_github_tag
-msgid "Formio Version GitHub Tag"
-msgstr "Formio版本下载源"
+msgid "formio.js Version GitHub Tag"
+msgstr "formio.js版本下载源"
 
 #. module: formio
 #: model:ir.model,name:formio.model_formio_version_github_tag_available
-msgid "Formio Version GitHub Tag Available"
-msgstr "Formio可用版本下载源"
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_translation
-msgid "Formio Version Translation"
-msgstr "Formio版本翻译包"
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_translation_source
-msgid "Formio Version Translation Source"
-msgstr "Formio版本翻译源"
+msgid "formio.js Version GitHub Tag Available"
+msgstr "formio.js可用版本下载源"
 
 #. module: formio
 #: model:ir.actions.act_window,name:formio.action_formio_form
@@ -1308,9 +1249,9 @@ msgstr "更新日期"
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__formio_version_id
 msgid ""
-"Loads the specific Form.io Javascript API/libraries version (sourcecode: "
+"Loads the specific formio.js Javascript API/libraries version (sourcecode: "
 "\\https://github.com/formio/formio.js)"
-msgstr "加载特定的Form.io JS API /库版本（源代码： \\https://github.com/formio/formio.js）"
+msgstr "加载特定的formio.js API /库版本（源代码： \\https://github.com/formio/formio.js）"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_main_attachment_id
@@ -1728,7 +1669,7 @@ msgstr "责任人"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "Select Form.io JS Options"
+msgid "Select formio.js Options"
 msgstr "选择JS选项模板"
 
 #. module: formio
@@ -2155,8 +2096,8 @@ msgstr "网站讨论历史"
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
 msgid ""
-"When adding a new Form Builder, use this Form.io client/library version."
-msgstr "创建新的表单构建器时，将默认使用此Formio.js版本。"
+"When adding a new Form Builder, use this formio.js client/library version."
+msgstr "创建新的表单构建器时，将默认使用此formio.js版本。"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__wizard
