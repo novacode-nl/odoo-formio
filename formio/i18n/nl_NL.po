@@ -2289,7 +2289,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__version_id
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__formio_version_id
 #: model:ir.model.fields,field_description:formio.field_res_config_settings__formio_default_version_id
-msgid "formio.js Version"
+msgid "formio.js version"
 msgstr "formio.js versie"
 
 #. module: formio
