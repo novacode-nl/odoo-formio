@@ -24,18 +24,13 @@ msgstr "CRM Interessenten"
 
 #. module: formio_crm
 #: model:ir.model.fields,field_description:formio_crm.field_crm_lead_formio_forms
-msgid "Form.io Forms"
-msgstr "Form.io Formulare"
-
-#. module: formio_crm
-#: model:ir.model,name:formio_crm.model_formio_form
-msgid "Formio Form"
-msgstr "Formio Formular"
+msgid "Forms"
+msgstr "Formulare"
 
 #. module: formio_crm
 #: model:ir.model.fields,field_description:formio_crm.field_crm_lead_formio_forms_count
-msgid "Formio Forms Count"
-msgstr "Formio Formulare Anzahl"
+msgid "Forms Count"
+msgstr "Formulare Anzahl"
 
 #. module: formio_crm
 #: model:ir.model.fields,field_description:formio_crm.field_crm_lead_formio_this_model_id

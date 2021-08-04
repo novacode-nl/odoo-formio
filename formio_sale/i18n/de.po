@@ -19,18 +19,13 @@ msgstr ""
 
 #. module: formio_sale
 #: model:ir.model.fields,field_description:formio_sale.field_sale_order_formio_forms
-msgid "Form.io Forms"
-msgstr "Form.io Formulare"
-
-#. module: formio_sale
-#: model:ir.model,name:formio_sale.model_formio_form
-msgid "Formio Form"
-msgstr "Formio Formular"
+msgid "Forms"
+msgstr "Formulare"
 
 #. module: formio_sale
 #: model:ir.model.fields,field_description:formio_sale.field_sale_order_formio_forms_count
-msgid "Formio Forms Count"
-msgstr "Formio Formulare Anzahl"
+msgid "Forms Count"
+msgstr "Formulare Anzahl"
 
 #. module: formio_sale
 #: model:ir.model.fields,field_description:formio_sale.field_sale_order_formio_this_model_id
