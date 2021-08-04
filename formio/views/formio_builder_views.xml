@@ -129,7 +129,7 @@ See LICENSE file for full licensing details. -->
                             </group>
                             <div class="mb-3 text-muted">
                                 <i class="fa fa-info-circle" title="info"/><strong> View as HTML</strong> - This setting (still) doesn't work since version 4.x<br/>
-                                For more info see Formio.js GitHub issue: <a href="https://github.com/formio/formio.js/issues/1545" target="_blank">select component rendering error in viewAsHtml model #1545</a><br/>
+                                For more info see formio.js GitHub issue: <a href="https://github.com/formio/formio.js/issues/1545" target="_blank">select component rendering error in viewAsHtml model #1545</a><br/>
                                 <i class="fa fa-info-circle" title="info"/><strong> Integration / Resource settings</strong> - Enables integration of Form and ERP/Odoo objects.<br/>
                             </div>
                         </page>
