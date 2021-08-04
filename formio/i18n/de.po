@@ -503,8 +503,8 @@ msgstr "formio.js Javascript"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder_formio_version_id
-msgid "formio.js Version"
-msgstr "formio.js Version"
+msgid "formio.js version"
+msgstr "formio.js version"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder_formio_version_name

@@ -34,7 +34,7 @@ class VersionGitHubTag(models.Model):
 
     name = fields.Char(required=True)
     version_name = fields.Char('_compute_fields')
-    formio_version_id = fields.Many2one('formio.version', string='formio.js Version')
+    formio_version_id = fields.Many2one('formio.version', string='formio.js version')
     archive_url = fields.Char(compute='_compute_fields', string="Archive URL")
     changelog_url = fields.Char(compute='_compute_fields', string="Changelog URL")
     state = fields.Selection(

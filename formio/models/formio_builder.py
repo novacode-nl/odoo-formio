@@ -44,7 +44,7 @@ class Builder(models.Model):
         help="The form title in the current language", tracking=True)
     description = fields.Text("Description")
     formio_version_id = fields.Many2one(
-        'formio.version', string='formio.js Version', required=True,
+        'formio.version', string='formio.js version', required=True,
         default=lambda self: self._default_formio_version_id(), tracking=True,
         help="""Loads the specific formio.js Javascript libraries version (sourcecode: https://github.com/formio/formio.js)""")
     formio_version_name = fields.Char(related='formio_version_id.name', string='formio.js version', tracking=False) # silly, but avoids duplicate tracking message
