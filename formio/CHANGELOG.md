@@ -40,7 +40,7 @@
 
 ### 8.20
 
-- Fix: Ordering of "Form.io Version" in (Many2one) selection fields e.g. in Form and Config settings.
+- Fix: Ordering of "formio.js version" in (Many2one) selection fields e.g. in Form and Config settings.
 
 ### 8.19
 
@@ -88,7 +88,7 @@
 
 ### 8.10
 
-- JavaScript: Set the `baseUrl` (value: `window.location.href`) on the Formio object.\
+- JavaScript: Set the `baseUrl` (value: `window.location.href`) on the (formio.js) Formio object.\
   The `baseUrl` is the Form it's `<iframe src=.../>` attribute.\
   This can be used in other (integration) modules e.g. for security/access checking etc.
 
@@ -114,7 +114,7 @@
 ### 8.5
 
 - Fix (4): language switcher buttons and translations in public Forms (also used by `website_formio` module).\
-  Convert the Odoo language code (underscore "_") to Formio JS/i18n expected IETF code (hyphen "-").\
+  Convert the Odoo language code (underscore "_") to Formio (formio.js) JavaScript's i18n expected IETF code (hyphen "-").\
   PR: [\#100](https://github.com/novacode-nl/odoo-formio/pull/100)
 
 ### 8.4
@@ -125,7 +125,7 @@
 ### 8.3
 
 - Fix (3): language switcher buttons and translations in Form Builder and Forms.\
-  Convert the Odoo language code (underscore "_") to Formio JS/i18n expected IETF code (hyphen "-").\
+  Convert the Odoo language code (underscore "_") to Formio (formio.js) JavaScript's i18n expected IETF code (hyphen "-").\
   Issues: [\#91](https://github.com/novacode-nl/odoo-formio/issues/91), [\#93](https://github.com/novacode-nl/odoo-formio/issues/93), [\#95](https://github.com/novacode-nl/odoo-formio/issues/95)
 
 ### 8.2
@@ -216,10 +216,10 @@
 
 ### 6.0
 
-- New feature: Form.io (client/library) Version Checker, Importer and Installer tool.\
+- New feature: formio.js (client/library) Version Checker, Importer and Installer tool.\
   Now administrators can check, import (from GitHub) and install new releases/versions by a single click in Odoo.\
   Soon a scheduled Cron action shall be implemeneted which does the (default daily) checking and importing.
-- New feature: Configuration setting to specify the default Form.io (client/library) Version for any new Form Builder.
+- New feature: Configuration setting to specify the default formio.js (client/library) Version for any new Form Builder.
 
 ### 5.3
 
@@ -293,7 +293,7 @@
   The default is to show all these metadata fields (for backwards compatibility and no data migration needed).
 - Import formio.js version 3.x assets and bootstrap (CSS) instead of CDN.
 - Fix silly Javascript bug: `_.extend` (underscore.js ain't loaded here). Use jQuery extend.
-- Add help text regarding issue with (Formio.js) and `view_as_html` setting https://github.com/formio/formio.js/issues/1545
+- Add help text regarding issue with (formio.js) and `view_as_html` setting https://github.com/formio/formio.js/issues/1545
 
 ### 3.5
 
@@ -310,7 +310,7 @@
   Supported fields:
   - Scalar fields e.g. Char, Text, Integer, Boolean, Date, Datetime
   - Many2one field (load it's leaf/scalar field)
-  - One2many field, supported by Form.io Datagrid component
+  - One2many field, supported by formio.js Datagrid component
 
 ### 3.2
 
@@ -360,13 +360,13 @@
 ### 1.8
 
 - Change URLs and controllers FROM `/formio/form/<action>/<string:uuid>` URLs TO `/formio/form/<string:uuid>/<action>`.\
-  This solves issues regarding relative URLs from a Formio Javascript perspective (components). The UUID was stripped by the Formio Javascript client API.\
+  This solves issues regarding relative URLs from a Javascript perspective (components). The UUID was stripped by the Javascript client lib.\
   Should solve: [\#11](https://github.com/novacode-nl/odoo-formio/issues/11)
 - Remove 2 legacy (obsolete) controller methods for routes: `/formio/form/<string:uuid>` and `/formio/builder/<int:builder_id>`
 
 ### 1.7
 
-- Prevent Javascript clashes between Odoo and Form.io. Hence remove all Odoo Javascript (assets) loading in the Form.io iframe.
+- Prevent Javascript clashes between Odoo and formio.js. Hence remove all Odoo Javascript (assets) loading in the formio.js iframe.
 - Add and load standalone JsonRPC client.
 
 ### 1.6
@@ -381,7 +381,7 @@
 
 ### 1.4
 
-- Include and serve the Formio.js library assets (JS, CSS) within the module. Don't use CDN anymore.
+- Include and serve the formio.js library assets (JS, CSS) within the module. Don't use CDN anymore.
 - Click button to display the **Form Builder** in **Full Screen**.
 
 ### 1.3
@@ -400,8 +400,8 @@
 
 ### 1.0
 
-- Form.io embedded in iframe. This avoids clashes (Javascript and CSS) between Odoo and Form.io.
-- Redesign of Form.io templates
+- Form embedded in iframe. This avoids clashes (Javascript and CSS) between Odoo and formio.js.
+- Redesign of templates
 
 ### 0.16
 
@@ -424,13 +424,13 @@
 ### 0.12
 
 - Redesign of Builder and Form templates. A simplification and improvement.
-- Hopefully fixed enough styling issues due to Bootstrap 4 VS 3 presence (Odoo, Formio) and differences.
+- Hopefully fixed enough styling issues due to Bootstrap 4 VS 3 in Odoo and loaded JS Form (Builder).
 - Other small improvements
 
 ### 0.11
 
-- Include new Form.io versions and assets (3.27.3, 4.0.8)
-- Add recommendation into the description of the "latest" Form.io version.
+- Include new formio.js versions and assets (3.27.3, 4.0.8)
+- Add recommendation into the description of the "latest" formio.js version.
 
 ### 0.10
 
@@ -468,11 +468,11 @@
 
 ### 0.3
 
-- Translations system to manage the Form.io translatable terms and load into the form.
+- Translations system to manage the translatable terms and load into the form.
 
 ### 0.2
 
-- Form.io (library: JS, CSS) version management and loading.
+- formio.js (library: JS, CSS) version management and loading.
 
 ### 0.1
 
