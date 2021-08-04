@@ -22,7 +22,7 @@ ODOO_MODEL_PREFIX = 'OdooModel'
 
 # IMPORTANT regarding the delimiter choice:
 # - A dot "." results in undesired submission data, due to
-# the Form.io Javascript library/API.
+# the formio.js Javascript library/API.
 # - A dash is allowed, however causing issues with the ETL module (formio_etl).
 ODOO_FIELD_DELIM = '__'
 
@@ -133,7 +133,7 @@ class FormioForm(models.Model):
                         datagrid_rows.append(row)
                     odoo_field_val = datagrid_rows
                 else:
-                    error_msg = "One2many field % expects a Form.io datagrid component %s" % model_object
+                    error_msg = "One2many field % expects a formio.js datagrid component %s" % model_object
                     error = EtlOdooFieldError(formio_component_name, field, msg)
                     _logger.info(error.message)
                     return error.odoo_field_val
