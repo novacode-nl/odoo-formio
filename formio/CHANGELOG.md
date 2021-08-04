@@ -1,5 +1,9 @@
 # Changelog
 
+### 8.29
+
+- Add session variable `formio_last_form_uuid` upon POST `/formio/public/form/create`.
+
 ### 8.28
 
 - Correct misunderstanding, leftover names regarding the formio.js library.

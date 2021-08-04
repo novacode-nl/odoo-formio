@@ -157,6 +157,7 @@ class FormioPublicController(http.Controller):
 
         form_model = Form.with_context(**context)
         res = form_model.sudo().create(vals)
+        request.session['formio_last_form_uuid'] = res.uuid
         return {'form_uuid': res.uuid}
 
     def _get_public_form_js_options(self, form):
