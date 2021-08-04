@@ -80,7 +80,7 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                             </div>
                         </div>
                     </div>
-                    <h2>Default Form Builder JavaScript Options Template</h2>
+                    <h2>Default Form Builder formio.js Options Template</h2>
                     <div class="row mt16 o_settings_container formio_default_builder_js_options">
                         <div class="text-muted">
                             Select a default Form Builder JavaScript Options Template.<br/>
