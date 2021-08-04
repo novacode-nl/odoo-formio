@@ -44,7 +44,7 @@ class Builder(models.Model):
         help="The form title in the current language", track_visibility='onchange')
     description = fields.Text("Description")
     formio_version_id = fields.Many2one(
-        'formio.version', string='formio.js Version', required=True,
+        'formio.version', string='formio.js version', required=True,
         default=lambda self: self._default_formio_version_id(), track_visibility='onchange',
         help="""Loads the specific formio.js Javascript libraries version (sourcecode: https://github.com/formio/formio.js)""")
     formio_version_name = fields.Char(related='formio_version_id.name', string='formio.js version')

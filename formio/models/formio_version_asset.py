@@ -9,7 +9,7 @@ class VersionAsset(models.Model):
     _description = 'formio.js Version Asset'
     _order = 'sequence ASC'
 
-    version_id = fields.Many2one('formio.version', string='formio.js Version')
+    version_id = fields.Many2one('formio.version', string='formio.js version')
     type = fields.Selection([('js', 'js'), ('css', 'css')], string='Type', required=True)
     attachment_id = fields.Many2one(
         'ir.attachment', string="Attachment",

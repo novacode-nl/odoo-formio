@@ -7,7 +7,7 @@ from odoo import api, fields, models, _
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    formio_default_version_id = fields.Many2one('formio.version', string='formio.js Version')
+    formio_default_version_id = fields.Many2one('formio.version', string='formio.js version')
     formio_default_asset_css_ids = fields.Many2many('formio.default.asset.css', string='formio.js CSS assets')
     formio_default_builder_js_options_id = fields.Many2one('formio.builder.js.options', string='formio.js Builder JS options ID')
     formio_default_builder_js_options = fields.Text(related='formio_default_builder_js_options_id.value', string='formio.js Builder JS options')
