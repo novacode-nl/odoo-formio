@@ -9,7 +9,7 @@ class IrAttachment(models.AbstractModel):
 
     # Here for all kinds of integration e.g. file component, reporting
     formio_form_id = fields.Many2one(
-        'formio.form', compute='_compute_formio_form_id', store=True, default=False, index=True)
+        'formio.form', string='formio.form', compute='_compute_formio_form_id', store=True, default=False, index=True)
 
     @api.depends('res_model')
     def _compute_formio_form_id(self):

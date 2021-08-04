@@ -7,7 +7,7 @@ from odoo import api, fields, models, _
 
 class VersionGitHubChecker(models.TransientModel):
     _name = 'formio.version.github.checker.wizard'
-    _description = 'Formio Version GitHub Checker Wizard'
+    _description = 'formio.js Version GitHub Checker Wizard'
 
     installed_version_ids = fields.One2many('formio.version', compute='_compute_wizard_fields', string='Installed Versions')
     available_version_github_tag_ids = fields.One2many('formio.version.github.tag.available', 'version_checker_wizard_id')
@@ -59,7 +59,7 @@ class VersionGitHubChecker(models.TransientModel):
 
 class VersionGitHubTagAvailable(models.TransientModel):
     _name = 'formio.version.github.tag.available'
-    _description = 'Formio Version GitHub Tag Available'
+    _description = 'formio.js Version GitHub Tag Available'
 
     name = fields.Char(required=True)
     changelog_url = fields.Char(compute='_compute_fields', string='Changelog URL')
