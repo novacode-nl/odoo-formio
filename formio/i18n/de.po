@@ -476,99 +476,49 @@ msgid "Form is accessible by assigned portal user"
 msgstr "Formular ist zugänglich für den zugewiesenen Portal-Benutzer."
 
 #. module: formio
-#: model:ir.module.category,description:formio.module_category_formio
-#: model:ir.module.category,name:formio.module_category_formio
-#: model:ir.ui.menu,name:formio.menu_formio_root
-#: model:ir.ui.view,arch_db:formio.view_formio_builder_form
-#: model:ir.ui.view,arch_db:formio.view_formio_builder_formio
-#: model:ir.ui.view,arch_db:formio.view_formio_form_formio
-msgid "Form.io"
-msgstr ""
-
-#. module: formio
 #. flectra-web
 #: code:addons/formio/formio/static/src/js/formio_builder_widget.js:14
 #: code:addons/formio/static/src/js/formio_builder_widget.js:14
 #, python-format
-msgid "Form.io Builder"
-msgstr "Form.io Vorlagen"
+msgid "Form Builder"
+msgstr "Form Vorlagen"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder_formio_css_assets
-msgid "Form.io CSS"
-msgstr "Form.io CSS"
+msgid "formio.js CSS"
+msgstr "formio.js CSS"
 
 #. module: formio
 #. flectra-web
 #: code:addons/formio/formio/static/src/js/formio_form_widget.js:14
 #: code:addons/formio/static/src/js/formio_form_widget.js:14
 #, python-format
-msgid "Form.io Form"
-msgstr "Form.io Formular"
+msgid "Form"
+msgstr "Formular"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder_formio_js_assets
-msgid "Form.io Javascript"
-msgstr "Form.io Javascript"
+msgid "formio.js Javascript"
+msgstr "formio.js Javascript"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder_formio_version_id
-msgid "Form.io Version"
-msgstr "Form.io Version"
+msgid "formio.js Version"
+msgstr "formio.js Version"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder_formio_version_name
 #: model:ir.model.fields,help:formio.field_formio_version_name
-msgid "Form.io release/version."
-msgstr "Form.io Version."
+msgid "formio.js release/version."
+msgstr ""
 
 #. module: formio
 #. flectra-web
 #: code:addons/formio/formio/static/src/xml/formio.xml:18
 #: code:addons/formio/static/src/xml/formio.xml:18
 #, python-format
-msgid "Form.io version:"
-msgstr "Form.io Version:"
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_builder
-msgid "Formio Builder"
-msgstr "Vorlage"
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_builder_translation
-msgid "Formio Builder Translation"
-msgstr "Vorlagen Übersetzung"
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_form
-msgid "Formio Form"
-msgstr "Formular"
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_res_model
-msgid "Formio Resource Model"
-msgstr "Formio Ressource Modell"
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_version
-msgid "Formio Version"
-msgstr "Formio Version"
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_version_asset
-msgid "Formio Version Asset"
-msgstr "Formio Version Assets"
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_translation
-msgid "Formio Version Translation"
-msgstr "Formio Version Übersetzung"
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_translation_source
-msgid "Formio Version Translation Source"
-msgstr "Formio Version Übersetzung Herkunft"
+msgid "formio.js version:"
+msgstr ""
 
 #. module: formio
 #: model:ir.actions.act_window,name:formio.action_formio_form
@@ -695,10 +645,10 @@ msgstr "Zuletzt verändert am"
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder_formio_version_id
 msgid ""
-"Loads the specific Form.io Javascript API/libraries version (sourcecode: "
+"Loads the specific formio.js Javascript API/libraries version (sourcecode: "
 "\\https://github.com/formio/formio.js)"
 msgstr ""
-"Lädt die spezifizierte Form.io Javascript API/Library Version (Quellcode: "
+"Lädt die spezifizierte formio.js Javascript API/Library Version (Quellcode: "
 "\\https://github.com/formio/formio.js)"
 
 #. module: formio
