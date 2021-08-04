@@ -25,25 +25,14 @@ msgstr "Kontakt"
 #. module: formio_partner
 #: model:ir.model.fields,field_description:formio_partner.field_res_partner_formio_forms
 #: model:ir.model.fields,field_description:formio_partner.field_res_users_formio_forms
-msgid "Form.io Forms"
-msgstr "Form.io Formulare"
-
-#. module: formio_partner
-#: model:ir.model,name:formio_partner.model_formio_form
-msgid "Formio Form"
-msgstr "Form.io Formular"
+msgid "Forms"
+msgstr "Formulare"
 
 #. module: formio_partner
 #: model:ir.model.fields,field_description:formio_partner.field_res_partner_formio_forms_count
 #: model:ir.model.fields,field_description:formio_partner.field_res_users_formio_forms_count
-msgid "Formio Forms Count"
-msgstr "Formio Formulare Anzahl"
-
-#. module: formio_partner
-#: model:ir.model.fields,field_description:formio_partner.field_res_partner_formio_this_model_id
-#: model:ir.model.fields,field_description:formio_partner.field_res_users_formio_this_model_id
-msgid "Formio This Model"
-msgstr "Formio Dieses Modell"
+msgid "Forms Count"
+msgstr "Formulare Anzahl"
 
 #. module: formio_partner
 #: model:ir.ui.view,arch_db:formio_partner.view_partner_form_formio_partner
