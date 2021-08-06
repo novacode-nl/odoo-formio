@@ -36,13 +36,13 @@ See LICENSE file for full licensing details. -->
         sequence="30"/>
     <menuitem
         id="menu_formio_version"
-        name="Versions"
+        name="Installed formio.js versions"
         parent="formio.menu_formio_version_root"
         sequence="10"
         action="formio.action_formio_version"/>
     <menuitem
         id="menu_formio_version_github_tag"
-        name="GitHub releases (tags)"
+        name="formio.js versions (GitHub tags)"
         parent="formio.menu_formio_version_root"
         sequence="30"
         action="formio.action_formio_version_github_tag"/>
