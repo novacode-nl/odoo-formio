@@ -45,11 +45,17 @@ function app() {
                     const params = {submit_done_url: this.portalSubmitDoneUrl()};
                     window.parent.postMessage({odooFormioMessage: 'formioSubmitDone', params: params});
                 }
+                else {
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 500);
+                }
             }
-            // If the window.parent doesn't receive and handle the postMessage.
-            setTimeout(function() {
-                window.location.reload();
-            }, 500);
+            else {
+                setTimeout(function() {
+                    window.location.reload();
+                }, 500);
+            }
         }
     }
 

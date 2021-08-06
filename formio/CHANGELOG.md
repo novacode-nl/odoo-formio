@@ -1,5 +1,10 @@
 # Changelog
 
+### 8.30
+
+- Improve the submitDone redirect feature.\
+  Config should be explicit; don't wait on timeout and then redirect anymore.
+
 ### 8.29
 
 - Add session variable `formio_last_form_uuid` upon POST `/formio/public/form/create`.
