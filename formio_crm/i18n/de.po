@@ -33,11 +33,6 @@ msgid "Forms Count"
 msgstr "Formulare Anzahl"
 
 #. module: formio_crm
-#: model:ir.model.fields,field_description:formio_crm.field_crm_lead_formio_this_model_id
-msgid "Formio This Model"
-msgstr "Formio Dieses Modell"
-
-#. module: formio_crm
 #: model:ir.ui.view,arch_db:formio_crm.crm_case_form_view_oppor_formio_crm_lead
 msgid "Forms"
 msgstr "Formulare"

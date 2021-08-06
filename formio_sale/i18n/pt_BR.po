@@ -17,21 +17,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: formio_sale
-#: model:ir.model,name:formio_sale.model_formio_form
-msgid "Formio Form"
-msgstr "Formulário Form.io"
-
-#. module: formio_sale
-#: model:ir.model.fields,field_description:formio_sale.field_sale_order__formio_forms_count
-msgid "Formio Forms Count"
-msgstr "Quantidade"
-
-#. module: formio_sale
-#: model:ir.model.fields,field_description:formio_sale.field_sale_order__formio_this_model_id
-msgid "Formio This Model"
-msgstr "Este Modelo"
-
-#. module: formio_sale
 #: model:ir.model.fields,field_description:formio_sale.field_sale_order__formio_forms
 #: model_terms:ir.ui.view,arch_db:formio_sale.view_order_form_formio_sale
 msgid "Forms"

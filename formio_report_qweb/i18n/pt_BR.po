@@ -73,22 +73,6 @@ msgid "Form Builder"
 msgstr "Construtor de Formulários"
 
 #. module: formio_report_qweb
-#: model:ir.model,name:formio_report_qweb.model_formio_builder
-msgid "Formio Builder"
-msgstr "Construtor Form.io"
-
-#. module: formio_report_qweb
-#: model:ir.model,name:formio_report_qweb.model_formio_builder_report
-#: model:ir.model.fields,field_description:formio_report_qweb.field_ir_actions_report__formio_builder_report_ids
-msgid "Formio Builder Reports"
-msgstr "Relatórios Formio Builder"
-
-#. module: formio_report_qweb
-#: model:ir.model,name:formio_report_qweb.model_formio_form
-msgid "Formio Form"
-msgstr "Formulário Form.io"
-
-#. module: formio_report_qweb
 #: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__id
 msgid "ID"
 msgstr ""

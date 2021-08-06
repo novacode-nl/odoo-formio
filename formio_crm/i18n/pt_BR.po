@@ -22,19 +22,9 @@ msgid "CRM Lead"
 msgstr "Oportunidades"
 
 #. module: formio_crm
-#: model:ir.model,name:formio_crm.model_formio_form
-msgid "Formio Form"
-msgstr "Formulário Form.io"
-
-#. module: formio_crm
 #: model:ir.model.fields,field_description:formio_crm.field_crm_lead__formio_forms_count
-msgid "Formio Forms Count"
+msgid "Forms Count"
 msgstr "Quantidade"
-
-#. module: formio_crm
-#: model:ir.model.fields,field_description:formio_crm.field_crm_lead__formio_this_model_id
-msgid "Formio This Model"
-msgstr "Este Modelo"
 
 #. module: formio_crm
 #: model:ir.model.fields,field_description:formio_crm.field_crm_lead__formio_forms

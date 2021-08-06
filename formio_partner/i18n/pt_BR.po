@@ -22,23 +22,6 @@ msgid "Contact"
 msgstr "Contacto"
 
 #. module: formio_partner
-#: model:ir.model,name:formio_partner.model_formio_form
-msgid "Formio Form"
-msgstr "Formulário Form.io"
-
-#. module: formio_partner
-#: model:ir.model.fields,field_description:formio_partner.field_res_partner__formio_forms_count
-#: model:ir.model.fields,field_description:formio_partner.field_res_users__formio_forms_count
-msgid "Formio Forms Count"
-msgstr "Quantidade"
-
-#. module: formio_partner
-#: model:ir.model.fields,field_description:formio_partner.field_res_partner__formio_this_model_id
-#: model:ir.model.fields,field_description:formio_partner.field_res_users__formio_this_model_id
-msgid "Formio This Model"
-msgstr "Este Modelo"
-
-#. module: formio_partner
 #: model:ir.model.fields,field_description:formio_partner.field_res_partner__formio_forms
 #: model:ir.model.fields,field_description:formio_partner.field_res_users__formio_forms
 #: model_terms:ir.ui.view,arch_db:formio_partner.view_partner_form_formio_partner
