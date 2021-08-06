@@ -74,7 +74,7 @@ See LICENSE file for full licensing details. -->
     </record>
 
     <record id="action_formio_version_github_tag" model="ir.actions.act_window">
-        <field name="name">Versions GitHub tags</field>
+        <field name="name">formio.js versions (GitHub tags)</field>
         <field name="res_model">formio.version.github.tag</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="view_formio_version_github_tag_tree"/>
