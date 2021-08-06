@@ -5,8 +5,8 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
 <odoo>
     <data>
         <record id="module_category_formio" model="ir.module.category">
-            <field name="name">Form.io</field>
-            <field name="description">Form.io</field>
+            <field name="name">Forms</field>
+            <field name="description">Forms</field>
             <field name="sequence">10</field>
         </record>
 

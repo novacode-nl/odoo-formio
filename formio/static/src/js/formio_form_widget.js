@@ -11,7 +11,7 @@ odoo.define('formio.formio_form', function (require) {
     var _t = core._t;
 
     var FormioForm = Widget.extend({
-        title: core._t('Form.io Form'),
+        title: core._t('Form'),
 
         init: function (parent, params) {
             this._super.apply(this, arguments);

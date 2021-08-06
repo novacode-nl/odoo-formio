@@ -24,12 +24,12 @@ $(document).ready(function() {
                         return;
                     }
                     else {
-                        console.log('[Form.io] Saving Builder...');
+                        console.log('[Forms] Saving Builder...');
                         $.jsonRpc.request(save_url, 'call', {
                             'builder_id': builder_id,
                             'schema': builder.schema
                         }).then(function() {
-                            console.log('[Form.io] Builder sucessfully saved.');
+                            console.log('[Forms] Builder sucessfully saved.');
                         });
                     }
                 });
