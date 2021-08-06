@@ -5,7 +5,7 @@ See LICENSE file for full licensing details. -->
 <odoo>
     <menuitem
         id="menu_formio_root"
-        name="Form.io"
+        name="Forms"
         sequence="2"
         web_icon="formio,static/description/icon.png"
         groups="base.group_user"/>
@@ -27,7 +27,6 @@ See LICENSE file for full licensing details. -->
         name="Configuration"
         parent="formio.menu_formio_root"
         sequence="100"/>
-    <!-- Settings like: Hide the Form.io logo -->
     <menuitem
         id="menu_formio_settings"
         name="Settings"
@@ -36,7 +35,7 @@ See LICENSE file for full licensing details. -->
     <!-- action="formio.action_formio_settings"/> -->
     <menuitem
         id="menu_formio_version"
-        name="Versions"
+        name="formio.js versions"
         parent="formio.menu_formio_configuration"
         sequence="30"
         action="formio.action_formio_version"/>
