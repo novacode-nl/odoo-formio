@@ -30,7 +30,7 @@ See LICENSE file for full licensing details. -->
                 
                 <!-- Odoo JS dependencies could cause clashes with formio.js -->
                 <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
-                <script type="text/javascript" src="/formio/static/lib/owl.min.js"></script>
+                <script type="text/javascript" src="/formio/static/lib/owl/owl.min.js"></script>
                 <script type="text/javascript" src="/formio/static/src/js/odoo.jsonrpc.js"/>
                 <script type="text/javascript" src="/formio/static/src/js/builder/app.js"/>
             </head>
