@@ -50,9 +50,6 @@ class FormioStorageFilestoreController(http.Controller):
     def storage_filestore_get(self, **kwargs):
         """Get a (file) upload from the Form by searching the
         corresponding `ir.attachment`.
-        
-        The URL is rather anyoing and Form.io Platform coupled. We
-        need to consider some conversion?
         """
         IrAttachment = request.env['ir.attachment']
         
