@@ -54,6 +54,23 @@ See LICENSE file for full licensing details. -->
                                 </form>
                             </field>
                         </page>
+                        <page string="License(s)" name="others" groups="formio.group_formio_admin">
+                            <field name="license_assets" context="{'default_version_id': id}">
+                                <tree create="false" edit="false" delete="false">
+                                    <field name="attachment_id"/>
+                                    <field name="type"/>
+                                    <field name="attachment_type"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="version_id" readonly="1" attrs="{'invisible': [('version_id', '=', False)]}"/>
+                                        <field name="type"/>
+                                        <field name="attachment_id"/>
+                                        <field name="attachment_type" attrs="{'invisible': [('attachment_id', '=', False)]}"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter" groups="formio.group_formio_admin">

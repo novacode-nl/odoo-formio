@@ -1,5 +1,6 @@
 // Copyright Nova Code (http://www.novacode.nl)
 // See LICENSE file for full licensing details.
+// See formio.js.LICENSE.txt in this directory, for attribution.
 
 $(document).ready(function() {
     var Component = Formio.Components.components.recaptcha;

@@ -1,5 +1,10 @@
 # Changelog
 
+### 8.31
+
+- Add *formio.js* (library project) license file, also with GitHub downloader/installer.\
+  *formio.js* - https://github.com/formio/formio.js
+
 ### 8.30
 
 - Improve the submitDone redirect feature.\
