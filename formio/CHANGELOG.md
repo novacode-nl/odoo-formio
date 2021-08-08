@@ -1,5 +1,10 @@
 # Changelog
 
+### 8.26
+
+- Add *formio.js* (library project) license file, also with GitHub downloader/installer.\
+  *formio.js* - https://github.com/formio/formio.js
+
 ### 8.25
 
 - Correct misunderstanding, leftover names regarding the formio JS library.
