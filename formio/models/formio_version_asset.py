@@ -10,7 +10,7 @@ class VersionAsset(models.Model):
     _order = 'sequence ASC'
 
     version_id = fields.Many2one('formio.version', string='formio.js version')
-    type = fields.Selection([('js', 'js'), ('css', 'css')], string='Type', required=True)
+    type = fields.Selection([('js', 'js'), ('css', 'css'), ('license', 'license')], string='Type', required=True)
     attachment_id = fields.Many2one(
         'ir.attachment', string="Attachment",
         required=True, ondelete='cascade', domain=[('res_model', '=', 'formio.version.asset')],
