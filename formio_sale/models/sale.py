@@ -45,7 +45,7 @@ class SaleOrder(models.Model):
         self.ensure_one()
         res_model_id = self.env.ref('sale.model_sale_order').id
         return {
-            'name': 'Forms.io',
+            'name': 'Forms',
             'type': 'ir.actions.act_window',
             'domain': [('res_id', '=', self.id), ('res_model_id', '=', res_model_id)],
             'context': {'default_res_id': self.id},
