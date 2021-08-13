@@ -110,6 +110,7 @@ class Builder(models.Model):
     show_form_user_metadata = fields.Boolean(
         "Show User Metadata", tracking=True, help="Show submission and assigned user metadata in the Form header.", default=True)
     wizard = fields.Boolean("Wizard", tracking=True)
+    wizard_on_next_page_save_draft = fields.Boolean("Wizard on Next Page Save Draft", tracking=True)
     translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations')
     languages = fields.One2many('res.lang', compute='_compute_languages', string='Languages')
     allow_force_update_state_group_ids = fields.Many2many(
@@ -399,7 +400,8 @@ class Builder(models.Model):
     def _get_public_form_js_params(self):
         """ Form: Odoo JS (Owl component) misc. params """
         params = {
-            'public_submit_done_url': self.public_submit_done_url
+            'public_submit_done_url': self.public_submit_done_url,
+            'wizard_on_next_page_save_draft': self.wizard and self.wizard_on_next_page_save_draft
         }
         return params
 
