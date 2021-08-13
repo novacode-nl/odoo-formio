@@ -1,5 +1,10 @@
 # Changelog
 
+### 8.33
+
+- Fix warning: `Two fields (formio_version_name, formio_version_id) of formio.builder() have the same label.`
+- Fix warning: `The domain term '('formio_version_id', '=', [py:int])' should use the 'in' or 'not in' operator.`
+
 ### 8.32
 
 - New feature for public Form in Wizard mode: on next page perform a save draft.\
