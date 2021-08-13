@@ -1,6 +1,6 @@
 # Changelog
 
-### 8.2
+### 8.32
 
 - New feature for public Form in Wizard mode: on next page perform a save draft.\
   This is a (boolean/checkbox) setting in the Builder.
