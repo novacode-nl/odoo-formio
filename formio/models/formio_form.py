@@ -521,7 +521,8 @@ class Form(models.Model):
     def _get_js_params(self):
         """ Odoo JS (Owl component) misc. params """
         params = {
-            'portal_submit_done_url': self.portal_submit_done_url
+            'portal_submit_done_url': self.portal_submit_done_url,
+            'wizard_on_next_page_save_draft': self.builder_id.wizard and self.builder_id.wizard_on_next_page_save_draft
         }
         return params
 

@@ -1,5 +1,10 @@
 # Changelog
 
+### 8.2
+
+- New feature for public Form in Wizard mode: on next page perform a save draft.\
+  This is a (boolean/checkbox) setting in the Builder.
+
 ### 8.31
 
 - Add *formio.js* (library project) license file, also with GitHub downloader/installer.\

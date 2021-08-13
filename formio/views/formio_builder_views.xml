@@ -95,6 +95,7 @@ See LICENSE file for full licensing details. -->
                                 <group name="formio_settings" string="formio.js">
                                     <field name="formio_version_id" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="wizard" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="wizard_on_next_page_save_draft" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="view_as_html" groups="formio.group_formio_admin"/>
                                 </group>
                                 <group string="Publish">

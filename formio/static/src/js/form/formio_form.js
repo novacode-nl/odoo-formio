@@ -94,8 +94,24 @@ export class OdooFormioForm extends Component {
                     form.emit('submitDone', submission);
                 });
             });
+
             form.on('submitDone', function(submission) {
                 self.submitDone(submission);
+            });
+
+            // wizard nextPage
+            form.on('nextPage', function() {
+                if (self.params['wizard_on_next_page_save_draft']) {
+                    const data = {'data': form.data, 'saveDraft': true};
+                    if (self.formUuid) {
+                        data['form_uuid'] = self.formUuid;
+                    }
+                    $.jsonRpc.request(self.submitUrl, 'call', data).then(function(submission) {
+                        // Set properties to instruct the next calls to save (draft) the current form.
+                        self.formUuid = submission.form_uuid;
+                        self.submitUrl = '/formio/public/form/' + self.formUuid + '/submit';
+                    });
+                }
             });
 
             // Set the Submission (data)
@@ -103,7 +119,7 @@ export class OdooFormioForm extends Component {
             if (self.submissionUrl) {
                 $.jsonRpc.request(self.submissionUrl, 'call', {}).then(function(result) {
                     if (!$.isEmptyObject(result)) {
-                    form.submission = {'data': JSON.parse(result)};
+                        form.submission = {'data': JSON.parse(result)};
                     }
                 });
             }
