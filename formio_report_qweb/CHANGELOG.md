@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.4
+
+- New component: `survey`
+
 ## 4.3
 
 - (Fix) add group access to Print reports wizard.
