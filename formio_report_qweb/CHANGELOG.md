@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.3
+
+- New component: `survey`
+
 ## 3.2
 
 - Improve `password` component: show no mask (only empty input field) if value is empty.

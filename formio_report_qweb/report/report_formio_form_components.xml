@@ -42,6 +42,9 @@ See LICENSE file for full copyright and licensing details.
             <t t-elif="component.type == 'day'">
                 <t t-call="formio_report_qweb.day_component"/>
             </t>
+            <t t-elif="component.type == 'survey'">
+                <t t-call="formio_report_qweb.survey_component"/>
+            </t>
             <t t-elif="component.type == 'signature'">
                 <t t-call="formio_report_qweb.signature_component"/>
             </t>
@@ -209,6 +212,38 @@ See LICENSE file for full copyright and licensing details.
         <div class="mw-100 mb-3 formio_datetime_component">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
             <p t-esc="component.value"/>
+        </div>
+    </template>
+
+    <template id="survey_component">
+        <div class="mw-100 mb-3 formio_survey_component">
+            <table class="table table-bordered table-sm">
+                <tbody>
+                    <tr>
+                        <td/>
+                        <t t-foreach="component.values_labels" t-as="label">
+                            <td class="text-center font-weight-bold">
+                                <span t-esc="label"/>
+                            </td>
+                        </t>
+                    </tr>
+                    <t t-foreach="component.grid" t-as="question">
+                        <tr>
+                            <td><span class="ml-2" t-esc="question['question_label']"/></td>
+                            <t t-foreach="question['values']" t-as="q_val">
+                                <td class="text-center">
+                                    <t t-if="q_val['checked']">
+                                        <input type="radio" checked="checked"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="radio"/>
+                                    </t>
+                                </td>
+                            </t>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
         </div>
     </template>
 
