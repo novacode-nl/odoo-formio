@@ -3,16 +3,6 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
-    <template id="assets_frontend" inherit_id="web.assets_frontend" name="Portal Assets" priority="15">
-        <xpath expr="//link[last()]" position="after">
-            <link rel="stylesheet" type="text/css" href="/formio/static/src/css/formio_portal_form.css"/>
-        </xpath>
-        <xpath expr="//script[last()]" position="after">
-            <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.min.js"></script>
-            <script type="text/javascript" src="/formio/static/src/js/formio_form_container.js"/>
-        </xpath>
-    </template>
-
     <template id="portal_layout" name="Portal layout: formio menu entry" inherit_id="portal.portal_breadcrumbs" priority="40">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'formio' or formio" t-attf-class="breadcrumb-item #{'active ' if not formio else ''}">

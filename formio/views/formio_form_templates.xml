@@ -3,18 +3,6 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
-    <template id="assets_backend_formio_form" name="formio_form assets" inherit_id="web.assets_backend">
-        <xpath expr="." position="inside">
-            <link rel="stylesheet" type="text/css" href="/formio/static/src/css/formio_form.css"/>
-        </xpath>
-        <xpath expr="//script[last()]" position="after">
-            <script type="text/javascript" src="/formio/static/src/js/views/formio_form_view.js"></script>
-            <script type="text/javascript" src="/formio/static/src/js/views/formio_form_controller.js"></script>
-            <script type="text/javascript" src="/formio/static/src/js/views/formio_form_renderer.js"></script>
-            <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.min.js"></script>
-        </xpath>
-    </template>
-
     <template id="formio_form_embed" name="formio form - embed">
         &lt;!DOCTYPE html&gt;
         <html>
