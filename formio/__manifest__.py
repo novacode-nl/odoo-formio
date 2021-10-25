@@ -5,6 +5,7 @@
     'name': 'Forms',
     'summary': 'Form Builder & integration of professional and versatile Forms to collect any information you need for your business.',
     'version': '9.11',
+    'description': "",
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -61,10 +62,31 @@
     'images': [
         'static/description/banner.gif',
     ],
-    'description': """
-Forms
-=====
-
-Build, deploy and Forms.
-"""
+    'assets': {
+        'web.assets_backend': [
+            # builder
+            'formio/static/src/css/formio_builder.css',
+            'formio/static/src/js/views/formio_builder_view.js',
+            'formio/static/src/js/views/formio_builder_controller.js',
+            'formio/static/src/js/views/formio_builder_renderer.js',
+            'formio/static/src/js/tours/formio.js',
+            # form
+            'formio/static/src/css/formio_form.css',
+            'formio/static/src/js/views/formio_form_view.js',
+            'formio/static/src/js/views/formio_form_controller.js',
+            'formio/static/src/js/views/formio_form_renderer.js',
+            'formio/static/lib/iframe-resizer/iframeResizer.min.js'
+        ],
+        'web.assets_frontend': [
+            'formio/static/src/css/formio_portal_form.css',
+            'formio/static/lib/iframe-resizer/iframeResizer.min.js',
+            'formio/static/src/js/formio_form_container.js'
+        ],
+        'web.assets_common': [
+            'formio/static/lib/iframe-resizer/iframeResizer.min.js',
+        ],
+        'web.assets_qweb': [
+            'formio/static/src/xml/formio.xml',
+        ],
+    }
 }
