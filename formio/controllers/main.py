@@ -1,11 +1,13 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from collections import deque
 import json
 import logging
 
-from odoo import http, fields
+from collections import deque
+from os.path import dirname
+
+from odoo import http, fields, tools
 from odoo.http import request
 
 from ..models.formio_builder import \
@@ -19,6 +21,34 @@ _logger = logging.getLogger(__name__)
 
 
 class FormioController(http.Controller):
+
+    @http.route(['/web/content/<int:id>/fonts/<string:name>'], type='http', auth="public")
+    def send_fonts_file(self, id, name):
+        """
+        WARNING
+        -------
+        This route (/fonts/) is a rather iffy assumption which could
+        cause troubles.  Of course this could be requested by other
+        parts, but not yet in standard Odoo routes.
+
+        :param int id: The ID of the file (attachment) which requests the fonts file.
+            File(s) requesting this font file, are CSS files (formio.js library).
+        :param str name: The name of the fontfile in request.
+        """
+
+        ir_attach = request.env['ir.attachment'].sudo()
+        attach = ir_attach.browse(id)
+        if not attach.formio_asset_formio_version_id:
+            msg = 'Request expects a Forms (formio.js) fonts file (id: %s, name: %s' % (id, name)
+            _logger.warning(msg)
+            return request.not_found(msg)
+
+        attach_dir = dirname(attach.store_fname)
+        fonts_dir = '{attach_dir}/fonts/'.format(attach_dir=attach_dir)
+        fontfile_path = request.env['ir.attachment']._full_path(fonts_dir)
+        fontfile_path += '/%s' % name
+
+        return http.send_file(fontfile_path)
 
     # Builder
     @http.route('/formio/builder/<int:builder_id>', type='http', auth='user', website=True)

@@ -30,6 +30,7 @@ class Version(models.Model):
         string='License Assets')
 
     def unlink(self):
+        self.assets.unlink()
         domain = [('formio_version_id', 'in', self.ids)]
         self.env['formio.version.github.tag'].search(domain).write({'state': 'available'})
         return super(Version, self).unlink()
