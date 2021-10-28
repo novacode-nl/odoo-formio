@@ -1,5 +1,10 @@
 # Changelog
 
+### 8.28
+
+- Fix settings view (res.config.settings). Some settings and info appeared while searching for other settings.
+  Issue: [\#164](https://github.com/novacode-nl/odoo-formio/issues/164)
+
 ### 8.27
 
 - Fix warning: `Two fields (formio_version_name, formio_version_id) of formio.builder() have the same label.`
