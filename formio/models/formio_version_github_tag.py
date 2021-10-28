@@ -72,32 +72,45 @@ class VersionGitHubTag(models.Model):
             self.create(vals_list)
 
     def action_download_install(self):
+        # NOTICE: no windows (path) support
+        #
+        # See also comment in `ir.attachment` its
+        # `_get_path` function:
+        #     we use '/' in the db (even on windows)
+
         if self.formio_version_id:
             return
 
+        # dirs, paths
+        IrAttachment = self.env['ir.attachment']
+        archive_dir = 'formiojs/archive'
+        archive_path = IrAttachment._full_path(archive_dir)
+
+        if not os.path.isdir(archive_path):
+            os.makedirs(archive_path)
+
+        src_dir = 'formiojs/src'
+        src_path = IrAttachment._full_path(src_dir)
+
+        if not os.path.isdir(src_path):
+            os.makedirs(src_path)
+
+        src_version_path = '%s/formio.js-%s' % (src_path, self.version_name)
+        tar_path = '%s/%s.tar.gz' % (archive_path, self.version_name)
+
+        logger.info('version path => %s' % src_version_path)
+        logger.info('archive (.tar.gz) path => %s' % tar_path)
+
+        # download
         response = requests.get(self.archive_url, stream=True)
         logger.info('download => %s' % self.archive_url)
-        tar_path = '/tmp/%s.tar.gz' % self.version_name
-        static_path = modules.get_module_resource('formio', 'static/installed')
-        if sys.platform == 'win32':
-            tar_path = '%s\\%s.tar.gz' % (static_path, self.version_name)
+
         if response.status_code == 200:
             with open(tar_path, 'wb') as f:
                 f.write(response.raw.read())
                 tar = tarfile.open(tar_path)
-                if sys.platform == 'win32':
-                    tar.extractall('%s' % static_path, members=self._tar_extract_members(tar))
-                else:
-                    tar.extractall('/tmp', members=self._tar_extract_members(tar))
+                tar.extractall(src_path, members=self._tar_extract_members(tar))
                 tar.close()
-
-            extract_path = '/tmp/formio.js-%s' % self.version_name
-            if sys.platform == 'win32':
-                extract_path = '%s\\formio.js-%s' % (static_path, self.version_name)
-
-            # static_path = modules.get_module_resource('formio', 'static/installed')
-            static_version_dir = '%s/%s' % (static_path, self.version_name)
-            os.makedirs(static_version_dir, exist_ok=True)
 
             version_model = self.env['formio.version']
             asset_model = self.env['formio.version.asset']
@@ -117,10 +130,10 @@ class VersionGitHubTag(models.Model):
             ###############
             assets_vals_list = []
             default_assets_css = self.env['formio.default.asset.css'].search([])
-            for das in default_assets_css:
+            for css in default_assets_css:
                 default_asset_vals = {
                     'version_id': version.id,
-                    'attachment_id': das.attachment_id.id,
+                    'attachment_id': css.attachment_id.id,
                     'type': 'css'
                 }
                 assets_vals_list.append(default_asset_vals)
@@ -129,53 +142,47 @@ class VersionGitHubTag(models.Model):
             # https://github.com/formio/formio.js - LICENSE.txt
             ###################################################
             license_filename = 'LICENSE.txt'
-            # filesystem
-            src_license = '%s/%s' % (extract_path, license_filename)
-            dst_license = '%s/%s' % (static_version_dir, license_filename)
-            shutil.copyfile(src_license, dst_license)
+            license_path = '%s/%s' % (src_version_path, license_filename)
 
             # attachment
-            license_file = open(src_license, 'rb')
-            attachment_vals = {
-                'name': license_filename,
-                'type': 'binary',
-                'datas': base64.b64encode(license_file.read())
-            }
-            license_file.close()
-            attachment = attachment_model.create(attachment_vals)
+            if os.path.exists(license_path):
+                license_file = open(license_path, 'rb')
+                attachment_vals = {
+                    'name': license_filename,
+                    'type': 'binary',
+                    'datas': base64.b64encode(license_file.read())
+                }
+                license_file.close()
+                attachment = attachment_model.create(attachment_vals)
 
-            asset_vals = {
-                'version_id': version.id,
-                'attachment_id': attachment.id,
-                'type': 'license'
-            }
-            assets_vals_list.append(asset_vals)
+                asset_vals = {
+                    'version_id': version.id,
+                    'attachment_id': attachment.id,
+                    'type': 'license'
+                }
+                assets_vals_list.append(asset_vals)
 
             ###########################################
             # assets: js, css, fonts, formio.js LICENSE
             ###########################################
-            assets_extract_path = '%s/dist' % extract_path
-            for root, dirs, files in os.walk(assets_extract_path):
-                for dname in dirs:
-                    original_dir = '%s/%s' % (root, dname)
-                    target_dir = '%s/%s' % (static_version_dir, dname)
-                    # first delete target_dir (if exist it won't clash)
-                    shutil.rmtree(target_dir, ignore_errors=True)
-                    shutil.move(original_dir, target_dir)
-                
+
+            dist_version_path = '%s/dist' % src_version_path
+
+            for root, dirs, files in os.walk(dist_version_path):
                 for fname in files:
-                    original_file = '%s/%s' % (root, fname)
-                    target_file = '%s/%s' % (static_version_dir, fname)
-                    shutil.move(original_file, target_file)
+                    dist_file = '%s/%s' % (root, fname)
+                    # target_file = '%s/%s' % (static_version_dir, fname)
+                    # shutil.move(original_file, target_file)
+
+                    file_ext = os.path.splitext(fname)[1]
 
                     if fname == 'formio.full.min.js.LICENSE.txt':
                         ######################################################################
                         # https://github.com/formio/formio.js - formio.full.min.js.LICENSE.txt
                         ######################################################################
 
-                        # attachment
-                        # filesystem (already above)
-                        license_file = open(target_file, 'rb')
+                        # TODO: with open(original_file):
+                        license_file = open(dist_file, 'rb')
                         attachment_vals = {
                             'name': fname,
                             'type': 'binary',
@@ -190,27 +197,37 @@ class VersionGitHubTag(models.Model):
                             'type': 'license'
                         }
                         assets_vals_list.append(asset_vals)
-                    else:
+                    elif file_ext in ['.css', '.js']:
                         # attachment
-                        url = '/formio/static/installed/%s/%s' % (self.version_name, fname)
-                        attachment_vals = {
-                            'name': url,
-                            'type': 'url',
-                            'public': True,
-                            'url': url
-                        }
+                        with open(dist_file, 'rb') as f:
+                            attachment_vals = {
+                                'name': fname,
+                                'type': 'binary',
+                                'public': True,
+                                'formio_asset_formio_version_id': version.id,
+                                'datas': base64.b64encode(f.read())
+                            }
                         attachment = attachment_model.create(attachment_vals)
-
-                        # assets
                         asset_vals = {
                             'version_id': version.id,
                             'attachment_id': attachment.id
                         }
-                        ext = os.path.splitext(fname)[1]
 
-                        if ext == '.css':
+                        if file_ext == '.css':
                             asset_vals['type'] = 'css'
-                        elif ext == '.js':
+
+                            src_fonts_path = '%s/dist/fonts' % src_version_path
+                            css_attach_dir = os.path.dirname(attachment.store_fname)
+                            css_attach_path = IrAttachment._full_path(css_attach_dir)
+                            target_fonts_path = '%s/fonts' % css_attach_path
+
+                            # XXX this leads to troubles if formio.js
+                            # versions ship different font files (version dependent).
+                            # However, the CSS url to resolve the fonts is expected to be
+                            # this precise one.
+                            if os.path.exists(src_fonts_path) and not os.path.exists(target_fonts_path):
+                                shutil.copytree(src_fonts_path, target_fonts_path)
+                        elif file_ext == '.js':
                             asset_vals['type'] = 'js'
                         assets_vals_list.append(asset_vals)
 
@@ -220,11 +237,11 @@ class VersionGitHubTag(models.Model):
             ####################
             # cleanup and update
             ####################
+            # dir
+            shutil.rmtree(src_version_path)
+            # file (*.tar.gz)
             os.remove(tar_path)
-            tmp_path = '/tmp/formio.js-%s' % self.version_name
-            if sys.platform == 'win32':
-                tmp_path = '%s\\formio.js-%s' % (static_path, self.version_name)
-            shutil.rmtree(tmp_path)
+
             self.write({'state': STATE_INSTALLED, 'formio_version_id': version.id})
 
     def action_reset_installed(self):
@@ -257,11 +274,11 @@ class VersionGitHubTag(models.Model):
             #     logger.info('tar extract => dist/fonts')
             #     yield tarinfo
             elif dir_1 == 'fonts' and dir_2 == 'dist':
-                logger.info('tar extract => dist/fonts')
+                logger.info('tar extract => dist/fonts %s' % basename)
                 yield tarinfo
 
         # In case minimized files not found
-        src_todo = [src[todo] for todo in full_todo if todo not in full_done]
+        src_todo = [src[todo] for todo in full_todo if todo not in full_done and src.get(todo)]
         for tarinfo in members:
             filename = os.path.basename(tarinfo.name)
             if filename in src_todo:

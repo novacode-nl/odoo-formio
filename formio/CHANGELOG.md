@@ -1,5 +1,11 @@
 # Changelog
 
+### 9.0
+
+- Improve the formio.js library Downloader and Installer tool.\
+  Downloads and installs belong and go in the `ir.attachment` model and filestore which ensures proper permissions.\
+  Previous implementation located these into the `formio` module its `static/installed` directory.
+
 ### 8.34
 
 - Fix settings view (res.config.settings). Some settings and info appeared while searching for other settings.
