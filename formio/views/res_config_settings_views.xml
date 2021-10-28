@@ -86,12 +86,11 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                                 It's contents, the Form Builder JavaScript Options, shall be shown below.
                             </div>
                             <div class="o_setting_left_pane"/>
-                            <!-- <div class="row"> -->
                             <div class="o_setting_right_pane">
                                 <label for="formio_default_builder_js_options_id" string="Options Template"/>
                                 <field name="formio_default_builder_js_options_id"/>
                             </div>
-                            <div class="row">
+                            <div class="row mt16 ml32">
                                 <code><field name="formio_default_builder_js_options"/></code>
                             </div>
                         </div>
