@@ -3,6 +3,7 @@
 
 import ast
 import json
+import logging
 import re
 import uuid
 
@@ -14,6 +15,8 @@ from odoo.exceptions import AccessError, UserError
 from ..utils import get_field_selection_label
 
 from .formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
+
+_logger = logging.getLogger(__name__)
 
 STATE_PENDING = 'PENDING'
 STATE_DRAFT = 'DRAFT'
