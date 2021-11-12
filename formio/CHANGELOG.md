@@ -1,5 +1,10 @@
 # Changelog
 
+### 9.1
+
+- Fix Form Builder - Access Error (read) `ir.ui.view` upon action "Create New Version".
+  This now correctly determines the views (form, tree) by xmlid.
+
 ### 9.0
 
 - Improve the formio.js library Downloader and Installer tool.\

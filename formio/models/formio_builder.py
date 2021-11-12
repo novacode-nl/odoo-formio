@@ -341,13 +341,8 @@ class Builder(models.Model):
         self.ensure_one()
         res = self.copy_as_new_version()
 
-        form_view = self.env["ir.ui.view"].search(
-            [("name", "=", "formio.builder.form")]
-        )[0]
-
-        tree_view = self.env["ir.ui.view"].search(
-            [("name", "=", "formio.builder.tree")]
-        )[0]
+        form_view = self.env.ref('formio.view_formio_builder_form')
+        tree_view = self.env.ref('formio.view_formio_builder_tree')
 
         return {
             "name": self.name,
