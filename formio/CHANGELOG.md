@@ -1,5 +1,10 @@
 # Changelog
 
+### 8.29
+
+- Fix Form Builder - Access Error (read) `ir.ui.view` upon action "Create New Version".
+  This now correctly determines the views (form, tree) by xmlid.
+
 ### 8.28
 
 - Fix settings view (res.config.settings). Some settings and info appeared while searching for other settings.
