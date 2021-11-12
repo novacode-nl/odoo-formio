@@ -1,8 +1,13 @@
 # Changelog
 
+### 9.2
+
+- Fix Form submit: Error `_logger is undefined` in method `mail_activity_partner_linking`.\
+  Affected feature: Components API (tab in Builder) Partner
+
 ### 9.1
 
-- Fix Form Builder - Access Error (read) `ir.ui.view` upon action "Create New Version".
+- Fix Form Builder: Access Error (read) `ir.ui.view` upon action "Create New Version".\
   This now correctly determines the views (form, tree) by xmlid.
 
 ### 9.0
