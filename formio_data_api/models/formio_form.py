@@ -278,13 +278,35 @@ class FormioForm(models.Model):
                         eval_context = self._get_formio_eval_context(comp)
                         # nocopy allows to return 'value'
                         safe_eval.safe_eval(api.code, eval_context, mode="exec", nocopy=True)
-                        context_values = eval_context.get('value')
-                        value = context_values.get(prop_value)
+
+                        context_values = eval_context.get('values')
+
+                        # START: TODO DEPRECATE
+                        # value renamed to values, backwards incompatibility.
+                        if 'value' in eval_context:
+                            deprecation = """[DEPRECATION] Rename Component API (server) variable 'value' to 'values'.
+
+                            More info: https://github.com/novacode-nl/odoo-formio/wiki/Populate-a-Form-Component-value,-with-data-from-Server-(Python)-Code
+
+                            !! Definitive in Odoo v15 !!
+                            """
+                            _logger.warning("")
+                        context_value = eval_context.get('value')
+                        # END: TODO DEPRECATE
+
+                        value = context_values.get(prop_value) or context_value.get(prop_value)
                         if prop_value_obj:
                             # TODO-2: refactor DRY
                             value_fields = prop_value_obj.split('.')
                             value = reduce(getattr, value_fields, value)
-                        api_values[api.name] = context_values # caching
+
+                        # caching
+                        if context_values:
+                            api_values[api.name] = context_values
+                        elif context_value:
+                            # TODO DEPRECATE (context_value)
+                            api_values[api.name] = context_value
+
                         data[comp_key] = value
         return data
     
@@ -384,7 +406,8 @@ class FormioForm(models.Model):
             :returns: dict -- evaluation context given to safe_eval
         """
         return {
-            'value': {},
+            'value': {}, # TODO DEPRECATION
+            'values': {},
             'env': self.env,
             'component': component,
             'record': self,
@@ -417,6 +440,8 @@ class FormioForm(models.Model):
             ----------------------------------------------------------------
 
             More info: https://github.com/novacode-nl/odoo-formio/wiki/Prefill-Form-components-with-data-from-Odoo-(model-field)
+
+            !! Definitive in Odoo v15 !!
             """
             _logger.warning(deprecation)
             val = self._deprecated_etl_odoo_field_val(self.env.user, component.key, component)
@@ -438,6 +463,8 @@ class FormioForm(models.Model):
                 -----------------------------------------------------------------
 
                 More info: https://github.com/novacode-nl/odoo-formio/wiki/Prefill-Form-components-with-data-from-Odoo-(model-field)
+
+                !! Definitive in Odoo v15 !!
                 """
                 _logger.warning(deprecation)
 
@@ -469,6 +496,8 @@ class FormioForm(models.Model):
                 -----------------------------------------------------------------
 
                 More info: https://github.com/novacode-nl/odoo-formio/wiki/Prefill-Form-components-with-data-from-Odoo-(model-field)
+
+                !! Definitive in Odoo v15 !!
                 """
                 _logger.warning(deprecation)
                 model_object = self.env[self.res_model_id.model].browse(self.res_id)
