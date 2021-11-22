@@ -290,7 +290,7 @@ class FormioForm(models.Model):
 
                             !! Definitive in Odoo v15 !!
                             """
-                            _logger.warning("")
+                            _logger.warning(deprecation)
                         context_value = eval_context.get('value')
                         # END: TODO DEPRECATE
 
