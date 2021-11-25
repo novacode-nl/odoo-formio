@@ -30,8 +30,10 @@ class VersionGitHubTag(models.Model):
     # formio.js published release ain't available with the GitHub releases API
     # https://developer.github.com/v3/repos/releases/#list-releases
     #
-    # GitHub tags API
+    # GitHub tags API:
     # https://developer.github.com/v3/repos/#list-repository-tags
+    # - Results per page (max 100)
+    # - Sorted by tag name (descending)
 
     name = fields.Char(required=True)
     version_name = fields.Char('_compute_fields')

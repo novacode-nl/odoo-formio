@@ -24,7 +24,17 @@ class VersionGitHubChecker(models.TransientModel):
         token = self.env['ir.config_parameter'].sudo().get_param('formio.github.personal.access.token')
         if token:
             headers = {"Authorization": token}
-        response = requests.get('https://api.github.com/repos/formio/formio.js/tags', headers=headers)
+
+        # IMPORTANT NOTES
+        # ===============
+        # formio.js published release ain't available with the GitHub releases API
+        # https://developer.github.com/v3/repos/releases/#list-releases
+        #
+        # GitHub tags API:
+        # https://developer.github.com/v3/repos/#list-repository-tags
+        # - Results per page (max 100)
+        # - Sorted by tag name (descending)
+        response = requests.get('https://api.github.com/repos/formio/formio.js/tags?per_page=100', headers=headers)
 
         if response.status_code == 200:
             tags = response.json()
