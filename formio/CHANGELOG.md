@@ -1,5 +1,11 @@
 # Changelog
 
+### 9.3
+
+- Improve the formio.js library Downloader and Installer tool.\
+  Fetch 100 tags by adding (URL query) parameter `per_page=100`.\
+  Previously, 30 tags were fetched (default `per_page=30`).
+
 ### 9.2
 
 - Fix Form submit: Error `_logger is undefined` in method `mail_activity_partner_linking`.\
