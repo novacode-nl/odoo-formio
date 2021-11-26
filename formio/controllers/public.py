@@ -2,6 +2,7 @@
 # See LICENSE file for full licensing details.
 
 import json
+import logging
 
 from odoo import http, fields
 from odoo.http import request
@@ -12,6 +13,8 @@ from ..models.formio_builder import \
 from ..models.formio_form import \
     STATE_PENDING as FORM_STATE_PENDING, STATE_DRAFT as FORM_STATE_DRAFT, \
     STATE_COMPLETE as FORM_STATE_COMPLETE, STATE_CANCEL as FORM_STATE_CANCEL
+
+_logger = logging.getLogger(__name__)
 
 
 class FormioPublicController(http.Controller):
@@ -112,7 +115,7 @@ class FormioPublicController(http.Controller):
         }
         return request.render('formio.formio_form_public_create_embed', values)
 
-    @http.route('/formio/public/form/create/<string:builder_uuid>/config', type='json', auth='none', website=True)
+    @http.route('/formio/public/form/create/<string:builder_uuid>/config', type='json', auth='public', website=True)
     def public_form_create_config(self, builder_uuid, **kwargs):
         formio_builder = self._get_public_builder(builder_uuid)
         res = {'schema': {}, 'options': {}}
@@ -127,7 +130,7 @@ class FormioPublicController(http.Controller):
 
         return res
 
-    @http.route('/formio/public/form/create/<string:builder_uuid>/submit', type='json', auth="none", methods=['POST'], website=True)
+    @http.route('/formio/public/form/create/<string:builder_uuid>/submit', type='json', auth="public", methods=['POST'], website=True)
     def public_form_create_submit(self, builder_uuid, **post):
         formio_builder = self._get_public_builder(builder_uuid)
         if not formio_builder:
@@ -140,25 +143,85 @@ class FormioPublicController(http.Controller):
             'title': formio_builder.title,
             'public_create': True,
             'submission_data': json.dumps(post['data']),
-            'submission_user_id': request.env.ref('base.public_user').id,
             'submission_date': fields.Datetime.now(),
+            'submission_user_id': request.env.user.id
         }
 
-        if post.get('saveDraft') or (post['data'].get('saveDraft') and not post['data'].get('submit')):
+        save_draft = post.get('saveDraft') or (post['data'].get('saveDraft') and not post['data'].get('submit'))
+
+        if save_draft:
             vals['state'] = FORM_STATE_DRAFT
-            vals['public_share'] = True
+            if request.env.user._is_public():
+                vals['public_share'] = True
         else:
             vals['state'] = FORM_STATE_COMPLETE
             vals['public_share'] = False
 
         context = {'tracking_disable': True}
 
-        if not request.env.user:
-            public_user = request.env.ref('base.public_user').sudo()
-            Form = Form.with_company(public_user.sudo().company_id)
-        res = Form.with_context(**context).sudo().create(vals)
+        if request.env.user._is_public():
+            Form = Form.with_company(request.env.user.sudo().company_id)
+            res = Form.with_context(**context).sudo().create(vals)
+        else:
+            res = Form.with_context(**context).create(vals)
         request.session['formio_last_form_uuid'] = res.uuid
         return {'form_uuid': res.uuid}
+
+    ########################
+    # Form - fetch Odoo data
+    ########################
+
+    @http.route('/formio/public/form/create/<string:uuid>/data', type='http', auth='public', website=True)
+    def form_data(self, uuid, **kwargs):
+        """ Get data from a resource-object.
+
+        EXAMPLE
+        =======
+        This example loads data into Select Component, whereby choices
+        are Fleet Vehicle Model with Branc ID 5".
+
+        formio configuration (in "Data" tab)
+        -------------------------------------
+        - Data Source URL: /data
+        - Filter Query: model=fleet.vehicle.model&label=display_name&domain_fields=brand_id&brand_id=5
+        """
+
+        if request.env.user._is_public():
+            builder = self._get_public_builder(uuid)
+            if not builder:
+                return
+
+        args = request.httprequest.args
+
+        model = args.get('model')
+        # TODO: formio error?
+        if model is None:
+            _logger('model is missing in "Data Filter Query"')
+
+        label = args.get('label')
+        # TODO: formio error?
+        if label is None:
+            _logger.error('label is missing in "Data Filter Query"')
+
+        domain = []
+        domain_fields = args.getlist('domain_fields')
+        # domain_fields_op = args.getlist('domain_fields_operators')
+
+        for domain_field in domain_fields:
+            value = args.get(domain_field)
+
+            if value is not None:
+                filter = (domain_field, '=', value)
+                domain.append(filter)
+
+        _logger.debug("domain: %s" % domain)
+
+        try:
+            records = request.env[model].search_read(domain, [label])
+            data = json.dumps([{'id': r['id'], 'label': r[label]} for r in records])
+            return data
+        except Exception as e:
+            _logger.error("Exception: %s" % e)
 
     def _get_public_form_js_options(self, form):
         options = form._get_js_options()
@@ -200,3 +263,5 @@ class FormioPublicController(http.Controller):
     def _check_public_form(self):
         return request._uid == request.env.ref('base.public_user').id or request._uid
 
+    def _get_form(self, uuid, mode):
+        return request.env['formio.form'].get_form(uuid, mode)

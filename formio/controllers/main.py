@@ -108,7 +108,10 @@ class FormioController(http.Controller):
     # Form - user auth
     ##################
 
-    @http.route('/formio/form/<string:uuid>', type='http', auth='user', website=True)
+    @http.route([
+        '/formio/form/<string:uuid>',
+        '/formio/portal/form/<string:uuid>'
+    ], type='http', auth='user', website=True)
     def form_root(self, uuid, **kwargs):
         form = self._get_form(uuid, 'read')
         if not form:
@@ -202,7 +205,11 @@ class FormioController(http.Controller):
     # Form - fetch Odoo data
     ########################
 
-    @http.route('/formio/form/<string:uuid>/data', type='http', auth='user', website=True)
+    @http.route([
+        '/formio/form/<string:uuid>/data',
+        '/formio/portal/form/<string:uuid>/data'
+    ],
+    type='http', auth='user', website=True)
     def form_data(self, uuid, **kwargs):
         """ Get data from a resource-object.
 
