@@ -57,6 +57,10 @@ function app() {
                 }, 1000);
             }
         }
+
+        getDataUrl(compObj) {
+            return '/formio/public/form/create', self.formUuid, compObj.data.url;
+        }
     }
 
     const app = new App();

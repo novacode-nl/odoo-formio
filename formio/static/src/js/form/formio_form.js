@@ -48,6 +48,11 @@ export class OdooFormioForm extends Component {
         // Implemented in specific (*_app.js) classes.
     }
 
+    getDataUrl(compObj) {
+        // Possibly overridden in specific (*_app.js) classes.
+        return '/formio/form/', self.formUuid, compObj.data.url;
+    }
+
     loadForm() {
         const self = this;
 
@@ -80,7 +85,7 @@ export class OdooFormioForm extends Component {
                 let compObj = component.component;
                 if (compObj.hasOwnProperty('data') &&
                     compObj.data.hasOwnProperty('url') && !$.isEmptyObject(compObj.data.url)) {
-                    compObj.data.url = self.baseUrl.concat('/formio/form/',  self.formUuid, compObj.data.url);
+                    compObj.data.url = self.getDataUrl(compObj);
                 }
             });
 
