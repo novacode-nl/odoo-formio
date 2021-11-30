@@ -1,11 +1,16 @@
 # Changelog
 
+### 9.5
+
+- Public (website): Fix JavaScript (frontend) to set the proper `/data` URL-path on component objects, which fetch (Odoo) model records.
+
 ### 9.4
 
-- Portal: Fix `/data` URL-path to fetch (Odoo) model records, which required to change the Form URL in (embed) iframe:\
+- Portal: Fix `/data` URL-path to fetch (Odoo) model records.\
+  This required to change the Form URL in (embed) iframe:\
   - from: `/formio/form/<string:uuid>?portal=true`\
   - to: `/formio/portal/form/<string:uuid>`
-- Public: Implemented feature `/data` URL-path, to fetch (Odoo) model records.\
+- Public (website): Implemented feature `/data` URL-path, to fetch (Odoo) model records.\
   This configuration requires additional model read-access for the public user, on the model to fetch the records from.
 
 ### 9.3
