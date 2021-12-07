@@ -4,7 +4,7 @@
 {
     'name': 'Forms',
     'summary': 'Form Builder & integration of professional and versatile Forms to collect any information you need for your business.',
-    'version': '9.5',
+    'version': '9.6',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -32,8 +32,9 @@
         'security/ir_model_access.xml',
         'security/ir_rule.xml',
         # views
-        'views/formio_builder_views.xml',
         'views/formio_builder_js_options_views.xml',
+        'views/formio_builder_translation_views.xml',
+        'views/formio_builder_views.xml',
         'views/formio_form_views.xml',
         'views/formio_res_model_views.xml',
         'views/formio_translation_source_views.xml',
