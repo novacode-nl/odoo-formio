@@ -7,13 +7,18 @@ from odoo import api, fields, models, _
 class BuilderTranslation(models.Model):
     _name = 'formio.builder.translation'
     _description = 'formio.builder Translation'
-    _order = 'lang_id ASC'
+    _order = 'builder_name ASC, builder_version DESC, lang_name ASC, source ASC'
 
     builder_id = fields.Many2one(
         'formio.builder', string='Form Builder', required=True, ondelete='cascade')
     lang_id = fields.Many2one('res.lang', string='Language', required=True)
     source = fields.Text(string='Source Term', required=True)
     value = fields.Text(string='Translated Value', required=True)
+
+    # related fields
+    builder_name = fields.Char(related='builder_id.name')
+    builder_version = fields.Integer(related='builder_id.version')
+    lang_name = fields.Char(related='lang_id.name')
 
     @api.depends('lang_id', 'source', 'value')
     def name_get(self):
