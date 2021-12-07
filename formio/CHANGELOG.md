@@ -1,5 +1,10 @@
 # Changelog
 
+### 9.6
+
+- Form Builder: Translations button with action window.\
+  Ease the editting, export/import of Form Builder Translations.
+
 ### 9.5
 
 - Public (website): Fix JavaScript (frontend) to set the proper `/data` URL-path on component objects, which fetch (Odoo) model records.
