@@ -36,10 +36,27 @@ function app() {
             this.submitUrl = '/formio/public/form/' + this.formUuid + '/submit';
         }
 
-        submitDone() {
-            setTimeout(function() {
-                window.location.reload();
-            }, 1000);
+        publicSubmitDoneUrl() {
+            return this.params.hasOwnProperty('public_submit_done_url') && this.params.public_submit_done_url;
+        }
+
+        submitDone(submission) {
+            if (submission.state == 'submitted') {
+                if (this.publicSubmitDoneUrl()) {
+                    const params = {submit_done_url: this.publicSubmitDoneUrl()};
+                    window.parent.postMessage({odooFormioMessage: 'formioSubmitDone', params: params});
+                }
+                else {
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1000);
+                }
+            }
+            else {
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1000);
+            }
         }
     }
 

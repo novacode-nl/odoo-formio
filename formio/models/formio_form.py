@@ -101,6 +101,7 @@ class Form(models.Model):
     public_access_interval_type = fields.Selection(list(_interval_selection.items()), tracking=True)
     public_access = fields.Boolean("Public Access", compute='_compute_access', help="The Public Access check. Computed public access by checking whether (field) Public Access From has been expired.")
     public_create = fields.Boolean("Public Created", readonly=True, help="Form was public created")
+    public_submit_done_url = fields.Char(related='builder_id.public_submit_done_url')
     show_title = fields.Boolean("Show Title")
     show_state = fields.Boolean("Show State")
     show_id = fields.Boolean("Show ID")
@@ -523,6 +524,7 @@ class Form(models.Model):
         """ Odoo JS (Owl component) misc. params """
         params = {
             'portal_submit_done_url': self.portal_submit_done_url,
+            'public_submit_done_url': self.public_submit_done_url,
             'wizard_on_next_page_save_draft': self.builder_id.wizard and self.builder_id.wizard_on_next_page_save_draft
         }
         return params
