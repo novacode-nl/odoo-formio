@@ -1,5 +1,10 @@
 # Changelog
 
+### 9.7
+
+- Public existing (eg invited) form: Redirect submit-done URL feature.\
+  Similar feature already available with public created (website) and portal Forms.
+
 ### 9.6
 
 - Form Builder: Translations button with action window.\

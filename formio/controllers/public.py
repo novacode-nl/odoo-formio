@@ -46,6 +46,7 @@ class FormioPublicController(http.Controller):
         if form and form.builder_id.schema:
             res['schema'] = json.loads(form.builder_id.schema)
             res['options'] = self._get_public_form_js_options(form)
+            res['params'] = self._get_public_form_js_params(form.builder_id)
         return res
 
     @http.route('/formio/public/form/<string:uuid>/submission', type='json', auth='public', website=True)
