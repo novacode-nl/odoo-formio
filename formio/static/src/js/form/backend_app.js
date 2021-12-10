@@ -33,6 +33,7 @@ function app() {
             this.configUrl = '/formio/form/' + this.formUuid + '/config';
             this.submissionUrl = '/formio/form/' + this.formUuid + '/submission';
             this.submitUrl = '/formio/form/' + this.formUuid + '/submit';
+            this.wizardSubmitUrl = '/formio/form/';
             this.isPortalUrl = window.location.pathname.indexOf('/formio/portal/') >= 0;
         }
 

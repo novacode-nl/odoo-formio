@@ -1,5 +1,12 @@
 # Changelog
 
+### 9.8
+
+- Fix submit-URL of Form in Wizard-mode for backend auth-mode, when Form Builder enables the "Wizard on next Page Save Draft".\
+  This concerns the feature added in version 8.32.
+- Upon submit `/formio/public/form/create/<builder_uuid>/submit` set the Form (record) field `public_share=True`.\
+  This allows an internal user to use (eg test) such public Form as well, with identical public (share expiration) functionality.
+
 ### 9.7
 
 - Public existing (eg invited) form: Redirect submit-done URL feature.\
