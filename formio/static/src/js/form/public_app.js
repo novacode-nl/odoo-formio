@@ -30,10 +30,10 @@ function app() {
             if (!!document.getElementById('formio_form_uuid')) {
                 this.formUuid = document.getElementById('formio_form_uuid').value;
             }
-
             this.configUrl = '/formio/public/form/' + this.formUuid + '/config';
             this.submissionUrl = '/formio/public/form/' + this.formUuid + '/submission';
             this.submitUrl = '/formio/public/form/' + this.formUuid + '/submit';
+            this.wizardSubmitUrl = '/formio/public/form/';
         }
 
         publicSubmitDoneUrl() {

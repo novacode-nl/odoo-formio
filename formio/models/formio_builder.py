@@ -91,7 +91,7 @@ class Builder(models.Model):
         """
     )
     public = fields.Boolean("Public", tracking=True, help="Form is public accessible (e.g. used in Shop checkout, Events registration")
-    public_url = fields.Char(string='Public URL', compute='_compute_public_url', store=True, copy=False)
+    public_url = fields.Char(string='Public URL', compute='_compute_public_url')
     public_submit_done_url = fields.Char(
         string='Public Submit-done URL', tracking=True,
         help="""\

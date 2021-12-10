@@ -33,6 +33,7 @@ function app() {
             this.configUrl = '/formio/public/form/create/' + this.builderUuid + '/config';
             this.submissionUrl = false;
             this.submitUrl = '/formio/public/form/create/' + this.builderUuid + '/submit';
+            this.wizardSubmitUrl = '/formio/public/form/';
         }
 
         publicSubmitDoneUrl() {

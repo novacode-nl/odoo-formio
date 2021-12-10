@@ -143,6 +143,7 @@ class FormioPublicController(http.Controller):
             'builder_id': formio_builder.id,
             'title': formio_builder.title,
             'public_create': True,
+            'public_share': True,
             'submission_data': json.dumps(post['data']),
             'submission_date': fields.Datetime.now(),
             'submission_user_id': request.env.user.id
@@ -152,11 +153,8 @@ class FormioPublicController(http.Controller):
 
         if save_draft:
             vals['state'] = FORM_STATE_DRAFT
-            if request.env.user._is_public():
-                vals['public_share'] = True
         else:
             vals['state'] = FORM_STATE_COMPLETE
-            vals['public_share'] = False
 
         context = {'tracking_disable': True}
 
