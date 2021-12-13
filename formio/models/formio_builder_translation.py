@@ -16,9 +16,9 @@ class BuilderTranslation(models.Model):
     value = fields.Text(string='Translated Value', required=True)
 
     # related fields
-    builder_name = fields.Char(related='builder_id.name')
-    builder_version = fields.Integer(related='builder_id.version')
-    lang_name = fields.Char(related='lang_id.name')
+    builder_name = fields.Char(related='builder_id.name', store=True)
+    builder_version = fields.Integer(related='builder_id.version', store=True)
+    lang_name = fields.Char(related='lang_id.name', store=True)
 
     @api.depends('lang_id', 'source', 'value')
     def name_get(self):
