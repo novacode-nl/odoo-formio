@@ -1,5 +1,9 @@
 # Changelog
 
+### 9.9
+
+- Store related fields in model `formio.builder.translation`, to enable sorting.
+
 ### 9.8
 
 - Fix submit-URL of Form in Wizard-mode for backend auth-mode, when Form Builder enables the "Wizard on next Page Save Draft".\
