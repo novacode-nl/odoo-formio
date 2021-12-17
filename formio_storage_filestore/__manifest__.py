@@ -4,7 +4,7 @@
 {
     'name': 'Forms | Storage Filestore',
     'summary': 'Store uploads/files by URL in Odoo filestore (attachments)',
-    'version': '0.8',
+    'version': '0.9',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -20,9 +20,5 @@
     'images': [
         'static/description/banner.gif',
     ],
-    'description': """
-Forms | Storage Filestore Provider
-==================================
-
-"""
+    'description': ''
 }
