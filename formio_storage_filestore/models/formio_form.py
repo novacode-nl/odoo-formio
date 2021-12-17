@@ -37,10 +37,12 @@ class Form(models.Model):
     def _process_storage_filestore_ir_attachments(self, mode):
         attach_names = []
         for key, component in self._formio.input_components.items():
-            if hasattr(component, 'storage') and component.storage == 'url' \
-               and '/formio/storage/filestore' in component.url:
-                for val in component.value:
-                    attach_names.append(val['name'])
+            if component.type == 'datagrid':
+                for row in component.rows:
+                    for key, component_in_row in row.input_components.items():
+                        attach_names += self._get_component_file_names(component_in_row)
+            else:
+                attach_names += self._get_component_file_names(component)
 
         # update ir.attachment (link with formio.form)
         if attach_names:
@@ -65,4 +67,14 @@ class Form(models.Model):
             ]
             if attach_names:
                 domain.append(('name', 'not in', attach_names))
-            self.env['ir.attachment'].search(domain).unlink()
+            self.env['ir.attachment'].search(domain).\
+                with_context(formio_storage_filestore_force_unlink_attachment=True).\
+                unlink()
+
+    def _get_component_file_names(self, component_obj):
+        names = []
+        if hasattr(component_obj, 'storage') and component_obj.storage == 'url' \
+           and '/formio/storage/filestore' in component_obj.url:
+            for val in component_obj.value:
+                names.append(val['name'])
+        return names
