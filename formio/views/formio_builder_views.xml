@@ -127,15 +127,6 @@ See LICENSE file for full licensing details. -->
                                         <i class="fa fa-info-circle" title="info"/> Not applicable with public and website Forms
                                     </div>
                                 </group>
-                                <group name="form_settings" string="Form Appearance" col="4">
-                                    <field name="view_as_html" groups="formio.group_formio_admin"/>
-                                    <separator colspan="2" col="2"/>
-                                    <field name="show_form_title" string="Show Title" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                    <field name="show_form_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                    <field name="show_form_state" string="Show State" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                    <field name="show_form_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                    <field name="show_form_user_metadata" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                </group>
 
                                 <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
                             </group>
@@ -171,6 +162,43 @@ See LICENSE file for full licensing details. -->
                                 </group>
                             </group>
                         </page>
+                        <page string="Translations" name="translations" groups="formio.group_formio_admin">
+                            <group>
+                                <field name="language_en_enable"/>
+                            </group>
+                            <field name="translations" context="{'default_builder_id': id}">
+                                <tree editable="bottom">
+                                    <field name="builder_id" invisible="1"/>
+                                    <field name="lang_id"/>
+                                    <field name="source"/>
+                                    <field name="value"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Form Display" name="form_display_settings">
+                                <group>
+                                    <field name="view_as_html" groups="formio.group_formio_admin"/>
+                                </group>
+                                <group>
+                                    <field name="show_form_title" string="Show Title" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="show_form_state" string="Show State" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="show_form_user_metadata" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="show_form_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="show_form_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                </group>
+                        </page>
+                        <page string="Form Permissions" name="form_permissions" groups="formio.group_formio_admin">
+                            <div class="mb-3 text-muted">
+                                <i class="fa fa-info-circle" title="info"/> Specific permissions on Forms
+                            </div>
+                            <group>
+                                <field name="allow_force_update_state_group_ids" />
+                            </group>
+                            <group name="actions_settings" string="Actions">
+                                <field name="form_allow_copy" groups="formio.group_formio_admin" />
+                                <field name="form_copy_to_current" groups="formio.group_formio_admin" attrs="{'invisible': [('form_allow_copy', '=', False)]}" />
+                            </group>
+                        </page>
                         <page string="Components API" name="formio_components_api">
                             <group string="Partner" name="partner" colspan="2">
                                 <div class="text-muted mb-2" colspan="2">
@@ -185,31 +213,6 @@ See LICENSE file for full licensing details. -->
                                     <field name="component_partner_add_follower" string="Add to Followers" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="component_partner_activity_user_id" string="Activity User" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
-                            </group>
-                        </page>
-                        <page string="Translations" name="translations" groups="formio.group_formio_admin">
-                            <group>
-                                <field name="language_en_enable"/>
-                            </group>
-                            <field name="translations" context="{'default_builder_id': id}">
-                                <tree editable="bottom">
-                                    <field name="builder_id" invisible="1"/>
-                                    <field name="lang_id"/>
-                                    <field name="source"/>
-                                    <field name="value"/>
-                                </tree>
-                            </field>
-                        </page>
-                        <page string="Forms Permissions" name="forms_permissions" groups="formio.group_formio_admin">
-                            <div class="mb-3 text-muted">
-                                <i class="fa fa-info-circle" title="info"/> Specific permissions on Forms
-                            </div>
-                            <group>
-                                <field name="allow_force_update_state_group_ids" />
-                            </group>
-                            <group name="actions_settings" string="Actions">
-                                <field name="form_allow_copy" groups="formio.group_formio_admin" />
-                                <field name="form_copy_to_current" groups="formio.group_formio_admin" attrs="{'invisible': [('form_allow_copy', '=', False)]}" />
                             </group>
                         </page>
                         <page string="JS Options" name="javascript_options" groups="formio.group_formio_admin">
