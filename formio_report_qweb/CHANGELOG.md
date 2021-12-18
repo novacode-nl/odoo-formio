@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.5
+
+- In Builder (backend) form view, move "Reports" tab after "Form Permissions".
+
 ## 4.4
 
 - New component: `survey`
