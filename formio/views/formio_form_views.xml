@@ -204,7 +204,7 @@ See LICENSE file for full licensing details. -->
                                     <field name="allow_copy" groups="formio.group_formio_admin" />
                                     <field name="copy_to_current" groups="formio.group_formio_admin" attrs="{'invisible': [('allow_copy', '=', False)]}" />
                                 </group>
-                                <group string="Appearance" name="appearance_settings" col="4">
+                                <group string="Display" name="display_settings" col="4">
                                     <field name="show_title" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
                                     <field name="show_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
                                     <field name="show_state" groups="formio.group_formio_admin" attrs="{'invisible': [('builder_id', '=', False)]}"/>
