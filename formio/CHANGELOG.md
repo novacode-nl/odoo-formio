@@ -1,5 +1,10 @@
 # Changelog
 
+### 9.10
+
+- Layout improvements in Builder and Form (backend form) views.
+- Fix duplicate field label warnings for model `formio.builder.translation`.
+
 ### 9.9
 
 - Store related fields in model `formio.builder.translation`, to enable sorting.

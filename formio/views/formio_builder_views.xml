@@ -95,17 +95,23 @@ See LICENSE file for full licensing details. -->
                     <notebook>
                         <page string="General" name="settings">
                             <group name="settings">
-                                <group name="formio_settings" string="formio.js">
+                                <group name="formiojs_settings" string="formio.js">
                                     <field name="formio_version_id" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                    <field name="wizard" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                    <field name="wizard_on_next_page_save_draft" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                    <field name="view_as_html" groups="formio.group_formio_admin"/>
                                 </group>
-                                <group string="Publish">
+                                <group name="publish_settings" string="Publish">
                                     <field name="portal" groups="formio.group_formio_admin" string="Publish on Portal"/>
                                     <field name="public" groups="formio.group_formio_admin" string="Publish to Public"/>
                                     <div class="text-muted" colspan="2">
                                         <i class="fa fa-info-circle" title="info"/> Configure in related tabs (Portal, Public / Website)
+                                    </div>
+                                </group>
+                                <group name="wizard_settings" string="Wizard">
+                                    <field name="wizard" string="Wizard" groups="formio.group_formio_admin"
+                                           attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="wizard_on_next_page_save_draft" string="Save Draft on Next Page" groups="formio.group_formio_admin"
+                                           attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <div class="text-muted" colspan="2">
+                                        <i class="fa fa-info-circle" title="info"/> Multi-page form, with previous/next page buttons
                                     </div>
                                 </group>
                                 <group name="integration_settings" string="Integration">
@@ -118,24 +124,21 @@ See LICENSE file for full licensing details. -->
                                         <i class="fa fa-info-circle" title="info"/> Configure in Resource tab (if settings are available)
                                     </div>
                                     <div class="text-muted" colspan="2">
-                                        <i class="fa fa-info-circle" title="info"/> This doesn't make any sense with Public (published) Forms, which are standalone.
+                                        <i class="fa fa-info-circle" title="info"/> Not applicable with public and website Forms
                                     </div>
                                 </group>
-                                <group name="form_settings" string="Form Appearance">
+                                <group name="form_settings" string="Form Appearance" col="4">
+                                    <field name="view_as_html" groups="formio.group_formio_admin"/>
+                                    <separator colspan="2" col="2"/>
                                     <field name="show_form_title" string="Show Title" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                    <field name="show_form_state" string="Show State" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
-                                    <field name="show_form_user_metadata" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="show_form_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="show_form_state" string="Show State" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                     <field name="show_form_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
+                                    <field name="show_form_user_metadata" groups="formio.group_formio_admin" attrs="{'readonly': [('state', '!=', 'DRAFT')]}"/>
                                 </group>
 
                                 <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
                             </group>
-                            <div class="mb-3 text-muted">
-                                <i class="fa fa-info-circle" title="info"/><strong> View as HTML</strong> - This setting (still) doesn't work since version 4.x<br/>
-                                For more info see formio.js GitHub issue: <a href="https://github.com/formio/formio.js/issues/1545" target="_blank">select component rendering error in viewAsHtml model #1545</a><br/>
-                                <i class="fa fa-info-circle" title="info"/><strong> Integration / Resource settings</strong> - Enables integration of Form and ERP/Odoo objects.<br/>
-                            </div>
                         </page>
                         <page string="Resource" name="res_model_settings" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
                         <page string="Portal" name="portal_settings">
@@ -147,7 +150,7 @@ See LICENSE file for full licensing details. -->
                         </page>
                         <page string="Public" name="public_settings">
                             <div class="text-muted" colspan="2">
-                                <i class="fa fa-info-circle" title="info"/> Configuration of Website features shall also be done here.
+                                <i class="fa fa-info-circle" title="info"/> Configuration of Website features shall also be done here
                             </div>
                             <group>
                                 <group name="public_url" colspan="2" attrs="{'invisible': [('public_url', '=', False)]}">
@@ -160,7 +163,7 @@ See LICENSE file for full licensing details. -->
                                         <field name="public_access_interval_type" class="oe_inline ml-2" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
                                     </div>
                                     <div class="text-muted" colspan="2">
-                                        <i class="fa fa-info-circle" title="info"/><strong> Expire After:</strong> - Applicable on the Form it's (datimetime field) <strong>Public Access From</strong>.
+                                        <i class="fa fa-info-circle" title="info"/><strong> Expire After:</strong> Applicable on the Form it's (datimetime field) <strong>Public Access From</strong>
                                     </div>
                                 </group>
                                 <group string="Redirect After Submit">
@@ -170,7 +173,7 @@ See LICENSE file for full licensing details. -->
                         </page>
                         <page string="Components API" name="formio_components_api">
                             <group string="Partner" name="partner" colspan="2">
-                                <div class="mb-2" colspan="2">
+                                <div class="text-muted mb-2" colspan="2">
                                     <i class="fa fa-info-circle" title="info"/> To create or link (existing) Partner with a Form submission, specify the fields (Email, Name) from the Components API / Property Names.<br/>
                                     Partner determination/match shall be done by Email. This API is especially useful for public Forms.
                                 </div>
