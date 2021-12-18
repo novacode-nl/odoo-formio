@@ -10,7 +10,7 @@ See LICENSE file for full licensing details. -->
             <field name="inherit_id" ref="formio.view_formio_builder_form"/>
             <field name="arch" type="xml">
                 <data>
-                    <page name="translations" position="after">
+                    <xpath expr="//page[@name='form_permissions']" position="after">
                         <page name="qweb_reports" string="Reports">
                             <group name="print_reports_wizard" string="Print Reports Wizard">
                                 <div class="text-muted" colspan="2">
@@ -42,7 +42,7 @@ See LICENSE file for full licensing details. -->
                                 </field>
                             </group>
                         </page>
-                    </page>
+                    </xpath>
                 </data>
             </field>
         </record>
