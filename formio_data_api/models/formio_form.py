@@ -235,11 +235,15 @@ class FormioForm(models.Model):
                     from_object = self.env.user
                     fields = prop_val.split('.')
                     while len(fields) > 0:
-                        # traverse e.g: partner_id.back_account_id.name
-                        field = fields.pop(0)
-                        value = getattr(from_object, field)
+                        # traverse relational field eg Many2one: partner_id.back_account_id.name
                         if len(fields) > 1:
+                            # from_object becomes the relational (Many2one) object
+                            value = getattr(from_object, fields[0])
                             from_object = value
+                            field = fields.pop(0)
+                        else:
+                            field = fields.pop(0)
+                            value = getattr(from_object, field)
 
             # DEPRECATION-1 remove below
             if run_deprecated:
