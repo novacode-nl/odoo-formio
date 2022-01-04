@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <record id="view_formio_mail_recipient_search" model="ir.ui.view">
+        <field name="name">formio.mail.recipient.search</field>
+        <field name="model">formio.mail.recipient</field>
+        <field name="arch" type="xml">
+            <search string="Forms">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="builder_ids"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_formio_mail_recipient_tree" model="ir.ui.view">
+        <field name="name">formio.mail.recipient.tree</field>
+        <field name="model">formio.mail.recipient</field>
+        <field name="arch" type="xml">
+            <tree string="Mail Recipients">
+                <field name="name"/>
+                <field name="email"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_formio_mail_recipient_form" model="ir.ui.view">
+        <field name="name">formio.mail.recipient.form</field>
+        <field name="model">formio.mail.recipient</field>
+        <field name="arch" type="xml">
+	    <form string="Form">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="email"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_formio_mail_recipient" model="ir.actions.act_window">
+        <field name="name">Mail Recipients</field>
+        <field name="res_model">formio.mail.recipient</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_formio_mail_recipient_tree"/>
+    </record>
+</odoo>

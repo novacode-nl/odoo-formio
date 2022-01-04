@@ -198,8 +198,10 @@ class FormioController(http.Controller):
             vals['state'] = FORM_STATE_DRAFT
         else:
             vals['state'] = FORM_STATE_COMPLETE
-
         form.write(vals)
+
+        if post['data'].get('submit') and not post['data'].get('saveDraft'):
+            form.after_submit()
 
     ########################
     # Form - fetch Odoo data

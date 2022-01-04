@@ -302,6 +302,10 @@ class Form(models.Model):
             data = ast.literal_eval(data)
         return data
 
+    def after_submit(self):
+        """ Function is called everytime a form is submitted. """
+        pass
+
     def action_view_formio(self):
         return {
             "name": self.name,
