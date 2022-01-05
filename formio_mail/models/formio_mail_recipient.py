@@ -12,6 +12,14 @@ class Form(models.Model):
     # Database
     # ----------------------------------------------------------
 
-    name = fields.Char(string='Recipient Name')
-    email = fields.Char(string='Mail Address')
-    builder_ids = fields.Many2many(comodel_name='formio.builder', inverse_name='mail_recipients_ids', string='Form Builder')
+    name = fields.Char(
+        string='Recipient Name'
+    )
+    email = fields.Char(
+        string='Mail Address'
+    )
+    builder_ids = fields.Many2many(
+        comodel_name='formio.builder',
+        inverse_name='mail_recipients_ids',
+        string='Form Builder'
+    )

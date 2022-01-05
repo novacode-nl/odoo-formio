@@ -17,44 +17,36 @@ class FormioComponent(models.Model):
     label = fields.Char(
         string='Label'
     )
-
     display_name = fields.Char(
         string='Display Name',
         compute='_compute_display_name',
         readonly=True,
         store=True
     )
-
     component_id = fields.Char(
         string='Component ID'
     )
-
     key = fields.Char(
         string='Key'
     )
-
     type = fields.Char(
         string='Type'
     )
-
     parent_id = fields.Many2one(
         'formio.component',
         string='Parent Component',
         index=True
     )
-
     parent_name = fields.Char(
         related='parent_id.display_name',
         string='Parent Component Name',
         readonly=True
     )
-
     child_ids = fields.One2many(
         'formio.component',
         'parent_id',
         string='Child Components'
     )
-
     builder_id = fields.Many2one(
         'formio.builder',
         string='Form Builder',

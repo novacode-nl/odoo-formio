@@ -19,30 +19,25 @@ class FormioBuilder(models.Model):
         string='Mailings active',
         help='Check this box to send submitted forms to recipients.'
     )
-
     mail_recipients_ids = fields.Many2many(
         'formio.mail.recipient',
         string='Recipients'
     )
-
     mail_recipients_formio_component_ids = fields.Many2many(
         'formio.component',
         string='Formio Component',
         domain="[('builder_id', '=', id)]",
         help='List of formio components which should be used as source for mail recipients.'
     )
-
     mail_recipients_partner_ids = fields.Many2many(
         'res.partner',
         help='Use mail address from partner record.'
     )
-
     mail_report_id = fields.Many2one(
         'ir.actions.report',
         string="Report",
         domain=[('model', '=', 'formio.form')]
     )
-
     mail_template_id = fields.Many2one(
         'mail.template',
         string='Mail Template',
