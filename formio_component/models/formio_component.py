@@ -66,7 +66,24 @@ class FormioComponent(models.Model):
     # Helper
     # ----------------------------------------------------------
 
-    def _compare_components(self, builder):
+    def _get_component(self, builder, comp_id):
+        """
+        Returns a formio.component obj from component_id.
+
+        :param tuple builder: the builder records to which the component belongs,
+        :param string comp_id: Component id of desired component in database,
+        :return Database record according to builder_ids and comp_id.
+        """
+        return self.search([
+            ("builder_id", 'in', builder.ids),
+            ("component_id", '=', comp_id)
+        ])
+
+    # ----------------------------------------------------------
+    # Public
+    # ----------------------------------------------------------
+
+    def compare_components(self, builder):
         """
         Compares arrays with component keys.
 
@@ -89,20 +106,7 @@ class FormioComponent(models.Model):
             'deleted': list(set(old_components).difference(new_components))
         }
 
-    def _get_component(self, builder, comp_id):
-        """
-        Returns a formio.component obj from component_id.
-
-        :param tuple builder: the builder records to which the component belongs,
-        :param string comp_id: Component id of desired component in database,
-        :return Database record according to builder_ids and comp_id.
-        """
-        return self.search([
-            ("builder_id", 'in', builder.ids),
-            ("component_id", '=', comp_id)
-        ])
-
-    def _write_components(self, builder, comp_ids):
+    def write_components(self, builder, comp_ids):
         """
         Writes the components with all required data to formio.component model.
 
@@ -119,7 +123,7 @@ class FormioComponent(models.Model):
                 'builder_id': builder.id,
             })
 
-    def _update_components(self, builder):
+    def update_components(self, builder):
         """
         Checks for any component related changes and synchronize them with database records.
 
@@ -148,7 +152,7 @@ class FormioComponent(models.Model):
             elif not obj.parent and record.parent_id:
                 record.parent_id = False
 
-    def _delete_components(self, builder, comp_ids):
+    def delete_components(self, builder, comp_ids):
         """
         Removes components from formio.component model.
 
@@ -158,23 +162,3 @@ class FormioComponent(models.Model):
         for comp_id in comp_ids:
             components = self._get_component(builder, comp_id)
             components.unlink()
-
-    # ----------------------------------------------------------
-    # Public
-    # ----------------------------------------------------------
-    def synchronize_formio_components(self, builder_records=None):
-        """
-        Synchronize builder components with the formio.component model.
-
-        :param tuple builder_records: builder records of components which should be synchronized
-        and added or deleted to the formio.component model.
-        """
-        if builder_records is None:
-            builder_records = self.env['formio.builder'].search([])
-        for builder in builder_records:
-            components_dict = self._compare_components(builder)
-            if components_dict['added']:
-                self._write_components(builder, components_dict['added'])
-            if components_dict['deleted']:
-                self._delete_components(builder, components_dict['deleted'])
-            self._update_components(builder)

@@ -13,6 +13,10 @@ _logger = logging.getLogger(__name__)
 class FormioBuilder(models.Model):
     _inherit = 'formio.builder'
 
+    # ----------------------------------------------------------
+    # Model
+    # ----------------------------------------------------------
+
     def __getattr__(self, name):
         if name == '_formio' and self._name == 'formio.builder':
             # TODO implement caching on the model object
@@ -51,3 +55,24 @@ class FormioBuilder(models.Model):
         if vals.get('schema'):
             self.env['formio.component'].synchronize_formio_components(self)
         return res
+
+    # ----------------------------------------------------------
+    # Public
+    # ----------------------------------------------------------
+
+    def synchronize_formio_components(self, builder_records=None):
+        """
+        Synchronize builder components with the formio.component model.
+
+        :param tuple builder_records: builder records of components which should be synchronized
+        and added or deleted to the formio.component model.
+        """
+        if builder_records is None:
+            builder_records = self.search([])
+        for builder in builder_records:
+            components_dict = self.env['formio.component'].compare_components(builder)
+            if components_dict['added']:
+                self.env['formio.component'].write_components(builder, components_dict['added'])
+            if components_dict['deleted']:
+                self.env['formio.component'].delete_components(builder, components_dict['deleted'])
+            self.env['formio.component'].update_components(builder)
