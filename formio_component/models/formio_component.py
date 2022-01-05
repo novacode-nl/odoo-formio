@@ -81,7 +81,7 @@ class FormioComponent(models.Model):
             'deleted': list(set(old_components).difference(new_components))
         }
 
-    def _get_components(self, builder, comp_id):
+    def _get_component(self, builder, comp_id):
         """
         Returns a formio.component obj from component_id.
 
@@ -130,7 +130,7 @@ class FormioComponent(models.Model):
         :param builder: The builder where the components are located at.
         """
         for comp_id, obj in builder._formio.component_ids.items():
-            record = self._get_components(builder, comp_id)
+            record = self._get_component(builder, comp_id)
             if not record or record.component_id != obj.id:
                 continue
 
@@ -147,7 +147,7 @@ class FormioComponent(models.Model):
             """
             if obj.parent:
                 if record.parent_id.component_id != obj.parent.id:
-                    parent_record = self._get_components(builder, obj.parent.id)
+                    parent_record = self._get_component(builder, obj.parent.id)
                     record.parent_id = parent_record
             elif not obj.parent and record.parent_id:
                 record.parent_id = False
@@ -160,7 +160,7 @@ class FormioComponent(models.Model):
         :param array component_keys: components which should be removed from this model.
         """
         for comp_id in comp_ids:
-            components = self._get_components(builder, comp_id)
+            components = self._get_component(builder, comp_id)
             components.unlink()
 
     # ----------------------------------------------------------
