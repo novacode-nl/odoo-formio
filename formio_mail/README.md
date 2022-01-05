@@ -1,6 +1,6 @@
 # Forms | Mail
 
-This module aims to extend the Odoo form.io stack with features, such as:
+This module aims to extend the Odoo Forms stack with features, such as:
 
 * Send submitted forms as PDF to mail recipients
 * Mail recipients can be specified in three ways:
