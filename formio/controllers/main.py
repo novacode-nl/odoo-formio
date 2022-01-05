@@ -198,9 +198,10 @@ class FormioController(http.Controller):
             vals['state'] = FORM_STATE_DRAFT
         else:
             vals['state'] = FORM_STATE_COMPLETE
+
         form.write(vals)
 
-        if post['data'].get('submit') and not post['data'].get('saveDraft'):
+        if vals.get('state') == FORM_STATE_COMPLETE:
             form.after_submit()
 
     ########################
