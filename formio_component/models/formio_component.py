@@ -17,12 +17,6 @@ class FormioComponent(models.Model):
     label = fields.Char(
         string='Label'
     )
-    display_name = fields.Char(
-        string='Display Name',
-        compute='_compute_display_name',
-        readonly=True,
-        store=True
-    )
     component_id = fields.Char(
         string='Component ID'
     )
@@ -37,11 +31,6 @@ class FormioComponent(models.Model):
         string='Parent Component',
         index=True
     )
-    parent_name = fields.Char(
-        related='parent_id.display_name',
-        string='Parent Component Name',
-        readonly=True
-    )
     child_ids = fields.One2many(
         'formio.component',
         'parent_id',
@@ -53,6 +42,25 @@ class FormioComponent(models.Model):
         required=True,
         ondelete='cascade'
     )
+
+    # ----------------------------------------------------------
+    # Model
+    # ----------------------------------------------------------
+
+    @api.depends('label', 'key', 'parent_id')
+    def name_get(self):
+        res = []
+        for r in self:
+            if r.parent_id:
+                label = '{parent}.{key} ({label})'.format(
+                    parent=r.parent_id.key, key=r.key, label=r.label
+                )
+            else:
+                label = '{key} ({label})'.format(
+                    parent=r.parent_id.key, key=r.key, label=r.label
+                )
+            res.append((r.id, label))
+        return res
 
     # ----------------------------------------------------------
     # Helper
@@ -93,18 +101,6 @@ class FormioComponent(models.Model):
             ("builder_id", 'in', builder.ids),
             ("component_id", '=', comp_id)
         ])
-
-    @api.depends('label', 'parent_id')
-    def _compute_display_name(self):
-        """
-        Computes the display name of formio.component.
-        If it has parent it adds parents name to the display name.
-        """
-        for record in self:
-            if record.parent_id:
-                record.display_name = '%s.%s (%s)' % (record.parent_id.key, record.key, record.label)
-            else:
-                record.display_name = '%s (%s)' % (record.key, record.label)
 
     def _write_components(self, builder, comp_ids):
         """
