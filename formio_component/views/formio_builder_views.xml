@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+     See LICENSE file for full licensing details. -->
+
+<odoo>
+    <record id="view_formio_builder_form_inherit" model="ir.ui.view">
+        <field name="name">formio.builder.component</field>
+        <field name="model">formio.builder</field>
+        <field name="inherit_id" ref="formio.view_formio_builder_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='formio_components_api']/group[@name='component_value_python_code']" position="before">
+                <group string="Create Database Records of Builder Components" name="create_database_records" colspan="2">
+                <div class="mb-2 text-muted" colspan="2">
+                        <i class="fa fa-info-circle" title="info"/>
+                        By enabling the synchronization all components created in the Forms Builder will be synchronized with the database.<br/>
+                        This allows for example to select Forms Components in Many2one fields.
+                    </div>
+                    <field name="component_sync_enabled"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

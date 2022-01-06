@@ -12,12 +12,21 @@ class FormioBuilder(models.Model):
     _inherit = 'formio.builder'
 
     # ----------------------------------------------------------
+    # Database
+    # ----------------------------------------------------------
+
+    component_sync_enabled = fields.Boolean(
+        default=True,
+        string='Synchronize Components'
+    )
+
+    # ----------------------------------------------------------
     # Model
     # ----------------------------------------------------------
 
     def write(self, vals):
         res = super(FormioBuilder, self).write(vals)
-        if vals.get('schema'):
+        if vals.get('schema') and self.component_sync_enabled:
             self.synchronize_formio_components()
         return res
 
@@ -106,6 +115,8 @@ class FormioBuilder(models.Model):
         """
         Synchronize builder components with the formio.component model.
         """
+        if not self.component_sync_enabled:
+            return False
         components_dict = self._compare_components()
         if components_dict['added']:
             self._write_components(components_dict['added'])
