@@ -30,11 +30,10 @@ class FormioBuilder(models.Model):
         Returns a formio.component obj from component_id.
         """
         return self.env['formio.component'].search([
-            ("builder_id", 'in', self.id),
+            ("builder_id", '=', self.id),
             ("component_id", '=', comp_id)
         ])
 
-    @api.model
     def _compare_components(self):
         """
         Compares arrays with component keys.
@@ -50,7 +49,6 @@ class FormioBuilder(models.Model):
             'deleted': list(set(old_components).difference(new_components))
         }
 
-    @api.model
     def _write_components(self, comp_ids):
         """
         Writes the components with all required data to formio.component model.
@@ -65,7 +63,6 @@ class FormioBuilder(models.Model):
                 'builder_id': self.id,
             })
 
-    @api.model
     def _update_components(self):
         """
         Checks for any component related changes and synchronize them with database records.
@@ -93,7 +90,6 @@ class FormioBuilder(models.Model):
             elif not obj.parent and record.parent_id:
                 record.parent_id = False
 
-    @api.model
     def _delete_components(self, comp_ids):
         """
         Removes components from formio.component model.
