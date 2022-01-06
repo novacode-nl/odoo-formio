@@ -46,18 +46,14 @@ class FormioBuilder(models.Model):
         help='This field contains the template of the mail that will be automatically sent'
     )
 
-    # ----------------------------------------------------------
-    # Helper
-    # ----------------------------------------------------------
-
-    def _get_recipients_from_record(self, builder):
+    def _get_recipients_from_record(self):
         """
         Get's all mail recipients from res.partner and formio.mail.recipient.
 
         :return array: With mail recipients in a dictionary.
         """
         res = []
-        for record in builder.mail_recipients_partner_ids:
+        for record in self.mail_recipients_partner_ids:
             mail = tools.email_split_and_format(record.email)
             mail_values = {}
             if mail:
@@ -65,38 +61,13 @@ class FormioBuilder(models.Model):
             if record.lang:
                 mail_values['lang'] = record.lang
             res.append(mail_values)
-        for record in builder.mail_recipients_ids:
+        for record in self.mail_recipients_ids:
             mail = tools.email_split_and_format(record.email)
             mail_values = {}
             if mail:
                 mail_values['recipient'] = mail[0]
             res.append(mail_values)
         return res
-
-    def _get_recipients_from_component(self, form, builder):
-        """
-        Computes all formio.components specified in the mail_recipients_formio_component_ids field.
-
-        :param record formio.form: Form record to get the component values from.
-        :return array: With mail recipients in a dictionary.
-        """
-        values = []
-        result = []
-        components = builder.mail_recipients_formio_component_ids
-        for comp in components:
-            if comp.key not in form._formio.input_components.keys():
-                continue
-            comp_obj = form._formio.input_components[comp.key]
-            values.extend(self._get_component_mail(comp_obj))
-        for v in values:
-            mail = tools.email_split_and_format(v)
-            if mail:
-                result.append({'recipient': mail[0]})
-        return result
-
-    # ----------------------------------------------------------
-    # Formio Specific Helper Functions
-    # ----------------------------------------------------------
 
     def _get_component_mail(self, component):
         """

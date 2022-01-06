@@ -16,10 +16,29 @@ class Form(models.Model):
         and database records.
         """
         res = []
-        builder = self.env['formio.builder']
-        res.extend(builder._get_recipients_from_record(self.builder_id))
-        res.extend(builder._get_recipients_from_component(self, self.builder_id))
+        res.extend(self.builder_id._get_recipients_from_record())
+        res.extend(self._get_recipients_from_component())
         return res
+
+    def _get_recipients_from_component(self):
+        """
+        Computes all formio.components specified in the mail_recipients_formio_component_ids field.
+        :param record formio.form: Form record to get the component values from.
+        :return array: With mail recipients in a dictionary.
+        """
+        values = []
+        result = []
+        components = self.builder_id.mail_recipients_formio_component_ids
+        for comp in components:
+            if comp.key not in self._formio.input_components.keys():
+                continue
+            comp_obj = self._formio.input_components[comp.key]
+            values.extend(self._get_component_mail(comp_obj))
+        for v in values:
+            mail = tools.email_split_and_format(v)
+            if mail:
+                result.append({'recipient': mail[0]})
+        return result
 
     def after_submit(self):
         super(Form, self).after_submit()
