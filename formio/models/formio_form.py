@@ -236,14 +236,19 @@ class Form(models.Model):
         user_groups = self.env.user.groups_id
         for form in self:
             # allow_unlink
-            unlink_form = self.get_form(form.uuid, 'unlink')
-            if unlink_form:
+            if self.env.su:
                 form.allow_unlink = True
             else:
-                form.allow_unlink = False
+                unlink_form = self.get_form(form.uuid, 'unlink')
+                if unlink_form or self.env.su:
+                    form.allow_unlink = True
+                else:
+                    form.allow_unlink = False
 
             # allow_state_update
-            if self.env.user.has_group('formio.group_formio_admin'):
+            if self.env.su:
+                form.allow_force_update_state = True
+            elif self.env.user.has_group('formio.group_formio_admin'):
                 form.allow_force_update_state = True
             elif form.builder_id.allow_force_update_state_group_ids and \
                  (user_groups & form.builder_id.allow_force_update_state_group_ids):
@@ -252,7 +257,9 @@ class Form(models.Model):
                 form.allow_force_update_state = False
 
             # readonly_submission_data
-            if self.env.user.has_group('formio.group_formio_admin'):
+            if self.env.su:
+                form.readonly_submission_data = False
+            elif self.env.user.has_group('formio.group_formio_admin'):
                 form.readonly_submission_data = False
             else:
                 form.readonly_submission_data = True

@@ -1,5 +1,9 @@
 # Changelog
 
+### 9.11
+
+- Improve `formio.form` its `_compute_access` method, to allow root user (`self.env.su`).
+
 ### 9.10
 
 - Layout improvements in Builder and Form (backend form) views.
