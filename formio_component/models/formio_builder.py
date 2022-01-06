@@ -25,13 +25,12 @@ class FormioBuilder(models.Model):
     # Helper
     # ----------------------------------------------------------
 
-    @api.model
     def _get_component(self, comp_id):
         """
         Returns a formio.component obj from component_id.
         """
         return self.env['formio.component'].search([
-            ("builder_id", 'in', self.ids),
+            ("builder_id", 'in', self.id),
             ("component_id", '=', comp_id)
         ])
 
