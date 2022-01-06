@@ -10,6 +10,17 @@ from odoo.exceptions import UserError
 class Form(models.Model):
     _inherit = 'formio.form'
 
+    def get_mail_recipients(self):
+        """
+        This function collects all mail recipients from form components
+        and database records.
+        """
+        res = []
+        builder = self.env['formio.builder']
+        res.extend(builder._get_recipients_from_record(self.builder_id))
+        res.extend(builder._get_recipients_from_component(self, self.builder_id))
+        return res
+
     def after_submit(self):
         super(Form, self).after_submit()
         if self.builder_id.mail_active:
@@ -18,7 +29,7 @@ class Form(models.Model):
     def send_mail(self):
         self.ensure_one()
         template = self.builder_id.mail_template_id
-        recipients = self.builder_id.get_mail_recipients(self)
+        recipients = self.get_mail_recipients()
         attachment_ids = self.generate_attachment()
         context = self._context
 

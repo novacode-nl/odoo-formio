@@ -50,14 +50,14 @@ class FormioBuilder(models.Model):
     # Helper
     # ----------------------------------------------------------
 
-    def _get_recipients_from_record(self):
+    def _get_recipients_from_record(self, builder):
         """
         Get's all mail recipients from res.partner and formio.mail.recipient.
 
         :return array: With mail recipients in a dictionary.
         """
         res = []
-        for record in self.mail_recipients_partner_ids:
+        for record in builder.mail_recipients_partner_ids:
             mail = tools.email_split_and_format(record.email)
             mail_values = {}
             if mail:
@@ -65,7 +65,7 @@ class FormioBuilder(models.Model):
             if record.lang:
                 mail_values['lang'] = record.lang
             res.append(mail_values)
-        for record in self.mail_recipients_ids:
+        for record in builder.mail_recipients_ids:
             mail = tools.email_split_and_format(record.email)
             mail_values = {}
             if mail:
@@ -73,7 +73,7 @@ class FormioBuilder(models.Model):
             res.append(mail_values)
         return res
 
-    def _get_recipients_from_component(self, form):
+    def _get_recipients_from_component(self, form, builder):
         """
         Computes all formio.components specified in the mail_recipients_formio_component_ids field.
 
@@ -82,7 +82,7 @@ class FormioBuilder(models.Model):
         """
         values = []
         result = []
-        components = self.mail_recipients_formio_component_ids
+        components = builder.mail_recipients_formio_component_ids
         for comp in components:
             if comp.key not in form._formio.input_components.keys():
                 continue
@@ -126,21 +126,4 @@ class FormioBuilder(models.Model):
         elif component.type is 'email' or 'select' or 'textfield':
             res.append(component.value)
             return res
-        return res
-
-    # ----------------------------------------------------------
-    # Public
-    # ----------------------------------------------------------
-
-    def get_mail_recipients(self, form):
-        """
-        This function collects all mail recipients from form components
-        and database records.
-
-        :param record form: the form record for getting mail recipients.
-        :return array: With mail addresses of recipient.
-        """
-        res = []
-        res.extend(self._get_recipients_from_record())
-        res.extend(self._get_recipients_from_component(form))
         return res
