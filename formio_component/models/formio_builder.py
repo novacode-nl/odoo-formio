@@ -107,7 +107,6 @@ class FormioBuilder(models.Model):
     # Public
     # ----------------------------------------------------------
 
-    @api.model
     def synchronize_formio_components(self):
         """
         Synchronize builder components with the formio.component model.
