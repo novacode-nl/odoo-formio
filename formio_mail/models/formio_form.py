@@ -33,7 +33,7 @@ class Form(models.Model):
             if comp.key not in self._formio.input_components.keys():
                 continue
             comp_obj = self._formio.input_components[comp.key]
-            values.extend(self._get_component_mail(comp_obj))
+            values.extend(self.builder_id._get_component_mail(comp_obj))
         for v in values:
             mail = tools.email_split_and_format(v)
             if mail:
