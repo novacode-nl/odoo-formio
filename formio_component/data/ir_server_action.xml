@@ -10,10 +10,7 @@ See LICENSE file for full licensing details. -->
         <field name="model_id" ref="model_formio_builder"/>
         <field name="binding_model_id" ref="model_formio_builder"/>
         <field name="code">
-active_ids = env.context.get('active_ids')
-if active_ids:
-    records = model.browse(active_ids)
-    model.synchronize_formio_components(records)
+    record.synchronize_formio_components()
         </field>
     </record>
 </odoo>

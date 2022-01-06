@@ -13,7 +13,7 @@
     'depends': ['formio', 'formio_data_api'],
     'data': [
         'security/ir.model.access.csv',
-        'views/formio_builder_views.xml',
+        'data/ir_server_action.xml',
         'views/formio_component_views.xml',
         'views/formio_menu.xml',
     ],

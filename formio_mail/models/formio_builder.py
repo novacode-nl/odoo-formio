@@ -87,7 +87,7 @@ class FormioBuilder(models.Model):
             if comp.key not in form._formio.input_components.keys():
                 continue
             comp_obj = form._formio.input_components[comp.key]
-            values.extend(self._get_component(comp_obj))
+            values.extend(self._get_component_mail(comp_obj))
         for v in values:
             mail = tools.email_split_and_format(v)
             if mail:
@@ -98,7 +98,7 @@ class FormioBuilder(models.Model):
     # Formio Specific Helper Functions
     # ----------------------------------------------------------
 
-    def _get_component(self, component):
+    def _get_component_mail(self, component):
         """
         Get's the value from a supported formio.component.
         Supported components are:
@@ -116,7 +116,7 @@ class FormioBuilder(models.Model):
             for row in component.rows:
                 for obj in row:
                     inner_component = row[obj]['_object']
-                    res.extend(self._get_component(inner_component))
+                    res.extend(self._get_component_mail(inner_component))
             return res
         elif component.type == 'selectboxes':
             for key, value in component.value.items():
