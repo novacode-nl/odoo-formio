@@ -167,7 +167,7 @@ class FormioPublicController(http.Controller):
         else:
             res = Form.with_context(**context).create(vals)
         if vals.get('state') == FORM_STATE_COMPLETE:
-            Form.after_submit()
+            res.after_submit()
         request.session['formio_last_form_uuid'] = res.uuid
         return {'form_uuid': res.uuid}
 
