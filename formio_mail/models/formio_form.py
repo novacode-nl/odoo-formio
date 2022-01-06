@@ -23,7 +23,6 @@ class Form(models.Model):
     def _get_recipients_from_component(self):
         """
         Computes all formio.components specified in the mail_recipients_formio_component_ids field.
-        :param record formio.form: Form record to get the component values from.
         :return array: With mail recipients in a dictionary.
         """
         values = []
