@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms | Component',
+    'name': 'Forms | Components Synchronizer',
     'summary': 'Saves Form Components as database records.',
     'version': '0.1',
     'license': 'LGPL-3',
