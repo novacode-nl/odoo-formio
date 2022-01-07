@@ -4,6 +4,7 @@
 import logging
 
 from odoo import fields, models, api, tools, _
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -24,6 +25,15 @@ class FormioBuilder(models.Model):
     # Model
     # ----------------------------------------------------------
 
+    @api.constrains("builder_id", "component_id")
+    def constraint_unique_builder_component_id(self):
+        res = self.search([
+            ("builder_id", "=", self.builder_id.id),
+            ("component_id", "=", self.component_id.id)
+        ])
+        if len(res) > 1:
+            raise ValidationError(_('Builder and Component ID should be unique!'))
+
     def write(self, vals):
         res = super(FormioBuilder, self).write(vals)
         if vals.get('schema') and self.component_sync_active:
@@ -41,7 +51,7 @@ class FormioBuilder(models.Model):
         return self.env['formio.component'].search([
             ("builder_id", '=', self.id),
             ("component_id", '=', comp_id)
-        ])
+        ], limit=1)
 
     def _compare_components(self):
         """
