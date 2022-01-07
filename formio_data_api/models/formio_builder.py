@@ -35,7 +35,7 @@ class FormioBuilder(models.Model):
                 elif 'lang' not in context and 'uid' not in context:
                     lang = self.write_uid.lang
                 else:
-                    raise UserError("The form can't be loaded. No (user) language was set.")
+                    raise UserError("The form builder can't be loaded. No (user) language was set.")
 
                 res_lang = self.env['res.lang'].search([('code', '=', lang)], limit=1)
 
