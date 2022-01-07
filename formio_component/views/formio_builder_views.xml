@@ -15,7 +15,7 @@
                         By enabling the synchronization all components created in the Forms Builder will be synchronized with the database.<br/>
                         This allows for example to select Forms Components in Many2one fields.
                     </div>
-                    <field name="component_sync_enabled"/>
+                    <field name="component_sync_active"/>
                 </group>
             </xpath>
         </field>
