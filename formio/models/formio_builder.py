@@ -316,7 +316,7 @@ class Builder(models.Model):
 
     def action_current(self):
         self.ensure_one()
-        self.write({'state': STATE_CURRENT})
+        self.write({'state': STATE_CURRENT, 'is_locked': True})
 
     def action_obsolete(self):
         self.ensure_one()
