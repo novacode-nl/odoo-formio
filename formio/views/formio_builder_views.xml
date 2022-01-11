@@ -57,6 +57,7 @@ See LICENSE file for full licensing details. -->
                     <button
                         name="action_current" type="object" string="Current"
                         attrs="{'invisible': [('state', 'in', ['CURRENT', 'OBSOLETE'])]}"
+                        confirm="Are you sure? This makes it possible to create and use these forms.">
                         class="btn-primary"/>
                     <button
                         name="action_draft" type="object" string="Draft"
