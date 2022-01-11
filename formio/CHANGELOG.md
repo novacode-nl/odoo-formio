@@ -1,5 +1,9 @@
 # Changelog
 
+### 9.12
+
+- Form Builder: unlock/lock feature, allows to modify a published Form Builder (in state: Current).
+
 ### 9.11
 
 - Improve `formio.form` its `_compute_access` method, to allow root user (`self.env.su`).

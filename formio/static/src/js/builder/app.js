@@ -52,7 +52,7 @@ class App extends Component {
                 return;
             }
             else if ('readOnly' in self.params && self.params['readOnly'] == true) {
-                alert("This Form Builder is readonly. It's state is either Current or Obsolete. Refresh the page again.");
+                alert("This Form Builder is readonly (probably locked). Refresh the page and try again.");
                 return;
             }
             else {
