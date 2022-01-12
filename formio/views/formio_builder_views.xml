@@ -68,6 +68,11 @@ See LICENSE file for full licensing details. -->
                         attrs="{'invisible': [('state', '=', 'OBSOLETE')]}"
                         confirm="Are you sure? The Form shall be unpublished."/>
                     <button
+                        name="action_new_builder_version" type="object" string="Create New Version"
+                        attrs="{'invisible':[('id','=',False)]}"
+                        confirm="Are you sure? This creates a new (draft) version."/>
+                    <field name="state" widget="statusbar"/>
+                    <button
                         name="action_lock" type="object" string="Lock"
                         attrs="{'invisible':['|', ('is_locked','=',True), '|', ('id','=',False), ('state','!=','CURRENT')]}"
                         confirm="Are you sure? No further modifications are possible in the Form Builder and configuration."/>
@@ -75,11 +80,6 @@ See LICENSE file for full licensing details. -->
                         name="action_unlock" type="object" string="Unlock"
                         attrs="{'invisible':['|', ('is_locked','=',False), '|', ('id','=',False), ('state','!=','CURRENT')]}"
                         confirm="Are you sure? Modifying the Form Builder could cause existing forms to be invalid."/>
-                    <button
-                        name="action_new_builder_version" type="object" string="Create New Version"
-                        attrs="{'invisible':[('id','=',False)]}"
-                        confirm="Are you sure? This creates a new (draft) version."/>
-                    <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
