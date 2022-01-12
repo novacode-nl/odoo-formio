@@ -137,7 +137,7 @@ See LICENSE file for full licensing details. -->
                                         <i class="fa fa-info-circle" title="info"/> Configure in Resource tab (if settings are available)
                                     </div>
                                     <div class="text-muted" colspan="2">
-                                        <i class="fa fa-info-circle" title="info"/> Not applicable with public and website Forms
+                                        <i class="fa fa-info-circle" title="info"/> Not applicable with public/website Forms and custom implementations (depends).
                                     </div>
                                 </group>
 
