@@ -187,6 +187,10 @@ See LICENSE file for full licensing details. -->
                                     <field name="value"/>
                                 </tree>
                             </field>
+                            <div class="text-muted">
+                                <i class="fa fa-info-circle" title="info"/> Translations of the <strong>formio.js version</strong> can be done via the General tab (click field: formio.js version)<br/>
+                                <i class="fa fa-info-circle" title="info"/> The button "Translations" has the same as in this list.
+                            </div>
                         </page>
                         <page string="Form Display" name="form_display_settings">
                                 <group>
