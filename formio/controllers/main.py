@@ -194,7 +194,7 @@ class FormioController(http.Controller):
             'submission_date': fields.Datetime.now(),
         }
 
-        if post['data'].get('saveDraft') and not post['data'].get('submit'):
+        if post.get('saveDraft') or (post['data'].get('saveDraft') and not post['data'].get('submit')):
             vals['state'] = FORM_STATE_DRAFT
         else:
             vals['state'] = FORM_STATE_COMPLETE
