@@ -1,5 +1,10 @@
 # Changelog
 
+### 9.13
+
+- Fix backend submit-URL (endpoint) of Form in Wizard-mode, when Form Builder enables the "Wizard on next Page Save Draft".\
+  This concerns (fixes) changes in versions, 9.8, 8.32.
+
 ### 9.12
 
 - Form Builder: unlock/lock feature, allows to modify a published Form Builder (in state: Current).
