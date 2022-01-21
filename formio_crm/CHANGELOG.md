@@ -1,5 +1,10 @@
 # Changelog
 
+### 1.1
+
+- Fix computed fields: access rights (compute_sudo).
+- Fix Forms button in CRM Lead form: access right.
+
 ### 1.0
 
 - Remove function `_onchange_partner_id` from `crm.lead` model. 
