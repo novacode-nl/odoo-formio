@@ -8,8 +8,10 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     formio_forms = fields.One2many('formio.form', 'partner_id', string='Forms')
-    formio_forms_count = fields.Integer(compute='_compute_formio_forms_count', string='Forms Count')
-    formio_this_model_id = fields.Many2one('ir.model', compute='_compute_formio_this_model_id')
+    formio_forms_count = fields.Integer(
+        compute='_compute_formio_forms_count', string='Forms Count', compute_sudo=True)
+    formio_this_model_id = fields.Many2one(
+        'ir.model', compute='_compute_formio_this_model_id', compute_sudo=True)
 
     def _compute_formio_forms_count(self):
         for r in self:
