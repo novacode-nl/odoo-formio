@@ -2,8 +2,8 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms | Website (Snippet etc)',
-    'summary': 'Forms Snippet, Other website integration',
+    'name': 'Forms | Website (integration)',
+    'summary': 'Website integration, redirect page',
     'version': '1.4',
     'license': 'LGPL-3',
     'author': 'Nova Code',
