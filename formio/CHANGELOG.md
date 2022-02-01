@@ -1,5 +1,9 @@
 # Changelog
 
+### 9.14
+
+- Upon copy `formio.version` record, also copy the (One2many) assets.
+
 ### 9.13
 
 - Fix backend submit-URL (endpoint) of Form in Wizard-mode, when Form Builder enables the "Wizard on next Page Save Draft".\
