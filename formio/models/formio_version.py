@@ -19,13 +19,13 @@ class Version(models.Model):
     translations = fields.Many2many('formio.translation', string='Translations')
     assets = fields.One2many('formio.version.asset', 'version_id', string='Assets (js, css)', domain=[('type', 'in', ['css', 'js'])])
     css_assets = fields.One2many(
-        'formio.version.asset', 'version_id', domain=[('type', '=', 'css')],
+        'formio.version.asset', 'version_id', domain=[('type', '=', 'css')], copy=True,
         string='CSS Assets')
     js_assets = fields.One2many(
-        'formio.version.asset', 'version_id', domain=[('type', '=', 'js')],
+        'formio.version.asset', 'version_id', domain=[('type', '=', 'js')], copy=True,
         string='Javascript Assets')
     license_assets = fields.One2many(
-        'formio.version.asset', 'version_id',  domain=[('type', '=', 'license')],
+        'formio.version.asset', 'version_id',  domain=[('type', '=', 'license')], copy=True,
         string='License Assets')
 
     def unlink(self):
