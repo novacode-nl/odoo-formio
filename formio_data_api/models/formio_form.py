@@ -330,18 +330,17 @@ class FormioForm(models.Model):
 
         # first check formio.form whether to update
         if noupdate_form_domain:
-            update = not self.filtered_domain(safe_eval(noupdate_form_domain))
+            update = not self.filtered_domain(safe_eval.safe_eval(noupdate_form_domain))
 
         # if still may update, then check the resource model object
         if update:
             if res_field_noupdate_domain:
-                update = not model_object.filtered_domain(safe_eval(res_field_noupdate_domain))
+                update = not model_object.filtered_domain(safe_eval.safe_eval(res_field_noupdate_domain))
 
             if update:
                 value = self._etl_odoo_field_val(model_object, res_field_value, formio_component)
         return value
 
-    # def _etl_odoo_field_val(self, res_model_object, formio_component_name, formio_component):
     def _etl_odoo_field_val(self, model_object, field_getter, formio_component):
         """
         :param res_model_object object: Model object
