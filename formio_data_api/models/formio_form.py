@@ -15,7 +15,7 @@ from formiodata.form import Form
 
 from odoo import models
 from odoo.exceptions import UserError
-from odoo.tools.safe_eval import safe_eval
+from odoo.tools import safe_eval
 
 from odoo.addons.formio.models.formio_form import STATE_PENDING, STATE_DRAFT, STATE_COMPLETE
 
@@ -204,12 +204,12 @@ class FormioForm(models.Model):
 
             # API: noupdate check on formio.form (domain)
             noupdate_form_domain = properties.get('noupdate_form')
-            if noupdate_form_domain and self.filtered_domain(safe_eval(noupdate_form_domain)):
+            if noupdate_form_domain and self.filtered_domain(safe_eval.safe_eval(noupdate_form_domain)):
                 continue
 
             # API: noupdate check on current user (domain)
             noupdate_user_domain = properties.get('noupdate_user')
-            if noupdate_user_domain and self.env.user.filtered_domain(safe_eval(noupdate_user_domain)):
+            if noupdate_user_domain and self.env.user.filtered_domain(safe_eval.safe_eval(noupdate_user_domain)):
                 continue
 
             if self.res_model_id and self.id:
@@ -281,7 +281,7 @@ class FormioForm(models.Model):
                     elif api:
                         eval_context = self._get_formio_eval_context(comp)
                         # nocopy allows to return 'value'
-                        safe_eval(api.code, eval_context, mode="exec", nocopy=True)
+                        safe_eval.safe_eval(api.code, eval_context, mode="exec", nocopy=True)
 
                         context_values = eval_context.get('values')
 
@@ -330,12 +330,12 @@ class FormioForm(models.Model):
 
         # first check formio.form whether to update
         if noupdate_form_domain:
-            update = not self.filtered_domain(safe_eval(noupdate_form_domain))
+            update = not self.filtered_domain(safe_eval.safe_eval(noupdate_form_domain))
 
         # if still may update, then check the resource model object
         if update:
             if res_field_noupdate_domain:
-                update = not model_object.filtered_domain(safe_eval(res_field_noupdate_domain))
+                update = not model_object.filtered_domain(safe_eval.safe_eval(res_field_noupdate_domain))
 
             if update:
                 value = self._etl_odoo_field_val(model_object, res_field_value, formio_component)
