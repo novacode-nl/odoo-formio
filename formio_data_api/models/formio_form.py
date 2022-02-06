@@ -204,12 +204,12 @@ class FormioForm(models.Model):
 
             # API: noupdate check on formio.form (domain)
             noupdate_form_domain = properties.get('noupdate_form')
-            if noupdate_form_domain and self.filtered_domain(safe_eval.safe_eval(noupdate_form_domain)):
+            if noupdate_form_domain and self.filtered_domain(safe_eval(noupdate_form_domain)):
                 continue
 
             # API: noupdate check on current user (domain)
             noupdate_user_domain = properties.get('noupdate_user')
-            if noupdate_user_domain and self.env.user.filtered_domain(safe_eval.safe_eval(noupdate_user_domain)):
+            if noupdate_user_domain and self.env.user.filtered_domain(safe_eval(noupdate_user_domain)):
                 continue
 
             if self.res_model_id and self.id:
@@ -330,12 +330,12 @@ class FormioForm(models.Model):
 
         # first check formio.form whether to update
         if noupdate_form_domain:
-            update = not self.filtered_domain(safe_eval.safe_eval(noupdate_form_domain))
+            update = not self.filtered_domain(safe_eval(noupdate_form_domain))
 
         # if still may update, then check the resource model object
         if update:
             if res_field_noupdate_domain:
-                update = not model_object.filtered_domain(safe_eval.safe_eval(res_field_noupdate_domain))
+                update = not model_object.filtered_domain(safe_eval(res_field_noupdate_domain))
 
             if update:
                 value = self._etl_odoo_field_val(model_object, res_field_value, formio_component)
