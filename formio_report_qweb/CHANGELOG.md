@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.6
+
+- New component: `fieldset`
+  PR [\#175](https://github.com/novacode-nl/odoo-formio/pull/175)
+
 ## 4.5
 
 - In Builder (backend) form view, move "Reports" tab after "Form Permissions".
