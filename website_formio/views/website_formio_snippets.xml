@@ -14,7 +14,7 @@
     </template>
 
     <template id="formio_snippet" inherit_id="website.snippets" priority="8">
-        <xpath expr="//div[@id='snippet_effect']//t[@id='form_form_hook']" position="before">
+        <xpath expr="//div[@id='snippet_effect']//t[@t-snippet][last()]" position="after">
             <t t-snippet="website_formio.s_website_formio" t-thumbnail="/website_formio/static/description/snippet_icon.png"/>
         </xpath>
     </template>

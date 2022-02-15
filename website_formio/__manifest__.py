@@ -15,11 +15,19 @@
         'data/website_data.xml',
         'data/website_formio_demo_data.xml',
         'views/formio_builder_views.xml',
-        'views/website_formio_templates.xml',
         'views/website_formio_snippets.xml',
     ],
     'application': True,
     'images': [
         'static/description/banner.gif',
     ],
+    'assets': {
+        'web.assets_frontend': [
+            'formio/static/lib/iframe-resizer/iframeResizer.min.js',
+        ],
+        'website.assets_editor': [
+            'website_formio/static/src/js/website_formio_editor.js',
+            'formio/static/src/js/formio_form_container.js',
+        ],
+    }
 }

@@ -25,4 +25,9 @@
     'images': [
         'static/description/banner.gif',
     ],
+    'assets': {
+        'web.report_assets_common': [
+            'formio_report_qweb/static/src/scss/report_formio_form.scss',
+        ]
+    }
 }
