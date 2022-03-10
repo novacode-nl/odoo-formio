@@ -78,6 +78,15 @@ export class OdooFormioForm extends Component {
             }
             window.setLanguage = function(lang) {
                 form.language = lang;
+                FormioUtils.eachComponent(form.components, (component) => {
+                    let compObj = component.component;
+                    if (compObj.hasOwnProperty('data') &&
+                        compObj.data.hasOwnProperty('url') && !$.isEmptyObject(compObj.data.url)) {
+                        let filterParams = new URLSearchParams(compObj.filter);
+                        filterParams.set('language', form.language);
+                        compObj.filter = filterParams.toString();
+                    }
+                });
             };
 
             // Alter the data (Data Source) URL, prefix with Odoo controller endpoint.
@@ -87,6 +96,9 @@ export class OdooFormioForm extends Component {
                 if (compObj.hasOwnProperty('data') &&
                     compObj.data.hasOwnProperty('url') && !$.isEmptyObject(compObj.data.url)) {
                     compObj.data.url = self.getDataUrl(compObj);
+                    let filterParams = new URLSearchParams(compObj.filter);
+                    filterParams.set('language', form.language);
+                    compObj.filter = filterParams.toString();
                 }
             });
 

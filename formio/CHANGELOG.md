@@ -1,5 +1,9 @@
 # Changelog
 
+### 9.15
+
+- Set the (form) language in the fetch `/data` URL.
+
 ### 9.14
 
 - Upon copy `formio.version` record, also copy the (One2many) assets.
