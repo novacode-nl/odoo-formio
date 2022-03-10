@@ -16,3 +16,7 @@ class ResLang(models.Model):
     @api.model
     def _formio_ietf_code(self, code):
         return code.replace('_', '-')
+
+    @api.model
+    def _from_formio_ietf_code(self, code):
+        return code.replace('-', '_')

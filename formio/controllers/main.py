@@ -254,7 +254,13 @@ class FormioController(http.Controller):
         _logger.debug("domain: %s" % domain)
 
         try:
-            records = request.env[model].search_read(domain, [label])
+            language = args.get('language')
+            if language:
+                lang = request.env['res.lang']._from_formio_ietf_code(language)
+                model_obj = request.env[model].with_context(lang=lang)
+            else:
+                model_obj = request.env[model]
+            records = model_obj.search_read(domain, [label])
             data = json.dumps([{'id': r['id'], 'label': r[label]} for r in records])
             return data
         except Exception as e:
