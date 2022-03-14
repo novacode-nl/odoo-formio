@@ -1,5 +1,9 @@
 # Changelog
 
+### 9.16
+
+- Remove searchbar from Builder and Form.
+
 ### 9.15
 
 - Set the (form) language in the fetch `/data` URL.
