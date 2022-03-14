@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    type="action"
+                    name="%(formio.action_formio_form)d"
+                    context="{'search_default_purchase_order_id': id, 'search_default_res_model_id': formio_this_model_id, 'default_res_model_id': formio_this_model_id, 'default_purchase_order_id': id}"
+                    groups="formio.group_formio_user"
+                    class="oe_stat_button"
+                    icon="fa-file-text">
+                    <field name="formio_forms_count" widget="statinfo" string="Forms"/>
+                </button>
+            </div>
+            <xpath expr="//form/sheet/notebook" position="after">
+                <field name="formio_this_model_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
