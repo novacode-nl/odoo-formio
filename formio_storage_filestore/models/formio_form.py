@@ -15,10 +15,10 @@ class Form(models.Model):
         return res
 
     def write(self, vals):
-        submission_data = self.submission_data
         res = super(Form, self).write(vals)
-        if vals.get('submission_data'):
-            self._process_storage_filestore_ir_attachments('write')
+        for rec in self:
+            if vals.get('submission_data'):
+                rec._process_storage_filestore_ir_attachments('write')
         return res
 
     def unlink(self):
