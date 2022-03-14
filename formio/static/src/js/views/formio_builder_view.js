@@ -18,7 +18,7 @@ var BuilderView = BasicView.extend({
     display_name: _lt('Builder'),
     icon: 'fa-rocket',
     multi_record: false,
-    searchable: false,
+    withSearchBar: false,
     jsLibs: [],
     viewType: 'formio_builder',
 
