@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.7
+
+- Minor code improvements.
+
 ## 4.6
 
 - New component: `fieldset`

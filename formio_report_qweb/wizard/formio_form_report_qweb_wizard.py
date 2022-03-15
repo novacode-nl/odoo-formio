@@ -33,8 +33,7 @@ class FormReportQwebWizard(models.TransientModel):
         }
 
     def action_save_attachment(self):
-        filename = self._generate_qweb_report()
-        return
+        self._generate_qweb_report()
 
     def _generate_qweb_report(self):
         def close_streams(streams):
@@ -84,13 +83,9 @@ class FormReportQwebWizard(models.TransientModel):
                 self.env['ir.attachment'].create(attach_vals)
             self.write(vals)
             return filename
+        else:
+            raise Warning(_('The report could not be generated. It is recommended to check the server log.'))
 
-            # return {
-            #     'type' : 'ir.actions.act_url',
-            #     'url': '/web/content/formio.form.report.qweb.wizard/%s/datas/%s' % (self.id, filename),
-            #     'target': 'self',
-            # }
-        
 
 class FormReportQwebWizardLine(models.TransientModel):
     _name = 'formio.form.report.qweb.wizard.line'
