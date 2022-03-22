@@ -1,5 +1,11 @@
 # Changelog
 
+### 9.17
+
+- Fix completed wizard form, with "Save draft on next page" (setting).\
+  When navigating pages, the form state has been updated from "complete" to "draft".\
+  Issue: [\#184](https://github.com/novacode-nl/odoo-formio/issues/184)
+
 ### 9.16
 
 - Remove searchbar from Builder and Form.

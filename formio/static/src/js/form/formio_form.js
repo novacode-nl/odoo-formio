@@ -119,7 +119,9 @@ export class OdooFormioForm extends Component {
 
             // wizard nextPage
             form.on('nextPage', function() {
-                if (self.params['wizard_on_next_page_save_draft']) {
+                // readOnly check also applies in server endpoint
+                const readOnly = 'readOnly' in self.options && self.options['readOnly'] == true;
+                if (self.params['wizard_on_next_page_save_draft'] && !readOnly) {
                     const data = {'data': form.data, 'saveDraft': true};
                     if (self.formUuid) {
                         data['form_uuid'] = self.formUuid;

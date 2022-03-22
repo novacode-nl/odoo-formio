@@ -184,7 +184,7 @@ class FormioController(http.Controller):
         """ POST with ID instead of uuid, to get the model object right away """
 
         form = self._get_form(uuid, 'write')
-        if not form:
+        if not form or form.state == FORM_STATE_COMPLETE:
             # TODO raise or set exception (in JSON resonse) ?
             return
         
