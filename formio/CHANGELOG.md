@@ -1,5 +1,9 @@
 # Changelog
 
+### 9.18
+
+- Minor change: name (attr) on 2 view groups `portal_redirect_after_submit`, `public_redirect_after_submit`
+
 ### 9.17
 
 - Fix completed wizard form, with "Save draft on next page" (setting).\
