@@ -147,7 +147,7 @@ See LICENSE file for full licensing details. -->
                         <page string="Resource" name="res_model_settings" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
                         <page string="Portal" name="portal_settings">
                             <group>
-                                <group string="Redirect After Submit">
+                                <group name="portal_redirect_after_submit" string="Redirect After Submit">
                                     <field name="portal_submit_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
                                 </group>
                             </group>
@@ -170,7 +170,7 @@ See LICENSE file for full licensing details. -->
                                         <i class="fa fa-info-circle" title="info"/><strong> Expire After:</strong> Applicable on the Form it's (datimetime field) <strong>Public Access From</strong>
                                     </div>
                                 </group>
-                                <group string="Redirect After Submit">
+                                <group name="public_redirect_after_submit" string="Redirect After Submit">
                                     <field name="public_submit_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
                                 </group>
                             </group>
