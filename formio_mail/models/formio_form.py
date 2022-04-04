@@ -77,7 +77,7 @@ class Form(models.Model):
 
     def generate_attachment(self):
         content, content_type = self.builder_id.mail_report_id._render(self.ids)
-        attachment_name = '%s - %s' % (_('Form'), self.title)
+        attachment_name = '%s - %s.pdf' % (_('Form'), self.title)
         return self.env['ir.attachment'].create({
             'name': attachment_name,
             'type': 'binary',
