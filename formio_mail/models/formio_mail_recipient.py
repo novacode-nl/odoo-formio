@@ -20,6 +20,5 @@ class Form(models.Model):
     )
     builder_ids = fields.Many2many(
         comodel_name='formio.builder',
-        inverse_name='mail_recipients_ids',
         string='Form Builder'
     )
