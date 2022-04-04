@@ -73,7 +73,13 @@ class FormioBuilder(models.Model):
         Writes the components with all required data to formio.component model.
         """
         for comp_id in comp_ids:
-            obj = self._formio.component_ids[comp_id]
+            try:
+                obj = self._formio.component_ids[comp_id]
+            except KeyError as e:
+                msg = _('No component found with (generated) id %s in the Form Builder.\n\n'
+                        'Suggestion:\nOpen the Form Builder and add or edit a component (eg label, setting), which generates new component ids.') % comp_id
+                raise ValidationError(msg)
+
             self.env['formio.component'].create({
                 'label': obj.label,
                 'component_id': obj.id,
