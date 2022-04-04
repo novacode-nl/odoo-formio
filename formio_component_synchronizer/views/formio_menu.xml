@@ -8,5 +8,5 @@ See LICENSE file for full licensing details. -->
         name="Components"
         parent="formio.menu_formio_configuration"
         sequence="200"
-        action="formio_component.action_formio_component"/>
+        action="formio_component_synchronizer.action_formio_component"/>
 </odoo>
