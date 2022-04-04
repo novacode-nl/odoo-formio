@@ -23,8 +23,5 @@
         'static/description/banner.gif',
     ],
     'description': """
-Forms | Component
-================
-Saves Form Components as database records.
 """
 }
