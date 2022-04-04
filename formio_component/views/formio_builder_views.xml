@@ -8,6 +8,11 @@
         <field name="model">formio.builder</field>
         <field name="inherit_id" ref="formio.view_formio_builder_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']/button[@name='action_view_formio']" position="before">
+                <button name="%(action_formio_component)d" type="action" string="Components"
+                        context="{'default_builder_id': id, 'search_default_builder_id': id}"
+                        groups="formio.group_formio_admin" icon="fa-bars"/>
+            </xpath>
             <xpath expr="//page[@name='formio_components_api']/group[@name='component_value_python_code']" position="before">
                 <group string="Synchronize Components" name="synchronize_components" colspan="2">
                 <div class="mb-2 text-muted" colspan="2">
