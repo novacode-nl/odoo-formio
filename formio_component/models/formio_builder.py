@@ -131,8 +131,6 @@ class FormioBuilder(models.Model):
         """
         Synchronize builder components with the formio.component model.
         """
-        if not self.component_sync_active:
-            return False
         components_dict = self._compare_components()
         if components_dict['added']:
             self._write_components(components_dict['added'])
