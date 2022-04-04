@@ -94,7 +94,7 @@ class FormioBuilder(models.Model):
                 if value:
                     res.append(key)
             return res
-        elif component.type is 'email' or 'select' or 'textfield':
+        elif component.type in ('email', 'select', 'textfield'):
             res.append(component.value)
             return res
         return res
