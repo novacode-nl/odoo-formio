@@ -3,4 +3,5 @@
 
 from . import formio_form
 from . import formio_builder
-from . import formio_mail_recipient
+from . import formio_mail_recipient_address
+from . import formio_mail_recipient_line

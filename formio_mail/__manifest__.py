@@ -14,7 +14,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/formio_builder_views.xml',
-        'views/formio_mail_recipient_views.xml',
+        'views/formio_mail_recipient_address_views.xml',
         'views/formio_menu.xml',
     ],
     'application': True,

@@ -5,8 +5,8 @@ from odoo import api, fields, models, _
 
 
 class Form(models.Model):
-    _name = 'formio.mail.recipient'
-    _description = 'Form Mail Recipient'
+    _name = 'formio.mail.recipient.address'
+    _description = 'Form Mail Recipient Mail Address'
 
     # ----------------------------------------------------------
     # Database
@@ -17,8 +17,4 @@ class Form(models.Model):
     )
     email = fields.Char(
         string='Mail Address'
-    )
-    builder_ids = fields.Many2many(
-        comodel_name='formio.builder',
-        string='Form Builder'
     )

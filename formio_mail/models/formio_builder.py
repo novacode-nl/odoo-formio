@@ -19,54 +19,72 @@ class FormioBuilder(models.Model):
         string='Mailings active',
         help='Check this box to send submitted forms to recipients.'
     )
-    mail_recipients_ids = fields.Many2many(
-        'formio.mail.recipient',
-        string='Recipients'
-    )
-    mail_recipients_formio_component_ids = fields.Many2many(
-        'formio.component',
-        string='Formio Component',
-        domain="[('builder_id', '=', id)]",
-        help='List of formio components which should be used as source for mail recipients.'
-    )
-    mail_recipients_partner_ids = fields.Many2many(
-        'res.partner',
-        help='Use mail address from partner record.'
-    )
-    mail_report_id = fields.Many2one(
-        'ir.actions.report',
-        string="Report",
-        domain=[('model', '=', 'formio.form')]
-    )
-    mail_template_id = fields.Many2one(
-        'mail.template',
-        string='Mail Template',
-        domain=[('model', '=', 'formio.form')],
-        ondelete='restrict',
-        help='This field contains the template of the mail that will be automatically sent'
+
+    mail_recipient_line = fields.One2many(
+        'formio.mail.recipient.line',
+        'builder_id',
+        string='Mail Recipient Line'
     )
 
-    def _get_recipients_from_record(self):
+    def _get_recipients_from_component(self):
+        """
+        Computes all formio.components specified in the mail_recipients_formio_component_ids field.
+        :return array: With mail recipients in a dictionary.
+        """
+        values = []
+        result = []
+        components = self.builder_id.mail_recipients_formio_component_ids
+        for comp in components:
+            if comp.key not in self._formio.input_components.keys():
+                continue
+            comp_obj = self._formio.input_components[comp.key]
+            values.extend(self.builder_id._get_component_mail(comp_obj))
+        for v in values:
+            mail = tools.email_split_and_format(v)
+            if mail:
+                result.append({'recipient': mail[0]})
+        return result
+
+    def _get_recipients_from_record(self, form):
         """
         Get's all mail recipients from res.partner and formio.mail.recipient.
 
         :return array: With mail recipients in a dictionary.
         """
         res = []
-        for record in self.mail_recipients_partner_ids:
-            mail = tools.email_split_and_format(record.email)
-            mail_values = {}
-            if mail:
-                mail_values['recipient'] = mail[0]
-            if record.lang:
-                mail_values['lang'] = record.lang
-            res.append(mail_values)
-        for record in self.mail_recipients_ids:
-            mail = tools.email_split_and_format(record.email)
-            mail_values = {}
-            if mail:
-                mail_values['recipient'] = mail[0]
-            res.append(mail_values)
+        for line in self.mail_recipient_line:
+            for record in line.mail_recipients_partner_id:
+                mail_values = {}
+                mail = tools.email_split_and_format(record.email)
+                if mail:
+                    mail_values['recipient'] = mail[0]
+                if record.lang:
+                    mail_values['lang'] = record.lang
+                mail_values['template'] = line.mail_template_id.id
+                mail_values['report'] = line.mail_report_id.id
+                res.append(mail_values)
+            for record in line.mail_recipients_address_id:
+                mail_values = {}
+                mail = tools.email_split_and_format(record.email)
+                if mail:
+                    mail_values['recipient'] = mail[0]
+                mail_values['template'] = line.mail_template_id.id
+                mail_values['report'] = line.mail_report_id.id
+                res.append(mail_values)
+            for record in line.mail_recipients_formio_component_id:
+                mail_values = {}
+                component_values = []
+                if record.key not in form._formio.input_components.keys():
+                    continue
+                obj = form._formio.input_components[record.key]
+                component_values.extend(self._get_component_mail(obj))
+                for value in component_values:
+                    mail = tools.email_split_and_format(value)
+                    if mail:
+                        mail_values['recipient'] = mail[0]
+                mail_values['template'] = line.mail_template_id.id
+                mail_values['report'] = line.mail_report_id.id
+                res.append(mail_values)
         return res
 
     def _get_component_mail(self, component):

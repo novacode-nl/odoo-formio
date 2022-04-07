@@ -3,21 +3,20 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
-    <record id="view_formio_mail_recipient_search" model="ir.ui.view">
-        <field name="name">formio.mail.recipient.search</field>
-        <field name="model">formio.mail.recipient</field>
+    <record id="view_formio_mail_recipient_address_search" model="ir.ui.view">
+        <field name="name">formio.mail.recipient.address.search</field>
+        <field name="model">formio.mail.recipient.address</field>
         <field name="arch" type="xml">
             <search string="Forms">
                 <field name="name"/>
                 <field name="email"/>
-                <field name="builder_ids"/>
             </search>
         </field>
     </record>
 
-    <record id="view_formio_mail_recipient_tree" model="ir.ui.view">
-        <field name="name">formio.mail.recipient.tree</field>
-        <field name="model">formio.mail.recipient</field>
+    <record id="view_formio_mail_recipient_address_tree" model="ir.ui.view">
+        <field name="name">formio.mail.recipient.address.tree</field>
+        <field name="model">formio.mail.recipient.address</field>
         <field name="arch" type="xml">
             <tree string="Mail Recipients">
                 <field name="name"/>
@@ -26,9 +25,9 @@ See LICENSE file for full licensing details. -->
         </field>
     </record>
 
-    <record id="view_formio_mail_recipient_form" model="ir.ui.view">
-        <field name="name">formio.mail.recipient.form</field>
-        <field name="model">formio.mail.recipient</field>
+    <record id="view_formio_mail_recipient_address_form" model="ir.ui.view">
+        <field name="name">formio.mail.recipient.address.form</field>
+        <field name="model">formio.mail.recipient.address</field>
         <field name="arch" type="xml">
 	    <form string="Form">
                 <sheet>
@@ -43,10 +42,10 @@ See LICENSE file for full licensing details. -->
         </field>
     </record>
 
-    <record id="action_formio_mail_recipient" model="ir.actions.act_window">
-        <field name="name">Mail Recipients</field>
-        <field name="res_model">formio.mail.recipient</field>
+    <record id="action_formio_mail_recipient_address" model="ir.actions.act_window">
+        <field name="name">Mail Recipients Address</field>
+        <field name="res_model">formio.mail.recipient.address</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="view_formio_mail_recipient_tree"/>
+        <field name="view_id" ref="view_formio_mail_recipient_address_tree"/>
     </record>
 </odoo>

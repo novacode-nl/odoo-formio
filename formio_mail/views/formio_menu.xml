@@ -8,5 +8,5 @@ See LICENSE file for full licensing details. -->
         name="Mail Recipients"
         parent="formio.menu_formio_configuration"
         sequence="210"
-        action="formio_mail.action_formio_mail_recipient"/>
+        action="formio_mail.action_formio_mail_recipient_address"/>
 </odoo>
