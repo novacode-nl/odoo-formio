@@ -60,6 +60,9 @@ See LICENSE file for full copyright and licensing details.
             <t t-elif="component.type == 'columns'">
                 <t t-call="formio_report_qweb.columns_component"/>
             </t>
+            <t t-elif="component.type == 'fieldset'">
+                <t t-call="formio_report_qweb.fieldset_component"/>
+            </t>
             <t t-elif="component.type == 'panel'">
                 <t t-call="formio_report_qweb.panel_component"/>
             </t>
@@ -341,6 +344,14 @@ See LICENSE file for full copyright and licensing details.
                     </div>
                 </t>
             </div>
+        </t>
+    </template>
+
+    <template id="fieldset_component">
+        <t t-set="fieldset_component" t-value="component"/>
+        <t t-foreach="fieldset_component.components.items()" t-as="component">
+            <t t-set="component" t-value="component[1]"/>
+            <t t-call="formio_report_qweb.component"/>
         </t>
     </template>
 

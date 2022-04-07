@@ -75,6 +75,11 @@ class Builder(models.Model):
         - Obsolete: Was current but obsolete (unpublished)""")
     display_state = fields.Char("Display State", compute='_compute_display_fields', store=False)
     display_name_full = fields.Char("Display Name Full", compute='_compute_display_fields', search='_search_display_name_full', store=False)
+    is_locked = fields.Boolean(
+        string="Locked", tracking=True,
+        help="""\
+        - Locked: No further modifications are possible in the Form Builder and configuration.
+        - Unlocked: Modications are possible, but could cause existing forms to be invalid.""")
     parent_id = fields.Many2one('formio.builder', string='Parent Builder', readonly=True)
     parent_version = fields.Integer(related='parent_id.version', string='Parent Version', readonly=True)
     version = fields.Integer("Version", required=True, readonly=True, default=1)
@@ -311,11 +316,19 @@ class Builder(models.Model):
 
     def action_current(self):
         self.ensure_one()
-        self.write({'state': STATE_CURRENT})
+        self.write({'state': STATE_CURRENT, 'is_locked': True})
 
     def action_obsolete(self):
         self.ensure_one()
         self.write({'state': STATE_OBSOLETE})
+
+    def action_lock(self):
+        self.ensure_one()
+        self.write({'is_locked': True})
+
+    def action_unlock(self):
+        self.ensure_one()
+        self.write({'is_locked': False})
 
     @api.returns('self', lambda value: value)
     def copy_as_new_version(self):
@@ -387,9 +400,9 @@ class Builder(models.Model):
 
     def _get_js_params(self):
         """ Odoo JS (Owl component) misc. params """
-        params = {}
-        if self.state in [STATE_CURRENT, STATE_OBSOLETE]:
-            params['readOnly'] = True
+        params = {
+            'readOnly': self.is_locked
+        }
         return params
 
     def _get_public_form_js_params(self):

@@ -1,5 +1,40 @@
 # Changelog
 
+### 9.18
+
+- Minor change: name (attr) on 2 view groups `portal_redirect_after_submit`, `public_redirect_after_submit`
+
+### 9.17
+
+- Fix completed wizard form, with "Save draft on next page" (setting).\
+  When navigating pages, the form state has been updated from "complete" to "draft".\
+  Issue: [\#184](https://github.com/novacode-nl/odoo-formio/issues/184)
+
+### 9.16
+
+- Remove searchbar from Builder and Form.
+
+### 9.15
+
+- Set the (form) language in the fetch `/data` URL.
+
+### 9.14
+
+- Upon copy `formio.version` record, also copy the (One2many) assets.
+
+### 9.13
+
+- Fix backend submit-URL (endpoint) of Form in Wizard-mode, when Form Builder enables the "Wizard on next Page Save Draft".\
+  This concerns (fixes) changes in versions, 9.8, 8.32.
+
+### 9.12
+
+- Form Builder: unlock/lock feature, allows to modify a published Form Builder (in state: Current).
+
+### 9.11
+
+- Improve `formio.form` its `_compute_access` method, to allow root user (`self.env.su`).
+
 ### 9.10
 
 - Layout improvements in Builder and Form (backend form) views.

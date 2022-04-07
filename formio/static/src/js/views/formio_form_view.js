@@ -18,7 +18,7 @@ var FormView = BasicView.extend({
     display_name: _lt('Form'),
     icon: 'fa-rocket',
     multi_record: false,
-    searchable: false,
+    withSearchBar: false,
     jsLibs: [],
     viewType: 'formio_form',
     /**

@@ -3,16 +3,15 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
-    <record id="view_order_form_formio_sale" model="ir.ui.view">
-        <field name="name">sale.order.form.formio.sale</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
                 <button
                     type="action"
                     name="%(formio.action_formio_form)d"
-                    context="{'search_default_sale_order_id': id, 'search_default_res_model_id': formio_this_model_id, 'default_res_model_id': formio_this_model_id, 'default_sale_order_id': id}"
+                    context="{'search_default_purchase_order_id': id, 'search_default_res_model_id': formio_this_model_id, 'default_res_model_id': formio_this_model_id, 'default_purchase_order_id': id}"
                     groups="formio.group_formio_user"
                     class="oe_stat_button"
                     icon="fa-file-text">
