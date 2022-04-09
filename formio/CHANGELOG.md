@@ -1,5 +1,10 @@
 # Changelog
 
+### 9.19
+
+- Form Builder set to "Draft" state now unlocks too.\
+  Code change: `action_draft` now updates `is_locked=False`, if `is_locked`.
+
 ### 9.18
 
 - Minor change: name (attr) on 2 view groups `portal_redirect_after_submit`, `public_redirect_after_submit`
