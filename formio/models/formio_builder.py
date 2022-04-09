@@ -312,7 +312,10 @@ class Builder(models.Model):
         }
 
     def action_draft(self):
-        self.write({'state': STATE_DRAFT})
+        vals = {'state': STATE_DRAFT}
+        if self.is_locked:
+            vals['is_locked'] = False
+        self.write(vals)
 
     def action_current(self):
         self.ensure_one()
