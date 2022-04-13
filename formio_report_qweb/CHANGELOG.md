@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.8
+
+- Bypass (is safe) access check in `formio.form` function `show_components_not_implemented`.\
+  This ensures generating a QWeb report won't fail, while processing a public Form eg in an automated action.\
+  Generation of the QWeb report could fail due to the access checks, when executing by public user context.
+
 ## 4.7
 
 - Minor code improvements.

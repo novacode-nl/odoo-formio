@@ -20,8 +20,8 @@ class Form(models.Model):
         @param str report_name as xmlid (external ID)
         """
         domain = [('report_name', '=', report_name)]
-        report = self.env['ir.actions.report'].search(domain, limit=1)
-        report_config = self.builder_id.report_ids.filtered(lambda x: x.ir_actions_report_id.id == report.id)
+        report = self.env['ir.actions.report'].sudo().search(domain, limit=1)
+        report_config = self.builder_id.sudo().report_ids.filtered(lambda x: x.ir_actions_report_id.id == report.id)
         return report_config.show_components_not_implemented
 
     def action_report_wizard(self):
