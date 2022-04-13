@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.9
+
+- Add report: Form (Partner preferenced)
+- Add Dutch (nl_NL) translations for QWeb report (header)
+
 ## 4.8
 
 - Bypass (is safe) access check in `formio.form` function `show_components_not_implemented`.\

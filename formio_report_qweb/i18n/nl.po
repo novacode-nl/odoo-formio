@@ -1,0 +1,582 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* formio_report_qweb
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-13 09:22+0000\n"
+"PO-Revision-Date: 2022-04-13 11:24+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: formio_report_qweb
+#: model:ir.actions.report,print_report_name:formio_report_qweb.action_report_formio_form
+#: model:ir.actions.report,print_report_name:formio_report_qweb.action_report_formio_form_assigned_user
+#: model:ir.actions.report,print_report_name:formio_report_qweb.action_report_formio_form_partner
+msgid "'Form - %s - %s' % (object.title, object.id)"
+msgstr "'Formulier - %s - %s' % (object.title, object.id)"
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.view_formio_builder_form_inherit
+msgid ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Configure the <strong>Print Reports button</strong> in <strong>Forms</strong>.<br/>\n"
+"                                    Specify the order and whether to print the report by default. Only PDF reports shall be printed."
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.view_formio_builder_form_inherit
+msgid ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> General configuration for "
+"Reports"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.report_formio_form_template
+msgid "<strong>Assigned:</strong>"
+msgstr "<strong>Toegewezen:</strong>"
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.report_formio_form_template
+msgid "<strong>Date:</strong>"
+msgstr "<strong>Datum:</strong>"
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.report_formio_form_template
+msgid "<strong>ID:</strong>"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.report_formio_form_template
+msgid "<strong>Submission by:</strong>"
+msgstr "<strong>Ingediend door:</strong>"
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__message_needaction
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__activity_ids
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__activity_exception_decoration
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__activity_state
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__activity_type_icon
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__message_attachment_count
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__builder_report_ids
+msgid "Builder Report"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.formio_form_report_qweb_report_wizard_form
+msgid "Close"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__create_uid
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__create_uid
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard__create_uid
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__create_date
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__create_date
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard__create_date
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.day_component
+msgid "Day"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__default_enable
+msgid "Default Enable"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder__display_name
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__display_name
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__display_name
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form__display_name
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard__display_name
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard_line__display_name
+#: model:ir.model.fields,field_description:formio_report_qweb.field_ir_actions_report__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard__datas
+msgid "File Content (base64)"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__message_follower_ids
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__message_channel_ids
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__message_partner_ids
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report__activity_type_icon
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report_print_wizard_config__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model,name:formio_report_qweb.model_formio_form
+msgid "Form"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.actions.report,name:formio_report_qweb.action_report_formio_form_assigned_user
+msgid "Form (Assigned user preferences)"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.actions.report,name:formio_report_qweb.action_report_formio_form
+msgid "Form (My preferences)"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.actions.report,name:formio_report_qweb.action_report_formio_form_partner
+msgid "Form (Partner preferences)"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model,name:formio_report_qweb.model_formio_builder
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__builder_id
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__builder_id
+msgid "Form Builder"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model,name:formio_report_qweb.model_formio_builder_report_print_wizard_config
+msgid "Form Builder Report Print Wizard Config"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_ir_actions_report__formio_builder_report_ids
+msgid "Form Builder Reports"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model,name:formio_report_qweb.model_formio_form_report_qweb_wizard
+msgid "Form Report QWeb Wizard"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model,name:formio_report_qweb.model_formio_form_report_qweb_wizard_line
+msgid "Form Report QWeb Wizard Line"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model,name:formio_report_qweb.model_formio_builder_report
+msgid "Formio Builder Reports"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard__formio_form_id
+msgid "Formio Form"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder__id
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__id
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__id
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form__id
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard__id
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard_line__id
+#: model:ir.model.fields,field_description:formio_report_qweb.field_ir_actions_report__id
+msgid "ID"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__activity_exception_icon
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report__activity_exception_icon
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report_print_wizard_config__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report__message_needaction
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report__message_unread
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_needaction
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report__message_has_error
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report__message_has_sms_error
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_has_error
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__message_is_follower
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder____last_update
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report____last_update
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config____last_update
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form____last_update
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard____last_update
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard_line____last_update
+#: model:ir.model.fields,field_description:formio_report_qweb.field_ir_actions_report____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__write_uid
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__write_uid
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard__write_uid
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__write_date
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__write_date
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard__write_date
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__message_main_attachment_id
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__message_has_error
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__message_ids
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.day_component
+msgid "Month"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__report_name
+msgid "Name"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__activity_date_deadline
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__activity_summary
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__activity_type_id
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__message_needaction_counter
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__message_has_error_counter
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report__message_needaction_counter
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report__message_has_error_counter
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report__message_unread_counter
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: formio_report_qweb
+#: code:addons/formio_report_qweb/wizard/formio_form_report_qweb_wizard.py:0
+#, python-format
+msgid ""
+"Please close and try again.\n"
+"Record for the print wizard does not exist anymore."
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard_line__print_report
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.formio_form_report_qweb_report_wizard_form
+msgid "Print"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard__print_count
+msgid "Print Count"
+msgstr ""
+
+#. module: formio_report_qweb
+#: code:addons/formio_report_qweb/models/formio_form.py:0
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.view_formio_form_form_inherit
+#, python-format
+msgid "Print Reports"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.view_formio_builder_form_inherit
+msgid "Print Reports Wizard"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder__report_print_wizard_ids
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form__report_print_wizard_ids
+msgid "Print Wizard Reports"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__ir_actions_report_id
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__ir_actions_report_id
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard_line__ir_actions_report_id
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.formio_form_report_qweb_report_wizard_form
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.view_formio_builder_form_inherit
+msgid "Report"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model,name:formio_report_qweb.model_ir_actions_report
+msgid "Report Action"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__report_type
+msgid "Report Type"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report_print_wizard_config__sequence
+msgid "Report priority/sequence for the Builder Form"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.view_formio_builder_form_inherit
+msgid "Reports"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.view_formio_builder_form_inherit
+msgid "Reports Configuration"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form__reports_print_wizard_count
+msgid "Reports Print Wizard Count"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__activity_user_id
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__message_has_sms_error
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard__save_attachment
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.formio_form_report_qweb_report_wizard_form
+msgid "Save as Attachment"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.formio_builder_report_form
+msgid "Settings"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__show_components_not_implemented
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.formio_builder_report_form
+msgid "Show not implemented components"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder__report_ids
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form__report_ids
+msgid "Standard Reports"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.report_formio_form_template
+msgid "State:"
+msgstr "Status:"
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report__activity_state
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report_print_wizard_config__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: formio_report_qweb
+#: code:addons/formio_report_qweb/wizard/formio_form_report_qweb_wizard.py:0
+#, python-format
+msgid ""
+"The report could not be generated. It is recommended to check the server "
+"log."
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report_print_wizard_config__report_type
+msgid ""
+"The type of the report that will be rendered, each one having its own "
+"rendering method. HTML means the report will be opened directly in your "
+"browser PDF means the report will be rendered using Wkhtmltopdf and "
+"downloaded by the user."
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.view_formio_builder_form_inherit
+msgid "Type"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report__activity_exception_decoration
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report_print_wizard_config__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__message_unread
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__message_unread_counter
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.component_not_implemented
+msgid "WARNING:"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report__website_message_ids
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_builder_report_print_wizard_config__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report__website_message_ids
+#: model:ir.model.fields,help:formio_report_qweb.field_formio_builder_report_print_wizard_config__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard_line__wizard_id
+msgid "Wizard"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model:ir.model.fields,field_description:formio_report_qweb.field_formio_form_report_qweb_wizard__wizard_line_ids
+msgid "Wizard Line"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.day_component
+msgid "Year"
+msgstr ""
+
+#. module: formio_report_qweb
+#: model_terms:ir.ui.view,arch_db:formio_report_qweb.component_not_implemented
+msgid "component not implemented (showing raw data)"
+msgstr ""
