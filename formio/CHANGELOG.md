@@ -1,5 +1,9 @@
 # Changelog
 
+### 9.20
+
+- Dutch (nl_NL) translations improvements.
+
 ### 9.19
 
 - Form Builder set to "Draft" state now unlocks too.\
