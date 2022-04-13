@@ -14,6 +14,16 @@
         <field name="binding_model_id" ref="model_formio_form"/>
         <field name="binding_type">report</field>
     </record>
+    <record id="action_report_formio_form_partner" model="ir.actions.report">
+        <field name="name">Form (Partner preferences)</field>
+        <field name="model">formio.form</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">formio_report_qweb.report_formio_form_partner</field>
+        <field name="report_file">formio_report_qweb.report_formio_form_partner</field>
+        <field name="print_report_name">'Form - %s - %s' % (object.title, object.id)</field>
+        <field name="binding_model_id" ref="model_formio_form"/>
+        <field name="binding_type">report</field>
+    </record>
     <record id="action_report_formio_form_assigned_user" model="ir.actions.report">
         <field name="name">Form (Assigned user preferences)</field>
         <field name="model">formio.form</field>

@@ -32,6 +32,17 @@ See LICENSE file for full copyright and licensing details.
         </t>
     </template>
 
+    <template id="report_formio_form_document_partner">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+                <t t-set="show_components_not_implemented"
+                   t-value="o.show_components_not_implemented('formio_report_qweb.report_formio_form_partner')"/>
+                <t t-call="formio_report_qweb.report_formio_form_template"/>
+            </t>
+        </t>
+    </template>
+
     <template id="report_formio_form_template">
         <div class="page mt-4">
             <h3 class="mb-4"><span t-field="o.title"/></h3>
@@ -95,6 +106,12 @@ See LICENSE file for full copyright and licensing details.
     <template id="report_formio_form_assigned_user">
         <t t-foreach="docs" t-as="o">
             <t t-call="formio_report_qweb.report_formio_form_document_assigned_user" t-lang="o.user_id.lang"/>
+        </t>
+    </template>
+
+    <template id="report_formio_form_partner">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="formio_report_qweb.report_formio_form_document_partner" t-lang="o.partner_id.lang"/>
         </t>
     </template>
 </odoo>
