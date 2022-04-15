@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.0
+
+- Changed `table` component, due to a fix in the Python `formio-data` libary:
+  https://github.com/novacode-nl/python-formio-data/pull/26
+
 ## 3.3
 
 - New component: `survey`

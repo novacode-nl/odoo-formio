@@ -372,12 +372,14 @@ See LICENSE file for full copyright and licensing details.
         <div class="formio_table_component mb-4">
             <table>
                 <tbody>
-                    <t t-foreach="component.rows" t-as="row">
+                    <t t-foreach="component.rows" t-as="row_cells">
                         <tr>
-                            <t t-foreach="row" t-as="component">
-                                <td>
-                                    <t t-call="formio_report_qweb.component"/>
-                                </td>
+                            <t t-foreach="row_cols" t-as="col">
+                                <t t-foreach="col['components']" t-as="component">
+                                    <td>
+                                        <t t-call="formio_report_qweb.component"/>
+                                    </td>
+                                </t>
                             </t>
                         </tr>
                     </t>
