@@ -1,8 +1,13 @@
 # Changelog
 
+## 5.0
+
+- Changed `table` component, due to a fix in the Python `formio-data` libary:
+  https://github.com/novacode-nl/python-formio-data/pull/26
+
 ## 4.9
 
-- Add report: Form (Partner preferenced)
+- Add report: Form (Partner preferences)
 - Add Dutch (nl_NL) translations for QWeb report (header)
 
 ## 4.8
