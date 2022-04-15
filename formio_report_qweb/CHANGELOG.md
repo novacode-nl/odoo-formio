@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.1
+
+- Fix typo in previous change of `table` component
+
 ## 5.0
 
 - Changed `table` component, due to a fix in the Python `formio-data` libary:
