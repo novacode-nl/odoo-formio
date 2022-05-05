@@ -1,5 +1,10 @@
 # Changelog
 
+### 9.21
+
+- Fix language determination in public Form.\
+  Derive in order: context, user, base.lang_en.
+
 ### 9.20
 
 - Dutch (nl_NL) translations improvements.
