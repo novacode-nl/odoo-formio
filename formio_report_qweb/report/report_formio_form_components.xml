@@ -285,7 +285,7 @@ See LICENSE file for full copyright and licensing details.
         <div class="mw-100 mb-3 formio_signature_component">
             <t t-if="component.value">
                 <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
-                <img t-att-src="component.value" t-att-alt="component.label"/>
+                <img t-att-src="component.value" t-att-alt="component.label" width="100%"/>
             </t>
             <t t-else="">
                 <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
