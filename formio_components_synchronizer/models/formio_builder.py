@@ -12,18 +12,15 @@ _logger = logging.getLogger(__name__)
 class FormioBuilder(models.Model):
     _inherit = 'formio.builder'
 
-    # ----------------------------------------------------------
-    # Database
-    # ----------------------------------------------------------
-
     component_sync_active = fields.Boolean(
         default=True,
         string='Synchronize Components'
     )
-
-    # ----------------------------------------------------------
-    # Model
-    # ----------------------------------------------------------
+    component_ids = fields.One2many(
+        comodel_name="formio.component",
+        inverse_name="builder_id",
+        string="Components"
+    )
 
     @api.constrains("builder_id", "component_id")
     def constraint_unique_builder_component_id(self):

@@ -1,18 +1,13 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from collections import defaultdict
-from odoo import fields, models, api, _
+from odoo import api, fields, models
 
 
 class FormioComponent(models.Model):
     _name = 'formio.component'
     _rec_name = 'label'
     _description = 'Formio Component'
-
-    # ----------------------------------------------------------
-    # Database
-    # ----------------------------------------------------------
 
     label = fields.Char(
         string='Label'
@@ -43,10 +38,6 @@ class FormioComponent(models.Model):
         ondelete='cascade'
     )
 
-    # ----------------------------------------------------------
-    # Model
-    # ----------------------------------------------------------
-
     @api.depends('label', 'key', 'parent_id')
     def name_get(self):
         res = []
@@ -57,7 +48,7 @@ class FormioComponent(models.Model):
                 )
             else:
                 label = '{key} ({label})'.format(
-                    parent=r.parent_id.key, key=r.key, label=r.label
+                    key=r.key, label=r.label
                 )
             res.append((r.id, label))
         return res
