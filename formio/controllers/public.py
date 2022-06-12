@@ -88,6 +88,9 @@ class FormioPublicController(http.Controller):
 
         form.write(vals)
 
+        if vals.get('state') == FORM_STATE_COMPLETE:
+            form.after_submit()
+
     ######################
     # Form - public create
     ######################
@@ -163,6 +166,8 @@ class FormioPublicController(http.Controller):
             res = Form.with_context(**context).sudo().create(vals)
         else:
             res = Form.with_context(**context).create(vals)
+        if vals.get('state') == FORM_STATE_COMPLETE:
+            res.after_submit()
         request.session['formio_last_form_uuid'] = res.uuid
         return {'form_uuid': res.uuid}
 

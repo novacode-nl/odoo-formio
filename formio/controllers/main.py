@@ -201,6 +201,9 @@ class FormioController(http.Controller):
 
         form.write(vals)
 
+        if vals.get('state') == FORM_STATE_COMPLETE:
+            form.after_submit()
+
     ########################
     # Form - fetch Odoo data
     ########################

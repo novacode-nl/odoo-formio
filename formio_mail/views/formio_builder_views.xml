@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <record id="view_formio_builder_form_inherit" model="ir.ui.view">
+        <field name="name">formio.builder.inherit</field>
+        <field name="model">formio.builder</field>
+        <field name="inherit_id" ref="formio.view_formio_builder_form"/>
+        <field name="arch" type="xml">
+            <page name="qweb_reports" position="after">
+                <page name="mail" string="Mail">
+                    <group name="mail_settings" string="Mail Settings" colspan="2">
+                        <field name="mail_active" string="Mailings active"/>
+                    </group>
+                    <group name="mail_recipients" string="Recipients" colspan="2">
+                        <field name="mail_recipient_line" nolabel="1" context="{'default_builder_id': id}">
+                            <tree editable="bottom">
+                                <field name="builder_id" invisible="1"/>
+                                <field name="mail_recipients_address_id"/>
+                                <field name="mail_recipients_formio_component_id"/>
+                                <field name="mail_recipients_partner_id"/>
+                                <field name="mail_report_id" required="1"/>
+                                <field name="mail_template_id" required="1"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>
