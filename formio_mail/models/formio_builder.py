@@ -3,17 +3,13 @@
 
 import logging
 
-from odoo import fields, models, api, tools, _
+from odoo import fields, models, tools
 
 _logger = logging.getLogger(__name__)
 
 
 class FormioBuilder(models.Model):
     _inherit = 'formio.builder'
-
-    # ----------------------------------------------------------
-    # Database
-    # ----------------------------------------------------------
 
     mail_active = fields.Boolean(
         string='Mailings active',

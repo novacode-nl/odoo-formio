@@ -17,11 +17,13 @@ See LICENSE file for full licensing details. -->
                         <field name="mail_recipient_line" nolabel="1" context="{'default_builder_id': id}">
                             <tree editable="bottom">
                                 <field name="builder_id" invisible="1"/>
-                                <field name="mail_recipients_address_id"/>
-                                <field name="mail_recipients_formio_component_id"/>
-                                <field name="mail_recipients_partner_id"/>
-                                <field name="mail_report_id" required="1"/>
-                                <field name="mail_template_id" required="1"/>
+                                <field name="builder_component_ids" invisible="1"/>
+                                <field name="mail_recipients_partner_id" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="mail_recipients_address_id" options="{'no_open': True, 'no_create': True}" optional="show"/>
+                                <field name="mail_recipients_formio_component_id" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="mail_recipients_formio_component_key" optional="hide"/>
+                                <field name="mail_report_id" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="mail_template_id" options="{'no_open': True, 'no_create': True}"/>
                             </tree>
                         </field>
                     </group>
