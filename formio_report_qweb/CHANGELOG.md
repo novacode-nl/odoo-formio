@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.2
+
+- Fixes the "faded" signature images on PDF version of form
+  PR [\#188](https://github.com/novacode-nl/odoo-formio/pull/188)
+
 ## 5.1
 
 - Fix typo in previous change of `table` component
