@@ -18,6 +18,7 @@
         'views/website_formio_templates.xml',
         'views/website_formio_snippets.xml',
     ],
+    'installable': False,
     'application': True,
     'images': [
         'static/description/banner.gif',

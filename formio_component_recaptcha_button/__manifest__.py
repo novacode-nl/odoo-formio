@@ -17,7 +17,7 @@
         'views/formio_form_templates.xml',
         'views/formio_form_public_templates.xml',
     ],
-    'installable': True,
+    'installable': False,
     'application': True,
     'images': [
         'static/description/banner.gif',

@@ -22,6 +22,7 @@
         'views/formio_mail_recipient_address_views.xml',
         'views/formio_menu.xml',
     ],
+    'installable': False,
     'application': True,
     'images': [
         'static/description/banner.gif',

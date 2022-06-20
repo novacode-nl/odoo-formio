@@ -22,6 +22,7 @@
         'wizard/formio_form_report_qweb_wizard.xml'
     ],
     'application': True,
+    'installable': False,
     'images': [
         'static/description/banner.gif',
     ],
