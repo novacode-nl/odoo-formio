@@ -54,9 +54,6 @@ class FormioForm(models.Model):
                     raise UserError("The form can't be loaded. No (user) language was set.")
 
                 res_lang = self.env['res.lang'].search([('code', '=', lang)], limit=1)
-
-                # TODO remove unicode?
-                schema_json = u'%s' % self.builder_id.schema
                 builder_obj = Builder(
                     self.builder_id.schema,
                     language=res_lang.iso_code,
@@ -122,7 +119,7 @@ class FormioForm(models.Model):
         Example:
 
         The Resource Model is a stock.picking.
-        Don't update the Formio Component (weight) value with the Delivery Order email of the Lead, 
+        Don't update the Formio Component (weight) value with the Delivery Order email of the Lead,
         if the Picking Type code is either EF or GH.
 
         ---------------------------------------------------------------------------------------
@@ -223,7 +220,7 @@ class FormioForm(models.Model):
                     if prop_key == 'res_model_field':
                         # API: ir.model.model (object) field value
                         run_deprecated = False
-                        val = self._etl_odoo_field_val(self.res_model_id, comp)
+                        value = self._etl_odoo_field_val(self.res_model_id, comp)
                     elif prop_key == 'res_field' and res_model_object:
                         # API: resource model (object) field value
                         run_deprecated = False
@@ -313,7 +310,7 @@ class FormioForm(models.Model):
 
                         data[comp_key] = value
         return data
-    
+
     def _etl_res_field_value(self, model_object, formio_component):
         """
         :param model_object object: Model object
@@ -323,7 +320,6 @@ class FormioForm(models.Model):
         value = None
         properties = formio_component.properties or {}
         res_field_value = properties.get('res_field')
-        
         noupdate_form_domain = properties.get('noupdate_form')
         res_field_noupdate_domain = properties.get('res_field_noupdate')
         update = True
@@ -359,7 +355,7 @@ class FormioForm(models.Model):
                 error = EtlOdooFieldError(field_getter, field, error_msg)
                 _logger.info(error.message)
                 return error.odoo_field_val
-        
+
             if field_def.type == 'one2many':
                 # TODO many2many works here as well?
                 if formio_component.type == 'datagrid':
@@ -379,7 +375,7 @@ class FormioForm(models.Model):
                     odoo_field_val = datagrid_rows
                 else:
                     error_msg = "One2many field % expects a formio.js datagrid component %s" % model_object
-                    error = EtlOdooFieldError(formio_component_name, field, msg)
+                    error = EtlOdooFieldError(formio_component.name, field, error_msg)
                     _logger.info(error.message)
                     return error.odoo_field_val
             elif field_def.type == 'many2one':
@@ -390,7 +386,7 @@ class FormioForm(models.Model):
                     fields_done.append(field)
                 except:
                     error_msg = "field not found in model"
-                    error = EtlOdooFieldError(formio_component_name, field, error_msg)
+                    error = EtlOdooFieldError(formio_component.name, field, error_msg)
                     _logger.info(error.message)
                     return error.odoo_field_val
             else:
@@ -399,7 +395,7 @@ class FormioForm(models.Model):
                     fields_done.append(field)
                 except:
                     msg = "3. field not found"
-                    error = EtlOdooFieldError(formio_component_name, field, msg)
+                    error = EtlOdooFieldError(formio_component.name, field, msg)
                     _logger.info(error.message)
                     odoo_field_val = error.message
         return odoo_field_val
@@ -409,7 +405,7 @@ class FormioForm(models.Model):
             :returns: dict -- evaluation context given to safe_eval
         """
         return {
-            'value': {}, # TODO DEPRECATION
+            'value': {},  # TODO DEPRECATION
             'values': {},
             'env': self.env,
             'component': component,
@@ -421,10 +417,10 @@ class FormioForm(models.Model):
 
     ###############################################################
     # DEPRECATION-1
-    # 
+    #
     # The functions below are deprecated and shall be removed soon.
     ###############################################################
-    
+
     def _deprecated_etl_odoo_data(self, component):
         # DEPRECATION-1 remove
 
@@ -545,7 +541,7 @@ class FormioForm(models.Model):
                     odoo_field_val = datagrid_rows
                 else:
                     error_msg = "One2many field % expects a formio.js datagrid component %s" % model_object
-                    error = EtlOdooFieldError(formio_component_name, field, msg)
+                    error = EtlOdooFieldError(formio_component_name, field, error_msg)
                     _logger.info(error.message)
                     return error.odoo_field_val
             elif field_def.type == 'many2one':
