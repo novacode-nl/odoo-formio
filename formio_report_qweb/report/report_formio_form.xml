@@ -4,12 +4,6 @@ Copyright Nova Code (http://www.novacode.nl)
 See LICENSE file for full copyright and licensing details.
 -->
 <odoo>
-    <template id="assets_common" name="report_formio_form assets" inherit_id="web.report_assets_common">
-        <xpath expr="." position="inside">
-            <link rel="stylesheet" type="text/scss" href="/formio_report_qweb/static/src/scss/report_formio_form.scss"/>
-        </xpath>
-    </template>
-
     <template id="report_formio_form_document">
         <t t-call="web.html_container">
             <t t-call="web.external_layout">

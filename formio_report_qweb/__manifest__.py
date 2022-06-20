@@ -11,6 +11,8 @@
     'license': 'LGPL-3',
     'category': 'Extra Tools',
     'depends': ['formio', 'formio_data_api'],
+    'application': True,
+    'installable': True,
     'data': [
         'report/formio_form_report_views.xml',
         'report/report_formio_form.xml',
@@ -21,8 +23,11 @@
         'views/formio_form_views.xml',
         'wizard/formio_form_report_qweb_wizard.xml'
     ],
-    'application': True,
-    'installable': False,
+    'assets': {
+        'web.report_assets_common': [
+            'formio_report_qweb/static/src/scss/report_formio_form.scss'
+        ],
+    },
     'images': [
         'static/description/banner.gif',
     ],

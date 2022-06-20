@@ -8,11 +8,12 @@ class Form(models.Model):
     _inherit = 'formio.form'
 
     report_ids = fields.One2many('formio.builder.report', related='builder_id.report_ids')
-    report_print_wizard_ids = fields.One2many('formio.builder.report', related='builder_id.report_print_wizard_ids')
-    reports_print_wizard_count = fields.Integer(compute='_compute_reports_print_wizard_count')
+    report_print_wizard_ids = fields.One2many('formio.builder.report', compute='_compute_report_print_wizards')
+    reports_print_wizard_count = fields.Integer(compute='_compute_report_print_wizards')
 
     @api.depends('builder_id')
-    def _compute_reports_print_wizard_count(self):
+    def _compute_report_print_wizards(self):
+        self.report_print_wizard_ids = [(6, 0, self.builder_id.report_print_wizard_ids.ids)]
         self.reports_print_wizard_count = len(self.builder_id.report_print_wizard_ids)
 
     def show_components_not_implemented(self, report_name):
