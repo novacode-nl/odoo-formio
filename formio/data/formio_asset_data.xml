@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <data>
+        <record id="css_bootstrap_3_3_7" model="ir.attachment">
+            <field name="name">https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css</field>
+            <field name="type">url</field>
+            <field name="res_model">formio.version.asset</field>
+            <field name="public" eval="True"/>
+            <field name="url">/formio/static/lib/bootstrap/3.3.7/bootstrap.min.css</field>
+        </record>
+
+        <record id="css_bootstrap_4_1_3" model="ir.attachment">
+            <field name="name">bootstrap 4.1.3 bootstrap.min.css</field>
+            <field name="type">url</field>
+            <field name="res_model">formio.version.asset</field>
+            <field name="public" eval="True"/>
+            <field name="url">/formio/static/lib/bootstrap/4.1.3/bootstrap.min.css</field>
+        </record>
+    </data>
+</odoo>

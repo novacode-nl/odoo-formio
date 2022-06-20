@@ -17,7 +17,7 @@
     'data': [
         'data/formio_default_asset_css_data.xml',
         'data/formio_version_data.xml',
-        'data/formio_version_asset_data.xml',
+        'data/formio_asset_data.xml',
         'data/ir_cron_data.xml',
         'data/mail_activity_data.xml',
         'data/mail_template_data.xml',

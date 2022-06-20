@@ -110,6 +110,14 @@ See LICENSE file for full licensing details. -->
                             <group name="settings">
                                 <group name="formiojs_settings" string="formio.js">
                                     <field name="formio_version_id" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                    <field name="formio_version_is_dummy" invisible="1"/>
+                                    <div class="text-muted" colspan="2" attrs="{'invisible': [('formio_version_is_dummy', '=', False)]}">
+                                        <strong class="text-danger">
+                                            <i class="fa fa-info-circle" title="info"/> Replace this "Dummy" version, which doesn't work<br/>
+                                            <i class="fa fa-info-circle" title="info"/> Dummy version is only here to bootstrap (default) demo data<br/>
+                                            <i class="fa fa-info-circle" title="info"/> Install a formio.js version (menu: Configuration / formio.js versions)
+                                        </strong>
+                                    </div>
                                 </group>
                                 <group name="publish_settings" string="Publish">
                                     <field name="portal" groups="formio.group_formio_admin" string="Publish on Portal"/>

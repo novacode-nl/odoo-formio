@@ -1,5 +1,12 @@
 # Changelog
 
+### 9.22
+
+- Remove `formio.version` and related assets data
+- Add Dummy `formio.version` record (without assets)
+- Add Dummy `formio.version` to `formio.builder` Demo data
+- Show warning about Dummy version `formio.builder` form view.
+
 ### 9.21
 
 - Fix language determination in public Form.\

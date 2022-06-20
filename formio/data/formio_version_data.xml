@@ -4,20 +4,9 @@ See LICENSE file for full licensing details. -->
 
 <odoo>
     <data>
-        <record id="version_4_9_26" model="formio.version">
-            <field name="name">4.9.26</field>
-        </record>
-        <record id="version_4_9_23" model="formio.version">
-            <field name="name">4.9.23</field>
-        </record>
-        <record id="version_4_7_8" model="formio.version">
-            <field name="name">4.7.8</field>
-        </record>
-        <record id="version_3_27_3" model="formio.version">
-            <field name="name">3.27.3</field>
-        </record>
-        <record id="version_3_6_6" model="formio.version">
-            <field name="name">3.6.6</field>
+        <record id="version_dummy" model="formio.version">
+            <field name="name">Dummy</field>
+            <field name="is_dummy">True</field>
         </record>
     </data>
 </odoo>
