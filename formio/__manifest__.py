@@ -11,9 +11,9 @@
     'live_test_url': 'https://demo13.novacode.nl',
     'category': 'Forms/Forms',
     'depends': ['web', 'portal', 'mail'],
-    'qweb': [
-        'static/src/xml/formio.xml',
-    ],
+    'installable': True,
+    'application': True,
+    'uninstall_hook': 'uninstall_hook',
     'data': [
         'data/formio_default_asset_css_data.xml',
         'data/formio_version_data.xml',
@@ -52,15 +52,6 @@
         # wizards
         'wizard/formio_version_github_checker_wizard.xml'
     ],
-    'demo': [
-        'data/formio_demo_data.xml',
-    ],
-    'installable': True,
-    'application': True,
-    'uninstall_hook': 'uninstall_hook',
-    'images': [
-        'static/description/banner.gif',
-    ],
     'assets': {
         'web.assets_backend': [
             # builder
@@ -85,5 +76,11 @@
         'web.assets_qweb': [
             'formio/static/src/xml/formio.xml',
         ],
-    }
+    },
+    'demo': [
+        'data/formio_demo_data.xml',
+    ],
+    'images': [
+        'static/description/banner.gif',
+    ]
 }

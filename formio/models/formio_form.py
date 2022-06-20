@@ -314,7 +314,7 @@ class Form(models.Model):
 
     def action_view_formio(self):
         return {
-            "name": self.name,
+            "name": self.display_name,
             "type": "ir.actions.act_window",
             "res_model": "formio.form",
             "views": [(False, 'formio_form')],
