@@ -1,3 +1,9 @@
+/* .o_form_sheet_bg > .formio_form_container.o_form_sheet { */
+/*     /* TODO setting in builder or ir.config_param ? */
+/*     max-width: none !important; */
+/*     width: 80% !important; */
+/* } */
+
 .formio_form_iframe_container {
     background:url('/web/static/lib/select2/select2-spinner.gif') center center no-repeat;
 }

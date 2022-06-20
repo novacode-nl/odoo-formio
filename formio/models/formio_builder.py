@@ -301,7 +301,7 @@ class Builder(models.Model):
     def action_view_formio(self):
         view_id = self.env.ref('formio.view_formio_builder_formio').id
         return {
-            "name": self.name,
+            "name": self.display_name_full,
             "type": "ir.actions.act_window",
             "res_model": "formio.builder",
             "views": [(view_id, 'formio_builder')],

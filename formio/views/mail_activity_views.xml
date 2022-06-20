@@ -7,7 +7,7 @@ See LICENSE file for full licensing details. -->
         <field name="name">Activity Types</field>
         <field name="res_model">mail.activity.type</field>
         <field name="view_mode">tree,form</field>
-        <field name="domain">['|', ('res_model_id', '=', False), ('res_model_id.model', '=', 'formio.form')]</field>
+        <field name="domain">['|', ('res_model', '=', False), ('res_model', '=', 'formio.form')]</field>
         <field name="context">{'default_res_model': 'formio.form'}</field>
     </record>
     <menuitem id="formio_menu_config_activity_type"

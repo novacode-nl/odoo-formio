@@ -65,15 +65,13 @@
         'web.assets_backend': [
             # builder
             'formio/static/src/css/formio_builder.css',
-            'formio/static/src/js/views/formio_builder_view.js',
-            'formio/static/src/js/views/formio_builder_controller.js',
-            'formio/static/src/js/views/formio_builder_renderer.js',
-            'formio/static/src/js/tours/formio.js',
+            'formio/static/src/js/views/formio_builder.js',
             # form
             'formio/static/src/css/formio_form.css',
-            'formio/static/src/js/views/formio_form_view.js',
-            'formio/static/src/js/views/formio_form_controller.js',
-            'formio/static/src/js/views/formio_form_renderer.js',
+            'formio/static/src/js/views/formio_form.js',
+            # misc
+            'formio/static/src/js/views/form_controller.js',
+            'formio/static/src/js/tours/formio.js',
             'formio/static/lib/iframe-resizer/iframeResizer.min.js'
         ],
         'web.assets_frontend': [

@@ -323,7 +323,13 @@ See LICENSE file for full licensing details. -->
     <record id="action_formio_builder" model="ir.actions.act_window">
         <field name="name">Form Builders</field>
         <field name="res_model">formio.builder</field>
-        <field name="view_mode">tree,form,formio_builder</field>
+        <!-- TODO when Odoo (v.16) has fixed the Action Service
+             implementation!
+             Currently it doesn't allow to hide search and obtain breadcrumbs.
+             Path: odoo/addons/web/static/src/webclient/actions/action_service.js
+        -->
+        <!-- <field name="view_mode">tree,form,formio_builder</field> -->
+        <field name="view_mode">tree,form</field>
     </record>
 
     <record id="action_formio_builder_view_tree" model="ir.actions.act_window.view">
@@ -338,10 +344,10 @@ See LICENSE file for full licensing details. -->
         <field name="view_id" ref="formio.view_formio_builder_form"/>
         <field name="act_window_id" ref="action_formio_builder"/>
     </record>
-    <record id="action_formio_builder_view_formio" model="ir.actions.act_window.view">
-        <field name="sequence" eval="2"/>
-        <field name="view_mode">formio_builder</field>
-        <field name="view_id" ref="formio.view_formio_builder_formio"/>
-        <field name="act_window_id" ref="action_formio_builder"/>
-    </record>
+    <!-- <record id="action_formio_builder_view_formio" model="ir.actions.act_window.view"> -->
+    <!--     <field name="sequence" eval="2"/> -->
+    <!--     <field name="view_mode">formio_builder</field> -->
+    <!--     <field name="view_id" ref="formio.view_formio_builder_formio"/> -->
+    <!--     <field name="act_window_id" ref="action_formio_builder"/> -->
+    <!-- </record> -->
 </odoo>

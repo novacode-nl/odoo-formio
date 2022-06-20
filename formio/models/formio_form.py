@@ -57,7 +57,6 @@ class Form(models.Model):
         compute='_compute_kanban_group_state', store=True)
     url = fields.Char(compute='_compute_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
-    act_window_multi_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     partner_id = fields.Many2one('res.partner', string='Partner', tracking=True)
     initial_res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model #1')
     initial_res_model_name = fields.Char(related='initial_res_model_id.name', readonly=True, string='Resource Name #1')
