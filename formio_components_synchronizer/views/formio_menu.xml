@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <menuitem
+        id="menu_formio_component"
+        name="Components"
+        parent="formio.menu_formio_configuration"
+        sequence="200"
+        action="formio_components_synchronizer.action_formio_component"/>
+</odoo>

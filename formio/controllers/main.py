@@ -184,7 +184,7 @@ class FormioController(http.Controller):
         """ POST with ID instead of uuid, to get the model object right away """
 
         form = self._get_form(uuid, 'write')
-        if not form:
+        if not form or form.state == FORM_STATE_COMPLETE:
             # TODO raise or set exception (in JSON resonse) ?
             return
         
@@ -194,12 +194,15 @@ class FormioController(http.Controller):
             'submission_date': fields.Datetime.now(),
         }
 
-        if post['data'].get('saveDraft') and not post['data'].get('submit'):
+        if post.get('saveDraft') or (post['data'].get('saveDraft') and not post['data'].get('submit')):
             vals['state'] = FORM_STATE_DRAFT
         else:
             vals['state'] = FORM_STATE_COMPLETE
 
         form.write(vals)
+
+        if vals.get('state') == FORM_STATE_COMPLETE:
+            form.after_submit()
 
     ########################
     # Form - fetch Odoo data
@@ -254,7 +257,13 @@ class FormioController(http.Controller):
         _logger.debug("domain: %s" % domain)
 
         try:
-            records = request.env[model].search_read(domain, [label])
+            language = args.get('language')
+            if language:
+                lang = request.env['res.lang']._from_formio_ietf_code(language)
+                model_obj = request.env[model].with_context(lang=lang)
+            else:
+                model_obj = request.env[model]
+            records = model_obj.search_read(domain, [label])
             data = json.dumps([{'id': r['id'], 'label': r[label]} for r in records])
             return data
         except Exception as e:

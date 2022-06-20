@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-04 07:03+0000\n"
-"PO-Revision-Date: 2021-08-04 09:20+0200\n"
+"POT-Creation-Date: 2022-04-13 09:27+0000\n"
+"PO-Revision-Date: 2022-04-13 11:32+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -127,9 +127,19 @@ msgstr ""
 "        - Verouderd: Niet live, was eerder actueel (niet gepubliceerd)"
 
 #. module: formio
+#: model:ir.model.fields,help:formio.field_formio_builder__is_locked
+msgid ""
+"        - Locked: No further modifications are possible in the Form Builder "
+"and configuration.\n"
+"        - Unlocked: Modications are possible, but could cause existing forms "
+"to be invalid."
+msgstr ""
+
+#. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__portal_submit_done_url
 #: model:ir.model.fields,help:formio.field_formio_builder__public_submit_done_url
 #: model:ir.model.fields,help:formio.field_formio_form__portal_submit_done_url
+#: model:ir.model.fields,help:formio.field_formio_form__public_submit_done_url
 msgid ""
 "        IMPORTANT:\n"
 "        - Absolute URL should contain a protocol (https://, http://)\n"
@@ -139,15 +149,6 @@ msgstr ""
 "        BELANGRIJK:\n"
 "        - Absolute URL moet een protocol bevatten (https://, http://)\n"
 "        - Relatieve URL is ook ondersteunt bijv. /web/login"
-
-#. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid ""
-"<br/>\n"
-"                                <i class=\"fa fa-info-circle\" title=\"info"
-"\"/><strong> Integration / Resource settings</strong> - Enables integration "
-"of Form and ERP/Odoo objects.<br/>"
-msgstr ""
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
@@ -176,7 +177,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid ""
 "<i class=\"fa fa-info-circle\" title=\"info\"/> Configuration of Website "
-"features shall also be done here."
+"features shall also be done here"
 msgstr ""
 "<i class=\"fa fa-info-circle\" title=\"info\"/> Configuratie van website \n"
 "functionaliteiten zal ook hier staan."
@@ -187,7 +188,8 @@ msgid ""
 "<i class=\"fa fa-info-circle\" title=\"info\"/> Configure in Resource tab "
 "(if settings are available)"
 msgstr ""
-"<i class=\"fa fa-info-circle\" title=\"info\"/> Configureer in Resource tab \"\n"
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Configureer in Resource tab "
+"\"\n"
 "(indien instellingen aanwezig)"
 
 #. module: formio
@@ -196,23 +198,33 @@ msgid ""
 "<i class=\"fa fa-info-circle\" title=\"info\"/> Configure in related tabs "
 "(Portal, Public / Website)"
 msgstr ""
-"<i class=\"fa fa-info-circle\" title=\"info\"/> Configureer in gerelateerde tabbladen \"\n"
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Configureer in gerelateerde "
+"tabbladen \"\n"
 "(Portaal, Openbaar / Website)"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid ""
-"<i class=\"fa fa-info-circle\" title=\"info\"/> Specific permissions on Forms"
-msgstr "<i class=\"fa fa-info-circle\" title=\"info\"/> Specifieke rechten op Formulieren"
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Multi-page form, with "
+"previous/next page buttons"
+msgstr "<i class=\"fa fa-info-circle\" title=\"info\"/> Formulier met meerdere pagina's, met knoppen voor vorige/volgende pagina"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid ""
-"<i class=\"fa fa-info-circle\" title=\"info\"/> This doesn't make any sense "
-"with Public (published) Forms, which are standalone."
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Not applicable with public/"
+"website Forms and custom implementations (depends)."
 msgstr ""
 "<i class=\"fa fa-info-circle\" title=\"info\"/> Dit is niet van toepassing\n"
-"bij openbare (gepubliceerde) formulieren, welke initieel niet gekoppeld zijn aan een resource."
+"bij openbare (gepubliceerde) formulieren en custom implementaties."
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Specific permissions on Forms"
+msgstr ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Specifieke rechten op "
+"Formulieren"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
@@ -222,6 +234,16 @@ msgid ""
 "Components API / Property Names.<br/>\n"
 "                                    Partner determination/match shall be "
 "done by Email. This API is especially useful for public Forms."
+msgstr ""
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid ""
+"<i class=\"fa fa-info-circle\" title=\"info\"/> Translations of the "
+"<strong>formio.js version</strong> can be done via the General tab (click "
+"field: formio.js version)<br/>\n"
+"                                <i class=\"fa fa-info-circle\" title=\"info"
+"\"/> The button \"Translations\" has the same as in this list."
 msgstr ""
 
 #. module: formio
@@ -237,16 +259,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid ""
 "<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Expire After:</"
-"strong> - Applicable on the Form it's (datimetime field) <strong>Public "
-"Access From</strong>."
-msgstr ""
-
-#. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid ""
-"<i class=\"fa fa-info-circle\" title=\"info\"/><strong> View as HTML</"
-"strong> - This setting (still) doesn't work since version 4.x<br/>\n"
-"                                For more info see formio.js GitHub issue:"
+"strong> Applicable on the Form it's (datimetime field) <strong>Public Access "
+"From</strong>"
 msgstr ""
 
 #. module: formio
@@ -429,7 +443,8 @@ msgstr ""
 #: code:addons/formio/static/src/js/tours/formio.js:0
 #, python-format
 msgid "After save, click here (or the view switch) to open the Form Builder."
-msgstr "Na opslaan, klik hier (of de weergave button) om de Form Builder te openen."
+msgstr ""
+"Na opslaan, klik hier (of de weergave button) om de Form Builder te openen."
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__form_allow_copy
@@ -459,11 +474,6 @@ msgid "Allow groups to force update State"
 msgstr ""
 
 #. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
-msgid "Appearance"
-msgstr ""
-
-#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__archive_url
 msgid "Archive URL"
 msgstr ""
@@ -485,7 +495,15 @@ msgstr ""
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid ""
-"Are you sure? Modifying the Form Builder causes existing forms to be invalid."
+"Are you sure? Modifying the Form Builder could cause existing forms to be "
+"invalid."
+msgstr ""
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid ""
+"Are you sure? No further modifications are possible in the Form Builder and "
+"configuration."
 msgstr ""
 
 #. module: formio
@@ -494,18 +512,28 @@ msgid "Are you sure? The Form shall be unpublished."
 msgstr ""
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid "Are you sure? This creates a new (draft) version."
+msgstr ""
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid "Are you sure? This makes it possible to create and use these forms."
+msgstr ""
+
+#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_github_tag_form
 msgid "Are you to Reset, to download and install again?"
 msgstr ""
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_version__assets
-msgid "Assets"
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_version_form
+msgid "Assets (JavaScript, CSS)"
 msgstr ""
 
 #. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_version_form
-msgid "Assets (JavaScript, CSS)"
+#: model:ir.model.fields,field_description:formio.field_formio_version__assets
+msgid "Assets (js, css)"
 msgstr ""
 
 #. module: formio
@@ -578,6 +606,16 @@ msgstr ""
 #, python-format
 msgid "Builder"
 msgstr "Builder"
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__builder_name
+msgid "Builder Name"
+msgstr "Builder Naam"
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__builder_version
+msgid "Builder Version"
+msgstr "Builder versie"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version__css_assets
@@ -787,6 +825,11 @@ msgid "Description..."
 msgstr "Omschrijving..."
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
+msgid "Display"
+msgstr "Weergave"
+
+#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__display_name
 #: model:ir.model.fields,field_description:formio.field_formio_builder_js_options__display_name
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__display_name
@@ -906,11 +949,6 @@ msgid "Form"
 msgstr "Form"
 
 #. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "Form Appearance"
-msgstr "Formulier weergave"
-
-#. module: formio
 #: model:ir.model,name:formio.model_formio_builder
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__builder_id
 #: model:ir.model.fields,field_description:formio.field_formio_form__builder_id
@@ -941,6 +979,16 @@ msgid "Form Builders"
 msgstr "Form Builders"
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid "Form Display"
+msgstr ""
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid "Form Permissions"
+msgstr "Formulier rechten"
+
+#. module: formio
 #: model:ir.model,name:formio.model_formio_res_model
 msgid "Form Resource Model"
 msgstr ""
@@ -969,21 +1017,6 @@ msgid "Form was public created"
 msgstr ""
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_ir_attachment__formio_form_id
-msgid "formio.form"
-msgstr ""
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_version_github_checker_wizard
-msgid "formio.js Version GitHub Checker Wizard"
-msgstr ""
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_version_github_tag_available
-msgid "formio.js Version GitHub Tag Available"
-msgstr ""
-
-#. module: formio
 #: model:ir.actions.act_window,name:formio.action_formio_form
 #: model:ir.model.fields,field_description:formio.field_formio_builder__forms
 #: model:ir.ui.menu,name:formio.menu_formio_form
@@ -997,9 +1030,9 @@ msgid "Forms"
 msgstr "Formulieren"
 
 #. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "Forms Permissions"
-msgstr "Formulier rechten"
+#: model:ir.model.fields,field_description:formio.field_ir_attachment__formio_asset_formio_version_id
+msgid "Forms asset (js, css) file"
+msgstr ""
 
 #. module: formio
 #: model:ir.actions.server,name:formio.ir_cron_formio_version_github_tag_check_and_register_ir_actions_server
@@ -1036,11 +1069,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:formio.field_res_config_settings__formio_github_personal_access_token
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
 msgid "GitHub personal access token"
-msgstr ""
-
-#. module: formio
-#: model:ir.ui.menu,name:formio.menu_formio_version_github_tag
-msgid "GitHub releases (tags)"
 msgstr ""
 
 #. module: formio
@@ -1106,6 +1134,7 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__name
+#: model:ir.model.fields,help:formio.field_formio_builder_translation__builder_name
 #: model:ir.model.fields,help:formio.field_formio_form__name
 msgid ""
 "Identifies this specific form. This name can be used in APIs.         Use "
@@ -1153,6 +1182,12 @@ msgid "Installed Versions"
 msgstr "Geïnstalleerde versies"
 
 #. module: formio
+#: model:ir.actions.act_window,name:formio.action_formio_version
+#: model:ir.ui.menu,name:formio.menu_formio_version
+msgid "Installed formio.js versions"
+msgstr "Geïnstalleerde formio.js versies"
+
+#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__install_date
 msgid "Installed on"
 msgstr "Geïnstalleerd op"
@@ -1198,6 +1233,7 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__lang_id
+#: model:ir.model.fields,field_description:formio.field_formio_builder_translation__lang_name
 #: model:ir.model.fields,field_description:formio.field_formio_translation__lang_id
 msgid "Language"
 msgstr "Taal"
@@ -1266,6 +1302,16 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_version__license_assets
+msgid "License Assets"
+msgstr ""
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_version_form
+msgid "License(s)"
+msgstr ""
+
+#. module: formio
 #: code:addons/formio/models/formio_form.py:0
 #, python-format
 msgid "Link the Form to the appropriate Partner"
@@ -1276,6 +1322,16 @@ msgstr ""
 msgid ""
 "Loads the specific formio.js Javascript libraries version (sourcecode: "
 "https://github.com/formio/formio.js)"
+msgstr ""
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid "Lock"
+msgstr ""
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__is_locked
+msgid "Locked"
 msgstr ""
 
 #. module: formio
@@ -1324,6 +1380,12 @@ msgstr ""
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_res_model__module_dependency
 msgid "Module Dependency"
+msgstr ""
+
+#. module: formio
+#: model:ir.model.fields,help:formio.field_ir_attachment__formio_asset_formio_version_id
+msgid ""
+"Mostly files from the formio.js project - https://github.com/formio/formio.js"
 msgstr ""
 
 #. module: formio
@@ -1559,6 +1621,7 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__public_submit_done_url
+#: model:ir.model.fields,field_description:formio.field_formio_form__public_submit_done_url
 msgid "Public Submit-done URL"
 msgstr ""
 
@@ -1712,10 +1775,15 @@ msgid "SMS Delivery error"
 msgstr ""
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid "Save Draft on Next Page"
+msgstr ""
+
+#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
 msgid ""
 "Select a default Form Builder JavaScript Options Template.<br/>\n"
-"                            It's contents, the Form Builder JavaScript "
+"                                It's contents, the Form Builder JavaScript "
 "Options, shall be shown below."
 msgstr ""
 
@@ -1948,6 +2016,7 @@ msgid "Translated Value"
 msgstr "Vertalingswaarde"
 
 #. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_translation_form
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_translation_form
 msgid "Translation"
 msgstr "Vertaling"
@@ -1970,12 +2039,14 @@ msgid "Translation Value"
 msgstr "Vertalingswaarde"
 
 #. module: formio
+#: model:ir.actions.act_window,name:formio.action_formio_builder_translation
 #: model:ir.actions.act_window,name:formio.action_formio_translation
 #: model:ir.model.fields,field_description:formio.field_formio_builder__translations
 #: model:ir.model.fields,field_description:formio.field_formio_version__translations
 #: model:ir.ui.menu,name:formio.menu_formio_translation
 #: model:ir.ui.menu,name:formio.menu_formio_translation_root
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_translation_tree
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_translation_tree
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_form
 msgid "Translations"
@@ -2003,6 +2074,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:formio.field_formio_builder__uuid
 #: model:ir.model.fields,field_description:formio.field_formio_form__uuid
 msgid "UUID"
+msgstr ""
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid "Unlock"
 msgstr ""
 
 #. module: formio
@@ -2093,15 +2169,12 @@ msgid "Version:"
 msgstr "Versie:"
 
 #. module: formio
-#: model:ir.actions.act_window,name:formio.action_formio_version
-#: model:ir.ui.menu,name:formio.menu_formio_version
 #: model:ir.ui.menu,name:formio.menu_formio_version_root
 msgid "Versions"
 msgstr "Versies"
 
 #. module: formio
 #: code:addons/formio/wizard/formio_version_github_checker_wizard.py:0
-#: model:ir.actions.act_window,name:formio.action_formio_version_github_tag
 #, python-format
 msgid "Versions GitHub tags"
 msgstr ""
@@ -2158,8 +2231,14 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__wizard
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_search
 msgid "Wizard"
+msgstr ""
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__wizard_on_next_page_save_draft
+msgid "Wizard on Next Page Save Draft"
 msgstr ""
 
 #. module: formio
@@ -2254,6 +2333,11 @@ msgid "formio.builder Translation"
 msgstr ""
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_ir_attachment__formio_form_id
+msgid "formio.form"
+msgstr ""
+
+#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "formio.js"
 msgstr ""
@@ -2290,11 +2374,7 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model,name:formio.model_formio_version
-#: model:ir.model.fields,field_description:formio.field_formio_builder__formio_version_id
-#: model:ir.model.fields,field_description:formio.field_formio_version_asset__version_id
-#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__formio_version_id
-#: model:ir.model.fields,field_description:formio.field_res_config_settings__formio_default_version_id
-msgid "formio.js version"
+msgid "formio.js Version"
 msgstr "formio.js versie"
 
 #. module: formio
@@ -2303,8 +2383,18 @@ msgid "formio.js Version Asset"
 msgstr ""
 
 #. module: formio
+#: model:ir.model,name:formio.model_formio_version_github_checker_wizard
+msgid "formio.js Version GitHub Checker Wizard"
+msgstr ""
+
+#. module: formio
 #: model:ir.model,name:formio.model_formio_version_github_tag
 msgid "formio.js Version GitHub Tag"
+msgstr ""
+
+#. module: formio
+#: model:ir.model,name:formio.model_formio_version_github_tag_available
+msgid "formio.js Version GitHub Tag Available"
 msgstr ""
 
 #. module: formio
@@ -2339,9 +2429,17 @@ msgid "formio.js release/version."
 msgstr "formio.js release/versie"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__formio_version_name
+#: model:ir.model.fields,field_description:formio.field_formio_builder__formio_version_id
+#: model:ir.model.fields,field_description:formio.field_formio_version_asset__version_id
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__formio_version_id
+#: model:ir.model.fields,field_description:formio.field_res_config_settings__formio_default_version_id
 msgid "formio.js version"
 msgstr "formio.js versie"
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__formio_version_name
+msgid "formio.js version name"
+msgstr "formio.js versie naam"
 
 #. module: formio
 #. openerp-web
@@ -2349,6 +2447,12 @@ msgstr "formio.js versie"
 #, python-format
 msgid "formio.js version:"
 msgstr "formio.js versie"
+
+#. module: formio
+#: model:ir.actions.act_window,name:formio.action_formio_version_github_tag
+#: model:ir.ui.menu,name:formio.menu_formio_version_github_tag
+msgid "formio.js versions (GitHub tags)"
+msgstr "formio.js versies (GitHub tags)"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
@@ -2377,8 +2481,8 @@ msgid "js"
 msgstr ""
 
 #. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "select component rendering error in viewAsHtml model #1545"
+#: model:ir.model.fields.selection,name:formio.selection__formio_version_asset__type__license
+msgid "license"
 msgstr ""
 
 #. module: formio

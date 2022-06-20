@@ -1,5 +1,39 @@
 # Changelog
 
+## 5.2
+
+- Fixes the "faded" signature images on PDF version of form
+  PR [\#188](https://github.com/novacode-nl/odoo-formio/pull/188)
+
+## 5.1
+
+- Fix typo in previous change of `table` component
+
+## 5.0
+
+- Changed `table` component, due to a fix in the Python `formio-data` libary:
+  https://github.com/novacode-nl/python-formio-data/pull/26
+
+## 4.9
+
+- Add report: Form (Partner preferences)
+- Add Dutch (nl_NL) translations for QWeb report (header)
+
+## 4.8
+
+- Bypass (is safe) access check in `formio.form` function `show_components_not_implemented`.\
+  This ensures generating a QWeb report won't fail, while processing a public Form eg in an automated action.\
+  Generation of the QWeb report could fail due to the access checks, when executing by public user context.
+
+## 4.7
+
+- Minor code improvements.
+
+## 4.6
+
+- New component: `fieldset`
+  PR [\#175](https://github.com/novacode-nl/odoo-formio/pull/175)
+
 ## 4.5
 
 - In Builder (backend) form view, move "Reports" tab after "Form Permissions".

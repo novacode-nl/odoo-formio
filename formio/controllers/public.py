@@ -88,6 +88,9 @@ class FormioPublicController(http.Controller):
 
         form.write(vals)
 
+        if vals.get('state') == FORM_STATE_COMPLETE:
+            form.after_submit()
+
     ######################
     # Form - public create
     ######################
@@ -163,6 +166,8 @@ class FormioPublicController(http.Controller):
             res = Form.with_context(**context).sudo().create(vals)
         else:
             res = Form.with_context(**context).create(vals)
+        if vals.get('state') == FORM_STATE_COMPLETE:
+            res.after_submit()
         request.session['formio_last_form_uuid'] = res.uuid
         return {'form_uuid': res.uuid}
 
@@ -216,7 +221,13 @@ class FormioPublicController(http.Controller):
         _logger.debug("domain: %s" % domain)
 
         try:
-            records = request.env[model].search_read(domain, [label])
+            language = args.get('language')
+            if language:
+                lang = request.env['res.lang']._from_formio_ietf_code(language)
+                model_obj = request.env[model].with_context(lang=lang)
+            else:
+                model_obj = request.env[model]
+            records = model_obj.search_read(domain, [label])
             data = json.dumps([{'id': r['id'], 'label': r[label]} for r in records])
             return data
         except Exception as e:
@@ -241,10 +252,10 @@ class FormioPublicController(http.Controller):
 
         # language
         Lang = request.env['res.lang']
-        if request.env.user.lang:
-            options['language'] = Lang._formio_ietf_code(request.env.user.lang)
-        elif request.context.get('lang'):
+        if request.context.get('lang'):
             options['language'] = Lang._formio_ietf_code(request.context.get('lang'))
+        elif request.env.user.lang:
+            options['language'] = Lang._formio_ietf_code(request.env.user.lang)
         else:
             options['language'] = request.env.ref('base.lang_en').formio_ietf_code
 
