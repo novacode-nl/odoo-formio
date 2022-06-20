@@ -2,7 +2,6 @@
 # See LICENSE file for full licensing details.
 
 import logging
-import re
 
 from functools import reduce
 from formiodata.builder import Builder
@@ -12,22 +11,9 @@ from odoo import models
 from odoo.exceptions import UserError
 from odoo.tools import safe_eval
 
-from odoo.addons.formio.models.formio_form import STATE_PENDING, STATE_DRAFT, STATE_COMPLETE
+from odoo.addons.formio.models.formio_form import STATE_PENDING, STATE_DRAFT
 
 _logger = logging.getLogger(__name__)
-
-# DEPRECATION-1 remove these constants/vars
-ODOO_PREFIX = 'Odoo'
-ODOO_REFRESH_PREFIX = 'OdooRF'
-ODOO_USER_PREFIX = 'OdooUser'
-ODOO_MODEL_PREFIX = 'OdooModel'
-
-# DEPRECATION-1 remove this constants/var
-# IMPORTANT regarding the delimiter choice:
-# - A dot "." results in undesired submission data, due to
-# the formio.js Javascript library/API.
-# - A dash is allowed, however causing issues with the ETL module (formio_etl).
-ODOO_FIELD_DELIM = '__'
 
 UNKNOWN_ODOO_FIELD = 'UNKNOWN Odoo field'
 
@@ -54,9 +40,6 @@ class FormioForm(models.Model):
                     raise UserError("The form can't be loaded. No (user) language was set.")
 
                 res_lang = self.env['res.lang'].search([('code', '=', lang)], limit=1)
-
-                # TODO remove unicode?
-                schema_json = u'%s' % self.builder_id.schema
                 builder_obj = Builder(
                     self.builder_id.schema,
                     language=res_lang.iso_code,
@@ -66,11 +49,21 @@ class FormioForm(models.Model):
                     # HACK masquerade empty Form object
                     # TODO implement caching on the model object
                     # self._formio = Form('{}', builder_obj)
-                    form = Form('{}', builder_obj, date_format=res_lang.date_format, time_format=res_lang.time_format)
+                    form = Form(
+                        "{}",
+                        builder_obj,
+                        date_format=res_lang.date_format,
+                        time_format=res_lang.time_format,
+                    )
                 else:
                     # TODO implement caching on the model object
                     # self._formio = Form(self.submission_data, builder_obj)
-                    form = Form(self.submission_data, builder_obj, date_format=res_lang.date_format, time_format=res_lang.time_format)
+                    form = Form(
+                        self.submission_data,
+                        builder_obj,
+                        date_format=res_lang.date_format,
+                        time_format=res_lang.time_format,
+                    )
                 return form
         else:
             return self.__getattribute__(name)
@@ -122,7 +115,7 @@ class FormioForm(models.Model):
         Example:
 
         The Resource Model is a stock.picking.
-        Don't update the Formio Component (weight) value with the Delivery Order email of the Lead, 
+        Don't update the Formio Component (weight) value with the Delivery Order email of the Lead,
         if the Picking Type code is either EF or GH.
 
         ---------------------------------------------------------------------------------------
@@ -188,19 +181,15 @@ class FormioForm(models.Model):
         data = super(FormioForm, self)._etl_odoo_data()
 
         # IMPORTANT:
-        # Don't ETL (update) a form if it's state is Completed.
+        # Don't ETL (update) a form if it's state ain't Pending or Draft.
         # This makes no sense, because updated value can not be submitted (stored) in a completed form anyway.
-        if self.state == STATE_COMPLETE:
+        if self.state not in [STATE_PENDING, STATE_DRAFT]:
             return data
 
         # TODO-1: refactor both for (lopps) to separate functions
         for comp_key, comp in self._formio.input_components.items():
             value = False
             properties = comp.properties or {}
-
-            # DEPRECATION-1 cleanup with removal
-            # If new ETL/API not determined, then run deprecated implementation.
-            run_deprecated = True
 
             # API: noupdate check on formio.form (domain)
             noupdate_form_domain = properties.get('noupdate_form')
@@ -222,16 +211,11 @@ class FormioForm(models.Model):
                 if self.res_model_id:
                     if prop_key == 'res_model_field':
                         # API: ir.model.model (object) field value
-                        run_deprecated = False
-                        val = self._etl_odoo_field_val(self.res_model_id, comp)
+                        value = self._etl_odoo_field_val(self.res_model_id, comp)
                     elif prop_key == 'res_field' and res_model_object:
-                        # API: resource model (object) field value
-                        run_deprecated = False
                         value = self._etl_res_field_value(res_model_object, comp)
                 # API: current user field value
                 if prop_key == 'user_field':
-                    run_deprecated = False
-
                     from_object = self.env.user
                     fields = prop_val.split('.')
                     while len(fields) > 0:
@@ -244,11 +228,6 @@ class FormioForm(models.Model):
                         else:
                             field = fields.pop(0)
                             value = getattr(from_object, field)
-
-            # DEPRECATION-1 remove below
-            if run_deprecated:
-                value = self._deprecated_etl_odoo_data(comp)
-
             if value:
                 data[comp_key] = value
 
@@ -282,38 +261,18 @@ class FormioForm(models.Model):
                         eval_context = self._get_formio_eval_context(comp)
                         # nocopy allows to return 'value'
                         safe_eval.safe_eval(api.code, eval_context, mode="exec", nocopy=True)
-
                         context_values = eval_context.get('values')
-
-                        # START: TODO DEPRECATE
-                        # value renamed to values, backwards incompatibility.
-                        if 'value' in eval_context:
-                            deprecation = """[DEPRECATION] Rename Component API (server) variable 'value' to 'values'.
-
-                            More info: https://github.com/novacode-nl/odoo-formio/wiki/Populate-a-Form-Component-value,-with-data-from-Server-(Python)-Code
-
-                            !! Definitive in Odoo v15 !!
-                            """
-                            _logger.warning(deprecation)
-                        context_value = eval_context.get('value')
-                        # END: TODO DEPRECATE
-
-                        value = context_values.get(prop_value) or context_value.get(prop_value)
+                        value = context_values.get(prop_value)
                         if prop_value_obj:
                             # TODO-2: refactor DRY
                             value_fields = prop_value_obj.split('.')
                             value = reduce(getattr, value_fields, value)
-
                         # caching
                         if context_values:
                             api_values[api.name] = context_values
-                        elif context_value:
-                            # TODO DEPRECATE (context_value)
-                            api_values[api.name] = context_value
-
                         data[comp_key] = value
         return data
-    
+
     def _etl_res_field_value(self, model_object, formio_component):
         """
         :param model_object object: Model object
@@ -323,7 +282,6 @@ class FormioForm(models.Model):
         value = None
         properties = formio_component.properties or {}
         res_field_value = properties.get('res_field')
-        
         noupdate_form_domain = properties.get('noupdate_form')
         res_field_noupdate_domain = properties.get('res_field_noupdate')
         update = True
@@ -359,7 +317,7 @@ class FormioForm(models.Model):
                 error = EtlOdooFieldError(field_getter, field, error_msg)
                 _logger.info(error.message)
                 return error.odoo_field_val
-        
+
             if field_def.type == 'one2many':
                 # TODO many2many works here as well?
                 if formio_component.type == 'datagrid':
@@ -379,7 +337,7 @@ class FormioForm(models.Model):
                     odoo_field_val = datagrid_rows
                 else:
                     error_msg = "One2many field % expects a formio.js datagrid component %s" % model_object
-                    error = EtlOdooFieldError(formio_component_name, field, msg)
+                    error = EtlOdooFieldError(formio_component.name, field, error_msg)
                     _logger.info(error.message)
                     return error.odoo_field_val
             elif field_def.type == 'many2one':
@@ -390,7 +348,7 @@ class FormioForm(models.Model):
                     fields_done.append(field)
                 except:
                     error_msg = "field not found in model"
-                    error = EtlOdooFieldError(formio_component_name, field, error_msg)
+                    error = EtlOdooFieldError(formio_component.name, field, error_msg)
                     _logger.info(error.message)
                     return error.odoo_field_val
             else:
@@ -399,7 +357,7 @@ class FormioForm(models.Model):
                     fields_done.append(field)
                 except:
                     msg = "3. field not found"
-                    error = EtlOdooFieldError(formio_component_name, field, msg)
+                    error = EtlOdooFieldError(formio_component.name, field, msg)
                     _logger.info(error.message)
                     odoo_field_val = error.message
         return odoo_field_val
@@ -409,7 +367,6 @@ class FormioForm(models.Model):
             :returns: dict -- evaluation context given to safe_eval
         """
         return {
-            'value': {}, # TODO DEPRECATION
             'values': {},
             'env': self.env,
             'component': component,
@@ -418,174 +375,6 @@ class FormioForm(models.Model):
             'dateutil': safe_eval.dateutil,
             'time': safe_eval.time,
         }
-
-    ###############################################################
-    # DEPRECATION-1
-    # 
-    # The functions below are deprecated and shall be removed soon.
-    ###############################################################
-    
-    def _deprecated_etl_odoo_data(self, component):
-        # DEPRECATION-1 remove
-
-        val = False
-        if component.key.startswith(ODOO_USER_PREFIX) and self.state in (STATE_PENDING, STATE_DRAFT):
-            # Current user
-            deprecation = """[DEPRECATION] OdooUser__ Component Property Name (key) is deprecated in favor of ...
-
-            Use API Custom Properties (key): user_field, user_field_noupdate
-
-            EXAMPLE:
-            ----------------------------------------------------------------
-            | Key                              | Value                     |
-            ----------------------------------------------------------------
-            | user_field                       | partner_id.birthdate      |
-            ----------------------------------------------------------------
-
-            More info: https://github.com/novacode-nl/odoo-formio/wiki/Prefill-Form-components-with-data-from-Odoo-(model-field)
-
-            !! Definitive in Odoo v15 !!
-            """
-            _logger.warning(deprecation)
-            val = self._deprecated_etl_odoo_field_val(self.env.user, component.key, component)
-        elif self.res_model_id:
-            # Form is linked with a resource object (eg crm.lead, sale.order etc)
-            if component.key == ODOO_MODEL_PREFIX:
-                # Resource model: ir.model (object)
-                val = self._deprecated_etl_odoo_field_val(self.res_model_id, component.key, component)
-            elif component.key.startswith(ODOO_REFRESH_PREFIX):
-                deprecation = """[DEPRECATION] OdooRF__ Component Property Name (key) is deprecated in favor of ...
-
-                Use API Custom Properties (key): res_field
-
-                EXAMPLE:
-                -----------------------------------------------------------------
-                | Key                              | Value                      |
-                ----------------------------------------------------------------
-                | res_field                        | partner_shipping_id.street |
-                -----------------------------------------------------------------
-
-                More info: https://github.com/novacode-nl/odoo-formio/wiki/Prefill-Form-components-with-data-from-Odoo-(model-field)
-
-                !! Definitive in Odoo v15 !!
-                """
-                _logger.warning(deprecation)
-
-                # Resource model: always refresh/reload
-                model_object = self.env[self.res_model_id.model].browse(self.res_id)
-                val = self._deprecated_etl_odoo_field_val(model_object, component.key, component)
-            elif component.key.startswith(ODOO_PREFIX) and self.state in (STATE_PENDING, STATE_DRAFT):
-                # Resource model: only load if form state in [PENDING, DRAFT]
-                # IMPORTANT: Keep this one last, because it's the always matching `Odoo` prefix.
-
-                deprecation = """[DEPRECATION] Odoo__ Component (key) Property Name is deprecated in favor of ...
-
-                Use API Custom Properties (keys): res_field, res_field_noupdate
-
-                EXAMPLE 1 - noupdate if form matches domain (filter):
-                -----------------------------------------------------------------
-                | Key                              | Value                      |
-                -----------------------------------------------------------------
-                | res_field                        | partner_shipping_id.street |
-                | nouppdate_form                   | [('state', '=', 'DRAFT')]  |
-                ----------------------------------------------------------------
-
-                EXAMPLE 2 - noupdate if res (resource object) matches domain (filter):
-                -----------------------------------------------------------------
-                | Key                              | Value                      |
-                -----------------------------------------------------------------
-                | res_field                        | partner_shipping_id.street |
-                | nouppdate_res                    | [('field_x', '=', True)]   |
-                -----------------------------------------------------------------
-
-                More info: https://github.com/novacode-nl/odoo-formio/wiki/Prefill-Form-components-with-data-from-Odoo-(model-field)
-
-                !! Definitive in Odoo v15 !!
-                """
-                _logger.warning(deprecation)
-                model_object = self.env[self.res_model_id.model].browse(self.res_id)
-                val = self._deprecated_etl_odoo_field_val(model_object, component.key, component)
-        return val
-
-    def _deprecated_etl_odoo_field_val(self, res_model_object, formio_component_name, formio_component):
-        fields = self._deprecated_split_fields_token(formio_component_name)
-        fields_done = []
-        model_object = res_model_object
-
-        for field in fields:
-            try:
-                field_def = model_object._fields[field]
-            except:
-                error_msg = "field not found in model"
-                error = EtlOdooFieldError(formio_component_name, field, error_msg)
-                _logger.info(error.message)
-                return error.odoo_field_val
-
-            if field_def.type == 'one2many':
-                # TODO many2many works here as well?
-                if formio_component.type == 'datagrid':
-                    one2many_records = getattr(model_object, field)
-                    datagrid_components = formio_component.raw.get('components')
-                    datagrid_rows = []
-                    for record in one2many_records:
-                        row = {}
-                        for comp in datagrid_components:
-                            one2many_fields = self._deprecated_split_fields_token(comp['key'])
-                            # XXX Exception handler checking one2many_fields exist, doesn't make sense here.
-                            # Because additional/custom components can be present in datagrid row.
-                            # For now just silence all exceptions here.
-                            try:
-                                row[comp['key']] = reduce(getattr, one2many_fields, record)
-                                for one2many_field in one2many_fields:
-                                    if one2many_field not in fields_done:
-                                        fields_done.append(one2many_field)
-                            except:
-                                pass
-                        datagrid_rows.append(row)
-                    odoo_field_val = datagrid_rows
-                else:
-                    error_msg = "One2many field % expects a formio.js datagrid component %s" % model_object
-                    error = EtlOdooFieldError(formio_component_name, field, msg)
-                    _logger.info(error.message)
-                    return error.odoo_field_val
-            elif field_def.type == 'many2one':
-                try:
-                    model_object = getattr(model_object, field)
-                    if not model_object:
-                        return False
-                    fields_done.append(field)
-                except:
-                    error_msg = "field not found in model"
-                    error = EtlOdooFieldError(formio_component_name, field, error_msg)
-                    _logger.info(error.message)
-                    return error.odoo_field_val
-            else:
-                try:
-                    odoo_field_val = getattr(model_object, field)
-                    fields_done.append(field)
-                except:
-                    msg = "field not found"
-                    error = EtlOdooFieldError(formio_component_name, field, msg)
-                    _logger.info(error.message)
-                    odoo_field_val = error.message
-        return odoo_field_val
-
-    def _deprecated_split_fields_token(self, split_str):
-        # DEPRECATION-1 remove this function
-        if split_str.startswith(ODOO_USER_PREFIX):
-            re_pattern = r'^%s\%s' % (ODOO_USER_PREFIX, ODOO_FIELD_DELIM)
-            res = re.sub(re_pattern, '', split_str).split(ODOO_FIELD_DELIM)
-        elif split_str.startswith(ODOO_REFRESH_PREFIX):
-            re_pattern = r'^%s\%s' % (ODOO_REFRESH_PREFIX, ODOO_FIELD_DELIM)
-            res = re.sub(re_pattern, '', split_str).split(ODOO_FIELD_DELIM)
-        elif split_str.startswith(ODOO_PREFIX):
-            # IMPORTANT !
-            # Keep this one last, because it's the always matching `Odoo` prefix.
-            re_pattern = r'^%s\%s' % (ODOO_PREFIX, ODOO_FIELD_DELIM)
-            res = re.sub(re_pattern, '', split_str).split(ODOO_FIELD_DELIM)
-        else:
-            res = split_str.split(ODOO_FIELD_DELIM)
-        return res
 
 
 class EtlOdooFieldError(Exception):
