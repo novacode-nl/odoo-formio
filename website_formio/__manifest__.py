@@ -8,7 +8,7 @@
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
-    'live_test_url': 'https://demo13.novacode.nl',
+    'live_test_url': 'https://demo15.novacode.nl',
     'category': 'Extra Tools',
     'depends': ['formio', 'website', 'website_editor_unsanitize_html_field'],
     'installable': False,
