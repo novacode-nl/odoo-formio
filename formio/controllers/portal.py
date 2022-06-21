@@ -102,7 +102,7 @@ class FormioCustomerPortal(CustomerPortal):
         values = self._formio_form_get_page_view_values(form, **kwargs)
         return request.render("formio.portal_my_formio_edit", values)
 
-    @http.route(['/my/formio/form/create/<string:name>'], type='http', auth="user", method=['GET'], website=True)
+    @http.route(['/my/formio/form/create/<string:name>'], type='http', auth="user", methods=['GET'], website=True)
     def portal_create_form(self, name):
         builder = request.env['formio.builder'].search([('name', '=', name), ('portal', '=', True)], limit=1)
         if not builder:
@@ -119,7 +119,7 @@ class FormioCustomerPortal(CustomerPortal):
         url = '/my/formio/form/{uuid}'.format(uuid=form.uuid)
         return request.redirect(url)
 
-    @http.route(['/my/formio/form/<string:uuid>/delete'], type='http', auth="user", method=['GET'], website=True)
+    @http.route(['/my/formio/form/<string:uuid>/delete'], type='http', auth="user", methods=['GET'], website=True)
     def portal_delete_form(self, uuid, **kwargs):
         """ Unlink form. Access rules apply on the unlink method """
 
@@ -133,7 +133,7 @@ class FormioCustomerPortal(CustomerPortal):
 
         return request.redirect(redirect_url)
 
-    @http.route(['/my/formio/form/<string:uuid>/cancel'], type='http', auth="user", method=['GET'], website=True)
+    @http.route(['/my/formio/form/<string:uuid>/cancel'], type='http', auth="user", methods=['GET'], website=True)
     def portal_cancel_form(self, uuid, **kwargs):
         """ Cancel form. Access rules apply on the write method """
 
@@ -146,7 +146,7 @@ class FormioCustomerPortal(CustomerPortal):
         # TODO call method (website_formio page) with message?
         return request.redirect(redirect_url)
 
-    @http.route(['/my/formio/form/<string:uuid>/copy'], type='http', auth="user", method=['GET'], website=True)
+    @http.route(['/my/formio/form/<string:uuid>/copy'], type='http', auth="user", methods=['GET'], website=True)
     def portal_copy_form(self, uuid, **kwargs):
         form = request.env['formio.form'].get_form(uuid, 'read')
         redirect_url = self._redirect_url(**kwargs)
