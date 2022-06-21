@@ -22,7 +22,6 @@ See LICENSE file for full licensing details. -->
                 <field name="public" optional="show"/>
                 <field name="public_url" optional="hide"/>
                 <field name="formio_version_id"/>
-                <field name="user_id" optional="hide"/>
                 <field name="parent_id" optional="hide"/>
                 <field name="write_date" optional="hide"/>
                 <field name="create_date" optional="hide"/>
@@ -102,7 +101,6 @@ See LICENSE file for full licensing details. -->
                         <group>
                             <field name="uuid" attrs="{'invisible': [('id', '=', False)]}"/>
                             <field name="is_locked" attrs="{'invisible': [('state', '!=', 'CURRENT')]}"/>
-                            <field name="user_id"/>
                         </group>
                     </group>
                     <notebook>
@@ -296,11 +294,7 @@ See LICENSE file for full licensing details. -->
             <search string="Form Builders">
                 <field name="title"/>
                 <field name="name"/>
-                <field name="user_id"/>
                 <field name="formio_version_id"/>
-                <separator/>
-                <filter string="My Form Builders" name="my_builders"
-                        domain="[('user_id', '=', uid)]"/>
                 <separator/>
                 <filter string="Draft" name="state_draft"
                         domain="[('state', '=', 'DRAFT')]"/>
@@ -320,7 +314,6 @@ See LICENSE file for full licensing details. -->
                         domain="[('wizard', '=', False)]"/>
                 <group expand="0" string="Group By">
                     <filter string="Name" name="name" domain="[]" context="{'group_by':'name'}"/>
-                    <filter string="Assigned User" name="user" domain="[]" context="{'group_by':'user_id'}"/>
                     <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
                 </group>
             </search>

@@ -45,6 +45,7 @@ class Builder(models.Model):
     description = fields.Text("Description")
     formio_version_id = fields.Many2one(
         'formio.version', string='formio.js version', required=True,
+        domain="[('is_dummy', '=', False)]",
         default=lambda self: self._default_formio_version_id(), tracking=True,
         help="""Loads the specific formio.js Javascript libraries version (sourcecode: https://github.com/formio/formio.js)""")
     formio_version_name = fields.Char(related='formio_version_id.name', string='formio.js version name', tracking=False)  # silly, but avoids duplicate tracking message
@@ -85,7 +86,7 @@ class Builder(models.Model):
     parent_version = fields.Integer(related='parent_id.version', string='Parent Version', readonly=True)
     version = fields.Integer("Version", required=True, readonly=True, default=1)
     version_comment = fields.Text("Version Comment")
-    user_id = fields.Many2one('res.users', string='Assigned user', tracking=True)
+    user_id = fields.Many2one('res.users', string='Assigned user', tracking=True)  # TODO old field, remove?
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal", tracking=True, help="Form is accessible by assigned portal user")
     portal_submit_done_url = fields.Char(
