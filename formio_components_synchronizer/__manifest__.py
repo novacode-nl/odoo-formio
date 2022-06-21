@@ -18,8 +18,8 @@
         'views/formio_builder_views.xml',
         'views/formio_menu.xml',
     ],
-    'installable': False,
     'application': False,
+    'installable': False,
     'images': [
         'static/description/banner.gif',
     ],

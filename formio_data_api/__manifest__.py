@@ -19,8 +19,8 @@
     'external_dependencies': {
         'python': ['formio-data'],
     },
-    'installable': True,
     'application': False,
+    'installable': True,
     'images': [
         'static/description/banner.gif',
     ],

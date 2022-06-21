@@ -16,8 +16,8 @@
         'data/website_editor_unsanitize_html_field_data.xml',
         'views/website_editor_unsanitize_html_field_views.xml',
     ],
-    'installable': False,
     'application': False,
+    'installable': False,
     'images': [
         'static/description/banner.gif',
     ],

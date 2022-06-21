@@ -11,8 +11,8 @@
     'live_test_url': 'https://demo13.novacode.nl',
     'category': 'Forms/Forms',
     'depends': ['web', 'portal', 'mail'],
-    'installable': True,
     'application': True,
+    'installable': True,
     'uninstall_hook': 'uninstall_hook',
     'data': [
         'data/formio_default_asset_css_data.xml',

@@ -15,8 +15,8 @@
         'data/formio_storage_filestore_data.xml',
         'data/ir_cron_data.xml'
     ],
-    'installable': False,
     'application': True,
+    'installable': False,
     'images': [
         'static/description/banner.gif',
     ],

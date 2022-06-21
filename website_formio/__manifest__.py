@@ -11,7 +11,7 @@
     'live_test_url': 'https://demo13.novacode.nl',
     'category': 'Extra Tools',
     'depends': ['formio', 'website', 'website_editor_unsanitize_html_field'],
-    'installable': True,
+    'installable': False,
     'application': True,
     'data': [
         'data/website_data.xml',
