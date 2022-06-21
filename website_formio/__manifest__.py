@@ -11,15 +11,23 @@
     'live_test_url': 'https://demo13.novacode.nl',
     'category': 'Extra Tools',
     'depends': ['formio', 'website', 'website_editor_unsanitize_html_field'],
+    'installable': True,
+    'application': True,
     'data': [
         'data/website_data.xml',
         'data/website_formio_demo_data.xml',
         'views/formio_builder_views.xml',
-        'views/website_formio_templates.xml',
         'views/website_formio_snippets.xml',
     ],
-    'installable': False,
-    'application': True,
+    'assets': {
+        'web.assets_frontend': [
+            'formio/static/lib/iframe-resizer/iframeResizer.min.js'
+        ],
+        'web.assets_editor': [
+            'website_formio/static/src/js/website_formio_editor.js',
+            'formio/static/src/js/formio_form_container.js'
+        ],
+    },
     'images': [
         'static/description/banner.gif',
     ],
