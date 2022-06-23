@@ -3,6 +3,8 @@
 
 import logging
 
+from formiodata.components import datagridComponent
+
 from odoo import fields, models, api, tools, _
 from odoo.exceptions import ValidationError
 
@@ -103,11 +105,22 @@ class FormioBuilder(models.Model):
                 record.key = obj.key
 
             """
-            Updating datagrid
+            Updating parent_id
             """
             if obj.parent:
-                if record.parent_id.component_id != obj.parent.id:
-                    parent_record = self._get_component(obj.parent.id)
+                parent_id = False
+                if isinstance(obj.parent, datagridComponent.gridRow):
+                    for datagrid_id, datagrid in self._formio.component_ids.items():
+                        if datagrid.type == 'datagrid':
+                            for row in datagrid.rows:
+                                for key in row.input_components:
+                                    comp = row.input_components[key]
+                                    if comp.id == obj.id:
+                                        parent_id = datagrid.id
+                else:
+                    parent_id = obj.parent.id
+                if record.parent_id.component_id != parent_id:
+                    parent_record = self._get_component(parent_id)
                     record.parent_id = parent_record
             elif not obj.parent and record.parent_id:
                 record.parent_id = False
