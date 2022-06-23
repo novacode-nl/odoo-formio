@@ -5,7 +5,7 @@ import logging
 
 from formiodata.components import datagridComponent
 
-from odoo import fields, models, api, tools, _
+from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -108,15 +108,8 @@ class FormioBuilder(models.Model):
             Updating parent_id
             """
             if obj.parent:
-                parent_id = False
                 if isinstance(obj.parent, datagridComponent.gridRow):
-                    for datagrid_id, datagrid in self._formio.component_ids.items():
-                        if datagrid.type == 'datagrid':
-                            for row in datagrid.rows:
-                                for key in row.input_components:
-                                    comp = row.input_components[key]
-                                    if comp.id == obj.id:
-                                        parent_id = datagrid.id
+                    parent_id = self._determine_component_parent_id_from_rows(comp_id, obj.parent.datagrid)
                 else:
                     parent_id = obj.parent.id
                 if record.parent_id.component_id != parent_id:
@@ -132,6 +125,13 @@ class FormioBuilder(models.Model):
         for comp_id in comp_ids:
             components = self._get_component(comp_id)
             components.unlink()
+
+    def _determine_component_parent_id_from_rows(self, any_component_id, parent_component):
+        for row in parent_component.rows:
+            for key in row.input_components:
+                comp_in_row = row.input_components[key]
+                if comp_in_row.id == any_component_id:
+                    return parent_component.id
 
     # ----------------------------------------------------------
     # Public
