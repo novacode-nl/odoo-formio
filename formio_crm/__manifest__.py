@@ -8,7 +8,7 @@
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
-    'live_test_url': 'https://demo13.novacode.nl',
+    'live_test_url': 'https://demo14.novacode.nl',
     'category': 'CRM',
     'depends': ['crm', 'formio'],
     'data': [
