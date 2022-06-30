@@ -4,7 +4,7 @@
 
 - Builder: formio.js version (field) domain/filter exclude Dummy.
 - Builder: hide the Assigned user (`user_id`) field.\
-  Let's see if this still needed, otherwise change to `Many2many2`.
+  Let's see if this still needed, otherwise change to `Many2many`.
 - Remove menu to `formio.res.model`\
   Issue: [\#190](https://github.com/novacode-nl/odoo-formio/issues/190)
 

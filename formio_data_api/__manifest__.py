@@ -3,7 +3,7 @@
 
 {
     'name': 'Forms | Data API',
-    'summary': 'Python API for Forms data (builder, form/submission).',
+    'summary': 'Python API for Forms data (builder, form/submission)',
     'version': '1.7',
     'license': 'LGPL-3',
     'author': 'Nova Code',
