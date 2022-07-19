@@ -1,5 +1,10 @@
 # Changelog
 
+### 9.24
+
+- Fix Dummy version info in Builder.
+- Archive Dummy version upon install of a real version.
+
 ### 9.23
 
 - Builder: formio.js version (field) domain/filter exclude Dummy.

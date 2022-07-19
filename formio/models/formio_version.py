@@ -15,6 +15,7 @@ class Version(models.Model):
     name = fields.Char(
         "Name", required=True, tracking=True,
         help="""formio.js release/version.""")
+    active = fields.Boolean(default=True)
     sequence = fields.Integer()
     description = fields.Text("Description")
     is_dummy = fields.Boolean(string="Is Dummy (default version in demo data)", readonly=True)
@@ -40,6 +41,8 @@ class Version(models.Model):
     def create(self, vals):
         res = super(Version, self).create(vals)
         self._update_versions_sequence()
+        if not res.is_dummy:
+            self._archive_dummy_version()
         return res
 
     def write(self, vals):
@@ -58,4 +61,10 @@ class Version(models.Model):
             seq += 1
             version = versions.filtered(lambda r: r.name == name)[0]
             version.sequence = seq
-        
+
+    @api.model
+    def _archive_dummy_version(self):
+        domain = [('is_dummy', '=', True)]
+        dummy = self.search(domain)
+        if dummy:
+            dummy.write({'active': False})
