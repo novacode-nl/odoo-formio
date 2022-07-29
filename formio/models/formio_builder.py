@@ -110,7 +110,7 @@ class Builder(models.Model):
     show_form_user_metadata = fields.Boolean(
         "Show User Metadata", track_visibility='onchange', help="Show submission and assigned user metadata in the Form header.", default=True)
     wizard = fields.Boolean("Wizard", track_visibility='onchange')
-    translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations')
+    translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations', copy=True)
     languages = fields.One2many('res.lang', compute='_compute_languages', string='Languages')
     allow_force_update_state_group_ids = fields.Many2many(
         'res.groups', string='Allow groups to force update State',
