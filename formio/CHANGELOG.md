@@ -2,8 +2,8 @@
 
 ### 9.25
 
-- Form Builder: Copy the Translations upon Create New Versio
-  Issue: [\#139](https://github.com/novacode-nl/odoo-formio/issues/139)
+- Form Builder: Copy the Translations upon Create New Versio\
+  Issue: [\#139](https://github.com/novacode-nl/odoo-formio/issues/139)\
   PR: [\#190](https://github.com/novacode-nl/odoo-formio/pull/192)
 
 ### 9.24
