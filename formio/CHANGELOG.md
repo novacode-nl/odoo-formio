@@ -1,5 +1,11 @@
 # Changelog
 
+### 9.25
+
+- Form Builder: Copy the Translations upon Create New Versio
+  Issue: [\#139](https://github.com/novacode-nl/odoo-formio/issues/139)
+  PR: [\#190](https://github.com/novacode-nl/odoo-formio/pull/192)
+
 ### 9.24
 
 - Fix Dummy version info in Builder.
@@ -242,7 +248,7 @@
 ### 8.11
 
 - Fix singleton error, when matching multiple Partners by email in the Form (e.g. for following and report emails).\
-  PR [\#109](https://github.com/novacode-nl/odoo-formio/pull/109)
+  PR: [\#109](https://github.com/novacode-nl/odoo-formio/pull/109)
 - Schedule Activity (on Form) if found multiple Partners with same email submitted in the Form.
 
 ### 8.10
@@ -268,7 +274,7 @@
 ### 8.6
 
 - Fix: Language determination in Public Form (also used by `website_formio` module).\
-  PR [\#101](https://github.com/novacode-nl/odoo-formio/pull/101)
+  PR: [\#101](https://github.com/novacode-nl/odoo-formio/pull/101)
 
 ### 8.5
 
