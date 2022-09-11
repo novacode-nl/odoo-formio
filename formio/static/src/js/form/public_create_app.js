@@ -44,7 +44,12 @@ function app() {
             if (submission.state == 'submitted') {
                 if (this.publicSubmitDoneUrl()) {
                     const params = {submit_done_url: this.publicSubmitDoneUrl()};
-                    window.parent.postMessage({odooFormioMessage: 'formioSubmitDone', params: params});
+                    if (window.self !== window.top) {
+                        window.parent.postMessage({odooFormioMessage: 'formioSubmitDone', params: params});
+                    }
+                    else {
+                        window.location = params.submit_done_url;
+                    }
                 }
                 else {
                     setTimeout(function() {
