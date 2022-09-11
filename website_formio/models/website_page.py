@@ -7,8 +7,8 @@ from odoo.addons.http_routing.models.ir_http import slug
 
 class WebsitePage(models.Model):
     _name = 'formio.website.page'
-    _inherit = ['mail.thread', 'website.published.multi.mixin']
     _description = 'Forms Website Page'
+    _inherit = ['mail.thread', 'website.published.multi.mixin']
 
     # see also (odoo CE):
     # - website_sale: product.template
