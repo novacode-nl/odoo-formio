@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <record id="view_formio_website_page_tree" model="ir.ui.view">
+        <field name="name">formio.website.page.tree</field>
+        <field name="model">formio.website.page</field>
+        <field name="arch" type="xml">
+            <tree string="Forms Website Pages" default_order="id desc">
+                <field name="id" optional="hide"/>
+                <field name="name"/>
+                <field name="formio_builder_id"/>
+                <field name="website_id"/>
+                <field name="website_url"/>
+                <field name="is_published"/>
+                <field name="create_uid" optional="hide"/>
+                <field name="create_date" optional="hide"/>
+                <field name="write_uid" optional="hide"/>
+                <field name="write_date" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_formio_website_page_form" model="ir.ui.view">
+        <field name="name">formio.website.page.form</field>
+        <field name="model">formio.website.page</field>
+        <field name="arch" type="xml">
+	    <form string="Forms Website Pages">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <field name="is_published" widget="website_redirect_button"/>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="formio_builder_id"/>
+                        <field name="website_id"/>
+                        <field name="website_url"/>
+                    </group>
+                    <group name="publishing" string="Publishing Info">
+                        <field name="create_uid"/>
+                        <field name="create_date"/>
+                        <field name="write_uid"/>
+                        <field name="write_date"/>
+                    </group>
+                    <!-- <notebook> -->
+                    <!--     <page string="Form Builders" name="formio_builders"> -->
+                    <!--         <field name="formio_builder_ids"> -->
+                    <!--             <tree> -->
+                    <!--                 <field name="id" optional="hide"/> -->
+                    <!--                 <field name="name"/> -->
+                    <!--                 <field name="uuid" optional="hide"/> -->
+                    <!--                 <field name="title"/> -->
+                    <!--                 <field name="formio_version_name" string="formio.js version"/> -->
+                    <!--                 <field name="public"/> -->
+                    <!--                 <field name="state"/> -->
+                    <!--             </tree> -->
+                    <!--         </field> -->
+                    <!--     </page> -->
+                    <!-- </notebook> -->
+                </sheet>
+                <div class="oe_chatter" groups="formio.group_formio_admin">
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_formio_website_page" model="ir.actions.act_window">
+        <field name="name">Website Pages With Forms</field>
+        <field name="res_model">formio.website.page</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- formio app -->
+    <menuitem
+        id="menu_formio_website_formio"
+        name="Website"
+        parent="formio.menu_formio_configuration"
+        sequence="90"/>
+    <!-- parent="formio.menu_formio_root" -->
+
+    <menuitem
+        id="menu_formio_website_page"
+        name="Pages With Forms"
+        parent="website_formio.menu_formio_website_formio"
+        sequence="50"
+        action="website_formio.action_formio_website_page"/>
+
+    <!-- website app -->
+    <menuitem
+        id="menu_website_website_formio"
+        name="Forms"
+        parent="website.menu_website_configuration"
+        sequence="90"/>
+
+    <menuitem
+        id="menu_website_formio_website_page"
+        name="Pages With Forms"
+        parent="website_formio.menu_website_website_formio"
+        sequence="50"
+        action="website_formio.action_formio_website_page"/>
+</odoo>
