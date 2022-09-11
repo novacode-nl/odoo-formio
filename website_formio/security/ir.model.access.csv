@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_formio_website_page,access_formio_website_page,model_formio_website_page,,1,0,0,0
+access_formio_website_page_admin,Forms Web Page - Forms admin ,website_formio.model_formio_website_page,formio.group_formio_admin,1,1,1,1
+access_formio_website_page_website_designer,Forms Web Page - Website Designer,website_formio.model_formio_website_page,website.group_website_designer,1,1,1,1

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <template id="formio_website_page" name="Website Page With Form">
+        <t t-call="website.layout">
+            <div itemprop="content_top" t-field="page.website_content_1" class="oe_structure oe_empty mt16" id="content_top"/>
+            <div class="form container oe_structure pt32">
+                <div class="row">
+                    <div class="col-lg-10 offset-lg-1">
+                        <div class="formio_form_iframe_container" style="border:0px;padding:0px;">
+                            <iframe t-attf-src="#{form['form_url']}" class="formio_form_embed"/>
+                            <!-- <script> -->
+                            <!--     iFrameResize({heightCalculationMethod: 'grow'}, '.formio_form_embed'); -->
+                            <!-- </script> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div itemprop="content_bottom" t-field="page.website_content_2" class="oe_structure oe_empty mt16" id="content_bottom"/>
+        </t>
+    </template>
+</odoo>

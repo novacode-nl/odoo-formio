@@ -8,12 +8,27 @@ See LICENSE file for full licensing details. -->
         <field name="model">formio.builder</field>
         <field name="inherit_id" ref="formio.view_formio_builder_form"/>
         <field name="arch" type="xml">
+            <!-- attributes (renaming) -->
             <page name="public_settings" position="attributes">
                 <attribute name="string">Public / Website</attribute>
             </page>
             <field name="public" position="attributes">
                 <attribute name="string">Publish on Website</attribute>
             </field>
+
+            <!-- formio.website.page -->
+            <xpath expr="//group[@name='public_url']" position="after">
+                <group string="Website Pages" name="website_pages" colspan="4">
+                    <div class="text-muted" colspan="2">
+                        <i class="fa fa-info-circle" title="info"/> Form can be attached to load on website page(s)
+                    </div>
+                    <div class="text-muted" colspan="2">
+                        <i class="fa fa-info-circle" title="info"/> To load a specific public form on a website page, add the query-parameter with the form its UUID to the URL of the website page <strong>?form=UUID</strong>
+                    </div>
+                    <field name="formio_website_page_ids" string="Page" nolabel="1" groups="formio.group_formio_admin"/>
+                </group>
+            </xpath>
+
             <!-- portal_submit_done -->
             <field name="portal_submit_done_url" position="before">
                 <field name="portal_submit_done_page_id" string="Website Page" groups="formio.group_formio_admin"/>
@@ -21,6 +36,7 @@ See LICENSE file for full licensing details. -->
             <field name="portal_submit_done_url" position="attributes">
                 <attribute name="attrs">{'readonly': [('portal_submit_done_page_id', '!=', False)]}</attribute>
             </field>
+
             <!-- public_submit_done -->
             <field name="public_submit_done_url" position="before">
                 <field name="public_submit_done_page_id" string="Website Page" groups="formio.group_formio_admin"/>

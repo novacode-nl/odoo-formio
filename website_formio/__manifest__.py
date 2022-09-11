@@ -4,30 +4,38 @@
 {
     'name': 'Forms | Website (Block etc)',
     'summary': 'Form Block, other website integration',
-    'version': '1.8',
+    'version': '2.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'live_test_url': 'https://demo15.novacode.nl',
     'category': 'Extra Tools',
-    'depends': ['formio', 'website', 'website_editor_unsanitize_html_field'],
-    'installable': False,
-    'application': True,
+    'depends': [
+        'formio',
+        'website_editor_unsanitize_html_field',
+        'website',
+    ],
     'data': [
         'data/website_data.xml',
         'data/website_formio_demo_data.xml',
+        'security/ir.model.access.csv',
         'views/formio_builder_views.xml',
+        'views/formio_website_page.xml',
+        'views/website_formio_templates.xml',
         'views/website_formio_snippets.xml',
     ],
     'assets': {
-        'web.assets_frontend': [
-            'formio/static/lib/iframe-resizer/iframeResizer.min.js'
+        'web.assets_backend': [
+            'website_formio/static/src/js/website_formio_editor.js'
         ],
-        'web.assets_editor': [
-            'website_formio/static/src/js/website_formio_editor.js',
+        'web.assets_frontend': [
             'formio/static/src/js/formio_form_container.js'
         ],
+        'web.assets_common': [
+            'formio/static/lib/iframe-resizer/iframeResizer.min.js',
+        ],
     },
+    'application': True,
     'images': [
         'static/description/banner.gif',
     ],
