@@ -1,5 +1,9 @@
 # Changelog
 
+### 9.27
+
+- Don't copy the Form Builder Locked field.
+
 ### 9.26
 
 - Improve the "Redirect After Submit" feature, to also support when the form is in the same window (not only iframe).
