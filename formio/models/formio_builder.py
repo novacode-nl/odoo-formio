@@ -76,7 +76,7 @@ class Builder(models.Model):
     display_state = fields.Char("Display State", compute='_compute_display_fields', store=False)
     display_name_full = fields.Char("Display Name Full", compute='_compute_display_fields', search='_search_display_name_full', store=False)
     is_locked = fields.Boolean(
-        string="Locked", tracking=True,
+        string="Locked", copy=False, tracking=True,
         help="""\
         - Locked: No further modifications are possible in the Form Builder and configuration.
         - Unlocked: Modications are possible, but could cause existing forms to be invalid.""")
