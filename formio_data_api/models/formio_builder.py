@@ -17,7 +17,7 @@ class FormioBuilder(models.Model):
 
     component_server_api_ids = fields.One2many(
         'formio.component.server.api', 'formio_builder_id',
-        string='Component Server APIs', context={'active_test': False})
+        string='Component Server APIs', copy=True, context={'active_test': False})
 
     def __getattr__(self, name):
         if name == '_formio' and self._name == 'formio.builder':
