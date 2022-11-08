@@ -32,7 +32,7 @@ See LICENSE file for full licensing details. -->
                     <button
                         name="action_reset_installed" type="object" string="Reset (to download and install again)"
                         attrs="{'invisible': [('formio_version_id', '=', False)]}"
-                        confirm="Are you to Reset, to download and install again?"/>
+                        confirm="Are you sure to reset, to download and install again?"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>

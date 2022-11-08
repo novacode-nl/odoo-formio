@@ -523,7 +523,7 @@ msgstr ""
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_github_tag_form
-msgid "Are you to Reset, to download and install again?"
+msgid "Are you sure to reset, to download and install again?"
 msgstr ""
 
 #. module: formio
