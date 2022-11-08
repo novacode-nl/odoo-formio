@@ -26,10 +26,10 @@ class ResPartner(models.Model):
         # Simpler to maintain and less risk with extending, than
         # computed field(s) in the formio.form object.
         res = super(ResPartner, self).write(vals)
-        if self.formio_forms:
+        if self.sudo().formio_forms:
             form_vals = self._prepare_write_formio_form_vals(vals)
             if form_vals:
-                self.formio_forms.write(form_vals)
+                self.sudo().formio_forms.write(form_vals)
         return res
 
     def _prepare_write_formio_form_vals(self, vals):

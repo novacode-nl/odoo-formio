@@ -8,6 +8,14 @@
 <section class="oe_container oe_dark">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">1.2</h4>
+    <ul>
+      <li>
+        Fix <code>write</code> function in partner model.<br/>
+        Which could update the form's <code>res_name</code> field, when the partner name has been updated.<br/>
+        Even when the user doesn't has forms access, the (write) function is allowed to update the field in forms.
+      </li>
+    </ul>
     <h4 class="oe_mb16">1.1</h4>
     <ul>
       <li>
