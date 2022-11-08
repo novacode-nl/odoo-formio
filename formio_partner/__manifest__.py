@@ -4,7 +4,7 @@
 {
     'name': 'Forms | Partner',
     'summary': 'Forms integration with Partners e.g. contacts, clients, customers, suppliers',
-    'version': '1.1',
+    'version': '1.2',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
