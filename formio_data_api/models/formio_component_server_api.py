@@ -24,7 +24,8 @@ class FormioComponentServerApi(models.Model):
         string='Type',
         selection=[('values', 'values')],
         default='values',
-        required=True)
+        ondelete='set null',
+    )
     # Python code
     code = fields.Text(
         string='Python Code',
