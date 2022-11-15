@@ -20,7 +20,11 @@ class FormioComponentServerApi(models.Model):
         'formio.builder', string='Form Builder',
         required=True, readonly=True, ondelete='cascade')
     name = fields.Char(string='API Name', required=True)
-    type = fields.Selection(string='Type', selection=[('values', 'values')], required=True)
+    type = fields.Selection(
+        string='Type',
+        selection=[('values', 'values')],
+        default='values',
+        required=True)
     # Python code
     code = fields.Text(
         string='Python Code',
