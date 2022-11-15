@@ -542,6 +542,10 @@ class Form(models.Model):
     def _etl_odoo_data(self):
         return {}
 
+    @api.model
+    def _generate_odoo_domain(self, builder, domain=[], data={}):
+        return domain
+
     def i18n_translations(self):
         i18n = self.builder_id.i18n_translations()
         return i18n

@@ -254,7 +254,9 @@ class FormioController(http.Controller):
                 filter = (domain_field, '=', value)
                 domain.append(filter)
 
-        _logger.debug("domain: %s" % domain)
+        if not domain:
+            # TODO document priority of domain_fields OR domain_api
+            domain = form._generate_odoo_domain(form.builder_id, domain, data=args.to_dict())
 
         try:
             language = args.get('language')

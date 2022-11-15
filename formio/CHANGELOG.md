@@ -1,5 +1,10 @@
 # Changelog
 
+### 9.28
+
+- Extend the form `/data` endpoints to support advanced domain filter.
+- Add the basic `_generate_odoo_domain` function in `formio.form` model, used in form `/data` endpoint.
+
 ### 9.27
 
 - Don't copy the Form Builder Locked field.
