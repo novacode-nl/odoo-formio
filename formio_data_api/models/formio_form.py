@@ -245,22 +245,21 @@ class FormioForm(models.Model):
                 prop_value = comp.properties.get('server_api_value')
                 prop_value_obj = comp.properties.get('server_api_value_obj')
                 if comp_key not in data and prop_api and prop_value:
-                    api = self.builder_id.component_server_api_ids.filtered(lambda x: x.active and x.name == prop_api)
-                    if not api:
+                    component_server_api = self.builder_id.component_server_api_ids.filtered(lambda x: x.active and x.name == prop_api)
+                    if not component_server_api:
                         _logger.error('NOT FOUND [formio.component.code.api] with name: %s' % prop_api)
 
-                    if api and api_values.get(api.name):
-                        value = api_values[api.name][prop_value]
+                    if component_server_api and api_values.get(component_server_api.name):
+                        value = api_values[component_server_api.name][prop_value]
                         if prop_value_obj:
-
                             # TODO-2: refactor DRY
                             value_fields = prop_value_obj.split('.')
                             value = reduce(getattr, value_fields, value)
                         data[comp_key] = value
-                    elif api:
-                        eval_context = self._get_formio_eval_context(comp)
+                    elif component_server_api:
+                        eval_context = self._get_formio_eval_context(component_server_api, comp)
                         # nocopy allows to return 'value'
-                        safe_eval.safe_eval(api.code, eval_context, mode="exec", nocopy=True)
+                        safe_eval.safe_eval(component_server_api.code, eval_context, mode="exec", nocopy=True)
                         context_values = eval_context.get('values')
                         value = context_values.get(prop_value)
                         if prop_value_obj:
@@ -269,7 +268,7 @@ class FormioForm(models.Model):
                             value = reduce(getattr, value_fields, value)
                         # caching
                         if context_values:
-                            api_values[api.name] = context_values
+                            api_values[component_server_api.name] = context_values
                         data[comp_key] = value
         return data
 
@@ -362,19 +361,27 @@ class FormioForm(models.Model):
                     odoo_field_val = error.message
         return odoo_field_val
 
-    def _get_formio_eval_context(self, component):
+    def _get_formio_eval_context(self, component_server_api, component=None, data={}):
         """ Prepare the context used when evaluating python code
-            :returns: dict -- evaluation context given to safe_eval
+
+        :param component_server_api: formio.component.server.api model record object
+        :param component: formiodata Component object
+        :param data: possible dict with data, eg from URL query params
+            by the /data URL endpoint
+        :returns: dict -- evaluation context given to safe_eval
         """
-        return {
-            'values': {},
+        res = {
             'env': self.env,
-            'component': component,
             'record': self,
             'datetime': safe_eval.datetime,
             'dateutil': safe_eval.dateutil,
             'time': safe_eval.time,
+            'component': component,
+            'data': data
         }
+        if component_server_api.type == 'values':
+            res['values'] = {}
+        return res
 
 
 class EtlOdooFieldError(Exception):

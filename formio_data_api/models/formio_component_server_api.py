@@ -20,10 +20,12 @@ class FormioComponentServerApi(models.Model):
         'formio.builder', string='Form Builder',
         required=True, readonly=True, ondelete='cascade')
     name = fields.Char(string='API Name', required=True)
+    type = fields.Selection(string='Type', selection=[('values', 'values')], required=True)
     # Python code
     code = fields.Text(
-        string='Python Code', groups='base.group_system',
+        string='Python Code',
         default=DEFAULT_PYTHON_CODE,
+        groups='base.group_system',
         help="Write Python code that the Component Value will get set. Some variables are "
         "available for use; help about python expression is given in the help tab.")
     active = fields.Boolean(string='Active')

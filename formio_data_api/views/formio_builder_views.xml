@@ -18,6 +18,7 @@
                     <field name="component_server_api_ids" context="{'default_formio_builder_id': id}" nolabel="1" attrs="{'readonly': [('state', '!=', 'DRAFT')]}">
                         <tree context="{'default_formio_builder_id': id}">
                             <field name="name"/>
+                            <field name="type"/>
                             <field name="active"/>
                             <field name="code" widget="ace" options="{'mode': 'python'}" optional="hide"/>
                         </tree>
