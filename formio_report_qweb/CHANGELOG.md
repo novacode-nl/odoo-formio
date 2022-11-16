@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.3
+
+- Form builder: obtain (un)locked setting to allow editable reports configuration.
+
 ## 5.2
 
 - Fixes the "faded" signature images on PDF version of form
@@ -11,8 +15,8 @@
 
 ## 5.0
 
-- Changed `table` component, due to a fix in the Python `formio-data` libary:
-  https://github.com/novacode-nl/python-formio-data/pull/26
+- Changed `table` component, due to a fix in the Python `formio-data` libary:\
+  PR [\#26](https://github.com/novacode-nl/python-formio-data/pull/26)
 
 ## 4.9
 
@@ -31,7 +35,7 @@
 
 ## 4.6
 
-- New component: `fieldset`
+- New component: `fieldset`\
   PR [\#175](https://github.com/novacode-nl/odoo-formio/pull/175)
 
 ## 4.5

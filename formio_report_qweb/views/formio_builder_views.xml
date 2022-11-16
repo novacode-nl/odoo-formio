@@ -17,7 +17,7 @@ See LICENSE file for full licensing details. -->
                                     <i class="fa fa-info-circle" title="info"/> Configure the <strong>Print Reports button</strong> in <strong>Forms</strong>.<br/>
                                     Specify the order and whether to print the report by default. Only PDF reports shall be printed.
                                 </div>
-                                <field name="report_print_wizard_ids" context="{'default_builder_id': id}" nolabel="1">
+                                <field name="report_print_wizard_ids" context="{'default_builder_id': id}" attrs="{'readonly': [('is_locked', '=', True)]}" nolabel="1">
                                     <tree editable="bottom">
                                         <field name="builder_id" invisible="1"/>
                                         <field name="builder_report_ids" invisible="1"/>
@@ -33,7 +33,7 @@ See LICENSE file for full licensing details. -->
                                 <div class="text-muted" colspan="2">
                                     <i class="fa fa-info-circle" title="info"/> General configuration for Reports
                                 </div>
-                                <field name="report_ids" context="{'default_builder_id': id}" nolabel="1">
+                                <field name="report_ids" context="{'default_builder_id': id}" attrs="{'readonly': [('is_locked', '=', True)]}" nolabel="1">
                                     <tree editable="bottom">
                                         <field name="builder_id" invisible="1"/>
                                         <field name="ir_actions_report_id" string="Report"/>

@@ -15,7 +15,7 @@
                         In the Form Builder configure the applied Component(s) its API (tab) Custom Properties 
                         <a href="https://github.com/novacode-nl/odoo-formio/wiki/Populate-a-Form-Component-value,-with-data-from-Server-(Python)-Code" title="Documentation" class="o_doc_link" target="_blank"></a>
                     </div>
-                    <field name="component_server_api_ids" context="{'default_formio_builder_id': id}" nolabel="1" attrs="{'readonly': [('state', '!=', 'DRAFT')]}">
+                    <field name="component_server_api_ids" context="{'default_formio_builder_id': id}" nolabel="1" attrs="{'readonly': [('is_locked', '=', True)]}">
                         <tree context="{'default_formio_builder_id': id}">
                             <field name="name"/>
                             <field name="type"/>

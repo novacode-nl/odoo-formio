@@ -4,7 +4,7 @@
 {
     'name': 'Forms | QWeb Reports',
     'summary': 'Generate (PDF) reports for every Form',
-    'version': '5.2',
+    'version': '5.3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'live_test_url': 'https://demo15.novacode.nl',
