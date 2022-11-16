@@ -6,7 +6,7 @@ Form builder: obtain (un)locked setting to allow editable reports configuration.
 
 ## 2.0
 
-(The following) changes to support advanced features for the components API.\
+(The following) changes to support advanced features for the components API.
 - Add selection field `type` in model `formio.component.server.api`, with one value (`value`), which still represents the component server value API.
 - Improve the function `_get_formio_eval_context`.
 
@@ -34,8 +34,8 @@ Fix `formio.form` language determination in `__getattr__` which gets the (Python
 
 ## 1.3
 
-Renaming (v1.2) ETL API implementation and usage (prefixes):\
-- FROM: `server_value_api`\
+Renaming (v1.2) ETL API implementation and usage (prefixes):
+- FROM: `server_value_api`
 - TO: `server_api`\
 (!!) This is backwards incompatible and requires to change existing Form Builders which apply this feature since v1.2.
 
@@ -61,9 +61,9 @@ Pass determined (lang) `date_format` and `time_format` to the `Form` object cont
 ## 0.8
 
 - New ETL API: `OdooUser`\
-ETL a field from *current user* (logged-in uswr) into the Form.\
+ETL a field from *current user* (logged-in uswr) into the Form.
 - Change ETL API: `Odoo`\
-This now ETL a field from the Resource model object into the Form, also when Form has *state = DRAFT*\
+This now ETL a field from the Resource model object into the Form, also when Form has *state = DRAFT*
 - Change ETL API: `OdooModel`\
 ETL a field from the linked *Resource model object* into the Form.\
 (!!) This is backwards incompatible and requires to change existing Form Builders to: `OdooModel__model`
@@ -77,7 +77,7 @@ Change (formiodata) `Builder` object attr: `form_components` became `input_compo
 
 New API feature, support for Mail Template:\
 Form model object (`formio.form`) can now be used in a Mail Template (Jinja template renderer), e.g. to show field value, select choices etc.\
-This extends the *Mail Render Mixin*, because the *Jinja Sandbox* object doesn't directly allow `${object._formio}`, which it treats as unsafe and throws an exception.\
+This extends the *Mail Render Mixin*, because the *Jinja Sandbox* object doesn't directly allow `${object._formio}`, which it treats as unsafe and throws an exception.
 
 USAGE EXAMPLE (where `object` is a `formio.form` model object):\
 `${formio(object).input.firstName.value}`
@@ -94,9 +94,9 @@ ETL the Odoo model name into Forms (API Property Name: `OdooModel`).
 
 ## 0.3
 
-Change ETL Odoo field-data (API): field delimter from "`.`" to "`__`" (2 underscores).\
-- A dot "." results in undesired submission data, due to the formio Javascript library/API.
-- A dash is allowed, however causing issues with the ETL module (formio_etl).
+Change ETL Odoo field-data (API): field delimter from "`.`" to "`__`" (2 underscores).
+- A dot "`.`" results in undesired submission data, due to the formio Javascript library/API.
+- A dash "`/`" is allowed, however causing issues with the ETL module (formio_etl).
 
 ## 0.2
 
