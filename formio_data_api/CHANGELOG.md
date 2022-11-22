@@ -2,7 +2,7 @@
 
 ## 2.1
 
-Form builder: obtain (un)locked setting to allow editable reports configuration.
+Form builder: obtain (un)locked setting to allow editable *Components API* configuration.
 
 ## 2.0
 
