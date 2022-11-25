@@ -1,6 +1,7 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
+import re
 import logging
 
 from functools import reduce
@@ -14,6 +15,8 @@ from odoo.tools import safe_eval
 from odoo.addons.formio.models.formio_form import STATE_PENDING, STATE_DRAFT
 
 _logger = logging.getLogger(__name__)
+unquoted_dict_pattern = re.compile(r"^{(\w+:[\w\.]+,?)+}$")
+unquoted_dict_items_pattern = re.compile(r"(\w+:[\w\.]+)")
 
 UNKNOWN_ODOO_FIELD = 'UNKNOWN Odoo field'
 
@@ -216,18 +219,7 @@ class FormioForm(models.Model):
                         value = self._etl_res_field_value(res_model_object, comp)
                 # API: current user field value
                 if prop_key == 'user_field':
-                    from_object = self.env.user
-                    fields = prop_val.split('.')
-                    while len(fields) > 0:
-                        # traverse relational field eg Many2one: partner_id.back_account_id.name
-                        if len(fields) > 1:
-                            # from_object becomes the relational (Many2one) object
-                            value = getattr(from_object, fields[0])
-                            from_object = value
-                            field = fields.pop(0)
-                        else:
-                            field = fields.pop(0)
-                            value = getattr(from_object, field)
+                    value = self._etl_user_field_val(prop_val)
             if value:
                 data[comp_key] = value
 
@@ -360,6 +352,18 @@ class FormioForm(models.Model):
                     _logger.info(error.message)
                     odoo_field_val = error.message
         return odoo_field_val
+
+    def _etl_user_field_val(self, prop_val):
+        prop_val = prop_val.replace(' ', '')
+
+        if unquoted_dict_pattern.match(prop_val):
+            value = {}
+            for item in unquoted_dict_items_pattern.findall(prop_val):
+                key, path = item.split(':')
+                value[key] = self.traverse_path(path, self.env.user)
+        else:
+            value = self.traverse_path(prop_val, self.env.user)
+        return value
 
     def _get_formio_eval_context(self, component_server_api, component=None, data={}):
         """ Prepare the context used when evaluating python code

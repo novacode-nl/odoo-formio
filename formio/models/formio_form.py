@@ -10,6 +10,7 @@ import uuid
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models, _
+from odoo.fields import first
 from odoo.addons.base.models.res_partner import _tz_get
 from odoo.exceptions import AccessError, UserError
 
@@ -563,3 +564,15 @@ class Form(models.Model):
             )
         else:
             _logger.error('No user configured (in settings) for mail_activity_partner_linking')
+
+    @api.model
+    def traverse_path(self, path, record):
+        value = None
+        split_path = path.split('.')
+        try:
+            for name in split_path[:-1]:
+                record = first(record[name])
+            value = record[split_path[-1]]
+        except KeyError:
+            _logger.error('Incorrect API default value path: %s' % path)
+        return value
