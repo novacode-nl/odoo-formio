@@ -6,6 +6,7 @@ import logging
 
 from odoo import http, fields
 from odoo.http import request
+from odoo.tools.safe_eval import safe_eval
 
 from ..models.formio_builder import \
     STATE_CURRENT as BUILDER_STATE_CURRENT
@@ -13,6 +14,7 @@ from ..models.formio_builder import \
 from ..models.formio_form import \
     STATE_PENDING as FORM_STATE_PENDING, STATE_DRAFT as FORM_STATE_DRAFT, \
     STATE_COMPLETE as FORM_STATE_COMPLETE, STATE_CANCEL as FORM_STATE_CANCEL
+from .main import OPERATORS_MAPPING, domain_pattern
 
 _logger = logging.getLogger(__name__)
 
@@ -207,7 +209,8 @@ class FormioPublicController(http.Controller):
         if label is None:
             _logger.error('label is missing in "Data Filter Query"')
 
-        domain = []
+        # new style for using domain in the url with params
+        domain = self._get_domain_from_args(args)
         domain_fields = args.getlist('domain_fields')
         # domain_fields_op = args.getlist('domain_fields_operators')
 
@@ -275,3 +278,16 @@ class FormioPublicController(http.Controller):
 
     def _get_form(self, uuid, mode):
         return request.env['formio.form'].get_form(uuid, mode)
+
+    def _get_domain_from_args(self, args):
+        domain = []
+        domain_args = args.get('domain', '')
+
+        for criterion in domain_args.split(';'):
+            match = domain_pattern.match(criterion)
+            if match and len(match.groups()) == 3:
+                (key, operator, value) = match.groups()
+                if operator in OPERATORS_MAPPING:
+                    value = safe_eval(value, locals_dict={'current_user': request.env.user})
+                    domain.append((key, OPERATORS_MAPPING[operator], value))
+        return domain

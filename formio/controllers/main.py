@@ -2,6 +2,7 @@
 # See LICENSE file for full licensing details.
 
 import json
+import re
 import logging
 
 from collections import deque
@@ -9,6 +10,7 @@ from os.path import dirname
 
 from odoo import http, fields, tools
 from odoo.http import request
+from odoo.tools.safe_eval import safe_eval
 
 from ..models.formio_builder import \
     STATE_CURRENT as BUILDER_STATE_CURRENT, STATE_OBSOLETE as BUILDER_STATE_OBSOLETE
@@ -18,6 +20,24 @@ from ..models.formio_form import \
     STATE_COMPLETE as FORM_STATE_COMPLETE, STATE_CANCEL as FORM_STATE_CANCEL
 
 _logger = logging.getLogger(__name__)
+# Syntax inspired in the FIQL query language https://datatracker.ietf.org/doc/html/draft-nottingham-atompub-fiql-00
+OPERATORS_MAPPING = {
+    '==': '=',
+    '=ne=': '!=',
+    '=gt=': '>',
+    '=ge=': '>=',
+    '=lt=': '<',
+    '=le=': '<=',
+    '=like=': 'like',
+    '=nlike=': 'not like',
+    '=ilike=': 'ilike',
+    '=nilike=': 'not ilike',
+    '=in=': 'in',
+    '=nin=': 'not in',
+    '=child=': 'child_of',
+    '=parent=': 'parent_of',
+}
+domain_pattern = re.compile(r"^([\w\.]+)(=\w*=)[\"']?([\w\.]+)[\"']?$")
 
 
 class FormioController(http.Controller):
@@ -242,8 +262,10 @@ class FormioController(http.Controller):
         # TODO: formio error?
         if label is None:
             _logger.error('label is missing in "Data Filter Query"')
+        # new style for using domain in the url with params
+        domain = self._get_domain_from_args(args)
 
-        domain = []
+        # original implementation for the url params filtering
         domain_fields = args.getlist('domain_fields')
         # domain_fields_op = args.getlist('domain_fields_operators')
 
@@ -340,3 +362,18 @@ class FormioController(http.Controller):
 
     def _get_form(self, uuid, mode):
         return request.env['formio.form'].get_form(uuid, mode)
+
+    def _get_domain_from_args(self, args):
+        domain = []
+        domain_args = args.get('domain', '')
+
+        for criterion in domain_args.split(';'):
+            match = domain_pattern.match(criterion)
+            if match and len(match.groups()) == 3:
+                (key, operator, value) = match.groups()
+                if operator in OPERATORS_MAPPING:
+                    value = safe_eval(value, locals_dict={'current_user': request.env.user})
+                    domain.append((key, OPERATORS_MAPPING[operator], value))
+        return domain
+
+
