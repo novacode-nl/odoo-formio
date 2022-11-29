@@ -159,7 +159,7 @@ See LICENSE file for full licensing details. -->
                                 <group name="portal_urls" colspan="2" attrs="{'invisible': [('portal_url', '=', False)]}">
                                     <field name="portal_url" widget="CopyClipboardChar" style="font-size: 1.0em;"/>
                                 </group>
-                                <group name="portal_direct_create" colspan="2">
+                                <group name="portal_direct_create" colspan="2" attrs="{'invisible': [('portal', '=', False)]}">
                                     <field name="portal_direct_create"/>
                                     <field name="portal_direct_create_url" widget="CopyClipboardChar" style="font-size: 1.0em;"/>
                                 </group>

@@ -89,8 +89,8 @@ class Builder(models.Model):
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal", tracking=True, help="Form is accessible by assigned portal user")
     portal_url = fields.Char(string='Portal URL', compute='_compute_portal_urls')
-    portal_direct_create = fields.Boolean("Portal Direct-Create", tracking=True, help="Direct create Form by link")
-    portal_direct_create_url = fields.Char(string='Portal Direct-Create URL', compute='_compute_portal_urls')
+    portal_direct_create = fields.Boolean("Portal Direct Create", tracking=True, help="Direct create Form by link")
+    portal_direct_create_url = fields.Char(string='Portal Direct Create URL', compute='_compute_portal_urls')
     portal_submit_done_url = fields.Char(
         string='Portal Submit-done URL', tracking=True,
         help="""\
