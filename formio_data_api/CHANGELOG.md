@@ -11,7 +11,7 @@ The method accepts an optional `formio.form` object in the arguments.
 
 ## 2.1
 
-Form builder: obtain (un)locked setting to allow editable reports configuration.
+Form builder: obtain (un)locked setting to allow editable *Components API* configuration.
 
 ## 2.0
 
