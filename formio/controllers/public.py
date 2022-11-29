@@ -218,6 +218,10 @@ class FormioPublicController(http.Controller):
                 filter = (domain_field, '=', value)
                 domain.append(filter)
 
+        if not domain:
+            # TODO document priority of domain_fields OR domain_api
+            domain = builder._generate_odoo_domain(domain, data=args.to_dict())
+
         _logger.debug("domain: %s" % domain)
 
         try:

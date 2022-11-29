@@ -104,9 +104,9 @@ class FormioController(http.Controller):
         schema = json.dumps(post['schema'])
         builder.write({'schema': schema})
 
-    ##################
-    # Form - user auth
-    ##################
+    #######################
+    # Form uuid - user auth
+    #######################
 
     @http.route([
         '/formio/form/<string:uuid>',
@@ -141,7 +141,8 @@ class FormioController(http.Controller):
     @http.route('/formio/form/<string:form_uuid>/config', type='json', auth='user', website=True)
     def form_config(self, form_uuid, **kwargs):
         form = self._get_form(form_uuid, 'read')
-        res = {'schema': {}, 'options': {}, 'config': {}}
+        # TODO remove config (key)
+        res = {'schema': {}, 'options': {}, 'config': {}, 'params': {}}
 
         if form and form.builder_id.schema:
             res['schema'] = json.loads(form.builder_id.schema)
@@ -150,6 +151,7 @@ class FormioController(http.Controller):
 
         return res
 
+    # TODO Remove this endpoint (not used?)
     @http.route('/formio/form/create/<string:builder_uuid>', type='json', auth='user', website=True)
     def form_config_builder(self, builder_uuid, **kwargs):
         domain = [('uuid', '=', builder_uuid)]
@@ -255,8 +257,7 @@ class FormioController(http.Controller):
                 domain.append(filter)
 
         if not domain:
-            # TODO document priority of domain_fields OR domain_api
-            domain = form._generate_odoo_domain(form.builder_id, domain, data=args.to_dict())
+            domain = form._generate_odoo_domain(domain, data=args.to_dict())
 
         try:
             language = args.get('language')
@@ -316,7 +317,7 @@ class FormioController(http.Controller):
                 if not res_data or not isinstance(res_data.ids, list):
                     res_data = getattr(record, _field)
                 elif isinstance(res_data, list):
-                    res_data = [get_attr(r, _field) for r in res_data]
+                    res_data = [getattr(r, _field) for r in res_data]
 
             data = json.dumps([{'id': r['id'], 'label': r[label]} for r in res_data])
             return data

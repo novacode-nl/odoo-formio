@@ -1,5 +1,10 @@
 # Changelog
 
+### 10.0
+
+- Portal form: render new (not yet stored) or a direct create (old style)
+- Refactor `_generate_odoo_domain`.
+
 ### 9.28
 
 - Extend the form `/data` endpoints to support advanced domain filter.

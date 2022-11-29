@@ -7,6 +7,7 @@ from formiodata.builder import Builder
 
 from odoo import fields, models, _
 from odoo.exceptions import ValidationError, UserError
+from odoo.tools import safe_eval
 
 
 _logger = logging.getLogger(__name__)
@@ -81,3 +82,28 @@ class FormioBuilder(models.Model):
 
                 display_error = _(msg) % (component.label, component.key, properties)
                 raise ValidationError(display_error)
+
+    def _get_formio_eval_context(self, component_server_api, formio_form=None, component=None, data={}):
+        """ Prepare the context used when evaluating python code
+
+        :param component_server_api: formio.component.server.api model record object
+        :param formio_form: formio.form model record object
+        :param component: formiodata Component object
+        :param data: possible dict with data, eg from URL query params
+            by the /data URL endpoint
+        :returns: dict -- evaluation context given to safe_eval
+        """
+        res = {
+            'env': self.env,
+            'builder': self,
+            'record': formio_form,
+            'form': formio_form,
+            'datetime': safe_eval.datetime,
+            'dateutil': safe_eval.dateutil,
+            'time': safe_eval.time,
+            'component': component,
+            'data': data
+        }
+        if component_server_api.type == 'values':
+            res['values'] = {}
+        return res

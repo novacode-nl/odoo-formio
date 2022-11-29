@@ -257,7 +257,7 @@ class FormioForm(models.Model):
                             value = reduce(getattr, value_fields, value)
                         data[comp_key] = value
                     elif component_server_api:
-                        eval_context = self._get_formio_eval_context(component_server_api, comp)
+                        eval_context = self.builder_id._get_formio_eval_context(component_server_api, self, comp)
                         # nocopy allows to return 'value'
                         safe_eval.safe_eval(component_server_api.code, eval_context, mode="exec", nocopy=True)
                         context_values = eval_context.get('values')
@@ -360,28 +360,6 @@ class FormioForm(models.Model):
                     _logger.info(error.message)
                     odoo_field_val = error.message
         return odoo_field_val
-
-    def _get_formio_eval_context(self, component_server_api, component=None, data={}):
-        """ Prepare the context used when evaluating python code
-
-        :param component_server_api: formio.component.server.api model record object
-        :param component: formiodata Component object
-        :param data: possible dict with data, eg from URL query params
-            by the /data URL endpoint
-        :returns: dict -- evaluation context given to safe_eval
-        """
-        res = {
-            'env': self.env,
-            'record': self,
-            'datetime': safe_eval.datetime,
-            'dateutil': safe_eval.dateutil,
-            'time': safe_eval.time,
-            'component': component,
-            'data': data
-        }
-        if component_server_api.type == 'values':
-            res['values'] = {}
-        return res
 
 
 class EtlOdooFieldError(Exception):

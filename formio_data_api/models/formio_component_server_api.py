@@ -6,13 +6,14 @@ from odoo import fields, models
 
 class FormioComponentServerApi(models.Model):
     _name = 'formio.component.server.api'
-    _description = 'Formio Component Server API'
+    _description = 'Form (Builder) Component Server API'
 
     DEFAULT_PYTHON_CODE = """# Available variables:
 #  - values: Dictionary, read by the Forms Data API to set Components (key) value
 #  - env: Odoo Environment on which the action is triggered
 #  - component: Form component (formiodata.Component) object
-#  - record: formio.form record on which the action is triggered; may be void
+#  - builder: formio.builder object (record) on which the action is triggered
+#  - form: formio.form object (record) on which the action is triggered; maybe None (not present)
 #  - time, datetime, dateutil, timezone: useful Python libraries
 # Assign to values (dict), eg values['foo'] = 'bar', values.update({some_dict})"""
 

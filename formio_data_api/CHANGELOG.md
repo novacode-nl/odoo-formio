@@ -1,8 +1,17 @@
 # Changelog
 
+## 2.2
+
+Enable a new (not yet stored) form, to use the Components API as well.
+
+It was necessary to refactor the method `_get_formio_eval_context`.\
+This method is used by the Components API to apply on a `formio.builder` object and possibly obtain the `formio.form` object too.\
+There's always a `formio.builder` object present, so it's the logical class to implement the method in anyway.\
+The method accepts an optional `formio.form` object in the arguments.
+
 ## 2.1
 
-Form builder: obtain (un)locked setting to allow editable *Components API* configuration.
+Form builder: obtain (un)locked setting to allow editable reports configuration.
 
 ## 2.0
 

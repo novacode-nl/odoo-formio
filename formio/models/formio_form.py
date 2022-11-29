@@ -527,7 +527,7 @@ class Form(models.Model):
 
             if self.builder_id.view_as_html:
                 options['renderMode'] = 'html'
-                options['viewAsHtml'] = True # backwards compatible (version < 4.x)?
+                options['viewAsHtml'] = True  # backwards compatible (version < 4.x)?
         return options
 
     def _get_js_params(self):
@@ -542,9 +542,8 @@ class Form(models.Model):
     def _etl_odoo_data(self):
         return {}
 
-    @api.model
-    def _generate_odoo_domain(self, builder, domain=[], data={}):
-        return domain
+    def _generate_odoo_domain(self, domain=[], data={}):
+        return self.builder_id._generate_odoo_domain(domain, data)
 
     def i18n_translations(self):
         i18n = self.builder_id.i18n_translations()

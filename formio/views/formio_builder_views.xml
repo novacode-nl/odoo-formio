@@ -19,6 +19,9 @@ See LICENSE file for full licensing details. -->
                 <field name="is_locked" optional="show"/>
                 <field name="formio_res_model_id" optional="show"/>
                 <field name="portal" optional="show"/>
+                <field name="portal_url" optional="hide"/>
+                <field name="portal_direct_create" optional="hide"/>
+                <field name="portal_direct_create_url" optional="hide"/>
                 <field name="public" optional="show"/>
                 <field name="public_url" optional="hide"/>
                 <field name="formio_version_id"/>
@@ -153,6 +156,13 @@ See LICENSE file for full licensing details. -->
                         <page string="Resource" name="res_model_settings" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
                         <page string="Portal" name="portal_settings">
                             <group>
+                                <group name="portal_urls" colspan="2" attrs="{'invisible': [('portal_url', '=', False)]}">
+                                    <field name="portal_url" widget="CopyClipboardChar" style="font-size: 1.0em;"/>
+                                </group>
+                                <group name="portal_direct_create" colspan="2">
+                                    <field name="portal_direct_create"/>
+                                    <field name="portal_direct_create_url" widget="CopyClipboardChar" style="font-size: 1.0em;"/>
+                                </group>
                                 <group name="portal_redirect_after_submit" string="Redirect After Submit">
                                     <field name="portal_submit_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
                                 </group>

@@ -88,6 +88,9 @@ class Builder(models.Model):
     user_id = fields.Many2one('res.users', string='Assigned user', tracking=True)  # TODO old field, remove?
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal", tracking=True, help="Form is accessible by assigned portal user")
+    portal_url = fields.Char(string='Portal URL', compute='_compute_portal_urls')
+    portal_direct_create = fields.Boolean("Portal Direct-Create", tracking=True, help="Direct create Form by link")
+    portal_direct_create_url = fields.Char(string='Portal Direct-Create URL', compute='_compute_portal_urls')
     portal_submit_done_url = fields.Char(
         string='Portal Submit-done URL', tracking=True,
         help="""\
@@ -273,6 +276,20 @@ class Builder(models.Model):
             else:
                 r.public_url = False
 
+    @api.depends('portal', 'portal_direct_create')
+    def _compute_portal_urls(self):
+        for r in self:
+            if r.portal and request:
+                url_root = request.httprequest.url_root
+                r.portal_url = '%s%s/%s' % (url_root, 'my/formio/form/new', r.name)
+                if r.portal_direct_create:
+                    r.portal_direct_create_url = '%s%s/%s' % (url_root, 'my/formio/form/create', r.name)
+                else:
+                    r.portal_direct_create_url = False
+            else:
+                r.portal_url = False
+                r.portal_direct_create_url = False
+
     @api.depends('translations')
     def _compute_languages(self):
         for r in self:
@@ -405,7 +422,59 @@ class Builder(models.Model):
     def _get_js_params(self):
         """ Odoo JS (Owl component) misc. params """
         params = {
-            'readOnly': self.is_locked
+            'portal_submit_done_url': self.portal_submit_done_url,
+            'readOnly': self.is_locked,
+            'wizard_on_next_page_save_draft': self.wizard and self.wizard_on_next_page_save_draft,
+        }
+        return params
+
+    @api.model
+    def get_builder_uuid(self, uuid):
+        """ Get builder by uuid or False. """
+
+        domain = [
+            ('uuid', '=', uuid),
+        ]
+        builder = self.sudo().search(domain, limit=1)
+        if builder:
+            return builder
+        else:
+            return False
+
+    @api.model
+    def get_portal_builder_uuid(self, uuid):
+        """ Verifies portal access to forms and return builder or False. """
+
+        domain = [
+            ('uuid', '=', uuid),
+            ('portal', '=', True),
+        ]
+        builder = self.sudo().search(domain, limit=1)
+        if builder:
+            return builder
+        else:
+            return False
+
+    @api.model
+    def get_portal_builder_name(self, name):
+        """ Verifies portal access to forms and return builder or False. """
+
+        domain = [
+            ('name', '=', name),
+            ('state', '=', STATE_CURRENT),
+            ('portal', '=', True),
+        ]
+        builder = self.sudo().search(domain, limit=1)
+        if builder:
+            return builder
+        else:
+            return False
+
+    def _get_portal_form_js_params(self):
+        """ Odoo JS (Owl component) misc. params """
+        params = {
+            'portal_submit_done_url': self.portal_submit_done_url,
+            'wizard_on_next_page_save_draft': self.wizard and self.wizard_on_next_page_save_draft,
         }
         return params
 
@@ -461,3 +530,6 @@ class Builder(models.Model):
             else:
                 i18n[code][trans.source] = trans.value
         return i18n
+
+    def _generate_odoo_domain(self, domain=[], data={}):
+        return domain

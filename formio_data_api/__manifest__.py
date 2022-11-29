@@ -4,7 +4,7 @@
 {
     'name': 'Forms | Data API',
     'summary': 'Python API for Forms data (builder, form/submission)',
-    'version': '2.1',
+    'version': '2.2',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
