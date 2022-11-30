@@ -67,8 +67,8 @@ class Form(models.Model):
             ]
             if attach_names:
                 domain.append(('name', 'not in', attach_names))
-            self.env['ir.attachment'].search(domain). \
-                with_context(formio_storage_filestore_force_unlink_attachment=True). \
+            self.env['ir.attachment'].search(domain).\
+                with_context(formio_storage_filestore_force_unlink_attachment=True).\
                 unlink()
 
     def _get_component_file_names(self, component_obj):
