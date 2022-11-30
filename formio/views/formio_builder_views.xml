@@ -160,8 +160,11 @@ See LICENSE file for full licensing details. -->
                                     <field name="portal_url" widget="CopyClipboardChar" style="font-size: 1.0em;"/>
                                 </group>
                                 <group name="portal_direct_create" colspan="2" attrs="{'invisible': [('portal', '=', False)]}">
-                                    <field name="portal_direct_create"/>
-                                    <field name="portal_direct_create_url" widget="CopyClipboardChar" style="font-size: 1.0em;"/>
+                                    <field name="portal_direct_create" string="Direct Create"/>
+                                    <field name="portal_direct_create_url" string="Direct Create URL" widget="CopyClipboardChar" style="font-size: 1.0em;"/>
+                                    <div class="text-muted mb-2" colspan="2">
+                                        <i class="fa fa-info-circle" title="info"/><strong> Direct Create:</strong> The URL first creates a form (record). This will be deprecated in next major release in favor of the new Portal URL.
+                                    </div>
                                 </group>
                                 <group name="portal_redirect_after_submit" string="Redirect After Submit">
                                     <field name="portal_submit_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
