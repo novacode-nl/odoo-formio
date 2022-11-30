@@ -237,6 +237,12 @@ class FormioCustomerPortal(CustomerPortal):
 
     @http.route('/formio/portal/form/new/<string:builder_uuid>/submit', type='json', auth="user", methods=['POST'], website=True)
     def form_new_submit(self, builder_uuid, **post):
+        """ Form submit endpoint
+
+        Note:
+        In wizard mode, the submit endpoint shall be changed
+        (frontend/JS code) to: /formio/form/<string:uuid>/submit
+        """
         builder = self._get_builder_uuid(builder_uuid)
 
         if not builder:
