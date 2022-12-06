@@ -31,7 +31,7 @@ function app() {
                 this.builderUuid = document.getElementById('formio_builder_uuid').value;
             }
             this.configUrl = '/formio/portal/form/new/' + this.builderUuid + '/config';
-            this.submissionUrl = false;
+            this.submissionUrl = '/formio/portal/form/new/' + this.builderUuid + '/submission';
             this.submitUrl = '/formio/portal/form/new/' + this.builderUuid + '/submit';
             this.wizardSubmitUrl = '/formio/form/';
             this.isPortalUrl = window.location.pathname.indexOf('/formio/portal/') >= 0;

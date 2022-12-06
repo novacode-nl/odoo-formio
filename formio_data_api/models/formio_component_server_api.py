@@ -6,7 +6,7 @@ from odoo import fields, models
 
 class FormioComponentServerApi(models.Model):
     _name = 'formio.component.server.api'
-    _description = 'Form (Builder) Component Server API'
+    _description = 'Forms Component Server API'
 
     DEFAULT_PYTHON_CODE = """# Available variables:
 #  - values: Dictionary, read by the Forms Data API to set Components (key) value
@@ -14,6 +14,7 @@ class FormioComponentServerApi(models.Model):
 #  - component: Form component (formiodata.Component) object
 #  - builder: formio.builder object (record) on which the action is triggered
 #  - form: formio.form object (record) on which the action is triggered; maybe None (not present)
+#  - params: Dictionary with optional params provided eg. URL query params
 #  - time, datetime, dateutil, timezone: useful Python libraries
 # Assign to values (dict), eg values['foo'] = 'bar', values.update({some_dict})"""
 
@@ -34,4 +35,4 @@ class FormioComponentServerApi(models.Model):
         groups='base.group_system',
         help="Write Python code that the Component Value will get set. Some variables are "
         "available for use; help about python expression is given in the help tab.")
-    active = fields.Boolean(string='Active')
+    active = fields.Boolean(string='Active', default=True)

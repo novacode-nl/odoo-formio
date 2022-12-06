@@ -235,6 +235,21 @@ class FormioCustomerPortal(CustomerPortal):
 
         return res
 
+    @http.route('/formio/portal/form/new/<string:builder_uuid>/submission', type='json', auth='user', website=True)
+    def form_new_submission(self, builder_uuid, **kwargs):
+        builder = self._get_builder_uuid(builder_uuid)
+
+        if not builder:
+            _logger.info('formio.builder with UUID %s not found' % builder_uuid)
+            # TODO raise or set exception (in JSON resonse) ?
+            return
+
+        args = request.httprequest.args
+        submission_data = {}
+        etl_odoo_data = builder.sudo()._etl_odoo_data(params=args.to_dict())
+        submission_data.update(etl_odoo_data)
+        return json.dumps(submission_data)
+
     @http.route('/formio/portal/form/new/<string:builder_uuid>/submit', type='json', auth="user", methods=['POST'], website=True)
     def form_new_submit(self, builder_uuid, **post):
         """ Form submit endpoint
@@ -318,7 +333,7 @@ class FormioCustomerPortal(CustomerPortal):
                 domain.append(filter)
 
         if not domain:
-            domain = builder._generate_odoo_domain(domain, data=args.to_dict())
+            domain = builder._generate_odoo_domain(domain, params=args.to_dict())
 
         try:
             language = args.get('language')

@@ -137,7 +137,18 @@ export class OdooFormioForm extends Component {
             // Set the Submission (data)
             // https://github.com/formio/formio.js/wiki/Form-Renderer#setting-the-submission
             if (self.submissionUrl) {
-                $.jsonRpc.request(self.submissionUrl, 'call', {}).then(function(result) {
+                let submissionUrl = self.submissionUrl;
+                if (self.params.hasOwnProperty('submission_url_add_url_query')) {
+                    if (self.params['submission_url_add_url_query'] == 'window' && window.location.search) {
+                        const params = new URLSearchParams(window.location.search);
+                        submissionUrl += '?' + params.toString();
+                    }
+                    else if (self.params['submission_url_add_url_query'] == 'window.parent' && window.parent.location.search) {
+                        const params = new URLSearchParams(window.parent.location.search);
+                        submissionUrl += '?' + params.toString();
+                    }
+                }
+                $.jsonRpc.request(submissionUrl, 'call', {}).then(function(result) {
                     if (!$.isEmptyObject(result)) {
                         form.submission = {'data': JSON.parse(result)};
                     }

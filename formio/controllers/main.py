@@ -257,7 +257,7 @@ class FormioController(http.Controller):
                 domain.append(filter)
 
         if not domain:
-            domain = form._generate_odoo_domain(domain, data=args.to_dict())
+            domain = form._generate_odoo_domain(domain, params=args.to_dict())
 
         try:
             language = args.get('language')

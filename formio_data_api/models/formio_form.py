@@ -70,7 +70,7 @@ class FormioForm(models.Model):
 
     def _etl_odoo_data(self):
         """
-        ETL (Odoo) data and prefill in the Form compoonents which have been configured for this.
+        ETL (Odoo) data and prefill in the Form components which have been configured for this.
         To configure the Form Component follow the steps:
         - Edit component
         - Open the tab: API

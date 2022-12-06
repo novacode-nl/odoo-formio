@@ -1,5 +1,13 @@
 # Changelog
 
+### 10.1
+
+Fundamentals to implement prepopulation* of component values for new (portal, public) forms.\
+Prepopulation* by means of the Components (server) API.
+- Form Builder configuration and frontend/JS: add possible URL query string from window, to submission URL.
+- New (portal) endpoint: `/formio/portal/form/new/<string:builder_uuid>/submission`\
+  Can be used to prepopulate a (new) form.
+
 ### 10.0
 
 - Portal form: render new (not yet stored) or a direct create (old style)

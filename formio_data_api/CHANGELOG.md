@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.0
+
+- Components API `formio.component.server.api`: change field `active` default value to `True` (checked).
+- Implement ETL data/values for Form Builder (new form) by Components Server API.
+- Renaming (improvement) argument in function `_get_formio_eval_context`, a feature added in version 2.2\
+  Renaming from `data` to `params`.
+
+**UPGRADE REQUIREMENT (important):**\
+Check and rename `data` to `params` in existing `formio.component.server.api` records, in the Python `code` (field).\
+Otherwise existing forms (builder) configurations with Componenets API (values, domain) won't work anymore!
+
 ## 2.2
 
 Enable a new (not yet stored) form, to use the Components API as well.

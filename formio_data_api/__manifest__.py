@@ -4,7 +4,7 @@
 {
     'name': 'Forms | Data API',
     'summary': 'Python API for Forms data (builder, form/submission)',
-    'version': '2.2',
+    'version': '3.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -19,14 +19,9 @@
     'external_dependencies': {
         'python': ['formio-data'],
     },
-    'application': False,
+    'application': True,
     'installable': True,
     'images': [
         'static/description/banner.gif',
-    ],
-    'description': """
-Forms | Data API
-================
-
-"""
+    ]
 }

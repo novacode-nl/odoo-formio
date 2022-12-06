@@ -220,7 +220,7 @@ class FormioPublicController(http.Controller):
 
         if not domain:
             # TODO document priority of domain_fields OR domain_api
-            domain = builder._generate_odoo_domain(domain, data=args.to_dict())
+            domain = builder._generate_odoo_domain(domain, params=args.to_dict())
 
         _logger.debug("domain: %s" % domain)
 
