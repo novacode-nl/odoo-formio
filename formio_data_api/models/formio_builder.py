@@ -114,8 +114,7 @@ class FormioBuilder(models.Model):
         ETL (Odoo) data and prefill in the Form components.
         """
         res = super(FormioBuilder, self)._etl_odoo_data(params)
-        if bool(params):
-            res.update(self._etl_component_server_api(params=params))
+        res.update(self._etl_component_server_api(params=params))
         return res
 
     def _etl_component_server_api(self, params={}):
