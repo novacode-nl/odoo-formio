@@ -210,13 +210,18 @@ class FormioController(http.Controller):
     # Form - fetch Odoo data
     ########################
 
-    @http.route([
-        '/formio/form/<string:uuid>/data',
-        '/formio/portal/form/<string:uuid>/data'
-    ],
-    type='http', auth='user', website=True)
+    @http.route(
+        ['/formio/form/<string:uuid>/data',
+         '/formio/portal/form/<string:uuid>/data'],
+        type='http', auth='user', website=True)
     def form_data(self, uuid, **kwargs):
         """ Get data from a resource-object.
+
+        RECOMMENDATION (DEPRECATION ?)
+        ==============================
+        Use the query string "?api=get_data" in URLs:
+        - /formio/form/<string:uuid>?api=get_data
+        - /formio/portal/form/<string:uuid>?api=get_data
 
         EXAMPLE
         =======
@@ -228,49 +233,7 @@ class FormioController(http.Controller):
         - Data Source URL: /data
         - Filter Query: model=res.partner&label=name&domain_fields=city&city=Sittard
         """
-
-        form = self._get_form(uuid, 'read')
-        if not form:
-            return
-        
-        args = request.httprequest.args
-
-        model = args.get('model')
-        # TODO: formio error?
-        if model is None:
-            _logger('model is missing in "Data Filter Query"')
-
-        label = args.get('label')
-        # TODO: formio error?
-        if label is None:
-            _logger.error('label is missing in "Data Filter Query"')
-
-        domain = []
-        domain_fields = args.getlist('domain_fields')
-        # domain_fields_op = args.getlist('domain_fields_operators')
-
-        for domain_field in domain_fields:
-            value = args.get(domain_field)
-
-            if value is not None:
-                filter = (domain_field, '=', value)
-                domain.append(filter)
-
-        if not domain:
-            domain = form._generate_odoo_domain(domain, params=args.to_dict())
-
-        try:
-            language = args.get('language')
-            if language:
-                lang = request.env['res.lang']._from_formio_ietf_code(language)
-                model_obj = request.env[model].with_context(lang=lang)
-            else:
-                model_obj = request.env[model]
-            records = model_obj.search_read(domain, [label])
-            data = json.dumps([{'id': r['id'], 'label': r[label]} for r in records])
-            return data
-        except Exception as e:
-            _logger.error("Exception: %s" % e)
+        return self._api_get_data(uuid)
 
     @http.route('/formio/form/<string:uuid>/res_data', type='http', auth='user', website=True)
     def form_res_data(self, uuid, **kwargs):
@@ -320,6 +283,49 @@ class FormioController(http.Controller):
                     res_data = [getattr(r, _field) for r in res_data]
 
             data = json.dumps([{'id': r['id'], 'label': r[label]} for r in res_data])
+            return data
+        except Exception as e:
+            _logger.error("Exception: %s" % e)
+
+    def _api_get_data(self, form_uuid):
+        form = self._get_form(form_uuid, 'read')
+        if not form:
+            return
+
+        args = request.httprequest.args
+        model = args.get('model')
+        # TODO: formio error?
+        if model is None:
+            _logger('model is missing in "Data Filter Query"')
+
+        label = args.get('label')
+        # TODO: formio error?
+        if label is None:
+            _logger.error('label is missing in "Data Filter Query"')
+
+        domain = []
+        domain_fields = args.getlist('domain_fields')
+        # domain_fields_op = args.getlist('domain_fields_operators')
+
+        for domain_field in domain_fields:
+            value = args.get(domain_field)
+
+            if value is not None:
+                filter = (domain_field, '=', value)
+                domain.append(filter)
+
+        if not domain:
+            domain = form._generate_odoo_domain(domain, params=args.to_dict())
+
+        try:
+            language = args.get('language')
+            if language:
+                lang = request.env['res.lang']._from_formio_ietf_code(language)
+                model_obj = request.env[model].with_context(lang=lang)
+            else:
+                model_obj = request.env[model]
+            records = model_obj.search_read(domain, [label])
+            data = json.dumps([{'id': r['id'], 'label': r[label]} for r in records])
             return data
         except Exception as e:
             _logger.error("Exception: %s" % e)

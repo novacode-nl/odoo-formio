@@ -179,6 +179,11 @@ class FormioPublicController(http.Controller):
     def form_data(self, uuid, **kwargs):
         """ Get data from a resource-object.
 
+        RECOMMENDATION (DEPRECATION ?)
+        ==============================
+        Use the query string "?api=get_data" in URL:
+        /formio/public/form/create/<string:uuid>?api=get_data
+
         EXAMPLE
         =======
         This example loads data into Select Component, whereby choices
@@ -189,9 +194,11 @@ class FormioPublicController(http.Controller):
         - Data Source URL: /data
         - Filter Query: model=fleet.vehicle.model&label=display_name&domain_fields=brand_id&brand_id=5
         """
+        return self._api_get_data(uuid)
 
+    def _api_get_data(self, builder_uuid):
         if request.env.user._is_public():
-            builder = self._get_public_builder(uuid)
+            builder = self._get_public_builder(builder_uuid)
             if not builder:
                 return
 

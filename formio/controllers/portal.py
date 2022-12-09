@@ -202,23 +202,26 @@ class FormioCustomerPortal(CustomerPortal):
 
     @http.route('/formio/portal/form/new/<string:builder_name>', type='http', auth='user', methods=['GET'], website=True)
     def portal_form_new_root(self, builder_name, **kwargs):
-        builder = self._get_builder_name(builder_name)
+        args = request.httprequest.args
+        if args.get('api') == 'get_data':
+            return self._api_get_data(builder_name)
+        else:
+            builder = self._get_builder_name(builder_name)
+            if not builder:
+                msg = 'Form Builder (name) %s: not found' % builder_name
+                return request.not_found(msg)
+            elif not builder.portal:
+                msg = 'Form Builder (name) %s: not published on portal' % builder_name
+                return request.not_found(msg)
 
-        if not builder:
-            msg = 'Form Builder (name) %s: not found' % builder_name
-            return request.not_found(msg)
-        elif not builder.portal:
-            msg = 'Form Builder (name) %s: not published on portal' % builder_name
-            return request.not_found(msg)
-
-        values = {
-            'languages': builder.languages,
-            'builder': builder,
-            'formio_builder_uuid': builder.uuid,
-            'formio_css_assets': builder.formio_css_assets,
-            'formio_js_assets': builder.formio_js_assets,
-        }
-        return request.render('formio.formio_form_portal_new_embed', values)
+            values = {
+                'languages': builder.languages,
+                'builder': builder,
+                'formio_builder_uuid': builder.uuid,
+                'formio_css_assets': builder.formio_css_assets,
+                'formio_js_assets': builder.formio_js_assets,
+            }
+            return request.render('formio.formio_form_portal_new_embed', values)
 
     @http.route('/formio/portal/form/new/<string:builder_uuid>/config', type='json', auth='user', website=True)
     def form_new_config(self, builder_uuid, **kwargs):
@@ -292,7 +295,12 @@ class FormioCustomerPortal(CustomerPortal):
 
     @http.route('/formio/portal/form/new/<string:builder_name>/data')
     def form_new_data(self, builder_name, **kwargs):
-        """ Get data from a resource-object.
+        """ Get data dispatch URL.
+
+        RECOMMENDATION (DEPRECATION ?)
+        ==============================
+        Use the query string "?api=get_data" in URL:
+        /formio/portal/form/new/<string:builder_name>?api=get_data
 
         EXAMPLE
         =======
@@ -304,7 +312,14 @@ class FormioCustomerPortal(CustomerPortal):
         - Data Source URL: /data
         - Filter Query: model=res.partner&label=name&domain_fields=city&city=Sittard
         """
+        return self._api_get_data(builder_name)
 
+    ############
+    # Misc utils
+    ############
+
+    def _api_get_data(self, builder_name):
+        """ Get data """
         builder = self._get_builder_name(builder_name)
         if not builder:
             return
@@ -346,6 +361,7 @@ class FormioCustomerPortal(CustomerPortal):
             data = json.dumps([{'id': r['id'], 'label': r[label]} for r in records])
             return data
         except Exception as e:
+            # TODO also raise or ensure exception to render in form?
             _logger.error("Exception: %s" % e)
 
     def _get_builder_uuid(self, builder_uuid):
