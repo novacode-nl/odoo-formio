@@ -150,9 +150,9 @@ See LICENSE file for full licensing details. -->
                                     </div>
                                 </group>
                                 <group name="other_settings" string="Other">
-                                    <field name="submission_url_add_url_query"/>
+                                    <field name="submission_url_add_query_params_from"/>
                                     <div class="text-muted" colspan="2">
-                                        <i class="fa fa-info-circle" title="info"/> Enables adding the URL query string (params) from the window's iframe (src) or window.parent to the form submission URL endpoint.
+                                        <i class="fa fa-info-circle" title="info"/> Enables adding the URL query params from the window's iframe (src) or window.parent to the form submission URL endpoint.
                                     </div>
                                 </group>
                                 <separator/>

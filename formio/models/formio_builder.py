@@ -120,14 +120,14 @@ class Builder(models.Model):
         "Show User Metadata", tracking=True, help="Show submission and assigned user metadata in the Form header.", default=True)
     wizard = fields.Boolean("Wizard", tracking=True)
     wizard_on_next_page_save_draft = fields.Boolean("Wizard on Next Page Save Draft", tracking=True)
-    submission_url_add_url_query = fields.Selection(
-        string="Submission URL add URL query",
+    submission_url_add_query_params_from = fields.Selection(
+        string="Add Query Params to Submission URL from",
         selection=[
             ("window", "Window iframe (src)"),
             ("window.parent", "Window parent (URL)"),
         ],
         tracking=True,
-        help="Enables adding the URL query string (params) from the window's iframe (src) or window.parent to the form submission URL endpoint.",
+        help="Enables adding the URL query params from the window's iframe (src) or window.parent to the form submission URL endpoint.",
     )
     translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations', copy=True)
     languages = fields.One2many('res.lang', compute='_compute_languages', string='Languages')
@@ -434,7 +434,7 @@ class Builder(models.Model):
             'portal_submit_done_url': self.portal_submit_done_url,
             'readOnly': self.is_locked,
             'wizard_on_next_page_save_draft': self.wizard and self.wizard_on_next_page_save_draft,
-            'submission_url_add_url_query': self.submission_url_add_url_query
+            'submission_url_add_query_params_from': self.submission_url_add_query_params_from
         }
         return params
 
@@ -485,7 +485,7 @@ class Builder(models.Model):
         params = {
             'portal_submit_done_url': self.portal_submit_done_url,
             'wizard_on_next_page_save_draft': self.wizard and self.wizard_on_next_page_save_draft,
-            'submission_url_add_url_query': self.submission_url_add_url_query
+            'submission_url_add_query_params_from': self.submission_url_query_params_from
         }
         return params
 
@@ -494,7 +494,7 @@ class Builder(models.Model):
         params = {
             'public_submit_done_url': self.public_submit_done_url,
             'wizard_on_next_page_save_draft': self.wizard and self.wizard_on_next_page_save_draft,
-            'submission_url_add_url_query': self.submission_url_add_url_query
+            'submission_url_add_query_params_from': self.submission_url_add_query_params_from
         }
         return params
 

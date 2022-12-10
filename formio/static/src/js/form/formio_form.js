@@ -138,12 +138,12 @@ export class OdooFormioForm extends Component {
             // https://github.com/formio/formio.js/wiki/Form-Renderer#setting-the-submission
             if (self.submissionUrl) {
                 let submissionUrl = self.submissionUrl;
-                if (self.params.hasOwnProperty('submission_url_add_url_query')) {
-                    if (self.params['submission_url_add_url_query'] == 'window' && window.location.search) {
+                if (self.params.hasOwnProperty('submission_url_add_query_params_from')) {
+                    if (self.params['submission_url_add_query_params_from'] == 'window' && window.location.search) {
                         const params = new URLSearchParams(window.location.search);
                         submissionUrl += '?' + params.toString();
                     }
-                    else if (self.params['submission_url_add_url_query'] == 'window.parent' && window.parent.location.search) {
+                    else if (self.params['submission_url_add_query_params_from'] == 'window.parent' && window.parent.location.search) {
                         const params = new URLSearchParams(window.parent.location.search);
                         submissionUrl += '?' + params.toString();
                     }
