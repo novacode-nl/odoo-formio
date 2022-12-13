@@ -24,7 +24,7 @@ class FormioComponentServerApi(models.Model):
 #  - time, datetime, dateutil, timezone: useful Python libraries
 #  if API type is "convert":
 #  - value: The value from values[component.key]
-# Assign to values (dict), eg values['foo'] = 'bar', values.update({some_dict})"""
+# Assign either to values (dict) OR convert (component type)"""
 
     formio_builder_id = fields.Many2one(
         'formio.builder', string='Form Builder',
