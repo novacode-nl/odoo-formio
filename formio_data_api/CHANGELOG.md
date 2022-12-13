@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1
+
+Components API `formio.component.server.api`
+- value conversion (convert) feature, which is a new API type.
+- Unique constraint on fields `name`, `type`.
+
+
 ## 3.0
 
 - Components API `formio.component.server.api`: change field `active` default value to `True` (checked).
