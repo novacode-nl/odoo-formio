@@ -10,8 +10,12 @@ class FormioComponentServerApi(models.Model):
     _description = 'Forms Component Server API'
 
     DEFAULT_PYTHON_CODE = """# Available variables:
+# Return, only one of:
+#  if API type is "values"
 #  - values: Dictionary, read by the Forms Data API to set Components (key) value
-#  - convert: The component's supported type, read by the Forms Data API to convert and return a value
+#  elif API type is "convert":
+#  - convert: A value in component's supported type, read by the Forms Data API to convert and return a value
+# Others:
 #  - env: Odoo Environment on which the action is triggered
 #  - component: Form component (formiodata.Component) object
 #  - builder: formio.builder object (record) on which the action is triggered
