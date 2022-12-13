@@ -52,9 +52,13 @@ class FormioComponentServerApi(models.Model):
         "available for use; help about python expression is given in the help tab.")
     active = fields.Boolean(string='Active', default=True)
 
-    @api.constrains('name', 'type')
+    @api.constrains('formio_builder_id', 'name', 'type')
     def _constraint_unique(self):
-        domain = [('name', '=', self.name), ('type', '=', self.type)]
+        domain = [
+            ("formio_builder_id", "=", self.formio_builder_id.id),
+            ("name", "=", self.name),
+            ("type", "=", self.type),
+        ]
         if self.search_count(domain) > 1:
-            msg = _('Components API Name and Type should be unique.\nOnly 1 Component API with name "%s" and type "%s" is allowed.') % (self.name, self.type)
+            msg = _('A component API with name "%s" and type "%s" is already set.\nPer Form Builder a Components API Name and Type should be unique.') % (self.name, self.type)
             raise ValidationError(msg)
