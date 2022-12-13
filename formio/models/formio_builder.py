@@ -485,7 +485,7 @@ class Builder(models.Model):
         params = {
             'portal_submit_done_url': self.portal_submit_done_url,
             'wizard_on_next_page_save_draft': self.wizard and self.wizard_on_next_page_save_draft,
-            'submission_url_add_query_params_from': self.submission_url_query_params_from
+            'submission_url_add_query_params_from': self.submission_url_add_query_params_from
         }
         return params
 
