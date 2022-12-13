@@ -54,11 +54,14 @@ class FormioComponentServerApi(models.Model):
 
     @api.constrains('formio_builder_id', 'name', 'type')
     def _constraint_unique(self):
-        domain = [
-            ("formio_builder_id", "=", self.formio_builder_id.id),
-            ("name", "=", self.name),
-            ("type", "=", self.type),
-        ]
-        if self.search_count(domain) > 1:
-            msg = _('A component API with name "%s" and type "%s" is already set.\nPer Form Builder a Components API Name and Type should be unique.') % (self.name, self.type)
-            raise ValidationError(msg)
+        for rec in self:
+            domain = [
+                ("formio_builder_id", "=", rec.formio_builder_id.id),
+                ("name", "=", rec.name),
+                ("type", "=", rec.type),
+            ]
+            if self.search_count(domain) > 1:
+                msg = _(
+                    'A component API with name "%s" and type "%s" is already set.\nPer Form Builder a Components API Name and Type should be unique.'
+                ) % (rec.name, rec.type)
+                raise ValidationError(msg)
