@@ -103,10 +103,9 @@ class FormioBuilder(models.Model):
             'dateutil': safe_eval.dateutil,
             'time': safe_eval.time,
             'component': component,
-            'params': params
+            'params': params,
+            'values': {}
         }
-        if component_server_api.type == 'values':
-            res['values'] = {}
         return res
 
     def _etl_odoo_data(self, params={}):

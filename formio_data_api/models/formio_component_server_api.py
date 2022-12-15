@@ -30,12 +30,6 @@ class FormioComponentServerApi(models.Model):
         'formio.builder', string='Form Builder',
         required=True, readonly=True, ondelete='cascade')
     name = fields.Char(string='API Name', required=True)
-    type = fields.Selection(
-        string='Type',
-        selection=[('values', 'values')],
-        default='values',
-        ondelete='set null',
-    )
     # Python code
     code = fields.Text(
         string='Python Code',
@@ -45,16 +39,15 @@ class FormioComponentServerApi(models.Model):
         "available for use; help about python expression is given in the help tab.")
     active = fields.Boolean(string='Active', default=True)
 
-    @api.constrains('formio_builder_id', 'name', 'type')
+    @api.constrains('formio_builder_id', 'name')
     def _constraint_unique(self):
         for rec in self:
             domain = [
                 ("formio_builder_id", "=", rec.formio_builder_id.id),
                 ("name", "=", rec.name),
-                ("type", "=", rec.type),
             ]
             if self.search_count(domain) > 1:
                 msg = _(
-                    'A component API with name "%s" and type "%s" is already set.\nPer Form Builder a Components API Name and Type should be unique.'
-                ) % (rec.name, rec.type)
+                    'A component API with name "%s" is already set.\nPer Form Builder a Components API Name should be unique.'
+                ) % (rec.name)
                 raise ValidationError(msg)

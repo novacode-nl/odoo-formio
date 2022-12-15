@@ -3,14 +3,15 @@
      See LICENSE file for full licensing details. -->
 
 <odoo>
-    <record id="view_formio_builder_form_inherit" model="ir.ui.view">
+    <record id="view_formio_builder_form" model="ir.ui.view">
         <field name="name">formio.builder.form data api</field>
         <field name="model">formio.builder</field>
         <field name="inherit_id" ref="formio.view_formio_builder_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='formio_components_api']/group[@name='partner']" position="before">
-                <group string="Component Value by Python Code" name="component_value_python_code" colspan="2">
+                <group string="Component Server Value (API)" name="component_value_python_code" colspan="2">
                     <div class="mb-2 text-muted" colspan="2">
+                        <i class="fa fa-info-circle" title="info"/> DEPRECATION WARNING: moved to a new module <code>formio_components_api</code>. Removed in the next Odoo version<br/>
                         <i class="fa fa-info-circle" title="info"/> Python code can assign Component(s) value or an object to the <code>values</code> dictionary<br/>
                         In the Form Builder configure the applied Component(s) its API (tab) Custom Properties 
                         <a href="https://github.com/novacode-nl/odoo-formio/wiki/Populate-a-Form-Component-value,-with-data-from-Server-(Python)-Code" title="Documentation" class="o_doc_link" target="_blank"></a>
@@ -18,7 +19,6 @@
                     <field name="component_server_api_ids" context="{'default_formio_builder_id': id}" nolabel="1" attrs="{'readonly': [('is_locked', '=', True)]}">
                         <tree context="{'default_formio_builder_id': id}">
                             <field name="name"/>
-                            <field name="type"/>
                             <field name="active"/>
                             <field name="code" widget="ace" options="{'mode': 'python'}" optional="hide"/>
                         </tree>
