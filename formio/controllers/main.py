@@ -219,9 +219,9 @@ class FormioController(http.Controller):
 
         RECOMMENDATION (DEPRECATION ?)
         ==============================
-        Use the query string "?api=get_data" in URLs:
-        - /formio/form/<string:uuid>?api=get_data
-        - /formio/portal/form/<string:uuid>?api=get_data
+        Use the query string "?api=getData" in URLs:
+        - /formio/form/<string:uuid>?api=getData
+        - /formio/portal/form/<string:uuid>?api=getData
 
         EXAMPLE
         =======

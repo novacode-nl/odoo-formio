@@ -181,8 +181,8 @@ class FormioPublicController(http.Controller):
 
         RECOMMENDATION (DEPRECATION ?)
         ==============================
-        Use the query string "?api=get_data" in URL:
-        /formio/public/form/create/<string:uuid>?api=get_data
+        Use the query string "?api=getData" in URL:
+        /formio/public/form/create/<string:uuid>?api=getData
 
         EXAMPLE
         =======

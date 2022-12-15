@@ -203,7 +203,7 @@ class FormioCustomerPortal(CustomerPortal):
     @http.route('/formio/portal/form/new/<string:builder_name>', type='http', auth='user', methods=['GET'], website=True)
     def portal_form_new_root(self, builder_name, **kwargs):
         args = request.httprequest.args
-        if args.get('api') == 'get_data':
+        if args.get('api') == 'getData':
             return self._api_get_data(builder_name)
         else:
             builder = self._get_builder_name(builder_name)
@@ -299,8 +299,8 @@ class FormioCustomerPortal(CustomerPortal):
 
         RECOMMENDATION (DEPRECATION ?)
         ==============================
-        Use the query string "?api=get_data" in URL:
-        /formio/portal/form/new/<string:builder_name>?api=get_data
+        Use the query string "?api=getData" in URL:
+        /formio/portal/form/new/<string:builder_name>?api=getData
 
         EXAMPLE
         =======

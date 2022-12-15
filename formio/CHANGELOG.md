@@ -1,6 +1,10 @@
 # Changelog
 
-### 10.3
+### 10.5
+
+Rename `/data` (fetching) endpoints query param from `api=get_data` to `api=getData`.
+
+### 10.4
 
 - Moved transalations button after form builder.
 
