@@ -1,7 +1,7 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -13,8 +13,6 @@ class FormioComponentServerApi(models.Model):
 # Return, only one of:
 #  if API type is "values"
 #  - values: Dictionary, read by the Forms Data API to set Components (key) value
-#  elif API type is "convert":
-#  - convert: A value in component's supported type, read by the Forms Data API to convert and return a value
 # Others:
 #  - env: Odoo Environment on which the action is triggered
 #  - component: Form component (formiodata.Component) object
@@ -22,15 +20,10 @@ class FormioComponentServerApi(models.Model):
 #  - form: formio.form object (record) on which the action is triggered; maybe None (not present)
 #  - params: Dictionary with optional params provided eg. URL query params
 #  - time, datetime, dateutil, timezone: useful Python libraries
-#  if API type is "convert":
-#  - value: The value from values[component.key]
 # Assign either to values (dict) OR convert (component type)
 #
 # EXAMPLE values:
 # values['rocket_factory'] = form.partner_id.rocket_factory_id.name
-#
-# EXAMPLE convert (boolean False, None to string):
-# convert = '' if not value else value
 """
 
     formio_builder_id = fields.Many2one(
@@ -39,7 +32,7 @@ class FormioComponentServerApi(models.Model):
     name = fields.Char(string='API Name', required=True)
     type = fields.Selection(
         string='Type',
-        selection=[('values', 'values'), ('convert', 'convert')],
+        selection=[('values', 'values')],
         default='values',
         ondelete='set null',
     )
