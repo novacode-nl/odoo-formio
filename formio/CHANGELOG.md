@@ -2,6 +2,10 @@
 
 ### 10.3
 
+- Moved transalations button after form builder.
+
+### 10.3
+
 - For clarity (between code and Components API), renamed field added in 10.1:\
   from `submission_url_add_query_string` to `submission_url_add_query_params_from`.
 
