@@ -217,8 +217,8 @@ class FormioController(http.Controller):
     def form_data(self, uuid, **kwargs):
         """ Get data from a resource-object.
 
-        RECOMMENDATION (DEPRECATION ?)
-        ==============================
+        DEPRECATED / CHANGE
+        ===================
         Use the query string "?api=getData" in URLs:
         - /formio/form/<string:uuid>?api=getData
         - /formio/portal/form/<string:uuid>?api=getData
@@ -233,6 +233,11 @@ class FormioController(http.Controller):
         - Data Source URL: /data
         - Filter Query: model=res.partner&label=name&domain_fields=city&city=Sittard
         """
+        msg = "The /data fetching URLs %s will be deprecated and work with a minor change in Odoo version 16.0\nMore info on Wiki: %s" % (
+            "/formio/form/<string:uuid>/data, /formio/portal/form/<string:uuid>/data",
+            "https://github.com/novacode-nl/odoo-formio/wiki/Populate-a-Select-Component-data-(options)-with-data-from-Odoo-model.field",
+        )
+        _logger.warning(msg)
         return self._api_get_data(uuid)
 
     @http.route('/formio/form/<string:uuid>/res_data', type='http', auth='user', website=True)

@@ -297,8 +297,8 @@ class FormioCustomerPortal(CustomerPortal):
     def form_new_data(self, builder_name, **kwargs):
         """ Get data dispatch URL.
 
-        RECOMMENDATION (DEPRECATION ?)
-        ==============================
+        DEPRECATED / CHANGE
+        ===================
         Use the query string "?api=getData" in URL:
         /formio/portal/form/new/<string:builder_name>?api=getData
 
@@ -312,6 +312,11 @@ class FormioCustomerPortal(CustomerPortal):
         - Data Source URL: /data
         - Filter Query: model=res.partner&label=name&domain_fields=city&city=Sittard
         """
+        msg = "The /data fetching URL %s will be deprecated and work with a minor change in Odoo version 16.0\nMore info on Wiki: %s" % (
+            "/formio/portal/form/new/<string:builder_name>/data",
+            "https://github.com/novacode-nl/odoo-formio/wiki/Populate-a-Select-Component-data-(options)-with-data-from-Odoo-model.field",
+        )
+        _logger.warning(msg)
         return self._api_get_data(builder_name)
 
     ############
