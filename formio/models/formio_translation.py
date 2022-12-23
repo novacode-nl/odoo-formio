@@ -1,7 +1,7 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 
 
 class Translation(models.Model):
