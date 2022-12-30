@@ -8,6 +8,10 @@ See LICENSE file for full licensing details. -->
         <html>
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+                <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/> -->
+                <!-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
+                <!-- <script src="https://cdn.form.io/flatpickr/flatpickr.min.js"></script> -->
+                <!-- <link rel="stylesheet" href="https://cdn.form.io/flatpickr/flatpickr.min.css"/> -->
                 <t t-foreach="formio_css_assets" t-as="css">
                     <link rel="stylesheet" type="text/css" t-att-href="css.url"/>
                 </t>

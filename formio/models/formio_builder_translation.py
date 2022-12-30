@@ -1,7 +1,7 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 
 class BuilderTranslation(models.Model):
@@ -18,7 +18,7 @@ class BuilderTranslation(models.Model):
     # related fields
     builder_name = fields.Char(related='builder_id.name', string='Builder Name', store=True)
     builder_version = fields.Integer(related='builder_id.version', string='Builder Version', store=True)
-    lang_name = fields.Char(related='lang_id.name', string='Language Name', store=True)
+    lang_name = fields.Char(related='lang_id.name', string='Language', store=True)
 
     @api.depends('lang_id', 'source', 'value')
     def name_get(self):

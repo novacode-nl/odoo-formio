@@ -1,5 +1,14 @@
 # Changelog
 
+### 10.6
+
+Add default Form Builder formio.js Options data.
+
+This contains an `editForm` configuration for the `select` component.\
+More info about the `overrideEditForm` property: https://github.com/formio/formio.js/issues/2280
+
+However the `dataSrc` property currently (December 2022) doesn't seem to work, also mentoined in: https://github.com/formio/formio.js/issues/2489
+
 ### 10.5
 
 Rename `/data` (fetching) endpoints query param from `api=get_data` to `api=getData`.
