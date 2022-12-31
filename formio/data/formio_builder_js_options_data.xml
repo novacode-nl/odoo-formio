@@ -26,10 +26,6 @@
              'defaultValue': 'api=getData&amp;model=MODEL&amp;label=name'
           },
           {
-            'key': 'refreshOn',
-            'defaultValue': 'data'
-          },
-          {
             'key': 'ignoreCache',
             'overrideEditForm': True,
             'defaultValue': True,
