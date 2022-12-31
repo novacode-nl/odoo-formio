@@ -30,13 +30,17 @@ class FormioPublicController(http.Controller):
             msg = 'Form UUID %s' % uuid
             return request.not_found(msg)
 
-        values = {
-            'languages': form.builder_id.languages,
-            'form': form,
-            'formio_css_assets': form.builder_id.formio_css_assets,
-            'formio_js_assets': form.builder_id.formio_js_assets,
-        }
-        return request.render('formio.formio_form_public_embed', values)
+        args = request.httprequest.args
+        if args.get('api') == 'getData':
+            return self._api_get_data(form.builder_id)
+        else:
+            values = {
+                'languages': form.builder_id.languages,
+                'form': form,
+                'formio_css_assets': form.builder_id.formio_css_assets,
+                'formio_js_assets': form.builder_id.formio_js_assets,
+            }
+            return request.render('formio.formio_form_public_embed', values)
 
     @http.route('/formio/public/form/<string:form_uuid>/config', type='json', auth='public', website=True)
     def form_config(self, form_uuid, **kwargs):
@@ -109,15 +113,19 @@ class FormioPublicController(http.Controller):
         #     msg = 'Form Builder UUID %s not current/published' % builder_uuid
         #     return request.not_found(msg)
 
-        values = {
-            'languages': formio_builder.languages,
-            'builder': formio_builder,
-            'public_form_create': True,
-            'formio_builder_uuid': formio_builder.uuid,
-            'formio_css_assets': formio_builder.formio_css_assets,
-            'formio_js_assets': formio_builder.formio_js_assets,
-        }
-        return request.render('formio.formio_form_public_create_embed', values)
+        args = request.httprequest.args
+        if args.get('api') == 'getData':
+            return self._api_get_data(formio_builder)
+        else:
+            values = {
+                'languages': formio_builder.languages,
+                'builder': formio_builder,
+                'public_form_create': True,
+                'formio_builder_uuid': formio_builder.uuid,
+                'formio_css_assets': formio_builder.formio_css_assets,
+                'formio_js_assets': formio_builder.formio_js_assets,
+            }
+            return request.render('formio.formio_form_public_create_embed', values)
 
     @http.route('/formio/public/form/create/<string:builder_uuid>/config', type='json', auth='public', website=True)
     def public_form_create_config(self, builder_uuid, **kwargs):
@@ -199,13 +207,24 @@ class FormioPublicController(http.Controller):
             "https://github.com/novacode-nl/odoo-formio/wiki/Populate-a-Select-Component-data-(options)-with-data-from-Odoo-model.field",
         )
         _logger.warning(msg)
-        return self._api_get_data(uuid)
+        return self._api_get_data_builder_uuid(uuid)
 
-    def _api_get_data(self, builder_uuid):
-        if request.env.user._is_public():
-            builder = self._get_public_builder(builder_uuid)
-            if not builder:
-                return
+    ############
+    # Misc utils
+    ############
+
+    def _api_get_data_builder_uuid(self, builder_uuid):
+        builder = self._get_public_builder(builder_uuid)
+        if builder:
+            return self._api_get_data(builder)
+        else:
+            _logger.info('api=getData: Form Builder (uuid) %s is not found or allowed' % builder_uuid)
+            return []
+
+    def _api_get_data(self, builder):
+        if not builder.public:
+            _logger.info('api=getData: Form Builder (uuid) %s is not allowed' % builder.uuid)
+            return []
 
         args = request.httprequest.args
 

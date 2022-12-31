@@ -327,7 +327,8 @@ class FormioCustomerPortal(CustomerPortal):
         """ Get data """
         builder = self._get_builder_name(builder_name)
         if not builder:
-            return
+            _logger.info('api=getData: Form Builder (name) %s is not found or allowed' % builder_name)
+            return []
 
         args = request.httprequest.args
 

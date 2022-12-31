@@ -1,5 +1,9 @@
 # Changelog
 
+### 10.7
+
+Implement missing `api=getData` (fetching) endpoints in backend, portal, public.
+
 ### 10.6
 
 Add default Form Builder formio.js Options data.

@@ -118,25 +118,29 @@ class FormioController(http.Controller):
             msg = 'Form UUID %s' % uuid
             return request.not_found(msg)
 
-        # TODO REMOVE (still needed or obsolete legacy?)
-        # Needed to update language
-        context = request.env.context.copy()
-        context.update({'lang': request.env.user.lang})
-        request.env.context = context
+        args = request.httprequest.args
+        if args.get('api') == 'getData':
+            return self._api_get_data(uuid)
+        else:
+            # TODO REMOVE (still needed or obsolete legacy?)
+            # Needed to update language
+            context = request.env.context.copy()
+            context.update({'lang': request.env.user.lang})
+            request.env.context = context
 
-        languages = form.builder_id.languages
-        lang_en = request.env.ref('base.lang_en')
+            languages = form.builder_id.languages
+            lang_en = request.env.ref('base.lang_en')
 
-        if lang_en.active and form.builder_id.language_en_enable and 'en_US' not in languages.mapped('code'):
-            languages |= request.env.ref('base.lang_en')
+            if lang_en.active and form.builder_id.language_en_enable and 'en_US' not in languages.mapped('code'):
+                languages |= request.env.ref('base.lang_en')
 
-        values = {
-            'languages': languages.sorted('name'),
-            'form': form,
-            'formio_css_assets': form.builder_id.formio_css_assets,
-            'formio_js_assets': form.builder_id.formio_js_assets,
-        }
-        return request.render('formio.formio_form_embed', values)
+            values = {
+                'languages': languages.sorted('name'),
+                'form': form,
+                'formio_css_assets': form.builder_id.formio_css_assets,
+                'formio_js_assets': form.builder_id.formio_js_assets,
+            }
+            return request.render('formio.formio_form_embed', values)
 
     @http.route('/formio/form/<string:form_uuid>/config', type='json', auth='user', website=True)
     def form_config(self, form_uuid, **kwargs):
@@ -295,7 +299,8 @@ class FormioController(http.Controller):
     def _api_get_data(self, form_uuid):
         form = self._get_form(form_uuid, 'read')
         if not form:
-            return
+            _logger.info('api=getData: Form (uuid) %s is not found or allowed' % form_uuid)
+            return []
 
         args = request.httprequest.args
         model = args.get('model')
