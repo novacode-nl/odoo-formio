@@ -188,6 +188,17 @@ class Form(models.Model):
     def _after_write(self, vals):
         self._process_api_components(vals)
 
+    def _clear_res_fields(self):
+        vals = {
+            'initial_res_id': False,
+            'res_model_id': False,
+            'res_id': False,
+            'res_act_window_url': False,
+            'res_name': False,
+            'res_partner_id': False
+        }
+        self.write(vals)
+
     def _process_api_components(self, vals):
         if vals.get('submission_data') and self.builder_id.component_partner_email:
             submission_data = self._decode_data(vals['submission_data'])
