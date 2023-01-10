@@ -31,6 +31,7 @@ export class OdooFormioForm extends Component {
         this.submissionUrl = null;
         this.submitUrl = null;
         this.wizardSubmitUrl = null;
+        this.apiUrl = null;
     }
 
     willStart() {
@@ -65,6 +66,59 @@ export class OdooFormioForm extends Component {
                 self.createForm();
             }
         });
+    }
+
+    /**
+     * onChange handler
+     *
+     * @param form: The form instance
+     * @param changed: The changes that occurred, and the component that triggered the change.
+     *   See "componentChange" event:
+     *   - instance: The component instance
+     *   - component: The component json
+     *   - value: The value that was changed
+     *   - flags: The flags for the change event loop
+     * @param flags: The change loop flags
+     * @param modified: Flag to determine if the change was
+     *   made by a human interaction, or programatic
+     */
+    onChange(form, changed, flags, modified) {
+        const self = this;
+        const hasChanged = typeof changed !== 'undefined' && typeof changed.changed !== 'undefined';
+        if (hasChanged) {
+            if (changed.changed.component) {
+                const component = changed.changed.component;
+                const instance = changed.changed.instance;
+                if (component.properties.hasOwnProperty('onChange')) {
+                    let apiUrl = self.apiUrl;
+                    apiUrl += '/' + 'onChange' + '/' + component.properties.onChange;
+                    let instanceData = {};
+                    if (instance.hasOwnProperty('parent')) {
+                        instanceData.parent_component = {
+                            'key': instance.parent.component.key,
+                            'type': instance.parent.component.type,
+                        };
+                    }
+                    if (instance.hasOwnProperty('path')) {
+                        instanceData.path = instance.path;
+                    }
+                    const data = {
+                        'changed': {
+                            'component': {
+                                'key': component.key,
+                                'type': component.type
+                            },
+                            'instance': instanceData,
+                            'value': changed.changed.value,
+                        },
+                        'form_data': form.data
+                    };
+                    $.jsonRpc.request(apiUrl, 'call', {'data': data}).then(function(result) {
+                        form.submission = {'data': JSON.parse(result)};
+                    });
+                }
+            }
+        }
     }
 
     createForm() {
@@ -103,6 +157,21 @@ export class OdooFormioForm extends Component {
             });
 
             // Events
+            form.on('change', function(changed, flags, modified) {
+                // - changed: The changes that occurred, and the component that triggered the change.
+                //   See "componentChange" event:
+                //   - instance: The component instance
+                //   - component: The component json
+                //   - value: The value that was changed
+                //   - flags: The flags for the change event loop
+                // - flags: The change loop flags
+                // - modified: Flag to determine if the change was
+                //   made by a human interaction, or programatic
+                if (changed.hasOwnProperty('changed')) {
+                    self.onChange(form, changed, flags, modified);
+                }
+            });
+
             form.on('submit', function(submission) {
                 const data = {'data': submission.data};
                 if (self.formUuid) {

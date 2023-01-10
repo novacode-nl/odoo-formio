@@ -34,6 +34,7 @@ function app() {
             this.submissionUrl = '/formio/public/form/' + this.formUuid + '/submission';
             this.submitUrl = '/formio/public/form/' + this.formUuid + '/submit';
             this.wizardSubmitUrl = '/formio/public/form/';
+            this.apiUrl = '/formio/public/form/' + this.formUuid + '/api';
         }
 
         publicSubmitDoneUrl() {

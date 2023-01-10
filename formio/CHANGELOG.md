@@ -1,5 +1,10 @@
 # Changelog
 
+### 11.0
+
+- Add Form (JS) `apiUrl` property (backend, portal, public).
+- Implement Form (JS) `change` event, which posts to `/api/onChange` endpoint (determined by `apiUrl`).
+
 ### 10.7
 
 Implement missing `api=getData` (fetching) endpoints in backend, portal, public.
