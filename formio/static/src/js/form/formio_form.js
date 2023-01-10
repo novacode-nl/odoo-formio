@@ -89,9 +89,9 @@ export class OdooFormioForm extends Component {
             if (changed.changed.component) {
                 const component = changed.changed.component;
                 const instance = changed.changed.instance;
-                if (component.properties.hasOwnProperty('onChange')) {
+                if (component.properties.hasOwnProperty('change')) {
                     let apiUrl = self.apiUrl;
-                    apiUrl += '/' + 'onChange' + '/' + component.properties.onChange;
+                    apiUrl += '/' + 'componentChange' + '/' + component.properties.change;
                     let instanceData = {};
                     if (instance.hasOwnProperty('parent')) {
                         instanceData.parent_component = {
