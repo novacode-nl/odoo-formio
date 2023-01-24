@@ -218,19 +218,21 @@ See LICENSE file for full licensing details. -->
                             </div>
                         </page>
                         <page string="Form Display" name="form_display_settings">
-                                <group>
+                            <group>
+                                <group string="iFrame Embedding" name="iframe_embed">
+                                    <field name="iframe_resizer_body_margin" groups="formio.group_formio_admin"/>
+                                </group>
+                                <group string="Submission" name="submission">
                                     <field name="view_as_html" groups="formio.group_formio_admin"/>
                                 </group>
-                                <group>
+                                <group string="Info" name="info">
                                     <field name="show_form_title" string="Show Title" groups="formio.group_formio_admin" attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                     <field name="show_form_state" string="Show State" groups="formio.group_formio_admin" attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                     <field name="show_form_user_metadata" groups="formio.group_formio_admin" attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                     <field name="show_form_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                     <field name="show_form_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                 </group>
-                                <group name="iframe_embed">
-                                    <field name="iframe_resizer_body_margin"/>
-                                </group>
+                            </group>
                         </page>
                         <page string="Form Permissions" name="form_permissions" groups="formio.group_formio_admin">
                             <div class="mb-3 text-muted">
