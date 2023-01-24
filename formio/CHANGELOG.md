@@ -1,5 +1,16 @@
 # Changelog
 
+## 11.1
+
+Solve Form height resizing issues, by applying the iFrame Resizer `bodyMargin` option.\
+Eg. ensure the rendering of select component at the bottom of a Form won't break anymore.\
+Issue: [\#20](https://github.com/novacode-nl/odoo-formio/issues/20)
+
+- Update iFrame Resizer (JS) library to version 4.3.2 (Dec 2021).
+- Add configurable `iframe_resizer_body_margin` field in Form Builder, with a (sensible) default value.
+- Change Form templates (backend, portal) to apply the configurable iFrame Resizer `bodyMargin`.
+- Add callable template `formio.form_iframe` (with options: `src`, `bodyMargin`, `form`), which applies the iFrame Resizer (with fallback on `form` its Form Builder).
+
 ### 11.0
 
 - Add Form (JS) `apiUrl` property (backend, portal, public).

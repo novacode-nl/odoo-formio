@@ -228,6 +228,9 @@ See LICENSE file for full licensing details. -->
                                     <field name="show_form_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                     <field name="show_form_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                 </group>
+                                <group name="iframe_embed">
+                                    <field name="iframe_resizer_body_margin"/>
+                                </group>
                         </page>
                         <page string="Form Permissions" name="form_permissions" groups="formio.group_formio_admin">
                             <div class="mb-3 text-muted">

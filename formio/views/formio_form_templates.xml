@@ -3,15 +3,37 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
+    <template id="form_iframe" name="formio form - embed">
+        <div class="formio_form_iframe_container">
+            <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.min.js"></script>
+            <iframe t-attf-src="#{src}" class="formio_form_embed"/>
+            <t t-if="bodyMargin">
+                <t t-set="bodyMarginResize" t-value="bodyMargin"/>
+            </t>
+            <t t-elif="form">
+                <t t-set="bodyMarginResize" t-value="form.iframe_resizer_body_margin"/>
+            </t>
+            <t t-else="">
+                <t t-set="bodyMarginResize" t-value="'0px 0px 260px 0px'"/>
+            </t>
+            <script>
+                iFrameResize(
+                    {
+                        heightCalculationMethod: 'grow',
+                        resizeFrom: 'child',
+                        bodyMargin: &quot;<t t-esc="bodyMarginResize"/>&quot;
+                    },
+                    '.formio_form_embed'
+                );
+            </script>
+        </div>
+    </template>
+
     <template id="formio_form_embed" name="formio form - embed">
         &lt;!DOCTYPE html&gt;
         <html>
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-                <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/> -->
-                <!-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
-                <!-- <script src="https://cdn.form.io/flatpickr/flatpickr.min.js"></script> -->
-                <!-- <link rel="stylesheet" href="https://cdn.form.io/flatpickr/flatpickr.min.css"/> -->
                 <t t-foreach="formio_css_assets" t-as="css">
                     <link rel="stylesheet" type="text/css" t-att-href="css.url"/>
                 </t>

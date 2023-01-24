@@ -118,6 +118,10 @@ class Builder(models.Model):
     show_form_state = fields.Boolean("Show Form State", tracking=True, help="Show the state in the Form header.", default=True)
     show_form_user_metadata = fields.Boolean(
         "Show User Metadata", tracking=True, help="Show submission and assigned user metadata in the Form header.", default=True)
+    iframe_resizer_body_margin = fields.Char(
+        "iFrame Resizer bodyMargin", default="0px 0px 260px 0px", tracking=True,
+        help="Override the default body margin style in the iFrame. A string can be any valid value for the CSS margin attribute. A number is converted into px."
+    )
     wizard = fields.Boolean("Wizard", tracking=True)
     wizard_on_next_page_save_draft = fields.Boolean("Wizard on Next Page Save Draft", tracking=True)
     submission_url_add_query_params_from = fields.Selection(

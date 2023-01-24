@@ -121,9 +121,10 @@ See LICENSE file for full licensing details. -->
     <template id="portal_my_formio_edit" name="Portal Form" priority="40">
         <t t-call="portal.portal_layout">
             <div t-attf-class="formio_form_container mt16 {{ form.state }}">
-                <div class="formio_form_iframe_container">
-                    <iframe t-attf-src="/formio/portal/form/#{form.uuid}" class="formio_form_embed"/>
-                </div>
+                <t t-call="formio.form_iframe">
+                    <t t-set="src" t-value="'/formio/portal/form/' + form.uuid"/>
+                    <t t-set="form" t-value="form"/>
+                </t>
             </div>
         </t>
     </template>
