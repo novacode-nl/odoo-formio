@@ -10,8 +10,8 @@ See LICENSE file for full licensing details. -->
             <t t-if="bodyMargin">
                 <t t-set="bodyMarginResize" t-value="bodyMargin"/>
             </t>
-            <t t-elif="form">
-                <t t-set="bodyMarginResize" t-value="form.iframe_resizer_body_margin"/>
+            <t t-elif="formio_builder">
+                <t t-set="bodyMarginResize" t-value="formio_builder.iframe_resizer_body_margin"/>
             </t>
             <t t-else="">
                 <t t-set="bodyMarginResize" t-value="'0px 0px 260px 0px'"/>
