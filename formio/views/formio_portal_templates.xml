@@ -123,7 +123,7 @@ See LICENSE file for full licensing details. -->
             <div t-attf-class="formio_form_container mt16 {{ form.state }}">
                 <t t-call="formio.form_iframe">
                     <t t-set="src" t-value="'/formio/portal/form/' + form.uuid"/>
-                    <t t-set="form" t-value="form"/>
+                    <t t-set="formio_builder" t-value="form.builder_id"/>
                 </t>
             </div>
         </t>
