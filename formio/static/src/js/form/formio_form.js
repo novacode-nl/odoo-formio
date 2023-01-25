@@ -55,6 +55,13 @@ export class OdooFormioForm extends Component {
         return '/formio/form/', self.formUuid, compObj.data.url;
     }
 
+    resetParentIFrame() {
+        // Ensures (also) the height shall be recomputed
+        if ('parentIFrame' in window) {
+            parentIFrame.reset();
+        }
+    }
+
     loadForm() {
         const self = this;
 
@@ -186,8 +193,17 @@ export class OdooFormioForm extends Component {
                 self.submitDone(submission);
             });
 
-            // wizard nextPage
-            form.on('nextPage', function() {
+            // wizard
+            form.on('wizardPageSelected', function(submission) {
+                self.resetParentIFrame();
+            });
+
+            form.on('prevPage', function(submission) {
+                self.resetParentIFrame();
+            });
+
+            form.on('nextPage', function(submission) {
+                self.resetParentIFrame();
                 // readOnly check also applies in server endpoint
                 const readOnly = 'readOnly' in self.options && self.options['readOnly'] == true;
                 if (self.params['wizard_on_next_page_save_draft'] && !readOnly) {
@@ -196,9 +212,11 @@ export class OdooFormioForm extends Component {
                         data['form_uuid'] = self.formUuid;
                     }
                     $.jsonRpc.request(self.submitUrl, 'call', data).then(function(submission) {
-                        // Set properties to instruct the next calls to save (draft) the current form.
-                        self.formUuid = submission.form_uuid;
-                        self.submitUrl = self.wizardSubmitUrl + self.formUuid + '/submit';
+                        if (typeof(submission) != 'undefined') {
+                            // Set properties to instruct the next calls to save (draft) the current form.
+                            self.formUuid = submission.form_uuid;
+                            self.submitUrl = self.wizardSubmitUrl + self.formUuid + '/submit';
+                        }
                     });
                 }
             });

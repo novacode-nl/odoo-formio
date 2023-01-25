@@ -106,6 +106,10 @@ class Form(models.Model):
     show_id = fields.Boolean("Show ID")
     show_uuid = fields.Boolean("Show UUID")
     show_user_metadata = fields.Boolean("Show User Metadata")
+    iframe_resizer_body_margin = fields.Char(
+        "iFrame Resizer bodyMargin",
+        related="builder_id.iframe_resizer_body_margin",
+    )
     languages = fields.One2many('res.lang', related='builder_id.languages', string='Languages')
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
     allow_force_update_state = fields.Boolean("Allow force update State", compute='_compute_access')
