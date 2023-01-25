@@ -1,5 +1,11 @@
 # Changelog
 
+## 11.2
+
+Improve Form (iFrame) resizing, especially for wizard Forms.\
+Change the `heightCalculationMethod` from `grow` to `lowestElement`.\
+This resizes upon every (component) change by obtaining the lowest bottom element.
+
 ## 11.1
 
 Solve Form height resizing issues, by applying the iFrame Resizer `bodyMargin` option.\
