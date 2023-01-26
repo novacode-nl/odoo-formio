@@ -1,5 +1,9 @@
 # Changelog
 
+## 11.4
+
+- Ensure users with (group) "Administration Settings" are assigned to the "Forms Administrator" group.
+
 ## 11.3
 
 - Improve Form (iFrame) resizing, especially for wizard Forms.\
