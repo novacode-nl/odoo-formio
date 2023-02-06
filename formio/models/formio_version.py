@@ -1,8 +1,6 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from pkg_resources import parse_version
-
 from odoo import api, fields, models
 
 
@@ -54,8 +52,7 @@ class Version(models.Model):
     @api.model
     def _update_versions_sequence(self):
         versions = self.search([])
-        names = versions.mapped('name')
-        names = sorted(names, key=parse_version)
+        names = sorted(versions.mapped('name'))
         seq = 0
         for name in names:
             seq += 1
