@@ -152,6 +152,11 @@ class Builder(models.Model):
     component_partner_activity_user_id = fields.Many2one('res.users', tracking=True)
     form_allow_copy = fields.Boolean(string='Allow Copies', help='Allow copying form submissions.', tracking=True, default=True)
     form_copy_to_current = fields.Boolean(string='Copy To Current', help='When copying a form, always link it to the current version of the builder instead of the original builder.', tracking=True, default=True)
+    server_action_ids = fields.Many2many(
+        comodel_name='ir.actions.server',
+        string='Server Actions',
+        domain="[('model_name', '=', 'formio.form')]"
+    )
 
     def _states_selection(self):
         return STATES
@@ -185,7 +190,7 @@ class Builder(models.Model):
     def constaint_check_name(self):
         self.ensure_one
         if re.search(r"[^a-zA-Z0-9_-]", self.name) is not None:
-            raise ValidationError('Name is invalid. Use ASCII letters, digits, "-" or "_".')
+            raise ValidationError(_('Name is invalid. Use ASCII letters, digits, "-" or "_".'))
 
     @api.constrains("name", "state")
     def constraint_one_current(self):

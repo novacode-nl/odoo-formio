@@ -1,5 +1,11 @@
 # Changelog
 
+## 11.5
+
+Provide an informational reference (link) between Form Builder and Server Actions:
+- Form Builder (form view): new tab "Actions API" where server actions can be linked.
+- Add char field "Forms Code" in server action (form view).
+
 ## 11.4
 
 - Ensure users with (group) "Administration Settings" are assigned to the "Forms Administrator" group.

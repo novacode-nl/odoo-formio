@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_server_action_form" model="ir.ui.view">
+        <field name="model">ir.actions.server</field>
+        <field name="inherit_id" ref="base.view_server_action_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='model_id']" position="after">
+                <field name="formio_code"/>
+                <div class="mb-2 text-muted" colspan="2">
+                    <i class="fa fa-info-circle" title="info"/> <strong> Forms Code:</strong> Reference used in Form Builder(s) to indentiy the link between a Server Action and Form Builder(s).
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
