@@ -64,8 +64,18 @@ export class OdooFormioForm extends Component {
 
     loadForm() {
         const self = this;
-
-        $.jsonRpc.request(self.configUrl, 'call', {}).then(function(result) {
+        let configUrl = self.configUrl;
+        const windowParams = new URLSearchParams(window.location.search);
+        if (windowParams) {
+            configUrl += '?' + windowParams.toString();
+        }
+        else if (window.parent.location.search) {
+            const parentParams = new URLSearchParams(window.parent.location.search);
+            if (parentParams) {
+                configUrl += '?' + parentParams.toString();
+            }
+        }
+        $.jsonRpc.request(configUrl, 'call', {}).then(function(result) {
             if (!$.isEmptyObject(result)) {
                 self.schema = result.schema;
                 self.options = result.options;

@@ -557,6 +557,9 @@ class Builder(models.Model):
                 i18n[code][trans.source] = trans.value
         return i18n
 
+    def _etl_odoo_config(self, params):
+        return {}
+
     def _etl_odoo_data(self, params):
         return {}
 

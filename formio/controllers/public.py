@@ -51,6 +51,10 @@ class FormioPublicController(http.Controller):
             res['schema'] = json.loads(form.builder_id.schema)
             res['options'] = self._get_public_form_js_options(form)
             res['params'] = self._get_public_form_js_params(form.builder_id)
+
+        args = request.httprequest.args
+        etl_odoo_config = form.builder_id.sudo()._etl_odoo_config(params=args.to_dict())
+        res['options'].update(etl_odoo_config.get('options', {}))
         return res
 
     @http.route('/formio/public/form/<string:uuid>/submission', type='json', auth='public', website=True)
@@ -139,6 +143,10 @@ class FormioPublicController(http.Controller):
             res['schema'] = json.loads(formio_builder.schema)
             res['options'] = self._get_public_create_form_js_options(formio_builder)
             res['params'] = self._get_public_form_js_params(formio_builder)
+
+        args = request.httprequest.args
+        etl_odoo_config = formio_builder.sudo()._etl_odoo_config(params=args.to_dict())
+        res['options'].update(etl_odoo_config.get('options', {}))
 
         return res
 

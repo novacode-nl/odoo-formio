@@ -236,6 +236,9 @@ class FormioCustomerPortal(CustomerPortal):
             res['options'] = self._get_form_js_options(builder)
             res['params'] = self._get_form_js_params(builder)
 
+        args = request.httprequest.args
+        etl_odoo_config = builder.sudo()._etl_odoo_config(params=args.to_dict())
+        res['options'].update(etl_odoo_config.get('options', {}))
         return res
 
     @http.route('/formio/portal/form/new/<string:builder_uuid>/submission', type='json', auth='user', website=True)
