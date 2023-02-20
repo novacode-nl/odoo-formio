@@ -1,5 +1,10 @@
 # Changelog
 
+## 11.7
+
+Rename field `formio_code` to `formio_ref`.\
+It has more meaning and cannot be confused with coding.
+
 ## 11.6
 
 Enable loading the config (eg options) of Forms using the backend `_etl_odoo_config` method:

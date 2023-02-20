@@ -10,23 +10,23 @@ from odoo.exceptions import ValidationError
 class ServerAction(models.Model):
     _inherit = "ir.actions.server"
 
-    formio_code = fields.Char(
-        string="Forms Code", help="Identifies a server action with related form builder."
+    formio_ref = fields.Char(
+        string="Forms Ref", help="Identifies a server action with related form builder."
     )
 
-    @api.constrains('formio_code')
-    def constaint_checkq_formio_code(self):
+    @api.constrains('formio_ref')
+    def constaint_check_formio_ref(self):
         self.ensure_one
-        if self.formio_code:
-            if re.search(r"[^a-zA-Z0-9_-]", self.formio_code) is not None:
-                raise ValidationError(_('Forms Code is invalid. Use ASCII letters, digits, "-" or "_".'))
+        if self.formio_ref:
+            if re.search(r"[^a-zA-Z0-9_-]", self.formio_ref) is not None:
+                raise ValidationError(_('Forms Ref is invalid. Use ASCII letters, digits, "-" or "_".'))
 
-    @api.constrains('formio_code')
-    def _constraint_unique_formio_code(self):
+    @api.constrains('formio_ref')
+    def _constraint_unique_formio_ref(self):
         for rec in self:
-            domain = [("formio_code", "=", rec.formio_code)]
+            domain = [("formio_ref", "=", rec.formio_ref)]
             if self.search_count(domain) > 1:
                 msg = _(
-                    'A Server Action with Forms Code "%s" already exists.\nForms Code should be unique.'
-                ) % (rec.formio_code)
+                    'A Server Action with Forms Ref "%s" already exists.\nForms Ref should be unique.'
+                ) % (rec.formio_ref)
                 raise ValidationError(msg)
