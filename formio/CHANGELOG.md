@@ -1,5 +1,9 @@
 # Changelog
 
+## 11.8
+
+Add field "Forms Ref" (`formio_ref`) in Server Actions list view.
+
 ## 11.7
 
 Rename field `formio_code` to `formio_ref`.\
