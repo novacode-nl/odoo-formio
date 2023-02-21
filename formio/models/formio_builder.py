@@ -47,7 +47,7 @@ class Builder(models.Model):
         'formio.version', string='formio.js version', required=True,
         default=lambda self: self._default_formio_version_id(), tracking=True,
         help="""Loads the specific formio.js Javascript libraries version (sourcecode: https://github.com/formio/formio.js)""")
-    formio_version_name = fields.Char(related='formio_version_id.name', string='formio.js version name', tracking=False) # silly, but avoids duplicate tracking message
+    formio_version_name = fields.Char(related='formio_version_id.name', string='formio.js version name', tracking=False)  # silly, but avoids duplicate tracking message
     formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='formio.js CSS')
     formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='formio.js Javascript')
     formio_js_options_id = fields.Many2one('formio.builder.js.options', string='formio.js Javascript Options template', store=False)
@@ -84,9 +84,12 @@ class Builder(models.Model):
     parent_version = fields.Integer(related='parent_id.version', string='Parent Version', readonly=True)
     version = fields.Integer("Version", required=True, readonly=True, default=1)
     version_comment = fields.Text("Version Comment")
-    user_id = fields.Many2one('res.users', string='Assigned user', tracking=True)
+    user_id = fields.Many2one('res.users', string='Assigned user', tracking=True)  # TODO old field, remove?
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal", tracking=True, help="Form is accessible by assigned portal user")
+    portal_url = fields.Char(string='Portal URL', compute='_compute_portal_urls')
+    portal_direct_create = fields.Boolean("Portal Direct Create", tracking=True, help="Direct create Form by link")
+    portal_direct_create_url = fields.Char(string='Portal Direct Create URL', compute='_compute_portal_urls')
     portal_submit_done_url = fields.Char(
         string='Portal Submit-done URL', tracking=True,
         help="""\
@@ -114,8 +117,26 @@ class Builder(models.Model):
     show_form_state = fields.Boolean("Show Form State", tracking=True, help="Show the state in the Form header.", default=True)
     show_form_user_metadata = fields.Boolean(
         "Show User Metadata", tracking=True, help="Show submission and assigned user metadata in the Form header.", default=True)
+    iframe_resizer_body_margin = fields.Char(
+        "iFrame Resizer bodyMargin", tracking=True,
+        help="""\
+        Override the default body margin style in the iFrame.
+        A string can be any valid value for the CSS margin attribute.
+        A number is converted into px.
+        Example: 0px 0px 260px 0px
+        """
+    )
     wizard = fields.Boolean("Wizard", tracking=True)
     wizard_on_next_page_save_draft = fields.Boolean("Wizard on Next Page Save Draft", tracking=True)
+    submission_url_add_query_params_from = fields.Selection(
+        string="Add Query Params to Submission URL from",
+        selection=[
+            ("window", "Window iframe (src)"),
+            ("window.parent", "Window parent (URL)"),
+        ],
+        tracking=True,
+        help="Enables adding the URL query params from the window's iframe (src) or window.parent to the form submission URL endpoint.",
+    )
     translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations', copy=True)
     languages = fields.One2many('res.lang', compute='_compute_languages', string='Languages')
     allow_force_update_state_group_ids = fields.Many2many(
@@ -130,6 +151,11 @@ class Builder(models.Model):
     component_partner_activity_user_id = fields.Many2one('res.users', tracking=True)
     form_allow_copy = fields.Boolean(string='Allow Copies', help='Allow copying form submissions.', tracking=True, default=True)
     form_copy_to_current = fields.Boolean(string='Copy To Current', help='When copying a form, always link it to the current version of the builder instead of the original builder.', tracking=True, default=True)
+    server_action_ids = fields.Many2many(
+        comodel_name='ir.actions.server',
+        string='Server Actions',
+        domain="[('model_name', '=', 'formio.form')]"
+    )
 
     def _states_selection(self):
         return STATES
@@ -163,7 +189,7 @@ class Builder(models.Model):
     def constaint_check_name(self):
         self.ensure_one
         if re.search(r"[^a-zA-Z0-9_-]", self.name) is not None:
-            raise ValidationError('Name is invalid. Use ASCII letters, digits, "-" or "_".')
+            raise ValidationError(_('Name is invalid. Use ASCII letters, digits, "-" or "_".'))
 
     @api.constrains("name", "state")
     def constraint_one_current(self):
@@ -272,6 +298,20 @@ class Builder(models.Model):
             else:
                 r.public_url = False
 
+    @api.depends('portal', 'portal_direct_create')
+    def _compute_portal_urls(self):
+        for r in self:
+            if r.portal and request:
+                url_root = request.httprequest.url_root
+                r.portal_url = '%s%s/%s' % (url_root, 'my/formio/form/new', r.name)
+                if r.portal_direct_create:
+                    r.portal_direct_create_url = '%s%s/%s' % (url_root, 'my/formio/form/create', r.name)
+                else:
+                    r.portal_direct_create_url = False
+            else:
+                r.portal_url = False
+                r.portal_direct_create_url = False
+
     @api.depends('translations')
     def _compute_languages(self):
         for r in self:
@@ -301,7 +341,7 @@ class Builder(models.Model):
     def action_view_formio(self):
         view_id = self.env.ref('formio.view_formio_builder_formio').id
         return {
-            "name": self.name,
+            "name": self.display_name_full,
             "type": "ir.actions.act_window",
             "res_model": "formio.builder",
             "views": [(view_id, 'formio_builder')],
@@ -404,7 +444,61 @@ class Builder(models.Model):
     def _get_js_params(self):
         """ Odoo JS (Owl component) misc. params """
         params = {
-            'readOnly': self.is_locked
+            'portal_submit_done_url': self.portal_submit_done_url,
+            'readOnly': self.is_locked,
+            'wizard_on_next_page_save_draft': self.wizard and self.wizard_on_next_page_save_draft,
+            'submission_url_add_query_params_from': self.submission_url_add_query_params_from
+        }
+        return params
+
+    @api.model
+    def get_builder_uuid(self, uuid):
+        """ Get builder by uuid or False. """
+
+        domain = [
+            ('uuid', '=', uuid),
+        ]
+        builder = self.sudo().search(domain, limit=1)
+        if builder:
+            return builder
+        else:
+            return False
+
+    @api.model
+    def get_portal_builder_uuid(self, uuid):
+        """ Verifies portal access to forms and return builder or False. """
+
+        domain = [
+            ('uuid', '=', uuid),
+            ('portal', '=', True),
+        ]
+        builder = self.sudo().search(domain, limit=1)
+        if builder:
+            return builder
+        else:
+            return False
+
+    @api.model
+    def get_portal_builder_name(self, name):
+        """ Verifies portal access to forms and return builder or False. """
+
+        domain = [
+            ('name', '=', name),
+            ('state', '=', STATE_CURRENT),
+            ('portal', '=', True),
+        ]
+        builder = self.sudo().search(domain, limit=1)
+        if builder:
+            return builder
+        else:
+            return False
+
+    def _get_portal_form_js_params(self):
+        """ Odoo JS (Owl component) misc. params """
+        params = {
+            'portal_submit_done_url': self.portal_submit_done_url,
+            'wizard_on_next_page_save_draft': self.wizard and self.wizard_on_next_page_save_draft,
+            'submission_url_add_query_params_from': self.submission_url_add_query_params_from
         }
         return params
 
@@ -412,7 +506,8 @@ class Builder(models.Model):
         """ Form: Odoo JS (Owl component) misc. params """
         params = {
             'public_submit_done_url': self.public_submit_done_url,
-            'wizard_on_next_page_save_draft': self.wizard and self.wizard_on_next_page_save_draft
+            'wizard_on_next_page_save_draft': self.wizard and self.wizard_on_next_page_save_draft,
+            'submission_url_add_query_params_from': self.submission_url_add_query_params_from
         }
         return params
 
@@ -460,3 +555,12 @@ class Builder(models.Model):
             else:
                 i18n[code][trans.source] = trans.value
         return i18n
+
+    def _etl_odoo_config(self, params):
+        return {}
+
+    def _etl_odoo_data(self, params):
+        return {}
+
+    def _generate_odoo_domain(self, domain=[], params={}):
+        return domain

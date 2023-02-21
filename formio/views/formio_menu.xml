@@ -6,7 +6,7 @@ See LICENSE file for full licensing details. -->
     <menuitem
         id="menu_formio_root"
         name="Forms"
-        sequence="2"
+        sequence="127"
         web_icon="formio,static/description/icon.png"
         groups="base.group_user"/>
     <menuitem
@@ -69,11 +69,11 @@ See LICENSE file for full licensing details. -->
         parent="formio.menu_formio_configuration"
         sequence="100"
         action="formio.action_formio_builder_js_options"/>
-    <menuitem
-        id="menu_formio_res_model"
-        name="Resource Models"
-        parent="formio.menu_formio_configuration"
-        sequence="200"
-        action="formio.action_formio_res_model"/>
+    <!-- <menuitem -->
+    <!--     id="menu_formio_res_model" -->
+    <!--     name="Resource Models" -->
+    <!--     parent="formio.menu_formio_configuration" -->
+    <!--     sequence="200" -->
+    <!--     action="formio.action_formio_res_model"/> -->
 
 </odoo>

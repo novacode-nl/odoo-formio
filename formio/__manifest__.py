@@ -4,20 +4,22 @@
 {
     'name': 'Forms',
     'summary': 'Form Builder & integration of professional and versatile Forms to collect any information you need for your business.',
-    'version': '9.24',
+    'version': '11.8',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
-    'live_test_url': 'https://demo14.novacode.nl',
+    # 'live_test_url': 'https://demo15.novacode.nl',
     'category': 'Forms/Forms',
     'depends': ['web', 'portal', 'mail'],
     'qweb': [
         'static/src/xml/formio.xml',
     ],
     'data': [
+        'data/formio_builder_js_options_data.xml',
         'data/formio_default_asset_css_data.xml',
         'data/formio_version_data.xml',
         'data/formio_version_asset_data.xml',
+        'data/ir_config_parameter_data.xml',
         'data/ir_cron_data.xml',
         'data/mail_activity_data.xml',
         'data/mail_template_data.xml',
@@ -43,6 +45,7 @@
         'views/formio_version_github_tag_views.xml',
         'views/formio_menu.xml',
         'views/res_config_settings_views.xml',
+        'views/ir_actions_views.xml',
         'views/mail_activity_views.xml',
         # formio templates
         'views/formio_builder_templates.xml',
@@ -60,11 +63,5 @@
     'uninstall_hook': 'uninstall_hook',
     'images': [
         'static/description/banner.gif',
-    ],
-    'description': """
-Forms
-=====
-
-Build, deploy and Forms.
-"""
+    ]
 }

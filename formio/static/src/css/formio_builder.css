@@ -1,6 +1,6 @@
-.o_form_view .o_form_sheet_bg > .formio_builder_container.o_form_sheet {
-    max-width: none;
-    width: 95%;
+.o_form_view .o_form_sheet.formio_builder_container {
+    max-width: none !important;
+    width: 95% !important;
 }
 
 .formio_builder_container .formio_builder_dock {

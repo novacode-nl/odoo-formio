@@ -12,6 +12,7 @@ from . import formio_version_asset
 from . import formio_version_github_tag
 from . import formio_translation_source
 from . import formio_translation
+from . import ir_actions
 from . import ir_attachment
 from . import ir_view
 from . import res_config_settings

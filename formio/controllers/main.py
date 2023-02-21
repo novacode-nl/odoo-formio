@@ -104,9 +104,9 @@ class FormioController(http.Controller):
         schema = json.dumps(post['schema'])
         builder.write({'schema': schema})
 
-    ##################
-    # Form - user auth
-    ##################
+    #######################
+    # Form uuid - user auth
+    #######################
 
     @http.route([
         '/formio/form/<string:uuid>',
@@ -118,30 +118,35 @@ class FormioController(http.Controller):
             msg = 'Form UUID %s' % uuid
             return request.not_found(msg)
 
-        # TODO REMOVE (still needed or obsolete legacy?)
-        # Needed to update language
-        context = request.env.context.copy()
-        context.update({'lang': request.env.user.lang})
-        request.env.context = context
+        args = request.httprequest.args
+        if args.get('api') == 'getData':
+            return self._api_get_data(uuid)
+        else:
+            # TODO REMOVE (still needed or obsolete legacy?)
+            # Needed to update language
+            context = request.env.context.copy()
+            context.update({'lang': request.env.user.lang})
+            request.env.context = context
 
-        languages = form.builder_id.languages
-        lang_en = request.env.ref('base.lang_en')
+            languages = form.builder_id.languages
+            lang_en = request.env.ref('base.lang_en')
 
-        if lang_en.active and form.builder_id.language_en_enable and 'en_US' not in languages.mapped('code'):
-            languages |= request.env.ref('base.lang_en')
+            if lang_en.active and form.builder_id.language_en_enable and 'en_US' not in languages.mapped('code'):
+                languages |= request.env.ref('base.lang_en')
 
-        values = {
-            'languages': languages.sorted('name'),
-            'form': form,
-            'formio_css_assets': form.builder_id.formio_css_assets,
-            'formio_js_assets': form.builder_id.formio_js_assets,
-        }
-        return request.render('formio.formio_form_embed', values)
+            values = {
+                'languages': languages.sorted('name'),
+                'form': form,
+                'formio_css_assets': form.builder_id.formio_css_assets,
+                'formio_js_assets': form.builder_id.formio_js_assets,
+            }
+            return request.render('formio.formio_form_embed', values)
 
     @http.route('/formio/form/<string:form_uuid>/config', type='json', auth='user', website=True)
     def form_config(self, form_uuid, **kwargs):
         form = self._get_form(form_uuid, 'read')
-        res = {'schema': {}, 'options': {}, 'config': {}}
+        # TODO remove config (key)
+        res = {'schema': {}, 'options': {}, 'config': {}, 'params': {}}
 
         if form and form.builder_id.schema:
             res['schema'] = json.loads(form.builder_id.schema)
@@ -150,6 +155,7 @@ class FormioController(http.Controller):
 
         return res
 
+    # TODO Remove this endpoint (not used?)
     @http.route('/formio/form/create/<string:builder_uuid>', type='json', auth='user', website=True)
     def form_config_builder(self, builder_uuid, **kwargs):
         domain = [('uuid', '=', builder_uuid)]
@@ -208,13 +214,18 @@ class FormioController(http.Controller):
     # Form - fetch Odoo data
     ########################
 
-    @http.route([
-        '/formio/form/<string:uuid>/data',
-        '/formio/portal/form/<string:uuid>/data'
-    ],
-    type='http', auth='user', website=True)
+    @http.route(
+        ['/formio/form/<string:uuid>/data',
+         '/formio/portal/form/<string:uuid>/data'],
+        type='http', auth='user', website=True)
     def form_data(self, uuid, **kwargs):
         """ Get data from a resource-object.
+
+        DEPRECATED / CHANGE
+        ===================
+        Use the query string "?api=getData" in URLs:
+        - /formio/form/<string:uuid>?api=getData
+        - /formio/portal/form/<string:uuid>?api=getData
 
         EXAMPLE
         =======
@@ -226,48 +237,12 @@ class FormioController(http.Controller):
         - Data Source URL: /data
         - Filter Query: model=res.partner&label=name&domain_fields=city&city=Sittard
         """
-
-        form = self._get_form(uuid, 'read')
-        if not form:
-            return
-        
-        args = request.httprequest.args
-
-        model = args.get('model')
-        # TODO: formio error?
-        if model is None:
-            _logger('model is missing in "Data Filter Query"')
-
-        label = args.get('label')
-        # TODO: formio error?
-        if label is None:
-            _logger.error('label is missing in "Data Filter Query"')
-
-        domain = []
-        domain_fields = args.getlist('domain_fields')
-        # domain_fields_op = args.getlist('domain_fields_operators')
-
-        for domain_field in domain_fields:
-            value = args.get(domain_field)
-
-            if value is not None:
-                filter = (domain_field, '=', value)
-                domain.append(filter)
-
-        _logger.debug("domain: %s" % domain)
-
-        try:
-            language = args.get('language')
-            if language:
-                lang = request.env['res.lang']._from_formio_ietf_code(language)
-                model_obj = request.env[model].with_context(lang=lang)
-            else:
-                model_obj = request.env[model]
-            records = model_obj.search_read(domain, [label])
-            data = json.dumps([{'id': r['id'], 'label': r[label]} for r in records])
-            return data
-        except Exception as e:
-            _logger.error("Exception: %s" % e)
+        msg = "The /data fetching URLs %s will be deprecated and work with a minor change in Odoo version 16.0\nMore info on Wiki: %s" % (
+            "/formio/form/<string:uuid>/data, /formio/portal/form/<string:uuid>/data",
+            "https://github.com/novacode-nl/odoo-formio/wiki/Populate-a-Select-Component-data-(options)-with-data-from-Odoo-model.field",
+        )
+        _logger.warning(msg)
+        return self._api_get_data(uuid)
 
     @http.route('/formio/form/<string:uuid>/res_data', type='http', auth='user', website=True)
     def form_res_data(self, uuid, **kwargs):
@@ -314,9 +289,53 @@ class FormioController(http.Controller):
                 if not res_data or not isinstance(res_data.ids, list):
                     res_data = getattr(record, _field)
                 elif isinstance(res_data, list):
-                    res_data = [get_attr(r, _field) for r in res_data]
+                    res_data = [getattr(r, _field) for r in res_data]
 
             data = json.dumps([{'id': r['id'], 'label': r[label]} for r in res_data])
+            return data
+        except Exception as e:
+            _logger.error("Exception: %s" % e)
+
+    def _api_get_data(self, form_uuid):
+        form = self._get_form(form_uuid, 'read')
+        if not form:
+            _logger.info('api=getData: Form (uuid) %s is not found or allowed' % form_uuid)
+            return []
+
+        args = request.httprequest.args
+        model = args.get('model')
+        # TODO: formio error?
+        if model is None:
+            _logger('model is missing in "Data Filter Query"')
+
+        label = args.get('label')
+        # TODO: formio error?
+        if label is None:
+            _logger.error('label is missing in "Data Filter Query"')
+
+        domain = []
+        domain_fields = args.getlist('domain_fields')
+        # domain_fields_op = args.getlist('domain_fields_operators')
+
+        for domain_field in domain_fields:
+            value = args.get(domain_field)
+
+            if value is not None:
+                filter = (domain_field, '=', value)
+                domain.append(filter)
+
+        if not domain:
+            domain = form._generate_odoo_domain(domain, params=args.to_dict())
+
+        try:
+            language = args.get('language')
+            if language:
+                lang = request.env['res.lang']._from_formio_ietf_code(language)
+                model_obj = request.env[model].with_context(lang=lang)
+            else:
+                model_obj = request.env[model]
+            records = model_obj.search_read(domain, [label])
+            data = json.dumps([{'id': r['id'], 'label': r[label]} for r in records])
             return data
         except Exception as e:
             _logger.error("Exception: %s" % e)

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="formio_builder_js_options_default" model="formio.builder.js.options">
+            <!-- More info about the `overrideEditForm` property:
+                 https://github.com/formio/formio.js/issues/2280
+
+                 However the `dataSrc` property currently (December
+                 2022) doesn't seem to work, also mentoined in:
+                 https://github.com/formio/formio.js/issues/2489
+            -->
+            <field name="name">Default</field>
+            <field name="value">{
+  'editForm': {
+    'select': [
+      {
+        'key': 'data',
+        'components': [
+          {
+            'key': 'dataSrc',
+            'overrideEditForm': True,
+            'defaultValue': 'url',
+          },
+          {
+             'key': 'filter',
+             'defaultValue': 'api=getData&amp;model=MODEL&amp;label=name'
+          },
+          {
+            'key': 'ignoreCache',
+            'overrideEditForm': True,
+            'defaultValue': True,
+          }
+        ]
+      }
+    ]
+  }
+}</field>
+        </record>
+    </data>
+</odoo>

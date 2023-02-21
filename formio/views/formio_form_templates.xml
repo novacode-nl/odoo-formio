@@ -15,6 +15,31 @@ See LICENSE file for full licensing details. -->
         </xpath>
     </template>
 
+    <template id="form_iframe" name="formio form - embed">
+        <div class="formio_form_iframe_container">
+            <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.min.js"></script>
+            <iframe t-attf-src="#{src}" class="formio_form_embed"/>
+            <t t-if="bodyMargin">
+                <t t-set="bodyMarginResize" t-value="bodyMargin"/>
+            </t>
+            <t t-elif="formio_builder">
+                <t t-set="bodyMarginResize" t-value="formio_builder.iframe_resizer_body_margin"/>
+            </t>
+            <t t-else="">
+                <t t-set="bodyMarginResize" t-value="'0px 0px 260px 0px'"/>
+            </t>
+            <script>
+                iFrameResize(
+                    {
+                        heightCalculationMethod: 'grow',
+                        bodyMargin: &quot;<t t-esc="bodyMarginResize"/>&quot;
+                    },
+                    '.formio_form_embed'
+                );
+            </script>
+        </div>
+    </template>
+
     <template id="formio_form_embed" name="formio form - embed">
         &lt;!DOCTYPE html&gt;
         <html>

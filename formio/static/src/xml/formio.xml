@@ -55,7 +55,13 @@
                 <div class="formio_form_iframe_container">
                     <iframe t-attf-src="/formio/form/#{form.uuid}" class="formio_form_embed"/>
                     <script>
-                        iFrameResize({heightCalculationMethod: 'grow'}, '.formio_form_embed');
+                        iFrameResize(
+                            {
+                                heightCalculationMethod: 'grow',
+                                bodyMargin: &quot;<t t-esc="form.iframe_resizer_body_margin"/>&quot;
+                            },
+                            '.formio_form_embed'
+                        );
                     </script>
                 </div>
             </div>

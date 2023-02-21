@@ -19,10 +19,12 @@ See LICENSE file for full licensing details. -->
                 <field name="is_locked" optional="show"/>
                 <field name="formio_res_model_id" optional="show"/>
                 <field name="portal" optional="show"/>
+                <field name="portal_url" optional="hide"/>
+                <field name="portal_direct_create" optional="hide"/>
+                <field name="portal_direct_create_url" optional="hide"/>
                 <field name="public" optional="show"/>
                 <field name="public_url" optional="hide"/>
                 <field name="formio_version_id"/>
-                <field name="user_id" optional="hide"/>
                 <field name="parent_id" optional="hide"/>
                 <field name="write_date" optional="hide"/>
                 <field name="create_date" optional="hide"/>
@@ -83,12 +85,12 @@ See LICENSE file for full licensing details. -->
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="%(action_formio_builder_translation)d" type="action" string="Translations"
-                                context="{'default_builder_id': id, 'search_default_builder_id': id}"
-                                groups="formio.group_formio_admin" icon="fa-language"/>
                         <button name="action_view_formio" type="object" string="Form Builder"
                                 groups="formio.group_formio_admin"
                                 class="oe_stat_button" icon="fa-rocket"/>
+                        <button name="%(action_formio_builder_translation)d" type="action" string="Translations"
+                                context="{'default_builder_id': id, 'search_default_builder_id': id}"
+                                groups="formio.group_formio_admin" icon="fa-language"/>
                     </div>
                     <label for="title" class="oe_edit_only"/>
                     <h1><field name="title" placeholder="Insert a meaningful title here"/></h1>
@@ -102,7 +104,6 @@ See LICENSE file for full licensing details. -->
                         <group>
                             <field name="uuid" attrs="{'invisible': [('id', '=', False)]}"/>
                             <field name="is_locked" attrs="{'invisible': [('state', '!=', 'CURRENT')]}"/>
-                            <field name="user_id"/>
                         </group>
                     </group>
                     <notebook>
@@ -140,13 +141,29 @@ See LICENSE file for full licensing details. -->
                                         <i class="fa fa-info-circle" title="info"/> Not applicable with public/website Forms and custom implementations (depends).
                                     </div>
                                 </group>
-
+                                <group name="other_settings" string="Other">
+                                    <field name="submission_url_add_query_params_from"/>
+                                    <div class="text-muted" colspan="2">
+                                        <i class="fa fa-info-circle" title="info"/> Enables adding the URL query params from the window's iframe (src) or window.parent to the form's submission (load) URL endpoint.
+                                    </div>
+                                </group>
+                                <separator/>
                                 <field name="description" placeholder="Description..." groups="formio.group_formio_admin"/>
                             </group>
                         </page>
                         <page string="Resource" name="res_model_settings" attrs="{'invisible': [('formio_res_model_id', '=', False)]}"/>
                         <page string="Portal" name="portal_settings">
                             <group>
+                                <group name="portal_urls" colspan="2" attrs="{'invisible': [('portal_url', '=', False)]}">
+                                    <field name="portal_url" widget="CopyClipboardChar" style="font-size: 1.0em;"/>
+                                </group>
+                                <group name="portal_direct_create" colspan="2" attrs="{'invisible': [('portal', '=', False)]}">
+                                    <field name="portal_direct_create" string="Direct Create"/>
+                                    <field name="portal_direct_create_url" string="Direct Create URL" widget="CopyClipboardChar" style="font-size: 1.0em;"/>
+                                    <div class="text-muted mb-2" colspan="2">
+                                        <i class="fa fa-info-circle" title="info"/><strong> Direct Create:</strong> The URL first creates a form (record). This will be deprecated in next major release in favor of the new Portal URL.
+                                    </div>
+                                </group>
                                 <group name="portal_redirect_after_submit" string="Redirect After Submit">
                                     <field name="portal_submit_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
                                 </group>
@@ -193,16 +210,21 @@ See LICENSE file for full licensing details. -->
                             </div>
                         </page>
                         <page string="Form Display" name="form_display_settings">
-                                <group>
+                            <group>
+                                <group string="iFrame Embedding" name="iframe_embed">
+                                    <field name="iframe_resizer_body_margin" groups="formio.group_formio_admin"/>
+                                </group>
+                                <group string="Submission" name="submission">
                                     <field name="view_as_html" groups="formio.group_formio_admin"/>
                                 </group>
-                                <group>
+                                <group string="Info" name="info">
                                     <field name="show_form_title" string="Show Title" groups="formio.group_formio_admin" attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                     <field name="show_form_state" string="Show State" groups="formio.group_formio_admin" attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                     <field name="show_form_user_metadata" groups="formio.group_formio_admin" attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                     <field name="show_form_id" string="Show ID" groups="formio.group_formio_admin" attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                     <field name="show_form_uuid" string="Show UUID" groups="formio.group_formio_admin" attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                 </group>
+                            </group>
                         </page>
                         <page string="Form Permissions" name="form_permissions" groups="formio.group_formio_admin">
                             <div class="mb-3 text-muted">
@@ -230,6 +252,23 @@ See LICENSE file for full licensing details. -->
                                     <field name="component_partner_add_follower" string="Add to Followers" attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                     <field name="component_partner_activity_user_id" string="Activity User" attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                 </group>
+                            </group>
+                        </page>
+                        <page string="Actions API" name="actions_api" groups="formio.group_formio_admin">
+                            <group string="Server Actions" name="server_actions" colspan="2">
+                                <div class="mb-2 text-muted" colspan="2">
+                                    <i class="fa fa-info-circle" title="info"/> Server actions which process the form data / submission<br/>
+                                    <i class="fa fa-info-circle" title="info"/> This is currently here for implementation overview purposes
+                                </div>
+                                <field name="server_action_ids" nolabel="1" attrs="{'readonly': [('is_locked', '=', True)]}">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="model_id"/>
+                                        <field name="formio_ref"/>
+                                        <field name="state"/>
+                                        <field name="sequence" optional="hide"/>
+                                    </tree>
+                                </field>
                             </group>
                         </page>
                         <page string="JS Options" name="javascript_options" groups="formio.group_formio_admin">
@@ -288,11 +327,7 @@ See LICENSE file for full licensing details. -->
             <search string="Form Builders">
                 <field name="title"/>
                 <field name="name"/>
-                <field name="user_id"/>
                 <field name="formio_version_id"/>
-                <separator/>
-                <filter string="My Form Builders" name="my_builders"
-                        domain="[('user_id', '=', uid)]"/>
                 <separator/>
                 <filter string="Draft" name="state_draft"
                         domain="[('state', '=', 'DRAFT')]"/>
@@ -312,7 +347,6 @@ See LICENSE file for full licensing details. -->
                         domain="[('wizard', '=', False)]"/>
                 <group expand="0" string="Group By">
                     <filter string="Name" name="name" domain="[]" context="{'group_by':'name'}"/>
-                    <filter string="Assigned User" name="user" domain="[]" context="{'group_by':'user_id'}"/>
                     <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
                 </group>
             </search>

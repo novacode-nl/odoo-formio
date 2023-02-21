@@ -13,6 +13,7 @@ class Version(models.Model):
     name = fields.Char(
         "Name", required=True, tracking=True,
         help="""formio.js release/version.""")
+    active = fields.Boolean(default=True)
     sequence = fields.Integer()
     description = fields.Text("Description")
     translations = fields.Many2many('formio.translation', string='Translations')
@@ -54,4 +55,3 @@ class Version(models.Model):
             seq += 1
             version = versions.filtered(lambda r: r.name == name)[0]
             version.sequence = seq
-        

@@ -57,7 +57,6 @@ class Form(models.Model):
         compute='_compute_kanban_group_state', store=True)
     url = fields.Char(compute='_compute_url', readonly=True)
     act_window_url = fields.Char(compute='_compute_act_window_url', readonly=True)
-    act_window_multi_url = fields.Char(compute='_compute_act_window_url', readonly=True)
     partner_id = fields.Many2one('res.partner', string='Partner', tracking=True)
     initial_res_model_id = fields.Many2one(related='builder_id.res_model_id', readonly=True, string='Resource Model #1')
     initial_res_model_name = fields.Char(related='initial_res_model_id.name', readonly=True, string='Resource Name #1')
@@ -107,6 +106,10 @@ class Form(models.Model):
     show_id = fields.Boolean("Show ID")
     show_uuid = fields.Boolean("Show UUID")
     show_user_metadata = fields.Boolean("Show User Metadata")
+    iframe_resizer_body_margin = fields.Char(
+        "iFrame Resizer bodyMargin",
+        related="builder_id.iframe_resizer_body_margin",
+    )
     languages = fields.One2many('res.lang', related='builder_id.languages', string='Languages')
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
     allow_force_update_state = fields.Boolean("Allow force update State", compute='_compute_access')
@@ -188,6 +191,17 @@ class Form(models.Model):
 
     def _after_write(self, vals):
         self._process_api_components(vals)
+
+    def _clear_res_fields(self):
+        vals = {
+            'initial_res_id': False,
+            'res_model_id': False,
+            'res_id': False,
+            'res_act_window_url': False,
+            'res_name': False,
+            'res_partner_id': False
+        }
+        self.write(vals)
 
     def _process_api_components(self, vals):
         if vals.get('submission_data') and self.builder_id.component_partner_email:
@@ -315,7 +329,7 @@ class Form(models.Model):
 
     def action_view_formio(self):
         return {
-            "name": self.name,
+            "name": self.display_name,
             "type": "ir.actions.act_window",
             "res_model": "formio.form",
             "views": [(False, 'formio_form')],
@@ -528,7 +542,7 @@ class Form(models.Model):
 
             if self.builder_id.view_as_html:
                 options['renderMode'] = 'html'
-                options['viewAsHtml'] = True # backwards compatible (version < 4.x)?
+                options['viewAsHtml'] = True  # backwards compatible (version < 4.x)?
         return options
 
     def _get_js_params(self):
@@ -542,6 +556,9 @@ class Form(models.Model):
 
     def _etl_odoo_data(self):
         return {}
+
+    def _generate_odoo_domain(self, domain=[], params={}):
+        return self.builder_id._generate_odoo_domain(domain, params)
 
     def i18n_translations(self):
         i18n = self.builder_id.i18n_translations()

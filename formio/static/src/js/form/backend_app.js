@@ -35,6 +35,7 @@ function app() {
             this.submitUrl = '/formio/form/' + this.formUuid + '/submit';
             this.wizardSubmitUrl = '/formio/form/';
             this.isPortalUrl = window.location.pathname.indexOf('/formio/portal/') >= 0;
+            this.apiUrl = '/formio/form/' + this.formUuid + '/api';
         }
 
         portalSubmitDoneUrl() {
