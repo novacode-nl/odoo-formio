@@ -57,6 +57,4 @@ class PurchaseOrder(models.Model):
             action['res_id'] = self.formio_forms[0].id
         else:
             action['domain'] = [('res_id', '=', self.id), ('res_model_id', '=', res_model_id)]
-        __import__("pdb").set_trace()
-
         return action
