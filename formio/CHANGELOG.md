@@ -1,5 +1,9 @@
 # Changelog
 
+## 11.9
+
+Field "Forms Ref" (`formio_ref`) is required in Server Action (view) when Model is a Form (`formio.form`).
+
 ## START: releases/changes backported from 15.0
 
 ### 11.8
