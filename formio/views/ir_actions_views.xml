@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="base.view_server_action_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='model_id']" position="after">
-                <field name="formio_ref" attrs="{'invisible': [('model_name', '!=', 'formio.form')]}"/>
+                <field name="formio_ref" attrs="{'invisible': [('model_name', '!=', 'formio.form')], 'required': [('model_name', '=', 'formio.form')]}"/>
                 <div class="mb-2 text-muted" colspan="2" attrs="{'invisible': [('model_name', '!=', 'formio.form')]}">
                     <i class="fa fa-info-circle" title="info"/> <strong> Forms Ref:</strong> Reference used in Form Builder(s) to indentiy the link between a Server Action and Form Builder(s).
                 </div>
