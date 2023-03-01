@@ -40,3 +40,10 @@ class ServerAction(models.Model):
                     'A Server Action with Forms Ref "%s" already exists.\nForms Ref should be unique.'
                 ) % (rec.formio_ref)
                 raise ValidationError(msg)
+
+    def copy(self, default=None):
+        self.ensure_one()
+        if self.formio_ref:
+            default = dict(default or {})
+            default['formio_ref'] = str(uuid.uuid4())
+        return super().copy(default)
