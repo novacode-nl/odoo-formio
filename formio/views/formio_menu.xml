@@ -10,18 +10,18 @@ See LICENSE file for full licensing details. -->
         web_icon="formio,static/description/icon.png"
         groups="base.group_user"/>
     <menuitem
-        id="menu_formio_form"
-        name="Forms"
-        parent="formio.menu_formio_root"
-        sequence="50"
-        action="formio.action_formio_form"/>
-    <menuitem
         id="menu_formio_builder"
         name="Form Builders"
         parent="formio.menu_formio_root"
-        sequence="70"
+        sequence="50"
         groups="formio.group_formio_admin"
         action="formio.action_formio_builder"/>
+    <menuitem
+        id="menu_formio_form"
+        name="Forms"
+        parent="formio.menu_formio_root"
+        sequence="570"
+        action="formio.action_formio_form"/>
     <menuitem
         id="menu_formio_configuration"
         name="Configuration"
