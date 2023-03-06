@@ -366,7 +366,12 @@ class FormioCustomerPortal(CustomerPortal):
                 model_obj = request.env[model].with_context(lang=lang)
             else:
                 model_obj = request.env[model]
-            records = model_obj.search_read(domain, [label])
+
+            limit = (args.get('limit') and int(args.get('limit'))) or None
+            order = args.get('sort') or model_obj._order + ', id'
+            records = model_obj.search_read(
+                domain=domain, fields=[label], limit=limit, order=order
+            )
             data = json.dumps([{'id': r['id'], 'label': r[label]} for r in records])
             return data
         except Exception as e:
