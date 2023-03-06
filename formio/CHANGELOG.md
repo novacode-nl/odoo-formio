@@ -1,5 +1,9 @@
 # Changelog
 
+## 11.11
+
+Fix typo menu (sequence).
+
 ## 11.10
 
 Menu: put Form Builders first.

@@ -20,7 +20,7 @@ See LICENSE file for full licensing details. -->
         id="menu_formio_form"
         name="Forms"
         parent="formio.menu_formio_root"
-        sequence="570"
+        sequence="70"
         action="formio.action_formio_form"/>
     <menuitem
         id="menu_formio_configuration"
