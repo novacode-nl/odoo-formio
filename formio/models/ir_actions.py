@@ -26,10 +26,10 @@ class ServerAction(models.Model):
 
     @api.constrains('formio_ref')
     def constaint_check_formio_ref(self):
-        self.ensure_one
-        if self.formio_ref:
-            if re.search(r"[^a-zA-Z0-9_-]", self.formio_ref) is not None:
-                raise ValidationError(_('Forms Ref is invalid. Use ASCII letters, digits, "-" or "_".'))
+        for rec in self:
+            if rec.formio_ref:
+                if re.search(r"[^a-zA-Z0-9_-]", rec.formio_ref) is not None:
+                    raise ValidationError(_('Forms Ref is invalid. Use ASCII letters, digits, "-" or "_".'))
 
     @api.constrains('formio_ref')
     def _constraint_unique_formio_ref(self):
