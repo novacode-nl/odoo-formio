@@ -38,7 +38,7 @@ odoo.define('website_formio_editor', function (require) {
                 });
                 def.then(function (result) {
                     var form_iframe = self.$target.find('.formio_form_iframe_container iframe'),
-                        iframe_src = '/formio/public/form/create/' + result.val;
+                        iframe_src = '/formio/public/form/new/' + result.val;
                     form_iframe.attr("src", iframe_src);
                     iFrameResize({}, '.formio_form_embed');
                 });

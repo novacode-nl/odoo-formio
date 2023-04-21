@@ -1,10 +1,5 @@
 # Changelog
 
-## 0.2
+## 16.0.1.0
 
-- Fix `name_get` method.
-- Add One2many `component_ids` on `formio.builder`.
-
-## 0.1
-
-- Initial version.
+Initial release.

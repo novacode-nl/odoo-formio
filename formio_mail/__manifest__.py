@@ -4,7 +4,7 @@
 {
     'name': 'Forms | Mail',
     'summary': 'Send Forms via mail',
-    'version': '0.2',
+    'version': '16.0.0.1',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -26,10 +26,5 @@
     'images': [
         'static/description/banner.gif',
     ],
-    'description': """
-Forms | Mail
-============
-
-Send forms via mail after completion.
-"""
+    'description': "Send forms via mail after completion."
 }

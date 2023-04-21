@@ -34,7 +34,7 @@ class FormioStorageFilestoreController(http.Controller):
         if not request.env.user.has_group('base.group_user'):
             IrAttachment = IrAttachment.sudo().with_context(binary_field_real_user=IrAttachment.env.user)
 
-        uid = request._context.get('uid') or request.env.ref('base.public_user').id
+        uid = request.env.context.get('uid') or request.env.ref('base.public_user').id
         vals = {
             'name': kwargs.get('name'),
             'formio_storage_filestore_user_id': uid,
@@ -77,5 +77,13 @@ class FormioStorageFilestoreController(http.Controller):
             else:
                 attachment = attachment[0]
                 data = io.BytesIO(base64.standard_b64decode(attachment["datas"]))
+                # TODO DeprecationWarning, deprecated
+                # odoo.http.send_file is deprecated.
+                #
+                # But:
+                # http.Stream.from_path only obtains the addons_path, not filestore!
+                #
+                # stream = http.Stream.from_path(fontfile_path)
+                # return stream.get_response()
                 response = http.send_file(data, filename=attachment['name'], as_attachment=True)
                 return response

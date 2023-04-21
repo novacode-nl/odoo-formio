@@ -4,15 +4,17 @@
 {
     'name': 'Forms | QWeb Reports',
     'summary': 'Generate (PDF) reports for every Form',
-    'version': '5.3',
+    'version': '16.0.1.0',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'live_test_url': 'https://demo15.novacode.nl',
     'license': 'LGPL-3',
     'category': 'Extra Tools',
-    'depends': ['formio', 'formio_data_api'],
+    'depends': [
+        'formio',
+        'formio_data_api'
+    ],
     'application': True,
-    'installable': True,
     'data': [
         'report/formio_form_report_views.xml',
         'report/report_formio_form.xml',
@@ -31,4 +33,5 @@
     'images': [
         'static/description/banner.gif',
     ],
+    'description': 'Generate (PDF) reports for every Form',
 }

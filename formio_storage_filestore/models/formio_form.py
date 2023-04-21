@@ -7,11 +7,14 @@ from odoo import api, models
 class Form(models.Model):
     _inherit = 'formio.form'
 
-    @api.model
-    def create(self, vals):
-        res = super(Form, self).create(vals)
-        if vals.get('submission_data'):
-            res._process_storage_filestore_ir_attachments('create')
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = self
+        for vals in vals_list:
+            rec = super(Form, self).create([vals])
+            if vals.get('submission_data'):
+                rec._process_storage_filestore_ir_attachments('create')
+            res |= rec
         return res
 
     def write(self, vals):

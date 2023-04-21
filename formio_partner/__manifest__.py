@@ -4,13 +4,16 @@
 {
     'name': 'Forms | Partner',
     'summary': 'Forms integration with Partners e.g. contacts, clients, customers, suppliers',
-    'version': '1.2',
+    'version': '16.0.1.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'live_test_url': 'https://demo15.novacode.nl',
     'category': 'Contacts',
-    'depends': ['contacts', 'formio'],
+    'depends': [
+        'contacts',
+        'formio'
+    ],
     'data': [
         'data/formio_partner_data.xml',
         'views/formio_form_views.xml',
@@ -20,9 +23,5 @@
     'images': [
         'static/description/banner.gif',
     ],
-    'description': """
-Forms | Partners
-================
-
-"""
+    'description': 'Forms integration with Partners e.g. contacts, clients, customers, suppliers',
 }

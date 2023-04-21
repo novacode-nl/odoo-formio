@@ -18,18 +18,17 @@ class Builder(models.Model):
         "formio.website.page", string="Website Pages", compute='_compute_website_pages'
     )
 
-    @api.model
-    def create(self, vals):
-        portal_submit_done_page_id = vals.get('portal_submit_done_page_id')
-        if portal_submit_done_page_id:
-            portal_submit_done_page = self.env['website.page'].browse(portal_submit_done_page_id)
-            vals['portal_submit_done_url'] = portal_submit_done_page.url
-
-        public_submit_done_page_id = vals.get('public_submit_done_page_id')
-        if public_submit_done_page_id:
-            public_submit_done_page = self.env['website.page'].browse(public_submit_done_page_id)
-            vals['public_submit_done_url'] = public_submit_done_page.url
-
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            portal_submit_done_page_id = vals.get('portal_submit_done_page_id')
+            if portal_submit_done_page_id:
+                portal_submit_done_page = self.env['website.page'].browse(portal_submit_done_page_id)
+                vals['portal_submit_done_url'] = portal_submit_done_page.url
+            public_submit_done_page_id = vals.get('public_submit_done_page_id')
+            if public_submit_done_page_id:
+                public_submit_done_page = self.env['website.page'].browse(public_submit_done_page_id)
+                vals['public_submit_done_url'] = public_submit_done_page.url
         return super(Builder, self).create(vals)
 
     def write(self, vals):
@@ -37,12 +36,10 @@ class Builder(models.Model):
         if portal_submit_done_page_id:
             portal_submit_done_page = self.env['website.page'].browse(portal_submit_done_page_id)
             vals['portal_submit_done_url'] = portal_submit_done_page.url
-
         public_submit_done_page_id = vals.get('public_submit_done_page_id')
         if public_submit_done_page_id:
             public_submit_done_page = self.env['website.page'].browse(public_submit_done_page_id)
             vals['public_submit_done_url'] = public_submit_done_page.url
-
         return super(Builder, self).write(vals)
 
     def _compute_website_pages(self):

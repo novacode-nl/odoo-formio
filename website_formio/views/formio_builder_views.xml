@@ -18,14 +18,14 @@ See LICENSE file for full licensing details. -->
 
             <!-- formio.website.page -->
             <xpath expr="//group[@name='public_url']" position="after">
-                <group string="Website Pages" name="website_pages" colspan="4">
+                <group string="Website Pages" name="website_pages" colspan="2">
                     <div class="text-muted" colspan="2">
                         <i class="fa fa-info-circle" title="info"/> Form can be attached to load on website page(s)
                     </div>
                     <div class="text-muted" colspan="2">
                         <i class="fa fa-info-circle" title="info"/> To load a specific public form on a website page, add the query-parameter with the form its UUID to the URL of the website page <strong>?form=UUID</strong>
                     </div>
-                    <field name="formio_website_page_ids" string="Page" nolabel="1" groups="formio.group_formio_admin"/>
+                    <field name="formio_website_page_ids" string="Page" nolabel="1" groups="formio.group_formio_admin" colspan="2"/>
                 </group>
             </xpath>
 

@@ -38,6 +38,6 @@ class WebsiteController(FormioPublicController):
             builder = page.sudo().formio_builder_id
             if builder.public:
                 values['form'] = {
-                    'form_url': '/formio/public/form/create/%s' % builder.uuid
+                    'form_url': '/formio/public/form/new/%s' % builder.uuid
                 }
         return request.render('website_formio.formio_website_page', values)

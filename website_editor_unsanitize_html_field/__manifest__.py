@@ -4,7 +4,7 @@
 {
     'name': 'Website Editor: Unsanitize HTML Field',
     'summary': 'Upon saving record (from website editor) unsanitize HTML Field, if configured for certain Model and Field.',
-    'version': '0.1',
+    'version': '16.0.0.1',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -16,6 +16,7 @@
         'views/website_editor_unsanitize_html_field_views.xml',
     ],
     'application': False,
+    'installable': False,
     'images': [
         'static/description/banner.gif',
     ],

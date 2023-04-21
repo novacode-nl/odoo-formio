@@ -2,9 +2,9 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms | Website (Block etc)',
+    'name': 'Forms | Website Integration',
     'summary': 'Form Block, other website integration',
-    'version': '2.0',
+    'version': '16.0.1.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -12,17 +12,19 @@
     'category': 'Extra Tools',
     'depends': [
         'formio',
-        'website_editor_unsanitize_html_field',
+        # 'website_editor_unsanitize_html_field',
         'website',
     ],
     'data': [
         'data/website_data.xml',
-        'data/website_formio_demo_data.xml',
         'security/ir.model.access.csv',
         'views/formio_builder_views.xml',
         'views/formio_website_page.xml',
         'views/website_formio_templates.xml',
         'views/website_formio_snippets.xml',
+    ],
+    'demo': [
+        'data/website_formio_demo_data.xml'
     ],
     'assets': {
         'web.assets_backend': [

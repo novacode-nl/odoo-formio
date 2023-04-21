@@ -51,19 +51,19 @@ See LICENSE file for full copyright and licensing details.
                     </div>
                     <div class="col-2">
                         <t t-if="o.state == 'PENDING'">
-                            <span t-attf-class="badge mb-1 badge-pill badge-info">State: <strong><t t-esc="o.display_state"/></strong></span>
+                            <span t-attf-class="badge mb-1 badge-pill badge-info">State: <strong><t t-out="o.display_state"/></strong></span>
                         </t>
                         <t t-elif="o.state == 'DRAFT'">
-                            <span t-attf-class="badge mb-1 badge-pill badge-warning">State: <span t-esc="o.display_state"/></span>
+                            <span t-attf-class="badge mb-1 badge-pill badge-warning">State: <span t-out="o.display_state"/></span>
                         </t>
                         <t t-elif="o.state == 'COMPLETE'">
-                            <span t-attf-class="badge mb-1 badge-pill badge-success">State: <strong><t t-esc="o.display_state"/></strong></span>
+                            <span t-attf-class="badge mb-1 badge-pill badge-success">State: <strong><t t-out="o.display_state"/></strong></span>
                         </t>
                         <t t-elif="o.state == 'CANCEL'">
-                            <span t-attf-class="badge mb-1 badge-pill badge-dark">State: <strong><t t-esc="o.display_state"/></strong></span>
+                            <span t-attf-class="badge mb-1 badge-pill badge-dark">State: <strong><t t-out="o.display_state"/></strong></span>
                         </t>
                         <t t-else="">
-                            <span t-attf-class="badge mb-1 badge-pill badge-light">State: <strong><t t-esc="o.display_state"/></strong></span>
+                            <span t-attf-class="badge mb-1 badge-pill badge-light">State: <strong><t t-out="o.display_state"/></strong></span>
                         </t>
                     </div>
                 </div>
@@ -71,7 +71,7 @@ See LICENSE file for full copyright and licensing details.
                     <div class="row">
                         <div class="col-6">
                             <t t-if="o.assigned_partner_id">
-                                <strong>Assigned:</strong> <span t-esc="o.assigned_partner_name"/>
+                                <strong>Assigned:</strong> <span t-out="o.assigned_partner_name"/>
                             </t>
                         </div>
                         <div class="col-6">

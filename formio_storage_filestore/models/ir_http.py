@@ -24,7 +24,7 @@ class IrHttp(models.AbstractModel):
         }
         _logger.info(log)
 
-        if auth_method == 'user' and request._context.get('uid'):
+        if auth_method == 'user' and request.env.context.get('uid'):
             return super(IrHttp, cls)._authenticate(endpoint)
         else:
             # Security measurement for public POST/uploads, because
@@ -37,7 +37,7 @@ class IrHttp(models.AbstractModel):
             if not base_url:
                 raise AccessDenied()
 
-            if '/formio/public/form/create' in base_url:
+            if '/formio/public/form/new' in base_url:
                 uuid = os.path.basename(os.path.normpath(base_url))
                 domain = [('uuid', '=', uuid), ('public', '=', True)]
                 builder = request.env['formio.builder'].sudo().search(domain)
