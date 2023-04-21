@@ -4,51 +4,21 @@
 import json
 import logging
 
-from collections import deque
 from os.path import dirname
 
-from odoo import http, fields, tools
+from odoo import http, fields
 from odoo.http import request
 
-from ..models.formio_builder import \
-    STATE_CURRENT as BUILDER_STATE_CURRENT, STATE_OBSOLETE as BUILDER_STATE_OBSOLETE
-
-from ..models.formio_form import \
-    STATE_PENDING as FORM_STATE_PENDING, STATE_DRAFT as FORM_STATE_DRAFT, \
-    STATE_COMPLETE as FORM_STATE_COMPLETE, STATE_CANCEL as FORM_STATE_CANCEL
+from ..models.formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
+from ..models.formio_form import (
+    STATE_DRAFT as FORM_STATE_DRAFT,
+    STATE_COMPLETE as FORM_STATE_COMPLETE,
+)
 
 _logger = logging.getLogger(__name__)
 
 
 class FormioController(http.Controller):
-
-    @http.route(['/web/content/<int:id>/fonts/<string:name>'], type='http', auth="public")
-    def send_fonts_file(self, id, name):
-        """
-        WARNING
-        -------
-        This route (/fonts/) is a rather iffy assumption which could
-        cause troubles.  Of course this could be requested by other
-        parts, but not yet in standard Odoo routes.
-
-        :param int id: The ID of the file (attachment) which requests the fonts file.
-            File(s) requesting this font file, are CSS files (formio.js library).
-        :param str name: The name of the fontfile in request.
-        """
-
-        ir_attach = request.env['ir.attachment'].sudo()
-        attach = ir_attach.browse(id)
-        if not attach.formio_asset_formio_version_id:
-            msg = 'Request expects a Forms (formio.js) fonts file (id: %s, name: %s' % (id, name)
-            _logger.warning(msg)
-            return request.not_found(msg)
-
-        attach_dir = dirname(attach.store_fname)
-        fonts_dir = '{attach_dir}/fonts/'.format(attach_dir=attach_dir)
-        fontfile_path = request.env['ir.attachment']._full_path(fonts_dir)
-        fontfile_path += '/%s' % name
-
-        return http.send_file(fontfile_path)
 
     # Builder
     @http.route('/formio/builder/<int:builder_id>', type='http', auth='user', website=True)
@@ -71,8 +41,9 @@ class FormioController(http.Controller):
             languages |= request.env.ref('base.lang_en')
 
         values = {
-            'languages': languages,
             'builder': builder,
+            # 'languages' already injected in rendering somehow
+            'builder_languages': languages,
             'formio_css_assets': builder.formio_css_assets,
             'formio_js_assets': builder.formio_js_assets,
         }
@@ -118,30 +89,26 @@ class FormioController(http.Controller):
             msg = 'Form UUID %s' % uuid
             return request.not_found(msg)
 
-        args = request.httprequest.args
-        if args.get('api') == 'getData':
-            return self._api_get_data(uuid)
-        else:
-            # TODO REMOVE (still needed or obsolete legacy?)
-            # Needed to update language
-            context = request.env.context.copy()
-            context.update({'lang': request.env.user.lang})
-            request.env.context = context
+        # TODO REMOVE (still needed or obsolete legacy?)
+        # Needed to update language
+        context = request.env.context.copy()
+        context.update({'lang': request.env.user.lang})
+        request.env.context = context
 
-            languages = form.builder_id.languages
-            lang_en = request.env.ref('base.lang_en')
+        languages = form.builder_id.languages
+        lang_en = request.env.ref('base.lang_en')
 
-            if lang_en.active and form.builder_id.language_en_enable and 'en_US' not in languages.mapped('code'):
-                languages |= request.env.ref('base.lang_en')
+        if lang_en.active and form.builder_id.language_en_enable and 'en_US' not in languages.mapped('code'):
+            languages |= request.env.ref('base.lang_en')
 
-            values = {
-                'languages': languages.sorted('name'),
-                'form': form,
-                'formio_css_assets': form.builder_id.formio_css_assets,
-                'formio_js_assets': form.builder_id.formio_js_assets,
-                'extra_assets': form.builder_id.extra_asset_ids
-            }
-            return request.render('formio.formio_form_embed', values)
+        values = {
+            'form': form,
+            # 'languages' already injected in rendering somehow
+            'form_languages': languages.sorted('name'),
+            'formio_css_assets': form.builder_id.formio_css_assets,
+            'formio_js_assets': form.builder_id.formio_js_assets,
+        }
+        return request.render('formio.formio_form_embed', values)
 
     @http.route('/formio/form/<string:form_uuid>/config', type='json', auth='user', website=True)
     def form_config(self, form_uuid, **kwargs):
@@ -153,22 +120,8 @@ class FormioController(http.Controller):
             res['schema'] = json.loads(form.builder_id.schema)
             res['options'] = self._get_form_js_options(form)
             res['params'] = self._get_form_js_params(form)
-            res['locales'] = self._get_form_js_locales(form)
 
         return res
-
-    # TODO Remove this endpoint (not used?)
-    @http.route('/formio/form/create/<string:builder_uuid>', type='json', auth='user', website=True)
-    def form_config_builder(self, builder_uuid, **kwargs):
-        domain = [('uuid', '=', builder_uuid)]
-        formio_builder = request.env['formio.builder'].sudo().search(domain, limit=1)
-        if not formio_builder or formio_builder.state != BUILDER_STATE_CURRENT:
-            return {}
-
-        if formio_builder.schema:
-            return json.loads(formio_builder.schema)
-        else:
-            return {}
 
     @http.route('/formio/form/<string:uuid>/submission', type='json', auth='user', website=True)
     def form_submission(self, uuid, **kwargs):
@@ -195,7 +148,6 @@ class FormioController(http.Controller):
         if not form or form.state == FORM_STATE_COMPLETE:
             # TODO raise or set exception (in JSON resonse) ?
             return
-        
         vals = {
             'submission_data': json.dumps(post['data']),
             'submission_user_id': request.env.user.id,
@@ -212,139 +164,45 @@ class FormioController(http.Controller):
         if vals.get('state') == FORM_STATE_COMPLETE:
             form.after_submit()
 
-    ########################
-    # Form - fetch Odoo data
-    ########################
-
-    @http.route(
-        ['/formio/form/<string:uuid>/data',
-         '/formio/portal/form/<string:uuid>/data'],
-        type='http', auth='user', website=True)
-    def form_data(self, uuid, **kwargs):
-        """ Get data from a resource-object.
-
-        DEPRECATED / CHANGE
-        ===================
-        Use the query string "?api=getData" in URLs:
-        - /formio/form/<string:uuid>?api=getData
-        - /formio/portal/form/<string:uuid>?api=getData
-
-        EXAMPLE
-        =======
-        This example loads data into Select Component, whereby choices
-        are the Partner/Contact names with city "Sittard".
-
-        formio configuration (in "Data" tab)
-        -------------------------------------
-        - Data Source URL: /data
-        - Filter Query: model=res.partner&label=name&domain_fields=city&city=Sittard
+    @http.route(['/web/content/<int:id>/fonts/<string:name>'], type='http', auth="public")
+    def send_fonts_file(self, id, name):
         """
-        msg = "The /data fetching URLs %s will be deprecated and work with a minor change in Odoo version 16.0\nMore info on Wiki: %s" % (
-            "/formio/form/<string:uuid>/data, /formio/portal/form/<string:uuid>/data",
-            "https://github.com/novacode-nl/odoo-formio/wiki/Populate-a-Select-Component-data-(options)-with-data-from-Odoo-model.field",
-        )
-        _logger.warning(msg)
-        return self._api_get_data(uuid)
+        WARNING
+        -------
+        This route (/fonts/) is a rather iffy assumption which could
+        cause troubles.  Of course this could be requested by other
+        parts, but not yet in standard Odoo routes.
 
-    @http.route('/formio/form/<string:uuid>/res_data', type='http', auth='user', website=True)
-    def form_res_data(self, uuid, **kwargs):
-        """ Get data from a linked resource-object (by: res_model_id, res_id),
-
-        This also traverses relations.
-
-        EXAMPLE
-        =======
-        This example loads data into Select Component whereby choices
-        are the product-names from a Sale Order.
-        The Form(Builder) has the "Resource Model" set to "Quotation" (i.e. sale.order).
-
-        formio configuration (in "Data" tab)
-        -------------------------------------
-        - Data Source URL: /res_data
-        - Filter Query: field=order_line.product_id&label=name
+        :param int id: The ID of the file (attachment) which requests the fonts file.
+            File(s) requesting this font file, are CSS files (formio.js library).
+        :param str name: The name of the fontfile in request.
         """
 
-        form = self._get_form(uuid, 'read')
-        if not form:
-            return
+        ir_attach = request.env['ir.attachment'].sudo()
+        attach = ir_attach.browse(id)
+        if not attach.formio_asset_formio_version_id:
+            msg = 'Request expects a Forms (formio.js) fonts file (id: %s, name: %s' % (id, name)
+            _logger.warning(msg)
+            return request.not_found(msg)
 
-        args = request.httprequest.args
+        attach_dir = dirname(attach.store_fname)
+        fonts_dir = '{attach_dir}/fonts/'.format(attach_dir=attach_dir)
+        fontfile_path = request.env['ir.attachment']._full_path(fonts_dir)
+        fontfile_path += '/%s' % name
 
-        field = args.get('field')
-        # TODO: formio error?
-        if field is None:
-            _logger('field is missing in "Data Filter Query"')
+        # TODO DeprecationWarning, deprecated
+        # odoo.http.send_file is deprecated.
+        #
+        # But:
+        # http.Stream.from_path only obtains the addons_path, not filestore!
+        #
+        # stream = http.Stream.from_path(fontfile_path)
+        # return stream.get_response()
+        return http.send_file(fontfile_path)
 
-        label = args.get('label')
-        # TODO: formio error?
-        if label is None:
-            _logger.error('label is missing in "Data Filter Query"')
-
-        try:
-            record = request.env[form.res_model_id.model].browse(form.res_id)
-
-            fields = deque(args.get('field').split('.'))
-            res_data = []
-            while fields:
-                _field = fields.popleft()
-
-                if not res_data or not isinstance(res_data.ids, list):
-                    res_data = getattr(record, _field)
-                elif isinstance(res_data, list):
-                    res_data = [getattr(r, _field) for r in res_data]
-
-            data = json.dumps([{'id': r['id'], 'label': r[label]} for r in res_data])
-            return data
-        except Exception as e:
-            _logger.error("Exception: %s" % e)
-
-    def _api_get_data(self, form_uuid):
-        form = self._get_form(form_uuid, 'read')
-        if not form:
-            _logger.info('api=getData: Form (uuid) %s is not found or allowed' % form_uuid)
-            return []
-
-        args = request.httprequest.args
-        model = args.get('model')
-        # TODO: formio error?
-        if model is None:
-            _logger('model is missing in "Data Filter Query"')
-
-        label = args.get('label')
-        # TODO: formio error?
-        if label is None:
-            _logger.error('label is missing in "Data Filter Query"')
-
-        domain = []
-        domain_fields = args.getlist('domain_fields')
-        # domain_fields_op = args.getlist('domain_fields_operators')
-
-        for domain_field in domain_fields:
-            value = args.get(domain_field)
-
-            if value is not None:
-                filter = (domain_field, '=', value)
-                domain.append(filter)
-
-        if not domain:
-            domain = form._generate_odoo_domain(domain, params=args.to_dict())
-
-        try:
-            language = args.get('language')
-            if language:
-                lang = request.env['res.lang']._from_formio_ietf_code(language)
-                model_obj = request.env[model].with_context(lang=lang)
-            else:
-                model_obj = request.env[model]
-            limit = (args.get('limit') and int(args.get('limit'))) or None
-            order = args.get('sort') or model_obj._order + ', id'
-            records = model_obj.search_read(
-                domain=domain, fields=[label], limit=limit, order=order
-            )
-            data = json.dumps([{'id': r['id'], 'label': r[label]} for r in records])
-            return data
-        except Exception as e:
-            _logger.error("Exception: %s" % e)
+    #########
+    # Helpers
+    #########
 
     def _get_form_js_options(self, form):
         options = form._get_js_options()
@@ -354,12 +212,9 @@ class FormioController(http.Controller):
         if request.env.user.lang in form.languages.mapped('code'):
             language = Lang._formio_ietf_code(request.env.user.lang)
         else:
-            language = Lang._formio_ietf_code(request._context['lang'])
+            language = Lang._formio_ietf_code(request.env.context['lang'])
         options['language'] = language
         return options
-
-    def _get_form_js_locales(self, form):
-        return form.builder_id._get_form_js_locales()
 
     def _get_form_js_params(self, form):
         return form._get_js_params()

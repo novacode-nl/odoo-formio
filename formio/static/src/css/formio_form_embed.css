@@ -19,7 +19,12 @@
 
 .formio_form_dock ul li {
     float: left;
-    margin-left: 20px;
+    margin-left: 40px;
+}
+
+span.formio_dock_label {
+    padding-right: 10px;
+    font-weight: 700;
 }
 
 h3.formio_form_title {

@@ -4,13 +4,18 @@
 {
     'name': 'Forms',
     'summary': 'Form Builder & integration of professional and versatile Forms to collect any information you need for your business.',
-    'version': '12.2',
+    'version': '16.0.1.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'live_test_url': 'https://demo15.novacode.nl',
     'category': 'Forms/Forms',
-    'depends': ['web', 'portal', 'mail'],
+    'depends': [
+        'base',
+        'mail',
+        'portal',
+        'web',
+    ],
     'application': True,
     'installable': True,
     'uninstall_hook': 'uninstall_hook',
@@ -62,13 +67,13 @@
         'web.assets_backend': [
             # builder
             'formio/static/src/css/formio_builder.css',
+            'formio/static/src/js/views/formio_builder.xml',
             'formio/static/src/js/views/formio_builder.js',
             # form
             'formio/static/src/css/formio_form.css',
+            'formio/static/src/js/views/formio_form.xml',
             'formio/static/src/js/views/formio_form.js',
             # misc
-            'formio/static/src/js/views/form_controller.js',
-            'formio/static/src/js/tours/formio.js',
             'formio/static/lib/iframe-resizer/iframeResizer.min.js'
         ],
         'web.assets_frontend': [
@@ -78,9 +83,6 @@
         ],
         'web.assets_common': [
             'formio/static/lib/iframe-resizer/iframeResizer.min.js',
-        ],
-        'web.assets_qweb': [
-            'formio/static/src/xml/formio.xml',
         ],
     },
     'demo': [

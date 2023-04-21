@@ -10,7 +10,7 @@ See LICENSE file for full licensing details. -->
             <form string="formio (js) Version GitHub Importer">
                 <sheet>
                     <group name="available_version_github_tags" string="Available Versions (releases)">
-                        <field name="available_version_github_tag_ids" nolabel="1">
+                        <field name="available_version_github_tag_ids" nolabel="1" colspan="2">
                             <tree default_order="name desc" limit="15" create="0" edit="0" delete="0">
                                 <field name="name"/>
                                 <field name="changelog_url" widget="url"/>

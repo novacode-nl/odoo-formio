@@ -7,9 +7,10 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
         <field name="name">res.config.settings.formio.view.form</field>
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="priority" eval="70"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('settings')]" position="inside">
-                <div class="app_settings_block" data-string="Forms" data-key="formio">
+                <div class="app_settings_block" string="Forms" data-string="Forms" data-key="formio">
                     <h2>formio.js library (js, css) version importer</h2>
                     <div class="row mt16 o_settings_container" name="formio_version">
                         <div class="col-12 col-md-6 o_setting_box" id="formio_default_version">
@@ -129,7 +130,7 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
         <field name="res_model">res.config.settings</field>
         <field name="view_mode">form</field>
         <field name="target">inline</field>
-        <field name="context">{'module' : 'formio'}</field>
+        <field name="context">{'module' : 'formio', 'bin_size': False}</field>
     </record>
 
     <menuitem name="Settings"

@@ -93,8 +93,6 @@ class Builder(models.Model):
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal", tracking=True, help="Form is accessible by assigned portal user")
     portal_url = fields.Char(string='Portal URL', compute='_compute_portal_urls')
-    portal_direct_create = fields.Boolean("Portal Direct Create", tracking=True, help="Direct create Form by link")
-    portal_direct_create_url = fields.Char(string='Portal Direct Create URL', compute='_compute_portal_urls')
     portal_submit_done_url = fields.Char(
         string='Portal Submit-done URL', tracking=True,
         help="""\
@@ -193,7 +191,7 @@ class Builder(models.Model):
     @api.constrains('name')
     def constaint_check_name(self):
         for rec in self:
-            if re.search(r"[^a-zA-Z0-9_-]", self.name) is not None:
+            if re.search(r"[^a-zA-Z0-9_-]", rec.name) is not None:
                 raise ValidationError(_('Name is invalid. Use ASCII letters, digits, "-" or "_".'))
 
     @api.constrains("name", "state")
@@ -236,13 +234,13 @@ class Builder(models.Model):
 
         json.loads(data) refuses identifies with single quotes.Use
         ast.literal_eval() instead.
-        
+
         :param str schema: schema string
         :return str schema: schema as dictionary
         """
         try:
             schema = json.loads(schema)
-        except:
+        except Exception:
             schema = ast.literal_eval(schema)
         return schema
 
@@ -299,25 +297,19 @@ class Builder(models.Model):
         for r in self:
             if r.public and request:
                 url_root = request.httprequest.url_root
-                self.public_url = '%s%s/%s' % (url_root, 'formio/public/form/create', r.uuid)
+                self.public_url = '%s%s/%s' % (url_root, 'formio/public/form/new', r.uuid)
             else:
                 r.public_url = False
 
-    @api.depends('portal', 'portal_direct_create')
+    @api.depends('portal')
     def _compute_portal_urls(self):
         for r in self:
             if r.portal and request:
                 url_root = request.httprequest.url_root
                 r.portal_url = '%s%s/%s' % (url_root, 'my/formio/form/new', r.name)
-                if r.portal_direct_create:
-                    r.portal_direct_create_url = '%s%s/%s' % (url_root, 'my/formio/form/create', r.name)
-                else:
-                    r.portal_direct_create_url = False
             else:
                 r.portal_url = False
-                r.portal_direct_create_url = False
 
-    @api.depends('translations')
     def _compute_languages(self):
         for r in self:
             languages = r.translations.mapped('lang_id')
@@ -344,12 +336,18 @@ class Builder(models.Model):
             r.act_window_url = url
 
     def action_view_formio(self):
-        view_id = self.env.ref('formio.view_formio_builder_formio').id
+        # return {
+        #     "type": "ir.actions.act_url",
+        #     "url": self.edit_url,
+        #     "target": "new"
+        # }
+        formio_view = self.env.ref('formio.view_formio_builder_formio')
+        form_view = self.env.ref('formio.view_formio_builder_form')
         return {
             "name": self.display_name_full,
             "type": "ir.actions.act_window",
             "res_model": "formio.builder",
-            "views": [(view_id, 'formio_builder')],
+            "views": [(formio_view.id, 'formio_builder'), (form_view.id, 'form')],
             "view_mode": "formio_builder",
             "target": "current",
             "res_id": self.id,
@@ -381,7 +379,7 @@ class Builder(models.Model):
     @api.returns('self', lambda value: value)
     def copy_as_new_version(self):
         """Get last version for builder-forms by traversing-up on parent_id"""
-        
+
         self.ensure_one()
         builder = self
 
@@ -426,7 +424,7 @@ class Builder(models.Model):
         if self.formio_js_options:
             try:
                 options = json.loads(self.formio_js_options)
-            except:
+            except Exception:
                 options = ast.literal_eval(self.formio_js_options)
         else:
             options = {}
@@ -443,7 +441,6 @@ class Builder(models.Model):
         # only set language if exist in i18n translations
         if options['i18n'].get(language):
             options['language'] = language
-            
         return options
 
     def _get_form_js_locales(self):

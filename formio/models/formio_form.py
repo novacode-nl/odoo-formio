@@ -114,8 +114,16 @@ class Form(models.Model):
     allow_unlink = fields.Boolean("Allow delete", compute='_compute_access')
     allow_force_update_state = fields.Boolean("Allow force update State", compute='_compute_access')
     readonly_submission_data = fields.Boolean("Data is readonly", compute='_compute_access')
-    allow_copy = fields.Boolean(string='Allow Copies', help='Allow copying form submissions.', tracking=True, default=True)
-    copy_to_current = fields.Boolean(string='Copy To Current', help='When copying a form, always link it to the current version of the builder instead of the original builder.', tracking=True, default=True)
+    allow_copy = fields.Boolean(
+        string="Allow Copies",
+        related="builder_id.form_allow_copy",
+        help="Allow copying form submissions.",
+    )
+    copy_to_current = fields.Boolean(
+        string="Copy To Current",
+        related="builder_id.form_copy_to_current",
+        help="When copying a form, always link it to the current version of the builder instead of the original builder.",
+    )
 
     @api.model
     def default_get(self, fields):
@@ -124,11 +132,14 @@ class Form(models.Model):
         result['res_id'] = False
         return result
 
-    @api.model
-    def create(self, vals):
-        vals = self._prepare_create_vals(vals)
-        res = super(Form, self).create(vals)
-        res._after_create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = self  # TODO self.env['formio.form']
+        for vals in vals_list:
+            vals = self._prepare_create_vals(vals)
+            rec = super(Form, self).create(vals)
+            rec._after_create(vals)
+            res |= rec
         return res
 
     def write(self, vals):
@@ -152,8 +163,6 @@ class Form(models.Model):
         vals['show_id'] = builder.show_form_id
         vals['show_uuid'] = builder.show_form_uuid
         vals['show_user_metadata'] = builder.show_form_user_metadata
-        vals['allow_copy'] = builder.form_allow_copy
-        vals['copy_to_current'] = builder.form_copy_to_current
 
         # access
         vals['portal_share'] = builder.portal
@@ -328,6 +337,11 @@ class Form(models.Model):
         pass
 
     def action_view_formio(self):
+        # return {
+        #     "type": "ir.actions.act_url",
+        #     "url": self.url,
+        #     "target": "new"
+        # }
         return {
             "name": self.display_name,
             "type": "ir.actions.act_window",

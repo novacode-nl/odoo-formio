@@ -35,11 +35,11 @@ class Version(models.Model):
         self.env['formio.version.github.tag'].search(domain).write({'state': 'available'})
         return super(Version, self).unlink()
 
-    @api.model
-    def create(self, vals):
-        res = super(Version, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = super(Version, self).create(vals_list)
         self._update_versions_sequence()
-        if not res.is_dummy:
+        if res.filtered(lambda r: not r.is_dummy):
             self._archive_dummy_version()
         return res
 

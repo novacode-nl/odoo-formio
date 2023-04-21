@@ -4,7 +4,8 @@
 }
 
 .formio_builder_container .formio_builder_dock {
-    margin-bottom: 8px;
+    float: right;
+    margin-bottom: 1rem;
 }
 
 .formio_builder_container .formio_builder_dock * {
@@ -21,11 +22,25 @@
 
 .formio_builder_container .formio_builder_dock ul li {
     float: left;
-    margin-left: 20px;
+    margin-left: 40px;
 }
 
 .formio_builder_container .formio_builder_dock ul li button {
     font-size: 12px;
+}
+
+.formio_builder_container .formio_builder_dock span.formio_dock_label {
+    padding-right: 10px;
+    font-weight: 700;
+}
+
+.formio_builder_container .formio_builder_dock .badge span.formio_dock_label {
+    padding-left: 6px;
+    padding-right: 10px;
+}
+
+.formio_builder_container .formio_builder_dock .badge span.formio_dock_val {
+    padding-right: 6px;
 }
 
 .formio_builder_container .formio_actions {

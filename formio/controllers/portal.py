@@ -202,27 +202,23 @@ class FormioCustomerPortal(CustomerPortal):
 
     @http.route('/formio/portal/form/new/<string:builder_name>', type='http', auth='user', methods=['GET'], website=True)
     def portal_form_new_root(self, builder_name, **kwargs):
-        args = request.httprequest.args
-        if args.get('api') == 'getData':
-            return self._api_get_data(builder_name)
-        else:
-            builder = self._get_builder_name(builder_name)
-            if not builder:
-                msg = 'Form Builder (name) %s: not found' % builder_name
-                return request.not_found(msg)
-            elif not builder.portal:
-                msg = 'Form Builder (name) %s: not published on portal' % builder_name
-                return request.not_found(msg)
+        builder = self._get_builder_name(builder_name)
+        if not builder:
+            msg = 'Form Builder (name) %s: not found' % builder_name
+            return request.not_found(msg)
+        elif not builder.portal:
+            msg = 'Form Builder (name) %s: not published on portal' % builder_name
+            return request.not_found(msg)
 
-            values = {
-                'languages': builder.languages,
-                'builder': builder,
-                'formio_builder_uuid': builder.uuid,
-                'formio_css_assets': builder.formio_css_assets,
-                'formio_js_assets': builder.formio_js_assets,
-                'extra_assets': builder.extra_asset_ids
-            }
-            return request.render('formio.formio_form_portal_new_embed', values)
+        values = {
+            'builder': builder,
+            # 'languages' already injected in rendering somehow
+            'form_languages': builder.languages,
+            'formio_builder_uuid': builder.uuid,
+            'formio_css_assets': builder.formio_css_assets,
+            'formio_js_assets': builder.formio_js_assets,
+        }
+        return request.render('formio.formio_form_portal_new_embed', values)
 
     @http.route('/formio/portal/form/new/<string:builder_uuid>/config', type='json', auth='user', website=True)
     def form_new_config(self, builder_uuid, **kwargs):
@@ -235,7 +231,6 @@ class FormioCustomerPortal(CustomerPortal):
         if builder.schema:
             res['schema'] = json.loads(builder.schema)
             res['options'] = self._get_form_js_options(builder)
-            res['locales'] = self._get_form_js_locales(builder)
             res['params'] = self._get_form_js_params(builder)
 
         args = request.httprequest.args
@@ -298,87 +293,9 @@ class FormioCustomerPortal(CustomerPortal):
         request.session['formio_last_form_uuid'] = res.uuid
         return {'form_uuid': res.uuid}
 
-    @http.route('/formio/portal/form/new/<string:builder_name>/data')
-    def form_new_data(self, builder_name, **kwargs):
-        """ Get data dispatch URL.
-
-        DEPRECATED / CHANGE
-        ===================
-        Use the query string "?api=getData" in URL:
-        /formio/portal/form/new/<string:builder_name>?api=getData
-
-        EXAMPLE
-        =======
-        This example loads data into Select Component, whereby choices
-        are the Partner/Contact names with city "Sittard".
-
-        formio configuration (in "Data" tab)
-        -------------------------------------
-        - Data Source URL: /data
-        - Filter Query: model=res.partner&label=name&domain_fields=city&city=Sittard
-        """
-        msg = "The /data fetching URL %s will be deprecated and work with a minor change in Odoo version 16.0\nMore info on Wiki: %s" % (
-            "/formio/portal/form/new/<string:builder_name>/data",
-            "https://github.com/novacode-nl/odoo-formio/wiki/Populate-a-Select-Component-data-(options)-with-data-from-Odoo-model.field",
-        )
-        _logger.warning(msg)
-        return self._api_get_data(builder_name)
-
-    ############
-    # Misc utils
-    ############
-
-    def _api_get_data(self, builder_name):
-        """ Get data """
-        builder = self._get_builder_name(builder_name)
-        if not builder:
-            _logger.info('api=getData: Form Builder (name) %s is not found or allowed' % builder_name)
-            return []
-
-        args = request.httprequest.args
-
-        model = args.get('model')
-        # TODO: formio error?
-        if model is None:
-            _logger('model is missing in "Data Filter Query"')
-
-        label = args.get('label')
-        # TODO: formio error?
-        if label is None:
-            _logger.error('label is missing in "Data Filter Query"')
-
-        domain = []
-        domain_fields = args.getlist('domain_fields')
-        # domain_fields_op = args.getlist('domain_fields_operators')
-
-        for domain_field in domain_fields:
-            value = args.get(domain_field)
-
-            if value is not None:
-                filter = (domain_field, '=', value)
-                domain.append(filter)
-
-        if not domain:
-            domain = builder._generate_odoo_domain(domain, params=args.to_dict())
-
-        try:
-            language = args.get('language')
-            if language:
-                lang = request.env['res.lang']._from_formio_ietf_code(language)
-                model_obj = request.env[model].with_context(lang=lang)
-            else:
-                model_obj = request.env[model]
-
-            limit = (args.get('limit') and int(args.get('limit'))) or None
-            order = args.get('sort') or model_obj._order + ', id'
-            records = model_obj.search_read(
-                domain=domain, fields=[label], limit=limit, order=order
-            )
-            data = json.dumps([{'id': r['id'], 'label': r[label]} for r in records])
-            return data
-        except Exception as e:
-            # TODO also raise or ensure exception to render in form?
-            _logger.error("Exception: %s" % e)
+    #########
+    # Helpers
+    #########
 
     def _get_builder_uuid(self, builder_uuid):
         return request.env['formio.builder'].get_portal_builder_uuid(builder_uuid)
@@ -402,9 +319,6 @@ class FormioCustomerPortal(CustomerPortal):
             options['language'] = request.env.ref('base.lang_en').formio_ietf_code
 
         return options
-
-    def _get_form_js_locales(self, builder):
-        return builder._get_form_js_locales()
 
     def _get_form_js_params(self, builder):
         return builder._get_portal_form_js_params()

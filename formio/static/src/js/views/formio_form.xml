@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="formio.FormView" owl="1">
+        <t t-set="form" t-value="model.root.data"/>
+        <div class="o_action h-100 o_form_view">
+            <div class="o_form_view_container" t-ref="root">
+                <Layout display="display">
+                    <div class="o_form_editable d-flex flex-nowrap h-100">
+                        <div class="o_form_sheet_bg">
+                            <div t-attf-class="clearfix o_form_sheet formio_form_container {{ form.state }}">
+                                <div class="formio_form_iframe_container">
+                                    <iframe t-attf-src="/formio/form/{{ form.uuid }}" class="formio_form_embed"/>
+                                    <script>
+                                        iFrameResize(
+                                            {
+                                                heightCalculationMethod: 'grow',
+                                                bodyMargin: &quot;<t t-out="form.iframe_resizer_body_margin"/>&quot;
+                                            },
+                                            '.formio_form_embed'
+                                        );
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Layout>
+            </div>
+        </div>
+    </t>
+
+</templates>

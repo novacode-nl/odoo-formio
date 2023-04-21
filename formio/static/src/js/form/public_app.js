@@ -2,6 +2,9 @@
 // See LICENSE file for full licensing details.
 
 import { OdooFormioForm } from "./formio_form.js";
+// use global owl
+// can't import from "@odoo/owl", because not an @odoo-module
+const { mount, whenReady, xml } = owl;
 
 /**
 FIX / WORKAROUND browser compatibility error.
@@ -26,6 +29,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Browse
 
 function app() {
     class App extends OdooFormioForm {
+        static template = xml`
+            <div t-name="App">
+                <div id="formio_form"></div>
+            </div>
+        `;
+
         initForm() {
             if (!!document.getElementById('formio_form_uuid')) {
                 this.formUuid = document.getElementById('formio_form_uuid').value;
@@ -67,15 +76,11 @@ function app() {
     }
 
     const app = new App();
-    app.mount(document.getElementById('formio_form_app'));
+    mount(App, document.getElementById('formio_form_app'));
 }
 
 async function start() {
-    const templates = await owl.utils.loadFile('/formio/static/src/js/form/public_app.xml');
-    const env = { qweb: new owl.QWeb({templates})};
-    owl.Component.env = env;
-    await owl.utils.whenReady();
+    await whenReady();
     app();
 }
-
 start();
