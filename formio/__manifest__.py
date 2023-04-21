@@ -4,7 +4,7 @@
 {
     'name': 'Forms',
     'summary': 'Form Builder & integration of professional and versatile Forms to collect any information you need for your business.',
-    'version': '11.11',
+    'version': '12.2',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -19,6 +19,7 @@
         'data/formio_default_asset_css_data.xml',
         'data/formio_version_data.xml',
         'data/formio_asset_data.xml',
+        'data/formio_extra_asset_data.xml',
         'data/ir_config_parameter_data.xml',
         'data/ir_cron_data.xml',
         'data/mail_activity_data.xml',
@@ -37,6 +38,7 @@
         'views/formio_builder_js_options_views.xml',
         'views/formio_builder_translation_views.xml',
         'views/formio_builder_views.xml',
+        'views/formio_extra_asset_views.xml',
         'views/formio_form_views.xml',
         'views/formio_res_model_views.xml',
         'views/formio_translation_source_views.xml',
@@ -45,6 +47,7 @@
         'views/formio_version_github_tag_views.xml',
         'views/formio_menu.xml',
         'views/res_config_settings_views.xml',
+        'views/res_lang_views.xml',
         'views/ir_actions_views.xml',
         'views/mail_activity_views.xml',
         # formio templates

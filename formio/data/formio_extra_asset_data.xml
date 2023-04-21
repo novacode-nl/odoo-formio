@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <data>
+        <!-- flatpickr ir.attachment -->
+        <record id="flatpickr_min_css_attachment" model="ir.attachment">
+            <field name="name">flatpickr.min.css</field>
+            <field name="type">url</field>
+            <field name="res_model">formio.extra.asset</field>
+            <field name="public" eval="True"/>
+            <field name="url">https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css</field>
+        </record>
+
+        <record id="flatpickr_min_js_attachment" model="ir.attachment">
+            <field name="name">flatpickr.min.js</field>
+            <field name="type">url</field>
+            <field name="res_model">formio.extra.asset</field>
+            <field name="public" eval="True"/>
+            <field name="url">https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js</field>
+        </record>
+
+        <record id="flatpickr_l10n_default_min_js_attachment" model="ir.attachment">
+            <field name="name">flatpickr.l10n.default.min.js</field>
+            <field name="type">url</field>
+            <field name="res_model">formio.extra.asset</field>
+            <field name="public" eval="True"/>
+            <field name="url">https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/default.min.js</field>
+        </record>
+
+        <record id="flatpickr_l10n_nl_min_js_attachment" model="ir.attachment">
+            <field name="name">flatpickr.l10n.nl.min.js</field>
+            <field name="type">url</field>
+            <field name="res_model">formio.extra.asset</field>
+            <field name="public" eval="True"/>
+            <field name="url">https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/nl.min.js</field>
+        </record>
+
+        <!-- flatpickr formio.extra.asset -->
+        <record id="flatpickr_min_css_asset" model="formio.extra.asset">
+            <field name="type">css</field>
+            <field name="attachment_id" ref="formio.flatpickr_min_css_attachment"/>
+        </record>
+
+        <record id="flatpickr_min_js_asset" model="formio.extra.asset">
+            <field name="type">js</field>
+            <field name="attachment_id" ref="formio.flatpickr_min_js_attachment"/>
+        </record>
+
+        <record id="flatpickr_l10n_default_min_js_asset" model="formio.extra.asset">
+            <field name="type">js</field>
+            <field name="attachment_id" ref="formio.flatpickr_l10n_default_min_js_attachment"/>
+        </record>
+
+        <record id="flatpickr_l10n_nl_min_js_asset" model="formio.extra.asset">
+            <field name="type">js</field>
+            <field name="attachment_id" ref="formio.flatpickr_l10n_nl_min_js_attachment"/>
+        </record>
+    </data>
+</odoo>

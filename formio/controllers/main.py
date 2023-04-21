@@ -139,6 +139,7 @@ class FormioController(http.Controller):
                 'form': form,
                 'formio_css_assets': form.builder_id.formio_css_assets,
                 'formio_js_assets': form.builder_id.formio_js_assets,
+                'extra_assets': form.builder_id.extra_asset_ids
             }
             return request.render('formio.formio_form_embed', values)
 
@@ -152,6 +153,7 @@ class FormioController(http.Controller):
             res['schema'] = json.loads(form.builder_id.schema)
             res['options'] = self._get_form_js_options(form)
             res['params'] = self._get_form_js_params(form)
+            res['locales'] = self._get_form_js_locales(form)
 
         return res
 
@@ -355,6 +357,9 @@ class FormioController(http.Controller):
             language = Lang._formio_ietf_code(request._context['lang'])
         options['language'] = language
         return options
+
+    def _get_form_js_locales(self, form):
+        return form.builder_id._get_form_js_locales()
 
     def _get_form_js_params(self, form):
         return form._get_js_params()

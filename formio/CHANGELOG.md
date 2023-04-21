@@ -1,5 +1,22 @@
 # Changelog
 
+## 12.2
+
+Fix and improve email templates:
+- Migrate Jinja to QWeb syntax.
+- Replace `email_to` by `partner_to`.
+
+## 12.1
+
+Add unique constraint on `formio.builder.translation` (fields: `builder_id`, `lang_id`, `source`).
+
+## 12.0
+
+This release brings datetime component localization and translations:
+- Add `formio.extra.asset` (model, views) to store extra JS and CSS assets, eg `flatpickr` (JS library) and its localization files.
+- Implement locales administration and passing to the (JS) frontend.
+- Set default and update the datetime (flatpickr) locale by language chooser in a form.
+
 ## 11.11
 
 Fix typo menu (sequence).

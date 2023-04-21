@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_lang_tree" model="ir.ui.view">
+        <field name="model">res.lang</field>
+        <field name="inherit_id" ref="base.res_lang_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='url_code']" position="after">
+                <field name="formio_short_code" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_lang_form" model="ir.ui.view">
+        <field name="model">res.lang</field>
+        <field name="inherit_id" ref="base.res_lang_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']/parent::group/parent::group" position="inside">
+                <group>
+                    <field name="formio_short_code" readonly="0"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

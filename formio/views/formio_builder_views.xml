@@ -212,6 +212,17 @@ See LICENSE file for full licensing details. -->
                                     <field name="value"/>
                                 </tree>
                             </field>
+                            <group string="Languages &amp; Locales" name="languages_locales">
+                                <field name="languages" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="code" optional="show"/>
+                                        <field name="formio_ietf_code" optional="hide"/>
+                                        <field name="formio_short_code" optional="show"/>
+                                        <field name="active"/>
+                                    </tree>
+                                </field>
+                            </group>
                             <div class="text-muted">
                                 <i class="fa fa-info-circle" title="info"/> Translations of the <strong>formio.js version</strong> can be done via the General tab (click field: formio.js version)<br/>
                                 <i class="fa fa-info-circle" title="info"/> The button "Translations" has the same as in this list.
@@ -278,6 +289,16 @@ See LICENSE file for full licensing details. -->
                                     </tree>
                                 </field>
                             </group>
+                        </page>
+                        <page string="JS Assets" name="extra_assets" groups="formio.group_formio_admin">
+                            <field name="extra_asset_ids">
+                                <tree editable="bottom">
+                                    <field name="type" readonly="1"/>
+                                    <field name="attachment_id" readonly="1"/>
+                                    <field name="attachment_type" optional="show"/>
+                                    <field name="url" optional="show"/>
+                                </tree>
+                            </field>
                         </page>
                         <page string="JS Options" name="javascript_options" groups="formio.group_formio_admin">
                             <div style="background-color: #e9ecef; padding: 0 10px;">

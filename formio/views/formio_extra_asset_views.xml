@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <record id="view_formio_extra_asset_tree" model="ir.ui.view">
+        <field name="name">formio.extra.asset.tree</field>
+        <field name="model">formio.extra.asset</field>
+        <field name="arch" type="xml">
+            <tree string="Extra Assets">
+                <field name="sequence" widget="handle"/>
+                <field name="type"/>
+                <field name="attachment_id" context="{'default_res_id': id}"/>
+                <field name="attachment_type"/>
+                <field name="url"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_formio_extra_asset_form" model="ir.ui.view">
+        <field name="name">formio.extra.asset.form</field>
+        <field name="model">formio.extra.asset</field>
+        <field name="arch" type="xml">
+	    <form string="Extra Asset">
+                <sheet>
+                    <group>
+                        <field name="type"/>
+                        <field name="attachment_id" context="{'default_res_id': id}"/>
+                        <field name="attachment_type"/>
+                        <field name="url"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_formio_extra_asset" model="ir.actions.act_window">
+        <field name="name">Extra Assets</field>
+        <field name="res_model">formio.extra.asset</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_formio_extra_asset_tree"/>
+    </record>
+</odoo>

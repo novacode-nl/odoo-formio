@@ -33,6 +33,14 @@ See LICENSE file for full licensing details. -->
         <html>
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+                <t t-foreach="extra_assets" t-as="asset">
+                    <t t-if="asset.type == 'css'">
+                        <link rel="stylesheet" type="text/css" t-att-href="asset.url"/>
+                    </t>
+                    <t t-if="asset.type == 'js'">
+                        <script type="text/javascript" t-att-src="asset.url"></script>
+                    </t>
+                </t>
                 <t t-foreach="formio_css_assets" t-as="css">
                     <link rel="stylesheet" type="text/css" t-att-href="css.url"/>
                 </t>
@@ -89,7 +97,7 @@ See LICENSE file for full licensing details. -->
                 <t t-if="len(languages) > 1">
                     <div class="formio_languages">
                         <t t-foreach="languages" t-as="lang">
-                            <button class="btn btn-sm btn-default" t-attf-onclick="setLanguage('{{ lang.formio_ietf_code }}')"><span t-field="lang.name"/></button>
+                            <button class="btn btn-sm btn-light" t-attf-onclick="setLanguage('{{ lang.formio_ietf_code }}')"><span t-field="lang.name"/></button>
                         </t>
                     </div>
                 </t>

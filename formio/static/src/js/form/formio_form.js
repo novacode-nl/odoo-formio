@@ -19,6 +19,8 @@ export class OdooFormioForm extends Component {
 
         this.schema = {};
         this.options = {};
+        this.language = null;
+        this.locales = {};
         this.params = {}; // extra params from Odoo backend
 
         this.baseUrl = window.location.protocol + '//' + window.location.host;
@@ -79,6 +81,9 @@ export class OdooFormioForm extends Component {
             if (!$.isEmptyObject(result)) {
                 self.schema = result.schema;
                 self.options = result.options;
+                self.language = self.options.language;
+                self.locales = result.locales;
+                self.defaultLocaleShort = self._localeShort(self.language);
                 self.params = result.params;
                 self.createForm();
             }
@@ -140,15 +145,23 @@ export class OdooFormioForm extends Component {
 
     createForm() {
         const self = this;
-
+        // this does some flatpickr (datetime) locale all over the place.
+        if ('language' in self.options && window.flatpickr != undefined) {
+            (window).flatpickr.localize((window).flatpickr.l10ns[self.defaultLocaleShort]);
+        }
         Formio.setBaseUrl(window.location.href);
-        Formio.createForm(document.getElementById('formio_form'), self.schema, self.options).then(function(form) {
-            // Language
-            if ('language' in self.options) {
-                form.language = self.options['language'];
+        self['options']['hooks'] = {
+            attachComponent: (element, instance) => {
+                if (instance.component.type == 'datetime') {
+                    self._localizeComponent(instance.component, self.language);
+                }
             }
+        };
+        Formio.createForm(document.getElementById('formio_form'), self.schema, self.options).then(function(form) {
             window.setLanguage = function(lang) {
+                self.language = lang;
                 form.language = lang;
+                // component with URL filter: add language
                 FormioUtils.eachComponent(form.components, (component) => {
                     let compObj = component.component;
                     if (compObj.hasOwnProperty('data') &&
@@ -158,6 +171,17 @@ export class OdooFormioForm extends Component {
                         compObj.filter = filterParams.toString();
                     }
                 });
+                // flatpickr (datetime) localization
+                if (window.flatpickr != undefined) {
+                    const localeShort = self._localeShort(lang);
+                    (window).flatpickr.localize((window).flatpickr.l10ns[localeShort]);
+                    form.everyComponent((component) => {
+                        if (component.type == 'datetime') {
+                            self._localizeComponent(component.component, form.language);
+                            component.redraw();
+                        }
+                    });
+                }
             };
 
             // Alter the data (Data Source) URL, prefix with Odoo controller endpoint.
@@ -188,6 +212,37 @@ export class OdooFormioForm extends Component {
                     self.onChange(form, changed, flags, modified);
                 }
             });
+
+            form.on('dataGridAddRow', function(component, row) {
+                if (!$.isEmptyObject(self.locales)) {
+                    let reloadComponents = [];
+                    FormioUtils.eachComponent(component.component.components, (componentObj) => {
+                        let localizedComponent = self._localizeComponent(componentObj, self.language);
+                        if (localizedComponent) {
+                            reloadComponents.push(componentObj);
+                        }
+                    }, true);
+                    if (reloadComponents.length > 0) {
+                        const localeShort = self._localeShort(self.language);
+                        form.everyComponent((component) => {
+                            for (let i=0; i < reloadComponents.length; i++) {
+                                let reloadComponent = reloadComponents[i];
+                                if (component.type == reloadComponent.type && component.key == reloadComponent.key) {
+                                    if (component.component.widget.language !== localeShort) {
+                                        component.component.widget.language = localeShort;
+                                        component.component.widget.locale = localeShort;
+                                        component.redraw();
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+            // TODO similar to 'dataGridAddRow'
+            // form.on('editGridAddRow', function(component, row) {});
+            // form.on('rowAdd', function(component, row) {});
 
             form.on('submit', function(submission) {
                 const data = {'data': submission.data};
@@ -252,5 +307,32 @@ export class OdooFormioForm extends Component {
                 });
             }
         });
+    }
+
+    _localizeComponent(component, language) {
+        /** IMPORTANT !
+            localization of datetime component (flatpickr widget)
+            works since formio.js version 5.0.0-rc.4
+        */
+        if (component.type == 'datetime') {
+            const localeShort = this._localeShort(language);
+            component.widget.language = localeShort;
+            component.widget.locale = localeShort;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    _localeShort(language) {
+        if (this.locales.hasOwnProperty(language)) {
+            return this.locales[language];
+        }
+        else {
+            // not really ok, but could work
+            return language.slice(0, 2);
+        }
     }
 }

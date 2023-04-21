@@ -220,6 +220,7 @@ class FormioCustomerPortal(CustomerPortal):
                 'formio_builder_uuid': builder.uuid,
                 'formio_css_assets': builder.formio_css_assets,
                 'formio_js_assets': builder.formio_js_assets,
+                'extra_assets': builder.extra_asset_ids
             }
             return request.render('formio.formio_form_portal_new_embed', values)
 
@@ -234,6 +235,7 @@ class FormioCustomerPortal(CustomerPortal):
         if builder.schema:
             res['schema'] = json.loads(builder.schema)
             res['options'] = self._get_form_js_options(builder)
+            res['locales'] = self._get_form_js_locales(builder)
             res['params'] = self._get_form_js_params(builder)
 
         args = request.httprequest.args
@@ -400,6 +402,9 @@ class FormioCustomerPortal(CustomerPortal):
             options['language'] = request.env.ref('base.lang_en').formio_ietf_code
 
         return options
+
+    def _get_form_js_locales(self, builder):
+        return builder._get_form_js_locales()
 
     def _get_form_js_params(self, builder):
         return builder._get_portal_form_js_params()

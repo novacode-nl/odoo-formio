@@ -9,6 +9,7 @@ class ResConfigSettings(models.TransientModel):
 
     formio_default_version_id = fields.Many2one('formio.version', string='formio.js version', domain="[('is_dummy', '=', False)]")
     formio_default_asset_css_ids = fields.Many2many('formio.default.asset.css', string='formio.js CSS assets', context={'active_test': False})
+    formio_extra_asset_ids = fields.Many2many('formio.extra.asset', string='formio.js Extra assets', context={'active_test': False})
     formio_default_builder_js_options_id = fields.Many2one('formio.builder.js.options', string='formio.js builder options ID')
     formio_default_builder_js_options = fields.Text(related='formio_default_builder_js_options_id.value', string='formio.js builder options')
     formio_github_personal_access_token = fields.Char(string='GitHub personal access token')

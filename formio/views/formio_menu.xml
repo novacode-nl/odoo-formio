@@ -64,6 +64,12 @@ See LICENSE file for full licensing details. -->
         sequence="20"
         action="formio.action_formio_translation_source"/>
     <menuitem
+        id="menu_formio_extra_asset"
+        name="Extra Assets"
+        parent="formio.menu_formio_configuration"
+        sequence="50"
+        action="formio.action_formio_extra_asset"/>
+    <menuitem
         id="menu_formio_builder_js_options"
         name="Form Builder formio.js options"
         parent="formio.menu_formio_configuration"
