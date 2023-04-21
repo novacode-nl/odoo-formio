@@ -1,5 +1,9 @@
 # Changelog
 
+## 12.3
+
+Fix `formio.builder` typo in `_constaint_check_name`.
+
 ## 12.2
 
 Fix and improve email templates:

@@ -193,7 +193,7 @@ class Builder(models.Model):
     @api.constrains('name')
     def constaint_check_name(self):
         for rec in self:
-            if re.search(r"[^a-zA-Z0-9_-]", self.name) is not None:
+            if re.search(r"[^a-zA-Z0-9_-]", rec.name) is not None:
                 raise ValidationError(_('Name is invalid. Use ASCII letters, digits, "-" or "_".'))
 
     @api.constrains("name", "state")
