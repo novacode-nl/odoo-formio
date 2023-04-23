@@ -6,10 +6,14 @@ import logging
 
 from os.path import dirname
 
+try:
+    from werkzeug.utils import send_file
+except ImportError:
+    from odoo.tools._vendor.send_file import send_file
+
 from odoo import http, fields
 from odoo.http import request
 
-from ..models.formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
 from ..models.formio_form import (
     STATE_DRAFT as FORM_STATE_DRAFT,
     STATE_COMPLETE as FORM_STATE_COMPLETE,
@@ -190,15 +194,17 @@ class FormioController(http.Controller):
         fontfile_path = request.env['ir.attachment']._full_path(fonts_dir)
         fontfile_path += '/%s' % name
 
-        # TODO DeprecationWarning, deprecated
-        # odoo.http.send_file is deprecated.
+        # TODO DeprecationWarning, odoo.http.send_file is deprecated.
         #
         # But:
         # http.Stream.from_path only obtains the addons_path, not filestore!
-        #
         # stream = http.Stream.from_path(fontfile_path)
         # return stream.get_response()
-        return http.send_file(fontfile_path)
+        #
+        # Workaround: (to improve/replace in futute?)
+        # still using Odoo <= v15 approach by using Werkzeug
+        # implementation
+        return send_file(fontfile_path, request.httprequest.environ,)
 
     #########
     # Helpers

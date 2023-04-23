@@ -9,7 +9,7 @@
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'live_test_url': 'https://demo15.novacode.nl',
-    'category': 'Inventory/Purchase',
+    'category': 'Forms/Forms',
     'depends': [
         'purchase',
         'formio',

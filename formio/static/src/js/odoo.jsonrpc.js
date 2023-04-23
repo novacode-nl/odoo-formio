@@ -2,7 +2,9 @@
     $.extend({
         jsonRpc: {
             _genericJsonRpc: function(fct_name, params, settings, fct) {
-                // Copied from addons/web/static/src/js/core/ajax.js
+                // TODO track future versions (Odoo >= 16) whether to
+                // replace this implementation.
+                // Copied from addons/web/static/src/legacy/js/core/ajax.js
                 // with slightly modifications.
                 var data = {
                     jsonrpc: "2.0",
