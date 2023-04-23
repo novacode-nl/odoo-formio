@@ -27,6 +27,7 @@
         'data/formio_extra_asset_data.xml',
         'data/ir_config_parameter_data.xml',
         'data/ir_cron_data.xml',
+        'data/ir_module_module.xml',
         'data/mail_activity_data.xml',
         'data/mail_template_data.xml',
         # translations

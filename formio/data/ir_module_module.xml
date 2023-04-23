@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.module" id="formio.module_formio_components_api">
+            <field name="name">formio_components_api</field>
+            <field name="sequence">30</field>
+            <field name="shortdesc">Forms | Components API</field>
+            <field name="category_id" ref="base.module_category_forms"/>
+            <field name="application" eval="True"/>
+            <field name="summary">APIs: on Load, on Change, Domain (filter select components).</field>
+            <field name="license">OPL-1</field>
+            <field name="author">Nova Code</field>
+            <field name="to_buy" eval="False"/>
+            <field name="icon">/formio/static/description/icon_extra.png</field>
+            <field name="website">https://apps.odoo.com/apps/modules/16.0/formio_components_api</field>
+        </record>
+
+        <record model="ir.module.module" id="formio.module_formio_deploy">
+            <field name="name">formio_deploy</field>
+            <field name="sequence">30</field>
+            <field name="shortdesc">Forms | Deploy Tool</field>
+            <field name="category_id" ref="base.module_category_forms"/>
+            <field name="application" eval="True"/>
+            <field name="summary">Export and import Form Builders and related data (APIs, automated/server actions, translations).</field>
+            <field name="license">OPL-1</field>
+            <field name="author">Nova Code</field>
+            <field name="to_buy" eval="False"/>
+            <field name="icon">/formio/static/description/icon_extra.png</field>
+            <field name="website">https://apps.odoo.com/apps/modules/16.0/formio_deploy</field>
+        </record>
+
+        <record model="ir.module.module" id="formio.module_formio_etl">
+            <field name="name">formio_etl</field>
+            <field name="sequence">30</field>
+            <field name="shortdesc">Forms | ETL Interface</field>
+            <field name="category_id" ref="base.module_category_forms"/>
+            <field name="application" eval="True"/>
+            <field name="summary">Explore Forms loaded (ETL) into generated models, views, database tables and records.</field>
+            <field name="license">OPL-1</field>
+            <field name="author">Nova Code</field>
+            <field name="to_buy" eval="False"/>
+            <field name="icon">/formio/static/description/icon_extra.png</field>
+            <field name="website">https://apps.odoo.com/apps/modules/16.0/formio_etl</field>
+        </record>
+
+       <record model="ir.module.module" id="formio.module_formio_helpdesk">
+            <field name="name">formio_helpdesk</field>
+            <field name="sequence">30</field>
+            <field name="shortdesc">Forms | Helpdesk</field>
+            <field name="category_id" ref="base.module_category_forms"/>
+            <field name="application" eval="True"/>
+            <field name="summary">Forms integration with Helpdesk (also portal) Tickets.</field>
+            <field name="license">OPL-1</field>
+            <field name="author">Nova Code</field>
+            <field name="to_buy" eval="False"/>
+            <field name="icon">/formio/static/description/icon_extra.png</field>
+            <field name="website">https://apps.odoo.com/apps/modules/16.0/formio_helpdesk</field>
+       </record>
+
+       <record model="ir.module.module" id="formio.module_formio_hr">
+            <field name="name">formio_hr</field>
+            <field name="sequence">30</field>
+            <field name="shortdesc">Forms | HR</field>
+            <field name="category_id" ref="base.module_category_forms"/>
+            <field name="application" eval="True"/>
+            <field name="summary">Forms integration with Employees.</field>
+            <field name="license">OPL-1</field>
+            <field name="author">Nova Code</field>
+            <field name="to_buy" eval="False"/>
+            <field name="icon">/formio/static/description/icon_extra.png</field>
+            <field name="website">https://apps.odoo.com/apps/modules/16.0/formio_hr</field>
+       </record>
+
+       <record model="ir.module.module" id="formio.module_formio_theme">
+            <field name="name">formio_theme</field>
+            <field name="sequence">30</field>
+            <field name="shortdesc">Forms | HR</field>
+            <field name="category_id" ref="base.module_category_forms"/>
+            <field name="application" eval="True"/>
+            <field name="summary">Theme/Style Forms by defining CSS in the Form Builder.</field>
+            <field name="license">OPL-1</field>
+            <field name="author">Nova Code</field>
+            <field name="to_buy" eval="False"/>
+            <field name="icon">/formio/static/description/icon_extra.png</field>
+            <field name="website">https://apps.odoo.com/apps/modules/16.0/formio_theme</field>
+       </record>
+
+       <record model="ir.module.module" id="formio.module_website_formio_automation">
+            <field name="name">website_formio_automation</field>
+            <field name="sequence">30</field>
+            <field name="shortdesc">Forms | Website Automation</field>
+            <field name="category_id" ref="base.module_category_forms"/>
+            <field name="application" eval="True"/>
+            <field name="summary">Integrate Forms into any website/e-commerce process.</field>
+            <field name="license">OPL-1</field>
+            <field name="author">Nova Code</field>
+            <field name="to_buy" eval="False"/>
+            <field name="icon">/formio/static/description/icon_extra.png</field>
+            <field name="website">https://apps.odoo.com/apps/modules/16.0/website_formio_automation</field>
+       </record>
+    </data>
+</odoo>
