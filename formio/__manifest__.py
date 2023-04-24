@@ -55,7 +55,6 @@
         'views/res_config_settings_views.xml',
         'views/res_lang_views.xml',
         'views/ir_actions_views.xml',
-        'views/ir_module_views.xml',
         'views/mail_activity_views.xml',
         # formio templates
         'views/formio_builder_templates.xml',
