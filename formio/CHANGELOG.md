@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.1.2
+
+Improve form builder wizard save as draft: previous page, page clicked.
+
 ## 16.0.1.1
 
 Fix deprecation warning in (http) controller `send_fonts_file`, by
