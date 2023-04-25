@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.1.3
+
+Minor layout (width) fix in Form Builder Translations tab.
+
 ## 16.0.1.2
 
 Improve form builder wizard save as draft: previous page, page clicked.

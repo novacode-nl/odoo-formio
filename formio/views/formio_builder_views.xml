@@ -204,7 +204,7 @@ See LICENSE file for full licensing details. -->
                                 </tree>
                             </field>
                             <group string="Languages &amp; Locales" name="languages_locales">
-                                <field name="languages" nolabel="1">
+                                <field name="languages" nolabel="1" colspan="2">
                                     <tree editable="bottom">
                                         <field name="name"/>
                                         <field name="code" optional="show"/>
