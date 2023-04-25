@@ -2465,9 +2465,9 @@ msgid "Wizard"
 msgstr "Assistent"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__wizard_on_next_page_save_draft
-msgid "Wizard on Next Page Save Draft"
-msgstr "Assistent auf der nächsten Seite Entwurf speichern"
+#: model:ir.model.fields,field_description:formio.field_formio_builder__wizard_on_change_page_save_draft
+msgid "Wizard on Change Page Save Draft"
+msgstr "Assistent auf der Seite ändern Entwurf speichern"
 
 #. module: formio
 #: code:addons/formio/formio/models/formio_builder.py:0

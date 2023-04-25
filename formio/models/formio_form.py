@@ -550,7 +550,7 @@ class Form(models.Model):
         params = {
             'portal_submit_done_url': self.portal_submit_done_url,
             'public_submit_done_url': self.public_submit_done_url,
-            'wizard_on_next_page_save_draft': self.builder_id.wizard and self.builder_id.wizard_on_next_page_save_draft
+            'wizard_on_change_page_save_draft': self.builder_id.wizard and self.builder_id.wizard_on_change_page_save_draft
         }
         return params
 

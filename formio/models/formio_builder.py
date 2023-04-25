@@ -133,6 +133,7 @@ class Builder(models.Model):
     )
     wizard = fields.Boolean("Wizard", tracking=True)
     wizard_on_next_page_save_draft = fields.Boolean("Wizard on Next Page Save Draft", tracking=True)
+    wizard_on_change_page_save_draft = fields.Boolean("Wizard on Change Page Save Draft", tracking=True)
     submission_url_add_query_params_from = fields.Selection(
         string="Add Query Params to Submission URL from",
         selection=[
@@ -455,7 +456,7 @@ class Builder(models.Model):
         params = {
             'portal_submit_done_url': self.portal_submit_done_url,
             'readOnly': self.is_locked,
-            'wizard_on_next_page_save_draft': self.wizard and self.wizard_on_next_page_save_draft,
+            'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
             'submission_url_add_query_params_from': self.submission_url_add_query_params_from
         }
         return params
@@ -506,16 +507,16 @@ class Builder(models.Model):
         """ Odoo JS (Owl component) misc. params """
         params = {
             'portal_submit_done_url': self.portal_submit_done_url,
-            'wizard_on_next_page_save_draft': self.wizard and self.wizard_on_next_page_save_draft,
+            'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
             'submission_url_add_query_params_from': self.submission_url_add_query_params_from
         }
         return params
 
     def _get_public_form_js_params(self):
-        """ Form: Odoo JS (Owl component) misc. params """
+        """ Odoo JS (Owl component) misc. params """
         params = {
             'public_submit_done_url': self.public_submit_done_url,
-            'wizard_on_next_page_save_draft': self.wizard and self.wizard_on_next_page_save_draft,
+            'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
             'submission_url_add_query_params_from': self.submission_url_add_query_params_from
         }
         return params

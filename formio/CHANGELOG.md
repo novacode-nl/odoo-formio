@@ -1,5 +1,9 @@
 # Changelog
 
+## 12.4
+
+Improve form builder wizard save as draft: previous page, page clicked.
+
 ## 12.3
 
 Fix `formio.builder` typo in `_constaint_check_name`.

@@ -130,7 +130,7 @@ See LICENSE file for full licensing details. -->
                                 <group name="wizard_settings" string="Wizard">
                                     <field name="wizard" string="Wizard" groups="formio.group_formio_admin"
                                            attrs="{'readonly': [('is_locked', '=', True)]}"/>
-                                    <field name="wizard_on_next_page_save_draft" string="Save Draft on Next Page" groups="formio.group_formio_admin"
+                                    <field name="wizard_on_change_page_save_draft" string="Save Draft on Change Page" groups="formio.group_formio_admin"
                                            attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                     <div class="text-muted" colspan="2">
                                         <i class="fa fa-info-circle" title="info"/> Multi-page form, with previous/next page buttons
