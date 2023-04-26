@@ -1,7 +1,11 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from odoo import api, fields, models
+import re
+import uuid
+
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class IrAttachment(models.AbstractModel):
@@ -13,6 +17,31 @@ class IrAttachment(models.AbstractModel):
     formio_asset_formio_version_id = fields.Many2one(
         'formio.version', string='Forms asset (js, css) file',
         help='Mostly files from the formio.js project - https://github.com/formio/formio.js')
+    formio_ref = fields.Char(
+        string="Forms Ref",
+        help="Identifies an attachment with a related Forms/Builder record.",
+    )
+
+    @api.constrains('formio_ref')
+    def constaint_check_formio_ref(self):
+        for rec in self:
+            if rec.formio_ref:
+                if re.search(r"[^a-zA-Z0-9_-]", rec.formio_ref) is not None:
+                    raise ValidationError(_('Forms Ref is invalid. Use ASCII letters, digits, "-" or "_".'))
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        models = self._formio_ref_models()
+        for vals in vals_list:
+            if vals.get('res_model') in models and not vals.get('formio_ref'):
+                vals['formio_ref'] = str(uuid.uuid4())
+        return super(IrAttachment, self).create(vals_list)
+
+    def write(self, vals):
+        models = self._formio_ref_models()
+        if vals.get('res_model') in models and not vals.get('formio_ref'):
+            vals['formio_ref'] = str(uuid.uuid4())
+        return super(IrAttachment, self).write(vals)
 
     @api.depends('res_model')
     def _compute_formio_form_id(self):
@@ -31,3 +60,13 @@ class IrAttachment(models.AbstractModel):
             if asset_ids:
                 to_check = self - self.browse(asset_ids)
         super(IrAttachment, to_check).check(mode, values)
+
+    def copy(self, default=None):
+        self.ensure_one()
+        if self.formio_ref:
+            default = dict(default or {})
+            default['formio_ref'] = str(uuid.uuid4())
+        return super().copy(default)
+
+    def _formio_ref_models(self):
+        return ['formio.version.asset', 'formio.extra.asset']

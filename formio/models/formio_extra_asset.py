@@ -16,6 +16,7 @@ class ExtraAsset(models.Model):
         required=True, ondelete='cascade', domain=[('res_model', '=', 'formio.extra.asset')],
         context={'default_res_model': 'formio.extra.asset'})
     attachment_type = fields.Selection(related='attachment_id.type', string='Attachment Type', readonly=True)
+    attachment_formio_ref = fields.Char(related='attachment_id.formio_ref', string='Forms Ref', readonly=True)
     sequence = fields.Integer(string='Sequence', default=1)
     url = fields.Char(compute='_compute_url')
 

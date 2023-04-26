@@ -1,5 +1,11 @@
 # Changelog
 
+## 16.0.1.4
+
+Implement "Form Ref" field on several models regarding assets and attacments:
+`formio.version.asset`, `formio.extra.asset`, `ir.attachment`\
+This facilitates purposes like export/import tools.
+
 ## 16.0.1.3
 
 Minor layout (width) fix in Form Builder Translations tab.
