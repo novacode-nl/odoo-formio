@@ -1,6 +1,6 @@
 # Changelog
 
-Implement "Form Ref" field on several models regarding assets and attachments:\
+Implement "Forms Ref" field on several models regarding assets and attachments:\
 `formio.version.asset`, `formio.extra.asset`, `ir.attachment`\
 This facilitates purposes like export/import tools.
 
