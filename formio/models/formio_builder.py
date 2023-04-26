@@ -53,7 +53,8 @@ class Builder(models.Model):
     formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='formio.js Javascript')
     extra_asset_ids = fields.Many2many(
         comodel_name='formio.extra.asset',
-        string='Extra Assets'
+        string='Extra Assets',
+        domain=[('attachment_id.res_model', '=', 'formio.extra.asset')]
     )
     formio_js_options_id = fields.Many2one('formio.builder.js.options', string='formio.js Javascript Options template', store=False)
     formio_js_options = fields.Text(

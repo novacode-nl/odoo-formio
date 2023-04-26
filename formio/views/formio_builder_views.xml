@@ -284,14 +284,15 @@ See LICENSE file for full licensing details. -->
                                 </field>
                             </group>
                         </page>
-                        <page string="JS Assets" name="extra_assets" groups="formio.group_formio_admin">
+                        <page string="Extra Assets" name="extra_assets" groups="formio.group_formio_admin">
                             <field name="extra_asset_ids">
-                                <tree editable="bottom">
+                                <tree>
                                     <field name="type" readonly="1"/>
                                     <field name="attachment_id" readonly="1"/>
-                                    <field name="attachment_type" optional="show"/>
+                                    <field name="attachment_type" string="Attachment Type" optional="show"/>
+                                    <field name="url" string="URL" optional="show"/>
+                                    <field name="attachment_public" string="Public" optional="show"/>
                                     <field name="attachment_formio_ref" optional="show"/>
-                                    <field name="url" optional="show"/>
                                 </tree>
                             </field>
                         </page>

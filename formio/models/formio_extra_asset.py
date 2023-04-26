@@ -13,12 +13,26 @@ class ExtraAsset(models.Model):
     type = fields.Selection([('js', 'js'), ('css', 'css'), ('license', 'license')], string='Type', required=True)
     attachment_id = fields.Many2one(
         'ir.attachment', string="Attachment",
-        required=True, ondelete='cascade', domain=[('res_model', '=', 'formio.extra.asset')],
+        required=True,
+        ondelete='cascade',
+        # don't allow to relink attachments (hence domain), but field is needed to create new attachment
+        domain=[('id', '=', 0)],
         context={'default_res_model': 'formio.extra.asset'})
     attachment_type = fields.Selection(related='attachment_id.type', string='Attachment Type', readonly=True)
+    attachment_public = fields.Boolean(related='attachment_id.public', string='Attachment Public', readonly=True)
     attachment_formio_ref = fields.Char(related='attachment_id.formio_ref', string='Forms Ref', readonly=True)
     sequence = fields.Integer(string='Sequence', default=1)
-    url = fields.Char(compute='_compute_url')
+    url = fields.Char(string="URL", compute='_compute_url')
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Workaround, put link with attachment_id.
+        # Wtf, Odoo only stores res_id when attachement_id.public is False
+        res = super().create(vals_list)
+        for rec in res:
+            vals = {'res_id': rec.id}
+            rec.attachment_id.write(vals)
+        return res
 
     @api.depends('attachment_id')
     def _compute_url(self):
