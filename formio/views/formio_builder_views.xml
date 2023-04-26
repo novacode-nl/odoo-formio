@@ -296,6 +296,7 @@ See LICENSE file for full licensing details. -->
                                     <field name="type" readonly="1"/>
                                     <field name="attachment_id" readonly="1"/>
                                     <field name="attachment_type" optional="show"/>
+                                    <field name="attachment_formio_ref" optional="show"/>
                                     <field name="url" optional="show"/>
                                 </tree>
                             </field>

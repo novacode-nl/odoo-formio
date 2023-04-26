@@ -236,6 +236,12 @@ class VersionGitHubTag(models.Model):
 
             if assets_vals_list:
                 res = asset_model.create(assets_vals_list)
+                for rec in res:
+                    attachment_vals = {
+                        'res_model': 'formio.version.asset',
+                        'res_id': rec.id
+                    }
+                    rec.attachment_id.write(attachment_vals)
 
             ####################
             # cleanup and update

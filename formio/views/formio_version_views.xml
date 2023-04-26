@@ -43,6 +43,7 @@ See LICENSE file for full licensing details. -->
                                     <field name="attachment_id"/>
                                     <field name="type"/>
                                     <field name="attachment_type"/>
+                                    <field name="attachment_formio_ref" optional="show"/>
                                 </tree>
                                 <form>
                                     <group>
