@@ -33,7 +33,13 @@ class IrAttachment(models.AbstractModel):
     def create(self, vals_list):
         models = self._formio_ref_models()
         for vals in vals_list:
-            if vals.get('res_model') in models and not vals.get('formio_ref'):
+            generate_formio_ref = False
+            if not vals.get('formio_ref'):
+                if vals.get('res_model') in models:
+                    generate_formio_ref = True
+                elif self._context.get('default_res_model') in models:
+                    generate_formio_ref = True
+            if generate_formio_ref:
                 vals['formio_ref'] = str(uuid.uuid4())
         return super(IrAttachment, self).create(vals_list)
 
@@ -55,7 +61,17 @@ class IrAttachment(models.AbstractModel):
     def check(self, mode, values=None):
         to_check = self
         if self.ids:
-            self._cr.execute("SELECT id FROM ir_attachment WHERE res_model = 'formio.version.asset' AND id IN %s", [tuple(self.ids)])
+            self._cr.execute(
+                """
+                SELECT
+                    id
+                FROM
+                    ir_attachment
+                WHERE
+                    res_model IN ('formio.version.asset', 'formio.extra.asset')
+                    AND id IN %s""",
+                [tuple(self.ids)],
+            )
             asset_ids = [r[0] for r in self._cr.fetchall()]
             if asset_ids:
                 to_check = self - self.browse(asset_ids)

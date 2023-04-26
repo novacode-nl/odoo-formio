@@ -10,8 +10,10 @@ See LICENSE file for full licensing details. -->
             <tree string="Extra Assets">
                 <field name="sequence" widget="handle"/>
                 <field name="type"/>
-                <field name="attachment_id" context="{'default_res_id': id}"/>
+                <field name="attachment_id"
+                       context="{'default_res_model': 'formio.extra.asset', 'default_res_id': id}"/>
                 <field name="attachment_type"/>
+                <field name="attachment_public"/>
                 <field name="url"/>
             </tree>
         </field>
@@ -25,8 +27,10 @@ See LICENSE file for full licensing details. -->
                 <sheet>
                     <group>
                         <field name="type"/>
-                        <field name="attachment_id" context="{'default_res_id': id}"/>
+                        <field name="attachment_id"
+                               context="{'default_res_model': 'formio.extra.asset', 'default_res_id': id}"/>
                         <field name="attachment_type"/>
+                        <field name="attachment_public"/>
                         <field name="url"/>
                     </group>
                 </sheet>

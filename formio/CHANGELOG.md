@@ -1,5 +1,12 @@
 # Changelog
 
+## 12.6
+
+Improvements for administration of "Extra Assets" (js, css) with link/relation to attachments.\
+Affected models: `formio.extra.attachment`, `ir.attachment`.
+
+## 12.5
+
 Implement "Forms Ref" field on several models regarding assets and attachments:\
 `formio.version.asset`, `formio.extra.asset`, `ir.attachment`\
 This facilitates purposes like export/import tools.
