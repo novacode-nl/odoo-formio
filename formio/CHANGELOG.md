@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.1.7
+
+Improve Form Builder "Actions API" tab (layout and info).
+
 ## 16.0.1.6
 
 Migrate (v15) datetime component localization and translations:
