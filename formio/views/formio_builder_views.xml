@@ -255,20 +255,25 @@ See LICENSE file for full licensing details. -->
                             </group>
                         </page>
                         <page string="Actions API" name="actions_api" groups="formio.group_formio_admin">
-                            <group string="Server Actions" name="server_actions" colspan="2">
-                                <div class="mb-2 text-muted" colspan="2">
-                                    <i class="fa fa-info-circle" title="info"/> Server actions which process the form data / submission<br/>
-                                    <i class="fa fa-info-circle" title="info"/> This is currently here for implementation overview purposes
-                                </div>
-                                <field name="server_action_ids" nolabel="1" attrs="{'readonly': [('is_locked', '=', True)]}">
-                                    <tree>
-                                        <field name="name"/>
-                                        <field name="model_id"/>
-                                        <field name="formio_ref"/>
-                                        <field name="state"/>
-                                        <field name="sequence" optional="hide"/>
-                                    </tree>
-                                </field>
+                            <group>
+                                <group string="Server Actions" name="server_actions" colspan="2">
+                                    <div class="mb-2 text-muted" colspan="2">
+                                        <i class="fa fa-info-circle" title="info"/> Server actions which process the form data / submission<br/>
+                                        <i class="fa fa-info-circle" title="info"/> This is used by the <a href="https://apps.odoo.com/apps/modules/16.0/formio_deploy/" target="_blank"><i class="fa fa-link"/> Deploy Tool (formio_deploy) module</a><br/>
+                                    </div>
+                                    <field name="server_action_ids"
+                                           nolabel="1"
+                                           colspan="2"
+                                           attrs="{'readonly': [('is_locked', '=', True)]}">
+                                        <tree>
+                                            <field name="name"/>
+                                            <field name="model_id"/>
+                                            <field name="formio_ref"/>
+                                            <field name="state"/>
+                                            <field name="sequence" optional="hide"/>
+                                        </tree>
+                                    </field>
+                                </group>
                             </group>
                         </page>
                         <page string="JS Options" name="javascript_options" groups="formio.group_formio_admin">

@@ -1,5 +1,9 @@
 # Changelog
 
+## 11.12
+
+Improve Form Builder "Actions API" tab (layout and info).
+
 ## 11.11
 
 Fix typo menu (sequence).
