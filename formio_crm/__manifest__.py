@@ -9,7 +9,7 @@
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     'live_test_url': 'https://demo15.novacode.nl',
-    'category': 'CRM',
+    'category': 'Forms/Forms',
     'depends': ['crm', 'formio'],
     'data': [
         'data/formio_crm_data.xml',

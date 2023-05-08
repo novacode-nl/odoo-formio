@@ -10,7 +10,7 @@
     'website': 'https://www.novacode.nl',
     'live_test_url': 'https://demo15.novacode.nl',
     'license': 'LGPL-3',
-    'category': 'Extra Tools',
+    'category': 'Forms/Forms',
     'depends': ['formio', 'formio_data_api'],
     'data': [
         'security/ir.model.access.csv',

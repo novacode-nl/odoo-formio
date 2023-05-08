@@ -9,7 +9,7 @@
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
     # 'live_test_url': 'https://demo15.novacode.nl',
-    'category': 'Extra Tools',
+    'category': 'Forms/Forms',
     'depends': [
         'mail',
         'formio_components_synchronizer',
