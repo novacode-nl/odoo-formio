@@ -10,7 +10,11 @@ class ExtraAsset(models.Model):
     _order = 'sequence'
     _rec_name = 'attachment_id'
 
-    type = fields.Selection([('js', 'js'), ('css', 'css'), ('license', 'license')], string='Type', required=True)
+    type = fields.Selection(
+        [("js", "js"), ("css", "css"), ("image", "image"), ("license", "license")],
+        string="Type",
+        required=True,
+    )
     attachment_id = fields.Many2one(
         'ir.attachment', string="Attachment",
         required=True,
@@ -40,9 +44,12 @@ class ExtraAsset(models.Model):
             if r.attachment_type == 'url':
                 r.url = r.attachment_id.url
             elif r.attachment_type == 'binary':
-                r.url = '/web/content/{attachment_id}/{name}'.format(
-                    attachment_id=r.attachment_id.id,
-                    name=r.attachment_id.name)
+                if r.type == 'image':
+                    r.url = '/web/image/{attachment_id}'.format(attachment_id=r.attachment_id.id)
+                else:
+                    r.url = '/web/content/{attachment_id}/{name}'.format(
+                        attachment_id=r.attachment_id.id,
+                        name=r.attachment_id.name)
             else:
                 r.url = False
 
