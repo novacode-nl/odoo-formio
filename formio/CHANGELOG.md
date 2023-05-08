@@ -1,5 +1,9 @@
 # Changelog
 
+## 12.7
+
+Improve Form Builder "Actions API" tab (layout and info).
+
 ## 12.6
 
 Improvements for administration of "Extra Assets" (js, css) with link/relation to attachments.\
