@@ -36,6 +36,7 @@ class FormioPublicController(http.Controller):
                 'form_languages': form.builder_id.languages,
                 'formio_css_assets': form.builder_id.formio_css_assets,
                 'formio_js_assets': form.builder_id.formio_js_assets,
+                'extra_assets': form.builder_id.extra_asset_ids
             }
             return request.render('formio.formio_form_public_embed', values)
 
@@ -47,6 +48,7 @@ class FormioPublicController(http.Controller):
         if form and form.builder_id.schema:
             res['schema'] = json.loads(form.builder_id.schema)
             res['options'] = self._get_public_form_js_options(form)
+            res['locales'] = self._get_public_form_js_locales(form)
             res['params'] = self._get_public_form_js_params(form.builder_id)
 
         args = request.httprequest.args
@@ -120,6 +122,7 @@ class FormioPublicController(http.Controller):
                 'form_languages': formio_builder.languages,
                 'formio_css_assets': formio_builder.formio_css_assets,
                 'formio_js_assets': formio_builder.formio_js_assets,
+                'extra_assets': formio_builder.extra_asset_ids
             }
             return request.render('formio.formio_form_public_new_embed', values)
 
@@ -134,6 +137,7 @@ class FormioPublicController(http.Controller):
         if formio_builder.schema:
             res['schema'] = json.loads(formio_builder.schema)
             res['options'] = self._get_public_new_form_js_options(formio_builder)
+            res['locales'] = self._get_public_form_js_locales(formio_builder)
             res['params'] = self._get_public_form_js_params(formio_builder)
 
         args = request.httprequest.args
@@ -210,6 +214,9 @@ class FormioPublicController(http.Controller):
             options['language'] = request.env.ref('base.lang_en').formio_ietf_code
 
         return options
+
+    def _get_public_form_js_locales(self, builder):
+        return builder._get_form_js_locales()
 
     def _get_public_form_js_params(self, builder):
         return builder._get_public_form_js_params()

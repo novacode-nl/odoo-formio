@@ -1,5 +1,12 @@
 # Changelog
 
+## 16.0.1.6
+
+Migrate (v15) datetime component localization and translations:
+- Set `extra_assets` in controllers template vars.
+- Implement locales administration and passing to the (JS) frontend.
+- Set default and update the datetime (flatpickr) locale by language chooser in a form.
+
 ## 16.0.1.5
 
 Improvements for administration of "Extra Assets" (js, css) with link/relation to attachments.\
