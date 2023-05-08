@@ -129,6 +129,7 @@ class FormioPublicController(http.Controller):
                 'formio_builder_uuid': formio_builder.uuid,
                 'formio_css_assets': formio_builder.formio_css_assets,
                 'formio_js_assets': formio_builder.formio_js_assets,
+                'extra_assets': formio_builder.extra_asset_ids
             }
             return request.render('formio.formio_form_public_create_embed', values)
 
