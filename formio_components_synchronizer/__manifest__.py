@@ -8,7 +8,7 @@
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
-    'live_test_url': 'https://demo15.novacode.nl',
+    'live_test_url': 'https://demo16.novacode.nl',
     'license': 'LGPL-3',
     'category': 'Forms/Forms',
     'depends': ['formio', 'formio_data_api'],
