@@ -15,12 +15,12 @@ See LICENSE file for full licensing details. -->
         </xpath>
     </template>
 
-    <template id="portal_my_home" name="Portal My Home: formio forms" customize_show="True" inherit_id="portal.portal_my_home" priority="20">
+    <template id="portal_my_home" name="Show Forms" customize_show="True" inherit_id="portal.portal_my_home" priority="20">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Forms</t>
                 <t t-set="url" t-value="'/my/formio'"/>
-                <t t-set="count" t-value="form_count"/>
+                <t t-set="placeholder_count" t-value="'form_count'"/>
             </t>
         </xpath>
     </template>
@@ -38,12 +38,14 @@ See LICENSE file for full licensing details. -->
             </t>
             <t t-if="builders_create_form">
                 <div class="o_dropdown_kanban dropdown mt8 mb8">
-                    <button class="dropdown-toggle btn btn-primary" role="button" data-toggle="dropdown" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                    <a class="dropdown-toggle btn btn-primary" role="button" data-bs-toggle="dropdown" href="#" aria-label="Dropdown menu" title="Dropdown menu">
                         Submit a Form
-                    </button>
+                    </a>
                     <div class="dropdown-menu" role="menu">
                         <t t-foreach="builders_create_form" t-as="builder">
-                            <a t-attf-href="/my/formio/form/new/{{ builder.name }}" class="dropdown-item"><span t-field="builder.title"/></a>
+                            <a t-attf-href="/my/formio/form/new/{{ builder.name }}" role="menuitem" class="dropdown-item">
+                                <span t-field="builder.title"/>
+                            </a>
                         </t>
                     </div>
                 </div>

@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.1.8
+
+Fix portal /my page.
+
 ## 16.0.1.7
 
 Improve Form Builder "Actions API" tab (layout and info).
