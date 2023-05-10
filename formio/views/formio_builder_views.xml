@@ -77,11 +77,13 @@ See LICENSE file for full licensing details. -->
                     <button
                         name="action_lock" type="object" string="Lock"
                         attrs="{'invisible':['|', ('is_locked','=',True), '|', ('id','=',False), ('state','!=','CURRENT')]}"
-                        confirm="Are you sure? No further modifications are possible in the Form Builder and configuration."/>
+                        confirm="Are you sure? No further modifications are possible in the Form Builder and configuration."
+                        class="btn-primary"/>
                     <button
                         name="action_unlock" type="object" string="Unlock"
                         attrs="{'invisible':['|', ('is_locked','=',False), '|', ('id','=',False), ('state','!=','CURRENT')]}"
-                        confirm="Are you sure? Modifying the Form Builder could cause existing forms to be invalid."/>
+                        confirm="Are you sure? Modifying the Form Builder could cause existing forms to be invalid."
+                        class="btn-primary"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">

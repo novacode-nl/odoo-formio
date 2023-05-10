@@ -1,5 +1,12 @@
 # Changelog
 
+## 12.9
+
+Form Builder Lock/Unlock buttons with primary color.
+
+## 12.8
+Cleanup/fix migrations (apparently picked from 16.0)
+
 ## 12.7
 
 Improve Form Builder "Actions API" tab (layout and info).
