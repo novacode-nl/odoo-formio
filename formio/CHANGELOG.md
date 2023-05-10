@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.1.9
+
+Form Builder Lock/Unlock buttons with primary color.
+
 ## 16.0.1.8
 
 Fix portal /my page.
