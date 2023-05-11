@@ -112,7 +112,9 @@ See LICENSE file for full licensing details. -->
                         <page string="General" name="settings">
                             <group name="settings">
                                 <group name="formiojs_settings" string="formio.js">
-                                    <field name="formio_version_id" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                    <field name="formio_version_id"
+                                           attrs="{'readonly': [('is_locked', '=', True)]}"
+                                           options="{'no_create_edit': True, 'no_quick_create': True}"/>
                                     <field name="formio_version_is_dummy" invisible="1"/>
                                     <div colspan="2" attrs="{'invisible': [('formio_version_is_dummy', '=', False)]}">
                                         <strong class="text-danger">

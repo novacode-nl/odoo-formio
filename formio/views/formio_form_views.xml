@@ -20,7 +20,12 @@ See LICENSE file for full licensing details. -->
                 <field name="submission_partner_id"/>
                 <field name="submission_date"/>
                 <field name="state"/>
-                <button string="Form" class="btn-sm btn-secondary" name="action_view_formio" type="object"/>
+                <button
+                    string="Open Form"
+                    name="action_view_formio"
+                    type="object"
+                    class="btn-sm btn-secondary"
+                    icon="fa-arrow-right"/>
                 <field name="portal_share" optional="show"/>
                 <field name="public_share" optional="show"/>
                 <field name="public_access" optional="show"/>

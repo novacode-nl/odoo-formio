@@ -1,5 +1,9 @@
 # Changelog
 
+## 12.10
+
+Form Builder: Disallow create and edit for field "formio.js version".
+
 ## 12.9
 
 Form Builder Lock/Unlock buttons with primary color.
