@@ -3,7 +3,7 @@
 
 {
     'name': 'Forms | Website (Block etc)',
-    'summary': 'Form Block, other website integration',
+    'summary': "'Drag & drop' Form Block, other website integration",
     'version': '2.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
