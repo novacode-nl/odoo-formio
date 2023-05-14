@@ -75,6 +75,7 @@ class FormioController(http.Controller):
             'builder': builder,
             'formio_css_assets': builder.formio_css_assets,
             'formio_js_assets': builder.formio_js_assets,
+            'extra_assets': builder.extra_asset_ids,
         }
         return request.render('formio.formio_builder_embed', values)
 

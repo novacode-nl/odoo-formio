@@ -1,5 +1,9 @@
 # Changelog
 
+## 12.11
+
+Improve loading "Extra Assets" (js, css), by targetting `before` or `after` the core assets.
+
 ## 12.10
 
 Form Builder: Disallow create and edit for field "formio.js version".
@@ -18,7 +22,7 @@ Improve Form Builder "Actions API" tab (layout and info).
 ## 12.6
 
 Improvements for administration of "Extra Assets" (js, css) with link/relation to attachments.\
-Affected models: `formio.extra.attachment`, `ir.attachment`.
+Affected models: `formio.extra.asset`, `ir.attachment`.
 
 ## 12.5
 

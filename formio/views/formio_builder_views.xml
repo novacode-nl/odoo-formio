@@ -303,6 +303,7 @@ See LICENSE file for full licensing details. -->
                             <field name="extra_asset_ids">
                                 <tree>
                                     <field name="type" readonly="1"/>
+                                    <field name="target" readonly="1" optional="hide"/>
                                     <field name="attachment_id" readonly="1"/>
                                     <field name="attachment_type" string="Attachment Type" optional="show"/>
                                     <field name="url" string="URL" optional="show"/>

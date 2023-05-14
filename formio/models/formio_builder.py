@@ -575,3 +575,6 @@ class Builder(models.Model):
 
     def _generate_odoo_domain(self, domain=[], params={}):
         return domain
+
+    def _has_extra_asset(self, extra_asset_record):
+        return self.extra_asset_ids.filtered(lambda x: x.id == extra_asset_record.id)
