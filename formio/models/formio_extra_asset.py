@@ -6,6 +6,7 @@ from odoo import api, fields, models
 
 class ExtraAsset(models.Model):
     _name = 'formio.extra.asset'
+    _inherit = ['mail.thread']
     _description = 'formio.js Extra Asset'
     _order = 'sequence'
     _rec_name = 'attachment_id'
@@ -14,18 +15,27 @@ class ExtraAsset(models.Model):
         [("js", "js"), ("css", "css"), ("image", "image"), ("license", "license")],
         string="Type",
         required=True,
+        tracking=True
+    )
+    target = fields.Selection(
+        [('append', 'Append'), ('prepend', 'Prepend')],
+        string="Target",
+        required=True,
+        tracking=True,
+        help="Target: append (after) or prepend (before) formio.js, OWL, jQuery"
     )
     attachment_id = fields.Many2one(
         'ir.attachment', string="Attachment",
         required=True,
         ondelete='cascade',
+        tracking=True,
         # don't allow to relink attachments (hence domain), but field is needed to create new attachment
         domain=[('id', '=', 0)],
         context={'default_res_model': 'formio.extra.asset'})
     attachment_type = fields.Selection(related='attachment_id.type', string='Attachment Type', readonly=True)
     attachment_public = fields.Boolean(related='attachment_id.public', string='Attachment Public', readonly=True)
     attachment_formio_ref = fields.Char(related='attachment_id.formio_ref', string='Forms Ref', readonly=True)
-    sequence = fields.Integer(string='Sequence', default=1)
+    sequence = fields.Integer(string='Sequence', default=1, tracking=True,)
     url = fields.Char(string="URL", compute='_compute_url')
 
     @api.model_create_multi

@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.1.11
+
+Improve loading "Extra Assets" (js, css), by targetting `before` or `after` the core assets.
+
 ## 16.0.1.10
 
 Form Builder: Disallow create and edit for field "formio.js version".
@@ -26,7 +30,7 @@ Migrate (v15) datetime component localization and translations:
 ## 16.0.1.5
 
 Improvements for administration of "Extra Assets" (js, css) with link/relation to attachments.\
-Affected models: `formio.extra.attachment`, `ir.attachment`.
+Affected models: `formio.extra.asset`, `ir.attachment`.
 
 ## 16.0.1.4
 

@@ -40,21 +40,25 @@ See LICENSE file for full licensing details. -->
         <!-- flatpickr formio.extra.asset -->
         <record id="flatpickr_min_css_asset" model="formio.extra.asset">
             <field name="type">css</field>
+            <field name="target">prepend</field>
             <field name="attachment_id" ref="formio.flatpickr_min_css_attachment"/>
         </record>
 
         <record id="flatpickr_min_js_asset" model="formio.extra.asset">
             <field name="type">js</field>
+            <field name="target">prepend</field>
             <field name="attachment_id" ref="formio.flatpickr_min_js_attachment"/>
         </record>
 
         <record id="flatpickr_l10n_default_min_js_asset" model="formio.extra.asset">
             <field name="type">js</field>
+            <field name="target">prepend</field>
             <field name="attachment_id" ref="formio.flatpickr_l10n_default_min_js_attachment"/>
         </record>
 
         <record id="flatpickr_l10n_nl_min_js_asset" model="formio.extra.asset">
             <field name="type">js</field>
+            <field name="target">prepend</field>
             <field name="attachment_id" ref="formio.flatpickr_l10n_nl_min_js_attachment"/>
         </record>
     </data>
