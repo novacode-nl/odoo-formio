@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+See LICENSE file for full licensing details. -->
+
+<odoo>
+    <data>
+        <!-- recaptcha -->
+        <record id="formio_component_recaptcha_js" model="ir.attachment">
+            <field name="name">formio_component_recaptcha.js</field>
+            <field name="type">url</field>
+            <field name="res_model">formio.extra.asset</field>
+            <field name="public" eval="True"/>
+            <field name="url">/formio_component_recaptcha_button/static/src/js/formio_component_recaptcha.js</field>
+        </record>
+
+        <record id="formio_component_recaptcha_js_asset" model="formio.extra.asset">
+            <field name="type">js</field>
+            <field name="target">append</field>
+            <field name="attachment_id" ref="formio_component_recaptcha_button.formio_component_recaptcha_js"/>
+        </record>
+
+        <!-- button -->
+        <record id="formio_component_recaptcha_button_js" model="ir.attachment">
+            <field name="name">formio_component_recaptcha_button.js</field>
+            <field name="type">url</field>
+            <field name="res_model">formio.extra.asset</field>
+            <field name="public" eval="True"/>
+            <field name="url">/formio_component_recaptcha_button/static/src/js/formio_component_recaptcha_button.js</field>
+        </record>
+
+        <record id="formio_component_recaptcha_button_js_asset" model="formio.extra.asset">
+            <field name="type">js</field>
+            <field name="target">append</field>
+            <field name="attachment_id" ref="formio_component_recaptcha_button.formio_component_recaptcha_button_js"/>
+        </record>
+    </data>
+</odoo>

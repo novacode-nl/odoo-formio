@@ -6,8 +6,6 @@ See LICENSE file for full licensing details. -->
     <template id="formio_form_embed_inherit" inherit_id="formio.formio_form_embed">
         <xpath expr="//head" position="inside">
             <t t-if="form.builder_id.component_recaptcha_button_active and form.builder_id.component_recaptcha_button_site_key">
-                <script type="text/javascript" src="/formio_component_recaptcha_button/static/src/js/formio_component_recaptcha.js"/>
-                <script type="text/javascript" src="/formio_component_recaptcha_button/static/src/js/formio_component_recaptcha_button.js"/>
                 <script type="text/javascript" t-attf-src="https://www.google.com/recaptcha/api.js?render={{ form.builder_id.component_recaptcha_button_site_key }}"></script>
             </t>
         </xpath>
