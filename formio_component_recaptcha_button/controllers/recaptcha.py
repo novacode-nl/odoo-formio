@@ -1,7 +1,6 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-import json
 import requests
 
 from odoo import http
@@ -15,9 +14,8 @@ class FormioRecaptchaController(http.Controller):
 
     @http.route('/formio/component/recaptcha', type='json', auth="none", methods=['POST'], website=True)
     def verification(self, **post):
-        url = 'https://www.google.com/recaptcha/api/siteverify';
-
-        secret = request.env['ir.config_parameter'].sudo().get_param('formio_recaptcha_button.secret_key')
+        url = 'https://www.google.com/recaptcha/api/siteverify'
+        secret = request.env['ir.config_parameter'].sudo().get_param('recaptcha_private_key')
         data = {
             'secret': secret,
             'response': post['token']
