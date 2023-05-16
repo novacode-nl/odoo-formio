@@ -1,5 +1,9 @@
 # Changelog
 
+## 12.12
+
+Fix the component data URL check in the Form JS (rendering) code.
+
 ## 12.11
 
 Improve loading "Extra Assets" (js, css), by targetting `before` or `after` the core assets.
