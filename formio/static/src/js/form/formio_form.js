@@ -138,6 +138,13 @@ export class OdooFormioForm extends Component {
         }
     }
 
+    _hasComponentDataURL(component) {
+        return component
+            && component.hasOwnProperty('data')
+            && component.data.hasOwnProperty('url')
+            && !$.isEmptyObject(component.data.url);
+    }
+
     createForm() {
         const self = this;
 
@@ -151,8 +158,7 @@ export class OdooFormioForm extends Component {
                 form.language = lang;
                 FormioUtils.eachComponent(form.components, (component) => {
                     let compObj = component.component;
-                    if (compObj.hasOwnProperty('data') &&
-                        compObj.data.hasOwnProperty('url') && !$.isEmptyObject(compObj.data.url)) {
+                    if (self._hasComponentDataURL(compObj)) {
                         let filterParams = new URLSearchParams(compObj.filter);
                         filterParams.set('language', form.language);
                         compObj.filter = filterParams.toString();
@@ -164,8 +170,7 @@ export class OdooFormioForm extends Component {
             // This also accounts nested components eg inside datagrid, editgrid.
             FormioUtils.eachComponent(form.components, (component) => {
                 let compObj = component.component;
-                if (compObj.hasOwnProperty('data') &&
-                    compObj.data.hasOwnProperty('url') && !$.isEmptyObject(compObj.data.url)) {
+                if (self._hasComponentDataURL(compObj)) {
                     compObj.data.url = self.getDataUrl(compObj);
                     let filterParams = new URLSearchParams(compObj.filter);
                     filterParams.set('language', form.language);

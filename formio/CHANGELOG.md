@@ -1,5 +1,9 @@
 # Changelog
 
+## 11.13
+
+Fix the component data URL check in the Form JS (rendering) code.
+
 ## 11.12
 
 Improve Form Builder "Actions API" tab (layout and info).
