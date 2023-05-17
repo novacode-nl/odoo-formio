@@ -13,7 +13,7 @@ class Version(models.Model):
     name = fields.Char(
         "Name", required=True, tracking=True,
         help="""formio.js release/version.""")
-    active = fields.Boolean(default=True)
+    active = fields.Boolean("Active", tracking=True, default=True)
     sequence = fields.Integer()
     description = fields.Text("Description")
     is_dummy = fields.Boolean(string="Is Dummy (default version in demo data)", readonly=True)
