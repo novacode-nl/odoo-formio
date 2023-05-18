@@ -162,7 +162,8 @@ export class OdooFormioForm extends Component {
                 if (instance.component.type == 'datetime') {
                     self._localizeComponent(instance.component, self.language);
                 }
-            }
+            },
+            ...self['options']['hooks'],
         };
         Formio.createForm(document.getElementById('formio_form'), self.schema, self.options).then(function(form) {
             window.setLanguage = function(lang) {
