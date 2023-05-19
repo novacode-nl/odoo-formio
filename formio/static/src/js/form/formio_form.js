@@ -171,7 +171,7 @@ export class OdooFormioForm extends Component {
             });
 
             window.setLanguage = function(lang, button) {
-                console.log(lang)
+                
                 self.language = lang;
                 form.language = lang;
                 var buttons = document.querySelectorAll('.formio_languages button');
