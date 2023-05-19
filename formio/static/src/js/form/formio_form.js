@@ -159,10 +159,30 @@ export class OdooFormioForm extends Component {
                 }
             }
         };
+
         Formio.createForm(document.getElementById('formio_form'), self.schema, self.options).then(function(form) {
-            window.setLanguage = function(lang) {
+            var buttons = document.querySelectorAll('.formio_languages button');
+            
+            buttons.forEach(function(btn) {
+                
+                if (self.language === btn.lang) {
+                    btn.classList.add('language_button_active');
+                };
+            });
+
+            window.setLanguage = function(lang, button) {
+                console.log(lang)
                 self.language = lang;
                 form.language = lang;
+                var buttons = document.querySelectorAll('.formio_languages button');
+
+                buttons.forEach(function(btn) {
+                    btn.classList.remove('language_button_active');
+                });
+                button.classList.add('language_button_active');
+
+                
+
                 // component with URL filter: add language
                 FormioUtils.eachComponent(form.components, (component) => {
                     let compObj = component.component;

@@ -40,5 +40,13 @@ h3.formio_form_title {
 }
 
 .formio_languages button {
-    border: 1px solid #d8d8d8;
+    border: 1px solid #000000;
+    background-color:white;
+    color:black;
+}
+
+.btn.language_button_active {
+    background-color:#6e757c;
+    color:white;
+    border: 1px solid #6e757c;
 }
