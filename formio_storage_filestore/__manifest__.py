@@ -16,7 +16,7 @@
         'data/ir_cron_data.xml'
     ],
     'application': True,
-    'installable': False,
+    'installable': True,
     'images': [
         'static/description/banner.gif',
     ],

@@ -52,7 +52,7 @@ class FormioStorageFilestoreController(http.Controller):
         corresponding `ir.attachment`.
         """
         IrAttachment = request.env['ir.attachment']
-        
+
         # Avoid using sudo when not necessary: internal users can
         # create attachments, as opposed to public and portal users.
         if not request.env.user.has_group('base.group_user'):
