@@ -53,7 +53,9 @@ class Version(models.Model):
     def action_add_base_translations(self):
         """ Actually this should be re-implemented to a wizard.
         The wizard should provide a list of all (base) translations to import. """
-        base_translations = self.env['formio.translation'].search([])
+
+        domain = [('lang_id.active', '=', True)]
+        base_translations = self.env['formio.translation'].search(domain)
         vals_list = []
         for rec in self:
             for trans in base_translations:
