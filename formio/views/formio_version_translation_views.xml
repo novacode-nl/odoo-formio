@@ -8,11 +8,14 @@ See LICENSE file for full licensing details. -->
         <field name="model">formio.version.translation</field>
         <field name="arch" type="xml">
             <tree string="Translations" editable="top">
+                <field name="sequence" widget="handle"/>
                 <field name="formio_version_id" optional="show"/>
                 <field name="lang_id"/>
                 <field name="source_property"/>
                 <field name="source_text"/>
                 <field name="value"/>
+                <field name="base_translation_origin" optional="show"/>
+                <field name="base_translation_updated" optional="show"/>
             </tree>
         </field>
     </record>
@@ -29,6 +32,8 @@ See LICENSE file for full licensing details. -->
                         <field name="source_property" placeholder="A formio.js library translation property ..."/>
                         <field name="source_text"/>
                         <field name="value"/>
+                        <field name="base_translation_origin"/>
+                        <field name="base_translation_updated"/>
                     </group>
                 </sheet>
             </form>
@@ -45,6 +50,19 @@ See LICENSE file for full licensing details. -->
                 <field name="source_property"/>
                 <field name="source_text"/>
                 <field name="value"/>
+                <filter string="Origin Base Translations"
+                        name="origin_base"
+                        domain="[('base_translation_origin', '=', True)]"/>
+                <filter string="Origin User Added Translations"
+                        name="origin_user"
+                        domain="[('base_translation_origin', '=', False)]"/>
+                <separator/>
+                <filter string="Updated Base Translations"
+                        name="updated_base"
+                        domain="[('base_translation_updated', '=', True)]"/>
+                <filter string="Not Updated Base Translations"
+                        name="not_updated_base"
+                        domain="[('base_translation_updated', '=', False)]"/>
             </search>
         </field>
     </record>
