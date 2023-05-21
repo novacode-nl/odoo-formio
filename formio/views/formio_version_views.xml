@@ -21,6 +21,11 @@ See LICENSE file for full licensing details. -->
         <field name="arch" type="xml">
 	    <form string="Form">
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_formio_version_translation)d" type="action" string="Translations"
+                                context="{'default_formio_version_id': id, 'search_default_formio_version_id': id}"
+                                groups="formio.group_formio_admin" icon="fa-language"/>
+                    </div>
                     <label for="name" class="oe_edit_only"/>
                     <h1><field name="name"/></h1>
                     <group>
@@ -28,10 +33,17 @@ See LICENSE file for full licensing details. -->
                     </group>
                     <notebook>
                         <page string="Translations" name="translations" groups="formio.group_formio_admin">
-                            <field name="translations">
+                            <button string="Import Base Translations" name="action_add_base_translations" type="object" class="btn-primary"/>
+                            <button string="Delete Base Translations" name="action_delete_base_translations" type="object" confirm="Are you sure to delete the base translations?"/>
+                            <div class="text-muted mt-4">
+                                <i class="fa fa-info-circle" title="info"/> The Base Translations can be found in menu: Configuration / Translations.<br/>
+                                <i class="fa fa-info-circle" title="info"/> Action button "IMPORT BASE TRANSLATIONS" doesn't overwrite changes. It just adds base translations.
+                            </div>
+                            <field name="translation_ids" context="{'default_formio_version_id': id}">
                                 <tree editable="bottom">
                                     <field name="lang_id" options="{'no_quick_create':True,'no_create_edit':True}"/>
-                                    <field name="source_id"/>
+                                    <field name="source_property"/>
+                                    <field name="source_text"/>
                                     <field name="value"/>
                                 </tree>
                             </field>

@@ -3,7 +3,7 @@
 See LICENSE file for full licensing details. -->
 
 <odoo>
-    <data>
+    <data noupdate="1">
         <record id="version_dummy" model="formio.version">
             <field name="name">Dummy</field>
             <field name="is_dummy">True</field>

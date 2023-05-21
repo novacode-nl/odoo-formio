@@ -10,6 +10,7 @@ See LICENSE file for full licensing details. -->
             <tree string="Translations" editable="top">
                 <field name="builder_id" optional="show"/>
                 <field name="lang_id"/>
+                <field name="source_property"/>
                 <field name="source"/>
                 <field name="value"/>
             </tree>
@@ -25,6 +26,7 @@ See LICENSE file for full licensing details. -->
                     <group>
                         <field name="builder_id"/>
                         <field name="lang_id"/>
+                        <field name="source_property" placeholder="A formio.js library translation property ..."/>
                         <field name="source"/>
                         <field name="value"/>
                     </group>
@@ -40,6 +42,7 @@ See LICENSE file for full licensing details. -->
             <search>
                 <field name="builder_id"/>
                 <field name="lang_id"/>
+                <field name="source_property"/>
                 <field name="source"/>
                 <field name="value"/>
             </search>

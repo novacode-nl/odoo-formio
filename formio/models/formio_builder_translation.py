@@ -13,7 +13,8 @@ class BuilderTranslation(models.Model):
     builder_id = fields.Many2one(
         'formio.builder', string='Form Builder', required=True, ondelete='cascade')
     lang_id = fields.Many2one('res.lang', string='Language', required=True)
-    source = fields.Text(string='Source Term', required=True)
+    source_property = fields.Text(string='Source Property')
+    source = fields.Text(string='Source Text', required=True)
     value = fields.Text(string='Translated Value', required=True)
 
     # related fields
