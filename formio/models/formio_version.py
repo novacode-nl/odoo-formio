@@ -70,7 +70,7 @@ class Version(models.Model):
         if vals_list:
             self.env['formio.version.translation'].create(vals_list)
 
-    def action_delete_base_translations(self):
+    def action_unlink_base_translations(self):
         for rec in self:
             rec.translation_ids.filtered('base_translation_id').unlink()
 

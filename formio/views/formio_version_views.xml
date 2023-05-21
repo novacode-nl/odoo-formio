@@ -34,10 +34,11 @@ See LICENSE file for full licensing details. -->
                     <notebook>
                         <page string="Translations" name="translations" groups="formio.group_formio_admin">
                             <button string="Import Base Translations" name="action_add_base_translations" type="object" class="btn-primary"/>
-                            <button string="Delete Base Translations" name="action_delete_base_translations" type="object" confirm="Are you sure to delete the base translations?"/>
+                            <button string="Unlink Base Translations" name="action_unlink_base_translations" type="object" confirm="Are you sure to unlink the base translations from this formio.js version?"/>
                             <div class="text-muted mt-4">
                                 <i class="fa fa-info-circle" title="info"/> The Base Translations can be found in menu: Configuration / Translations.<br/>
-                                <i class="fa fa-info-circle" title="info"/> Action button "IMPORT BASE TRANSLATIONS" doesn't overwrite changes. It just adds base translations.
+                                <i class="fa fa-info-circle" title="info"/> Action button "IMPORT BASE TRANSLATIONS" doesn't overwrite changes. It adds all Base Translations.<br/>
+                                <i class="fa fa-info-circle" title="info"/> Action button "UNLINK BASE TRANSLATIONS" removes the Base Translations from this formio.js version.
                             </div>
                             <field name="translation_ids" context="{'default_formio_version_id': id}">
                                 <tree editable="bottom">
