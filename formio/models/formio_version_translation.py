@@ -17,9 +17,7 @@ class VersionTranslation(models.Model):
     base_translation_origin = fields.Boolean(
         string='Origin Base', default=False, compute='_compute_base_translation_origin', store=True
     )
-    base_translation_updated = fields.Boolean(
-        string='Updated Base', compute='_compute_base_translation_updated', store=True
-    )
+    base_translation_updated = fields.Boolean(string='Updated Base', default=False)
     lang_id = fields.Many2one('res.lang', string='Language', required=True)
     source_property = fields.Text(
         string='Property',
