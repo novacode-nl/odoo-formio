@@ -1,12 +1,12 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 
 
 class Translation(models.Model):
     _name = 'formio.translation'
-    _description = 'formio.js Version Translation'
+    _description = 'formio.js Base Translation'
     _order = 'lang_id ASC'
 
     lang_id = fields.Many2one('res.lang', string='Language', required=True)

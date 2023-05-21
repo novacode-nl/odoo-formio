@@ -212,6 +212,7 @@ See LICENSE file for full licensing details. -->
                                 <tree editable="bottom">
                                     <field name="builder_id" invisible="1"/>
                                     <field name="lang_id"/>
+                                    <field name="source_property" placeholder="A formio.js library translation property ..."/>
                                     <field name="source"/>
                                     <field name="value"/>
                                 </tree>

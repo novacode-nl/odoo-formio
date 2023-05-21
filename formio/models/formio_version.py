@@ -17,7 +17,8 @@ class Version(models.Model):
     sequence = fields.Integer()
     description = fields.Text("Description")
     is_dummy = fields.Boolean(string="Is Dummy (default version in demo data)", readonly=True)
-    translations = fields.Many2many('formio.translation', string='Translations')
+    translations = fields.Many2many('formio.translation', string='All Translations')
+    translation_ids = fields.One2many('formio.version.translation', 'formio_version_id', string='Translations')
     assets = fields.One2many('formio.version.asset', 'version_id', string='Assets (js, css)', domain=[('type', 'in', ['css', 'js'])])
     css_assets = fields.One2many(
         'formio.version.asset', 'version_id', domain=[('type', '=', 'css')], copy=True,
@@ -48,6 +49,30 @@ class Version(models.Model):
         if 'name' in vals:
             self._update_versions_sequence()
         return res
+
+    def action_add_base_translations(self):
+        """ Actually this should be re-implemented to a wizard.
+        The wizard should provide a list of all (base) translations to import. """
+        base_translations = self.env['formio.translation'].search([])
+        vals_list = []
+        for rec in self:
+            for trans in base_translations:
+                if not rec.translation_ids.filtered(lambda t: t.base_translation_id.id == trans.id):
+                    vals = {
+                        'formio_version_id': rec.id,
+                        'base_translation_id': trans.id,
+                        'lang_id': trans.lang_id.id,
+                        'source_property': trans.source_id.property,
+                        'source_text': trans.source_id.source,
+                        'value': trans.value,
+                    }
+                    vals_list.append(vals)
+        if vals_list:
+            self.env['formio.version.translation'].create(vals_list)
+
+    def action_delete_base_translations(self):
+        for rec in self:
+            rec.translation_ids.filtered('base_translation_id').unlink()
 
     @api.model
     def _update_versions_sequence(self):

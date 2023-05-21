@@ -5,7 +5,7 @@ See LICENSE file for full copyright and licensing details. -->
 <odoo>
     <!-- <data noupdate="1"> -->
     <data>
-        <!-- Builder -->
+        <!-- formio.builder -->
         <record id="access_formio_builder_admin" model="ir.model.access">
             <field name="name">formio.builder: Admin</field>
             <field name="model_id" ref="formio.model_formio_builder"/>
@@ -46,7 +46,7 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="0"/>
         </record>
 
-        <!-- Form -->
+        <!-- formio.form -->
         <record id="access_formio_form_admin" model="ir.model.access">
             <field name="name">formio.form: Admin</field>
             <field name="model_id" ref="formio.model_formio_form"/>
@@ -87,7 +87,7 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="1"/>
         </record>
 
-        <!-- Formio Version -->
+        <!-- formio.version -->
         <record id="access_formio_version_admin" model="ir.model.access">
             <field name="name">formio.version: Admin</field>
             <field name="model_id" ref="formio.model_formio_version"/>
@@ -128,7 +128,7 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="0"/>
         </record>
 
-        <!-- Formio Version Asset -->
+        <!-- formio.version.asset -->
         <record id="access_formio_version_asset_admin" model="ir.model.access">
             <field name="name">formio.version.asset: Admin</field>
             <field name="model_id" ref="formio.model_formio_version_asset"/>
@@ -169,7 +169,7 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="0"/>
         </record>
 
-        <!-- Formio Version Asset -->
+        <!-- formio.extra.asset -->
         <record id="access_formio_extra_asset_admin" model="ir.model.access">
             <field name="name">formio.extra.asset: Admin</field>
             <field name="model_id" ref="formio.model_formio_extra_asset"/>
@@ -210,7 +210,7 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="0"/>
         </record>
 
-        <!-- Formio Version GitHub tag -->
+        <!-- formio.version.github.tag -->
         <record id="access_formio_version_github_tag_admin" model="ir.model.access">
             <field name="name">formio.version.github.tag: Admin</field>
             <field name="model_id" ref="formio.model_formio_version_github_tag"/>
@@ -241,7 +241,7 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="1"/>
         </record>
 
-        <!-- Formio Default asset CSS -->
+        <!-- formio.default.asset.css -->
         <record id="access_formio_default_asset_css_admin" model="ir.model.access">
             <field name="name">formio.default.asset.css: Admin</field>
             <field name="model_id" ref="formio.model_formio_default_asset_css"/>
@@ -252,7 +252,7 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="1"/>
         </record>
 
-        <!-- Formio Translation -->
+        <!-- formio.translation.source -->
         <record id="access_formio_translation_source_admin" model="ir.model.access">
             <field name="name">formio.translation.source: Admin</field>
             <field name="model_id" ref="formio.model_formio_translation_source"/>
@@ -292,7 +292,8 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_write" eval="0"/>
             <field name="perm_unlink" eval="0"/>
         </record>
-        
+
+        <!-- formio.translation -->
         <record id="access_formio_translation_admin" model="ir.model.access">
             <field name="name">formio.translation: Admin</field>
             <field name="model_id" ref="formio.model_formio_translation"/>
@@ -333,7 +334,48 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="0"/>
         </record>
 
-        <!-- Formio Builder Model -->
+        <!-- formio.version.translation -->
+        <record id="access_formio_version_translation_admin" model="ir.model.access">
+            <field name="name">formio.version.translation: Admin</field>
+            <field name="model_id" ref="formio.model_formio_version_translation"/>
+            <field name="group_id" ref="formio.group_formio_admin"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="access_formio_version_translation_user_all_forms" model="ir.model.access">
+            <field name="name">formio.version.translation: User all forms</field>
+            <field name="model_id" ref="formio.model_formio_version_translation"/>
+            <field name="group_id" ref="formio.group_formio_user_all_forms"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record id="access_formio_version_translation_user" model="ir.model.access">
+            <field name="name">formio.version.translation: User assigned forms</field>
+            <field name="model_id" ref="formio.model_formio_version_translation"/>
+            <field name="group_id" ref="formio.group_formio_user"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record id="access_formio_version_translation_portal_user" model="ir.model.access">
+            <field name="name">formio.version.translation: Portal User</field>
+            <field name="model_id" ref="formio.model_formio_version_translation"/>
+            <field name="group_id" ref="base.group_portal"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <!-- formio.res.model -->
         <record id="access_formio_res_model_admin" model="ir.model.access">
             <field name="name">formio.res.model: Admin</field>
             <field name="model_id" ref="formio.model_formio_res_model"/>
@@ -374,7 +416,7 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="0"/>
         </record>
 
-        <!-- Formio Builder Translations -->
+        <!-- formio.builder.translation -->
         <record id="access_formio_builder_translation_admin" model="ir.model.access">
             <field name="name">formio.builder.translation: Admin</field>
             <field name="model_id" ref="formio.model_formio_builder_translation"/>
@@ -415,7 +457,7 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_unlink" eval="0"/>
         </record>
 
-        <!-- Formio Builder JavaScript Options -->
+        <!-- formio.builder.js.options -->
         <record id="access_formio_builder_js_options_admin" model="ir.model.access">
             <field name="name">formio.builder.js.options: Admin</field>
             <field name="model_id" ref="formio.model_formio_builder_js_options"/>

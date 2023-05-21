@@ -550,21 +550,27 @@ class Builder(models.Model):
     def i18n_translations(self):
         i18n = {}
         # formio.js translations
-        for trans in self.formio_version_id.translations:
+        for trans in self.formio_version_id.translation_ids:
             code = trans.lang_id.formio_ietf_code
             if code not in i18n:
-                i18n[code] = {trans.property: trans.value}
+                i18n[code] = {trans.source_property: trans.value}
             else:
-                i18n[code][trans.property] = trans.value
+                i18n[code][trans.source_property] = trans.value
         # Form Builder translations (labels etc).
         # These could override the former formio.js translations, but
         # that's how the Javascript API works.
         for trans in self.translations:
             code = trans.lang_id.formio_ietf_code
             if code not in i18n:
-                i18n[code] = {trans.source: trans.value}
+                if trans.source_property:
+                    i18n[code] = {trans.source_property: trans.value}
+                else:
+                    i18n[code] = {trans.source: trans.value}
             else:
-                i18n[code][trans.source] = trans.value
+                if trans.source_property:
+                    i18n[code][trans.source_property] = trans.value
+                else:
+                    i18n[code][trans.source] = trans.value
         return i18n
 
     def _etl_odoo_config(self, params):

@@ -10,6 +10,7 @@ from . import formio_form
 from . import formio_res_model
 from . import formio_version
 from . import formio_version_asset
+from . import formio_version_translation
 from . import formio_version_github_tag
 from . import formio_translation_source
 from . import formio_translation
