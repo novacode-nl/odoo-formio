@@ -1,5 +1,14 @@
 # Changelog
 
+## 16.0.2.1
+
+Improvements for Version Translations (model: `formio.version.translation`):
+- Compute and store origin (base translation, user added).
+- Compute and show whether a copied (origin) base translation has been updated.
+- Add sequence field. So translations can be ordered to ease admnistration and the translation override implementation.
+
+Fix `name_get` method (models: `formio.translation`, `formio.version.translation`)
+
 ## 16.0.2.0
 
 Major improvements for translations:
