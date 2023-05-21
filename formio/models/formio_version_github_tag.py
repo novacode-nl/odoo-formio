@@ -127,6 +127,7 @@ class VersionGitHubTag(models.Model):
                 'name': self.version_name,
             }
             version = version_model.create(vals)
+            version.action_add_base_translations()
 
             ################
             # default assets
