@@ -91,10 +91,9 @@ See LICENSE file for full licensing details. -->
                         <button name="%(action_formio_builder_translation)d" type="action" string="Translations"
                                 context="{'default_builder_id': id, 'search_default_builder_id': id}"
                                 groups="formio.group_formio_admin" icon="fa-language"/>
-                        <button name="action_view_forms" type="object"
+                        <button name="action_view_forms" type="object" class="oe_stat_button"
                                 groups="formio.group_formio_admin" icon="fa-file-text">
-                            <span>Forms: </span>
-                            <field name="form_count" />
+                            <field string="Forms" name="forms_count" widget="statinfo"/>
                         </button>           
                     </div>
                     <label for="title" class="oe_edit_only"/>

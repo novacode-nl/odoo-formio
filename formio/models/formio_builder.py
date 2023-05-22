@@ -92,7 +92,7 @@ class Builder(models.Model):
     version_comment = fields.Text("Version Comment")
     user_id = fields.Many2one('res.users', string='Assigned user', tracking=True)  # TODO old field, remove?
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
-    form_count = fields.Integer(string='Form Count', compute='_compute_form_count', compute_sudo=True)
+    forms_count = fields.Integer(string='Forms Count', compute='_compute_forms_count', compute_sudo=True)
     portal = fields.Boolean("Portal", tracking=True, help="Form is accessible by assigned portal user")
     portal_url = fields.Char(string='Portal URL', compute='_compute_portal_urls')
     portal_submit_done_url = fields.Char(
@@ -358,21 +358,21 @@ class Builder(models.Model):
         }
 
     def action_view_forms(self):
-        form_view = self.env.ref('formio.view_formio_form_tree')  
+        forms_view = self.env.ref('formio.view_formio_form_tree')  
         return {
             'name': 'Forms',
             'type': 'ir.actions.act_window',
             'res_model': 'formio.form',
             'view_mode': 'tree,form',  
-            'views': [(form_view.id, 'tree'), (False, 'form')], 
+            'views': [(forms_view.id, 'tree'), (False, 'form')], 
             'target': 'current',
             'domain': [('builder_id', '=', self.id)],  
             'context': {}
         }
    
-    def _compute_form_count(self):
+    def _compute_forms_count(self):
         for r in self:
-            r.form_count = len(r.forms)
+            r.forms_count = len(r.forms)
 
     def action_draft(self):
         vals = {'state': STATE_DRAFT}
