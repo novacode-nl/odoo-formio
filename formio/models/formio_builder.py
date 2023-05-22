@@ -77,7 +77,7 @@ class Builder(models.Model):
         default=STATE_DRAFT, required=True, tracking=True,
         help="""\
         - Draft: In draft / design.
-        - Current: Live and in use (publisehd).
+        - Current: Live and in use (published).
         - Obsolete: Was current but obsolete (unpublished)""")
     display_state = fields.Char("Display State", compute='_compute_display_fields', store=False)
     display_name_full = fields.Char("Display Name Full", compute='_compute_display_fields', search='_search_display_name_full', store=False)

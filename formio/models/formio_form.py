@@ -4,7 +4,6 @@
 import ast
 import json
 import logging
-import re
 import uuid
 
 from dateutil.relativedelta import relativedelta
