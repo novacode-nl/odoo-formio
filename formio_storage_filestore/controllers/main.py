@@ -5,7 +5,9 @@ import base64
 import io
 import json
 
-from odoo import http
+from werkzeug.exceptions import Forbidden
+
+from odoo import http, _
 from odoo.http import request
 
 import logging
@@ -22,7 +24,7 @@ class FormioStorageFilestoreController(http.Controller):
 
     @http.route('/formio/storage/filestore', type='http', auth='user', methods=['POST'], csrf=False)
     def storage_filestore_post(self, **kwargs):
-        """Process a (file) upload from the Form and create the
+        """Process file upload from the Form and create the
         corresponding `ir.attachment`.
 
         Distinguish auth=user and auth=public, implemented in the ir.http model.
@@ -48,11 +50,10 @@ class FormioStorageFilestoreController(http.Controller):
 
     @http.route('/formio/storage/filestore', type='http', auth='user', methods=['GET'])
     def storage_filestore_get(self, **kwargs):
-        """Get a (file) upload from the Form by searching the
+        """Get the file (uploaded) from the Form by searching the
         corresponding `ir.attachment`.
         """
         IrAttachment = request.env['ir.attachment']
-
         # Avoid using sudo when not necessary: internal users can
         # create attachments, as opposed to public and portal users.
         if not request.env.user.has_group('base.group_user'):
@@ -76,6 +77,19 @@ class FormioStorageFilestoreController(http.Controller):
                 return request.not_found(file_name)
             else:
                 attachment = attachment[0]
+                # access checks
+                Form = request.env['formio.form']
+                form = Form.browse(attachment.res_id)
+                if not request.env.user and form.sudo().public_share:
+                    if not Form.get_public_form(form.uuid, public_share=True):
+                        msg = 'The (once) public Form %s has been expired.'
+                        _logger.info(msg % form.uuid)
+                        raise Forbidden(_(msg) % form.uuid)
+                elif not Form.get_form(form.uuid, 'read'):
+                    msg = 'Forbidden Form %s'
+                    _logger.info(msg % form.uuid)
+                    raise Forbidden(_(msg) % form.uuid)
+
                 data = io.BytesIO(base64.standard_b64decode(attachment["datas"]))
                 response = http.send_file(data, filename=attachment['name'], as_attachment=True)
                 return response
