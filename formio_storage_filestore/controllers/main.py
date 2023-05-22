@@ -82,7 +82,7 @@ class FormioStorageFilestoreController(http.Controller):
                 form = Form.browse(attachment.res_id)
                 if not request.env.user and form.sudo().public_share:
                     if not Form.get_public_form(form.uuid, public_share=True):
-                        msg = 'The (once) public Form %s has been exprired.'
+                        msg = 'The (once) public Form %s has been expired.'
                         _logger.info(msg % form.uuid)
                         raise Forbidden(_(msg) % form.uuid)
                 elif not Form.get_form(form.uuid, 'read'):
