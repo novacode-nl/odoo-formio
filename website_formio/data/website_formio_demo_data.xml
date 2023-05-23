@@ -6,7 +6,7 @@ See LICENSE file for full licensing details. -->
     <data noupdate="1">
         <record id="formio_builder_demo_website" model="formio.builder">
             <field name="name">website_demo_1</field>
-            <field name="title">Demo - Forms Website Snippet (public form)</field>
+            <field name="title">Demo - Form Website</field>
             <field name="formio_version_id" ref="formio.version_4_9_26"/>
             <field name="public" eval="True"/>
             <field name="state">CURRENT</field>
