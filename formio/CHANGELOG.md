@@ -6,8 +6,6 @@ Fix formio.js version (action/button) _Download and install_ error:\
 `ValueError: max() arg is an empty sequence`.\
 Initialize the translations sequence properly.
 
-When there's no
-
 ## 16.0.2.1
 
 Improvements for Version Translations (model: `formio.version.translation`):
