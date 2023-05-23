@@ -58,7 +58,10 @@ class Version(models.Model):
         base_translations = self.env['formio.translation'].search(domain)
         vals_list = []
         for rec in self:
-            sequence = max(rec.translation_ids.mapped('sequence'))
+            if rec.translation_ids:
+                sequence = max(rec.translation_ids.mapped('sequence'))
+            else:
+                sequence = 1
             for trans in base_translations:
                 if not rec.translation_ids.filtered(lambda t: t.base_translation_id.id == trans.id):
                     sequence += 1
