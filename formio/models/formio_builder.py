@@ -31,7 +31,7 @@ class Builder(models.Model):
     _rec_name = 'display_name_full'
 
     _interval_selection = {'minutes': 'Minutes', 'hours': 'Hours', 'days': 'Days'}
-    _public_access_rule_types = {'time_interval': 'Time Interval', 'custom': 'Custom'}
+    _public_access_rule_types = {'time_interval': 'Time Interval'}
 
     name = fields.Char(
         "Name", required=True, tracking=True,

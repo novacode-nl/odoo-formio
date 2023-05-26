@@ -125,7 +125,7 @@ See LICENSE file for full licensing details. -->
                                 </group>
                                 <group name="publish_settings" string="Publish">
                                     <field name="portal" string="Publish on Portal"/>
-                                    <field name="public" groups="formio.group_formio_admin" string="Publish to Public"/>
+                                    <field name="public" string="Publish to Public"/>
                                     <div class="text-muted" colspan="2">
                                         <i class="fa fa-info-circle" title="info"/> Configure in related tabs (Portal, Public / Website)
                                     </div>
@@ -185,10 +185,9 @@ See LICENSE file for full licensing details. -->
                                     <field name="public_url" widget="CopyClipboardChar" style="font-size: 1.0em;"/>
                                 </group>
                                 <group name="general" string="General">
-                                    <field name="public_access_rule_type"/>
-                                    <!-- <field name="public_access_rule_type" attrs="{'required': [('public', '=', True)]}"/> -->
-                                    <div class="text-muted" colspan="2" attrs="{'invisible': [('public_access_rule_type', '!=', 'custom')]}">
-                                        <i class="fa fa-info-circle" title="info"/> The <em>Custom</em> Public Access Rule Type can be implemented by other modules and apps.
+                                    <field name="public_access_rule_type" attrs="{'required': [('public', '=', True)]}"/>
+                                    <div class="text-muted" colspan="2">
+                                        <i class="fa fa-info-circle" title="info"/> Other <em>Public Access Rule Type(s)</em> can be implemented by other modules.
                                     </div>
                                     <label for="public_access_interval_number" string="Expire After" attrs="{'invisible': [('public_access_rule_type', '!=', 'time_interval')]}"/>
                                     <div attrs="{'invisible': [('public_access_rule_type', '!=', 'time_interval')]}">

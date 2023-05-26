@@ -10,10 +10,9 @@ This can be set in new fields in the Form Builder:
 - Public Save-Draft Done URL
 
 Enhance the public Form access-check, by allowing _custom_ implementation(s) configured by a new selection field `public_access_rule_type`,
-with choices:
-- Time Interval (default)
-- Custom
-Updating the module also executes a migration, which ensures existing form builders set the `public_access_rule_type` field value `time_interval`.
+with current choice `time_interval`\
+Other `public_access_rule_type` choices with a inheritted `public_access` (method) check implementation can be implemented by modules and apps\
+Updating this module also executes a migration, which ensures existing form builders set the `public_access_rule_type` field value to `time_interval`.
 
 ## 16.0.2.2
 
