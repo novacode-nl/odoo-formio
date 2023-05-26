@@ -29,12 +29,28 @@ See LICENSE file for full licensing details. -->
                 </group>
             </xpath>
 
+            <!-- portal_save_draft_done -->
+            <field name="portal_save_draft_done_url" position="before">
+                <field name="portal_save_draft_done_page_id" string="Website Page" groups="formio.group_formio_admin"/>
+            </field>
+            <field name="portal_save_draft_done_url" position="attributes">
+                <attribute name="attrs">{'readonly': [('portal_save_draft_done_page_id', '!=', False)]}</attribute>
+            </field>
+
             <!-- portal_submit_done -->
             <field name="portal_submit_done_url" position="before">
                 <field name="portal_submit_done_page_id" string="Website Page" groups="formio.group_formio_admin"/>
             </field>
             <field name="portal_submit_done_url" position="attributes">
                 <attribute name="attrs">{'readonly': [('portal_submit_done_page_id', '!=', False)]}</attribute>
+            </field>
+
+            <!-- public_save_draft_done -->
+            <field name="public_save_draft_done_url" position="before">
+                <field name="public_save_draft_done_page_id" string="Website Page" groups="formio.group_formio_admin"/>
+            </field>
+            <field name="public_save_draft_done_url" position="attributes">
+                <attribute name="attrs">{'readonly': [('public_save_draft_done_page_id', '!=', False)]}</attribute>
             </field>
 
             <!-- public_submit_done -->
