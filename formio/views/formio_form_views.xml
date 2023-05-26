@@ -28,6 +28,7 @@ See LICENSE file for full licensing details. -->
                     icon="fa-arrow-right"/>
                 <field name="portal_share" optional="show"/>
                 <field name="public_share" optional="show"/>
+                <field name="public_access_rule_type" optional="hide"/>
                 <field name="public_access" optional="show"/>
                 <field name="public_create" optional="hide"/>
                 <field name="res_model_name" string="Resource Type" optional="show"/>
@@ -197,9 +198,12 @@ See LICENSE file for full licensing details. -->
                             <group>
                                 <group name="access_settings" string="Access">
                                     <field name="public_share" groups="formio.group_formio_admin"/>
-                                    <field name="public_access_date_from" groups="formio.group_formio_admin" attrs="{'required': [('public_share', '=', True)]}"/>
-                                    <label for="public_access_interval_number" string="Public Access Expire"/>
-                                    <div>
+                                    <field name="public_access_rule_type"/>
+                                    <field name="public_access_date_from"
+                                           groups="formio.group_formio_admin"
+                                           attrs="{'invisible': [('public_access_rule_type', '!=', 'time_interval')],'required': [('public_share', '=', True)]}"/>
+                                    <label for="public_access_interval_number" string="Public Access Expire" attrs="{'invisible': [('public_access_rule_type', '!=', 'time_interval')]}"/>
+                                    <div attrs="{'invisible': [('public_access_rule_type', '!=', 'time_interval')]}">
                                         <field name="public_access_interval_number" class="oe_inline" groups="formio.group_formio_admin" attrs="{'required': [('public_share', '=', True)]}"/>
                                         <field name="public_access_interval_type" class="oe_inline ml-2" groups="formio.group_formio_admin" attrs="{'required': [('public_share', '=', True)]}"/>
                                     </div>

@@ -31,6 +31,7 @@ class Builder(models.Model):
     _rec_name = 'display_name_full'
 
     _interval_selection = {'minutes': 'Minutes', 'hours': 'Hours', 'days': 'Days'}
+    _public_access_rule_types = {'time_interval': 'Time Interval', 'custom': 'Custom'}
 
     name = fields.Char(
         "Name", required=True, tracking=True,
@@ -94,8 +95,16 @@ class Builder(models.Model):
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
     portal = fields.Boolean("Portal", tracking=True, help="Form is accessible by assigned portal user")
     portal_url = fields.Char(string='Portal URL', compute='_compute_portal_urls')
+    portal_save_draft_done_url = fields.Char(
+        string='Portal Save-Draft Done URL', tracking=True,
+        help="""\
+        IMPORTANT:
+        - Absolute URL should contain a protocol (https://, http://)
+        - Relative URL is also supported e.g. /web/login
+        """
+    )
     portal_submit_done_url = fields.Char(
-        string='Portal Submit-done URL', tracking=True,
+        string='Portal Submit Done URL', tracking=True,
         help="""\
         IMPORTANT:
         - Absolute URL should contain a protocol (https://, http://)
@@ -104,14 +113,23 @@ class Builder(models.Model):
     )
     public = fields.Boolean("Public", tracking=True, help="Form is public accessible (e.g. used in Shop checkout, Events registration")
     public_url = fields.Char(string='Public URL', compute='_compute_public_url')
-    public_submit_done_url = fields.Char(
-        string='Public Submit-done URL', tracking=True,
+    public_save_draft_done_url = fields.Char(
+        string='Public Save-Draft Done URL', tracking=True,
         help="""\
         IMPORTANT:
         - Absolute URL should contain a protocol (https://, http://)
         - Relative URL is also supported e.g. /web/login
         """
     )
+    public_submit_done_url = fields.Char(
+        string='Public Submit Done URL', tracking=True,
+        help="""\
+        IMPORTANT:
+        - Absolute URL should contain a protocol (https://, http://)
+        - Relative URL is also supported e.g. /web/login
+        """
+    )
+    public_access_rule_type = fields.Selection(list(_public_access_rule_types.items()), string='Public Access Rule Type', tracking=True)
     public_access_interval_number = fields.Integer(default=30, tracking=True, help="Public access to submitted Form shall be rejected after expiration of the configured time interval.")
     public_access_interval_type = fields.Selection(list(_interval_selection.items()), default='minutes', tracking=True)
     view_as_html = fields.Boolean("View as HTML", tracking=True, help="View submission as a HTML view instead of disabled webform.")
@@ -220,6 +238,12 @@ class Builder(models.Model):
         if res > 1:
             raise ValidationError("%s already has a record with version: %d. Use button/action: Create New Version."
                                   % (self.name, self.version))
+
+    @api.constrains('public', 'public_access_rule_type')
+    def constaint_public_access_rule_type(self):
+        for rec in self:
+            if rec.public and not rec.public_access_rule_type:
+                raise ValidationError(_("The field 'Public Access Rule' Type is required for Public Forms!"))
 
     @api.returns('self', lambda value: value.id)
     def copy(self, default=None):
@@ -452,6 +476,7 @@ class Builder(models.Model):
     def _get_js_params(self):
         """ Odoo JS (Owl component) misc. params """
         params = {
+            'portal_save_draft_done_url': self.portal_save_draft_done_url,
             'portal_submit_done_url': self.portal_submit_done_url,
             'readOnly': self.is_locked,
             'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
@@ -504,6 +529,7 @@ class Builder(models.Model):
     def _get_portal_form_js_params(self):
         """ Odoo JS (Owl component) misc. params """
         params = {
+            'portal_save_draft_done_url': self.portal_save_draft_done_url,
             'portal_submit_done_url': self.portal_submit_done_url,
             'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
             'submission_url_add_query_params_from': self.submission_url_add_query_params_from
@@ -513,6 +539,7 @@ class Builder(models.Model):
     def _get_public_form_js_params(self):
         """ Odoo JS (Owl component) misc. params """
         params = {
+            'public_save_draft_done_url': self.public_save_draft_done_url,
             'public_submit_done_url': self.public_submit_done_url,
             'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
             'submission_url_add_query_params_from': self.submission_url_add_query_params_from

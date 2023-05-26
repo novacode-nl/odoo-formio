@@ -1,5 +1,20 @@
 # Changelog
 
+## 16.0.2.3
+
+Fix the `formio.form` function `_get_public_form_js_locales` (wrong argument), called in the config route/endpoint.
+
+Enable a portal and/or public Form to _redirect (page) to URL_ upon a _Save Draft is Done_.\
+This can be set in new fields in the Form Builder:
+- Portal Save-Draft Done URL
+- Public Save-Draft Done URL
+
+Enhance the public Form access-check, by allowing _custom_ implementation(s) configured by a new selection field `public_access_rule_type`,
+with choices:
+- Time Interval (default)
+- Custom
+Updating the module also executes a migration, which ensures existing form builders set the `public_access_rule_type` field value `time_interval`.
+
 ## 16.0.2.2
 
 Fix formio.js version (action/button) _Download and install_ error:\

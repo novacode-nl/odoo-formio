@@ -47,8 +47,36 @@ function app() {
             this.apiUrl = '/formio/form/' + this.formUuid + '/api';
         }
 
+        portalSaveDraftDoneUrl() {
+            return this.params.hasOwnProperty('portal_save_draft_done_url') && this.params.portal_save_draft_done_url;
+        }
+
         portalSubmitDoneUrl() {
             return this.params.hasOwnProperty('portal_submit_done_url') && this.params.portal_submit_done_url;
+        }
+
+        saveDraftDone(submission) {
+            if (submission.state == 'draft') {
+                if (this.isPortalUrl && this.portalSaveDraftDoneUrl()) {
+                    const params = {save_draft_done_url: this.portalSaveDraftDoneUrl()};
+                    if (window.self !== window.top) {
+                        window.parent.postMessage({odooFormioMessage: 'formioSaveDraftDone', params: params});
+                    }
+                    else {
+                        window.location = params.submit_done_url;
+                    }
+                }
+                else {
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 500);
+                }
+            }
+            else {
+                setTimeout(function() {
+                    window.location.reload();
+                }, 500);
+            }
         }
 
         submitDone(submission) {

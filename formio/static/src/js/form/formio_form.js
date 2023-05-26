@@ -43,6 +43,10 @@ export class OdooFormioForm extends Component {
         // Implemented in specific (*_app.js) classes.
     }
 
+    saveDraftDone(submission) {
+        // Implemented in specific (*_app.js) classes.
+    }
+
     submitDone(submission) {
         // Implemented in specific (*_app.js) classes.
     }
@@ -255,7 +259,12 @@ export class OdooFormioForm extends Component {
             });
 
             form.on('submitDone', function(submission) {
-                self.submitDone(submission);
+                if (submission.state == 'draft') {
+                    self.saveDraftDone(submission);
+                }
+                else {
+                    self.submitDone(submission);
+                }
             });
 
             // wizard

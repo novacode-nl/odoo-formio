@@ -10,10 +10,14 @@ $(document).ready(function() {
         if (event.data.hasOwnProperty('odooFormioMessage')) {
             const msg = event.data.odooFormioMessage,
                   params = event.data.params,
-                  submitDoneUrl = params.hasOwnProperty('submit_done_url') && params.submit_done_url;
+                  submitDoneUrl = params.hasOwnProperty('submit_done_url') && params.submit_done_url,
+                  saveDraftDoneUrl = params.hasOwnProperty('save_draft_done_url') && params.save_draft_done_url;
 
             if (event.origin == baseUrl && msg == 'formioSubmitDone' && submitDoneUrl) {
                 window.location = submitDoneUrl;
+            }
+            else if (event.origin == baseUrl && msg == 'formioSaveDraftDone' && saveDraftDoneUrl) {
+                window.location = saveDraftDoneUrl;
             }
         }
     }, false);

@@ -21,6 +21,7 @@ See LICENSE file for full licensing details. -->
                 <field name="portal" optional="show"/>
                 <field name="portal_url" optional="hide"/>
                 <field name="public" optional="show"/>
+                <field name="public_access_rule_type" optional="hide"/>
                 <field name="public_url" optional="hide"/>
                 <field name="formio_version_id"/>
                 <field name="parent_id" optional="hide"/>
@@ -167,6 +168,9 @@ See LICENSE file for full licensing details. -->
                                 <group name="portal_urls" colspan="2" attrs="{'invisible': [('portal_url', '=', False)]}">
                                     <field name="portal_url" widget="CopyClipboardChar" style="font-size: 1.0em;"/>
                                 </group>
+                                <group name="portal_redirect_after_save_draft" string="Redirect After Save Draft">
+                                    <field name="portal_save_draft_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
+                                </group>
                                 <group name="portal_redirect_after_submit" string="Redirect After Submit">
                                     <field name="portal_submit_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
                                 </group>
@@ -181,14 +185,22 @@ See LICENSE file for full licensing details. -->
                                     <field name="public_url" widget="CopyClipboardChar" style="font-size: 1.0em;"/>
                                 </group>
                                 <group name="general" string="General">
-                                    <label for="public_access_interval_number" string="Expire After"/>
-                                    <div>
+                                    <field name="public_access_rule_type"/>
+                                    <!-- <field name="public_access_rule_type" attrs="{'required': [('public', '=', True)]}"/> -->
+                                    <div class="text-muted" colspan="2" attrs="{'invisible': [('public_access_rule_type', '!=', 'custom')]}">
+                                        <i class="fa fa-info-circle" title="info"/> The <em>Custom</em> Public Access Rule Type can be implemented by other modules and apps.
+                                    </div>
+                                    <label for="public_access_interval_number" string="Expire After" attrs="{'invisible': [('public_access_rule_type', '!=', 'time_interval')]}"/>
+                                    <div attrs="{'invisible': [('public_access_rule_type', '!=', 'time_interval')]}">
                                         <field name="public_access_interval_number" class="oe_inline" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
                                         <field name="public_access_interval_type" class="oe_inline ml-2" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
                                     </div>
-                                    <div class="text-muted" colspan="2">
-                                        <i class="fa fa-info-circle" title="info"/><strong> Expire After:</strong> Applicable on the Form it's (datimetime field) <strong>Public Access From</strong>
+                                    <div class="text-muted" colspan="2" attrs="{'invisible': [('public_access_rule_type', '!=', 'time_interval')]}">
+                                        <i class="fa fa-info-circle" title="info"/><strong> Expire After:</strong> Applicable on the Form it's (datietime field) <strong>Public Access From</strong>.
                                     </div>
+                                </group>
+                                <group name="public_redirect_after_save_draft" string="Redirect After Save Draft">
+                                    <field name="public_save_draft_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
                                 </group>
                                 <group name="public_redirect_after_submit" string="Redirect After Submit">
                                     <field name="public_submit_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>

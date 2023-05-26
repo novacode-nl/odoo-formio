@@ -48,7 +48,7 @@ class FormioPublicController(http.Controller):
         if form and form.builder_id.schema:
             res['schema'] = json.loads(form.builder_id.schema)
             res['options'] = self._get_public_form_js_options(form)
-            res['locales'] = self._get_public_form_js_locales(form)
+            res['locales'] = self._get_public_form_js_locales(form.builder_id)
             res['params'] = self._get_public_form_js_params(form.builder_id)
 
         args = request.httprequest.args
@@ -145,6 +145,21 @@ class FormioPublicController(http.Controller):
         res['options'].update(etl_odoo_config.get('options', {}))
 
         return res
+
+    @http.route('/formio/public/form/new/<string:builder_uuid>/submission', type='json', auth='public', website=True)
+    def public_form_new_submission(self, builder_uuid, **kwargs):
+        formio_builder = self._get_public_builder(builder_uuid)
+
+        if not formio_builder or not formio_builder.public:
+            _logger.info('formio.builder with UUID %s not found' % builder_uuid)
+            # TODO raise or set exception (in JSON resonse) ?
+            return
+
+        args = request.httprequest.args
+        submission_data = {}
+        etl_odoo_data = formio_builder.sudo()._etl_odoo_data(params=args.to_dict())
+        submission_data.update(etl_odoo_data)
+        return json.dumps(submission_data)
 
     @http.route('/formio/public/form/new/<string:builder_uuid>/submit', type='json', auth="public", methods=['POST'], website=True)
     def public_form_new_submit(self, builder_uuid, **post):

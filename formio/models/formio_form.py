@@ -90,15 +90,18 @@ class Form(models.Model):
     sequence = fields.Integer(help="Usefull when storing and listing forms in an ordered way")
     portal = fields.Boolean("Portal (Builder)", related='builder_id.portal', readonly=True, help="Form is accessible by assigned portal user")
     portal_share = fields.Boolean("Portal")
+    portal_save_draft_done_url = fields.Char(related='builder_id.portal_save_draft_done_url')
     portal_submit_done_url = fields.Char(related='builder_id.portal_submit_done_url')
     public = fields.Boolean("Public (Builder)", related='builder_id.public', readonly=True)
     public_share = fields.Boolean("Public", tracking=True, help="Share form in public? (with access expiration check).")
+    public_access_rule_type = fields.Selection(string='Public Access Rule Type', related='builder_id.public_access_rule_type')
     public_access_date_from = fields.Datetime(
         string='Public Access From', tracking=True, help='Datetime from when the form is public shared until it expires.')
     public_access_interval_number = fields.Integer(tracking=True)
     public_access_interval_type = fields.Selection(list(_interval_selection.items()), tracking=True)
     public_access = fields.Boolean("Public Access", compute='_compute_access', help="The Public Access check. Computed public access by checking whether (field) Public Access From has been expired.")
     public_create = fields.Boolean("Public Created", readonly=True, help="Form was public created")
+    public_save_draft_done_url = fields.Char(related='builder_id.public_save_draft_done_url')
     public_submit_done_url = fields.Char(related='builder_id.public_submit_done_url')
     show_title = fields.Boolean("Show Title")
     show_state = fields.Boolean("Show State")
@@ -270,8 +273,10 @@ class Form(models.Model):
                 form.allow_force_update_state = True
             elif self.env.user.has_group('formio.group_formio_admin'):
                 form.allow_force_update_state = True
-            elif form.builder_id.allow_force_update_state_group_ids and \
-                 (user_groups & form.builder_id.allow_force_update_state_group_ids):
+            elif (
+                form.builder_id.allow_force_update_state_group_ids
+                and (user_groups & form.builder_id.allow_force_update_state_group_ids)
+            ):
                 form.allow_force_update_state = True
             else:
                 form.allow_force_update_state = False
@@ -286,12 +291,11 @@ class Form(models.Model):
 
             # public
             form.public_access = form._public_access()
-            
+
     def _public_access(self):
         if self.public_share and self.public_access_date_from:
             now = fields.Datetime.now()
             expire_on = self.public_access_date_from + self._interval_types[self.public_access_interval_type](self.public_access_interval_number)
-            
             if self.public_access_interval_number == 0:
                 return False
             elif self.public_access_date_from > now:
@@ -561,7 +565,9 @@ class Form(models.Model):
     def _get_js_params(self):
         """ Odoo JS (Owl component) misc. params """
         params = {
+            'portal_save_draft_done_url': self.portal_save_draft_done_url,
             'portal_submit_done_url': self.portal_submit_done_url,
+            'public_save_draft_done_url': self.public_save_draft_done_url,
             'public_submit_done_url': self.public_submit_done_url,
             'wizard_on_change_page_save_draft': self.builder_id.wizard and self.builder_id.wizard_on_change_page_save_draft
         }

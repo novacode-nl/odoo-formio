@@ -40,14 +40,42 @@ function app() {
                 this.builderUuid = document.getElementById('formio_builder_uuid').value;
             }
             this.configUrl = '/formio/public/form/new/' + this.builderUuid + '/config';
-            this.submissionUrl = false;
+            this.submissionUrl = '/formio/public/form/new/' + this.builderUuid + '/submission';
             this.submitUrl = '/formio/public/form/new/' + this.builderUuid + '/submit';
             this.wizardSubmitUrl = '/formio/public/form/';
             this.apiUrl = '/formio/public/form/new/' + this.builderUuid + '/api';
         }
 
+        publicSaveDraftDoneUrl() {
+            return this.params.hasOwnProperty('public_save_draft_done_url') && this.params.public_save_draft_done_url;
+        }
+
         publicSubmitDoneUrl() {
             return this.params.hasOwnProperty('public_submit_done_url') && this.params.public_submit_done_url;
+        }
+
+        saveDraftDone(submission) {
+            if (submission.state == 'draft') {
+                if (this.publicSaveDraftDoneUrl()) {
+                    const params = {save_draft_done_url: this.publicSaveDraftDoneUrl()};
+                    if (window.self !== window.top) {
+                        window.parent.postMessage({odooFormioMessage: 'formioSaveDraftDone', params: params});
+                    }
+                    else {
+                        window.location = params.save_draft_done_url;
+                    }
+                }
+                else {
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1000);
+                }
+            }
+            else {
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1000);
+            }
         }
 
         submitDone(submission) {
@@ -59,6 +87,30 @@ function app() {
                     }
                     else {
                         window.location = params.submit_done_url;
+                    }
+                }
+                else {
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1000);
+                }
+            }
+            else {
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1000);
+            }
+        }
+
+        saveDraftDone(submission) {
+            if (submission.state == 'submitted') {
+                if (this.publicSaveDraftDoneUrl()) {
+                    const params = {save_draft_done_url: this.publicSaveDraftDoneUrl()};
+                    if (window.self !== window.top) {
+                        window.parent.postMessage({odooFormioMessage: 'formioSaveDraftDone', params: params});
+                    }
+                    else {
+                        window.location = params.save_draft_done_url;
                     }
                 }
                 else {
