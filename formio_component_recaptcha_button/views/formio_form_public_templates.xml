@@ -7,6 +7,8 @@ See LICENSE file for full licensing details. -->
         <xpath expr="//head" position="inside">
             <t t-if="builder.component_recaptcha_button_active and builder.component_recaptcha_button_site_key">
                 <script type="text/javascript" t-attf-src="https://www.google.com/recaptcha/api.js?render={{ builder.component_recaptcha_button_site_key }}"></script>
+                <script type="text/javascript" src="/formio_component_recaptcha_button/static/src/js/formio_component_recaptcha.js"></script>
+                <script type="text/javascript" src="/formio_component_recaptcha_button/static/src/js/formio_component_recaptcha_button.js"></script>
             </t>
         </xpath>
     </template>

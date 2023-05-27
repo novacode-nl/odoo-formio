@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.1.1
+
+Include the assets (files) directly in the template XMLs.\
+Remove `formio.extra.asset` data.
+
 ## 16.0.1.0
 
 Initial release.\
