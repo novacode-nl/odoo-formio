@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.2.4
+
+Remove `formio.version` Many2many `translations` field.
+Refactoring done and migrated in 16.0.2.0.
+
 ## 16.0.2.3
 
 Fix the `formio.form` function `_get_public_form_js_locales` (wrong argument), called in the config route/endpoint.

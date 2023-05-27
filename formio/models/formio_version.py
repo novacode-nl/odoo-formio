@@ -17,7 +17,6 @@ class Version(models.Model):
     sequence = fields.Integer()
     description = fields.Text("Description")
     is_dummy = fields.Boolean(string="Is Dummy (default version in demo data)", readonly=True)
-    translations = fields.Many2many('formio.translation', string='All Translations')
     translation_ids = fields.One2many('formio.version.translation', 'formio_version_id', string='Translations')
     assets = fields.One2many('formio.version.asset', 'version_id', string='Assets (js, css)', domain=[('type', 'in', ['css', 'js'])])
     css_assets = fields.One2many(

@@ -37,8 +37,8 @@ See LICENSE file for full licensing details. -->
                             <button string="Unlink Base Translations" name="action_unlink_base_translations" type="object" confirm="Are you sure to unlink the base translations from this formio.js version?"/>
                             <div class="text-muted mt-4 mb-4">
                                 <i class="fa fa-info-circle" title="info"/> The Base Translations can be found in menu: Configuration / Translations.<br/>
-                                <i class="fa fa-info-circle" title="info"/> Action button "ADD BASE TRANSLATIONS" doesn't overwrite changes..<br/>
-                                <i class="fa fa-info-circle" title="info"/> Action button "UNLINK BASE TRANSLATIONS" removes the Base Translations from this formio.js version, but not the custom ones.
+                                <i class="fa fa-info-circle" title="info"/> Action button ADD BASE TRANSLATIONS doesn't overwrite changes.<br/>
+                                <i class="fa fa-info-circle" title="info"/> Action button UNLINK BASE TRANSLATIONS removes the Base Translations from this formio.js version, but not the custom ones.
                             </div>
                             <field name="translation_ids" context="{'default_formio_version_id': id}">
                                 <tree editable="bottom">
