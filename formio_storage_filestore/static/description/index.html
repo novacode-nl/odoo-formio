@@ -60,6 +60,15 @@
 <section class="oe_container">
   <div class="oe_row oe_spaced">
     <h2 class="oe_slogan" style="color:#875A7B;">Releases</h2>
+    <h4 class="oe_mb16">1.1</h4>
+    <ul>
+      <li>
+        Improve public user check, by checking either:<br/>
+        - no user in request.env, or ...<br/>
+        - the request user has the public user group (the added check).<br/>
+        This change isn't solving a vulnerability, but a public GET request was too restrictive and could be denied too quickly.
+      </li>
+    </ul>
     <h4 class="oe_mb16">1.0</h4>
     <ul>
       <li>
@@ -117,7 +126,7 @@
         Add record rule: Files in completed Forms cannot be deleted.<br/>
         This ensures uploaded files (in a completed Form) cannot be deleted.
       </li>
-    </ul>
+pp    </ul>
     <h4 class="oe_mb16">0.3</h4>
     <ul>
       <li>
