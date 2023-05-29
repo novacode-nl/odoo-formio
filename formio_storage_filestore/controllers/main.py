@@ -80,7 +80,8 @@ class FormioStorageFilestoreController(http.Controller):
                 # access checks
                 Form = request.env['formio.form']
                 form = Form.browse(attachment.res_id)
-                if not request.env.user and form.sudo().public_share:
+                is_user_public = not request.env.user or request.env.user.has_group('base.group_public')
+                if is_user_public and form.sudo().public_share:
                     if not Form.get_public_form(form.uuid, public_share=True):
                         msg = 'The (once) public Form %s has been expired.'
                         _logger.info(msg % form.uuid)
