@@ -129,7 +129,11 @@ class Builder(models.Model):
         - Relative URL is also supported e.g. /web/login
         """
     )
-    public_access_rule_type = fields.Selection(list(_public_access_rule_types.items()), string='Public Access Rule Type', tracking=True)
+    public_access_rule_type = fields.Selection(
+        list(_public_access_rule_types.items()),
+        string='Public Access Rule Type',
+        default='time_interval',
+        tracking=True)
     public_access_interval_number = fields.Integer(default=30, tracking=True, help="Public access to submitted Form shall be rejected after expiration of the configured time interval.")
     public_access_interval_type = fields.Selection(list(_interval_selection.items()), default='minutes', tracking=True)
     view_as_html = fields.Boolean("View as HTML", tracking=True, help="View submission as a HTML view instead of disabled webform.")
