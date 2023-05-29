@@ -6,6 +6,5 @@ from odoo import api, SUPERUSER_ID
 
 def migrate(cr, version):
     env = api.Environment(cr, SUPERUSER_ID, {})
-    domain = [('translations', '!=', False)]
-    versions = env['formio.version'].search(domain)
+    versions = env['formio.version'].search([])
     versions.action_add_base_translations()
