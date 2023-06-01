@@ -1,5 +1,10 @@
 # Changelog
 
+## 13.3
+
+Change form 'heightCalculationMethod' from 'grow' to 'taggedElement'.\
+This solves issues for components with dynamic height, eg the collapsible Edit Grid (type `editgrid`).
+
 ## 13.2
 
 Fix formio.js version (action/button) _Download and install_ error:\
