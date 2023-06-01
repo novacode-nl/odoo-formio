@@ -31,7 +31,7 @@ See LICENSE file for full licensing details. -->
             <script>
                 iFrameResize(
                     {
-                        heightCalculationMethod: 'grow',
+                        heightCalculationMethod: 'taggedElement',
                         bodyMargin: &quot;<t t-esc="bodyMarginResize"/>&quot;
                     },
                     '.formio_form_embed'
@@ -60,7 +60,7 @@ See LICENSE file for full licensing details. -->
                 <script type="module" src="/formio/static/src/js/form/formio_form.js"/>
                 <script type="module" src="/formio/static/src/js/form/backend_app.js"/>
             </head>
-            <body>
+            <body data-iframe-height="1">
                 <t t-if="form">
                     <h3 t-if="form.show_title" class="formio_form_title"><span name="title" t-esc="form.title"/></h3>
                     <div t-if="form.show_id or form.show_uuid or form.show_state or form.show_user_metadata" class="formio_form_dock float-right">

@@ -31,7 +31,7 @@ See LICENSE file for full licensing details. -->
                         <div class="formio_form_iframe_container" style="border:0px;padding:0px;">
                             <iframe t-attf-src="#{form['form_url']}" class="formio_form_embed"/>
                             <script>
-                                iFrameResize({heightCalculationMethod: 'grow'}, '.formio_form_embed');
+                                iFrameResize({heightCalculationMethod: 'taggedElement'}, '.formio_form_embed');
                             </script>
                         </div>
                     </div>

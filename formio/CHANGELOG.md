@@ -1,5 +1,10 @@
 # Changelog
 
+## 11.14
+
+Change form 'heightCalculationMethod' from 'grow' to 'taggedElement'.\
+This solves issues for components with dynamic height, eg the collapsible Edit Grid (type `editgrid`).
+
 ## 11.13
 
 Fix the component data URL check in the Form JS (rendering) code.
