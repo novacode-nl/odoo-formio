@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.2.5
+
+Change form 'heightCalculationMethod' from 'grow' to 'lowestElement'.\
+This scales dynamically form heights the best.
+
 ## 16.0.2.4
 
 Remove `formio.version` Many2many `translations` field.

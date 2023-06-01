@@ -19,7 +19,7 @@ See LICENSE file for full licensing details. -->
             <script>
                 iFrameResize(
                     {
-                        heightCalculationMethod: 'grow',
+                        heightCalculationMethod: 'lowestElement',
                         bodyMargin: &quot;<t t-out="bodyMarginResize"/>&quot;
                     },
                     '.formio_form_embed'

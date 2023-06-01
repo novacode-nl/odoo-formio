@@ -14,7 +14,7 @@
                                     <script>
                                         iFrameResize(
                                             {
-                                                heightCalculationMethod: 'grow',
+                                                heightCalculationMethod: 'lowestElement',
                                                 bodyMargin: &quot;<t t-out="form.iframe_resizer_body_margin"/>&quot;
                                             },
                                             '.formio_form_embed'
