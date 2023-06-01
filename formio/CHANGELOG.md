@@ -1,9 +1,14 @@
 # Changelog
 
+## 16.0.2.6
+
+Change form 'heightCalculationMethod' from 'lowestElement' to 'taggedElement'.\
+This solves issues for components with dynamic height, eg the collapsible Edit Grid (type `editgrid`).
+
 ## 16.0.2.5
 
 Change form 'heightCalculationMethod' from 'grow' to 'lowestElement'.\
-This scales dynamically form heights the best.
+Improvement to scale dynamically form height.
 
 ## 16.0.2.4
 
