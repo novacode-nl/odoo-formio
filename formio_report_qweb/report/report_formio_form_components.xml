@@ -266,12 +266,12 @@ See LICENSE file for full copyright and licensing details.
                                 Year
                             </t>
                         </div>
-                        <div class="row date_input">
+                        <div class="row date_input me-4 pe-4">
                             <t t-if="date_part[0] == 'month'">
-                                <p><t t-out="component.month_name"/></p>
+                                <t t-out="component.month_name"/>
                             </t>
                             <t t-else="">
-                                <p><t t-out="date_part[1]"/></p>
+                                <t t-out="date_part[1]"/>
                             </t>
                         </div>
                     </div>
