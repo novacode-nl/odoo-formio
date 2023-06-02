@@ -167,7 +167,7 @@ See LICENSE file for full copyright and licensing details.
             <t t-if="component.multiple">
                 <div class="value_container">
                     <t t-foreach="component.value_labels" t-as="val_label">
-                        <span class="badge badge-light"><t t-out="val_label"/></span>
+                        <span class="badge text-dark"><t t-out="val_label"/></span>
                     </t>
                 </div>
             </t>
@@ -231,7 +231,7 @@ See LICENSE file for full copyright and licensing details.
                     </tr>
                     <t t-foreach="component.grid" t-as="question">
                         <tr>
-                            <td><span class="ml-2" t-out="question['question_label']"/></td>
+                            <td><span class="ms-2" t-out="question['question_label']"/></td>
                             <t t-foreach="question['values']" t-as="q_val">
                                 <td class="text-center">
                                     <t t-if="q_val['checked']">
@@ -302,7 +302,7 @@ See LICENSE file for full copyright and licensing details.
 
     <template id="content_component">
         <div class="mw-100 mb-3 formio_content_component">
-            <p><t t-out="component.raw['html']"/></p>
+            <p><t t-raw="component.raw['html']"/></p>
         </div>
     </template>
 
@@ -333,10 +333,10 @@ See LICENSE file for full copyright and licensing details.
 
     <template id="columns_component">
         <t t-foreach="component.rows" t-as="row">
-            <div class="row mb-2 mb8">
+            <div class="row mb-2">
                 <!-- col['with'] max to 12.. so if exceeds override by 12 -->
                 <t t-foreach="row" t-as="col">
-                    <div t-attf-class="col-{{ col['column']['width'] }} col-xs-{{ col['column']['width'] }} mb-2">
+                    <div t-attf-class="col-{{ col['column']['width'] }} col-xs-{{ col['column']['width'] }} pe-4">
                         <t t-foreach="col['components']" t-as="component">
                             <t t-call="formio_report_qweb.component"/>
                         </t>
@@ -355,10 +355,10 @@ See LICENSE file for full copyright and licensing details.
     </template>
 
     <template id="panel_component">
-        <div class="formio_panel_component mb-4 mb16">
+        <div class="formio_panel_component mb-4">
             <p><t t-out="component.title"/></p>
             <t t-set="panel_component" t-value="component"/>
-            <div class="formio_panel_components ml-4 mr-4 ml8 mr8 mb8">
+            <div class="formio_panel_components ms-2 me-2">
                 <t t-foreach="panel_component.components.items()" t-as="component">
                     <t t-set="component" t-value="component[1]"/>
                     <t t-call="formio_report_qweb.component"/>
@@ -375,7 +375,7 @@ See LICENSE file for full copyright and licensing details.
                         <tr>
                             <t t-foreach="row_cols" t-as="col">
                                 <t t-foreach="col['components']" t-as="component">
-                                    <td>
+                                    <td class="px-2">
                                         <t t-call="formio_report_qweb.component"/>
                                     </td>
                                 </t>
@@ -389,7 +389,7 @@ See LICENSE file for full copyright and licensing details.
 
     <template id="tabs_component">
         <div class="formio_tabs_component mb-4">
-            <div class="formio_tabs_components ml-4 mr-4">
+            <div class="formio_tabs_components">
                 <t t-foreach="component.tabs" t-as="tab">
                     <div class="formio_tab_component">
                         <div class="mb-2">
@@ -406,14 +406,14 @@ See LICENSE file for full copyright and licensing details.
 
     <!-- Data components -->
     <template id="datagrid_component">
-        <div class="formio_datagrid_component mb-4 mb16">
+        <div class="formio_datagrid_component mb-4">
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
             <table class="table table-bordered table-sm">
                 <!-- <t t-set="nolabel" t-value="False"/> -->
                 <t t-foreach="component.rows" t-as="grid_row">
                     <tr>
                         <t t-foreach="grid_row.components.values()" t-as="component">
-                            <td style="border: none;">
+                            <td style="border: none;" class="px-2">
                                 <t t-call="formio_report_qweb.component"/>
                                 <!--     <t t-set="nolabel" t-value="nolabel"/> -->
                                 <!-- </t> -->
