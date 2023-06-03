@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.2.7
+
+Add form/builder heightCalculationMethod 'taggedElement' targets in portal and public templates.
+
 ## 16.0.2.6
 
 Change form 'heightCalculationMethod' from 'lowestElement' to 'taggedElement'.\
