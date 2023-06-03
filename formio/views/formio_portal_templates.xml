@@ -180,7 +180,7 @@ See LICENSE file for full licensing details. -->
                 </t>
                 <link rel="stylesheet" href="/formio/static/src/css/formio_form_embed.css"/>
             </head>
-            <body>
+            <body data-iframe-height="1">
                 <t t-if="builder">
                     <h3 t-if="builder.show_form_title" class="formio_form_title"><span name="title" t-esc="builder.title"/></h3>
                 </t>

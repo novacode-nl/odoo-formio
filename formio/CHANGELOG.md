@@ -1,5 +1,9 @@
 # Changelog
 
+## 13.4
+
+Add form/builder heightCalculationMethod 'taggedElement' targets in portal and public templates.
+
 ## 13.3
 
 Change form 'heightCalculationMethod' from 'grow' to 'taggedElement'.\

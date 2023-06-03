@@ -42,7 +42,7 @@ See LICENSE file for full licensing details. -->
                 </t>
                 <link rel="stylesheet" href="/formio/static/src/css/formio_form_embed.css"/>
             </head>
-            <body>
+            <body data-iframe-height="1">
                 <h3 t-if="form.show_title" class="formio_form_title"><span name="title" t-esc="form.title"/></h3>
                 <div t-if="form.show_id or form.show_uuid or form.show_state or form.show_user_metadata" class="formio_form_dock float-right">
                     <ul>
@@ -131,7 +131,7 @@ See LICENSE file for full licensing details. -->
                 </t>
                 <link rel="stylesheet" href="/formio/static/src/css/formio_form_embed.css"/>
             </head>
-            <body>
+            <body data-iframe-height="1">
                 <t t-if="builder">
                     <h3 t-if="builder.show_form_title" class="formio_form_title"><span name="title" t-esc="builder.title"/></h3>
                 </t>
