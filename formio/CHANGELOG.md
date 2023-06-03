@@ -1,5 +1,9 @@
 # Changelog
 
+## 11.16
+
+Update iframe-resizer v4.3.6 (JS library).
+
 ## 11.15
 
 Add form/builder heightCalculationMethod 'taggedElement' targets in portal and public templates.
