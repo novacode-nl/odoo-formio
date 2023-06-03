@@ -34,7 +34,7 @@ See LICENSE file for full licensing details. -->
                 <script type="text/javascript" src="/formio/static/src/js/odoo.jsonrpc.js"/>
                 <script type="text/javascript" src="/formio/static/src/js/builder/app.js"/>
             </head>
-            <body>
+            <body data-iframe-height="1">
                 <t t-if="len(languages) > 1">
                     <div class="formio_languages">
                         <t t-foreach="languages" t-as="lang">
