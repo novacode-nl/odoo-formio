@@ -12,7 +12,6 @@
     'category': 'Forms/Forms',
     'depends': [
         'formio',
-        # 'website_editor_unsanitize_html_field',
         'website',
     ],
     'data': [
