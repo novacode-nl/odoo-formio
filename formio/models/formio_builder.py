@@ -133,6 +133,7 @@ class Builder(models.Model):
         """
     )
     wizard = fields.Boolean("Wizard", tracking=True)
+    # DEPRECATED: wizard_on_next_page_save_draft (in favor of: wizard_on_change_page_save_draft)
     wizard_on_next_page_save_draft = fields.Boolean("Wizard on Next Page Save Draft", tracking=True)
     wizard_on_change_page_save_draft = fields.Boolean("Wizard on Change Page Save Draft", tracking=True)
     submission_url_add_query_params_from = fields.Selection(
