@@ -5,6 +5,7 @@
   </div>
   <div class="oe_centered">
     <h4 class="oe_mb16 text-center">Compatible with Enterprise and Community</h4>
+    <h4 class="oe_mb16 text-center">Works on Odoo.sh</h4>
   </div>
 </section>
 
@@ -35,28 +36,37 @@
     <tbody>
       <tr>
         <td><strong>Form Builder</strong></td>
-        <td>Powerful "drag & drop" Form Builder in Odoo.</td>
+        <td>
+          Powerful "drag & drop" Form Builder in Odoo.<br/>
+          Form Builders (designs) are stored in database (form builder) records.
+        </td>
       </tr>
       <tr>
         <td><strong>Forms</strong></td>
         <td>
-          - Create/start new Forms<br/>
-          - Publish Forms e.g. on  portal and website<br/>
-          - Assign Form(s) to user and send invitation by mail<br/>
-          - Forms Submissions are stored in the Odoo database<br/>
-          - View, analyse, use and share Forms (submissions data)<br/>
+          - Form submissions are stored in database (form) records.<br/>
+          - Create / publish / share a Form in backend, website, portal, by email or a hyperlink.<br/>
+          - Assign Form(s) to (portal) user and send invitation by mail.<br/>
+          - View, analyse, use and share Forms (submissions data).<br/>
         </td>
       </tr>
       <tr>
+        <td><strong>JSON data</strong></td>
+        <td>
+          - A Form Builder (design) is stored as <em>JSON data</em> in the schema field of a form builder record.<br/>
+          - A submitted Form (input data) is stored as <em>JSON data</em> in the submission field of a form record.
+        </td>
+      </tr>
+      <tr>
+      <tr>
         <td><strong>Highly configurable</strong></td>
-        <td>Easily configure your Forms deployment, publishing and other functionalities (done in the Form Builder).</td>
+        <td>Easily configure your Forms deployment, publishing and other functionalities (in the Form Builder).</td>
       </tr>
       <tr>
         <td><strong>Integration (ERP, workflow, website, e-commerce)</strong></td>
         <td>
-          While building and deploying standalone Forms is enjoyable ...<br/>
-          Benefit from real power by integrating Forms with your workflow, ERP, website, e-commerce and other Odoo business apps.<br/>
-          - Implement automated actions to handle Form submissions to integrate with any part of Odoo.<br/>
+          Benefit from real power by integrating Forms with your workflow, ERP, website, e-commerce and other business apps / modules.<br/>
+          - Implement automated actions to handle Form submissions to integrate with anything you want.<br/>
           - Visit the other Forms modules to get a basic idea of configurable integration modules -- Click the author link <strong style="color: #875A7B;">"Nova Code"</strong> in the top. 
         </td>
       </tr>
@@ -83,6 +93,13 @@
       <tr>
         <td><strong>Installation</strong></td>
         <td>After installation you can start right away. No extra technical requirements or setup.</td>
+      </tr>
+      <tr>
+        <td><strong>Odoo database migration</strong></td>
+        <td>
+          Form builders, forms and other related data remain compatible in newer Odoo versions, even when you migrate the database.<br/>
+          Mainly due to the JSON data storage of the form builders (designs) and form submissions.
+        </td>
       </tr>
       <tr>
         <td><strong>We <i class="fa fa-heart"/> open source</strong></td>
