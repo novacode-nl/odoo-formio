@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms | Storage Filestore',
+    'name': 'Forms | Filestore Storage',
     'summary': 'Store uploads/files by URL in Odoo filestore (attachments)',
     'version': '1.1',
     'license': 'LGPL-3',
