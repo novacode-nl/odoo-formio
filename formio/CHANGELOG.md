@@ -1,5 +1,12 @@
 # Changelog
 
+## 16.0.2.9
+
+Backend Forms layout improvements:
+- Form resizing according to the Form Builder (setting) field `iFrame Resizer bodyMargin`.
+  Tech fieldname: `iframe_resizer_body_margin`
+- Improve the form view (sheet) height and styling.
+
 ## 16.0.2.8
 
 Update iframe-resizer v4.3.6 (JS library).

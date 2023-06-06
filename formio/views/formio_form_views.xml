@@ -132,6 +132,7 @@ See LICENSE file for full licensing details. -->
                 <field name="submission_partner_name"/>
                 <field name="submission_date"/>
                 <field name="submission_data"/>
+                <field name="iframe_resizer_body_margin"/>
             </formio_form>
         </field>
     </record>
