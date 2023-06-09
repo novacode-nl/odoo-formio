@@ -295,7 +295,10 @@ class Form(models.Model):
     def _public_access(self):
         if self.public_share and self.public_access_date_from:
             now = fields.Datetime.now()
-            expire_on = self.public_access_date_from + self._interval_types[self.public_access_interval_type](self.public_access_interval_number)
+            interval_delta = self._interval_types[self.public_access_interval_type](
+                self.public_access_interval_number
+            )
+            expire_on = self.public_access_date_from + interval_delta
             if self.public_access_interval_number == 0:
                 return False
             elif self.public_access_date_from > now:
