@@ -1,5 +1,10 @@
 # Changelog
 
+## 13.6
+
+- Fix language determination (cascade) for public Form load by UUID.
+- Add cascade delete on `formio_version_id` in model `formio.version.translation`.
+
 ## 13.5
 
 Update iframe-resizer v4.3.6 (JS library).

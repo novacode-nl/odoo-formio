@@ -287,10 +287,14 @@ class FormioPublicController(http.Controller):
         options = form._get_js_options()
 
         Lang = request.env['res.lang']
-        language = Lang._formio_ietf_code(request.env.user.lang)
-        if language:
-            options['language'] = language
-            options['i18n'] = form.i18n_translations()
+        # language
+        if request.context.get('lang'):
+            options['language'] = Lang._formio_ietf_code(request.context.get('lang'))
+        elif request.env.user.lang:
+            options['language'] = Lang._formio_ietf_code(request.env.user.lang)
+        else:
+            options['language'] = request.env.ref('base.lang_en').formio_ietf_code
+        options['i18n'] = form.i18n_translations()
         return options
 
     def _get_public_create_form_js_options(self, builder):
