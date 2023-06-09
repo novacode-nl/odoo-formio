@@ -1,5 +1,9 @@
 # Changelog
 
+## 11.17
+
+Fix language determination (cascade) for public Form load by UUID.
+
 ## 11.16
 
 Update iframe-resizer v4.3.6 (JS library).

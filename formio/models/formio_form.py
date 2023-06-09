@@ -262,8 +262,9 @@ class Form(models.Model):
                 form.allow_force_update_state = True
             elif self.env.user.has_group('formio.group_formio_admin'):
                 form.allow_force_update_state = True
-            elif form.builder_id.allow_force_update_state_group_ids and \
-                 (user_groups & form.builder_id.allow_force_update_state_group_ids):
+            elif form.builder_id.allow_force_update_state_group_ids and (
+                user_groups & form.builder_id.allow_force_update_state_group_ids
+            ):
                 form.allow_force_update_state = True
             else:
                 form.allow_force_update_state = False
@@ -278,12 +279,14 @@ class Form(models.Model):
 
             # public
             form.public_access = form._public_access()
-            
+
     def _public_access(self):
         if self.public_share and self.public_access_date_from:
             now = fields.Datetime.now()
-            expire_on = self.public_access_date_from + self._interval_types[self.public_access_interval_type](self.public_access_interval_number)
-            
+            interval_delta = self._interval_types[self.public_access_interval_type](
+                self.public_access_interval_number
+            )
+            expire_on = self.public_access_date_from + interval_delta
             if self.public_access_interval_number == 0:
                 return False
             elif self.public_access_date_from > now:
