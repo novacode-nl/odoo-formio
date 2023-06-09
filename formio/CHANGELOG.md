@@ -2,7 +2,7 @@
 
 ## 16.0.2.10
 
-- Fix language determination (cascade) for public Form.
+- Fix language determination (cascade) for public Form load by UUID.
 - Add cascade delete on `formio_version_id` in model `formio.version.translation`.
 
 ## 16.0.2.9
