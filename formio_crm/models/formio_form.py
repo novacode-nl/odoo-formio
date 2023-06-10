@@ -1,15 +1,16 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 from odoo.addons.formio.models.formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
-from odoo.addons.formio.utils import get_field_selection_label
 
 
 class Form(models.Model):
     _inherit = 'formio.form'
 
-    crm_lead_id = fields.Many2one('crm.lead', readonly=True, string='CRM Lead')
+    crm_lead_id = fields.Many2one(
+        "crm.lead", string="CRM Lead", readonly=True, ondelete="cascade"
+    )
 
     def _prepare_create_vals(self, vals):
         vals = super(Form, self)._prepare_create_vals(vals)
@@ -25,8 +26,6 @@ class Form(models.Model):
             id=res_id,
             model='crm.lead',
             action=action.id)
-        res_model_name = builder.res_model_id.name
-
         vals['crm_lead_id'] = res_id
         vals['res_partner_id'] = lead.partner_id.id
         vals['res_act_window_url'] = url
