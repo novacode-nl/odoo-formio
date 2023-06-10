@@ -2,8 +2,8 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms | Filestore Storage',
-    'summary': 'Store uploads/files by URL in Odoo filestore (attachments)',
+    'name': 'Forms | Files Storage',
+    'summary': 'Store uploaded files by URL in the filestore (attachments)',
     'version': '16.0.2.1',
     'license': 'LGPL-3',
     'author': 'Nova Code',
