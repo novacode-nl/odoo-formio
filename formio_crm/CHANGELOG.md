@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2
+
+Add cascade delete on `crm_lead_id` field in `formio.form` model.
+
 ### 1.1
 
 - Fix computed fields: access rights (compute_sudo).

@@ -1,15 +1,16 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 from odoo.addons.formio.models.formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
-from odoo.addons.formio.utils import get_field_selection_label
 
 
 class Form(models.Model):
     _inherit = 'formio.form'
 
-    sale_order_id = fields.Many2one('sale.order', readonly=True, string='Sale Order')
+    sale_order_id = fields.Many2one(
+        "sale.order", string="Sale Order", readonly=True, ondelete="cascade"
+    )
 
     def _prepare_create_vals(self, vals):
         vals = super(Form, self)._prepare_create_vals(vals)
