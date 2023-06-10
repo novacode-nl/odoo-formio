@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms | Files Storage',
+    'name': 'Forms | File Storage',
     'summary': 'Store uploaded files by URL in the filestore (attachments)',
     'version': '16.0.2.1',
     'license': 'LGPL-3',
