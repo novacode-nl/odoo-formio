@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.2.11
+
+In the Form Builder, implement conditional warning (also extendable) in case there are integrated APIs.\
+This warns the Form Builder user about components being removed or updated, which could lead the API regression/breakage.
+
 ## 16.0.2.10
 
 - Fix language determination (cascade) for public Form load by UUID.
