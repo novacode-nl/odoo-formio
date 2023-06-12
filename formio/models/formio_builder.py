@@ -164,6 +164,8 @@ class Builder(models.Model):
         string='Server Actions',
         domain="[('model_name', '=', 'formio.form')]"
     )
+    show_api_alert = fields.Boolean(compute='_compute_show_api_alert')
+    api_alert = fields.Text(compute='_compute_api_alert')
 
     def _states_selection(self):
         return STATES
@@ -345,6 +347,21 @@ class Builder(models.Model):
                 model=r._name,
                 action=action.id)
             r.act_window_url = url
+
+    def _compute_show_api_alert(self):
+        self.ensure_one()
+        self.show_api_alert = len(self.server_action_ids) > 0
+
+    def _compute_api_alert(self):
+        self.ensure_one()
+        self.api_alert = ', '.join(self._api_alert_items())
+
+    def _api_alert_items(self):
+        self.ensure_one()
+        if len(self.server_action_ids) > 0:
+            return [_("Server Actions")]
+        else:
+            return []
 
     def action_view_formio(self):
         view_id = self.env.ref('formio.view_formio_builder_formio').id

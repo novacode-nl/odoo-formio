@@ -44,6 +44,9 @@ See LICENSE file for full licensing details. -->
                 <script type="text/javascript" src="/formio/static/src/js/builder/app.js"/>
             </head>
             <body data-iframe-height="1">
+                <div t-if="builder.show_api_alert" class="alert alert-warning p-2 ml-1 mr-1">
+                    <strong>WARNING: </strong><span>Be careful when updating or removing components, as there are integrated APIs <i class="fa fa-arrow-right"/> <t t-raw="builder.api_alert"/></span>
+                </div>
                 <t t-if="len(languages) > 1">
                     <div class="formio_languages">
                         <t t-foreach="languages" t-as="lang">
