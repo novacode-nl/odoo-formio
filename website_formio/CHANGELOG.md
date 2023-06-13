@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.1
+
+Solve Form height resizing issues, by applying the iFrame Resizer `bodyMargin` option.
+
 ### 2.0
 
 - Website page with form setup and publishing.

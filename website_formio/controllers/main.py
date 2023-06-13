@@ -30,6 +30,7 @@ class WebsiteController(FormioPublicController):
             if not form or page.id not in form.builder_id.formio_website_page_ids.ids:
                 return request.render('http_routing.404')
             else:
+                values['form_builder'] = form.builder_id
                 values['form'] = {
                     'form': form,
                     'form_url': '/formio/public/form/%s' % form.uuid
@@ -37,6 +38,7 @@ class WebsiteController(FormioPublicController):
         else:
             builder = page.sudo().formio_builder_id
             if builder.public:
+                values['form_builder'] = builder
                 values['form'] = {
                     'form_url': '/formio/public/form/create/%s' % builder.uuid
                 }

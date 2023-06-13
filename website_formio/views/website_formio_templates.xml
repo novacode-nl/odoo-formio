@@ -10,10 +10,26 @@ See LICENSE file for full licensing details. -->
                 <div class="row">
                     <div class="col-lg-10 offset-lg-1">
                         <div class="formio_form_iframe_container" style="border:0px;padding:0px;">
+                            <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.min.js"></script>
                             <iframe t-attf-src="#{form['form_url']}" class="formio_form_embed"/>
-                            <!-- <script> -->
-                            <!--     iFrameResize({heightCalculationMethod: 'grow'}, '.formio_form_embed'); -->
-                            <!-- </script> -->
+                            <t t-if="bodyMargin">
+                                <t t-set="bodyMarginResize" t-value="bodyMargin"/>
+                            </t>
+                            <t t-elif="form_builder">
+                                <t t-set="bodyMarginResize" t-value="form_builder.iframe_resizer_body_margin"/>
+                            </t>
+                            <t t-else="">
+                                <t t-set="bodyMarginResize" t-value="'0px 0px 260px 0px'"/>
+                            </t>
+                            <script>
+                                iFrameResize(
+                                    {
+                                        heightCalculationMethod: 'taggedElement',
+                                        bodyMargin: &quot;<t t-out="bodyMarginResize"/>&quot;
+                                    },
+                                    '.formio_form_embed'
+                                );
+                            </script>
                         </div>
                     </div>
                 </div>

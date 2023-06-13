@@ -4,7 +4,7 @@
 {
     'name': 'Forms | Website (Block etc)',
     'summary': "'Drag & drop' Form Block, other website integration",
-    'version': '2.0',
+    'version': '2.1',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
