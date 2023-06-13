@@ -34,9 +34,13 @@ class FormioPublicController(http.Controller):
         if args.get('api') == 'getData':
             return self._api_get_data(form.builder_id)
         else:
+            languages = form.builder_id.languages
+            lang_en = request.env.ref('base.lang_en')
+            if lang_en.active and form.builder_id.language_en_enable and 'en_US' not in languages.mapped('code'):
+                languages |= request.env.ref('base.lang_en')
             values = {
-                'languages': form.builder_id.languages,
                 'form': form,
+                'form_languages': languages,
                 'formio_css_assets': form.builder_id.formio_css_assets,
                 'formio_js_assets': form.builder_id.formio_js_assets,
             }
