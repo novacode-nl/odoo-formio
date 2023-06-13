@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.1.2
+
+Solve Form height resizing issues, by applying the iFrame Resizer `bodyMargin` option.
+
 ## 16.0.1.1
 
 Enable a portal and/or public Form to _redirect to a configured website page_, upon a _Save Draft is Done_.\

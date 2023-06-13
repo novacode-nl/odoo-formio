@@ -4,7 +4,7 @@
 {
     'name': 'Forms | Website Integration',
     'summary': "'Drag & drop' Form Block, other website integration",
-    'version': '16.0.1.1',
+    'version': '16.0.1.2',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
