@@ -30,10 +30,13 @@ class FormioPublicController(http.Controller):
             msg = 'Form UUID %s' % uuid
             return request.not_found(msg)
         else:
+            languages = form.builder_id.languages
+            lang_en = request.env.ref('base.lang_en')
+            if lang_en.active and form.builder_id.language_en_enable and 'en_US' not in languages.mapped('code'):
+                languages |= request.env.ref('base.lang_en')
             values = {
                 'form': form,
-                # 'languages' already injected in rendering somehow
-                'form_languages': form.builder_id.languages,
+                'form_languages': languages,
                 'formio_css_assets': form.builder_id.formio_css_assets,
                 'formio_js_assets': form.builder_id.formio_js_assets,
                 'extra_assets': form.builder_id.extra_asset_ids
