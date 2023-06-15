@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="config_param_formio_builder_js_options_default" model="ir.config_parameter">
+        <field name="key">formio.default_builder_js_options_id</field>
+        <field name="value" eval="ref('formio.formio_builder_js_options_default')"/>
+    </record>
+    
+    <record id="config_param_formio_default_version" model="ir.config_parameter">
+        <field name="key">formio.default_version</field>
+        <field name="value">4.14.14</field>
+    </record>
+
+    <!-- formio.js v4.x.x -->
+    <record id="default_asset_css_bootstrap_4_1_3" model="formio.default.asset.css">
+        <field name="attachment_id" ref="formio.default_attachment_css_bootstrap_4_1_3"/>
+        <field name="active">True</field>
+    </record>
+
+    <!-- formio.js v5.x.x -->
+    <!-- <record id="default_asset_css_bootstrap_5_2_3" model="formio.default.asset.css"> -->
+    <!--     <field name="attachment_id" ref="formio.default_attachment_css_bootstrap_5_2_3"/> -->
+    <!--     <field name="active">False</field> -->
+    <!-- </record> -->
+</odoo>
