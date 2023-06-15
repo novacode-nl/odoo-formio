@@ -4,7 +4,7 @@
 {
     'name': 'Forms',
     'summary': 'Form Builder & integration of professional and versatile Forms to collect any information you need for your business.',
-    'version': '12.0',
+    'version': '12.1',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -14,12 +14,17 @@
     'qweb': [
         'static/src/xml/formio.xml',
     ],
+    'application': True,
+    'installable': True,
+    'post_init_hook': 'post_init_hook',
+    'uninstall_hook': 'uninstall_hook',
     'data': [
+        # the ordering is important
         'data/formio_builder_js_options_data.xml',
         'data/formio_default_asset_css_data.xml',
         'data/formio_version_data.xml',
         'data/formio_version_asset_data.xml',
-        'data/ir_config_parameter_data.xml',
+        'data/formio_default_version_data.xml',
         'data/ir_cron_data.xml',
         'data/mail_activity_data.xml',
         'data/mail_template_data.xml',

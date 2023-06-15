@@ -36,7 +36,7 @@ class VersionGitHubTag(models.Model):
     # - Sorted by tag name (descending)
 
     name = fields.Char(required=True)
-    version_name = fields.Char('_compute_fields')
+    version_name = fields.Char(compute='_compute_fields')
     formio_version_id = fields.Many2one('formio.version', string='formio.js version')
     archive_url = fields.Char(compute='_compute_fields', string="Archive URL")
     changelog_url = fields.Char(compute='_compute_fields', string="Changelog URL")
@@ -67,7 +67,7 @@ class VersionGitHubTag(models.Model):
                 r.install_date = fields.Datetime.now()
             else:
                 r.install_date = False
-        
+
     @api.model
     def check_and_register_available_versions(self):
         vals_list = self.env['formio.version.github.checker.wizard'].check_new_versions()
