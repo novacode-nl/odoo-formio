@@ -106,6 +106,8 @@ See LICENSE file for full licensing details. -->
                         <group>
                             <field name="uuid" attrs="{'invisible': [('id', '=', False)]}"/>
                             <field name="is_locked" attrs="{'invisible': [('state', '!=', 'CURRENT')]}"/>
+                            <field name="backend_use_draft" attrs="{'invisible': [('state', '!=', 'DRAFT')]}" widget="boolean_toggle"/>
+                            <field name="backend_use_obsolete" attrs="{'invisible': [('state', '!=', 'OBSOLETE')]}" widget="boolean_toggle"/>
                         </group>
                     </group>
                     <notebook>
