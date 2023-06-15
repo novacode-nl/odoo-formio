@@ -1,8 +1,7 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from odoo import api, models
-from odoo.addons.formio.models.formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
+from odoo import models
 
 
 class Form(models.Model):
@@ -29,14 +28,10 @@ class Form(models.Model):
         vals['res_partner_id'] = res_id
         return vals
 
-    @api.onchange('builder_id')
-    def _onchange_builder_domain(self):
-        res = super(Form, self)._onchange_builder_domain()
+    def _get_builder_id_domain(self):
+        self.ensure_one()
+        domain = super()._get_builder_id_domain()
         if self._context.get('active_model') == 'res.partner':
             res_model_id = self.env.ref('base.model_res_partner').id
-            domain = [
-                ('state', '=', BUILDER_STATE_CURRENT),
-                ('res_model_id', '=', res_model_id),
-            ]
-            res['domain'] = {'builder_id': domain}
-        return res
+            domain.append(('res_model_id', '=', res_model_id))
+        return domain

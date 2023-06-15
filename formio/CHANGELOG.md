@@ -1,5 +1,33 @@
 # Changelog
 
+## 12.0
+
+1. Refactored the Form its Form Builder (field) domain/filter.
+
+This solves the deprecation warning, regarding a domain that may not be returned by an onchange method.
+
+Replace the `_onchange_builder_id` method (implementation), by a new computed field `builder_id_domain` and 2 new methods:
+- `_compute_builder_domain`
+- `_get_builder_domain`.
+
+This also affects the implementation replacement in additional modules which should be updated as well !\
+Eg: `formio_crm`, `formio_partner`, `formio_purchase`, `formio_sale`.
+
+**WARNING / UPDATE REQUIREMENT**
+
+Update all modules which implemented the `_onchange_builder_id` method.\
+For the (Nova Code) Forms modules those are:
+- formio_crm
+- formio_partner
+- formio_purchase
+- formio_sale
+
+2. Add new feature which allows Form Builders in "Draft" or "Obsolete" state to be choosen in a new Form in the backend.
+
+The 2 setting fields are available in the Form Builder:
+- Use Draft in Backend
+- Use Obsolete in Backend
+
 ## 11.17
 
 Fix language determination (cascade) for public Form load by UUID.
