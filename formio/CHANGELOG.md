@@ -1,5 +1,10 @@
 # Changelog
 
+## 14.1
+
+Improve app/module installation, by downloading and installing a default formio.js library version after install.\
+Also log a warning in case an error (eg ConnectionError) occurs.
+
 ## 14.0
 
 1. Refactored the Form its Form Builder (field) domain/filter.
