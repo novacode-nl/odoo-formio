@@ -130,8 +130,8 @@ See LICENSE file for full licensing details. -->
                                     <div class="text-muted" colspan="2">
                                         <i class="fa fa-info-circle" title="info"/> Configure in related tabs (Portal, Public / Website)
                                     </div>
-                                    <field name="backend_use_draft" widget="boolean_toggle"/>
-                                    <field name="backend_use_obsolete" widget="boolean_toggle"/>
+                                    <field name="backend_use_draft" attrs="{'invisible': [('state', '!=', 'DRAFT')]}" widget="boolean_toggle"/>
+                                    <field name="backend_use_obsolete" attrs="{'invisible': [('state', '!=', 'OBSOLETE')]}" widget="boolean_toggle"/>
                                 </group>
                                 <group name="wizard_settings" string="Wizard">
                                     <field name="wizard" string="Wizard" groups="formio.group_formio_admin"
