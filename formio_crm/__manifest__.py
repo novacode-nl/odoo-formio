@@ -4,7 +4,7 @@
 {
     'name': 'Forms | CRM',
     'summary': 'Forms integration with CRM Leads',
-    'version': '1.2',
+    'version': '2.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',

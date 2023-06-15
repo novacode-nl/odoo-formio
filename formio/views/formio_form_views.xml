@@ -174,11 +174,12 @@ See LICENSE file for full licensing details. -->
                     <group name="general">
                         <group>
                             <field name="res_name" string="Resource" attrs="{'invisible': [('res_name', '=', False)]}"/>
-                            <field name="builder_id" attrs="{'readonly': [('id', '!=', False)]}"/>
+                            <field name="builder_id" attrs="{'readonly': [('id', '!=', False)]}" domain="builder_id_domain"/>
+                            <field name="builder_id_domain" invisible="0"/>
                         </group>
                         <group>
                             <field name="id" attrs="{'invisible': [('id', '=', False)]}"/>
-                            <field name="uuid" attrs="{'invisible': [('id', '=', False)]}"/>
+                            <field name="uuid"/>
                             <field name="res_id" invisible="1"/>
                             <field name="allow_force_update_state" invisible="1"/>
                         </group>

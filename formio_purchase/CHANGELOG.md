@@ -6,10 +6,6 @@ Replace the `_onchange_builder_id` method (implementation) by a new method `_get
 This due to refactoring in the base Forms (`formio`) module, to solve a deprecation warning,
 regarding a domain that may not be returned by an onchange method.
 
-## 1.1
-
-Add cascade delete on `sale_order_id` field in `formio.form` model.
-
 ## 1.0
 
 Initial release.

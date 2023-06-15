@@ -15,7 +15,11 @@ from odoo.exceptions import AccessError, UserError
 
 from ..utils import get_field_selection_label
 
-from .formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
+from .formio_builder import (
+    STATE_DRAFT as BUILDER_STATE_DRAFT,
+    STATE_CURRENT as BUILDER_STATE_CURRENT,
+    STATE_OBSOLETE as BUILDER_STATE_OBSOLETE,
+)
 
 _logger = logging.getLogger(__name__)
 
@@ -40,8 +44,15 @@ class Form(models.Model):
     }
 
     builder_id = fields.Many2one(
-        'formio.builder', string='Form Builder', required=True,
-        ondelete='restrict', domain=[('state', '=', BUILDER_STATE_CURRENT)])
+        'formio.builder',
+        string='Form Builder',
+        required=True,
+        ondelete='restrict',
+    )
+    builder_id_domain = fields.Binary(
+        compute='_compute_builder_id_domain',
+        store=False
+    )
     name = fields.Char(related='builder_id.name', readonly=True)
     uuid = fields.Char(
         default=lambda self: self._default_uuid(), required=True, readonly=True, copy=False,
@@ -232,6 +243,22 @@ class Form(models.Model):
     def _get_builder_from_id(self, builder_id):
         return self.env['formio.builder'].browse(builder_id)
 
+    @api.depends('uuid')
+    def _compute_builder_id_domain(self):
+        for rec in self:
+            rec.builder_id_domain = self._get_builder_id_domain()
+
+    def _get_builder_id_domain(self):
+        self.ensure_one()
+        domain = [
+            '|',
+            ('state', '=', BUILDER_STATE_CURRENT),
+            '|',
+            '&', ('state', '=', BUILDER_STATE_DRAFT), ('backend_use_draft', '=', True),
+            '&', ('state', '=', BUILDER_STATE_OBSOLETE), ('backend_use_obsolete', '=', True)
+        ]
+        return domain
+
     @api.depends('state')
     def _compute_kanban_group_state(self):
         for r in self:
@@ -416,16 +443,18 @@ class Form(models.Model):
     def _default_uuid(self):
         return str(uuid.uuid4())
 
-    @api.onchange('builder_id')
-    def _onchange_builder_domain(self):
-        domain = [
-            ('state', '=', BUILDER_STATE_CURRENT),
-            ('res_model_id', '=', False),
-        ]
-        res = {
-            'domain': {'builder_id': domain}
-        }
-        return res
+    # @api.onchange('builder_id')
+    # def _onchange_builder_domain(self):
+    #     domain = [
+    #         '|', '&',
+    #         ('state', '=', BUILDER_STATE_CURRENT),
+    #         ('res_model_id', '=', False),
+    #         '&', ('state', '=', BUILDER_STATE_DRAFT), ('test_draft', '=', True)
+    #     ]
+    #     res = {
+    #         'domain': {'builder_id': domain}
+    #     }
+    #     return res
 
     @api.onchange('builder_id')
     def _onchange_builder(self):

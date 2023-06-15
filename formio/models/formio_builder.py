@@ -92,6 +92,16 @@ class Builder(models.Model):
     version_comment = fields.Text("Version Comment")
     user_id = fields.Many2one('res.users', string='Assigned user', tracking=True)  # TODO old field, remove?
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
+    backend_use_draft = fields.Boolean(
+        string='Use Draft in Backend',
+        default=False,
+        help='Allows to use this Form Builder in state DRAFT, when adding/choosing a new Form in the backend.'
+    )
+    backend_use_obsolete = fields.Boolean(
+        string='Use Obsolete in Backend',
+        default=False,
+        help='Allows to use this Form Builder in state OBSOLETE, when adding/choosing a new Form in the backend.'
+    )
     portal = fields.Boolean("Portal", tracking=True, help="Form is accessible by assigned portal user")
     portal_url = fields.Char(string='Portal URL', compute='_compute_portal_urls')
     portal_direct_create = fields.Boolean("Portal Direct Create", tracking=True, help="Direct create Form by link")
