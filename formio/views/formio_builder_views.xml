@@ -105,6 +105,8 @@ See LICENSE file for full licensing details. -->
                         <group>
                             <field name="uuid" attrs="{'invisible': [('id', '=', False)]}"/>
                             <field name="is_locked" attrs="{'invisible': [('state', '!=', 'CURRENT')]}"/>
+                            <field name="backend_use_draft" attrs="{'invisible': [('state', '!=', 'DRAFT')]}" widget="boolean_toggle"/>
+                            <field name="backend_use_obsolete" attrs="{'invisible': [('state', '!=', 'OBSOLETE')]}" widget="boolean_toggle"/>
                         </group>
                     </group>
                     <notebook>
@@ -126,11 +128,9 @@ See LICENSE file for full licensing details. -->
                                 <group name="publish_settings" string="Publish &amp; Usage">
                                     <field name="portal" string="Publish on Portal"/>
                                     <field name="public" string="Publish to Public"/>
-                                    <div class="text-muted mb-2" colspan="2">
+                                    <div class="text-muted" colspan="2">
                                         <i class="fa fa-info-circle" title="info"/> Configure in related tabs (Portal, Public / Website)
                                     </div>
-                                    <field name="backend_use_draft" attrs="{'invisible': [('state', '!=', 'DRAFT')]}" widget="boolean_toggle"/>
-                                    <field name="backend_use_obsolete" attrs="{'invisible': [('state', '!=', 'OBSOLETE')]}" widget="boolean_toggle"/>
                                 </group>
                                 <group name="wizard_settings" string="Wizard">
                                     <field name="wizard" string="Wizard" groups="formio.group_formio_admin"
