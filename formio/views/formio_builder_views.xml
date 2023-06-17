@@ -116,12 +116,15 @@ See LICENSE file for full licensing details. -->
                                     <field name="formio_version_id"
                                            attrs="{'readonly': [('is_locked', '=', True)]}"
                                            options="{'no_create_edit': True, 'no_quick_create': True}"/>
+                                    <div colspan="2" attrs="{'invisible': [('formio_version_is_dummy', '=', True)]}">
+                                        <i class="fa fa-info-circle" title="info"/> Download and install formio.js versions (menu: Configuration / formio.js versions)
+                                    </div>
                                     <field name="formio_version_is_dummy" invisible="1"/>
                                     <div colspan="2" attrs="{'invisible': [('formio_version_is_dummy', '=', False)]}">
                                         <strong class="text-danger">
                                             <i class="fa fa-info-circle" title="info"/> Replace this "Dummy" version, which doesn't work<br/>
                                             <i class="fa fa-info-circle" title="info"/> Dummy version is only here to bootstrap (default) demo data<br/>
-                                            <i class="fa fa-info-circle" title="info"/> Install a formio.js version (menu: Configuration / formio.js versions)
+                                            <i class="fa fa-info-circle" title="info"/> Download and install a formio.js version (menu: Configuration / formio.js versions)
                                         </strong>
                                     </div>
                                 </group>
