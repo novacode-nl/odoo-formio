@@ -1,3 +1,5 @@
 formio/static/installed/*
 __pycache__/
 *.py[cod]
+*~
+*.pyc
