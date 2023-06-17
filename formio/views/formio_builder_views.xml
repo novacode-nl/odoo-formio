@@ -112,7 +112,12 @@ See LICENSE file for full licensing details. -->
                         <page string="General" name="settings">
                             <group name="settings">
                                 <group name="formiojs_settings" string="formio.js">
-                                    <field name="formio_version_id" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                    <field name="formio_version_id"
+                                           attrs="{'readonly': [('is_locked', '=', True)]}"
+                                           options="{'no_create_edit': True, 'no_quick_create': True}"/>
+                                    <div colspan="2">
+                                        <i class="fa fa-info-circle" title="info"/> Download and install formio.js versions (menu: Configuration / formio.js versions)
+                                    </div>
                                 </group>
                                 <group name="publish_settings" string="Publish">
                                     <field name="portal" groups="formio.group_formio_admin" string="Publish on Portal"/>
