@@ -40,7 +40,7 @@ h3.formio_form_title {
 }
 
 .formio_languages button {
-    border: 1px solid #000;
+    border: 1px solid #ced4da;
     background-color: #fff;
     color: #000;
     padding: 6px 10px 6px 10px;
@@ -56,5 +56,4 @@ h3.formio_form_title {
 
 .formio_languages button:hover {
     background-color: #ddd;
-    border: 1px solid #545b62;
 }
