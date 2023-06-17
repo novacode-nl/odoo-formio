@@ -16,5 +16,20 @@ body {
 }
 
 .formio_languages button {
-    border: 1px solid #d8d8d8;
+    border: 1px solid #ced4da;
+    background-color: #fff;
+    color: #000;
+    padding: 6px 10px 6px 10px;
+    box-shadow: none !important;
+    transition: none !important;
+}
+
+.btn.language_button_active, .btn.language_button_active:hover {
+    background-color: #5a6268;
+    border: 1px solid #545b62;
+    color: #fff;
+}
+
+.formio_languages button:hover {
+    background-color: #ddd;
 }

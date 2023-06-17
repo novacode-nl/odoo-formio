@@ -35,15 +35,26 @@ class App extends Component {
     createBuilder() {
         const self = this;
         let builder = new Formio.FormBuilder(document.getElementById('formio_builder'), self.schema, self.options);
+        let buttons = document.querySelectorAll('.formio_languages button');
+        buttons.forEach(function(btn) {
+            if (self.options.language === btn.lang) {
+                btn.classList.add('language_button_active');
+            };
+        });
 
         builder.instance.ready.then(function() {
             if ('language' in self.options) {
                 builder.language = self.options['language'];
                 // builder.instance.webform.language = self.options['language'];
             }
-            window.setLanguage = function(lang) {
+            window.setLanguage = function(lang, button) {
                 builder.instance.webform.language = lang;
                 builder.instance.redraw();
+                let buttons = document.querySelectorAll('.formio_languages button');
+                buttons.forEach(function(btn) {
+                    btn.classList.remove('language_button_active');
+                });
+                button.classList.add('language_button_active');
             };
         });
 

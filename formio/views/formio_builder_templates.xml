@@ -50,7 +50,9 @@ See LICENSE file for full licensing details. -->
                 <t t-if="len(languages) > 1">
                     <div class="formio_languages">
                         <t t-foreach="languages" t-as="lang">
-                            <button class="btn btn-sm btn-light" t-attf-onclick="setLanguage('{{ lang.formio_ietf_code }}')"><span t-field="lang.name"/></button>
+                            <button class="btn btn-sm btn-default" t-att-lang="lang.formio_ietf_code" t-attf-onclick="setLanguage('{{ lang.formio_ietf_code }}', this)">
+                                <span t-field="lang.name"/>
+                            </button>
                         </t>
                     </div>
                 </t>
