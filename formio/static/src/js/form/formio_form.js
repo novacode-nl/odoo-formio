@@ -68,7 +68,7 @@ export class OdooFormioForm extends Component {
         // readOnly check also applies in server endpoint
         const readOnly = 'readOnly' in this.options && this.options['readOnly'] == true;
         if (this.params['wizard_on_change_page_save_draft'] && !readOnly) {
-	    form.beforeSubmit();
+            form.beforeSubmit();
             const data = {'data': form.data, 'saveDraft': true};
             if (this.formUuid) {
                 data['form_uuid'] = this.formUuid;
