@@ -98,8 +98,11 @@ See LICENSE file for full licensing details. -->
                             <field string="Forms" name="forms_count" widget="statinfo"/>
                         </button>
                     </div>
-                    <label for="title" class="oe_edit_only"/>
-                    <h1><field name="title" placeholder="Insert a meaningful title here"/></h1>
+                    <div class="oe_title mb24">
+                        <h1>
+                            <field name="title" class="text-break" placeholder="Insert a meaningful title here"/>
+                        </h1>
+                    </div>
                     <group>
                         <group>
                             <field name="name" placeholder="Use ASCII letters, digits (0-9), - or _" attrs="{'readonly': [('is_locked', '=', True)]}"/>
