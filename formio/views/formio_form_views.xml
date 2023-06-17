@@ -170,7 +170,11 @@ See LICENSE file for full licensing details. -->
                             <field name="res_name"/>
                         </button>
                     </div>
-                    <h1><field name="title" attrs="{'invisible': [('builder_id', '=', False)]}"/></h1>
+                    <div class="oe_title mb24">
+                        <h1>
+                            <field name="title" class="text-break" placeholder="Insert a meaningful title here" attrs="{'invisible': [('builder_id', '=', False)]}"/>
+                        </h1>
+                    </div>
                     <group name="general">
                         <group>
                             <field name="res_name" string="Resource" attrs="{'invisible': [('res_name', '=', False)]}"/>
