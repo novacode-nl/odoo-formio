@@ -38,6 +38,12 @@ See LICENSE file for full copyright and licensing details.
     </template>
 
     <template id="report_formio_form_template">
+        <style t-if="report_type == 'pdf'">
+            div.formio_component {
+              padding-top: 4px;
+            }
+        </style>
+
         <div class="page mt-4">
             <h3 class="mb-4"><span t-field="o.title"/></h3>
 
