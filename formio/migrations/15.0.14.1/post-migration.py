@@ -25,7 +25,7 @@ def migrate(cr, version):
         param_version = Param.get_param('formio.default_version')
         if param_version:
             version_name = 'v%s' % param_version
-            domain = [('name', '=', version_name)]
+            domain = [('name', '=', version_name), ('state', '!=', 'installed')]
             version_github_tag = VersionGitHubTag.search(domain, limit=1)
             if version_github_tag and len(version_github_tag) == 1:
                 version_github_tag.action_download_install()
