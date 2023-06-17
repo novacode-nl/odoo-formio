@@ -183,10 +183,8 @@ export class OdooFormioForm extends Component {
                 }
             }
         };
-
         Formio.createForm(document.getElementById('formio_form'), self.schema, self.options).then(function(form) {
-            var buttons = document.querySelectorAll('.formio_languages button');
-            
+            let buttons = document.querySelectorAll('.formio_languages button');
             buttons.forEach(function(btn) {
                 
                 if (self.language === btn.lang) {
@@ -195,18 +193,13 @@ export class OdooFormioForm extends Component {
             });
 
             window.setLanguage = function(lang, button) {
-                
                 self.language = lang;
                 form.language = lang;
-                var buttons = document.querySelectorAll('.formio_languages button');
-
+                let buttons = document.querySelectorAll('.formio_languages button');
                 buttons.forEach(function(btn) {
                     btn.classList.remove('language_button_active');
                 });
                 button.classList.add('language_button_active');
-
-                
-
                 // component with URL filter: add language
                 FormioUtils.eachComponent(form.components, (component) => {
                     let compObj = component.component;

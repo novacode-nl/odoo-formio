@@ -93,7 +93,7 @@ class Builder(models.Model):
     version_comment = fields.Text("Version Comment")
     user_id = fields.Many2one('res.users', string='Assigned user', tracking=True)  # TODO old field, remove?
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
-    forms_count = fields.Integer(string='Forms Count', compute='_compute_forms_count', compute_sudo=True)
+    forms_count = fields.Integer(string='Forms Count', compute='_compute_forms_count')
     backend_use_draft = fields.Boolean(
         string='Use Draft in Backend',
         default=False,
