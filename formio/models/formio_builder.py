@@ -92,7 +92,7 @@ class Builder(models.Model):
     version_comment = fields.Text("Version Comment")
     user_id = fields.Many2one('res.users', string='Assigned user', tracking=True)  # TODO old field, remove?
     forms = fields.One2many('formio.form', 'builder_id', string='Forms')
-    form_count = fields.Integer(string='Form Count', compute='_compute_form_count')
+    forms_count = fields.Integer(string='Forms Count', compute='_compute_forms_count')
     backend_use_draft = fields.Boolean(
         string='Use Draft in Backend',
         default=False,
@@ -400,9 +400,9 @@ class Builder(models.Model):
             'context': {}
         }
 
-    def _compute_form_count(self):
+    def _compute_forms_count(self):
         for r in self:
-            r.form_count = len(r.forms)
+            r.forms_count = len(r.forms)
 
     def action_draft(self):
         vals = {'state': STATE_DRAFT}
