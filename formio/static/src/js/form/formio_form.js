@@ -64,6 +64,26 @@ export class OdooFormioForm extends Component {
         }
     }
 
+    wizardStateChange (form, submission) {
+        this.resetParentIFrame();
+        // readOnly check also applies in server endpoint
+        const readOnly = 'readOnly' in this.options && this.options['readOnly'] == true;
+        if (this.params['wizard_on_change_page_save_draft'] && !readOnly) {
+            form.beforeSubmit();
+            const data = {'data': form.data, 'saveDraft': true};
+            if (this.formUuid) {
+                data['form_uuid'] = this.formUuid;
+            }
+            $.jsonRpc.request(this.submitUrl, 'call', data).then(function(submission) {
+                if (typeof(submission) != 'undefined') {
+                    // Set properties to instruct the next calls to save (draft) the current form.
+                    this.formUuid = submission.form_uuid;
+                    this.submitUrl = this.wizardSubmitUrl + this.formUuid + '/submit';
+                }
+            });
+        }
+    }
+
     loadForm() {
         const self = this;
         let configUrl = self.configUrl;
