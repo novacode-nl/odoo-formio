@@ -1,5 +1,23 @@
 # Changelog
 
+## 16.0.3.2
+
+### Fix
+
+Fix migration for version 16.0.3.1 - upgrade error:
+UniqueViolation: duplicate key value violates unique constraint "ir_config_parameter_key_uniq"
+
+### Improvements
+
+Style (highlight) active language button.
+
+The "Forms" Button in the Form Builder view.
+
+Archive functionality for formio.js versions (also unarchive and search filter).
+
+Wizard draft autosave mode.\
+This allows complex components to serialize their data on the form before submitting it.
+
 ## 16.0.3.1
 
 Improve app/module installation, by downloading and installing a default formio.js library version after install.\
