@@ -47,6 +47,7 @@
 
 .formio_builder_dock button {
     color: #000;
+    background-color: #fff;
     border: 1px solid #ced4da;
     border-radius: 0.2rem;
     padding: 6px 10px 6px 10px;
