@@ -43,12 +43,12 @@ h3.formio_form_title {
     transition: none !important;
 }
 
-.btn.language_button_active, .btn.language_button_active:hover {
-    background-color: #5a6268;
-    border: 1px solid #545b62;
-    color: #fff;
+.btn.language_button_active {
+    background-color: rgba(0, 0, 0, 0.08);
+    color: #000;
 }
 
 .formio_languages button:hover {
-    background-color: #ddd;
+    background-color: #d3d3d3;
+    border: 1px solid #c0c0c0;
 }
