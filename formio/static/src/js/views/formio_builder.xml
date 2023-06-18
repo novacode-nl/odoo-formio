@@ -12,8 +12,8 @@
                                 <h1><span name="title" t-out="builder.title"/></h1>
                                 <div class="formio_builder_dock">
                                     <ul>
-                                        <li class="fullscreen_formio">
-                                            <button id="fullscreen_formio" class="pull-right">Fullscreen (Exit with ESC)</button>
+                                        <li class="fullscreen_formio btn-group">
+                                            <button id="fullscreen_formio" class="btn btn-sm btn-default pull-right">Fullscreen (Exit with ESC)</button>
                                         </li>
                                         <li class="version">
                                             <span class="formio_dock_label">Version</span><span t-out="builder.version"/>
