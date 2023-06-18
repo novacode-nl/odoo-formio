@@ -24,14 +24,23 @@
     margin-left: 20px;
 }
 
-.formio_builder_container .formio_builder_dock ul li button {
-    font-size: 12px;
-}
-
 .formio_builder_container .formio_actions {
     clear: both;
     padding-top: 10px;
     margin-bottom: 20px;
+}
+
+.formio_builder_dock button {
+    color: #000;
+    border: 1px solid #ced4da;
+    border-radius: 0.2rem;
+    padding: 6px 10px 6px 10px;
+}
+
+.formio_builder_dock button:hover {
+    color: #000;
+    background-color: #d3d3d3;
+    border: 1px solid #c0c0c0;
 }
 
 .formio_builder_iframe_container {
