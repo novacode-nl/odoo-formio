@@ -1,5 +1,20 @@
 # Changelog
 
+## 16.0.4.0
+
+Make formio.js CDN for hot-loaded dependencies configurable.
+
+Make use of the formio.js CDN class to override the base URL for all 3rd party assets that are loaded on-the-fly by formio.js lib.\
+This includes for example ACE, CKEditor, Flatpickr, Quill etc.
+
+This allows for improved privacy by using a CDN that honors the GDPR.\
+Since no information can be found about GDPR compliance of the default formio.js CDN, the Cloudflare CDN is set as the default value.\
+Even though it's not perfect, they have at least a page about the GDPR: https://www.cloudflare.com/trust-hub/gdpr/
+
+Commercial sites in the EU could choose to override the default value to a paid GDPR-aware CDN like KeyCDN.com or GlobalConnect.no and host the required files there,\
+or simply point it to the base URL of their Odoo install and ship the files themselves.\
+This would require pinning the formio.js version, since different versions of the library need different dependencies.
+
 ## 16.0.3.2
 
 ### Fix
