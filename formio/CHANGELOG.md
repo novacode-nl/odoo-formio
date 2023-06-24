@@ -4,6 +4,13 @@
 
 Make formio.js CDN for hot-loaded dependencies configurable.
 
+### WARNING / UPDATE REQUIREMENT !
+
+**Update all Form Builders (field) 'formio.js version' >= v4.14.11**\
+If not updated, all forms and builders will crash.
+
+### Description
+
 Make use of the formio.js CDN class to override the base URL for all 3rd party assets that are loaded on-the-fly by formio.js lib.\
 This includes for example ACE, CKEditor, Flatpickr, Quill etc.
 
