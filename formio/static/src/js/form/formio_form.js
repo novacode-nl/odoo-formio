@@ -171,21 +171,53 @@ export class OdooFormioForm extends Component {
     }
 
     patchCDN() {
-        // CDN class is not exported, so patch it here because
-        // ckeditor's URLs are somewhat nonstandard.
-        // When using an external CDN, we must also avoid loading the customized
-        // version of flatpickr, instead relying on the default version.
-        const oldBuildUrl = Formio.cdn.buildUrl.bind(Formio.cdn);
-        Formio.cdn.buildUrl = function(cdnUrl, lib, version) {
-            if (lib == 'ckeditor') {
-                if (version == '19.0.0') version = '19.0.1'; // Somehow 19.0.0 is missing?!
-                return `${cdnUrl}/${lib}5/${version}`;
-            } else if (lib == 'flatpickr-formio') {
-                return oldBuildUrl(cdnUrl, 'flatpickr', this.libs['flatpickr']);
-            } else {
-                return oldBuildUrl(cdnUrl, lib, version);
-            }
-        };
+	// CDN class is not exported, so patch it here because
+	// ckeditor's URLs are somewhat nonstandard.
+        //
+        // The patch implements a fallback for formio.js version
+        // <= 4.14.12, where CDN.buildUrl is not implemented, to
+        // patch CDN.updateUrls.
+        //
+	// When using an external CDN, we must also avoid loading the customized
+	// version of flatpickr, instead relying on the default version.
+        if (Formio.cdn.buildUrl !== undefined && typeof(Formio.cdn.buildUrl === 'function')) {
+            const oldBuildUrl = Formio.cdn.buildUrl.bind(Formio.cdn);
+            Formio.cdn.buildUrl = function(cdnUrl, lib, version) {
+                if (lib == 'ckeditor') {
+                    if (version == '19.0.0') {
+                        // Somehow 19.0.0 is missing?!
+                        version = '19.0.1';
+                    }
+                    return `${cdnUrl}/${lib}5/${version}`;
+                } else if (lib == 'flatpickr-formio') {
+                    return oldBuildUrl(cdnUrl, 'flatpickr', this.libs['flatpickr']);
+                } else {
+                    return oldBuildUrl(cdnUrl, lib, version);
+                }
+            };
+        } else {
+            const oldUpdateUrls = Formio.cdn.updateUrls.bind(Formio.cdn);
+            Formio.cdn.updateUrls = function() {
+                for (const lib in this.libs) {
+                    let version = this.libs[lib];
+                    if (version === '') {
+                        this[lib] = `${this.baseUrl}/${lib}`;
+                    }
+                    else if (lib == 'ckeditor') {
+                        if (version == '19.0.0') {
+                            // Somehow 19.0.0 is missing?!
+                            version = '19.0.1';
+                        }
+                        this[lib] = `${this.baseUrl}/${lib}5/${version}`;
+                    } else if (lib == 'flatpickr-formio') {
+                        const flatpickr_version = this.libs['flatpickr'];
+                        this[lib] = `${this.baseUrl}/flatpickr/${flatpickr_version}`;
+                    } else {
+                        this[lib] = `${this.baseUrl}/${lib}/${this.libs[lib]}`;
+                    }
+                }
+            };
+        }
     }
 
     createForm() {
