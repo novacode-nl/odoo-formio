@@ -579,10 +579,13 @@ class Form(models.Model):
 
     def _get_js_params(self):
         """ Odoo JS (Owl component) misc. params """
+        Param = self.env['ir.config_parameter'].sudo()
+        cdn_base_url = Param.get_param('formio.cdn_base_url')
         params = {
             'portal_submit_done_url': self.portal_submit_done_url,
             'public_submit_done_url': self.public_submit_done_url,
-            'wizard_on_change_page_save_draft': self.builder_id.wizard and self.builder_id.wizard_on_change_page_save_draft
+            'wizard_on_change_page_save_draft': self.builder_id.wizard and self.builder_id.wizard_on_change_page_save_draft,
+            'cdn_base_url': cdn_base_url
         }
         return params
 

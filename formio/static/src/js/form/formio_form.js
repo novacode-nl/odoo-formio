@@ -176,6 +176,10 @@ export class OdooFormioForm extends Component {
         if ('language' in self.options && window.flatpickr != undefined) {
             (window).flatpickr.localize((window).flatpickr.l10ns[self.defaultLocaleShort]);
         }
+
+	// Ensure when unconfigured, no requests are done
+	Formio.cdn.setBaseUrl(self.params['cdn_base_url'] || window.location.href);
+
         Formio.setBaseUrl(window.location.href);
         self['options']['hooks'] = {
             attachComponent: (element, instance) => {

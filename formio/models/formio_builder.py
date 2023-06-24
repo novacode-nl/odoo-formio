@@ -500,11 +500,14 @@ class Builder(models.Model):
 
     def _get_js_params(self):
         """ Odoo JS (Owl component) misc. params """
+        Param = self.env['ir.config_parameter'].sudo()
+        cdn_base_url = Param.get_param('formio.cdn_base_url')
         params = {
             'portal_submit_done_url': self.portal_submit_done_url,
             'readOnly': self.is_locked,
             'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
-            'submission_url_add_query_params_from': self.submission_url_add_query_params_from
+            'submission_url_add_query_params_from': self.submission_url_add_query_params_from,
+            'cdn_base_url': cdn_base_url
         }
         return params
 

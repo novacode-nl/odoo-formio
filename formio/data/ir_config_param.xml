@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- Copyright Nova Code (http://www.novacode.nl)
+License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
+
+<odoo>
+    <data noupdate="1">
+        <record id="ir_config_param_formio_cdn_base_url" model="ir.config_parameter">
+	  <field name="key">formio.cdn_base_url</field>
+          <field name="value">https://cdnjs.cloudflare.com/ajax/libs</field>
+        </record>
+    </data>
+</odoo>
