@@ -2,9 +2,9 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms | Website (Block etc)',
+    'name': 'Forms | Website Integration',
     'summary': "'Drag & drop' Form Block, other website integration",
-    'version': '2.1',
+    'version': '2.2',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
