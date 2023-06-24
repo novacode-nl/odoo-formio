@@ -7,9 +7,8 @@ Make formio.js CDN for hot-loaded dependencies configurable.
 Make use of the formio.js CDN class to override the base URL for all 3rd party assets that are loaded on-the-fly by formio.js lib.\
 This includes for example ACE, CKEditor, Flatpickr, Quill etc.
 
-This allows for improved privacy by using a CDN that honors the GDPR.\
-Since no information can be found about GDPR compliance of the default formio.js CDN, the Cloudflare CDN is set as the default value.\
-Even though it's not perfect, they have at least a page about the GDPR: https://www.cloudflare.com/trust-hub/gdpr/
+The Cloudflare CDN is set as the default value.\
+They have a page about the GDPR: https://www.cloudflare.com/trust-hub/gdpr/
 
 Commercial sites in the EU could choose to override the default value to a paid GDPR-aware CDN like KeyCDN.com or GlobalConnect.no and host the required files there,\
 or simply point it to the base URL of their Odoo install and ship the files themselves.\
@@ -19,8 +18,8 @@ This would require pinning the formio.js version, since different versions of th
 
 ### Fix
 
-Fix migration for version 15.0.14.2 - upgrade error:
-UniqueViolation: duplicate key value violates unique constraint "ir_config_parameter_key_uniq"
+Fix migration for version 16.0.3.1 - upgrade error:\
+`UniqueViolation: duplicate key value violates unique constraint "ir_config_parameter_key_uniq"`
 
 ### Improvements
 
@@ -110,7 +109,7 @@ Major improvements for translations:
 - Specific Version Translations instead of linking (Many2many) to the available Base Translations.
 - Translations (overrides) of formio.js source properties in the form builder.
 
-Add `noupdate=1` for the xmlid `formio.version_dummy` data (record).
+Add `noupdate=1` for the xmlid `formio.version_dummy` data (record).\
 This prevents recreation when the dummy version has been archived (is inactive).
 
 ## 12.12
