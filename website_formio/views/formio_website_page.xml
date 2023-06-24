@@ -38,6 +38,7 @@ See LICENSE file for full licensing details. -->
                         <field name="website_url"/>
                     </group>
                     <group name="publishing" string="Publishing Info">
+                        <field name="is_published" widget="boolean_toggle"/>
                         <field name="create_uid"/>
                         <field name="create_date"/>
                         <field name="write_uid"/>
