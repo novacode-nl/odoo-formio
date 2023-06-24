@@ -169,6 +169,19 @@ export class OdooFormioForm extends Component {
             && !$.isEmptyObject(component.data.url);
     }
 
+    patchCDN() {
+	// CDN class is not exported, so patch it here because ckeditor's URLs are somewhat nonstandard
+	const oldBuildUrl = Formio.cdn.buildUrl.bind(Formio.cdn);
+	Formio.cdn.buildUrl = function(cdnUrl, lib, version) {
+	    if (lib == 'ckeditor') {
+		if (version == '19.0.0') version = '19.0.1'; // Somehow 19.0.0 is missing?!
+		return `${cdnUrl}/${lib}5/${version}`;
+	    } else {
+		return oldBuildUrl(cdnUrl, lib, version);
+	    }
+	}
+    }
+
     createForm() {
         const self = this;
         // this does some flatpickr (datetime) locale all over the place.
@@ -176,6 +189,7 @@ export class OdooFormioForm extends Component {
             (window).flatpickr.localize((window).flatpickr.l10ns[self.defaultLocaleShort]);
         }
 
+	this.patchCDN();
 	// For privacy, ensure when unconfigured, no 3rd party requests are done
 	Formio.cdn.setBaseUrl(self.params['cdn_base_url'] || window.location.href);
 
