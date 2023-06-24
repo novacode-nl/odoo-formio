@@ -32,9 +32,23 @@ class App extends Component {
         });
     }
 
+    patchCDN() {
+	// CDN class is not exported, so patch it here because ckeditor's URLs are somewhat nonstandard
+	const oldBuildUrl = Formio.cdn.buildUrl.bind(Formio.cdn);
+	Formio.cdn.buildUrl = function(cdnUrl, lib, version) {
+	    if (lib == 'ckeditor') {
+		if (version == '19.0.0') version = '19.0.1'; // Somehow 19.0.0 is missing?!
+		return `${cdnUrl}/${lib}5/${version}`;
+	    } else {
+		return oldBuildUrl(cdnUrl, lib, version);
+	    }
+	};
+    }
+
     createBuilder() {
         const self = this;
 
+        this.patchCDN();
 	// Ensure when unconfigured, no requests are done
 	Formio.cdn.setBaseUrl(self.params['cdn_base_url'] || window.location.href);
 
