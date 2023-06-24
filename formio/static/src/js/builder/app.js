@@ -41,6 +41,10 @@ function app() {
 
         createBuilder() {
             const self = this;
+
+	    // For privacy, ensure when unconfigured, no 3rd party requests are done
+	    Formio.cdn.setBaseUrl(self.params['cdn_base_url'] || window.location.href);
+
             let builder = new Formio.FormBuilder(document.getElementById('formio_builder'), self.schema, self.options);
             let buttons = document.querySelectorAll('.formio_languages button');
             

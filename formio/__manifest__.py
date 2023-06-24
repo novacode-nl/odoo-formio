@@ -28,6 +28,7 @@
         'data/formio_asset_data.xml',
         'data/formio_extra_asset_data.xml',
         'data/formio_default_version_data.xml',
+        'data/ir_config_param.xml',
         'data/ir_cron_data.xml',
         'data/mail_activity_data.xml',
         'data/mail_template_data.xml',
