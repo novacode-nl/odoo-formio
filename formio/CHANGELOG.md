@@ -17,8 +17,8 @@ This includes for example ACE, CKEditor, Flatpickr, Quill etc.
 The Cloudflare CDN is set as the default value.\
 They have a page about the GDPR: https://www.cloudflare.com/trust-hub/gdpr/
 
-Commercial sites in the EU could choose to override the default value to a paid GDPR-aware CDN like KeyCDN.com or GlobalConnect.no and host the required files there,\
-or simply point it to the base URL of their Odoo install and ship the files themselves.\
+It's also possible to override the default value to a (paid) GDPR-aware CDN like KeyCDN.com or GlobalConnect.no and host the required files there,\
+or simply point it to the base URL of their Odoo install and ship the files.\
 This would require pinning the formio.js version, since different versions of the library need different dependencies.
 
 ## 16.0.3.2
