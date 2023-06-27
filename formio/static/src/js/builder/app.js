@@ -85,9 +85,10 @@ class App extends Component {
     createBuilder() {
         const self = this;
 
-        this.patchCDN();
-	// Ensure when unconfigured, no requests are done
-	Formio.cdn.setBaseUrl(self.params['cdn_base_url'] || window.location.href);
+        if (Formio.hasOwnProperty('cdn')) {
+            this.patchCDN();
+	    Formio.cdn.setBaseUrl(self.params['cdn_base_url'] || window.location.href);
+        }
 
         let builder = new Formio.FormBuilder(document.getElementById('formio_builder'), self.schema, self.options);
         let buttons = document.querySelectorAll('.formio_languages button');
