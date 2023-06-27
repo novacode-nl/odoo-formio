@@ -87,7 +87,7 @@ class App extends Component {
 
         if (Formio.hasOwnProperty('cdn')) {
             this.patchCDN();
-	    Formio.cdn.setBaseUrl(self.params['cdn_base_url'] || window.location.href);
+	    Formio.cdn.setBaseUrl(self.params['cdn_base_url']);
         }
 
         let builder = new Formio.FormBuilder(document.getElementById('formio_builder'), self.schema, self.options);
