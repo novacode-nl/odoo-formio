@@ -1,5 +1,12 @@
 # Changelog
 
+## 12.2
+
+### Improvement
+
+Render a new portal form by the generic QWeb form template.\
+This ensures to apply any extra form builder config/settings.
+
 ## 12.1
 
 Improve app/module installation, by downloading and installing a default formio.js library version after install.\

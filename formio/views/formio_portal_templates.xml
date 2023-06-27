@@ -144,9 +144,10 @@ See LICENSE file for full licensing details. -->
     <template id="portal_my_formio_new" name="Portal Form" priority="40">
         <t t-call="portal.portal_layout">
             <div t-attf-class="formio_form_container mt16">
-                <div class="formio_form_iframe_container">
-                    <iframe t-attf-src="/formio/portal/form/new/#{builder.name}" class="formio_form_embed"/>
-                </div>
+                <t t-call="formio.form_iframe">
+                    <t t-set="src" t-value="'/formio/portal/form/new/' + builder.name"/>
+                    <t t-set="formio_builder" t-value="builder"/>
+                </t>
             </div>
         </t>
     </template>
