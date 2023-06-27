@@ -226,9 +226,10 @@ export class OdooFormioForm extends Component {
             (window).flatpickr.localize((window).flatpickr.l10ns[self.defaultLocaleShort]);
         }
 
-	this.patchCDN();
-	// For privacy, ensure when unconfigured, no 3rd party requests are done
-	Formio.cdn.setBaseUrl(self.params['cdn_base_url'] || window.location.href);
+        if (Formio.hasOwnProperty('cdn')) {
+	    this.patchCDN();
+	    Formio.cdn.setBaseUrl(self.params['cdn_base_url'] || window.location.href);
+        }
 
         Formio.setBaseUrl(window.location.href);
         self['options']['hooks'] = {

@@ -1,13 +1,13 @@
 # Changelog
 
+## 16.0.4.1
+
+Backwards formio.js compatibility fix:\
+Apply `patchCDN` if there's an instantiated `Formio.cdn` object.
+
 ## 16.0.4.0
 
 Make formio.js CDN for hot-loaded dependencies configurable.
-
-### WARNING / UPDATE REQUIREMENT !
-
-**Update all Form Builders (field) 'formio.js version' >= v4.14.11**\
-If not updated, all forms and builders will crash.
 
 ### Description
 
