@@ -500,14 +500,12 @@ class Builder(models.Model):
 
     def _get_js_params(self):
         """ Odoo JS (Owl component) misc. params """
-        Param = self.env['ir.config_parameter'].sudo()
-        cdn_base_url = Param.get_param('formio.cdn_base_url')
         params = {
             'portal_submit_done_url': self.portal_submit_done_url,
             'readOnly': self.is_locked,
             'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
             'submission_url_add_query_params_from': self.submission_url_add_query_params_from,
-            'cdn_base_url': cdn_base_url
+            'cdn_base_url': self._cdn_base_url()
         }
         return params
 
@@ -558,7 +556,8 @@ class Builder(models.Model):
         params = {
             'portal_submit_done_url': self.portal_submit_done_url,
             'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
-            'submission_url_add_query_params_from': self.submission_url_add_query_params_from
+            'submission_url_add_query_params_from': self.submission_url_add_query_params_from,
+            'cdn_base_url': self._cdn_base_url()
         }
         return params
 
@@ -567,7 +566,8 @@ class Builder(models.Model):
         params = {
             'public_submit_done_url': self.public_submit_done_url,
             'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
-            'submission_url_add_query_params_from': self.submission_url_add_query_params_from
+            'submission_url_add_query_params_from': self.submission_url_add_query_params_from,
+            'cdn_base_url': self._cdn_base_url()
         }
         return params
 
@@ -595,6 +595,11 @@ class Builder(models.Model):
         ]
         builder = self.sudo().search(domain, limit=1)
         return builder or False
+
+    def _cdn_base_url(self):
+        Param = self.env['ir.config_parameter'].sudo()
+        cdn_base_url = Param.get_param('formio.cdn_base_url')
+        return cdn_base_url
 
     def i18n_translations(self):
         i18n = {}
