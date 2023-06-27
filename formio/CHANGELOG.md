@@ -1,5 +1,12 @@
 # Changelog
 
+## 16.0.4.2
+
+### Improvement
+
+Render a new portal form by the generic QWeb form template.\
+This ensures to apply any extra form builder config/settings.
+
 ## 16.0.4.1
 
 Backwards formio.js compatibility fix:\
