@@ -219,18 +219,6 @@ class VersionGitHubTag(models.Model):
 
                         if file_ext == '.css':
                             asset_vals['type'] = 'css'
-
-                            src_fonts_path = '%s/dist/fonts' % src_version_path
-                            css_attach_dir = os.path.dirname(attachment.store_fname)
-                            css_attach_path = IrAttachment._full_path(css_attach_dir)
-                            target_fonts_path = '%s/fonts' % css_attach_path
-
-                            # XXX this leads to troubles if formio.js
-                            # versions ship different font files (version dependent).
-                            # However, the CSS url to resolve the fonts is expected to be
-                            # this precise one.
-                            if os.path.exists(src_fonts_path) and not os.path.exists(target_fonts_path):
-                                shutil.copytree(src_fonts_path, target_fonts_path)
                         elif file_ext == '.js':
                             asset_vals['type'] = 'js'
                         assets_vals_list.append(asset_vals)

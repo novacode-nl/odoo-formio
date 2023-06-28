@@ -1,8 +1,8 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
-
 import json
 import logging
+from io import BytesIO
 
 from os.path import dirname
 
@@ -192,11 +192,6 @@ class FormioController(http.Controller):
             _logger.warning(msg)
             return request.not_found(msg)
 
-        attach_dir = dirname(attach.store_fname)
-        fonts_dir = '{attach_dir}/fonts/'.format(attach_dir=attach_dir)
-        fontfile_path = request.env['ir.attachment']._full_path(fonts_dir)
-        fontfile_path += '/%s' % name
-
         # TODO DeprecationWarning, odoo.http.send_file is deprecated.
         #
         # But:
@@ -207,7 +202,7 @@ class FormioController(http.Controller):
         # Workaround: (to improve/replace in futute?)
         # still using Odoo <= v15 approach by using Werkzeug
         # implementation
-        return send_file(fontfile_path, request.httprequest.environ,)
+        return send_file(BytesIO(attach.raw), request.httprequest.environ, download_name=attach.name)
 
     #########
     # Helpers
