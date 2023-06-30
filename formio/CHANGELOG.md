@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.3
+
+Ensure external JavaScript libraries get loaded as expected by a common CDN.\
+This introduces the `patchRequireLibrary` (JS function) which alters some library URLs the formio.js `CDN` class fetches.\
+Currently the Flatpickr localizations URLs are altered.
+
 ## 15.2
 
 ### Improvement

@@ -103,7 +103,7 @@ export class OdooFormioForm extends Component {
                 self.options = result.options;
                 self.language = self.options.language;
                 self.locales = result.locales;
-                self.defaultLocaleShort = self._localeShort(self.language);
+                self.defaultLocaleShort = self.localeShort(self.language);
                 self.params = result.params;
                 self.createForm();
             }
@@ -163,63 +163,6 @@ export class OdooFormioForm extends Component {
         }
     }
 
-    _hasComponentDataURL(component) {
-        return component
-            && component.hasOwnProperty('data')
-            && component.data.hasOwnProperty('url')
-            && !$.isEmptyObject(component.data.url);
-    }
-
-    patchCDN() {
-	// CDN class is not exported, so patch it here because
-	// ckeditor's URLs are somewhat nonstandard.
-        //
-        // The patch implements a fallback for formio.js version
-        // <= 4.14.12, where CDN.buildUrl is not implemented, to
-        // patch CDN.updateUrls.
-        //
-	// When using an external CDN, we must also avoid loading the customized
-	// version of flatpickr, instead relying on the default version.
-        if (Formio.cdn.buildUrl !== undefined && typeof(Formio.cdn.buildUrl === 'function')) {
-            const oldBuildUrl = Formio.cdn.buildUrl.bind(Formio.cdn);
-            Formio.cdn.buildUrl = function(cdnUrl, lib, version) {
-                if (lib == 'ckeditor') {
-                    if (version == '19.0.0') {
-                        // Somehow 19.0.0 is missing?!
-                        version = '19.0.1';
-                    }
-                    return `${cdnUrl}/${lib}5/${version}`;
-                } else if (lib == 'flatpickr-formio') {
-                    return oldBuildUrl(cdnUrl, 'flatpickr', this.libs['flatpickr']);
-                } else {
-                    return oldBuildUrl(cdnUrl, lib, version);
-                }
-            };
-        } else {
-            const oldUpdateUrls = Formio.cdn.updateUrls.bind(Formio.cdn);
-            Formio.cdn.updateUrls = function() {
-                for (const lib in this.libs) {
-                    let version = this.libs[lib];
-                    if (version === '') {
-                        this[lib] = `${this.baseUrl}/${lib}`;
-                    }
-                    else if (lib == 'ckeditor') {
-                        if (version == '19.0.0') {
-                            // Somehow 19.0.0 is missing?!
-                            version = '19.0.1';
-                        }
-                        this[lib] = `${this.baseUrl}/${lib}5/${version}`;
-                    } else if (lib == 'flatpickr-formio') {
-                        const flatpickr_version = this.libs['flatpickr'];
-                        this[lib] = `${this.baseUrl}/flatpickr/${flatpickr_version}`;
-                    } else {
-                        this[lib] = `${this.baseUrl}/${lib}/${this.libs[lib]}`;
-                    }
-                }
-            };
-        }
-    }
-
     createForm() {
         const self = this;
         // this does some flatpickr (datetime) locale all over the place.
@@ -236,7 +179,7 @@ export class OdooFormioForm extends Component {
         self['options']['hooks'] = {
             attachComponent: (element, instance) => {
                 if (instance.component.type == 'datetime') {
-                    self._localizeComponent(instance.component, self.language);
+                    self.localizeComponent(instance.component, self.language);
                 }
             }
         };
@@ -259,7 +202,7 @@ export class OdooFormioForm extends Component {
                 // component with URL filter: add language
                 FormioUtils.eachComponent(form.components, (component) => {
                     let compObj = component.component;
-                    if (self._hasComponentDataURL(compObj)) {
+                    if (self.hasComponentDataURL(compObj)) {
                         let filterParams = new URLSearchParams(compObj.filter);
                         filterParams.set('language', form.language);
                         compObj.filter = filterParams.toString();
@@ -267,11 +210,11 @@ export class OdooFormioForm extends Component {
                 });
                 // flatpickr (datetime) localization
                 if (window.flatpickr != undefined) {
-                    const localeShort = self._localeShort(lang);
+                    const localeShort = self.localeShort(lang);
                     (window).flatpickr.localize((window).flatpickr.l10ns[localeShort]);
                     form.everyComponent((component) => {
                         if (component.type == 'datetime') {
-                            self._localizeComponent(component.component, form.language);
+                            self.localizeComponent(component.component, form.language);
                             component.redraw();
                         }
                     });
@@ -282,7 +225,7 @@ export class OdooFormioForm extends Component {
             // This also accounts nested components eg inside datagrid, editgrid.
             FormioUtils.eachComponent(form.components, (component) => {
                 let compObj = component.component;
-                if (self._hasComponentDataURL(compObj)) {
+                if (self.hasComponentDataURL(compObj)) {
                     compObj.data.url = self.getDataUrl(compObj);
                     let filterParams = new URLSearchParams(compObj.filter);
                     filterParams.set('language', form.language);
@@ -310,13 +253,13 @@ export class OdooFormioForm extends Component {
                 if (!$.isEmptyObject(self.locales)) {
                     let reloadComponents = [];
                     FormioUtils.eachComponent(component.component.components, (componentObj) => {
-                        let localizedComponent = self._localizeComponent(componentObj, self.language);
+                        let localizedComponent = self.localizeComponent(componentObj, self.language);
                         if (localizedComponent) {
                             reloadComponents.push(componentObj);
                         }
                     }, true);
                     if (reloadComponents.length > 0) {
-                        const localeShort = self._localeShort(self.language);
+                        const localeShort = self.localeShort(self.language);
                         form.everyComponent((component) => {
                             for (let i=0; i < reloadComponents.length; i++) {
                                 let reloadComponent = reloadComponents[i];
@@ -432,13 +375,88 @@ export class OdooFormioForm extends Component {
         });
     }
 
-    _localizeComponent(component, language) {
+    patchCDN() {
+	// CDN class is not exported, so patch it here because
+	// ckeditor's URLs are somewhat nonstandard.
+        //
+        // The patch implements a fallback for formio.js version
+        // <= 4.14.12, where CDN.buildUrl is not implemented, to
+        // patch CDN.updateUrls.
+        //
+	// When using an external CDN, we must also avoid loading the customized
+	// version of flatpickr, instead relying on the default version.
+        if (Formio.cdn.buildUrl !== undefined && typeof(Formio.cdn.buildUrl === 'function')) {
+            const oldBuildUrl = Formio.cdn.buildUrl.bind(Formio.cdn);
+            Formio.cdn.buildUrl = function(cdnUrl, lib, version) {
+                if (lib == 'ckeditor') {
+                    if (version == '19.0.0') {
+                        // Somehow 19.0.0 is missing?!
+                        version = '19.0.1';
+                    }
+                    return `${cdnUrl}/${lib}5/${version}`;
+                } else if (lib == 'flatpickr-formio') {
+                    return oldBuildUrl(cdnUrl, 'flatpickr', this.libs['flatpickr']);
+                } else {
+                    return oldBuildUrl(cdnUrl, lib, version);
+                }
+            };
+        } else {
+            const oldUpdateUrls = Formio.cdn.updateUrls.bind(Formio.cdn);
+            Formio.cdn.updateUrls = function() {
+                for (const lib in this.libs) {
+                    let version = this.libs[lib];
+                    if (version === '') {
+                        this[lib] = `${this.baseUrl}/${lib}`;
+                    }
+                    else if (lib == 'ckeditor') {
+                        if (version == '19.0.0') {
+                            // Somehow 19.0.0 is missing?!
+                            version = '19.0.1';
+                        }
+                        this[lib] = `${this.baseUrl}/${lib}5/${version}`;
+                    } else if (lib == 'flatpickr-formio') {
+                        const flatpickr_version = this.libs['flatpickr'];
+                        this[lib] = `${this.baseUrl}/flatpickr/${flatpickr_version}`;
+                    } else {
+                        this[lib] = `${this.baseUrl}/${lib}/${this.libs[lib]}`;
+                    }
+                }
+            };
+        }
+    }
+
+    patchRequireLibary() {
+        // Formio requireLibrary method is not exported, so patch it
+        // here because the standard CDNs use a different flatpickr
+        // naming and src URLs.
+        const oldRequireLibrary= Formio.requireLibrary.bind(Formio);
+        Formio.requireLibrary = function(name, property, src, polling) {
+            if (name != 'flatpickr-css' && name.includes('flatpickr-')) {
+                name = name.replaceAll('flatpickr-', '');
+                property = property.replaceAll('flatpickr-', '');
+                src = src.replaceAll('flatpickr-', '').replaceAll('.js', '.min.js');
+                return oldRequireLibrary(name, property, src, polling);
+            }
+            else {
+                return oldRequireLibrary(name, property, src, polling);
+            }
+        };
+    }
+
+    hasComponentDataURL(component) {
+        return component
+            && component.hasOwnProperty('data')
+            && component.data.hasOwnProperty('url')
+            && !$.isEmptyObject(component.data.url);
+    }
+
+    localizeComponent(component, language) {
         /** IMPORTANT !
             localization of datetime component (flatpickr widget)
             works since formio.js version 5.0.0-rc.4
         */
         if (component.type == 'datetime') {
-            const localeShort = this._localeShort(language);
+            const localeShort = this.localeShort(language);
             component.widget.language = localeShort;
             component.widget.locale = localeShort;
             return true;
@@ -449,7 +467,7 @@ export class OdooFormioForm extends Component {
         }
     }
 
-    _localeShort(language) {
+    localeShort(language) {
         if (this.locales.hasOwnProperty(language)) {
             return this.locales[language];
         }

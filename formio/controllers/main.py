@@ -91,6 +91,7 @@ class FormioController(http.Controller):
                 res['schema'] = json.loads(builder.schema)
             res['options'] = builder._get_js_options()
             res['params'] = builder._get_js_params()
+            res['locales'] = builder._get_form_js_locales()
 
         return res
 
