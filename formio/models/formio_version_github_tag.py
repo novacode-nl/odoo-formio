@@ -7,9 +7,8 @@ import os
 import requests
 import shutil
 import tarfile
-import sys
 
-from odoo import api, fields, models, modules
+from odoo import api, fields, models
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +23,7 @@ class VersionGitHubTag(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'formio.js Version GitHub Tag'
     #_order = 'create_date desc, id asc'
+    order = 'write_date desc, id desc'
 
     # IMPORTANT NOTES
     # ===============
@@ -36,6 +36,7 @@ class VersionGitHubTag(models.Model):
     # - Sorted by tag name (descending)
 
     name = fields.Char(required=True)
+
     version_name = fields.Char(compute='_compute_fields')
     formio_version_id = fields.Many2one('formio.version', string='formio.js version')
     archive_url = fields.Char(compute='_compute_fields', string="Archive URL")

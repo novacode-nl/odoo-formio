@@ -66,7 +66,7 @@ class FormioController(http.Controller):
                 res['schema'] = json.loads(builder.schema)
             res['options'] = builder._get_js_options()
             res['params'] = builder._get_js_params()
-
+            res['locales'] = builder._get_form_js_locales()
         return res
 
     @http.route('/formio/builder/<model("formio.builder"):builder>/save', type='json', auth="user", methods=['POST'], website=True)
@@ -204,7 +204,7 @@ class FormioController(http.Controller):
         # stream = http.Stream.from_path(fontfile_path)
         # return stream.get_response()
         #
-        # Workaround: (to improve/replace in futute?)
+        # Workaround: (to improve/replace in future?)
         # still using Odoo <= v15 approach by using Werkzeug
         # implementation
         return send_file(fontfile_path, request.httprequest.environ,)
