@@ -296,7 +296,6 @@ export class OdooFormioForm extends Component {
             if (src_is_string
                 && src.includes('flatpickr')
                 && src.includes('l10n'))
-                // && !name.includes('flatpickr-default'))
             {
                 ////////////////////////////////////////////////////
                 // HACK - SPECIAL CASE for flatpickr l10n (locales).
