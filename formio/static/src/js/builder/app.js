@@ -81,23 +81,17 @@ function app() {
                 }
                 window.setLanguage = function(lang, button) {
                     builder.instance.webform.language = lang;
-                    // TODO Fix flatpickr (datetime) localization
-                    // if (window.flatpickr != undefined) {
-                    //     const localeShort = self.localeShort(lang);
-                    //     (window).flatpickr.localize((window).flatpickr.l10ns[localeShort]);
-                    //     FormioUtils.eachComponent(builder._form.components, (component) => {
-                    //         if (component.type == 'datetime') {
-                    //             self.localizeComponent(component, lang);
-                    //             component.component.redraw();
-                    //         }
-                    //     });
-                    //     builder.instance.redraw();
-                    // }
                     let buttons = document.querySelectorAll('.formio_languages button');
                     buttons.forEach(function(btn) {
                         btn.classList.remove('language_button_active');
                     });
                     button.classList.add('language_button_active');
+                    FormioUtils.eachComponent(builder._form.components, (component) => {
+                        if (component.type == 'datetime') {
+                            self.localizeComponent(component, lang);
+                        }
+                    });
+                    builder.instance.redraw();
                 };
             });
 
@@ -177,7 +171,12 @@ function app() {
             // naming and src URLs.
             const oldRequireLibrary= Formio.requireLibrary.bind(Formio);
             Formio.requireLibrary = function(name, property, src, polling) {
-                if (src.includes('flatpickr') && src.includes('l10n')) {
+                const src_is_string = typeof(src) === 'string';
+                if (src_is_string
+                    && src.includes('flatpickr')
+                    && src.includes('l10n'))
+                    // && !name.includes('flatpickr-default'))
+                {
                     ////////////////////////////////////////////////////
                     // HACK - SPECIAL CASE for flatpickr l10n (locales).
                     ////////////////////////////////////////////////////
@@ -186,17 +185,31 @@ function app() {
                     // nameLang: nl-NL
                     // nameShort: nl
                     let nameLang = name.replaceAll('flatpickr-', '');
-                    let nameShort = nameLang.substring(0, 2);
+                    // nameShort
+                    let nameShort = nameLang;
+                    if (nameLang !== 'default') {
+                        nameShort = nameLang.substring(0, 2);
+                    }
                     if (nameShort == 'en') {
                         nameShort = 'default';
                     }
+                    // property
                     property = property.replaceAll('flatpickr-', '');
-                    property = property.substring(0, 2);
+                    if (property !== 'default') {
+                        property = property.substring(0, 2);
+                    }
+                    if (property == 'en') {
+                        property = 'default';
+                    }
+                    // src
                     src = src.replaceAll('flatpickr-', '').replaceAll('.js', '.min.js');
                     src = src.replaceAll(nameLang, nameShort);
                     return oldRequireLibrary(nameShort, property, src, polling);
                 }
-                else if (name != 'flatpickr-css' && name.includes('flatpickr-')) {
+                else if (src_is_string
+                         && name != 'flatpickr-css'
+                         && name.includes('flatpickr-'))
+                {
                     name = name.replaceAll('flatpickr-', '');
                     property = property.replaceAll('flatpickr-', '');
                     src = src.replaceAll('flatpickr-', '').replaceAll('.js', '.min.js');
