@@ -163,7 +163,7 @@ function app() {
                     }
                 };
             }
-	}
+        }
 
         patchRequireLibary() {
             // Formio requireLibrary method is not exported, so patch it
