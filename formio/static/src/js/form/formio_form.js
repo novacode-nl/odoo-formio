@@ -431,7 +431,44 @@ export class OdooFormioForm extends Component {
         // naming and src URLs.
         const oldRequireLibrary= Formio.requireLibrary.bind(Formio);
         Formio.requireLibrary = function(name, property, src, polling) {
-            if (name != 'flatpickr-css' && name.includes('flatpickr-')) {
+            const src_is_string = typeof(src) === 'string';
+            if (src_is_string
+                && src.includes('flatpickr')
+                && src.includes('l10n'))
+            {
+                ////////////////////////////////////////////////////
+                // HACK - SPECIAL CASE for flatpickr l10n (locales).
+                ////////////////////////////////////////////////////
+                // EXAMPLE of rewriting:
+                // name: flatpickr-nl-NL
+                // nameLang: nl-NL
+                // nameShort: nl
+                let nameLang = name.replaceAll('flatpickr-', '');
+                // nameShort
+                let nameShort = nameLang;
+                if (nameLang !== 'default') {
+                    nameShort = nameLang.substring(0, 2);
+                }
+                if (nameShort == 'en') {
+                    nameShort = 'default';
+                }
+                // property
+                property = property.replaceAll('flatpickr-', '');
+                if (property !== 'default') {
+                    property = property.substring(0, 2);
+                }
+                if (property == 'en') {
+                    property = 'default';
+                }
+                // src
+                src = src.replaceAll('flatpickr-', '').replaceAll('.js', '.min.js');
+                src = src.replaceAll(nameLang, nameShort);
+                return oldRequireLibrary(nameShort, property, src, polling);
+            }
+            else if (src_is_string
+                     && name != 'flatpickr-css'
+                     && name.includes('flatpickr-'))
+            {
                 name = name.replaceAll('flatpickr-', '');
                 property = property.replaceAll('flatpickr-', '');
                 src = src.replaceAll('flatpickr-', '').replaceAll('.js', '.min.js');

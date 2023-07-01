@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.4
+
+Fix and improve 'datetime' component localization and translations:\
+- Fix and improve `patchRequireLibrary` (JS function) to gradually determine the arguments.
+- Fix and improve Form Builder `setLanguage` to localize datetime components.
+
 ## 15.3
 
 Ensure external JavaScript libraries get loaded as expected by a common CDN.\

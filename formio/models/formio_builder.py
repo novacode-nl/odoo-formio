@@ -488,10 +488,12 @@ class Builder(models.Model):
         else:
             language = Lang._formio_ietf_code(self._context['lang'])
 
-        # only set language if exist in i18n translations
         if options['i18n'].get(language):
             options['language'] = language
-            
+        elif self.language_en_enable:
+            lang_en = self.env.ref('base.lang_en')
+            options['language'] = Lang._formio_ietf_code(lang_en.code)
+
         return options
 
     def _get_form_js_locales(self):
