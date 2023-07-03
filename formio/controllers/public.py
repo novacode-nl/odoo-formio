@@ -277,6 +277,19 @@ class FormioPublicController(http.Controller):
                 model_obj = request.env[model].with_context(lang=lang)
             else:
                 model_obj = request.env[model]
+
+            # Bypass access rights restrictions - by configuration !
+            # Ensure the model_obj search_read can query by direct ir.rule domain.
+            # This also sets sudo() on the model_obj, if the ir.rule is present.
+            model_rule_id = args.get('model_rule_id')
+            if model_rule_id and int(model_rule_id):
+                rule = request.env['ir.rule'].sudo().browse(int(model_rule_id))
+                if rule and rule.active and rule.model_id.model == model:
+                    # add_domain = rule._compute_direct_domain('stock.production.lot', 'read')
+                    add_domain = rule._formio_compute_direct_domain(model, 'read')
+                    domain += add_domain
+                    model_obj = model_obj.sudo()
+
             limit = (args.get('limit') and int(args.get('limit'))) or None
             order = args.get('sort') or model_obj._order + ', id'
             records = model_obj.search_read(

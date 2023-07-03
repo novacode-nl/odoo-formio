@@ -16,6 +16,7 @@ from . import formio_translation_source
 from . import formio_translation
 from . import ir_actions
 from . import ir_attachment
+from . import ir_rule
 from . import ir_view
 from . import res_config_settings
 from . import res_lang

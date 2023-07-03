@@ -1,5 +1,14 @@
 # Changelog
 
+## 15.5
+
+Implement a `api=getData` model access-rights bypass, by obtaining a direct record rule (`ir.rule`).\
+Provide the  record-rule (`ir.rule`) ID in the query-param `&module_rule_id=<model('ir.rule'):model_rule_id>`, shown in the example below.\
+The domain of the record-rule applies and the model `search_read` shall be executed with superuser mode (`sudo()`).
+
+Example URL (query params):
+`http://localhost:8069/formio/portal/form/new/FORMIO_BUILDER_NAME?api=getData&model=stock.production.lot&label=name&model_rule_id=99`
+
 ## 15.4
 
 Fix and improve 'datetime' component localization and translations:\
