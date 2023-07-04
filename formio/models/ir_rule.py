@@ -25,6 +25,10 @@ class IrRule(models.Model):
             global_domains = []                     # list of domains
             group_domains = []                      # list of domains
             rule = self.sudo()
+
+            if not set(user_groups.ids).intersection(set(rule.groups.ids)):
+                return self._compute_domain(model_name, mode)
+
             # evaluate the domain for the current user
             dom = safe_eval(rule.domain_force, eval_context) if rule.domain_force else []
             dom = expression.normalize_domain(dom)
