@@ -1,5 +1,11 @@
 # Changelog
 
+## 16.0.4.5
+
+Add to Python eval context of `ir.actions.server` code:
+- `_logger` - logger object
+- `os.getenv` - get (os) environment variable function
+
 ## 16.0.4.4
 
 Fix and improve 'datetime' component localization and translations:\

@@ -1,11 +1,15 @@
 # Copyright 2023 Nova Code (https://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
+import logging
+import os
 import re
 import uuid
 
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+
+_logger = logging.getLogger(__name__)
 
 
 class ServerAction(models.Model):
@@ -47,3 +51,9 @@ class ServerAction(models.Model):
             default = dict(default or {})
             default['formio_ref'] = str(uuid.uuid4())
         return super().copy(default)
+
+    def _get_eval_context(self, action=None):
+        eval_context = super()._get_eval_context(action)
+        eval_context['logger'] = _logger
+        eval_context['os_getenv'] = os.getenv
+        return eval_context
