@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.6
+
+Add to Python eval context of `ir.actions.server` code:
+- `_logger` - logger object
+- `os.getenv` - get (os) environment variable function
+
 ## 15.5
 
 Implement a `api=getData` model access-rights bypass, by obtaining a direct record rule (`ir.rule`).\
