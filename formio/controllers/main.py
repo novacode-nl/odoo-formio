@@ -1,8 +1,8 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
-
 import json
 import logging
+from io import BytesIO
 
 from os.path import dirname
 
@@ -73,10 +73,10 @@ class FormioController(http.Controller):
     def builder_save(self, builder, **post):
         if not request.env.user.has_group('formio.group_formio_admin'):
             return
-        
+
         if not 'builder_id' in post or int(post['builder_id']) != builder.id:
             return
-        
+
         schema = json.dumps(post['schema'])
         builder.write({'schema': schema})
 
@@ -192,10 +192,17 @@ class FormioController(http.Controller):
             _logger.warning(msg)
             return request.not_found(msg)
 
-        attach_dir = dirname(attach.store_fname)
-        fonts_dir = '{attach_dir}/fonts/'.format(attach_dir=attach_dir)
-        fontfile_path = request.env['ir.attachment']._full_path(fonts_dir)
-        fontfile_path += '/%s' % name
+        # Get the font-file via formio.version.asset;
+        # don't search ir.attachment directly, as there are no indexes on formio_asset_formio_version_id
+        assets = request.env["formio.version.asset"].search(
+            [
+                ("version_id", "=", attach.formio_asset_formio_version_id.id),
+            ])
+        font_asset = assets.filtered(lambda a: a.attachment_id.name == name)
+        if not font_asset:
+            msg = f"Font {name} not found"
+            _logger.warning(msg)
+            return request.not_found(msg)
 
         # TODO DeprecationWarning, odoo.http.send_file is deprecated.
         #
@@ -207,7 +214,7 @@ class FormioController(http.Controller):
         # Workaround: (to improve/replace in future?)
         # still using Odoo <= v15 approach by using Werkzeug
         # implementation
-        return send_file(fontfile_path, request.httprequest.environ,)
+        return send_file(BytesIO(font_asset.attachment_id.raw), request.httprequest.environ, download_name=name)
 
     #########
     # Helpers

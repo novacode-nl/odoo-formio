@@ -179,6 +179,7 @@ class VersionGitHubTag(models.Model):
                     # target_file = '%s/%s' % (static_version_dir, fname)
                     # shutil.move(original_file, target_file)
 
+                    logger.debug(f"add asset={fname}")
                     file_ext = os.path.splitext(fname)[1]
 
                     if fname == 'formio.full.min.js.LICENSE.txt':
@@ -202,39 +203,24 @@ class VersionGitHubTag(models.Model):
                             'type': 'license'
                         }
                         assets_vals_list.append(asset_vals)
-                    elif file_ext in ['.css', '.js']:
-                        # attachment
-                        with open(dist_file, 'rb') as f:
-                            attachment_vals = {
-                                'name': fname,
-                                'type': 'binary',
-                                'public': True,
-                                'formio_asset_formio_version_id': version.id,
-                                'datas': base64.b64encode(f.read())
-                            }
-                        attachment = attachment_model.create(attachment_vals)
-                        asset_vals = {
-                            'version_id': version.id,
-                            'attachment_id': attachment.id
+                        continue
+
+                    # general attachment
+                    with open(dist_file, "rb") as f:
+                        attachment_vals = {
+                            "name": fname,
+                            "type": "binary",
+                            "public": True,
+                            "formio_asset_formio_version_id": version.id,
+                            "datas": base64.b64encode(f.read())
                         }
-
-                        if file_ext == '.css':
-                            asset_vals['type'] = 'css'
-
-                            src_fonts_path = '%s/dist/fonts' % src_version_path
-                            css_attach_dir = os.path.dirname(attachment.store_fname)
-                            css_attach_path = IrAttachment._full_path(css_attach_dir)
-                            target_fonts_path = '%s/fonts' % css_attach_path
-
-                            # XXX this leads to troubles if formio.js
-                            # versions ship different font files (version dependent).
-                            # However, the CSS url to resolve the fonts is expected to be
-                            # this precise one.
-                            if os.path.exists(src_fonts_path) and not os.path.exists(target_fonts_path):
-                                shutil.copytree(src_fonts_path, target_fonts_path)
-                        elif file_ext == '.js':
-                            asset_vals['type'] = 'js'
-                        assets_vals_list.append(asset_vals)
+                    attachment = attachment_model.create(attachment_vals)
+                    asset_vals = {
+                        "version_id": version.id,
+                        "attachment_id": attachment.id,
+                        "type": file_ext.split(".")[-1]
+                    }
+                    assets_vals_list.append(asset_vals)
 
             if assets_vals_list:
                 res = asset_model.create(assets_vals_list)
@@ -273,7 +259,7 @@ class VersionGitHubTag(models.Model):
         for tarinfo in members:
             basename = os.path.basename(tarinfo.name)
             dirname = os.path.dirname(tarinfo.name)
-            
+
             dir_1 = os.path.basename(dirname)
             dir_2 = os.path.basename(os.path.dirname(dirname))
 
