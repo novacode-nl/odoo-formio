@@ -15,7 +15,7 @@ class IrAttachment(models.AbstractModel):
     formio_form_id = fields.Many2one(
         'formio.form', string='formio.form', compute='_compute_formio_form_id', store=True, default=False, index=True)
     formio_asset_formio_version_id = fields.Many2one(
-        'formio.version', string='Forms asset (js, css) file',
+        'formio.version', string='formio.js version',
         help='Mostly files from the formio.js project - https://github.com/formio/formio.js')
     formio_ref = fields.Char(
         string="Forms Ref",

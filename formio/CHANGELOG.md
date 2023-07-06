@@ -1,5 +1,13 @@
 # Changelog
 
+## 16.0.5.0
+
+PR [\#243](https://github.com/novacode-nl/odoo-formio/pull/243), with additional improvements.
+
+Improve storing and serving frontend assets determined by the configurable `ir_attachment.location`.\
+This supports particular Odoo instances with other storage mechanisms - eg S3 buckets, Azure files.\
+Additionally, this will work for a multi-node installation, with an instance other than the one that stores the files.
+
 ## 16.0.4.5
 
 Add to Python eval context of `ir.actions.server` code:

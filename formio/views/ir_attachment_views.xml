@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_attachment_form" model="ir.ui.view">
+        <field name="model">ir.attachment</field>
+        <field name="inherit_id" ref="base.view_attachment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='res_name']" position="after">
+                <field name="formio_asset_formio_version_id" readonly="1" attrs="{'invisible': [('formio_asset_formio_version_id', '=', False)]}"/>
+                <field name="formio_ref" readonly="1" attrs="{'invisible': [('formio_ref', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_attachment_tree" model="ir.ui.view">
+        <field name="model">ir.attachment</field>
+        <field name="inherit_id" ref="base.view_attachment_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='res_id']" position="after">
+                <field name="formio_asset_formio_version_id" optional="show"/>
+                <field name="formio_ref" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
