@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.5.1
+
+Ensure record rule(s) modifications are not reverted, so `noupdate="1"`.
+
 ## 16.0.5.0
 
 PR [\#243](https://github.com/novacode-nl/odoo-formio/pull/243), with additional improvements.

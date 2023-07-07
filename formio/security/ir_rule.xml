@@ -3,7 +3,7 @@
 See LICENSE file for full copyright and licensing details. -->
 
 <odoo>
-    <data>
+    <data noupdate="1">
         <record id="formio_form_user_all" model="ir.rule">
             <field name="name">formio.form: User all forms</field>
             <field name="model_id" ref="model_formio_form"/>
