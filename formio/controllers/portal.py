@@ -91,7 +91,7 @@ class FormioCustomerPortal(CustomerPortal):
             return '/my/formio'
 
     ####################
-    # Form - portal list
+    # Page - portal list
     ####################
 
     @http.route(['/my/formio'], type='http', auth="user", website=True)
@@ -105,7 +105,7 @@ class FormioCustomerPortal(CustomerPortal):
         if res_model and res_id:
             domain.append(('res_model', '=', res_model))
             domain.append(('res_id', '=', res_id))
-        
+
         order = 'create_date DESC'
         forms = request.env['formio.form'].search(domain, order=order)
 
@@ -113,9 +113,9 @@ class FormioCustomerPortal(CustomerPortal):
         values['forms'] = forms
         return request.render("formio.portal_my_formio", values)
 
-    ###############################
-    # Form - portal create and uuid
-    ###############################
+    ########################################
+    # Page - portal create, uuid and actions
+    ########################################
 
     @http.route('/my/formio/form/<string:uuid>', type='http', auth='user', website=True)
     def portal_form(self, uuid, **kwargs):
@@ -183,8 +183,41 @@ class FormioCustomerPortal(CustomerPortal):
 
         return request.redirect(redirect_url)
 
+    ######################
+    # Form - portal - uuid
+    ######################
+
+    @http.route('/formio/portal/form/<string:uuid>', type='http', auth='user', website=True)
+    def portal_form_root(self, uuid, **kwargs):
+        form = self._get_form(uuid, 'read')
+        if not form:
+            msg = 'Form UUID %s' % uuid
+            return request.not_found(msg)
+
+        # TODO REMOVE (still needed or obsolete legacy?)
+        # Needed to update language
+        context = request.env.context.copy()
+        context.update({'lang': request.env.user.lang})
+        request.env.context = context
+
+        languages = form.builder_id.languages
+        lang_en = request.env.ref('base.lang_en')
+
+        if lang_en.active and form.builder_id.language_en_enable and 'en_US' not in languages.mapped('code'):
+            languages |= request.env.ref('base.lang_en')
+
+        values = {
+            'form': form,
+            # 'languages' already injected in rendering somehow
+            'form_languages': languages.sorted('name'),
+            'formio_css_assets': form.builder_id.formio_css_assets,
+            'formio_js_assets': form.builder_id.formio_js_assets,
+            'extra_assets': form.builder_id.extra_asset_ids
+        }
+        return request.render('formio.formio_form_embed', values)
+
     ###################
-    # Form - portal new
+    # Page - portal new
     ###################
 
     @http.route('/my/formio/form/new/<string:builder_name>', type='http', auth='user', website=True)
@@ -223,6 +256,10 @@ class FormioCustomerPortal(CustomerPortal):
                 'extra_assets': builder.extra_asset_ids
             }
             return request.render('formio.formio_form_portal_new_embed', values)
+
+    #####################
+    # Form - portal - new
+    #####################
 
     @http.route('/formio/portal/form/new/<string:builder_uuid>/config', type='json', auth='user', website=True)
     def form_new_config(self, builder_uuid, **kwargs):
