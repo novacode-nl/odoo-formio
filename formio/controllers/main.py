@@ -22,35 +22,10 @@ _logger = logging.getLogger(__name__)
 
 class FormioController(http.Controller):
 
-    @http.route(['/web/content/<int:id>/fonts/<string:name>'], type='http', auth="public")
-    def send_fonts_file(self, id, name):
-        """
-        WARNING
-        -------
-        This route (/fonts/) is a rather iffy assumption which could
-        cause troubles.  Of course this could be requested by other
-        parts, but not yet in standard Odoo routes.
+    ##############
+    # Form Builder
+    ##############
 
-        :param int id: The ID of the file (attachment) which requests the fonts file.
-            File(s) requesting this font file, are CSS files (formio.js library).
-        :param str name: The name of the fontfile in request.
-        """
-
-        ir_attach = request.env['ir.attachment'].sudo()
-        attach = ir_attach.browse(id)
-        if not attach.formio_asset_formio_version_id:
-            msg = 'Request expects a Forms (formio.js) fonts file (id: %s, name: %s' % (id, name)
-            _logger.warning(msg)
-            return request.not_found(msg)
-
-        attach_dir = dirname(attach.store_fname)
-        fonts_dir = '{attach_dir}/fonts/'.format(attach_dir=attach_dir)
-        fontfile_path = request.env['ir.attachment']._full_path(fonts_dir)
-        fontfile_path += '/%s' % name
-
-        return http.send_file(fontfile_path)
-
-    # Builder
     @http.route('/formio/builder/<int:builder_id>', type='http', auth='user', website=True)
     def builder_root(self, builder_id, **kwargs):
         if not request.env.user.has_group('formio.group_formio_admin'):
@@ -99,21 +74,20 @@ class FormioController(http.Controller):
     def builder_save(self, builder, **post):
         if not request.env.user.has_group('formio.group_formio_admin'):
             return
-        
-        if not 'builder_id' in post or int(post['builder_id']) != builder.id:
+
+        if 'builder_id' not in post or int(post['builder_id']) != builder.id:
             return
-        
+
         schema = json.dumps(post['schema'])
         builder.write({'schema': schema})
 
     #######################
-    # Form uuid - user auth
+    # Form - backend - uuid
     #######################
 
-    @http.route([
+    @http.route(
         '/formio/form/<string:uuid>',
-        '/formio/portal/form/<string:uuid>'
-    ], type='http', auth='user', website=True)
+        type='http', auth='user', website=True)
     def form_root(self, uuid, **kwargs):
         form = self._get_form(uuid, 'read')
         if not form:
@@ -197,14 +171,14 @@ class FormioController(http.Controller):
         if not form or form.state == FORM_STATE_COMPLETE:
             # TODO raise or set exception (in JSON resonse) ?
             return
-        
+
         vals = {
-            'submission_data': json.dumps(post['data']),
+            'submission_data': json.dumps(post['submission']),
             'submission_user_id': request.env.user.id,
             'submission_date': fields.Datetime.now(),
         }
 
-        if post.get('saveDraft') or (post['data'].get('saveDraft') and not post['data'].get('submit')):
+        if post.get('saveDraft') or (post['submission'].get('saveDraft') and not post['submission'].get('submit')):
             vals['state'] = FORM_STATE_DRAFT
         else:
             vals['state'] = FORM_STATE_COMPLETE
@@ -299,6 +273,42 @@ class FormioController(http.Controller):
             return data
         except Exception as e:
             _logger.error("Exception: %s" % e)
+
+    #######
+    # Fonts
+    #######
+
+    @http.route(['/web/content/<int:id>/fonts/<string:name>'], type='http', auth="public")
+    def send_fonts_file(self, id, name):
+        """
+        WARNING
+        -------
+        This route (/fonts/) is a rather iffy assumption which could
+        cause troubles.  Of course this could be requested by other
+        parts, but not yet in standard Odoo routes.
+
+        :param int id: The ID of the file (attachment) which requests the fonts file.
+            File(s) requesting this font file, are CSS files (formio.js library).
+        :param str name: The name of the fontfile in request.
+        """
+
+        ir_attach = request.env['ir.attachment'].sudo()
+        attach = ir_attach.browse(id)
+        if not attach.formio_asset_formio_version_id:
+            msg = 'Request expects a Forms (formio.js) fonts file (id: %s, name: %s' % (id, name)
+            _logger.warning(msg)
+            return request.not_found(msg)
+
+        attach_dir = dirname(attach.store_fname)
+        fonts_dir = '{attach_dir}/fonts/'.format(attach_dir=attach_dir)
+        fontfile_path = request.env['ir.attachment']._full_path(fonts_dir)
+        fontfile_path += '/%s' % name
+
+        return http.send_file(fontfile_path)
+
+    #########
+    # Helpers
+    #########
 
     def _api_get_data(self, form_uuid):
         form = self._get_form(form_uuid, 'read')
