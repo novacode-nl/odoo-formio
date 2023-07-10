@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.5.2
+
+Fix regression due to `16.0.5.0` regarding formio.js version assets with `ir_attachment.location` default or set to `file`.\
+The (storage) location of the font files was wrong. It should be in the CSS assets directory, for correct (relative) resolving.
+
 ## 16.0.5.1
 
 Ensure record rule(s) modifications are not reverted, so `noupdate="1"`.

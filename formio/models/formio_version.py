@@ -18,7 +18,9 @@ class Version(models.Model):
     description = fields.Text("Description")
     is_dummy = fields.Boolean(string="Is Dummy (default version in demo data)", readonly=True)
     translation_ids = fields.One2many('formio.version.translation', 'formio_version_id', string='Translations')
-    assets = fields.One2many('formio.version.asset', 'version_id', string='Assets (js, css)', domain=[('type', 'in', ['css', 'js'])])
+    assets = fields.One2many(
+        'formio.version.asset', 'version_id', string='Assets (js, css)',
+        domain=[('type', '!=', 'license')])
     css_assets = fields.One2many(
         'formio.version.asset', 'version_id', domain=[('type', '=', 'css')], copy=True,
         string='CSS Assets')

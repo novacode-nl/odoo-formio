@@ -200,7 +200,17 @@ class VersionGitHubTag(models.Model):
                         }
                         assets_vals_list.append(asset_vals)
                         continue
-                    elif attachment_location == 'file' and file_ext not in ['js', 'css']:
+                    else:
+                        attachment_vals = self._prepare_version_asset_attachment_vals(version, fname, dist_file)
+                        attachment = IrAttachment.create(attachment_vals)
+                        asset_vals = {
+                            "version_id": version.id,
+                            "attachment_id": attachment.id,
+                            "type": file_ext
+                        }
+                        assets_vals_list.append(asset_vals)
+                    # fonts if 'file' storage
+                    if attachment_location == 'file' and file_ext == 'css':
                         # copy other (font) files if attachments are stored statically in filestore
                         src_fonts_path = '%s/dist/fonts' % src_version_path
                         css_attach_dir = os.path.dirname(attachment.store_fname)
@@ -212,15 +222,7 @@ class VersionGitHubTag(models.Model):
                         # this precise one.
                         if os.path.exists(src_fonts_path) and not os.path.exists(target_fonts_path):
                             shutil.copytree(src_fonts_path, target_fonts_path)
-                    else:
-                        attachment_vals = self._prepare_version_asset_attachment_vals(version, fname, dist_file)
-                        attachment = IrAttachment.create(attachment_vals)
-                        asset_vals = {
-                            "version_id": version.id,
-                            "attachment_id": attachment.id,
-                            "type": file_ext
-                        }
-                        assets_vals_list.append(asset_vals)
+
 
             if assets_vals_list:
                 res = asset_model.create(assets_vals_list)
