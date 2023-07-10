@@ -189,7 +189,7 @@ export class OdooFormioForm extends Component {
                 if (self.params.hasOwnProperty('hook_api_validation')
                     && !!self.params['hook_api_validation'])
                 {
-                    const data = {'submission': submission.data};
+                    const data = {'data': submission.data};
                     $.jsonRpc.request(self.apiValidationUrl, 'call', data).then(function(errors) {
                         if (!$.isEmptyObject(errors)) {
                             next(errors);
@@ -261,7 +261,7 @@ export class OdooFormioForm extends Component {
             });
 
             form.on('submit', function(submission) {
-                const data = {'submission': submission.data};
+                const data = {'data': submission.data};
                 if (self.formUuid) {
                     data['form_uuid'] = self.formUuid;
                 }
