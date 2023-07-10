@@ -313,7 +313,7 @@ class FormioCustomerPortal(CustomerPortal):
         vals = {
             'builder_id': builder.id,
             'title': builder.title,
-            'submission_data': json.dumps(post['data']),
+            'submission_data': json.dumps(post['submission']),
             'submission_date': fields.Datetime.now(),
             'submission_user_id': request.env.user.id,
             'user_id': request.env.user.id,
