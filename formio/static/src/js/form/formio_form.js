@@ -26,17 +26,20 @@ export class OdooFormioForm extends Component {
         this.locales = {};
         this.params = {}; // extra params from Odoo backend
 
-        this.baseUrl = window.location.protocol + '//' + window.location.host;
-        this.urlParams = new URLSearchParams(window.location.search);
-
         // by initForm
         this.builderUuid = null;
         this.formUuid = null;
+
+        // urls
+        this.baseUrl = window.location.protocol + '//' + window.location.host;
         this.configUrl = null;
         this.submissionUrl = null;
         this.submitUrl = null;
         this.wizardSubmitUrl = null;
         this.apiUrl = null;
+        this.apiValidationUrl = null;
+        this.urlParams = new URLSearchParams(window.location.search);
+
     }
 
     initForm() {
@@ -181,6 +184,24 @@ export class OdooFormioForm extends Component {
                 if (instance.component.type == 'datetime') {
                     self.localizeComponent(instance.component, self.language);
                 }
+            },
+            customValidation: (submission, next) => {
+                if (self.params.hasOwnProperty('hook_api_validation')
+                    && !!self.params['hook_api_validation'])
+                {
+                    const data = {'submission': submission.data};
+                    $.jsonRpc.request(self.apiValidationUrl, 'call', data).then(function(errors) {
+                        if (!$.isEmptyObject(errors)) {
+                            next(errors);
+                        }
+                        else {
+                            next();
+                        }
+                    });
+                }
+                else {
+                    next();
+                }
             }
         };
         Formio.createForm(document.getElementById('formio_form'), self.schema, self.options).then(function(form) {
@@ -240,7 +261,7 @@ export class OdooFormioForm extends Component {
             });
 
             form.on('submit', function(submission) {
-                const data = {'data': submission.data};
+                const data = {'submission': submission.data};
                 if (self.formUuid) {
                     data['form_uuid'] = self.formUuid;
                 }

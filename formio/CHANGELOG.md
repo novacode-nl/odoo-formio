@@ -1,5 +1,12 @@
 # Changelog
 
+## 16.0.6.0
+
+Changes:
+- Implement the formio.js `customValidation` hook, which XHR posts to the API / validation endpoint.
+- Rename form payload from `data` to `submission`, which is more self-explanatory.
+- Some code reorder, cleanup and comments.
+
 ## 16.0.5.2
 
 Fix regression due to `16.0.5.0` regarding formio.js version assets with `ir_attachment.location` default or set to `file`.\

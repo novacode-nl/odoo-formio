@@ -19,9 +19,9 @@ _logger = logging.getLogger(__name__)
 
 class FormioPublicController(http.Controller):
 
-    ###############
-    # Form - public
-    ###############
+    ####################
+    # Form - public uuid
+    ####################
 
     @http.route('/formio/public/form/<string:uuid>', type='http', auth='public', website=True)
     def public_form_root(self, uuid, **kwargs):
