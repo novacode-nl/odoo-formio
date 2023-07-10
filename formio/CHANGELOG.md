@@ -1,5 +1,12 @@
 # Changelog
 
+## 15.7
+
+Changes:
+- Implement the formio.js `customValidation` hook, which XHR posts to the API /validation endpoint.
+- Rename form payload from `data` to `submission`, which is more self-explanatory.
+- Some code reorder, cleanup and comments.
+
 ## 15.6
 
 Add to Python eval context of `ir.actions.server` code:
