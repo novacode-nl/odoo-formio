@@ -24,7 +24,10 @@ _logger = logging.getLogger(__name__)
 
 class FormioController(http.Controller):
 
-    # Builder
+    ##############
+    # Form Builder
+    ##############
+
     @http.route('/formio/builder/<int:builder_id>', type='http', auth='user', website=True)
     def builder_root(self, builder_id, **kwargs):
         if not request.env.user.has_group('formio.group_formio_admin'):
@@ -74,20 +77,17 @@ class FormioController(http.Controller):
         if not request.env.user.has_group('formio.group_formio_admin'):
             return
 
-        if not 'builder_id' in post or int(post['builder_id']) != builder.id:
+        if 'builder_id' not in post or int(post['builder_id']) != builder.id:
             return
 
         schema = json.dumps(post['schema'])
         builder.write({'schema': schema})
 
     #######################
-    # Form uuid - user auth
+    # Form - backend - uuid
     #######################
 
-    @http.route([
-        '/formio/form/<string:uuid>',
-        '/formio/portal/form/<string:uuid>'
-    ], type='http', auth='user', website=True)
+    @http.route('/formio/form/<string:uuid>', type='http', auth='user', website=True)
     def form_root(self, uuid, **kwargs):
         form = self._get_form(uuid, 'read')
         if not form:
@@ -156,12 +156,12 @@ class FormioController(http.Controller):
             # TODO raise or set exception (in JSON resonse) ?
             return
         vals = {
-            'submission_data': json.dumps(post['data']),
+            'submission_data': json.dumps(post['submission']),
             'submission_user_id': request.env.user.id,
             'submission_date': fields.Datetime.now(),
         }
 
-        if post.get('saveDraft') or (post['data'].get('saveDraft') and not post['data'].get('submit')):
+        if post.get('saveDraft') or (post['submission'].get('saveDraft') and not post['submission'].get('submit')):
             vals['state'] = FORM_STATE_DRAFT
         else:
             vals['state'] = FORM_STATE_COMPLETE
@@ -170,6 +170,10 @@ class FormioController(http.Controller):
 
         if vals.get('state') == FORM_STATE_COMPLETE:
             form.after_submit()
+
+    #######
+    # Fonts
+    #######
 
     @http.route(['/web/content/<int:id>/fonts/<string:name>'], type='http', auth="public")
     def send_fonts_file(self, id, name):
