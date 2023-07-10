@@ -89,12 +89,12 @@ class FormioPublicController(http.Controller):
             return
 
         vals = {
-            'submission_data': json.dumps(post['submission']),
+            'submission_data': json.dumps(post['data']),
             'submission_user_id': request.env.user.id,
             'submission_date': fields.Datetime.now(),
         }
 
-        if post.get('saveDraft') or (post['submission'].get('saveDraft') and not post['submission'].get('submit')):
+        if post.get('saveDraft') or (post['data'].get('saveDraft') and not post['data'].get('submit')):
             vals['state'] = FORM_STATE_DRAFT
         else:
             vals['state'] = FORM_STATE_COMPLETE
@@ -170,7 +170,7 @@ class FormioPublicController(http.Controller):
             'title': formio_builder.title,
             'public_create': True,
             'public_share': True,
-            'submission_data': json.dumps(post['submission']),
+            'submission_data': json.dumps(post['data']),
             'submission_date': fields.Datetime.now(),
             'submission_user_id': request.env.user.id
         }
