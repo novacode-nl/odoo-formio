@@ -179,13 +179,12 @@ class Form(models.Model):
         # resource model, id
         vals['res_model_id'] = builder.res_model_id.id
 
-        if not vals.get('res_id'):
+        if not vals.get('res_id') and self._context.get('active_model') != 'formio.builder':
             vals['res_id'] = self._context.get('active_id')
+            vals['initial_res_id'] = vals['res_id']
 
-        vals['initial_res_id'] = vals['res_id']
-
-        if not vals.get('res_name'):
-            vals['res_name'] = builder.res_model_id.name
+            if not vals.get('res_name'):
+                vals['res_name'] = builder.res_model_id.name
 
         # timezone (add if not provided already)
         if not vals.get('submission_timezone'):

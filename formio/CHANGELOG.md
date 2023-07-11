@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.0.16.1
+
+Fix standalone form (`formio.form`) record create, shouldn't set the `res_id`.\
+This also results in a visible button to open the linked resource.
+
 ## 15.0.16.0
 
 Changes:
