@@ -45,7 +45,7 @@ See LICENSE file for full licensing details. -->
             </head>
             <body data-iframe-height="1">
                 <div t-if="builder.show_api_alert" class="alert alert-warning p-2 ml-1 mr-1">
-                    <strong>WARNING: </strong><span>Be careful when updating or removing components, as there are integrated APIs <i class="fa fa-arrow-right"/> <t t-raw="builder.api_alert"/></span>
+                    <strong>WARNING: </strong><span>Be careful when updating or removing components, as there are integrated APIs <i class="fa fa-arrow-right"/> <t t-out="builder.api_alert"/></span>
                 </div>
                 <t t-if="len(builder_languages) > 1">
                     <div class="formio_languages">

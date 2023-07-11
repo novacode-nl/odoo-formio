@@ -105,7 +105,7 @@ See LICENSE file for full copyright and licensing details.
             <div class="label mb-2"><t t-call="formio_report_qweb.component_label"/></div>
             <p>
                 <t t-if="component.value">
-                    <t t-raw="component.value.replace('\n', '&lt;br/&gt;')"/>
+                    <t t-out="o.markupsafe(component.value.replace('\n', '&lt;br/&gt;'))"/>
                 </t>
             </p>
         </div>
@@ -296,13 +296,13 @@ See LICENSE file for full copyright and licensing details.
 
     <template id="htmlelement_component">
         <div class="formio_htmlelement_component formio_component mw-100 mb-3">
-            <t t-out="component.html"/>
+            <t t-out="o.markupsafe(component.html)"/>
         </div>
     </template>
 
     <template id="content_component">
         <div class="formio_content_component formio_component mw-100 mb-3 ">
-            <p><t t-raw="component.raw['html']"/></p>
+            <p><t t-out="o.markupsafe(component.raw['html'])"/></p>
         </div>
     </template>
 
