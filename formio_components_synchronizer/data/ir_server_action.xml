@@ -4,7 +4,7 @@ See LICENSE file for full licensing details. -->
 
 <odoo>
     <record id="action_synchronize_formio_components" model="ir.actions.server">
-        <field name="name">Sync Components</field>
+        <field name="name">Synchronize Components</field>
         <field name="type">ir.actions.server</field>
         <field name="state">code</field>
         <field name="model_id" ref="model_formio_builder"/>
