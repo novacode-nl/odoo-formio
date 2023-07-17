@@ -276,6 +276,7 @@ See LICENSE file for full licensing details. -->
                             </group>
                         </page>
                         <page string="Components API" name="formio_components_api">
+                            <group name="main"/>
                             <group string="Partner" name="partner" colspan="2">
                                 <div class="text-muted mb-2" colspan="2">
                                     <i class="fa fa-info-circle" title="info"/> To create or link (existing) Partner with a Form submission, specify the fields (Email, Name) from the Components API / Property Names.<br/>

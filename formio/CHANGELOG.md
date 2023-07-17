@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.0.16.2
+
+In Form Builder form-view, add group "main" in top of the notebook/page "formio_components_api".
+
 ## 15.0.16.1
 
 Fix standalone form (`formio.form`) record create, shouldn't set the `res_id`.\
