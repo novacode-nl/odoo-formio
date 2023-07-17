@@ -8,19 +8,21 @@
         <field name="model">formio.builder</field>
         <field name="inherit_id" ref="formio.view_formio_builder_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[@name='button_box']/button[@name='action_view_formio']" position="before">
-                <button name="%(action_formio_component)d" type="action" string="Components"
-                        context="{'default_builder_id': id, 'search_default_builder_id': id}"
+            <xpath expr="//div[@name='button_box']/button[@name='action_view_forms']" position="before">
+                <!-- TODO stat_info count -->
+                <button name="action_view_components" type="object" string="Components"
                         groups="formio.group_formio_admin" icon="fa-bars"/>
             </xpath>
-            <xpath expr="//page[@name='formio_components_api']/group[@name='component_value_python_code']" position="before">
-                <group string="Synchronize Components" name="synchronize_components" colspan="2">
-                <div class="mb-2 text-muted" colspan="2">
+
+            <xpath expr="//page[@name='formio_components_api']/group[@name='main']" position="inside">
+                <group>
+                    <field name="component_sync_active" widget="boolean_toggle"/>
+                </group>
+                <group>
+                    <div class="mb-2 text-muted" colspan="2">
                         <i class="fa fa-info-circle" title="info"/>
-                        By enabling the synchronization all components created in the Form Builder will be synchronized with the database.<br/>
-                        This allows for example to select Form Components in Many2one fields.
+                        By enabling "Synchronize Components" all components created/updated/deleted in the Form Builder will be automatically synchronized as <code>formio.component</code> records.
                     </div>
-                    <field name="component_sync_active"/>
                 </group>
             </xpath>
         </field>

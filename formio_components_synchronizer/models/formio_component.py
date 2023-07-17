@@ -1,26 +1,48 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from odoo import api, fields, models
+from odoo import fields, models
+
+import logging
+_logger = logging.getLogger(__name__)
 
 
-class FormioComponent(models.Model):
+class FormComponent(models.Model):
     _name = 'formio.component'
-    _rec_name = 'label'
-    _description = 'Formio Component'
+    _rec_name = 'path_label'
+    _description = 'Form Component'
+    _order = 'builder_name asc, builder_version asc, sequence asc'
 
-    label = fields.Char(
-        string='Label'
+    builder_id = fields.Many2one(
+        'formio.builder',
+        string='Form Builder',
+        required=True,
+        ondelete='cascade'
     )
-    component_id = fields.Char(
-        string='Component ID'
+    builder_name = fields.Char(
+        related='builder_id.name',
+        string='Form Builder Name',
+        store=True
     )
-    key = fields.Char(
-        string='Key'
+    builder_title = fields.Char(
+        related='builder_id.title',
+        string='Form Builder Title',
+        store=True
     )
-    type = fields.Char(
-        string='Type'
+    builder_version = fields.Integer(
+        related='builder_id.version',
+        string='Form Builder Version',
+        store=True
     )
+    sequence = fields.Integer(string='Sequence')
+    label = fields.Char(string='Label', required=True)
+    key = fields.Char(string='Key', required=True)
+    path_key = fields.Char(string='Path Keys', required=True, index=True)
+    path_label = fields.Char(string='Path Labels', required=True, index=True)
+    input_path_key = fields.Char(string='Input Path Keys', index=True)
+    input_path_label = fields.Char(string='Input Path Labels', index=True)
+    type = fields.Char(string='Type', required=True)
+    input = fields.Boolean(string='Input')
     parent_id = fields.Many2one(
         'formio.component',
         string='Parent Component',
@@ -31,24 +53,6 @@ class FormioComponent(models.Model):
         'parent_id',
         string='Child Components'
     )
-    builder_id = fields.Many2one(
-        'formio.builder',
-        string='Form Builder',
-        required=True,
-        ondelete='cascade'
-    )
 
-    @api.depends('label', 'key', 'parent_id')
-    def name_get(self):
-        res = []
-        for r in self:
-            if r.parent_id:
-                label = '{parent}.{key} ({label})'.format(
-                    parent=r.parent_id.key, key=r.key, label=r.label
-                )
-            else:
-                label = '{key} ({label})'.format(
-                    key=r.key, label=r.label
-                )
-            res.append((r.id, label))
-        return res
+    def builder_path_key_list2str(self, path_key_list):
+        return '.'.join(path_key_list)

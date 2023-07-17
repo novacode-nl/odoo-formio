@@ -4,7 +4,7 @@
 {
     'name': 'Forms | Components Synchronizer',
     'summary': 'Saves Form Components as database records.',
-    'version': '0.2',
+    'version': '15.0.1.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -19,8 +19,8 @@
         'views/formio_builder_views.xml',
         'views/formio_menu.xml',
     ],
-    'application': False,
-    'installable': False,
+    'application': True,
+    'installable': True,
     'images': [
         'static/description/banner.gif',
     ],
