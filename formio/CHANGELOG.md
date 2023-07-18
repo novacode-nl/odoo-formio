@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.0.16.3
+
+Improvement for translations:
+- Add translate function in `formio.builder` model
+- Set language (IETF code) in payload of `customValidation` hook.
+
 ## 15.0.16.2
 
 In Form Builder form-view, add group "main" in top of the notebook/page "formio_components_api".

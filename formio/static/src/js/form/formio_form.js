@@ -189,7 +189,7 @@ export class OdooFormioForm extends Component {
                 if (self.params.hasOwnProperty('hook_api_validation')
                     && !!self.params['hook_api_validation'])
                 {
-                    const data = {'data': submission.data};
+                    const data = {'data': submission.data, 'lang_ietf_code': self.language};
                     $.jsonRpc.request(self.apiValidationUrl, 'call', data).then(function(errors) {
                         if (!$.isEmptyObject(errors)) {
                             next(errors);

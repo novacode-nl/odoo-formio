@@ -631,6 +631,15 @@ class Builder(models.Model):
                     i18n[code][trans.source] = trans.value
         return i18n
 
+    def _formio_translate(self, source, lang_code=None):
+        self.ensure_one()
+        if not lang_code:
+            lang_code = self.env.lang
+        trans = self.translations.filtered(
+            lambda t: t.lang_id.code == lang_code and t.source == source
+        )
+        return trans[0].value if trans else source
+
     def _etl_odoo_config(self, params):
         return {}
 
