@@ -189,7 +189,7 @@ See LICENSE file for full licensing details. -->
                                 </group>
                             </group>
                         </page>
-                        <page string="Public" name="public_settings">
+                        <page string="Public / Website" name="public_settings">
                             <div class="text-muted mb-4" colspan="2">
                                 <i class="fa fa-info-circle" title="info"/> Configuration of Website features shall also be done here
                             </div>
@@ -208,7 +208,7 @@ See LICENSE file for full licensing details. -->
                                         <field name="public_access_interval_type" class="oe_inline ml-2" groups="formio.group_formio_admin" attrs="{'required': [('public', '=', True)]}"/>
                                     </div>
                                     <div class="text-muted" colspan="2" attrs="{'invisible': [('public_access_rule_type', '!=', 'time_interval')]}">
-                                        <i class="fa fa-info-circle" title="info"/><strong> Expire After:</strong> Applicable on the Form it's (datietime field) <strong>Public Access From</strong>.
+                                        <i class="fa fa-info-circle" title="info"/><strong> Expire After:</strong> Applicable on the Form it's (datetime field) <strong>Public Access From</strong>.
                                     </div>
                                 </group>
                                 <group name="public_redirect_after_save_draft" string="Redirect After Save Draft">

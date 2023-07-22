@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.6.4
+
+Updated Dutch translations (nl.po file).
+
 ## 16.0.6.3
 
 Improvement for translations:

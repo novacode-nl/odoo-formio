@@ -21,7 +21,7 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                                     <field name="formio_default_version_id"/>
                                 </div>
                                 <div class="text-muted">
-                                    When adding a new Form Builder, use this formio client/library version.
+                                    When adding a new Form Builder, use this formio.js client/library version.
                                 </div>
                             </div>
                         </div>
@@ -31,7 +31,7 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                                 <strong>Check, register and install the latest 30 available Versions</strong>
                                 <div class="text-muted">
                                     A scheduled action (daily cron) is available and already active.<br/>
-                                    Source: <a href="https://github.com/formio/formio.js/releases" target="_blank">https://github.com/formio/formio.js/releases</a>
+                                    Releases: <a href="https://github.com/formio/formio.js/tags" target="_blank">https://github.com/formio/formio.js/tags</a>
                                 </div>
                                 <div class="mt-4">
                                     <label for="formio_github_personal_access_token" string="GitHub personal access token"/>
@@ -54,7 +54,7 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                     <div class="row mt16 o_settings_container" name="formio_assets">
                         <div class="col-12 col-md-12 o_setting_box">
                             <div class="text-muted mb32">
-                                Add additional CSS files to be included for every new installed formio client/library.
+                                Add additional CSS files to be included for every new installed formio.js client/library.
                             </div>
 
                                 <div class="row ml16">
@@ -72,7 +72,7 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                     <div class="row mt16 o_settings_container" name="formio_components">
                         <div class="col-xs-12 col-md-6 o_setting_box">
                             <div class="text-muted">
-                                Custom and 3rd-party Component settings.
+                                Other Component settings.
                             </div>
                             <div class="o_setting_left_pane"/>
                             <div class="o_setting_right_pane">

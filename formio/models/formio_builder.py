@@ -97,12 +97,12 @@ class Builder(models.Model):
     backend_use_draft = fields.Boolean(
         string='Use Draft in Backend',
         default=False,
-        help='Allows to use this Form Builder in state DRAFT, when adding/choosing a new Form in the backend.'
+        help='Allows to use this Form Builder in state Draft, when adding/choosing a new Form in the backend.'
     )
     backend_use_obsolete = fields.Boolean(
         string='Use Obsolete in Backend',
         default=False,
-        help='Allows to use this Form Builder in state OBSOLETE, when adding/choosing a new Form in the backend.'
+        help='Allows to use this Form Builder in state Obsolete, when adding/choosing a new Form in the backend.'
     )
     portal = fields.Boolean("Portal", tracking=True, help="Form is accessible by assigned portal user")
     portal_url = fields.Char(string='Portal URL', compute='_compute_portal_urls')
@@ -158,7 +158,7 @@ class Builder(models.Model):
         "iFrame Resizer bodyMargin", tracking=True,
         help="""\
         Override the default body margin style in the iFrame.
-        A string can be any valid value for the CSS margin attribute.
+        A string can be any valid value for the CSS margin property.
         A number is converted into px.
         Example: 0px 0px 260px 0px
         """
