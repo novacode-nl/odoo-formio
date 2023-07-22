@@ -40,7 +40,8 @@ odoo.define('website_formio_editor', function (require) {
                     var form_iframe = self.$target.find('.formio_form_iframe_container iframe'),
                         iframe_src = '/formio/public/form/new/' + result.val;
                     form_iframe.attr("src", iframe_src);
-                    iFrameResize({}, '.formio_form_embed');
+                    // form_iframe.resize();
+                    // iFrameResize({heightCalculationMethod: 'taggedElement'}, '.formio_form_embed');
                 });
             });
         },

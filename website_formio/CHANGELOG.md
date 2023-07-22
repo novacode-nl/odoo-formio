@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.2.0
+
+Reset padding, borders and background-color on the form container (class: `formio_form_iframe_container`).
+This makes the form (snippet DOM) usable for styling  by using the `formio_theming` module.
+
 ## 16.0.1.2
 
 Solve Form height resizing issues, by applying the iFrame Resizer `bodyMargin` option.

@@ -4,7 +4,7 @@
 {
     'name': 'Forms | Website Integration',
     'summary': "'Drag & drop' Form Block, other website integration",
-    'version': '16.0.1.3',
+    'version': '16.0.2.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
@@ -30,7 +30,8 @@
             'website_formio/static/src/js/website_formio_editor.js'
         ],
         'web.assets_frontend': [
-            'formio/static/src/js/formio_form_container.js'
+            'formio/static/src/js/formio_form_container.js',
+            'formio/static/lib/iframe-resizer/iframeResizer.min.js',
         ],
         'web.assets_common': [
             'formio/static/lib/iframe-resizer/iframeResizer.min.js',
