@@ -31,7 +31,6 @@
         ],
         'web.assets_frontend': [
             'formio/static/src/js/formio_form_container.js',
-            'formio/static/lib/iframe-resizer/iframeResizer.min.js',
         ],
         'web.assets_common': [
             'formio/static/lib/iframe-resizer/iframeResizer.min.js',
