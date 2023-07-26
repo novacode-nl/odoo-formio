@@ -8,9 +8,7 @@
 }
 
 .formio_form_iframe_container {
-    padding: 16px;
-    border: 1px solid #dee2e6;
-    background-color: #fff !important;
+    
     background:url('/web/static/lib/select2/select2-spinner.gif') center center no-repeat;
 }
 
