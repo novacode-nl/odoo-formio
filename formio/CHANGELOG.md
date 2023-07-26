@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.6.5
+
+Security fix / meaurement:\
+Deny update of `submission_data` (field) upon form update, if the form has state 'Completed' or 'Canceled'.
+
 ## 16.0.6.4
 
 Updated Dutch translations (nl.po file).
