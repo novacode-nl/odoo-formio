@@ -3,8 +3,8 @@
 
 {
     'name': 'Forms',
-    'summary': 'Form Builder & integration of professional and versatile Forms to collect any information you need for your business.',
-    'version': '12.2',
+    'summary': 'Form Builder for backend, portal and website forms - to collect any information you need for your business.',
+    'version': '14.0.12.2',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
