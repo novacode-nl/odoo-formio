@@ -129,7 +129,7 @@ class FormioCustomerPortal(CustomerPortal):
 
     @http.route(['/my/formio/form/create/<string:name>'], type='http', auth="user", methods=['GET'], website=True)
     def portal_create_form(self, name):
-        builder = request.env['formio.builder'].search([('name', '=', name), ('portal', '=', True)], limit=1)
+        builder = request.env['formio.builder'].search([('name', '=', name), ('portal', '=', True),('state', '=', BUILDER_STATE_CURRENT)], limit=1)
         if not builder:
             redirect_url = self._redirect_url()
             # TODO website page with message?
