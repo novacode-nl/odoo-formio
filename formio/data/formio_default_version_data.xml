@@ -7,7 +7,7 @@
 
     <record id="config_param_formio_default_version" model="ir.config_parameter">
         <field name="key">formio.default_version</field>
-        <field name="value">4.14.14</field>
+        <field name="value">4.16.0</field>
     </record>
 
     <!-- formio.js v4.x.x -->
