@@ -5,6 +5,12 @@
     clear: both;
 }
 
+#formio_form_loading {
+    background: url('/web/static/lib/select2/select2-spinner.gif') center center no-repeat;
+    height: 16px;
+    margin-top: 5%;
+}
+
 .formio_form_dock {
     margin-bottom: .5rem;
 }

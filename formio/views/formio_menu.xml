@@ -18,7 +18,7 @@ See LICENSE file for full licensing details. -->
         action="formio.action_formio_builder"/>
     <menuitem
         id="menu_formio_form"
-        name="Forms"
+        name="Form Submissions"
         parent="formio.menu_formio_root"
         sequence="70"
         action="formio.action_formio_form"/>

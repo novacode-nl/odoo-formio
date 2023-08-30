@@ -4,10 +4,6 @@
 /*     width: 80% !important; */
 /* } */
 
-.formio_form_iframe_container {
-    background:url('/web/static/lib/select2/select2-spinner.gif') center center no-repeat;
-}
-
 .formio_form_iframe_container iframe{
     width: 1px;
     min-width: 100%;

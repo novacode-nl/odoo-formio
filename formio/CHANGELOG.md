@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.0.16.5
+
+Improvements:
+- Menu renaming: 'Forms' to 'Form Submissions'
+- Put the form (loading) spinner in dedicated `<div/>` which hides when the form has been rendered.
+
 ## 15.0.16.4
 
 Security fix / meaurement:\

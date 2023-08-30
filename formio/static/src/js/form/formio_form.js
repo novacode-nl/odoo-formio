@@ -205,7 +205,10 @@ export class OdooFormioForm extends Component {
             }
         };
         Formio.createForm(document.getElementById('formio_form'), self.schema, self.options).then(function(form) {
+            let loading = document.getElementById('formio_form_loading');
             let buttons = document.querySelectorAll('.formio_languages button');
+
+            loading.style.display = 'none';
             buttons.forEach(function(btn) {
                 if (self.language === btn.lang) {
                     btn.classList.add('language_button_active');
