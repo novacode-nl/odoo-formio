@@ -7,7 +7,7 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.form.tree</field>
         <field name="model">formio.form</field>
         <field name="arch" type="xml">
-            <tree string="Forms"
+            <tree string="Form Submissions"
                   decoration-info="state in ('DRAFT')"
                   decoration-success="state in ('COMPLETE')"
                   decoration-muted="state in ('CANCEL')">
@@ -243,7 +243,7 @@ See LICENSE file for full licensing details. -->
         <field name="name">formio.form.search</field>
         <field name="model">formio.form</field>
         <field name="arch" type="xml">
-            <search string="Forms">
+            <search string="Form Submissions">
                 <field name="id"/>
                 <field name="title"/>
                 <field name="builder_id"/>
@@ -285,7 +285,7 @@ See LICENSE file for full licensing details. -->
     
     <!-- actions -->
     <record id="action_formio_form" model="ir.actions.act_window">
-        <field name="name">Forms</field>
+        <field name="name">Form Submissions</field>
         <field name="res_model">formio.form</field>
         <field name="view_mode">tree,kanban,form,formio_form</field>
     </record>
