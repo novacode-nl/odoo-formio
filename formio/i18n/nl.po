@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-22 09:40+0000\n"
-"PO-Revision-Date: 2023-07-22 11:42+0200\n"
+"POT-Creation-Date: 2023-08-31 12:43+0000\n"
+"PO-Revision-Date: 2023-08-31 14:46+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -71,7 +71,6 @@ msgstr ""
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__iframe_resizer_body_margin
 #: model:ir.model.fields,help:formio.field_formio_form__iframe_resizer_body_margin
-#, fuzzy
 msgid ""
 "        Override the default body margin style in the iFrame.\n"
 "        A string can be any valid value for the CSS margin property.\n"
@@ -370,13 +369,12 @@ msgstr ""
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-#, fuzzy
 msgid ""
 "<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Expire After:</"
 "strong> Applicable on the Form it's (datetime field) <strong>Public Access "
 "From</strong>."
 msgstr ""
-"<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Verlopen na:</"
+"<i class=\"fa fa-info-circle\" title=\"info\"/><strong> Verloopt na:</"
 "strong> Van toepassing op het formulier (datetime veld) <strong>Openbare "
 "toegang vanaf</strong>."
 
@@ -596,7 +594,6 @@ msgstr "Query parameters toevoegen aan indienings (submission) URL van"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-#, fuzzy
 msgid ""
 "Add additional CSS files to be included for every new installed formio.js "
 "client/library."
@@ -994,11 +991,6 @@ msgid "Current"
 msgstr "Actueel"
 
 #. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
-msgid "Other Component settings."
-msgstr "Overige component instellingen"
-
-#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__submission_data
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
 msgid "Data"
@@ -1258,6 +1250,14 @@ msgid "Form Resource Model"
 msgstr ""
 
 #. module: formio
+#: model:ir.actions.act_window,name:formio.action_formio_form
+#: model:ir.ui.menu,name:formio.menu_formio_form
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_tree
+msgid "Form Submissions"
+msgstr "Forms Inzendingen"
+
+#. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__portal
 #: model:ir.model.fields,help:formio.field_formio_form__portal
 msgid "Form is accessible by assigned portal user"
@@ -1288,17 +1288,13 @@ msgid "Formio Versions"
 msgstr ""
 
 #. module: formio
-#: model:ir.actions.act_window,name:formio.action_formio_form
 #: model:ir.model.fields,field_description:formio.field_formio_builder__forms
-#: model:ir.ui.menu,name:formio.menu_formio_form
 #: model:ir.ui.menu,name:formio.menu_formio_root
 #: model_terms:ir.ui.view,arch_db:formio.portal_layout
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_home
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_search
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_tree
 msgid "Forms"
 msgstr "Formulieren"
 
@@ -1308,6 +1304,7 @@ msgid "Forms Count"
 msgstr "Formulieren aantal"
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_base_automation__formio_ref
 #: model:ir.model.fields,field_description:formio.field_formio_extra_asset__attachment_formio_ref
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__attachment_formio_ref
 #: model:ir.model.fields,field_description:formio.field_ir_actions_server__formio_ref
@@ -1455,6 +1452,12 @@ msgstr "Identificeert een serveractie met gerelateerde Form Builder."
 #: model:ir.model.fields,help:formio.field_ir_attachment__formio_ref
 msgid "Identifies an attachment with a related Forms/Builder record."
 msgstr "Identificeert een bijlage met een gerelateerd Forms Builder."
+
+#. module: formio
+#: model:ir.model.fields,help:formio.field_base_automation__formio_ref
+msgid "Identifies an automated action with related form builder."
+msgstr ""
+"Identificeert een geautomatiseerde actie met gerelateerde Form Builder."
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__name
@@ -1779,6 +1782,14 @@ msgid "Name is invalid. Use ASCII letters, digits, \"-\" or \"_\"."
 msgstr "Naam is ongeldig. Gebruik ASCII letters, cijfers, - of _"
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_calendar_event_id
+#: model:ir.model.fields,field_description:formio.field_formio_form__activity_calendar_event_id
+#: model:ir.model.fields,field_description:formio.field_formio_version__activity_calendar_event_id
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__activity_date_deadline
 #: model:ir.model.fields,field_description:formio.field_formio_form__activity_date_deadline
 #: model:ir.model.fields,field_description:formio.field_formio_version__activity_date_deadline
@@ -1846,7 +1857,7 @@ msgstr "Aantal fouten"
 #: model:ir.model.fields,help:formio.field_formio_form__message_needaction_counter
 #: model:ir.model.fields,help:formio.field_formio_version__message_needaction_counter
 #: model:ir.model.fields,help:formio.field_formio_version_github_tag__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr ""
 
 #. module: formio
@@ -1907,6 +1918,11 @@ msgstr "Originele door gebruiker toegevoegde vertalingen"
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "Other"
 msgstr "Andere"
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
+msgid "Other Component settings."
+msgstr "Overige component instellingen"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__parent_id
@@ -3134,7 +3150,3 @@ msgstr ""
 #, python-format
 msgid "{title} (state: {state}, version: {version})"
 msgstr "{title} [status: {state}, versie: {version}]"
-
-#~ msgid "Identifies an automated action with related form builder."
-#~ msgstr ""
-#~ "Identificeert een geautomatiseerde actie met gerelateerde Form Builder."
