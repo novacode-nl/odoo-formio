@@ -49,7 +49,10 @@ class App extends Component {
         }
 
         let builder = new Formio.FormBuilder(document.getElementById('formio_builder'), self.schema, self.options);
+        let loading = document.getElementById('formio_builder_loading');
         let buttons = document.querySelectorAll('.formio_languages button');
+
+        loading.style.display = 'none';
         buttons.forEach(function(btn) {
             if (self.options.language === btn.lang) {
                 btn.classList.add('language_button_active');

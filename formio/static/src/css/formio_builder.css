@@ -45,10 +45,6 @@
     border: 1px solid #c0c0c0;
 }
 
-.formio_builder_iframe_container {
-    background:url('/web/static/lib/select2/select2-spinner.gif') center center no-repeat;
-}
-
 .formio_builder_iframe_container .row {
     margin: 0;
 }

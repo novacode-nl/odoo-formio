@@ -1,5 +1,20 @@
 # Changelog
 
+## 15.0.6.7
+
+Fix:
+Form loading on portal and public/website.\
+Due to incomplete implementation of the new (loading) spinner implementation in v16.0.6.6.
+
+Improvement:
+Put the form builder (loading) spinner in dedicated `<div/>` which hides when the form builder has been rendered.
+
+## 15.0.6.6
+
+Improvements:
+- Menu renaming: 'Forms' to 'Form Submissions'
+- Put the form (loading) spinner in dedicated `<div/>` which hides when the form has been rendered.
+
 ## 15.0.16.5
 
 Improvements:

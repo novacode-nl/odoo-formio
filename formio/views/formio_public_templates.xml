@@ -146,8 +146,10 @@ See LICENSE file for full licensing details. -->
                     </div>
                 </t>
 
-                <!-- Form shall be mounted here -->
-                <div id="formio_form_app"/>
+                <!-- form shall be mounted here -->
+                <div id="formio_form_app">
+                    <div id="formio_form_loading"></div>
+                </div>
 
                 <t t-if="formio_builder_uuid">
                     <input type="hidden" id="formio_builder_uuid" name="formio_builder_uuid" t-att-value="formio_builder_uuid"/>

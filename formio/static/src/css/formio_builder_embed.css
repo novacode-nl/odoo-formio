@@ -8,6 +8,12 @@ body {
     padding-right: 4px;
 }
 
+#formio_builder_loading {
+    background: url('/web/static/lib/select2/select2-spinner.gif') center center no-repeat;
+    height: 16px;
+    margin-top: 5%;
+}
+
 .formio_languages {
     clear: both;
     margin-top: 10px;
