@@ -24,7 +24,7 @@ See LICENSE file for full licensing details. -->
                     string="Open Form"
                     name="action_view_formio"
                     type="object"
-                    class="btn-sm btn-secondary"
+                    class="btn-sm btn-primary"
                     icon="fa-arrow-right"/>
                 <field name="portal_share" optional="show"/>
                 <field name="public_share" optional="show"/>
