@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.0.6.8
+
+Fix:
+Still one Form loading regression (bug) in template `formio_form_public_embed`.\
+Due to incomplete implementation of the new (loading) spinner implementation in v16.0.6.6.
+
 ## 15.0.6.7
 
 Fix:

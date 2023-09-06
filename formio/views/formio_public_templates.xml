@@ -81,8 +81,11 @@ See LICENSE file for full licensing details. -->
                         </t>
                     </div>
                 </t>
-                <!-- Form shall be mounted here -->
-                <div id="formio_form_app"/>
+
+                <!-- form shall be mounted here -->
+                <div id="formio_form_app">
+                    <div id="formio_form_loading"></div>
+                </div>
 
                 <div t-if="form.show_uuid" class="float-right">
                     <small class="text-muted">UUID: <span t-esc="form.uuid"/></small>
