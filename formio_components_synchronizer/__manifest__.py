@@ -4,7 +4,7 @@
 {
     'name': 'Forms | Components Synchronizer',
     'summary': 'Saves Form Components as database records.',
-    'version': '16.0.2.0',
+    'version': '16.0.2.1',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',
