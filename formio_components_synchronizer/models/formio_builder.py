@@ -1,6 +1,7 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
+import json
 import logging
 
 from odoo import fields, models, _
@@ -120,6 +121,8 @@ class FormioBuilder(models.Model):
                 msg = _("No component found with (generated) path %s in the Form Builder.") % path_key
                 raise ValidationError(msg)
             self.env['formio.component'].sudo().create({
+                'builder_id': self.id,
+                'sequence': sequence,
                 'label': comp_obj.label,
                 'key': comp_obj.key,
                 'path_key': path_key,
@@ -130,8 +133,17 @@ class FormioBuilder(models.Model):
                 'input_path_label': ' // '.join(comp_obj.builder_input_path_label),
                 'type': comp_obj.type,
                 'input': comp_obj.input and comp_obj.is_form_component,
-                'builder_id': self.id,
-                'sequence': sequence
+                'hidden': comp_obj.hidden,
+                'disabled': comp_obj.disabled,
+                'table_view': comp_obj.tableView,
+                'clear_on_hide': comp_obj.clearOnHide,
+                'required': comp_obj.required,
+                'validate': json.dumps(comp_obj.validate, indent=4),
+                'properties': json.dumps(comp_obj.properties, indent=4),
+                'conditional': comp_obj.conditional,
+                'custom_conditional': json.dumps(comp_obj.customConditional, indent=4),
+                'templates': json.dumps(comp_obj.templates, indent=4),
+                'logic': json.dumps(comp_obj.logic, indent=4),
             })
 
     def _update_components(self):
@@ -152,12 +164,10 @@ class FormioBuilder(models.Model):
             record_sudo.sequence = sequence
             if not record or record.path_key != path_key:
                 continue
-            # component label, key
-            if record_sudo.label != comp_obj.label:
-                record_sudo.label = comp_obj.label
-            if record_sudo.key != comp_obj.key:
-                record_sudo.key = comp_obj.key
-            # component path
+            # update the component
+            record_sudo._update_component(comp_obj)
+            # update component parent (by path or data grids)
+            # TODO move into formio.component _update_component method (above) ?
             if comp_obj.parent:
                 if comp_obj.parent.builder_path_key:
                     parent_path_key = Component.builder_path_key_list2str(

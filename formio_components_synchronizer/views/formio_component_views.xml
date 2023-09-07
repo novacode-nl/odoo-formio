@@ -19,8 +19,19 @@ See LICENSE file for full licensing details. -->
                 <field name="input_path_key" optional="hide"/>
                 <field name="label" optional="hide"/>
                 <field name="key" optional="hide"/>
-                <field name="type"/>
-                <field name="input"/>
+                <field name="type" optional="show"/>
+                <field name="input" optional="show"/>
+                <field name="hidden" optional="show"/>
+                <field name="disabled" optional="show"/>
+                <field name="table_view" optional="hide"/>
+                <field name="required" optional="show"/>
+                <field name="clear_on_hide" optional="hide"/>
+                <field name="validate" optional="hide"/>
+                <field name="properties" optional="hide"/>
+                <field name="conditional" optional="show"/>
+                <field name="custom_conditional" optional="show"/>
+                <field name="templates" optional="hide"/>
+                <field name="logic" optional="show"/>
             </tree>
         </field>
     </record>
@@ -37,8 +48,19 @@ See LICENSE file for full licensing details. -->
                 <field name="path_key" optional="show"/>
                 <field name="input_path_label" optional="hide"/>
                 <field name="input_path_key" optional="hide"/>
-                <field name="type"/>
-                <field name="input"/>
+                <field name="type" optional="show"/>
+                <field name="input" optional="show"/>
+                <field name="hidden" optional="show"/>
+                <field name="disabled" optional="show"/>
+                <field name="table_view" optional="hide"/>
+                <field name="required" optional="show"/>
+                <field name="clear_on_hide" optional="hide"/>
+                <field name="validate" optional="hide"/>
+                <field name="properties" optional="hide"/>
+                <field name="conditional" optional="hide"/>
+                <field name="custom_conditional" optional="hide"/>
+                <field name="templates" optional="hide"/>
+                <field name="logic" optional="hide"/>
             </tree>
         </field>
     </record>
@@ -57,6 +79,15 @@ See LICENSE file for full licensing details. -->
                         <field name="key"/>
                         <field name="type"/>
                         <field name="input"/>
+                        <field name="hidden"/>
+                        <field name="required"/>
+                        <field name="clear_on_hide"/>
+                        <field name="validate"/>
+                        <field name="properties"/>
+                        <field name="conditional"/>
+                        <field name="custom_conditional"/>
+                        <field name="templates"/>
+                        <field name="logic"/>
                     </group>
                 </sheet>
             </form>
@@ -69,15 +100,87 @@ See LICENSE file for full licensing details. -->
         <field name="arch" type="xml">
             <search string="Components">
                 <field name="builder_id"/>
+                <separator/>
                 <field name="path_label"/>
                 <field name="path_key"/>
                 <field name="input_path_label"/>
                 <field name="input_path_key"/>
+                <separator/>
                 <field name="label"/>
                 <field name="key"/>
                 <field name="type"/>
                 <filter name="input" string="Input Components" domain="[('input', '=', True)]"/>
-                <filter name="input" string="Layout Components" domain="[('input', '=', False)]"/>                
+                <filter name="layout" string="Layout Components" domain="[('input', '=', False)]"/>
+                <separator/>
+                <separator/>
+                <filter name="hidden" string="Hidden" domain="[('hidden', '=', True)]"/>
+                <filter name="not_hidden" string="Not Hidden" domain="[('hidden', '=', False)]"/>
+                <separator/>
+                <filter name="disabled" string="Disabled" domain="[('disabled', '=', True)]"/>
+                <filter name="not_disabled" string="Not Disabled" domain="[('disabled', '=', False)]"/>
+                <separator/>
+                <filter name="clear_on_hide" string="Clear Value When Hidden" domain="[('clear_on_hide', '=', True)]"/>
+                <filter name="not_clear_on_hide" string="Not Clear Value When Hidden" domain="[('clear_on_hide', '=', False)]"/>
+                <separator/>
+                <filter name="table_view" string="Table View" domain="[('table_view', '=', True)]"/>
+                <filter name="not_table_view" string="Not Table View" domain="[('table_view', '=', False)]"/>
+                <separator/>
+                <filter name="required" string="Required" domain="[('required', '=', True)]"/>
+                <filter name="not_required" string="Not Required" domain="[('required', '=', False)]"/>
+                <separator/>
+                <filter name="with_templates" string="Templates" domain="[('templates', '!=', False)]"/>
+                <separator/>
+                <filter name="logic" string="Logic" domain="[('logic', '!=', False), ('logic', '!=', '[]')]"/>
+                <filter name="no_logic" string="No Logic" domain="['|', ('logic', '=', False), ('logic', '=', '[]')]"/>
+                <separator/>
+                <!-- TODO distinguish custom validations -->
+                <!-- <filter name="validate" string="Validations" domain="[('validate', '!=', False)]"/> -->
+                <!-- <filter name="no_validate" string="No Validations" domain="[('validate', '!=', False)]"/> -->
+                <filter name="poperties" string="API Properties" domain="[('properties', '!=', False), ('properties', '!=', '{}')]"/>
+                <filter name="no_properties" string="No API Properties" domain="['|', ('properties', '=', False), ('properties', '=', '{}')]"/>
+                <separator/>
+                <filter
+                    name="conditional"
+                    string="Conditional Simple"
+                    domain='[
+                            ("conditional", "!=", False),
+                            ("conditional", "!=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;}"),
+                            ("conditional", "!=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;, &apos;json&apos;: &apos;&apos;}")
+                            ]'
+                />
+                <filter
+                    name="no_conditional"
+                    string="No Conditional Simple"
+                    domain='[
+                            "|", "|",
+                            ("conditional", "=", False),
+                            ("conditional", "=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;}"),
+                            ("conditional", "=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;, &apos;json&apos;: &apos;&apos;}")
+                            ]'
+                />
+
+                <separator/>
+                <filter
+                    name="custom_conditional"
+                    string="Conditional Custom"
+                    domain='[
+                            ("custom_conditional", "!=", False),
+                            ("custom_conditional", "!=", &apos;&apos;),
+                            ("custom_conditional", "!=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;}"),
+                            ("custom_conditional", "!=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;, &apos;json&apos;: &apos;&apos;}")
+                            ]'
+                />
+                <filter
+                    name="no_custom_conditional"
+                    string="No Conditional Custom"
+                    domain='[
+                            "|", "|", "|",
+                            ("custom_conditional", "=", False),
+                            ("custom_conditional", "=", &apos;&apos;),
+                            ("custom_conditional", "=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;}"),
+                            ("custom_conditional", "=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;, &apos;json&apos;: &apos;&apos;}")
+                            ]'
+                />                
                 <group expand="0" string="Group By">
                     <filter string="Form Builder" name="group_builder_id" domain="[]" context="{'group_by':'builder_id'}"/>
                     <filter string="Type" name="group_type" domain="[]" context="{'group_by':'type'}"/>
@@ -102,7 +205,77 @@ See LICENSE file for full licensing details. -->
                 <field name="key"/>
                 <field name="type"/>
                 <filter name="input" string="Input Components" domain="[('input', '=', True)]"/>
-                <filter name="input" string="Layout Components" domain="[('input', '=', False)]"/>                
+                <filter name="layout" string="Layout Components" domain="[('input', '=', False)]"/>
+                <separator/>
+                <separator/>
+                <filter name="hidden" string="Hidden" domain="[('hidden', '=', True)]"/>
+                <filter name="not_hidden" string="Not Hidden" domain="[('hidden', '=', False)]"/>
+                <separator/>
+                <filter name="disabled" string="Disabled" domain="[('disabled', '=', True)]"/>
+                <filter name="not_disabled" string="Not Disabled" domain="[('disabled', '=', False)]"/>
+                <separator/>
+                <filter name="clear_on_hide" string="Clear Value When Hidden" domain="[('clear_on_hide', '=', True)]"/>
+                <filter name="not_clear_on_hide" string="Not Clear Value When Hidden" domain="[('clear_on_hide', '=', False)]"/>
+                <separator/>
+                <filter name="table_view" string="Table View" domain="[('table_view', '=', True)]"/>
+                <filter name="not_table_view" string="Not Table View" domain="[('table_view', '=', False)]"/>
+                <separator/>
+                <filter name="required" string="Required" domain="[('required', '=', True)]"/>
+                <filter name="not_required" string="Not Required" domain="[('required', '=', False)]"/>
+                <separator/>
+                <filter name="with_templates" string="Templates" domain="[('templates', '!=', False)]"/>
+                <separator/>
+                <filter name="logic" string="Logic" domain="[('logic', '!=', False), ('logic', '!=', '[]')]"/>
+                <filter name="no_logic" string="No Logic" domain="['|', ('logic', '=', False), ('logic', '=', '[]')]"/>
+                <separator/>
+                <!-- TODO distinguish custom validations -->
+                <!-- <filter name="validate" string="Validations" domain="[('validate', '!=', False)]"/> -->
+                <!-- <filter name="no_validate" string="No Validations" domain="[('validate', '!=', False)]"/> -->
+                <filter name="poperties" string="API Properties" domain="[('properties', '!=', False), ('properties', '!=', '{}')]"/>
+                <filter name="no_properties" string="No API Properties" domain="['|', ('properties', '=', False), ('properties', '=', '{}')]"/>
+                <separator/>
+                <filter
+                    name="conditional"
+                    string="Conditional Simple"
+                    domain='[
+                            ("conditional", "!=", False),
+                            ("conditional", "!=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;}"),
+                            ("conditional", "!=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;, &apos;json&apos;: &apos;&apos;}")
+                            ]'
+                />
+                <filter
+                    name="no_conditional"
+                    string="No Conditional Simple"
+                    domain='[
+                            "|", "|",
+                            ("conditional", "=", False),
+                            ("conditional", "=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;}"),
+                            ("conditional", "=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;, &apos;json&apos;: &apos;&apos;}")
+                            ]'
+                />
+
+                <separator/>
+                <filter
+                    name="custom_conditional"
+                    string="Conditional Custom"
+                    domain='[
+                            ("custom_conditional", "!=", False),
+                            ("custom_conditional", "!=", &apos;&apos;),
+                            ("custom_conditional", "!=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;}"),
+                            ("custom_conditional", "!=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;, &apos;json&apos;: &apos;&apos;}")
+                            ]'
+                />
+                <filter
+                    name="no_custom_conditional"
+                    string="No Conditional Custom"
+                    domain='[
+                            "|", "|", "|",
+                            ("custom_conditional", "=", False),
+                            ("custom_conditional", "=", &apos;&apos;),
+                            ("custom_conditional", "=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;}"),
+                            ("custom_conditional", "=", "{&apos;show&apos;: None, &apos;when&apos;: None, &apos;eq&apos;: &apos;&apos;, &apos;json&apos;: &apos;&apos;}")
+                            ]'
+                />
                 <group expand="0" string="Group By">
                     <filter string="Type" name="group_type" domain="[]" context="{'group_by':'type'}"/>
                     <filter string="Input" name="group_input" domain="[]" context="{'group_by':'input'}"/>
