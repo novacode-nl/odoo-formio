@@ -166,6 +166,48 @@ export class OdooFormioForm extends Component {
         }
     }
 
+    /**
+     * onBlur handler
+     *
+     * @param form: The form instance
+     * @param instance: The component instance.
+     */
+    onBlur(form, instance) {
+        const self = this;
+        if (instance.component) {
+            const component = instance.component;
+            // const instance = changed.changed.instance;
+            if (component.properties.hasOwnProperty('blur')) {
+                let apiUrl = self.apiUrl;
+                apiUrl += '/' + 'componentChange' + '/' + component.properties.blur;
+                let instanceData = {};
+                if (instance.hasOwnProperty('parent')) {
+                    instanceData.parent_component = {
+                        'key': instance.parent.key,
+                        'type': instance.parent.type,
+                    };
+                }
+                if (instance.hasOwnProperty('path')) {
+                    instanceData.path = instance.path;
+                }
+                const data = {
+                    'changed': {
+                        'component': {
+                            'key': instance.key,
+                            'type': component.type
+                         },
+                        'instance': instanceData,
+                        'value': instance.getValue(),
+                    },
+                    'form_data': form._data
+                };
+                $.jsonRpc.request(apiUrl, 'call', {'data': data}).then(function(result) {
+                    form.submission = {'data': JSON.parse(result)};
+                });
+            }
+        }
+    }
+
     createForm() {
         const self = this;
         // this does some flatpickr (datetime) locale all over the place.
@@ -261,17 +303,28 @@ export class OdooFormioForm extends Component {
 
             // Events
             form.on('change', function(changed, flags, modified) {
-                // - changed: The changes that occurred, and the component that triggered the change.
+                // A value has been changed within the rendered form
+                //
+                // @param changed: The changes that occurred, and the component that triggered the change.
                 //   See "componentChange" event:
                 //   - instance: The component instance
                 //   - component: The component json
                 //   - value: The value that was changed
                 //   - flags: The flags for the change event loop
-                // - flags: The change loop flags
-                // - modified: Flag to determine if the change was
+                // @param flags: The change loop flags
+                // @param modified: Flag to determine if the change was
                 //   made by a human interaction, or programatic
                 if (changed.hasOwnProperty('changed')) {
                     self.onChange(form, changed, flags, modified);
+                }
+            });
+
+            form.on('blur', function(instance) {
+                // Triggered when an input component has been blurred
+                //
+                // @param instance: The component instance.
+                if (changed) {
+                    self.onBlur(form, instance);
                 }
             });
 
