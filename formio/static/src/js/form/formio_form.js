@@ -313,7 +313,7 @@ export class OdooFormioForm extends Component {
                 // Triggered when an input component has been blurred
                 //
                 // @param instance: The component instance.
-                if (changed) {
+                if (instance) {
                     self.onBlur(form, instance);
                 }
             });
