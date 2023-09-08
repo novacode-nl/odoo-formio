@@ -116,8 +116,8 @@ class VersionGitHubTag(models.Model):
                 tar.extractall(src_path, members=self._tar_extract_members(tar))
                 tar.close()
 
-            version_model = self.env['formio.version']
-            asset_model = self.env['formio.version.asset']
+            version_model = self.env['formio.version'].sudo()
+            asset_model = self.env['formio.version.asset'].sudo()
             attachment_model = self.env['ir.attachment']
 
             # First delete if any already. If repeating download/install.
