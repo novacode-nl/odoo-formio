@@ -170,6 +170,8 @@ class FormioController(http.Controller):
 
         if vals.get('state') == FORM_STATE_COMPLETE:
             form.after_submit()
+        elif vals.get('state') == FORM_STATE_DRAFT:
+            form.after_save_draft()
 
     #######
     # Fonts
