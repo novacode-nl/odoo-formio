@@ -160,7 +160,7 @@ class Form(models.Model):
         if 'submission_data' in vals:
             # submission_data can only be provided per record !
             self.ensure_one()
-            if self.state in states_not_allowed:
+            if self.state in states_not_allowed and not self.allow_force_update_state:
                 msg = 'It is not allowed to update form with UUID {uuid} in state {state}'
                 _logger.info(msg.format(uuid=self.uuid, state=self.state))
                 raise AccessError(_(msg).format(uuid=self.uuid, state=self.state))
