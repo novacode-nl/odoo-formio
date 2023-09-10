@@ -374,6 +374,10 @@ class Form(models.Model):
         """ Function is called everytime a form is submitted. """
         pass
 
+    def after_save_draft(self):
+        """ Function is called everytime a form is save as draft. """
+        pass
+
     def action_view_formio(self):
         # return {
         #     "type": "ir.actions.act_url",
