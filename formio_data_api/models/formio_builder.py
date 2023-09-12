@@ -39,15 +39,13 @@ class FormioBuilder(models.Model):
                 else:
                     raise UserError("The form builder can't be loaded. No (user) language was set.")
 
-                res_lang = self.env['res.lang'].search([('code', '=', lang)], limit=1)
-
             if self.schema is False:
                 # HACK masquerade empty Builder object
                 builder_obj = Builder('{}')
             else:
                 builder_obj = Builder(
                     self.schema,
-                    language=res_lang.iso_code,
+                    language=self.env['res.lang'].sudo()._formio_ietf_code(lang),
                     i18n=self.i18n_translations()
                 )
             return builder_obj
