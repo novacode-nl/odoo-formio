@@ -155,7 +155,8 @@ export class OdooFormioForm extends Component {
                             'instance': instanceData,
                             'value': changed.changed.value,
                         },
-                        'form_data': form.data
+                        'form_data': form.data,
+                        'lang_ietf_code': self.language
                     };
                     $.jsonRpc.request(apiUrl, 'call', {'data': data}).then(function(result) {
                         form.submission = {'data': JSON.parse(result)};

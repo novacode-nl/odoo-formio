@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.6.11
+
+Add current language (`res.lang`) IETF code/tag to the form `componentChange` payload.
+
 ## 16.0.6.10
 
 Rename label of `formio.form` field `submission_data`, from `Data` to `Submission Data`.
