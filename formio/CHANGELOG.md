@@ -1,5 +1,9 @@
 # Changelog
 
+## 15.0.6.10
+
+Rename label of `formio.form` field `submission_data`, from `Data` to `Submission Data`.
+
 ## 15.0.6.9
 
 Add `formio.form` (Form) `after_save_draft` method and execute it in the `/submit` endpoints (backend, portal, public).

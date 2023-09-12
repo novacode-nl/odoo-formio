@@ -89,7 +89,7 @@ class Form(models.Model):
         'mail.template', 'Invitation Mail',
         domain=[('model', '=', 'formio.form')],
         help="This e-mail template will be sent on user assignment. Leave empty to send nothing.")
-    submission_data = fields.Text('Data', default=False)
+    submission_data = fields.Text('Submission Data', default=False)
     submission_user_id = fields.Many2one(
         'res.users', string='Submission User', readonly=True,
         help='User who submitted the form.')

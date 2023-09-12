@@ -223,7 +223,7 @@ See LICENSE file for full licensing details. -->
                                 </group>
                             </group>
                         </page>
-                        <page string="Data" name="data" groups="formio.group_formio_admin">
+                        <page string="Submission Data" name="data" groups="formio.group_formio_admin">
                             <field name="submission_data" attrs="{'readonly': ['|', ('id', '!=', False), ('readonly_submission_data', '=', True)]}"/>
                             <field name="readonly_submission_data" invisible="1"/>
                             <field name="id" invisible="1"/>
