@@ -208,8 +208,7 @@ class FormioCustomerPortal(CustomerPortal):
 
         values = {
             'form': form,
-            # 'languages' already injected in rendering somehow
-            'form_languages': languages.sorted('name'),
+            'languages': languages,
             'formio_css_assets': form.builder_id.formio_css_assets,
             'formio_js_assets': form.builder_id.formio_js_assets,
             'extra_assets': form.builder_id.extra_asset_ids

@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.0.6.11
+
+Fix portal form `AttributeError: 'tuple' object has no attribute 'formio_ietf_code'`.\
+Add (again) `language` template variable in the render values of endpoint `/formio/portal/form/<string:uuid>`\
+Issue: [\#257](https://github.com/novacode-nl/odoo-formio/issues/257)
+
 ## 15.0.6.10
 
 Rename label of `formio.form` field `submission_data`, from `Data` to `Submission Data`.

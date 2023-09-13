@@ -40,7 +40,7 @@ class FormioPublicController(http.Controller):
                 languages |= request.env.ref('base.lang_en')
             values = {
                 'form': form,
-                'form_languages': languages,
+                'languages': languages,
                 'formio_css_assets': form.builder_id.formio_css_assets,
                 'formio_js_assets': form.builder_id.formio_js_assets,
             }
