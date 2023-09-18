@@ -82,6 +82,10 @@ class Builder(models.Model):
         - Obsolete: Was current but obsolete (unpublished)""")
     display_state = fields.Char("Display State", compute='_compute_display_fields', store=False)
     display_name_full = fields.Char("Display Name Full", compute='_compute_display_fields', search='_search_display_name_full', store=False)
+    auto_save = fields.Boolean(
+        string="Auto Save", tracking=True,
+        help="Auto-save or manually save the Form Builder changes"
+    )
     is_locked = fields.Boolean(
         string="Locked", copy=False, tracking=True,
         help="""\
@@ -535,6 +539,7 @@ class Builder(models.Model):
             'portal_save_draft_done_url': self.portal_save_draft_done_url,
             'portal_submit_done_url': self.portal_submit_done_url,
             'readOnly': self.is_locked,
+            'autoSave': self.auto_save,
             'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
             'submission_url_add_query_params_from': self.submission_url_add_query_params_from,
         }

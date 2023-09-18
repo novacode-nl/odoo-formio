@@ -1,5 +1,13 @@
 # Changelog
 
+## 16.0.7.0
+
+Form Builder improvements:
+- Automatically resize the height.
+- Auto-save or manual-save (switch) per Form Builder design.
+- Remove the 'Fullscreen' mode (button), which causes resizer issue.
+- Changes some from HTML (CSS) classes to ids.
+
 ## 16.0.6.11
 
 Add current language (`res.lang`) IETF code/tag to the form `componentChange` payload.
