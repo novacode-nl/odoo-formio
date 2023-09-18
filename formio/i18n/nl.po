@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-31 12:43+0000\n"
-"PO-Revision-Date: 2023-08-31 14:46+0200\n"
+"POT-Creation-Date: 2023-09-18 10:59+0000\n"
+"PO-Revision-Date: 2023-09-18 13:08+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -991,12 +991,6 @@ msgid "Current"
 msgstr "Actueel"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_form__submission_data
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
-msgid "Data"
-msgstr ""
-
-#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__readonly_submission_data
 msgid "Data is readonly"
 msgstr "Data is alleen-lezen"
@@ -1304,7 +1298,6 @@ msgid "Forms Count"
 msgstr "Formulieren aantal"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_base_automation__formio_ref
 #: model:ir.model.fields,field_description:formio.field_formio_extra_asset__attachment_formio_ref
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__attachment_formio_ref
 #: model:ir.model.fields,field_description:formio.field_ir_actions_server__formio_ref
@@ -1344,13 +1337,6 @@ msgstr "Forms: Uitnodiging portaal gebruiker."
 msgid ""
 "Found multiple Partners with email <strong>%s</strong> submitted in the Form."
 msgstr ""
-
-#. module: formio
-#. odoo-javascript
-#: code:addons/formio/static/src/js/views/formio_builder.xml:0
-#, python-format
-msgid "Fullscreen (Exit with ESC)"
-msgstr "Volledig scherm (afsluiten met ESC)"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
@@ -1452,12 +1438,6 @@ msgstr "Identificeert een serveractie met gerelateerde Form Builder."
 #: model:ir.model.fields,help:formio.field_ir_attachment__formio_ref
 msgid "Identifies an attachment with a related Forms/Builder record."
 msgstr "Identificeert een bijlage met een gerelateerd Forms Builder."
-
-#. module: formio
-#: model:ir.model.fields,help:formio.field_base_automation__formio_ref
-msgid "Identifies an automated action with related form builder."
-msgstr ""
-"Identificeert een geautomatiseerde actie met gerelateerde Form Builder."
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__name
@@ -1780,14 +1760,6 @@ msgstr "Naam"
 #, python-format
 msgid "Name is invalid. Use ASCII letters, digits, \"-\" or \"_\"."
 msgstr "Naam is ongeldig. Gebruik ASCII letters, cijfers, - of _"
-
-#. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_calendar_event_id
-#: model:ir.model.fields,field_description:formio.field_formio_form__activity_calendar_event_id
-#: model:ir.model.fields,field_description:formio.field_formio_version__activity_calendar_event_id
-#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__activity_calendar_event_id
-msgid "Next Activity Calendar Event"
-msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__activity_date_deadline
@@ -2439,6 +2411,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "Submission"
 msgstr "Indiening"
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_form__submission_data
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
+msgid "Submission Data"
+msgstr "Inzending data"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_form__submission_date

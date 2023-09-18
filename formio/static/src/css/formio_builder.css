@@ -1,45 +1,45 @@
-.o_form_view .o_form_sheet.formio_builder_container {
+.o_form_view .o_form_sheet#formio_builder_container {
     max-width: none !important;
     width: 95% !important;
 }
 
-.formio_builder_container .formio_builder_dock {
+#formio_builder_container .formio_builder_dock {
     float: right;
     margin-bottom: 1rem;
 }
 
-.formio_builder_container .formio_builder_dock * {
+#formio_builder_container .formio_builder_dock * {
     font-size: 14px;
 }
 
-.formio_builder_container .formio_builder_dock * {
+#formio_builder_container .formio_builder_dock * {
     font-size: 14px;
 }
 
-.formio_builder_container .formio_builder_dock ul {
+#formio_builder_container .formio_builder_dock ul {
     list-style: none;
 }
 
-.formio_builder_container .formio_builder_dock ul li {
+#formio_builder_container .formio_builder_dock ul li {
     float: left;
     margin-left: 40px;
 }
 
-.formio_builder_container .formio_builder_dock span.formio_dock_label {
+#formio_builder_container .formio_builder_dock span.formio_dock_label {
     padding-right: 10px;
     font-weight: 700;
 }
 
-.formio_builder_container .formio_builder_dock .badge span.formio_dock_label {
+#formio_builder_container .formio_builder_dock .badge span.formio_dock_label {
     padding-left: 6px;
     padding-right: 10px;
 }
 
-.formio_builder_container .formio_builder_dock .badge span.formio_dock_val {
+#formio_builder_container .formio_builder_dock .badge span.formio_dock_val {
     padding-right: 6px;
 }
 
-.formio_builder_container .formio_actions {
+#formio_builder_container .formio_actions {
     clear: both;
     padding-top: 10px;
     margin-bottom: 20px;
@@ -60,48 +60,60 @@
     border: 1px solid #c0c0c0;
 }
 
-.formio_builder_iframe_container .row {
+#formio_builder_iframe_container .row {
     margin: 0;
 }
 
-.formio_builder_iframe_container iframe{
+#formio_builder_iframe_container iframe{
     width: 1px;
     min-width: 100%;
     border: 0;
+    height: 100%;
 }
 
 @media screen and (max-height: 1440px) {
-    .formio_builder_iframe_container iframe{
-        height: 840px;
+    #formio_builder_iframe_container iframe {
+        min-height: 840px;
     }
 }
 
 @media screen and (max-height: 1200px) {
-    .formio_builder_iframe_container iframe{
-        height: 760px;
+    #formio_builder_iframe_container iframe {
+        min-height: 760px;
     }
 }
 
 @media screen and (max-height: 1024px) {
-    .formio_builder_iframe_container iframe{
-        height: 680px;
+    #formio_builder_iframe_container iframe {
+        min-height: 680px;
     }
 }
 
 @media screen and (max-height: 900px) {
-    .formio_builder_iframe_container iframe{
-        height: 600px;
+    #formio_builder_iframe_container iframe {
+        min-height: 600px;
     }
 }
 
 @media screen and (max-height: 800px) {
-    .formio_builder_iframe_container iframe{
-        height: 600px;
+    #formio_builder_iframe_container iframe {
+        min-height: 600px;
     }
 }
 
 @media screen and (max-height: 768px) {
-    .formio_builder_iframe_container iframe{
-        height: 480px;
+    #formio_builder_iframe_container iframe {
+        min-height: 480px;
     }
+}
+
+/**
+   Hacks: Fit nicely in standard Odoo
+**/
+.o_form_view {
+    background-color: #f6f7fa;
+}
+
+.o_form_sheet_bg {
+    border-bottom: none !important;
 }

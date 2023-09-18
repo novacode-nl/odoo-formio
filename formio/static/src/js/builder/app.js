@@ -28,12 +28,23 @@ function app() {
             this.locales = {};
             self.params = {};
 
+            // init some builder state
+            self.isDirty = false;
+            self.cancelComponent = false;
+
             $.jsonRpc.request(self.configUrl, 'call', {}).then(function(result) {
                 if (!$.isEmptyObject(result)) {
                     self.schema = result.schema;
                     self.options = result.options;
                     self.params = result.params;
                     self.locales = result.locales;
+
+                    if ('autoSave' in self.params && self.params['autoSave'] == true) {
+                        self.autoSave = true;
+                    }
+                    else {
+                        self.autoSave = false;
+                    }
                     // TODO language translations and localisations (flatpickr issues)
                     // self.language = self.options.language;
                     // self.defaultLocaleShort = self.localeShort(self.language);
@@ -95,6 +106,19 @@ function app() {
                     });
                     builder.instance.redraw();
                 };
+                window.saveFormBuilder = function(button) {
+                    if (!self.autoSave) {
+                        console.log('[Forms] Saving Builder...');
+                        const builder_obj = builder.instance;
+                        $.jsonRpc.request(self.saveUrl, 'call', {
+                            'builder_id': self.builderId,
+                            'schema': builder._form
+                        }).then(function() {
+                            self.hideSaveBuilder();
+                            console.log('[Forms] Builder sucessfully saved.');
+                        });
+                    }
+                };
             });
 
             builder.instance.on('change', function(res) {
@@ -106,14 +130,62 @@ function app() {
                     return;
                 }
                 else {
-                    console.log('[Forms] Saving Builder...');
-                    $.jsonRpc.request(self.saveUrl, 'call', {
-                        'builder_id': self.builderId,
-                        'schema': res
-                    }).then(function() {
-                        console.log('[Forms] Builder sucessfully saved.');
+                    if (self.autoSave) {
+                        console.log('[Forms] Auto-saving Builder...');
+                        $.jsonRpc.request(self.saveUrl, 'call', {
+                            'builder_id': self.builderId,
+                            'schema': res
+                        }).then(function() {
+                            console.log('[Forms] Builder sucessfully auto-saved.');
+                        });
+                    }
+                }
+            });
+
+            builder.instance.on('saveComponent', function(schema) {
+                if (!self.autoSave) {
+                    self.isDirty = true;
+                    self.showSaveBuilder();
+                }
+            });
+
+            builder.instance.on('cancelComponent', function(component) {
+                if (!self.autoSave) {
+                    // Hack to suppress removeComponent, which propagates as a save.
+                    self.cancelComponent = true;
+                }
+                if (!self.autoSave && !self.isDirty) {
+                    let saveButtons = document.querySelectorAll('.formio_save');
+                    saveButtons.forEach(function(btn) {
+                        btn.classList.add('d-none');
                     });
                 }
+            });
+
+            builder.instance.on('removeComponent', function(component, schema, path, index) {
+                if (!self.autoSave) {
+                    self.isDirty = true;
+                    if (!self.cancelComponent) {
+                        self.showSaveBuilder();
+                    } else {
+                        // Re-initialize the cancelComponent hack.
+                        self.cancelComponent = false;
+                    }
+                }
+            });
+        }
+
+        showSaveBuilder() {
+            let saveButtons = document.querySelectorAll('.formio_save');
+            saveButtons.forEach(function(btn) {
+                btn.classList.remove('d-none');
+            });
+        }
+
+        hideSaveBuilder() {
+            let saveButtons = document.querySelectorAll('.formio_save');
+            saveButtons.forEach(function(btn) {
+                btn.classList.add('d-none');
             });
         }
 
