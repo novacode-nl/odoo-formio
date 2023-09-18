@@ -19,13 +19,9 @@ body {
     padding: 10px 10px 10px 10px;
 }
 
-#formio_builder_actions_top {
-    margin-bottom: 1rem;
-}
-
-#formio_builder_actions_bottom {
+.formio_builder_actions a {
     margin-top: 1rem;
-
+    margin-bottom: 1rem;
 }
 
 .formio_builder_actions a i {
