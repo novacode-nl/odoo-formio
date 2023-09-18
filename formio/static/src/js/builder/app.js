@@ -45,6 +45,13 @@ function app() {
                     else {
                         self.autoSave = false;
                     }
+
+                    if ('readOnly' in self.params && self.params['readOnly'] == true) {
+                        self.isReadOnly = true;
+                    }
+                    else {
+                        self.isReadOnly = false;
+                    }
                     // TODO language translations and localisations (flatpickr issues)
                     // self.language = self.options.language;
                     // self.defaultLocaleShort = self.localeShort(self.language);
@@ -125,8 +132,8 @@ function app() {
                 if (! res.hasOwnProperty('components')) {
                     return;
                 }
-                else if ('readOnly' in self.params && self.params['readOnly'] == true) {
-                    alert("This Form Builder is readonly (probably locked). Refresh the page and try again.");
+                else if (self.isReadOnly) {
+                    alert("WARNING: Nothing is saved!\nThis Form Builder is readonly (probably locked).\nRefresh the page and try again.");
                     return;
                 }
                 else {
@@ -155,10 +162,7 @@ function app() {
                     self.cancelComponent = true;
                 }
                 if (!self.autoSave && !self.isDirty) {
-                    let saveButtons = document.querySelectorAll('.formio_save');
-                    saveButtons.forEach(function(btn) {
-                        btn.classList.add('d-none');
-                    });
+                    self.hideSaveBuilder();
                 }
             });
 
@@ -176,17 +180,21 @@ function app() {
         }
 
         showSaveBuilder() {
-            let saveButtons = document.querySelectorAll('.formio_save');
-            saveButtons.forEach(function(btn) {
-                btn.classList.remove('d-none');
-            });
+            if (!this.isReadOnly) {
+                let saveButtons = document.querySelectorAll('.formio_save');
+                saveButtons.forEach(function(btn) {
+                    btn.classList.remove('d-none');
+                });
+            }
         }
 
         hideSaveBuilder() {
-            let saveButtons = document.querySelectorAll('.formio_save');
-            saveButtons.forEach(function(btn) {
-                btn.classList.add('d-none');
-            });
+            if (!this.isReadOnly) {
+                let saveButtons = document.querySelectorAll('.formio_save');
+                saveButtons.forEach(function(btn) {
+                    btn.classList.add('d-none');
+                });
+            }
         }
 
         patchCDN() {
