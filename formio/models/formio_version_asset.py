@@ -34,12 +34,19 @@ class VersionAsset(models.Model):
     @api.depends('attachment_id')
     def _compute_url(self):
         for r in self:
+            version_id = str(r.version_id.id)
             if r.attachment_type == 'url':
-                r.url = r.attachment_id.url
+                url = '{url}?{param}'.format(
+                    url=r.attachment_id.url,
+                    param=version_id
+                )
+                r.url = url
             elif r.attachment_type == 'binary':
-                r.url = '/web/content/{attachment_id}/{name}'.format(
+                r.url = '/web/content/{attachment_id}/{name}?{param}'.format(
                     attachment_id=r.attachment_id.id,
-                    name=r.attachment_id.name)
+                    name=r.attachment_id.name,
+                    param=version_id
+                )
 
     def unlink(self):
         self.mapped('attachment_id').unlink()

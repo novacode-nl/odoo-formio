@@ -1,9 +1,10 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
+
 import json
 import logging
-from io import BytesIO
 
+from io import BytesIO
 from os.path import dirname
 
 try:
@@ -13,6 +14,8 @@ except ImportError:
 
 from odoo import http, fields
 from odoo.http import request
+
+from .utils import generate_uuid4
 
 from ..models.formio_form import (
     STATE_DRAFT as FORM_STATE_DRAFT,
@@ -54,6 +57,8 @@ class FormioController(http.Controller):
             'formio_css_assets': builder.formio_css_assets,
             'formio_js_assets': builder.formio_js_assets,
             'extra_assets': builder.extra_asset_ids,
+            # uuid is used to disable assets (js, css) caching by hrefs
+            'uuid': generate_uuid4()
         }
         return request.render('formio.formio_builder_embed', values)
 

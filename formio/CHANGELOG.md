@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.7.2
+
+Form Builder improvement:\
+Avoid browser caching for Form Builder assets files (CSS, JS).
+
 ## 16.0.7.1
 
 Form Builder layout and styling improvements:
