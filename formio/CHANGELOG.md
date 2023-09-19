@@ -1,5 +1,11 @@
 # Changelog
 
+## 16.0.7.1
+
+Form Builder layout and styling improvements:
+- Revert (accidental) removal of language buttons CSS.
+- Improve spacing between language buttons and actions (save form button, auto-save message).
+
 ## 16.0.7.0
 
 Form Builder improvements:

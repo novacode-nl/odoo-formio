@@ -14,18 +14,54 @@ body {
     margin-top: 5%;
 }
 
+/* languages buttons */
+
+.formio_languages {
+    clear: both;
+    margin-bottom: 1rem;
+    padding-left: 4px;
+}
+
+.formio_languages button {
+    border: 1px solid #ced4da;
+    background-color: #fff;
+    color: #000;
+    padding: 6px 10px 6px 10px;
+    box-shadow: none !important;
+    transition: none !important;
+}
+
+.btn.language_button_active {
+    background-color: rgba(0, 0, 0, 0.08);
+    color: #000;
+}
+
+.formio_languages button:hover {
+    background-color: #d3d3d3;
+    border: 1px solid #c0c0c0;
+}
+
 .formio_builder_actions {
     text-align: left;
-    padding: 10px 10px 10px 10px;
+    padding: 0px 10px;
+}
+
+/* actions buttons */
+
+#formio_builder_actions_bottom {
+    margin-top: 1rem;
 }
 
 .formio_builder_actions a {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin: 0 0 1rem 0;
 }
 
 .formio_builder_actions a i {
     padding-right: 0.2rem;
+}
+
+.formio_builder_actions div.formio_text {
+    margin: 0 0 1rem 0;
 }
 
 /**
