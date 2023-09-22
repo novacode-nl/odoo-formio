@@ -1,17 +1,13 @@
-# Copyright Nova Code (http://www.novacode.nl)
+# Copyright Nova Code (https://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
 import logging
 
-from functools import reduce
 from formiodata.builder import Builder
 from formiodata.form import Form
 
 from odoo import models
 from odoo.exceptions import UserError
-from odoo.tools import safe_eval
-
-from odoo.addons.formio.models.formio_form import STATE_PENDING, STATE_DRAFT
 
 _logger = logging.getLogger(__name__)
 
@@ -20,6 +16,15 @@ UNKNOWN_ODOO_FIELD = 'UNKNOWN Odoo field'
 
 class FormioForm(models.Model):
     _inherit = 'formio.form'
+
+    def formio_component_class_mapping(self):
+        """
+        This method provides the formiodata.Builder instatiation the
+        component_class_mapping keyword argument.
+
+        This method can be implemented in other (formio) modules.
+        """
+        return {}
 
     def __getattr__(self, name):
         if name == '_formio':
@@ -39,7 +44,7 @@ class FormioForm(models.Model):
                 else:
                     raise UserError("The form can't be loaded. No (user) language was set.")
 
-                component_class_mapping = context.get('formio_component_class_mapping', {})
+                component_class_mapping = self.formio_component_class_mapping()
                 res_lang = self.env['res.lang'].search([('code', '=', lang)], limit=1)
                 builder_obj = Builder(
                     self.builder_id.schema,
