@@ -179,6 +179,17 @@ class Builder(models.Model):
         tracking=True,
         help="Enables adding the URL query params from the window's iframe (src) or window.parent to the form submission URL endpoint.",
     )
+    debug = fields.Boolean(
+        string="Debug",
+        default=False,
+        copy=False,
+        tracking=True,
+        help="When enabled along the standard Developer Mode (debug mode), this provides server log output etc."
+    )
+    debug_mode = fields.Boolean(
+        string="Debug Mode",
+        compute='_compute_debug_mode'
+    )
     translations = fields.One2many('formio.builder.translation', 'builder_id', string='Translations', copy=True)
     languages = fields.One2many('res.lang', compute='_compute_languages', string='Languages')
     allow_force_update_state_group_ids = fields.Many2many(
@@ -391,6 +402,10 @@ class Builder(models.Model):
     def _compute_api_alert(self):
         self.ensure_one()
         self.api_alert = ', '.join(self._api_alert_items())
+
+    def _compute_debug_mode(self):
+        for r in self:
+            r.debug_mode = r.debug and request.session.debug
 
     def _api_alert_items(self):
         self.ensure_one()

@@ -15,6 +15,8 @@ from ..models.formio_form import (
     STATE_COMPLETE as FORM_STATE_COMPLETE,
 )
 
+from .utils import log_form_submisssion
+
 _logger = logging.getLogger(__name__)
 
 
@@ -330,14 +332,21 @@ class FormioCustomerPortal(CustomerPortal):
             vals['state'] = FORM_STATE_COMPLETE
 
         context = {'tracking_disable': True}
-        res = Form.with_context(**context).create(vals)
+        form = Form.with_context(**context).create(vals)
 
         if vals.get('state') == FORM_STATE_COMPLETE:
-            res.after_submit()
+            form.after_submit()
         elif vals.get('state') == FORM_STATE_DRAFT:
-            res.after_save_draft()
-        request.session['formio_last_form_uuid'] = res.uuid
-        return {'form_uuid': res.uuid}
+            form.after_save_draft()
+        request.session['formio_last_form_uuid'] = form.uuid
+
+        # debug mode is checked/handled
+        log_form_submisssion(form)
+
+        return {
+            'form_uuid': form.uuid,
+            'submission_data': form.submission_data
+        }
 
     #########
     # Helpers

@@ -1,5 +1,19 @@
 # Changelog
 
+## 16.0.8.0
+
+### Improvements
+
+Form UI overlay, to block user interaction while loading and upon wizard state and submission.
+
+Advanced Form submit endpoint and response handling:\
+In the client/browser (JS), upon form submission return the form its `submission_data` (JSON) in the response and write it to the (JS) formio.js form object.\
+This allows to update the form (data) by backend/server code from the `submission_data` in the response.
+
+Debug logging the `/submit` endpoints, by enabling the new "Debug Mode" field in the Form Builder.
+
+Some Python code (Black) formatting improvements.
+
 ## 16.0.7.2
 
 Form Builder improvement:\

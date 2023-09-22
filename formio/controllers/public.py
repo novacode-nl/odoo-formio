@@ -7,12 +7,14 @@ import logging
 from odoo import http, fields
 from odoo.http import request
 
-from ..models.formio_builder import \
-    STATE_CURRENT as BUILDER_STATE_CURRENT
+from ..models.formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
 
-from ..models.formio_form import \
-    STATE_PENDING as FORM_STATE_PENDING, STATE_DRAFT as FORM_STATE_DRAFT, \
-    STATE_COMPLETE as FORM_STATE_COMPLETE, STATE_CANCEL as FORM_STATE_CANCEL
+from ..models.formio_form import (
+    STATE_DRAFT as FORM_STATE_DRAFT,
+    STATE_COMPLETE as FORM_STATE_COMPLETE,
+)
+
+from .utils import log_form_submisssion
 
 _logger = logging.getLogger(__name__)
 
@@ -102,6 +104,14 @@ class FormioPublicController(http.Controller):
             form.after_submit()
         elif vals.get('state') == FORM_STATE_DRAFT:
             form.after_save_draft()
+
+        # debug mode is checked/handled
+        log_form_submisssion(form)
+
+        return {
+            'form_uuid': uuid,
+            'submission_data': form.submission_data
+        }
 
     ###################
     # Form - public new
@@ -195,15 +205,25 @@ class FormioPublicController(http.Controller):
 
         if request.env.user._is_public():
             Form = Form.with_company(request.env.user.sudo().company_id)
-            res = Form.with_context(**context).sudo().create(vals)
+            form = Form.with_context(**context).sudo().create(vals)
         else:
-            res = Form.with_context(**context).create(vals)
+            form = Form.with_context(**context).create(vals)
+
+        # after hooks
         if vals.get('state') == FORM_STATE_COMPLETE:
-            res.after_submit()
+            form.after_submit()
         elif vals.get('state') == FORM_STATE_DRAFT:
-            res.after_save_draft()
-        request.session['formio_last_form_uuid'] = res.uuid
-        return {'form_uuid': res.uuid}
+            form.after_save_draft()
+
+        request.session['formio_last_form_uuid'] = form.uuid
+
+        # debug mode is checked/handled
+        log_form_submisssion(form)
+
+        return {
+            'form_uuid': form.uuid,
+            'submission_data': form.submission_data
+        }
 
     #########
     # Helpers

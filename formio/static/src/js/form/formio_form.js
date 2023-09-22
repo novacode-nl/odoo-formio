@@ -66,21 +66,42 @@ export class OdooFormioForm extends Component {
         }
     }
 
-    wizardStateChange (form, submission) {
-        this.resetParentIFrame();
+    hideOverlay() {
+        let loadingOverlay = document.getElementById('formio_form_loading_overlay');
+        if (loadingOverlay) {
+            loadingOverlay.style.display = 'none';
+        }
+    }
+
+    showOverlay() {
+        let loadingOverlay = document.getElementById('formio_form_loading_overlay');
+        if (loadingOverlay) {
+            loadingOverlay.style.display = 'block';
+        }
+    }
+
+    wizardStateChange(form) {
+        let self = this;
+        self.resetParentIFrame();
         // readOnly check also applies in server endpoint
-        const readOnly = 'readOnly' in this.options && this.options['readOnly'] == true;
-        if (this.params['wizard_on_change_page_save_draft'] && !readOnly) {
+        const readOnly = 'readOnly' in self.options && self.options['readOnly'] == true;
+        if (self.params['wizard_on_change_page_save_draft'] && !readOnly) {
             form.beforeSubmit();
             const data = {'data': form.data, 'saveDraft': true};
-            if (this.formUuid) {
-                data['form_uuid'] = this.formUuid;
+            if (self.formUuid) {
+                data['form_uuid'] = self.formUuid;
             }
-            $.jsonRpc.request(this.submitUrl, 'call', data).then(function(submission) {
+
+            self.showOverlay();
+
+            $.jsonRpc.request(self.submitUrl, 'call', data).then(function(submission) {
                 if (typeof(submission) != 'undefined') {
+                    console.log(submission);
                     // Set properties to instruct the next calls to save (draft) the current form.
-                    this.formUuid = submission.form_uuid;
-                    this.submitUrl = this.wizardSubmitUrl + this.formUuid + '/submit';
+                    self.formUuid = submission.form_uuid;
+                    self.submitUrl = self.wizardSubmitUrl + self.formUuid + '/submit';
+                    form.setSubmission({'data': JSON.parse(submission.submission_data)});
+                    self.hideOverlay();
                 }
             });
         }
@@ -99,6 +120,7 @@ export class OdooFormioForm extends Component {
                 configUrl += '?' + parentParams.toString();
             }
         }
+        self.showOverlay();
         $.jsonRpc.request(configUrl, 'call', {}).then(function(result) {
             if (!$.isEmptyObject(result)) {
                 self.schema = result.schema;
@@ -248,12 +270,8 @@ export class OdooFormioForm extends Component {
             }
         };
         Formio.createForm(document.getElementById('formio_form'), self.schema, self.options).then(function(form) {
-            let loading = document.getElementById('formio_form_loading');
             let buttons = document.querySelectorAll('.formio_languages button');
 
-            if (loading) {
-                loading.style.display = 'none';
-            }
             buttons.forEach(function(btn) {
                 
                 if (self.language === btn.lang) {
@@ -326,6 +344,7 @@ export class OdooFormioForm extends Component {
                 }
                 $.jsonRpc.request(self.submitUrl, 'call', data).then(function() {
                     form.emit('submitDone', submission);
+                    self.hideOverlay();
                 });
             });
 
@@ -339,9 +358,9 @@ export class OdooFormioForm extends Component {
             });
 
             // wizard
-            form.on('wizardPageSelected', (submission) => self.wizardStateChange(form, submission));
-            form.on('prevPage', (submission) => self.wizardStateChange(form, submission));
-            form.on('nextPage', (submission) => self.wizardStateChange(form, submission));
+            form.on('wizardPageSelected', (submission) => self.wizardStateChange(form));
+            form.on('prevPage', (submission) => self.wizardStateChange(form));
+            form.on('nextPage', (submission) => self.wizardStateChange(form));
 
             // Set the Submission (data)
             // https://github.com/formio/formio.js/wiki/Form-Renderer#setting-the-submission
@@ -361,6 +380,7 @@ export class OdooFormioForm extends Component {
                     if (!$.isEmptyObject(result)) {
                         form.submission = {'data': JSON.parse(result)};
                     }
+                    self.hideOverlay();
                 });
             }
         });

@@ -167,6 +167,10 @@ See LICENSE file for full licensing details. -->
                                         <i class="fa fa-info-circle" title="info"/> Not applicable with public/website Forms and custom implementations (depends).
                                     </div>
                                 </group>
+                                <group name="debug_mode" string="Debug Mode">
+                                    <field name="debug" widget="boolean_toggle"/>
+                                    <field name="debug_mode" readonly="1"/>
+                                </group>
                                 <group name="other_settings" string="Other">
                                     <field name="submission_url_add_query_params_from"/>
                                     <div class="text-muted" colspan="2">

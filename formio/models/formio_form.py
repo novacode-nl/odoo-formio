@@ -137,6 +137,10 @@ class Form(models.Model):
         related="builder_id.form_copy_to_current",
         help="When copying a form, always link it to the current version of the builder instead of the original builder.",
     )
+    debug_mode = fields.Boolean(
+        string="Debug Mode",
+        related='builder_id.debug_mode'
+    )
 
     @api.model
     def default_get(self, fields):

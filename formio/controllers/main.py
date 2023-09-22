@@ -15,7 +15,7 @@ except ImportError:
 from odoo import http, fields
 from odoo.http import request
 
-from .utils import generate_uuid4
+from .utils import log_form_submisssion, generate_uuid4
 
 from ..models.formio_form import (
     STATE_DRAFT as FORM_STATE_DRAFT,
@@ -177,6 +177,14 @@ class FormioController(http.Controller):
             form.after_submit()
         elif vals.get('state') == FORM_STATE_DRAFT:
             form.after_save_draft()
+
+        # debug mode is checked/handled
+        log_form_submisssion(form)
+
+        return {
+            'form_uuid': uuid,
+            'submission_data': form.submission_data
+        }
 
     #######
     # Fonts

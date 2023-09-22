@@ -194,7 +194,7 @@ See LICENSE file for full licensing details. -->
 
                 <!-- form shall be mounted here -->
                 <div id="formio_form_app">
-                    <div id="formio_form_loading"></div>
+                    <div id="formio_form_loading_overlay"></div>
                 </div>
 
                 <t t-if="formio_builder_uuid">
