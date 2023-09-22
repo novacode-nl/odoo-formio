@@ -1,5 +1,12 @@
 # Changelog
 
+## 16.0.8.1
+
+Improvement:\
+Bypass any 'Administration/Access Rights' access error in the low-level method `_get_builder_from_id` used with form creation etc.\
+Use `sudo` in `formio.form` method `_get_builder_from_id`.\
+This is considered safe, because it's a low-level method.
+
 ## 16.0.8.0
 
 ### Improvements
@@ -47,22 +54,25 @@ Add `formio.form` (Form) `after_save_draft` method and execute it in the `/submi
 
 ## 16.0.6.8
 
-Fix:
+### Fix
+
 Still one Form loading regression (bug) in template `formio_form_public_embed`.\
 Due to incomplete implementation of the new (loading) spinner implementation in v16.0.6.6.
 
 ## 16.0.6.7
 
-Fix:
+### Fix
+
 Form loading on portal and public/website.\
 Due to incomplete implementation of the new (loading) spinner implementation in v16.0.6.6.
 
-Improvement:
+### Improvement
 Put the form builder (loading) spinner in dedicated `<div/>` which hides when the form builder has been rendered.
 
 ## 16.0.6.6
 
-Improvements:
+### Improvements
+
 - Menu renaming: 'Forms' to 'Form Submissions'
 - Put the form (loading) spinner in dedicated `<div/>` which hides when the form has been rendered.
 
@@ -77,7 +87,7 @@ Updated Dutch translations (nl.po file).
 
 ## 16.0.6.3
 
-Improvement for translations:
+Improvement for translations:\
 - Add translate function in `formio.builder` model
 - Set language (IETF code) in payload of `customValidation` hook.
 
@@ -92,7 +102,7 @@ This also results in a visible button to open the linked resource.
 
 ## 16.0.6.0
 
-Changes:
+Changes:\
 - Implement the formio.js `customValidation` hook, which XHR posts to the API / validation endpoint.
 - Some code reorder, cleanup and comments.
 

@@ -261,7 +261,11 @@ class Form(models.Model):
         return partner_vals
 
     def _get_builder_from_id(self, builder_id):
-        return self.env['formio.builder'].browse(builder_id)
+        """
+        Use `sudo` in to bypass any 'Administration/Access Rights' access error.
+        This is considered safe, because it's a low-level method.
+        """
+        return self.env["formio.builder"].sudo().browse(builder_id)
 
     @api.depends('uuid')
     def _compute_builder_id_domain(self):
