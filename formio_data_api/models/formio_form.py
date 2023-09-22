@@ -39,10 +39,12 @@ class FormioForm(models.Model):
                 else:
                     raise UserError("The form can't be loaded. No (user) language was set.")
 
+                component_class_mapping = context.get('formio_component_class_mapping', {})
                 res_lang = self.env['res.lang'].search([('code', '=', lang)], limit=1)
                 builder_obj = Builder(
                     self.builder_id.schema,
                     language=res_lang.iso_code,
+                    component_class_mapping=component_class_mapping,
                     i18n=self.builder_id.i18n_translations())
 
                 if self.submission_data is False:
