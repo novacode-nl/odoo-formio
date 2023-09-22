@@ -19,7 +19,7 @@ class FormioForm(models.Model):
 
     def formio_component_class_mapping(self):
         """
-        This method provides the formiodata.Builder instatiation the
+        This method provides the formiodata.Builder instantiation the
         component_class_mapping keyword argument.
 
         This method can be implemented in other (formio) modules.
