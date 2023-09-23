@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.8.2
+
+Form Builder default Auto Save enabled.\
+Because Odoo also does.
+
 ## 16.0.8.1
 
 Improvement:\

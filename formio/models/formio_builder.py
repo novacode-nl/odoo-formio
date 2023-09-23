@@ -83,8 +83,10 @@ class Builder(models.Model):
     display_state = fields.Char("Display State", compute='_compute_display_fields', store=False)
     display_name_full = fields.Char("Display Name Full", compute='_compute_display_fields', search='_search_display_name_full', store=False)
     auto_save = fields.Boolean(
-        string="Auto Save", tracking=True,
-        help="Auto-save or manually save the Form Builder changes"
+        string="Auto Save",
+        default=True,
+        tracking=True,
+        help="Auto-save or manually save the Form Builder changes",
     )
     is_locked = fields.Boolean(
         string="Locked", copy=False, tracking=True,
