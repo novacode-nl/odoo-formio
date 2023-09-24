@@ -1,7 +1,20 @@
 // Copyright Nova Code (http://www.novacode.nl)
 // See LICENSE file for full licensing details.
 
-import { OdooFormioForm } from "./formio_form.js";
+function uuidv4() {
+    // Used in cache invalidation (can also be used in PWA).
+    // TODO: DRY, move to generic function/method to be imported here.
+    // XXX: not ideal https://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(
+        /[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+}
+
+
+// random importPath ensures no cachinglet importPath = "./formio_form.js?" + uuidv4();
+let { OdooFormioForm } = await import(importPath);
+
 // use global owl
 // can't import from "@odoo/owl", because not an @odoo-module
 const { mount, whenReady, xml } = owl;

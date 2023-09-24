@@ -8,13 +8,7 @@ from odoo import http, fields
 from odoo.http import request
 
 from ..models.formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
-
-from ..models.formio_form import (
-    STATE_DRAFT as FORM_STATE_DRAFT,
-    STATE_COMPLETE as FORM_STATE_COMPLETE,
-)
-
-from .utils import log_form_submisssion
+from .utils import generate_uuid4, log_form_submisssion
 
 _logger = logging.getLogger(__name__)
 
@@ -41,7 +35,9 @@ class FormioPublicController(http.Controller):
                 'form_languages': languages,
                 'formio_css_assets': form.builder_id.formio_css_assets,
                 'formio_js_assets': form.builder_id.formio_js_assets,
-                'extra_assets': form.builder_id.extra_asset_ids
+                'extra_assets': form.builder_id.extra_asset_ids,
+                # uuid is used to disable assets (js, css) caching by hrefs
+                'uuid': generate_uuid4()
             }
             return request.render('formio.formio_form_public_embed', values)
 
@@ -137,7 +133,9 @@ class FormioPublicController(http.Controller):
                 'form_languages': formio_builder.languages,
                 'formio_css_assets': formio_builder.formio_css_assets,
                 'formio_js_assets': formio_builder.formio_js_assets,
-                'extra_assets': formio_builder.extra_asset_ids
+                'extra_assets': formio_builder.extra_asset_ids,
+                # uuid is used to disable assets (js, css) caching by hrefs
+                'uuid': generate_uuid4()
             }
             return request.render('formio.formio_form_public_new_embed', values)
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.8.3
+
+Form improvement:\
+Avoid browser caching for Form assets files (CSS, JS).
+
 ## 16.0.8.2
 
 Form Builder default Auto Save enabled.\
