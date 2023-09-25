@@ -2,7 +2,7 @@
 
 ## 16.0.9.0
 
-Fix sequence of form evens and its async callback actions, by queue-ing the sequence of async callback actions into a Promise object.\
+Fix sequence of form events and its async callback actions, by queue-ing the sequence of async callback actions into a Promise object.\
 This ensures the sequence of async callback actions will be resolved (executed) in the same order of the JS event stack.
 
 ## 16.0.8.3
