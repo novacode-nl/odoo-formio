@@ -96,7 +96,6 @@ export class OdooFormioForm extends Component {
 
             $.jsonRpc.request(self.submitUrl, 'call', data).then(function(submission) {
                 if (typeof(submission) != 'undefined') {
-                    console.log(submission);
                     // Set properties to instruct the next calls to save (draft) the current form.
                     self.formUuid = submission.form_uuid;
                     self.submitUrl = self.wizardSubmitUrl + self.formUuid + '/submit';
