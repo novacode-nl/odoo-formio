@@ -40,6 +40,8 @@ export class OdooFormioForm extends Component {
         this.apiValidationUrl = null;
         this.urlParams = new URLSearchParams(window.location.search);
 
+        // init a promise
+        this.promiseQueue = new Promise((resolve) => resolve());
     }
 
     initForm() {
@@ -94,15 +96,24 @@ export class OdooFormioForm extends Component {
 
             self.showOverlay();
 
-            $.jsonRpc.request(self.submitUrl, 'call', data).then(function(submission) {
-                if (typeof(submission) != 'undefined') {
-                    // Set properties to instruct the next calls to save (draft) the current form.
-                    self.formUuid = submission.form_uuid;
-                    self.submitUrl = self.wizardSubmitUrl + self.formUuid + '/submit';
-                    form.setSubmission({'data': JSON.parse(submission.submission_data)});
-                    self.hideOverlay();
-                }
+            // Fix compatibility with jQuery Promises.
+            //
+            // TODO: when replaced $.jsonRpc to native XHR, this
+            // extra (return) Promise ain't needed.
+            return new Promise((resolve, reject) => {
+                $.jsonRpc.request(self.submitUrl, 'call', data).then(function(submission) {
+                    if (typeof(submission) != 'undefined') {
+                        // Set properties to instruct the next calls to save (draft) the current form.
+                        self.formUuid = submission.form_uuid;
+                        self.submitUrl = self.wizardSubmitUrl + self.formUuid + '/submit';
+                        form.setSubmission({'data': JSON.parse(submission.submission_data)});
+                        self.hideOverlay();
+                    }
+                });
             });
+        }
+        else {
+            return null;
         }
     }
 
@@ -222,10 +233,27 @@ export class OdooFormioForm extends Component {
                     },
                     'form_data': form._data
                 };
-                $.jsonRpc.request(apiUrl, 'call', {'data': data}).then(function(result) {
-                    form.submission = {'data': JSON.parse(result)};
+
+                self.showOverlay();
+
+                // Fix compatibility with jQuery Promises.
+                //
+                // TODO: when replaced $.jsonRpc to native XHR, this
+                // extra (return) Promise ain't needed.
+                return new Promise((resolve, reject) => {
+                    $.jsonRpc.request(apiUrl, 'call', {'data': data}).then(function(result) {
+                        form.submission = {'data': JSON.parse(result)};
+                        self.hideOverlay();
+                        resolve();
+                    });
                 });
             }
+            else {
+                return null;
+            }
+        }
+        else {
+            return null;
         }
     }
 
@@ -272,7 +300,6 @@ export class OdooFormioForm extends Component {
             let buttons = document.querySelectorAll('.formio_languages button');
 
             buttons.forEach(function(btn) {
-                
                 if (self.language === btn.lang) {
                     btn.classList.add('language_button_active');
                 };
@@ -332,7 +359,9 @@ export class OdooFormioForm extends Component {
                 //
                 // @param instance: The component instance.
                 if (instance) {
-                    self.onBlur(form, instance);
+                    self.promiseQueue.then(() => {
+                        self.onBlur(form, instance);
+                    });
                 }
             });
 
@@ -357,9 +386,21 @@ export class OdooFormioForm extends Component {
             });
 
             // wizard
-            form.on('wizardPageSelected', (submission) => self.wizardStateChange(form));
-            form.on('prevPage', (submission) => self.wizardStateChange(form));
-            form.on('nextPage', (submission) => self.wizardStateChange(form));
+            form.on('wizardPageSelected', (submission) =>
+                self.promiseQueue.then((resolve, reject) => {
+                    self.wizardStateChange(form);
+                })
+            );
+            form.on('prevPage', (submission) =>
+                self.promiseQueue.then((resolve, reject) => {
+                    self.wizardStateChange(form);
+                })
+            );
+            form.on('nextPage', (submission) =>
+                self.promiseQueue.then((resolve, reject) => {
+                    self.wizardStateChange(form);
+                })
+            );
 
             // Set the Submission (data)
             // https://github.com/formio/formio.js/wiki/Form-Renderer#setting-the-submission
