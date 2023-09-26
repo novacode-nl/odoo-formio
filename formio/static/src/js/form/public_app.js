@@ -1,4 +1,4 @@
-// Copyright Nova Code (http://www.novacode.nl)
+// Copyright Nova Code (https://www.novacode.nl)
 // See LICENSE file for full licensing details.
 
 function uuidv4() {
@@ -11,8 +11,8 @@ function uuidv4() {
     );
 }
 
-
-// random importPath ensures no cachinglet importPath = "./formio_form.js?" + uuidv4();
+// random importPath ensures no caching
+let importPath = "./formio_form.js?" + uuidv4();
 let { OdooFormioForm } = await import(importPath);
 
 // use global owl

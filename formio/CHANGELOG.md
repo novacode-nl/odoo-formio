@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.9.1
+
+Fix UI rendering of a public (existing) form.\
+JS Console error: `Uncaught ReferenceError: importPath is not defined`
+
 ## 16.0.9.0
 
 Fix sequence of form events and its async callback actions, by queue-ing the sequence of async callback actions into a Promise object.\
