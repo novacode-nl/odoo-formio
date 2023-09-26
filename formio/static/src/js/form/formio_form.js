@@ -100,7 +100,7 @@ export class OdooFormioForm extends Component {
             //
             // TODO: when replaced $.jsonRpc to native XHR, this
             // extra (return) Promise ain't needed.
-            return new Promise((resolve, reject) => {
+            return new Promise(() => {
                 $.jsonRpc.request(self.submitUrl, 'call', data).then(function(submission) {
                     if (typeof(submission) != 'undefined') {
                         // Set properties to instruct the next calls to save (draft) the current form.
@@ -240,7 +240,7 @@ export class OdooFormioForm extends Component {
                 //
                 // TODO: when replaced $.jsonRpc to native XHR, this
                 // extra (return) Promise ain't needed.
-                return new Promise((resolve, reject) => {
+                return new Promise((resolve) => {
                     $.jsonRpc.request(apiUrl, 'call', {'data': data}).then(function(result) {
                         form.submission = {'data': JSON.parse(result)};
                         self.hideOverlay();
@@ -387,17 +387,17 @@ export class OdooFormioForm extends Component {
 
             // wizard
             form.on('wizardPageSelected', (submission) =>
-                self.promiseQueue.then((resolve, reject) => {
+                self.promiseQueue.then(() => {
                     self.wizardStateChange(form);
                 })
             );
             form.on('prevPage', (submission) =>
-                self.promiseQueue.then((resolve, reject) => {
+                self.promiseQueue.then(() => {
                     self.wizardStateChange(form);
                 })
             );
             form.on('nextPage', (submission) =>
-                self.promiseQueue.then((resolve, reject) => {
+                self.promiseQueue.then(() => {
                     self.wizardStateChange(form);
                 })
             );
