@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.9.2
+
+Fix public form submit endpoint.\
+Revert (accidentally) removed `import` in public controller.
+
 ## 16.0.9.1
 
 Fix UI rendering of a public (existing) form.\

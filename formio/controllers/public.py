@@ -8,6 +8,10 @@ from odoo import http, fields
 from odoo.http import request
 
 from ..models.formio_builder import STATE_CURRENT as BUILDER_STATE_CURRENT
+from ..models.formio_form import (
+    STATE_DRAFT as FORM_STATE_DRAFT,
+    STATE_COMPLETE as FORM_STATE_COMPLETE,
+)
 from .utils import generate_uuid4, log_form_submisssion
 
 _logger = logging.getLogger(__name__)
