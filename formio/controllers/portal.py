@@ -15,6 +15,8 @@ from ..models.formio_form import (
 )
 from .utils import generate_uuid4, log_form_submisssion
 
+from .utils import validate_csrf
+
 _logger = logging.getLogger(__name__)
 
 
@@ -193,7 +195,7 @@ class FormioCustomerPortal(CustomerPortal):
     ######################
 
     @http.route('/formio/portal/form/<string:uuid>', type='http', auth='user', website=True)
-    def portal_form_root(self, uuid, **kwargs):
+    def portal_form_root(self, uuid):
         form = self._get_form(uuid, 'read')
         if not form:
             msg = 'Form UUID %s' % uuid
@@ -241,7 +243,7 @@ class FormioCustomerPortal(CustomerPortal):
         return request.render("formio.portal_my_formio_new", values)
 
     @http.route('/formio/portal/form/new/<string:builder_name>', type='http', auth='user', methods=['GET'], website=True)
-    def portal_form_new_root(self, builder_name, **kwargs):
+    def portal_form_new_root(self, builder_name):
         builder = self._get_builder_name(builder_name)
         if not builder:
             msg = 'Form Builder (name) %s: not found' % builder_name
@@ -267,8 +269,8 @@ class FormioCustomerPortal(CustomerPortal):
     # Form - portal - new
     #####################
 
-    @http.route('/formio/portal/form/new/<string:builder_uuid>/config', type='json', auth='user', website=True)
-    def form_new_config(self, builder_uuid, **kwargs):
+    @http.route('/formio/portal/form/new/<string:builder_uuid>/config', type='http', auth='user', csrf=False, website=True)
+    def form_new_config(self, builder_uuid):
         builder = self._get_builder_uuid(builder_uuid)
         res = {'schema': {}, 'options': {}, 'params': {}}
 
@@ -278,15 +280,17 @@ class FormioCustomerPortal(CustomerPortal):
         if builder.schema:
             res['schema'] = json.loads(builder.schema)
             res['options'] = self._get_form_js_options(builder)
-            res['locales'] = self._get_form_js_locales(builder)
             res['params'] = self._get_form_js_params(builder)
+            res['locales'] = self._get_form_js_locales(builder)
+            res['csrf_token'] = request.csrf_token()
 
         args = request.httprequest.args
         etl_odoo_config = builder.sudo()._etl_odoo_config(params=args.to_dict())
         res['options'].update(etl_odoo_config.get('options', {}))
-        return res
 
-    @http.route('/formio/portal/form/new/<string:builder_uuid>/submission', type='json', auth='user', website=True)
+        return request.make_json_response(res)
+
+    @http.route('/formio/portal/form/new/<string:builder_uuid>/submission', type='http', auth='user', csrf=False, website=True)
     def form_new_submission(self, builder_uuid, **kwargs):
         builder = self._get_builder_uuid(builder_uuid)
 
@@ -299,9 +303,9 @@ class FormioCustomerPortal(CustomerPortal):
         submission_data = {}
         etl_odoo_data = builder.sudo()._etl_odoo_data(params=args.to_dict())
         submission_data.update(etl_odoo_data)
-        return json.dumps(submission_data)
+        return request.make_json_response(submission_data)
 
-    @http.route('/formio/portal/form/new/<string:builder_uuid>/submit', type='json', auth="user", methods=['POST'], website=True)
+    @http.route('/formio/portal/form/new/<string:builder_uuid>/submit', type='http', auth="user", methods=['POST'], csrf=False, website=True)
     def form_new_submit(self, builder_uuid, **post):
         """ Form submit endpoint
 
@@ -309,12 +313,14 @@ class FormioCustomerPortal(CustomerPortal):
         In wizard mode, the submit endpoint shall be changed
         (frontend/JS code) to: /formio/form/<string:uuid>/submit
         """
+        self.validate_csrf()
         builder = self._get_builder_uuid(builder_uuid)
 
         if not builder:
             # TODO raise or set exception (in JSON resonse) ?
             return
 
+        post = request.get_json_data()
         Form = request.env['formio.form']
         vals = {
             'builder_id': builder.id,
@@ -326,7 +332,9 @@ class FormioCustomerPortal(CustomerPortal):
             'portal_share': True
         }
 
-        save_draft = post.get('saveDraft') or (post['data'].get('saveDraft') and not post['data'].get('submit'))
+        save_draft = post.get('saveDraft') or (
+            post['data'].get('saveDraft') and not post['data'].get('submit')
+        )
 
         if save_draft:
             vals['state'] = FORM_STATE_DRAFT
@@ -345,10 +353,11 @@ class FormioCustomerPortal(CustomerPortal):
         # debug mode is checked/handled
         log_form_submisssion(form)
 
-        return {
+        res = {
             'form_uuid': form.uuid,
             'submission_data': form.submission_data
         }
+        request.make_json_response(res)
 
     #########
     # Helpers
@@ -382,3 +391,6 @@ class FormioCustomerPortal(CustomerPortal):
 
     def _get_form_js_params(self, builder):
         return builder._get_portal_form_js_params()
+
+    def validate_csrf(self):
+        validate_csrf(request)

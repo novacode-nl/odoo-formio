@@ -25,6 +25,7 @@ export class OdooFormioForm extends Component {
         this.language = null;
         this.locales = {};
         this.params = {}; // extra params from Odoo backend
+        this.csrfToken = null;
 
         // by initForm
         this.builderUuid = null;
@@ -90,25 +91,21 @@ export class OdooFormioForm extends Component {
         if (self.params['wizard_on_change_page_save_draft'] && !readOnly) {
             form.beforeSubmit();
             const data = {'data': form.data, 'saveDraft': true};
-            if (self.formUuid) {
-                data['form_uuid'] = self.formUuid;
-            }
 
             self.showOverlay();
 
             // Fix compatibility with jQuery Promises.
             //
-            // TODO: when replaced $.jsonRpc to native XHR, this
+            // TODO NOW: when replaced $.ajax to native XHR, this
             // extra (return) Promise ain't needed.
             return new Promise(() => {
-                $.jsonRpc.request(self.submitUrl, 'call', data).then(function(submission) {
+                this.postData(this.submitUrl, data).then(function(submission) {
                     if (typeof(submission) != 'undefined') {
                         // Set properties to instruct the next calls to save (draft) the current form.
-                        self.formUuid = submission.form_uuid;
-                        self.submitUrl = self.wizardSubmitUrl + self.formUuid + '/submit';
-                        form.setSubmission({'data': JSON.parse(submission.submission_data)});
-                        self.hideOverlay();
+                        this.formUuid = submission.form_uuid;
+                        this.submitUrl = this.wizardSubmitUrl + this.formUuid + '/submit';
                     }
+                    self.hideOverlay();
                 });
             });
         }
@@ -131,14 +128,17 @@ export class OdooFormioForm extends Component {
             }
         }
         self.showOverlay();
-        $.jsonRpc.request(configUrl, 'call', {}).then(function(result) {
+
+        self.getData(configUrl, {}).then(function(result) {
             if (!$.isEmptyObject(result)) {
-                self.schema = result.schema;
-                self.options = result.options;
+                const res = result;
+                self.schema = res.schema;
+                self.options = res.options;
                 self.language = self.options.language;
-                self.locales = result.locales;
+                self.locales = res.locales;
                 self.defaultLocaleShort = self.localeShort(self.language);
-                self.params = result.params;
+                self.params = res.params;
+                self.csrfToken = res.csrf_token;
                 self.createForm();
             }
         });
@@ -190,8 +190,9 @@ export class OdooFormioForm extends Component {
                         'form_data': form.data,
                         'lang_ietf_code': self.language
                     };
-                    $.jsonRpc.request(apiUrl, 'call', {'data': data}).then(function(result) {
-                        form.submission = {'data': JSON.parse(result)};
+                    // TODO implement Promise here too, similar to onBlur ?
+                    this.postData(apiUrl, data).then(function(result) {
+                        form.submission = {'data': result};
                     });
                 }
             }
@@ -238,11 +239,11 @@ export class OdooFormioForm extends Component {
 
                 // Fix compatibility with jQuery Promises.
                 //
-                // TODO: when replaced $.jsonRpc to native XHR, this
+                // TODO: when replaced $.ajax to native XHR, this
                 // extra (return) Promise ain't needed.
                 return new Promise((resolve) => {
-                    $.jsonRpc.request(apiUrl, 'call', {'data': data}).then(function(result) {
-                        form.submission = {'data': JSON.parse(result)};
+                    this.postData(apiUrl, data).then(function(result) {
+                        form.submission = {'data': result};
                         self.hideOverlay();
                         resolve();
                     });
@@ -255,6 +256,38 @@ export class OdooFormioForm extends Component {
         else {
             return null;
         }
+    }
+
+    getData(url, data) {
+        let dataPost = {...data};
+        if (this.formUuid) {
+            dataPost['form_uuid'] = this.formUuid;
+        }
+        dataPost['csrf_token'] = this.csrfToken;
+        return $.ajax(
+            {
+                url: url,
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(dataPost)
+            }
+        );
+    }
+
+    postData(url, data) {
+        let dataPost = {...data};
+        if (this.formUuid) {
+            dataPost['form_uuid'] = this.formUuid;
+        }
+        dataPost['csrf_token'] = this.csrfToken;
+        return $.ajax(
+            {
+                url: url,
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(dataPost)
+            }
+        );
     }
 
     createForm() {
@@ -282,7 +315,7 @@ export class OdooFormioForm extends Component {
                     && !!self.params['hook_api_validation'])
                 {
                     const data = {'data': submission.data, 'lang_ietf_code': self.language};
-                    $.jsonRpc.request(self.apiValidationUrl, 'call', data).then(function(errors) {
+                    self.postData(self.apiValidationUrl, data).then(function(errors) {
                         if (!$.isEmptyObject(errors)) {
                             next(errors);
                         }
@@ -367,10 +400,7 @@ export class OdooFormioForm extends Component {
 
             form.on('submit', function(submission) {
                 const data = {'data': submission.data};
-                if (self.formUuid) {
-                    data['form_uuid'] = self.formUuid;
-                }
-                $.jsonRpc.request(self.submitUrl, 'call', data).then(function() {
+                self.postData(self.submitUrl, data).then(function() {
                     form.emit('submitDone', submission);
                     self.hideOverlay();
                 });
@@ -416,9 +446,9 @@ export class OdooFormioForm extends Component {
                         submissionUrl += '?' + params.toString();
                     }
                 }
-                $.jsonRpc.request(submissionUrl, 'call', {}).then(function(result) {
+                self.getData(submissionUrl, {}).then(function(result) {
                     if (!$.isEmptyObject(result)) {
-                        form.submission = {'data': JSON.parse(result)};
+                        form.submission = {'data': result};
                     }
                     self.hideOverlay();
                 });

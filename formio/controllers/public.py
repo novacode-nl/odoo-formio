@@ -12,7 +12,9 @@ from ..models.formio_form import (
     STATE_DRAFT as FORM_STATE_DRAFT,
     STATE_COMPLETE as FORM_STATE_COMPLETE,
 )
-from .utils import generate_uuid4, log_form_submisssion
+
+from .utils import generate_uuid4, log_form_submisssion, validate_csrf
+
 
 _logger = logging.getLogger(__name__)
 
@@ -24,7 +26,7 @@ class FormioPublicController(http.Controller):
     ####################
 
     @http.route('/formio/public/form/<string:uuid>', type='http', auth='public', website=True)
-    def public_form_root(self, uuid, **kwargs):
+    def public_form_root(self, uuid):
         form = self._get_public_form(uuid, self._check_public_form())
         if not form:
             msg = 'Form UUID %s' % uuid
@@ -45,8 +47,8 @@ class FormioPublicController(http.Controller):
             }
             return request.render('formio.formio_form_public_embed', values)
 
-    @http.route('/formio/public/form/<string:form_uuid>/config', type='json', auth='public', website=True)
-    def form_config(self, form_uuid, **kwargs):
+    @http.route('/formio/public/form/<string:form_uuid>/config', type='http', auth='public', csrf=False, website=True)
+    def form_config(self, form_uuid):
         form = self._get_public_form(form_uuid, self._check_public_form())
         res = {'schema': {}, 'options': {}, 'params': {}}
 
@@ -55,14 +57,15 @@ class FormioPublicController(http.Controller):
             res['options'] = self._get_public_form_js_options(form)
             res['locales'] = self._get_public_form_js_locales(form.builder_id)
             res['params'] = self._get_public_form_js_params(form.builder_id)
+            res['csrf_token'] = request.csrf_token()
 
         args = request.httprequest.args
         etl_odoo_config = form.builder_id.sudo()._etl_odoo_config(params=args.to_dict())
         res['options'].update(etl_odoo_config.get('options', {}))
-        return res
+        return request.make_json_response(res)
 
-    @http.route('/formio/public/form/<string:uuid>/submission', type='json', auth='public', website=True)
-    def public_form_submission(self, uuid, **kwargs):
+    @http.route('/formio/public/form/<string:uuid>/submission', type='http', auth='public', csrf=False, website=True)
+    def public_form_submission(self, uuid):
         form = self._get_public_form(uuid, self._check_public_form())
 
         # Submission data
@@ -76,12 +79,12 @@ class FormioPublicController(http.Controller):
             etl_odoo_data = form.sudo()._etl_odoo_data()
             submission_data.update(etl_odoo_data)
 
-        return json.dumps(submission_data)
+        return request.make_json_response(submission_data)
 
-    @http.route('/formio/public/form/<string:uuid>/submit', type='json', auth="public", methods=['POST'], website=True)
+    @http.route('/formio/public/form/<string:uuid>/submit', type='http', auth="public", methods=['POST'], csrf=False, website=True)
     def public_form_submit(self, uuid, **post):
         """ POST with ID instead of uuid, to get the model object right away """
-
+        self.validate_csrf()
         form = self._get_public_form(uuid, self._check_public_form())
         if not form:
             # TODO raise or set exception (in JSON resonse) ?
@@ -93,7 +96,9 @@ class FormioPublicController(http.Controller):
             'submission_date': fields.Datetime.now(),
         }
 
-        if post.get('saveDraft') or (post['data'].get('saveDraft') and not post['data'].get('submit')):
+        if post.get('saveDraft') or (
+            post['data'].get('saveDraft') and not post['data'].get('submit')
+        ):
             vals['state'] = FORM_STATE_DRAFT
         else:
             vals['state'] = FORM_STATE_COMPLETE
@@ -118,7 +123,7 @@ class FormioPublicController(http.Controller):
     ###################
 
     @http.route('/formio/public/form/new/<string:builder_uuid>', type='http', auth='public', methods=['GET'], website=True)
-    def public_form_new_root(self, builder_uuid, **kwargs):
+    def public_form_new_root(self, builder_uuid):
         formio_builder = self._get_public_builder(builder_uuid)
         if not formio_builder:
             msg = 'Form Builder UUID %s: not found' % builder_uuid
@@ -143,8 +148,8 @@ class FormioPublicController(http.Controller):
             }
             return request.render('formio.formio_form_public_new_embed', values)
 
-    @http.route('/formio/public/form/new/<string:builder_uuid>/config', type='json', auth='public', website=True)
-    def public_form_new_config(self, builder_uuid, **kwargs):
+    @http.route('/formio/public/form/new/<string:builder_uuid>/config', type='http', auth='public', csrf=False, website=True)
+    def public_form_new_config(self, builder_uuid):
         formio_builder = self._get_public_builder(builder_uuid)
         res = {'schema': {}, 'options': {}}
 
@@ -156,15 +161,16 @@ class FormioPublicController(http.Controller):
             res['options'] = self._get_public_new_form_js_options(formio_builder)
             res['locales'] = self._get_public_form_js_locales(formio_builder)
             res['params'] = self._get_public_form_js_params(formio_builder)
+            res['csrf_token'] = request.csrf_token()
 
         args = request.httprequest.args
         etl_odoo_config = formio_builder.sudo()._etl_odoo_config(params=args.to_dict())
         res['options'].update(etl_odoo_config.get('options', {}))
 
-        return res
+        return request.make_json_response(res)
 
-    @http.route('/formio/public/form/new/<string:builder_uuid>/submission', type='json', auth='public', website=True)
-    def public_form_new_submission(self, builder_uuid, **kwargs):
+    @http.route('/formio/public/form/new/<string:builder_uuid>/submission', type='http', auth='public', csrf=False, website=True)
+    def public_form_new_submission(self, builder_uuid):
         formio_builder = self._get_public_builder(builder_uuid)
 
         if not formio_builder or not formio_builder.public:
@@ -176,15 +182,17 @@ class FormioPublicController(http.Controller):
         submission_data = {}
         etl_odoo_data = formio_builder.sudo()._etl_odoo_data(params=args.to_dict())
         submission_data.update(etl_odoo_data)
-        return json.dumps(submission_data)
+        return request.make_json_response(submission_data)
 
-    @http.route('/formio/public/form/new/<string:builder_uuid>/submit', type='json', auth="public", methods=['POST'], website=True)
-    def public_form_new_submit(self, builder_uuid, **post):
+    @http.route('/formio/public/form/new/<string:builder_uuid>/submit', type='http', auth="public", methods=['POST'], csrf=False, website=True)
+    def public_form_new_submit(self, builder_uuid):
+        self.validate_csrf()
         formio_builder = self._get_public_builder(builder_uuid)
         if not formio_builder:
             # TODO raise or set exception (in JSON resonse) ?
             return
 
+        post = request.get_json_data()
         Form = request.env['formio.form']
         vals = {
             'builder_id': formio_builder.id,
@@ -196,7 +204,9 @@ class FormioPublicController(http.Controller):
             'submission_user_id': request.env.user.id
         }
 
-        save_draft = post.get('saveDraft') or (post['data'].get('saveDraft') and not post['data'].get('submit'))
+        save_draft = post.get('saveDraft') or (
+            post['data'].get('saveDraft') and not post['data'].get('submit')
+        )
 
         if save_draft:
             vals['state'] = FORM_STATE_DRAFT
@@ -222,10 +232,12 @@ class FormioPublicController(http.Controller):
         # debug mode is checked/handled
         log_form_submisssion(form)
 
-        return {
+        request.session['formio_last_form_uuid'] = form.uuid
+        res = {
             'form_uuid': form.uuid,
             'submission_data': form.submission_data
         }
+        return request.make_json_response(res)
 
     #########
     # Helpers
@@ -280,3 +292,6 @@ class FormioPublicController(http.Controller):
 
     def _get_form(self, uuid, mode):
         return request.env['formio.form'].get_form(uuid, mode)
+
+    def validate_csrf(self):
+        validate_csrf(request)

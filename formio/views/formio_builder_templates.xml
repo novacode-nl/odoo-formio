@@ -31,7 +31,6 @@ See LICENSE file for full licensing details. -->
                 <!-- Odoo JS dependencies could cause clashes with formio.js -->
                 <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
                 <script type="text/javascript" src="/web/static/lib/owl/owl.js"></script>
-                <script type="text/javascript" src="/formio/static/src/js/odoo.jsonrpc.js"/>
 
                 <t t-foreach="extra_assets.filtered(lambda x: x.target == 'append')" t-as="asset">
                     <t t-if="asset.type == 'css'">
