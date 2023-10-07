@@ -15,6 +15,15 @@ _logger = logging.getLogger(__name__)
 class FormioBuilder(models.Model):
     _inherit = 'formio.builder'
 
+    def formio_component_class_mapping(self):
+        """
+        This method provides the formiodata.Builder instantiation the
+        component_class_mapping keyword argument.
+
+        This method can be implemented in other (formio) modules.
+        """
+        return {}
+
     def __getattr__(self, name):
         if name == '_formio' and self._name == 'formio.builder':
             # TODO implement caching on the model object
@@ -37,9 +46,11 @@ class FormioBuilder(models.Model):
                 # HACK masquerade empty Builder object
                 builder_obj = Builder('{}')
             else:
+                component_class_mapping = self.formio_component_class_mapping()
                 builder_obj = Builder(
                     self.schema,
                     language=self.env['res.lang'].sudo()._formio_ietf_code(lang),
+                    component_class_mapping=component_class_mapping,
                     i18n=self.i18n_translations()
                 )
             return builder_obj

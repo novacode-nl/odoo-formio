@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.2.2
+
+Add `component_class_mapping` feature to `formio.builder` model
+`_formio` its `getattr` method.
+
 ## 16.0.2.1
 
 Improve the `component_class_mapping` feature introduced in previous version `16.0.2.0 `.\
