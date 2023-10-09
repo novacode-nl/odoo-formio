@@ -3,7 +3,7 @@
 ## 16.0.10.0
 
 CSRF protection for form builders and forms.\
-This also removes the custom JSON-RPC implementation with XMLHTTPRequest (XHR), which is still jQuery tough (to be replaced by native XHR soon).
+This also removes the custom JSON-RPC implementation with XMLHTTPRequest (XHR), which is still jQuery (to be replaced by native XHR soon).
 
 Also removed several unused `kwargs` from controller methods (arguments).
 
