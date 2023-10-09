@@ -5,7 +5,10 @@ import json
 import logging
 import uuid
 
-from odoo.http import request
+from odoo.http import MISSING_CSRF_WARNING, request
+
+from ..exceptions import BadCSRF
+
 
 _logger = logging.getLogger(__name__)
 
@@ -36,3 +39,14 @@ def log_form_submisssion(form, debug_mode=True):
             'Submission data',
             json.dumps(submission_data, indent=4, sort_keys=True)
         )
+
+
+def validate_csrf(request):
+    post = request.get_json_data()
+    token = post.pop('csrf_token', None)
+    if not request.validate_csrf(token):
+        if token is not None:
+            _logger.warning("CSRF validation failed on path '%s'", request.httprequest.path)
+        else:
+            _logger.warning(MISSING_CSRF_WARNING, request.httprequest.path)
+        raise BadCSRF('Session expired (invalid CSRF token)')

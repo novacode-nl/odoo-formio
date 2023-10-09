@@ -21,6 +21,8 @@ from ..models.formio_form import (
 )
 from .utils import log_form_submisssion, generate_uuid4
 
+from .utils import validate_csrf
+
 _logger = logging.getLogger(__name__)
 
 
@@ -31,7 +33,7 @@ class FormioController(http.Controller):
     ##############
 
     @http.route('/formio/builder/<int:builder_id>', type='http', auth='user', website=True)
-    def builder_root(self, builder_id, **kwargs):
+    def builder_root(self, builder_id):
         if not request.env.user.has_group('formio.group_formio_admin'):
             # TODO Render template with message?
             return request.redirect("/")
@@ -61,8 +63,8 @@ class FormioController(http.Controller):
         }
         return request.render('formio.formio_builder_embed', values)
 
-    @http.route('/formio/builder/<int:builder_id>/config', type='json', auth='user', website=True)
-    def builder_config(self, builder_id, **kwargs):
+    @http.route('/formio/builder/<int:builder_id>/config', type='http', auth='user', methods=['POST'], csrf=False, website=True)
+    def builder_config(self, builder_id):
         if not request.env.user.has_group('formio.group_formio_admin'):
             return
         builder = request.env['formio.builder'].browse(builder_id)
@@ -74,13 +76,16 @@ class FormioController(http.Controller):
             res['options'] = builder._get_js_options()
             res['params'] = builder._get_js_params()
             res['locales'] = builder._get_form_js_locales()
-        return res
+            res['csrf_token'] = request.csrf_token()
+        return request.make_json_response(res)
 
-    @http.route('/formio/builder/<model("formio.builder"):builder>/save', type='json', auth="user", methods=['POST'], website=True)
-    def builder_save(self, builder, **post):
+    @http.route('/formio/builder/<model("formio.builder"):builder>/save', type='http', auth="user", methods=['POST'], csrf=False, website=True)
+    def builder_save(self, builder):
+        self.validate_csrf()
         if not request.env.user.has_group('formio.group_formio_admin'):
             return
 
+        post = request.get_json_data()
         if 'builder_id' not in post or int(post['builder_id']) != builder.id:
             return
 
@@ -92,7 +97,7 @@ class FormioController(http.Controller):
     #######################
 
     @http.route('/formio/form/<string:uuid>', type='http', auth='user', website=True)
-    def form_root(self, uuid, **kwargs):
+    def form_root(self, uuid):
         form = self._get_form(uuid, 'read')
         if not form:
             msg = 'Form UUID %s' % uuid
@@ -122,8 +127,8 @@ class FormioController(http.Controller):
         }
         return request.render('formio.formio_form_embed', values)
 
-    @http.route('/formio/form/<string:form_uuid>/config', type='json', auth='user', website=True)
-    def form_config(self, form_uuid, **kwargs):
+    @http.route('/formio/form/<string:form_uuid>/config', type='http', auth='user', csrf=False, website=True)
+    def form_config(self, form_uuid):
         form = self._get_form(form_uuid, 'read')
         # TODO remove config (key)
         res = {'schema': {}, 'options': {}, 'config': {}, 'params': {}}
@@ -133,11 +138,11 @@ class FormioController(http.Controller):
             res['options'] = self._get_form_js_options(form)
             res['params'] = self._get_form_js_params(form)
             res['locales'] = self._get_form_js_locales(form)
+            res['csrf_token'] = request.csrf_token()
+        return request.make_json_response(res)
 
-        return res
-
-    @http.route('/formio/form/<string:uuid>/submission', type='json', auth='user', website=True)
-    def form_submission(self, uuid, **kwargs):
+    @http.route('/formio/form/<string:uuid>/submission', type='http', auth='user', csrf=False, website=True)
+    def form_submission(self, uuid):
         form = self._get_form(uuid, 'read')
 
         # Submission data
@@ -151,23 +156,26 @@ class FormioController(http.Controller):
             etl_odoo_data = form.sudo()._etl_odoo_data()
             submission_data.update(etl_odoo_data)
 
-        return json.dumps(submission_data)
+        return request.make_json_response(submission_data)
 
-    @http.route('/formio/form/<string:uuid>/submit', type='json', auth="user", methods=['POST'], website=True)
-    def form_submit(self, uuid, **post):
+    @http.route('/formio/form/<string:uuid>/submit', type='http', auth="user", methods=['POST'], csrf=False, website=True)
+    def form_submit(self, uuid):
         """ POST with ID instead of uuid, to get the model object right away """
-
+        self.validate_csrf()
         form = self._get_form(uuid, 'write')
         if not form or form.state == FORM_STATE_COMPLETE:
             # TODO raise or set exception (in JSON resonse) ?
             return
+        post = request.get_json_data()
         vals = {
             'submission_data': json.dumps(post['data']),
             'submission_user_id': request.env.user.id,
             'submission_date': fields.Datetime.now(),
         }
 
-        if post.get('saveDraft') or (post['data'].get('saveDraft') and not post['data'].get('submit')):
+        if post.get('saveDraft') or (
+            post['data'].get('saveDraft') and not post['data'].get('submit')
+        ):
             vals['state'] = FORM_STATE_DRAFT
         else:
             vals['state'] = FORM_STATE_COMPLETE
@@ -182,10 +190,11 @@ class FormioController(http.Controller):
         # debug mode is checked/handled
         log_form_submisssion(form)
 
-        return {
+        res = {
             'form_uuid': uuid,
             'submission_data': form.submission_data
         }
+        return request.make_json_response(res)
 
     #######
     # Fonts
@@ -271,3 +280,6 @@ class FormioController(http.Controller):
 
     def _get_form(self, uuid, mode):
         return request.env['formio.form'].get_form(uuid, mode)
+
+    def validate_csrf(self):
+        validate_csrf(request)

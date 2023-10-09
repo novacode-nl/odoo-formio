@@ -27,17 +27,19 @@ function app() {
             this.language = null;
             this.locales = {};
             self.params = {};
+            self.csrfToken = null;
 
             // init some builder state
             self.isDirty = false;
             self.cancelComponent = false;
 
-            $.jsonRpc.request(self.configUrl, 'call', {}).then(function(result) {
-                if (!$.isEmptyObject(result)) {
-                    self.schema = result.schema;
-                    self.options = result.options;
-                    self.params = result.params;
-                    self.locales = result.locales;
+            self.getData(self.configUrl, {}).then(function(res) {
+                if (!$.isEmptyObject(res)) {
+                    self.schema = res.schema;
+                    self.options = res.options;
+                    self.params = res.params;
+                    self.locales = res.locales;
+                    self.csrfToken = res.csrf_token;
 
                     if ('autoSave' in self.params && self.params['autoSave'] == true) {
                         self.autoSave = true;
@@ -117,7 +119,7 @@ function app() {
                     if (!self.autoSave) {
                         console.log('[Forms] Saving Builder...');
                         const builder_obj = builder.instance;
-                        $.jsonRpc.request(self.saveUrl, 'call', {
+                        self.postData(self.saveUrl, {
                             'builder_id': self.builderId,
                             'schema': builder._form
                         }).then(function() {
@@ -139,9 +141,8 @@ function app() {
                 else {
                     if (self.autoSave) {
                         console.log('[Forms] Auto-saving Builder...');
-                        $.jsonRpc.request(self.saveUrl, 'call', {
-                            'builder_id': self.builderId,
-                            'schema': res
+                        self.postData(self.saveUrl, {
+                            'schema': builder._form
                         }).then(function() {
                             console.log('[Forms] Builder sucessfully auto-saved.');
                         });
@@ -195,6 +196,32 @@ function app() {
                     btn.classList.add('d-none');
                 });
             }
+        }
+
+        getData(url, data) {
+            let dataPost = {...data};
+            return $.ajax(
+                {
+                    url: url,
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(dataPost)
+                }
+            );
+        }
+
+        postData(url, data) {
+            let dataPost = {...data};
+            dataPost['builder_id'] = this.builderId;
+            dataPost['csrf_token'] = this.csrfToken;
+            return $.ajax(
+                {
+                    url: url,
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(dataPost)
+                }
+            );
         }
 
         patchCDN() {

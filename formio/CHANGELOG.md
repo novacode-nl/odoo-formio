@@ -1,5 +1,11 @@
 # Changelog
 
+## 16.0.10.0
+
+CSRF protection for form builders and forms.
+
+Also removed several unused `kwargs` from controller methods (arguments).
+
 ## 16.0.9.2
 
 Fix public form submit endpoint.\
