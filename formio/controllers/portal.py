@@ -13,9 +13,7 @@ from ..models.formio_form import (
     STATE_DRAFT as FORM_STATE_DRAFT,
     STATE_COMPLETE as FORM_STATE_COMPLETE,
 )
-from .utils import generate_uuid4, log_form_submisssion
-
-from .utils import validate_csrf
+from .utils import generate_uuid4, log_form_submisssion, validate_csrf
 
 _logger = logging.getLogger(__name__)
 

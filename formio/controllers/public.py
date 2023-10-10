@@ -15,7 +15,6 @@ from ..models.formio_form import (
 
 from .utils import generate_uuid4, log_form_submisssion, validate_csrf
 
-
 _logger = logging.getLogger(__name__)
 
 

@@ -2,8 +2,9 @@
 
 ## 16.0.10.0
 
-CSRF protection for forms. To protect the submit endpoints from abuse and spam.\
-This also removes the custom JSON-RPC implementation with XMLHTTPRequest (XHR), which is still jQuery (to be replaced by native XHR soon).
+CSRF protection for forms. To protect the submit endpoints from abuse and spam.
+
+This also removes the custom JSON-RPC implementation with XMLHttpRequest (XHR), which is still jQuery (to be replaced by native XHR soon).
 
 Also removed several unused `kwargs` from controller methods (arguments).
 
