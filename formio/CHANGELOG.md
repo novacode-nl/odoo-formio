@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.10.1
+
+Update system parameter `formio.default_version`: `4.17.2`
+
 ## 16.0.10.0
 
 CSRF protection for forms. To protect the submit endpoints from abuse and spam.
