@@ -15,8 +15,7 @@ from functools import partial
 _logger = logging.getLogger(__name__)
 
 
-def post_init_hook(cr, registry):
-    env = api.Environment(cr, SUPERUSER_ID, {})
+def post_init_hook(env):
     VersionGitHubTag = env['formio.version.github.tag']
     try:
         VersionGitHubTag.check_and_register_available_versions()
@@ -45,11 +44,11 @@ def post_init_hook(cr, registry):
         _logger.warning('\n'.join(msg_lines))
 
 
-def uninstall_hook(cr, registry):
+def uninstall_hook(env):
     def delete_config_parameter(dbname):
         db_registry = odoo.modules.registry.Registry.new(dbname)
         with api.Environment.manage(), db_registry.cursor() as cr:
             env = api.Environment(cr, SUPERUSER_ID, {})
             env['ir.config_parameter'].search(
                 [('key', '=', 'formio.default_builder_js_options_id')]).unlink()
-    cr.postcommit.add(partial(delete_config_parameter, cr.dbname))
+    # cr.postcommit.add(partial(delete_config_parameter, cr.dbname))

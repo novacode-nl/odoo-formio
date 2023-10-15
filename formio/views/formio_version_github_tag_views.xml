@@ -26,12 +26,12 @@ See LICENSE file for full licensing details. -->
                 <header>
                     <button
                         name="action_download_install" type="object" string="Download and Install"
-                        attrs="{'invisible': [('formio_version_id', '!=', False)]}"
+                        invisible="formio_version_id != False"
                         confirm="Are you sure to download and install? This could take some time to load, please be patient."
                         class="btn-primary"/>
                     <button
                         name="action_reset_installed" type="object" string="Reset (download and install again)"
-                        attrs="{'invisible': [('formio_version_id', '=', False)]}"
+                        invisible="formio_version_id == False"
                         confirm="Are you sure to reset (download and install again)?"/>
                     <field name="state" widget="statusbar"/>
                 </header>
@@ -46,8 +46,8 @@ See LICENSE file for full licensing details. -->
                             <field name="install_date"/>
                         </group>
                         <group colspan="2" name="urls">
-                            <field name="changelog_url" widget="url" attrs="{'invisible': [('changelog_url', '=', False)]}"/>
-                            <field name="archive_url" widget="url" attrs="{'invisible': [('archive_url', '=', False)]}"/>
+                            <field name="changelog_url" widget="url" invisible="changelog_url == False"/>
+                            <field name="archive_url" widget="url" invisible="archive_url == False"/>
                         </group>                            
                     </group>
                 </sheet>

@@ -5,8 +5,10 @@
         <field name="inherit_id" ref="base.view_attachment_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='res_name']" position="after">
-                <field name="formio_asset_formio_version_id" readonly="1" attrs="{'invisible': [('formio_asset_formio_version_id', '=', False)]}"/>
-                <field name="formio_ref" readonly="1" attrs="{'invisible': [('formio_ref', '=', False)]}"/>
+                <field name="formio_asset_formio_version_id"
+                       readonly="1"
+                       invisible="formio_asset_formio_version_id == False"/>
+                <field name="formio_ref" readonly="1" invisible="formio_ref == False"/>
             </xpath>
         </field>
     </record>

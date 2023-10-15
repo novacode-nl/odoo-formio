@@ -65,10 +65,10 @@ See LICENSE file for full licensing details. -->
                                 </tree>
                                 <form>
                                     <group>
-                                        <field name="version_id" readonly="1" attrs="{'invisible': [('version_id', '=', False)]}"/>
+                                        <field name="version_id" readonly="1" invisible="version_id == False"/>
                                         <field name="type"/>
                                         <field name="attachment_id"/>
-                                        <field name="attachment_type" attrs="{'invisible': [('attachment_id', '=', False)]}"/>
+                                        <field name="attachment_type" invisible="attachment_id == False"/>
                                     </group>
                                 </form>
                             </field>
@@ -82,10 +82,10 @@ See LICENSE file for full licensing details. -->
                                 </tree>
                                 <form>
                                     <group>
-                                        <field name="version_id" readonly="1" attrs="{'invisible': [('version_id', '=', False)]}"/>
+                                        <field name="version_id" readonly="1" invisible="version_id == False"/>
                                         <field name="type"/>
                                         <field name="attachment_id"/>
-                                        <field name="attachment_type" attrs="{'invisible': [('attachment_id', '=', False)]}"/>
+                                        <field name="attachment_type" invisible="attachment_id == False"/>
                                     </group>
                                 </form>
                             </field>

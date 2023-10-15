@@ -23,11 +23,16 @@
                 </group>
                 <footer>
                     <button
-                        name="action_print" string="Print" type="object"
-                        class="btn-primary" attrs="{'invisible': [('print_count', '=', 0)]}"/>
+                        name="action_print"
+                        string="Print"
+                        type="object"
+                        class="btn-primary"
+                        invisible="print_count == 0"/>
                     <button
-                        name="action_save_attachment" string="Save as Attachment" type="object"
-                        class="btn-primary" attrs="{'invisible': ['|', ('print_count', '=', 0), ('save_attachment', '=', False)]}"/>
+                        name="action_save_attachment"
+                        string="Save as Attachment" type="object"
+                        class="btn-primary"
+                        invisible="print_count == 0 or save_attachment == False"/>
                     <button special="cancel" string="Close"/>
                 </footer>
 	    </form>

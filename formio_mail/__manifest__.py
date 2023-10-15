@@ -4,7 +4,7 @@
 {
     'name': 'Forms | Mail',
     'summary': 'Send Forms via mail',
-    'version': '16.0.0.1',
+    'version': '0.1',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',

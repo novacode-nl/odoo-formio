@@ -5,8 +5,7 @@ import base64
 import io
 
 from odoo import api, fields, models, _
-from odoo.exceptions import Warning
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT as DATETIME_FORMAT
+from odoo.exceptions import UserError
 
 
 class FormReportQwebWizard(models.TransientModel):
@@ -44,7 +43,7 @@ class FormReportQwebWizard(models.TransientModel):
                     pass
 
         if not self.wizard_line_ids:
-            raise Warning(_('Please close and try again.\nRecord for the print wizard does not exist anymore.'))
+            raise UserError(_('Please close and try again.\nRecord for the print wizard does not exist anymore.'))
 
         wizard_lines = self.wizard_line_ids.filtered(lambda x: x.print_report)
         IrReport = self.env['ir.actions.report']
@@ -84,7 +83,7 @@ class FormReportQwebWizard(models.TransientModel):
             self.write(vals)
             return filename
         else:
-            raise Warning(_('The report could not be generated. It is recommended to check the server log.'))
+            raise UserError(_('The report could not be generated. It is recommended to check the server log.'))
 
 
 class FormReportQwebWizardLine(models.TransientModel):

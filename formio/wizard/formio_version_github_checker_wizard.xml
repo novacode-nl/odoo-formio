@@ -20,8 +20,11 @@ See LICENSE file for full licensing details. -->
                 </sheet>
                 <footer>
                     <button
-                        name="action_register_available_versions" string="Register Available Versions" type="object"
-                        class="btn btn-primary" attrs="{'invisible': [('available_version_github_tag_ids', '=', [])]}"/>
+                        name="action_register_available_versions"
+                        string="Register Available Versions"
+                        type="object"
+                        class="btn btn-primary"
+                        invisible="available_version_github_tag_ids == []"/>
                     <button string="Cancel" class="oe_link" special="cancel"/>
                 </footer>
             </form>

@@ -17,7 +17,7 @@ See LICENSE file for full licensing details. -->
                         <i class="fa fa-info-circle" title="info"/> Add the Site Key and Secret Key (Menu: Settings / General. Section: Integrations / reCAPTCHA)
                     </div>
                     <group name="recaptcha_button" colspan="2">
-                        <field name="component_recaptcha_button_active" string="Active" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                        <field name="component_recaptcha_button_active" string="Active" readonly="is_locked == True"/>
                     </group>
                 </group>
             </xpath>

@@ -1,12 +1,16 @@
+// /** @odoo-module **/
+
+// import { _t } from "@web/core/l10n/translation";
+// import options from '@web_editor/js/editor/snippets.options';
+
 odoo.define('website_formio_editor', function (require) {
     'use strict';
 
-    var core = require('web.core');
-    var rpc = require('web.rpc');
-    var options = require('web_editor.snippets.options');
-    var wUtils = require('website.utils');
-    var Dialog = require('web.Dialog');
-    var _t = core._t;
+    var jsonrpc = require('@web/core/network/rpc_service');
+    var options = require('@web_editor/js/editor/snippets.options');
+    var wUtils = require('@website/js/utils');
+    var Dialog = require('@web/legacy/js/core/dialog');
+    const { _t } = require("@web/core/l10n/translation");
 
     options.registry.website_formio_editor = options.Class.extend({
         popup_template_id: "editor_new_formio_form_popup",
@@ -14,7 +18,7 @@ odoo.define('website_formio_editor', function (require) {
 
         select_formio_builder: function (previewMode, value) {
             var self = this;
-            return rpc.query({
+            return jsonrpc('/web/dataset/call_kw/formio.builder/search_read', {
                 model: 'formio.builder',
                 method: 'search_read',
                 args: [[['public', '=', true], ['state', '=', 'CURRENT']],['uuid', 'display_name_full']],

@@ -5,12 +5,12 @@ import { KeepLast } from "@web/core/utils/concurrency";
 import { useBus, useService } from "@web/core/utils/hooks";
 import { ActionMenus } from "@web/search/action_menus/action_menus";
 import { Layout } from "@web/search/layout";
-import { useModel } from "@web/views/model";
-import { RelationalModel } from "@web/views/relational_model";
+import { useModel } from "@web/model/model";
+import { RelationalModel } from "@web/model/relational_model/relational_model";
 import { standardViewProps } from "@web/views/standard_view_props";
 import { FormArchParser } from "@web/views/form/form_arch_parser";
 import { FormCompiler } from "@web/views/form/form_compiler";
-import { FormControlPanel } from "@web/views/form/control_panel/form_control_panel";
+import { ControlPanel } from "@web/search/control_panel/control_panel";
 import { useSetupView } from "@web/views/view_hook";
 import { Component, onWillStart, useEffect, useRef, useState } from "@odoo/owl";
 
@@ -106,7 +106,7 @@ export const FormView = {
     icon: "fa fa-rocket",
     multiRecord: false,
     searchMenuTypes: [],
-    ControlPanel: FormControlPanel, // especially for breadcrumbs
+    ControlPanel: ControlPanel, // especially for breadcrumbs
     Controller: FormController,
     Renderer: FormRenderer,
     Model: RelationalModel,

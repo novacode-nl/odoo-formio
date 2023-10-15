@@ -21,7 +21,7 @@ See LICENSE file for full licensing details. -->
 	    <form string="Form">
                 <sheet>
                     <group>
-                        <field name="ir_model_id" attrs="{'readonly': [('module_dependency', '=', True)]}"/>
+                        <field name="ir_model_id" readonly="module_dependency == True"/>
                         <field name="module_dependency"/>
                     </group>
                 </sheet>
