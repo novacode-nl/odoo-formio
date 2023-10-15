@@ -1,5 +1,11 @@
 # Changelog
 
+## 16.0.10.2
+
+Improvement for change in 16.0.8.3 (caching):\
+Allow certain URLs (routes) to accept query (params) string.\
+This ensures no WARNINGs `... called ignoring args ...` will appear in the Odoo server log.
+
 ## 16.0.10.1
 
 Update system parameter `formio.default_version`: `4.17.2`

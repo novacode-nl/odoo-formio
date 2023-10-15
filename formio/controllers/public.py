@@ -81,14 +81,14 @@ class FormioPublicController(http.Controller):
         return request.make_json_response(submission_data)
 
     @http.route('/formio/public/form/<string:uuid>/submit', type='http', auth="public", methods=['POST'], csrf=False, website=True)
-    def public_form_submit(self, uuid, **post):
+    def public_form_submit(self, uuid, **kwargs):
         """ POST with ID instead of uuid, to get the model object right away """
         self.validate_csrf()
         form = self._get_public_form(uuid, self._check_public_form())
         if not form:
             # TODO raise or set exception (in JSON resonse) ?
             return
-
+        post = request.get_json_data()
         vals = {
             'submission_data': json.dumps(post['data']),
             'submission_user_id': request.env.user.id,
@@ -112,10 +112,11 @@ class FormioPublicController(http.Controller):
         # debug mode is checked/handled
         log_form_submisssion(form)
 
-        return {
+        res = {
             'form_uuid': uuid,
             'submission_data': form.submission_data
         }
+        return request.make_json_response(res)
 
     ###################
     # Form - public new
@@ -184,7 +185,7 @@ class FormioPublicController(http.Controller):
         return request.make_json_response(submission_data)
 
     @http.route('/formio/public/form/new/<string:builder_uuid>/submit', type='http', auth="public", methods=['POST'], csrf=False, website=True)
-    def public_form_new_submit(self, builder_uuid):
+    def public_form_new_submit(self, builder_uuid, **kwargs):
         self.validate_csrf()
         formio_builder = self._get_public_builder(builder_uuid)
         if not formio_builder:
