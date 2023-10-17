@@ -213,6 +213,8 @@ class Builder(models.Model):
     )
     hook_api_validation = fields.Boolean(
         string='Hook Validation API', default=False, copy=True)
+    overlay_api_change = fields.Boolean(
+        string='Overlay Change API', default=False, copy=True)
     show_api_alert = fields.Boolean(compute='_compute_show_api_alert')
     api_alert = fields.Text(compute='_compute_api_alert')
 

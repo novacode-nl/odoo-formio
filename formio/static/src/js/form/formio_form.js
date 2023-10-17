@@ -190,11 +190,32 @@ export class OdooFormioForm extends Component {
                         'form_data': form.data,
                         'lang_ietf_code': self.language
                     };
+
+                    if (self.params.hasOwnProperty('overlay_api_change')
+                        && !!self.params['overlay_api_change'])
+                    {
+                        self.showOverlay();
+                    }
+
                     // TODO implement Promise here too, similar to onBlur ?
-                    this.postData(apiUrl, data).then(function(result) {
-                        form.submission = {'data': result};
+                    return new Promise((resolve) => {
+                        this.postData(apiUrl, data).then(function(result) {
+                            form.submission = {'data': result};
+                            if (self.params.hasOwnProperty('overlay_api_change')
+                                && !!self.params['overlay_api_change'])
+                            {
+                                self.hideOverlay();
+                            }
+                            resolve();
+                        });
                     });
                 }
+                else {
+                    return null;
+                }
+            }
+            else {
+                return null;
             }
         }
     }
@@ -383,7 +404,9 @@ export class OdooFormioForm extends Component {
                 // @param modified: Flag to determine if the change was
                 //   made by a human interaction, or programatic
                 if (changed.hasOwnProperty('changed')) {
-                    self.onChange(form, changed, flags, modified);
+                    self.promiseQueue.then(() => {
+                        self.onChange(form, changed, flags, modified);
+                    });
                 }
             });
 
