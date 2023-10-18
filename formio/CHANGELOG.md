@@ -1,5 +1,13 @@
 # Changelog
 
+## 15.0.6.12
+
+Possibility to redirect the (parent) window upon submit of an embedded public form.
+
+The redirect occurs if the `<iframe/>` has set:
+- URL query-param `?embed` (any value allowed).
+- Following `sandbox` attribute with values (AFAIK): `sandbox="allow-same-origin allow-scripts allow-top-navigation"`
+
 ## 15.0.6.11
 
 Fix portal form `AttributeError: 'tuple' object has no attribute 'formio_ietf_code'`.\
