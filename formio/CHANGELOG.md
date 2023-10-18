@@ -1,5 +1,22 @@
 # Changelog
 
+## 16.0.10.4
+
+Possibility to redirect the (parent) window upon submit of an embedded public form.
+
+The redirect occurs if the `<iframe/>` has set:
+- URL query-param `?embed` (any value allowed).
+- Following `sandbox` attribute with values (AFAIK): `sandbox="allow-same-origin allow-scripts allow-top-navigation"`
+
+### Example iframe
+
+(Sizing weight/height is not covered here):
+
+```html
+<iframe src="https://www.example.com/formio/public/form/new/some-UUID?embed=1"
+    sandbox="allow-same-origin allow-scripts allow-top-navigation"/>
+```
+
 ## 16.0.10.3
 
 Add Form component onBlur and onChange "Overlay timeout" (frontend) API.

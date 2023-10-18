@@ -47,6 +47,12 @@ function app() {
             return this.params.hasOwnProperty('public_submit_done_url') && this.params.public_submit_done_url;
         }
 
+        isEmbed() {
+            const url = new URL(window.location);
+            const params = new URLSearchParams(url.search);
+            return params.has('embed');
+        }
+
         saveDraftDone(submission) {
             if (submission.state == 'draft') {
                 if (this.publicSaveDraftDoneUrl()) {
@@ -75,7 +81,10 @@ function app() {
             if (submission.state == 'submitted') {
                 if (this.publicSubmitDoneUrl()) {
                     const params = {submit_done_url: this.publicSubmitDoneUrl()};
-                    if (window.self !== window.top) {
+                    if (this.isEmbed()) {
+                        window.parent.location = params.submit_done_url;
+                    }
+                    else if (window.self !== window.top) {
                         window.parent.postMessage({odooFormioMessage: 'formioSubmitDone', params: params});
                     }
                     else {
