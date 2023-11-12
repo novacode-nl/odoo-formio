@@ -1,5 +1,12 @@
 # Changelog
 
+## 16.0.10.5
+
+### Form Builder UI improvements
+
+- Sidebar pabel disappears for long forms. This reverts some (resizing) changes from 16.0.7.0.
+- Show the "Auto-save" setting in the dock before State.
+
 ## 16.0.10.4
 
 Possibility to redirect the (parent) window upon submit of an embedded public form.

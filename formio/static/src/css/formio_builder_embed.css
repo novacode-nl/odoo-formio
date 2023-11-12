@@ -1,5 +1,11 @@
 body {
-    margin-right: 12px;
+    /* Remove horizontal scrollbar, due to formio.js 'margin: 15px' on div below:
+
+       <div id="formio_builder_app">
+           <div id="formio_builder">
+               <div class="formio builder row formbuilder"
+   */
+    margin-right: 15px;
 }
 
 #formio_builder_app {
