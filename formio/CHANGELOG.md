@@ -1,5 +1,12 @@
 # Changelog
 
+## 15.0.6.13
+
+Hide field `builder_id_domain` in `formio.form` form view.
+
+- Sidebar pabel disappears for long forms. This reverts some (resizing) changes from 16.0.7.0.
+- Show the "Auto-save" setting in the dock before State.
+
 ## 15.0.6.12
 
 Possibility to redirect the (parent) window upon submit of an embedded public form.
