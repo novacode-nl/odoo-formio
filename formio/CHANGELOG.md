@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.10.6
+
+Hide field `builder_id_domain` in `formio.form` form view.
+
 ## 16.0.10.5
 
 ### Form Builder UI improvements
