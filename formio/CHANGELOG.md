@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.10.2
+
+Update system parameter `formio.default_version`: `4.17.3p`
+
 ## 16.0.10.6
 
 Hide field `builder_id_domain` in `formio.form` form view.
