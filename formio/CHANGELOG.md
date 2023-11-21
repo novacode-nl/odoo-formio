@@ -2,7 +2,7 @@
 
 ## 16.0.10.2
 
-Update system parameter `formio.default_version`: `4.17.3p`
+Update system parameter `formio.default_version`: `4.17.3`
 
 ## 16.0.10.6
 
@@ -12,7 +12,7 @@ Hide field `builder_id_domain` in `formio.form` form view.
 
 ### Form Builder UI improvements
 
-- Sidebar pabel disappears for long forms. This reverts some (resizing) changes from 16.0.7.0.
+- Sidebar panel disappears for long forms. This reverts some (resizing) changes from 16.0.7.0.
 - Show the "Auto-save" setting in the dock before State.
 
 ## 16.0.10.4
