@@ -233,6 +233,14 @@ export class OdooFormioForm extends Component {
                             });
                         });
                     }
+                    else {
+                        return new Promise((resolve) => {
+                            this.postData(apiUrl, data).then(function(result) {
+                                form.submission = {'data': result};
+                                resolve();
+                            });
+                        });
+                    }
                 }
                 else {
                     return null;
@@ -319,6 +327,14 @@ export class OdooFormioForm extends Component {
                         this.postData(apiUrl, data).then(function(result) {
                             form.submission = {'data': result};
                             self.hideOverlay();
+                            resolve();
+                        });
+                    });
+                }
+                else {
+                    return new Promise((resolve) => {
+                        this.postData(apiUrl, data).then(function(result) {
+                            form.submission = {'data': result};
                             resolve();
                         });
                     });

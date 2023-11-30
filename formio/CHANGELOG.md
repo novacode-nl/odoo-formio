@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.10.8
+
+Fix form component "change" and "blur" (JS) APIs.\
+An overlay was always expected, but it is not enabled by default, resulting in no API execution!
+
 ## 16.0.10.7
 
 Update system parameter `formio.default_version`: `4.17.3`
