@@ -1,5 +1,20 @@
 # Changelog
 
+## 16.0.10.9
+
+Workaround for Safari 16.6 (AFAIK), with Columns in a Data Grid.\
+The Columns become too narrow and unusable in a Data Grid.
+GitHub issue: https://github.com/formio/formio.js/issues/5426
+
+This workaround adds 1 CSS rule, which adds a `width: 100%` to the
+first `<td/>` (column) targeted in a Data Grid table.
+
+```css
+#formio_form_app table.datagrid-table tbody tr td:first-child {
+    width: 100%;
+}
+```
+
 ## 16.0.10.8
 
 Fix form component "change" and "blur" (JS) APIs.\

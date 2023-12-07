@@ -71,7 +71,8 @@ body {
 }
 
 /**
-  Hack: Prevent the comopnent-editor-dialog scale too much
+  Hack:
+  Prevent the comopnent-editor-dialog scale too much
 **/
 /* .component-edit-tabs.col-sm-6 { */
 /*     min-height: auto; */
