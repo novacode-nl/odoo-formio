@@ -1,10 +1,25 @@
 # Changelog
 
+## 15.0.6.14
+
+Workaround for Safari 16.6 (AFAIK), with Columns in a Data Grid.\
+The Columns become too narrow and unusable in a Data Grid.
+GitHub issue: https://github.com/formio/formio.js/issues/5426
+
+This workaround adds 1 CSS rule, which adds a `width: 100%` to the
+first `<td/>` (column) targeted in a Data Grid table.
+
+```css
+#formio_form_app table.datagrid-table tbody tr td:first-child {
+    width: 100%;
+}
+```
+
 ## 15.0.6.13
 
 Hide field `builder_id_domain` in `formio.form` form view.
 
-- Sidebar pabel disappears for long forms. This reverts some (resizing) changes from 16.0.7.0.
+- Sidebar pabel disappears for long forms. This reverts some (resizing) changes from 15.0.7.0.
 - Show the "Auto-save" setting in the dock before State.
 
 ## 15.0.6.12
@@ -33,13 +48,13 @@ Add `formio.form` (Form) `after_save_draft` method and execute it in the `/submi
 
 Fix:
 Still one Form loading regression (bug) in template `formio_form_public_embed`.\
-Due to incomplete implementation of the new (loading) spinner implementation in v16.0.6.6.
+Due to incomplete implementation of the new (loading) spinner implementation in v15.0.6.6.
 
 ## 15.0.6.7
 
 Fix:
 Form loading on portal and public/website.\
-Due to incomplete implementation of the new (loading) spinner implementation in v16.0.6.6.
+Due to incomplete implementation of the new (loading) spinner implementation in v15.0.6.6.
 
 Improvement:
 Put the form builder (loading) spinner in dedicated `<div/>` which hides when the form builder has been rendered.

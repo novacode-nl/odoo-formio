@@ -39,3 +39,34 @@ body {
     background-color: #d3d3d3;
     border: 1px solid #c0c0c0;
 }
+
+.formio_builder_actions {
+    text-align: left;
+    padding: 0px 10px;
+}
+
+/* actions buttons */
+
+#formio_builder_actions_bottom {
+    margin-top: 1rem;
+}
+
+.formio_builder_actions a {
+    margin: 0 0 1rem 0;
+}
+
+.formio_builder_actions a i {
+    padding-right: 0.2rem;
+}
+
+.formio_builder_actions div.formio_text {
+    margin: 0 0 1rem 0;
+}
+
+/**
+  Hack:
+  Prevent the comopnent-editor-dialog scale too much
+**/
+/* .component-edit-tabs.col-sm-6 { */
+/*     min-height: auto; */
+/* } */
