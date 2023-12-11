@@ -64,10 +64,10 @@ h3.formio_form_title {
   ----------
   - Browser: Safari 16.6
   - This fixes a Data Grid with Columns inside. The columns become too
-    narrow in Safari!
+    narrow in Safari !
   - GitHub issue: https://github.com/formio/formio.js/issues/5426
 **/
 
-#formio_form_app table.datagrid-table tbody tr td:first-child {
-    width: 100%;
+#formio_form_app table.datagrid-table tbody tr td {
+    width: auto;
 }
