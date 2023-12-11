@@ -4,5 +4,5 @@
 import uuid
 
 
-DEF GENERATE_UUID4():
-    RETURN STR(UUID.UUID4())
+def generate_uuid4():
+    return str(uuid.uuid4())
