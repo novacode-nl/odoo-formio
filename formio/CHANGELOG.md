@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.10.10
+
+In Form Builder, when Autosave is disabled, highlight a colored border when a manual saving is required.
+
 ## 16.0.10.9
 
 Workaround for Safari 16.6 (AFAIK), with Columns in a Data Grid.\
