@@ -15,6 +15,8 @@ from ..models.formio_form import (
     STATE_COMPLETE as FORM_STATE_COMPLETE,
 )
 
+from .utils import generate_uuid4
+
 _logger = logging.getLogger(__name__)
 
 
@@ -211,7 +213,9 @@ class FormioCustomerPortal(CustomerPortal):
             'languages': languages,
             'formio_css_assets': form.builder_id.formio_css_assets,
             'formio_js_assets': form.builder_id.formio_js_assets,
-            'extra_assets': form.builder_id.extra_asset_ids
+            'extra_assets': form.builder_id.extra_asset_ids,
+            # uuid is used to disable assets (js, css) caching by hrefs
+            'uuid': generate_uuid4()
         }
         return request.render('formio.formio_form_embed', values)
 
@@ -252,7 +256,9 @@ class FormioCustomerPortal(CustomerPortal):
                 'formio_builder_uuid': builder.uuid,
                 'formio_css_assets': builder.formio_css_assets,
                 'formio_js_assets': builder.formio_js_assets,
-                'extra_assets': builder.extra_asset_ids
+                'extra_assets': builder.extra_asset_ids,
+                # uuid is used to disable assets (js, css) caching by hrefs
+                'uuid': generate_uuid4()
             }
             return request.render('formio.formio_form_portal_new_embed', values)
 

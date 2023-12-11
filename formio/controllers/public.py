@@ -14,6 +14,8 @@ from ..models.formio_form import \
     STATE_PENDING as FORM_STATE_PENDING, STATE_DRAFT as FORM_STATE_DRAFT, \
     STATE_COMPLETE as FORM_STATE_COMPLETE, STATE_CANCEL as FORM_STATE_CANCEL
 
+from .utils import generate_uuid4
+
 _logger = logging.getLogger(__name__)
 
 
@@ -43,6 +45,8 @@ class FormioPublicController(http.Controller):
                 'languages': languages,
                 'formio_css_assets': form.builder_id.formio_css_assets,
                 'formio_js_assets': form.builder_id.formio_js_assets,
+                # uuid is used to disable assets (js, css) caching by hrefs
+                'uuid': generate_uuid4()
             }
             return request.render('formio.formio_form_public_embed', values)
 
@@ -135,7 +139,9 @@ class FormioPublicController(http.Controller):
                 'formio_builder_uuid': formio_builder.uuid,
                 'formio_css_assets': formio_builder.formio_css_assets,
                 'formio_js_assets': formio_builder.formio_js_assets,
-                'extra_assets': formio_builder.extra_asset_ids
+                'extra_assets': formio_builder.extra_asset_ids,
+                # uuid is used to disable assets (js, css) caching by hrefs
+                'uuid': generate_uuid4()
             }
             return request.render('formio.formio_form_public_create_embed', values)
 

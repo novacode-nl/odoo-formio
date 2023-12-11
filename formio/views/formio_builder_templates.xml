@@ -25,7 +25,7 @@ See LICENSE file for full licensing details. -->
                     <script type="text/javascript" t-att-src="js.url"></script>
                 </t>
 
-                <link rel="stylesheet" href="/formio/static/src/css/formio_builder_embed.css"/>
+                <link rel="stylesheet" t-attf-href="/formio/static/src/css/formio_builder_embed.css?{{ uuid }}"/>
                 
                 <!-- Odoo JS dependencies could cause clashes with formio.js -->
                 <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
@@ -41,7 +41,7 @@ See LICENSE file for full licensing details. -->
                     </t>
                 </t>
 
-                <script type="text/javascript" src="/formio/static/src/js/builder/app.js"/>
+                <script type="text/javascript" t-attf-src="/formio/static/src/js/builder/app.js?{{ uuid }}"/>
             </head>
             <body data-iframe-height="1">
                 <div t-if="builder.show_api_alert" class="alert alert-warning p-2 ml-1 mr-1">

@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.0.6.15
+
+Improvement, avoid browser caching for certain assets files (CSS, JS):
+- Form Builder
+- Form (backend, portal, public)
+
 ## 15.0.6.14
 
 Workaround for Safari 16.6 (AFAIK), with Columns in a Data Grid.\
@@ -46,28 +52,28 @@ Add `formio.form` (Form) `after_save_draft` method and execute it in the `/submi
 
 ## 15.0.6.8
 
-Fix:
+Fix:\
 Still one Form loading regression (bug) in template `formio_form_public_embed`.\
 Due to incomplete implementation of the new (loading) spinner implementation in v15.0.6.6.
 
 ## 15.0.6.7
 
-Fix:
+Fix:\
 Form loading on portal and public/website.\
 Due to incomplete implementation of the new (loading) spinner implementation in v15.0.6.6.
 
-Improvement:
+Improvement:\
 Put the form builder (loading) spinner in dedicated `<div/>` which hides when the form builder has been rendered.
 
 ## 15.0.6.6
 
-Improvements:
+Improvements:\
 - Menu renaming: 'Forms' to 'Form Submissions'
 - Put the form (loading) spinner in dedicated `<div/>` which hides when the form has been rendered.
 
 ## 15.0.16.5
 
-Improvements:
+Improvements:\
 - Menu renaming: 'Forms' to 'Form Submissions'
 - Put the form (loading) spinner in dedicated `<div/>` which hides when the form has been rendered.
 
@@ -93,7 +99,7 @@ This also results in a visible button to open the linked resource.
 
 ## 15.0.16.0
 
-Changes:
+Changes:\
 - Implement the formio.js `customValidation` hook, which XHR posts to the API / validation endpoint.
 - Some code reorder, cleanup and comments.
 

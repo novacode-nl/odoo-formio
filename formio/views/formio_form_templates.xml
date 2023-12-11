@@ -50,7 +50,7 @@ See LICENSE file for full licensing details. -->
                     <script type="text/javascript" t-att-src="js.url"></script>
                 </t>
 
-                <link rel="stylesheet" href="/formio/static/src/css/formio_form_embed.css"/>
+                <link rel="stylesheet" t-attf-href="/formio/static/src/css/formio_form_embed.css?{{ uuid }}"/>
 
                 <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.contentWindow.min.js"></script>
                 <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
@@ -66,8 +66,9 @@ See LICENSE file for full licensing details. -->
                     </t>
                 </t>
 
-                <script type="module" src="/formio/static/src/js/form/formio_form.js"/>
-                <script type="module" src="/formio/static/src/js/form/backend_app.js"/>
+                <!-- TODO formio_form.js NEEDED ? -->
+                <!-- <script type="module" src="/formio/static/src/js/form/formio_form.js"/> -->
+                <script type="module" t-attf-src="/formio/static/src/js/form/backend_app.js?{{ uuid }}"/>
             </head>
             <body data-iframe-height="1">
                 <t t-if="form">

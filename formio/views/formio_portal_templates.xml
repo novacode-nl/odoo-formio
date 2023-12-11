@@ -171,15 +171,14 @@ See LICENSE file for full licensing details. -->
                     </t>
                 </t>
 
-                <script type="module" src="/formio/static/src/js/form/formio_form.js"/>
-                <script type="module" src="/formio/static/src/js/form/portal_new_app.js"/>
+                <script type="module" t-attf-src="/formio/static/src/js/form/portal_new_app.js?{{ uuid }}"/>
                 <t t-foreach="formio_css_assets" t-as="css">
                     <link rel="stylesheet" type="text/css" t-att-href="css.url"/>
                 </t>
                 <t t-foreach="formio_js_assets" t-as="js">
                     <script type="text/javascript" t-att-src="js.url"></script>
                 </t>
-                <link rel="stylesheet" href="/formio/static/src/css/formio_form_embed.css"/>
+                <link rel="stylesheet" t-attf-href="/formio/static/src/css/formio_form_embed.css?{{ uuid }}"/>
             </head>
             <body data-iframe-height="1">
                 <t t-if="builder">
