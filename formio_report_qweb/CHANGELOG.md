@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.1.3
+
+Move the `formio.form` `markupsafe()` instance method to the `formio_data_api` module.\
+That's the logical place, because it's needed in other modules and parts (eg email templates).
+
 ## 16.0.1.2
 
 Use MarkupSafe to escape components:

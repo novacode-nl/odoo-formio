@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.2.3
+
+Add `formio.form` `markupsafe()` instance method to escape components, eg: content, html, textarea.
+
 ## 16.0.2.2
 
 Add `component_class_mapping` feature to `formio.builder` model
