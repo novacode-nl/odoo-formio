@@ -3,6 +3,8 @@
 
 import logging
 
+from markupsafe import Markup
+
 from formiodata.builder import Builder
 from formiodata.form import Form
 
@@ -25,6 +27,16 @@ class FormioForm(models.Model):
         This method can be implemented in other (formio) modules.
         """
         return {}
+
+    def markupsafe(self, content, extra_replacements=[]):
+        """ Escape characters so it is safe to use in HTML and XML
+        :param extra_replacements
+        """
+        replacements = [['\n', '<br/>']]
+        replacements += extra_replacements
+        for rep in replacements:
+            content = content.replace(rep[0], rep[1])
+        return Markup(content)
 
     def __getattr__(self, name):
         if name == '_formio':

@@ -1,8 +1,6 @@
 # Copyright Nova Code (http://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
-from markupsafe import Markup
-
 from odoo import api, fields, models, _
 
 
@@ -49,7 +47,3 @@ class Form(models.Model):
                 'target': 'new',
                 'res_id': wiz.id
             }
-
-    def markupsafe(self, content):
-        """ Escape characters so it is safe to use in HTML and XML """
-        return Markup(content)

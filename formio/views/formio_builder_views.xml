@@ -44,6 +44,7 @@ See LICENSE file for full licensing details. -->
                 <field name="version"/>
                 <field name="parent_version"/>
                 <field name="formio_version_name"/>
+                <field name="auto_save"/>
                 <field name="state"/>
                 <field name="display_state"/>
             </formio_builder>

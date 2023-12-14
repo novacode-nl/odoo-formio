@@ -304,7 +304,7 @@ class FormioCustomerPortal(CustomerPortal):
         return request.make_json_response(submission_data)
 
     @http.route('/formio/portal/form/new/<string:builder_uuid>/submit', type='http', auth="user", methods=['POST'], csrf=False, website=True)
-    def form_new_submit(self, builder_uuid, **post):
+    def form_new_submit(self, builder_uuid, **kwargs):
         """ Form submit endpoint
 
         Note:

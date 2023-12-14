@@ -31,7 +31,7 @@ class FormioController(http.Controller):
     ##############
 
     @http.route('/formio/builder/<int:builder_id>', type='http', auth='user', website=True)
-    def builder_root(self, builder_id):
+    def builder_root(self, builder_id, **kwargs):
         if not request.env.user.has_group('formio.group_formio_admin'):
             # TODO Render template with message?
             return request.redirect("/")
@@ -199,7 +199,7 @@ class FormioController(http.Controller):
     #######
 
     @http.route(['/web/content/<int:id>/fonts/<string:name>'], type='http', auth="public")
-    def send_fonts_file(self, id, name):
+    def send_fonts_file(self, id, name, **kwargs):
         """
         WARNING
         -------
