@@ -12,9 +12,9 @@ class VersionAsset(models.Model):
     version_id = fields.Many2one('formio.version', string='formio.js version', ondelete='cascade')
     type = fields.Selection(
         [
-            ("js", "js"),
-            ("css", "css"),
-            ("license", "license"),
+            ("js", "JavaScript"),
+            ("css", "CSS"),
+            ("license", "License"),
             ("eot", "EOT Font File"),
             ("otf", "OTF Font File"),
             ("svg", "SVG Font File"),

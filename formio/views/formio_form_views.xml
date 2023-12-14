@@ -191,7 +191,7 @@ See LICENSE file for full licensing details. -->
                     <group name="general">
                         <group>
                             <field name="res_name" string="Resource" invisible="res_name == False"/>
-                            <field name="builder_id" readonly="id == False" domain="builder_id_domain"/>
+                            <field name="builder_id" readonly="id != False" domain="builder_id_domain"/>
                             <field name="builder_id_domain" invisible="1"/>
                         </group>
                         <group>
