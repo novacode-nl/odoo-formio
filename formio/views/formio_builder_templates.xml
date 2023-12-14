@@ -9,15 +9,6 @@ See LICENSE file for full licensing details. -->
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-                <t t-foreach="extra_assets.filtered(lambda x: x.target == 'prepend')" t-as="asset">
-                    <t t-if="asset.type == 'css'">
-                        <link rel="stylesheet" type="text/css" t-att-href="asset.url"/>
-                    </t>
-                    <t t-if="asset.type == 'js'">
-                        <script type="text/javascript" t-att-src="asset.url"></script>
-                    </t>
-                </t>
-
                 <t t-foreach="formio_css_assets" t-as="css">
                     <link rel="stylesheet" type="text/css" t-att-href="css.url"/>
                 </t>
@@ -30,15 +21,6 @@ See LICENSE file for full licensing details. -->
                 <!-- Odoo JS dependencies could cause clashes with formio.js -->
                 <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
                 <script type="text/javascript" src="/web/static/lib/owl/owl.js"></script>
-
-                <t t-foreach="extra_assets.filtered(lambda x: x.target == 'append')" t-as="asset">
-                    <t t-if="asset.type == 'css'">
-                        <link rel="stylesheet" type="text/css" t-att-href="asset.url"/>
-                    </t>
-                    <t t-if="asset.type == 'js'">
-                        <script type="text/javascript" t-att-src="asset.url"></script>
-                    </t>
-                </t>
 
                 <script type="text/javascript" t-attf-src="/formio/static/src/js/builder/app.js?{{ uuid }}"/>
             </head>

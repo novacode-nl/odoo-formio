@@ -52,11 +52,6 @@ class Builder(models.Model):
     formio_version_is_dummy = fields.Boolean(related='formio_version_id.is_dummy')
     formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='formio.js CSS')
     formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='formio.js Javascript')
-    extra_asset_ids = fields.Many2many(
-        comodel_name='formio.extra.asset',
-        string='Extra Assets',
-        domain=[('attachment_id.res_model', '=', 'formio.extra.asset')]
-    )
     formio_js_options_id = fields.Many2one('formio.builder.js.options', string='formio.js Javascript Options template', store=False)
     formio_js_options = fields.Text(
         default=lambda self: self._default_formio_js_options(),
@@ -701,6 +696,3 @@ class Builder(models.Model):
 
     def _generate_odoo_domain(self, domain=[], params={}):
         return domain
-
-    def _has_extra_asset(self, extra_asset_record):
-        return self.extra_asset_ids.filtered(lambda x: x.id == extra_asset_record.id)

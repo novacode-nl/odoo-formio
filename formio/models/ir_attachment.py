@@ -68,7 +68,7 @@ class IrAttachment(models.AbstractModel):
                 FROM
                     ir_attachment
                 WHERE
-                    res_model IN ('formio.version.asset', 'formio.extra.asset')
+                    res_model IN ('formio.version.asset')
                     AND id IN %s""",
                 [tuple(self.ids)],
             )
@@ -85,4 +85,4 @@ class IrAttachment(models.AbstractModel):
         return super().copy(default)
 
     def _formio_ref_models(self):
-        return ['formio.version.asset', 'formio.extra.asset']
+        return ['formio.version.asset']

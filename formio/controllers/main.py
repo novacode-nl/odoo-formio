@@ -55,7 +55,6 @@ class FormioController(http.Controller):
             'builder_languages': languages,
             'formio_css_assets': builder.formio_css_assets,
             'formio_js_assets': builder.formio_js_assets,
-            'extra_assets': builder.extra_asset_ids,
             # uuid is used to disable assets (js, css) caching by hrefs
             'uuid': generate_uuid4()
         }
@@ -119,7 +118,6 @@ class FormioController(http.Controller):
             'form_languages': languages.sorted('name'),
             'formio_css_assets': form.builder_id.formio_css_assets,
             'formio_js_assets': form.builder_id.formio_js_assets,
-            'extra_assets': form.builder_id.extra_asset_ids,
             # uuid is used to disable assets (js, css) caching by hrefs
             'uuid': generate_uuid4()
         }

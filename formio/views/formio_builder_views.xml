@@ -332,19 +332,6 @@ See LICENSE file for full licensing details. -->
                                 </group>
                             </group>
                         </page>
-                        <page string="Extra Assets" name="extra_assets" groups="formio.group_formio_admin">
-                            <field name="extra_asset_ids">
-                                <tree>
-                                    <field name="type" readonly="1"/>
-                                    <field name="target" readonly="1" optional="hide"/>
-                                    <field name="attachment_id" readonly="1"/>
-                                    <field name="attachment_type" string="Attachment Type" optional="show"/>
-                                    <field name="url" string="URL" optional="show"/>
-                                    <field name="attachment_public" string="Public" optional="show"/>
-                                    <field name="attachment_formio_ref" optional="show"/>
-                                </tree>
-                            </field>
-                        </page>
                         <page string="JS Options" name="javascript_options" groups="formio.group_formio_admin">
                             <div style="background-color: #e9ecef; padding: 0 10px;">
                                 <group>
