@@ -88,9 +88,17 @@ See LICENSE file for full licensing details. -->
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_view_formio" type="object" string="Form Builder"
+                        <button name="action_view_formio"
+                                type="object"
+                                string="Form Builder"
+                                aria-label="Form Builder"
                                 groups="formio.group_formio_admin"
-                                class="oe_stat_button" icon="fa-rocket"/>
+                                class="oe_stat_button bg-secondary"
+                                icon="fa-rocket">
+                            <div class="o_stat_info o_field_widget">
+                                <span>Form Builder</span>
+                            </div>
+                        </button>
                         <button name="%(action_formio_builder_translation)d" type="action" string="Translations"
                                 context="{'default_builder_id': id, 'search_default_builder_id': id}"
                                 groups="formio.group_formio_admin" icon="fa-language"/>
