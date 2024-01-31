@@ -307,6 +307,7 @@ class FormioForm(models.Model):
 
         fields = field_getter.split('.')
         fields_done = []
+        odoo_field_val = False
 
         for field in fields:
             try:
