@@ -1,12 +1,6 @@
 # Changelog
 
-## 16.0.1.1
+## 17.0.1.0
 
-Include the assets (files) directly in the template XMLs.\
-Remove `formio.extra.asset` data.
-
-## 16.0.1.0
-
-Initial release.\
-This uses (depends on) the `google_recaptcha` module, which provides the Site Key and Secret Key registration.
+Initial release.
 
