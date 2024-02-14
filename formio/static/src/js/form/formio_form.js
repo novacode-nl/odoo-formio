@@ -3,7 +3,153 @@
 
 // use global owl
 // can't import from "@odoo/owl", because not an @odoo-module
-const { Component, onMounted, onWillStart } = owl;
+
+import { sha512 } from '/formio/static/lib/noble-hashes.js'; 
+
+const ed = await import('/formio/static/lib/noble-ed25519.min.js');
+
+const base64ToArray = (b64) => {
+    return Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+};
+
+ed.etc.sha512Sync = (...m) => sha512().create().update(ed.etc.concatBytes(...m)).digest();
+
+const { Component, markup, onMounted, onWillStart, useState, xml } = owl;
+
+export class Branding extends Component {
+    static template = xml`<div style="text-align: center !important; display: block !important;">
+        <t t-out="state.output"/>
+    </div>`;
+
+    setup() {
+        super.setup();
+        this.state = useState({output: null});
+        onMounted(() => {
+            this.loadBranding();
+        });
+    }
+
+    loadBranding() {
+        const self = this;
+        const licenseUrl = '/formio/license';
+
+        this.props.getData(licenseUrl, {}).then(function(res) {
+            if (!$.isEmptyObject(res) && !$.isEmptyObject(res['licenses'])) {
+                if (!self.isValidLicense(res['licenses'])) {
+                    self.renderBranding(res['language']);
+                }
+            }
+            else {
+                self.renderBranding(res['language']);
+            }
+        });
+    }
+
+    renderBranding(language) {
+        const languageShort = language.substring(0, 2);
+
+        // translations (en_US is default)
+        const poweredByTranslations = {
+            'en_US': 'Form powered by',
+            'ar': 'النموذج مدعوم من',
+            'es': 'Formulario impulsado por',
+            'hi_IN': 'द्वारा संभव बनाया गया',
+            'it_IT': 'Modulo alimentato da',
+            'ro_RO': 'Formular alimentat de',
+            'ru_RU': 'Форма стала возможной благодаря',
+            'th_TH': 'แบบฟอร์มขับเคลื่อนโดย',
+            'zh_TW': '表格由',
+            'zh': '表格由',
+        };
+        const tooltipTranslations = {
+            'en_US': 'You can remove the Nova Forms branding by purchasing a license',
+            'ar': 'يمكنك إزالة العلامة التجارية Nova Forms عن طريق شراء ترخيص',
+            'de': 'Sie können das Nova Forms-Branding entfernen, indem Sie eine Lizenz erwerben',
+            'es': 'Puede eliminar la marca Nova Forms comprando una licencia',
+            'hi_IN': 'आप लाइसेंस खरीदकर नोवा फॉर्म ब्रांडिंग को हटा सकते हैं',
+            'it_IT': 'Puoi rimuovere il marchio Nova Forms acquistando una licenza',
+            'ro_RO': 'Puteți elimina marca Nova Forms achiziționând o licență',
+            'ru_RU': 'Вы можете удалить брендинг Nova Forms, купив лицензию.',
+            'th_TH': 'คุณสามารถลบตราสินค้า Nova Forms ได้โดยการซื้อใบอนุญาต',
+            'zh_TW': '您可以透過購買授權來刪除 Nova Forms 品牌',
+            'zh': '您可以通过购买许可证来删除 Nova Forms 品牌'
+        };
+
+        // powered by
+        let poweredBy = poweredByTranslations['en_US'];
+        if (poweredByTranslations.hasOwnProperty(language)) {
+            poweredBy = poweredByTranslations[language];
+        }
+        else if (poweredByTranslations.hasOwnProperty(languageShort)) {
+            poweredBy = poweredByTranslations[languageShort];
+        }
+
+        // tooltip
+        let tooltip = tooltipTranslations['en_US'];
+        if (tooltipTranslations.hasOwnProperty(language)) {
+            tooltip = tooltipTranslations[language];
+        }
+        else if (tooltipTranslations.hasOwnProperty(languageShort)) {
+            tooltip = tooltipTranslations[languageShort];
+        }
+
+        this.state.output = markup(`
+            <div data-tooltip="${tooltip}"
+                style="display: inline-block !important; margin-bottom: 1px !important; padding: 4px 8px 4px 8px !important; border: 1px solid #c0c0c0 !important; border-radius: 5px !important; background-color: #fff !important; color: #000 !important;">
+                ${poweredBy} <a href="https://www.novaforms.app/license">Nova Forms</a>
+            </div>
+        `);
+    }
+
+    isValidLicense(licenses) {
+        const self = this;
+        const valid = true;
+	const b64Pubkey = 'XzgyMhhjCqmWiiB0Z3fR15dNpmtTeRK1aLaQww9mXRo=';
+        for (let i = 0; i < licenses.length; i++) {
+            const licenseKey = licenses[i];
+            // const licenseKey = '{"domains": ["localhost"], "validUntil": "2024-10-10"}#f53x+f8sVaQnDsDqRHOL/25eoXhnxC62M4mnl0+cV/VptOmwVNLSimtnSAkpBIs534F/fjFbeYPptbjeK2SMAw==';
+            try {
+	        const [json, b64Signature] = licenseKey.split('#');
+                const licenseProps = JSON.parse(json);
+	        const binPubkey = base64ToArray(b64Pubkey);
+	        const hexPubkey = ed.etc.bytesToHex(binPubkey);
+	        const binSignature = base64ToArray(b64Signature);
+	        const hexSignature = ed.etc.bytesToHex(binSignature);
+	        const binMessage = new TextEncoder().encode(json);
+	        const hexMessage = ed.etc.bytesToHex(binMessage);
+                const domains = licenseProps.domains;
+                const validUntil = licenseProps.validUntil;
+
+                if (ed.verify(binSignature, binMessage, binPubkey)) {
+                    if (domains.includes(document.location.hostname)
+                        && self.isValidUntil(new Date(validUntil), new Date())) {
+                        return true;
+                    }
+                    else if (!domains.includes(document.location.hostname)) {
+                        console.log('License: invalid domain ' + document.location.hostname);
+                    }
+                    else if (self.isValidUntil(new Date(validUntil), new Date())) {
+                        console.log('License: invalid validUntil date ' + validUntil);
+                    }
+                }
+                else {
+                    console.log('License: invalid signature: ' + b64Signature);
+                }
+            } catch (error) {
+                console.log('License error: ' + error);
+            }
+        }
+        return false;
+    }
+
+    isValidUntil(validUntil, today) {
+        const dateValidUntil = new Date(validUntil);
+        dateValidUntil.setHours(0, 0, 0, 0);
+        const dateToday = new Date(today);
+        dateToday.setHours(0, 0, 0, 0);
+        return dateValidUntil.getTime() >= dateToday.getTime();
+    }
+}
 
 export class OdooFormioForm extends Component {
     setup() {
@@ -429,6 +575,9 @@ export class OdooFormioForm extends Component {
                     btn.classList.add('language_button_active');
                 };
             });
+
+            // TODO
+            // var  = document.createElement('div');
 
             window.setLanguage = function(lang, button) {
                 self.language = lang;

@@ -43,6 +43,8 @@ See LICENSE file for full licensing details. -->
 
                 <link rel="stylesheet" t-attf-href="/formio/static/src/css/formio_form_embed.css?{{ uuid }}"/>
 
+                <script type="module" src="/formio/static/lib/noble-ed25519.min.js"></script>
+                <script type="module" src="/formio/static/lib/noble-hashes.js"></script>
                 <script type="text/javascript" src="/formio/static/lib/iframe-resizer/iframeResizer.contentWindow.min.js"></script>
                 <script type="text/javascript" src="/web/static/lib/jquery/jquery.js"></script>
                 <script type="text/javascript" src="/web/static/lib/owl/owl.js"></script>

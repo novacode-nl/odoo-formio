@@ -2,17 +2,9 @@
 # See LICENSE file for full licensing details.
 
 def migrate(cr, version):
-    """
-    ir.model.fields.selection
-    formio.selection__formio_extra_asset__target__prepend
-    """
+    # Fix upgrade error
     cr.execute("""
-        DELETE FROM ir_model_fields_selection
-        WHERE field_id IN (
-            SELECT id
-            FROM
-              ir_model_fields
-            WHERE
-              model = 'formio.extra.asset'
-        )
+        UPDATE ir_model_fields
+        SET tracking = NULL
+        WHERE model = 'formio.extra.asset'
     """)

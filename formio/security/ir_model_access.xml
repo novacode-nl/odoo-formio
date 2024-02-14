@@ -426,5 +426,16 @@ See LICENSE file for full copyright and licensing details. -->
             <field name="perm_write" eval="1"/>
             <field name="perm_unlink" eval="1"/>
         </record>
+
+        <!-- formio.sass.license -->
+        <record id="access_formio_license_admin" model="ir.model.access">
+            <field name="name">formio.license: Admin</field>
+            <field name="model_id" ref="formio.model_formio_license"/>
+            <field name="group_id" ref="formio.group_formio_admin"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
     </data>
 </odoo>

@@ -86,3 +86,18 @@ h3.formio_form_title {
 #formio_form_app table.datagrid-table tbody tr td {
     width: auto;
 }
+
+div[data-tooltip]:hover::before {
+    position: absolute;
+    content: attr(data-tooltip);
+    padding: 0.2em 0.6em;
+    white-space: nowrap;
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+    transform: translate(-25%, calc(-100% - 10px));
+    z-index: 999;
+}

@@ -13,7 +13,7 @@ function uuidv4() {
 
 // random importPath ensures no caching
 let importPath = "./formio_form.js?" + uuidv4();
-let { OdooFormioForm } = await import(importPath);
+let { OdooFormioForm, Branding } = await import(importPath);
 
 // use global owl
 // can't import from "@odoo/owl", because not an @odoo-module
@@ -24,6 +24,7 @@ function app() {
         static template = xml`
             <div t-name="App">
                 <div id="formio_form"></div>
+                <Branding getData="this.getData"/>
             </div>
         `;
 

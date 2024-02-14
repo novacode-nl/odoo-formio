@@ -46,6 +46,7 @@
         'views/formio_builder_translation_views.xml',
         'views/formio_builder_views.xml',
         'views/formio_form_views.xml',
+        'views/formio_license_views.xml',
         'views/formio_res_model_views.xml',
         'views/formio_translation_source_views.xml',
         'views/formio_translation_views.xml',
@@ -85,6 +86,7 @@
             'formio/static/src/js/formio_form_container.js'
         ],
         'web.assets_common': [
+            'formio/static/lib/noble-hashes.js',
             'formio/static/lib/iframe-resizer/iframeResizer.min.js',
         ],
     },
