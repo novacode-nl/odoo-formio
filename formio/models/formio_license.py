@@ -1,4 +1,4 @@
-# Copyright 2024 Nova Code (https://www.novacode.nl)
+# Copyright Nova Code (https://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
 import json
