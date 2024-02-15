@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms | Sales',
+    'name': 'Forms • Sales',
     'summary': 'Forms integration with Sale Orders/Quotations',
     'version': '0.1',
     'license': 'LGPL-3',

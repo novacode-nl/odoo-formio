@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms | Website Integration',
+    'name': 'Forms • Website Integration',
     'summary': "'Drag & drop' Form Block, other website integration",
     'version': '17.0.1.0',
     'license': 'LGPL-3',

@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms | CRM',
+    'name': 'Forms • CRM',
     'summary': 'Forms integration with CRM Leads',
     'version': '0.1',
     'license': 'LGPL-3',

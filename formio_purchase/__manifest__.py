@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms | Purchase',
+    'name': 'Forms • Purchase',
     'summary': 'Forms integration with Purchase Orders',
     'version': '0.1',
     'license': 'LGPL-3',

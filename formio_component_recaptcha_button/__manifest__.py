@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms | reCAPTCHA Component',
+    'name': 'Forms • reCAPTCHA Component',
     'summary': 'Drag & drop a reCAPTCHA component with (server)verification on a Form.',
     'version': '0.1',
     'license': 'LGPL-3',

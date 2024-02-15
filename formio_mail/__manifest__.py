@@ -2,7 +2,7 @@
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms | Mail',
+    'name': 'Forms • Mail',
     'summary': 'Send Forms via mail',
     'version': '0.1',
     'license': 'LGPL-3',
