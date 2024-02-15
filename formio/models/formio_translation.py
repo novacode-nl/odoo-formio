@@ -14,12 +14,8 @@ class Translation(models.Model):
     property = fields.Text(related='source_id.property', string='Property', readonly=True)
     value = fields.Text(string='Translation Value', required=True)
 
-    @api.depends('lang_id', 'source_id', 'value')
-    def name_get(self):
-        res = []
+    def _compute_display_name(self):
         for r in self:
-            name = '{lang}: {source} => {value}'.format(
+            r.display_name = '{lang}: {source} => {value}'.format(
                 lang=r.lang_id.code, source=r.source_id.source, value=r.value
             )
-            res.append((r.id, name))
-        return res

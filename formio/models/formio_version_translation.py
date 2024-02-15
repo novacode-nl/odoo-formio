@@ -34,15 +34,11 @@ class VersionTranslation(models.Model):
             else:
                 r.base_translation_origin = False
 
-    @api.depends('lang_id', 'source_id', 'value')
-    def name_get(self):
-        res = []
+    def _compute_display_name(self):
         for r in self:
-            name = '{lang}: {source} => {value}'.format(
+            r.display_name = '{lang}: {source} => {value}'.format(
                 lang=r.lang_id.code, source=r.source_id.source, value=r.value
             )
-            res.append((r.id, name))
-        return res
 
     def write(self, vals):
         base_translation_updates = self.env['formio.version.translation']

@@ -353,15 +353,9 @@ class Form(models.Model):
         for r in self:
             r.display_state = get_field_selection_label(r, 'state')
 
-    @api.depends('title')
-    def name_get(self):
-        res = []
+    def _compute_display_name_get(self):
         for r in self:
-            name = '{title} [{id}]'.format(
-                title=r.title, id=r.id
-            )
-            res.append((r.id, name))
-        return res
+            r.display_name = '{title} [{id}]'.format(title=r.title, id=r.id)
 
     def _decode_data(self, data):
         """ Convert data (str) to dictionary
