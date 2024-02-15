@@ -1,4 +1,4 @@
-# Copyright Nova Code (http://www.novacode.nl)
+# Copyright Nova Code (https://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
 {
@@ -7,8 +7,8 @@
     'version': '17.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
-    'website': 'https://www.novacode.nl',
-    'live_test_url': 'https://demo16.novacode.nl',
+    'website': 'https://www.novaforms.app',
+    'live_test_url': 'https://demo17.novaforms.app',
     'license': 'LGPL-3',
     'category': 'Forms/Forms',
     'depends': ['formio', 'formio_data_api'],
