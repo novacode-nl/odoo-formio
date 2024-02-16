@@ -84,7 +84,7 @@ class LicenseController(http.Controller):
         domain = [
             ('active', '=', True)
         ]
-        licenses = request.env['formio.license'].search(domain)
+        licenses = request.env['formio.license'].sudo().search(domain)
         res = {
             'licenses': licenses.mapped('key'),
             'language': request.env.context['lang']

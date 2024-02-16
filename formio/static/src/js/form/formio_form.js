@@ -96,7 +96,7 @@ export class Branding extends Component {
         this.state.output = markup(`
             <div data-tooltip="${tooltip}"
                 style="display: inline-block !important; margin-bottom: 1px !important; padding: 4px 8px 4px 8px !important; border: 1px solid #c0c0c0 !important; border-radius: 5px !important; background-color: #fff !important; color: #000 !important;">
-                ${poweredBy} <a href="https://www.novaforms.app/license">Nova Forms</a>
+                ${poweredBy} <a style="color: #000 !important; font-weight: bold !important;" href="https://www.novaforms.app/license">Nova Forms</a>
             </div>
         `);
     }

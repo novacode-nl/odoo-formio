@@ -9,32 +9,25 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
         <field name="inherit_id" ref="base.res_config_settings_view_form"/>
         <field name="priority" eval="70"/>
         <field name="arch" type="xml">
-            <!-- <xpath expr="//div[hasclass('settings')]" position="inside"> -->
             <xpath expr="//form" position="inside">
                 <app data-string="Forms" string="Forms" name="formio" groups="formio.group_formio_admin">
-                    <h2>formio.js library (js, css) version importer</h2>
-                    <div class="row mt16 o_settings_container" name="formio_version">
-                        <div class="col-12 col-md-6 o_setting_box" id="formio_default_version">
-                            <div class="o_setting_left_pane"/>
-                            <div class="o_setting_right_pane">
-                                <div class="row">
-                                    <label for="formio_default_version_id" class="col-md-4" string="Default Version"/>
-                                    <field name="formio_default_version_id"/>
-                                </div>
-                                <div class="text-muted">
-                                    When adding a new Form Builder, use this formio.js client/library version.
-                                </div>
+                    <block title="formio.js library (js, css) version importer" name="formio_js_library_importer">
+                        <setting>
+                            <label for="formio_default_version_id" string="Default Version" class="col-md-4"/>
+                            <field name="formio_default_version_id"/>
+                            <div class="text-muted">
+                                When adding a new Form Builder, use this formio.js client/library version.
                             </div>
-                        </div>
-                        <div class="col-12 col-md-6 o_setting_box" id="formio_verion_github_importer">
-                            <div class="o_setting_left_pane"/>
-                            <div class="o_setting_right_pane">
-                                <strong>Check, register and install the latest 30 available Versions</strong>
-                                <div class="text-muted">
-                                    A scheduled action (daily cron) is available and already active.<br/>
-                                    Releases: <a href="https://github.com/formio/formio.js/tags" target="_blank">https://github.com/formio/formio.js/tags</a>
+                        </setting>
+                        <setting string="Check, register and install the latest 30 available Versions">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <div class="text-muted">
+                                        A scheduled action (daily cron) is available and already active.<br/>
+                                        Releases: <a href="https://github.com/formio/formio.js/tags" target="_blank">https://github.com/formio/formio.js/tags</a>
+                                    </div>
                                 </div>
-                                <div class="mt-4">
+                                <div class="row mt16">
                                     <label for="formio_github_personal_access_token" string="GitHub personal access token"/>
                                     <field name="formio_github_personal_access_token" style="width: 85%;"/>
                                     <div>
@@ -43,61 +36,41 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                                         This prevents timeouts and authorization errors.
                                     </div>
                                 </div>
-                                <div class="mt-4">
-                                    <button name="action_formio_version_github_importer" type="object"
-                                            confirm="Are you sure to check for available versions? This could take some time to load, please be patient."
-                                            string="Check and Register available Versions" class="ml-2 btn btn-primary" icon="fa-cog"/>
-                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <h2>Default CSS assets</h2>
-                    <div class="row mt16 o_settings_container" name="formio_assets">
-                        <div class="col-12 col-md-12 o_setting_box">
-                            <div class="text-muted mb32">
-                                Add additional CSS files to be included for every new installed formio.js client/library.
+                            <div class="mt16">
+                                <button name="action_formio_version_github_importer" type="object"
+                                        confirm="Are you sure to check for available versions? This could take some time to load, please be patient."
+                                        string="Check and Register available Versions" class="ml-2 btn btn-primary" icon="fa-cog"/>
                             </div>
-
-                                <div class="row ml16">
-                                    <field name="formio_default_asset_css_ids">
-                                        <tree editable="bottom">
-                                            <field name="url" widget="url"/>
-                                            <field name="active"/>
-                                            <field name="nodelete"/>
-                                        </tree>
-                                    </field>
-                                </div>
-                        </div>
-                    </div>
-                    <h2>Components</h2>
-                    <div class="row mt16 o_settings_container" name="formio_components">
-                        <div class="col-xs-12 col-md-6 o_setting_box">
-                            <div class="text-muted">
-                                Other Component settings.
+                        </setting>
+                            
+                    </block>
+                    <block title="Default CSS assets" name="default_css_assets">
+                        <setting string="Add additional CSS files to be included for every new installed formio.js client/library."
+                                 class="w-100">
+                            <div class="row">
+                                <field name="formio_default_asset_css_ids" class="w-100">
+                                    <tree editable="bottom">
+                                        <field name="url" widget="url"/>
+                                        <field name="active"/>
+                                        <field name="nodelete"/>
+                                    </tree>
+                                </field>
                             </div>
-                            <div class="o_setting_left_pane"/>
-                            <div class="o_setting_right_pane">
+                        </setting>
+                    </block>
+                    <block title="Components" name="components">
+                        <setting string="Other Component settings"/>
+                    </block>
+                    <block title="Default Form Builder formio.js Options Template">
+                        <setting string="Select a default Form Builder JavaScript Options Template. It's contents, the Form Builder JavaScript Options, shall be shown below."
+                                 class="w-100">
+                            <label for="formio_default_builder_js_options_id" string="Options Template" class="col-md-2"/>
+                            <field name="formio_default_builder_js_options_id"/>
+                            <div class="row mt16">
+                                <code><field name="formio_default_builder_js_options" class="w-100"/></code>
                             </div>
-                        </div>
-                    </div>
-                    <h2>Default Form Builder formio.js Options Template</h2>
-                    <div class="row mt16 o_settings_container" name="formio_default_builder_js_options">
-                        <div class="col-12 col-md-12 o_setting_box">
-                            <div class="text-muted mb32">
-                                Select a default Form Builder JavaScript Options Template.<br/>
-                                It's contents, the Form Builder JavaScript Options, shall be shown below.
-                            </div>
-                            <div class="o_setting_left_pane"/>
-                            <div class="o_setting_right_pane">
-                                <label for="formio_default_builder_js_options_id" string="Options Template"/>
-                                <field name="formio_default_builder_js_options_id"/>
-                            </div>
-                            <div class="row mt16 ml32">
-                                <code><field name="formio_default_builder_js_options"/></code>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-12 o_setting_box">
-                            <div class="text-muted">
+                            <div class="text-muted w-100">
                                 <strong>Example below</strong>. Options could contain the Form Builder "editForm" with some "File" component settings:<br/>
                                 <a href="https://github.com/formio/formio.js/blob/master/src/components/file/editForm/File.edit.file.js" target="_blank">
                                     https://github.com/formio/formio.js/blob/master/src/components/file/editForm/File.edit.file.js
@@ -118,8 +91,50 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
   }
 }</pre>
                             </div>
-                        </div>
-                    </div>
+                        </setting>
+                    </block>
+
+<!--                     <h2>Default Form Builder formio.js Options Template</h2> -->
+<!--                     <div class="row mt16 o_settings_container" name="formio_default_builder_js_options"> -->
+<!--                         <div class="col-12 col-md-12 o_setting_box"> -->
+<!--                             <div class="text-muted mb32"> -->
+<!--                                 Select a default Form Builder JavaScript Options Template.<br/> -->
+<!--                                 It's contents, the Form Builder JavaScript Options, shall be shown below. -->
+<!--                             </div> -->
+<!--                             <div class="o_setting_left_pane"/> -->
+<!--                             <div class="o_setting_right_pane"> -->
+<!--                                 <label for="formio_default_builder_js_options_id" string="Options Template"/> -->
+<!--                                 <field name="formio_default_builder_js_options_id"/> -->
+<!--                             </div> -->
+<!--                             <div class="row mt16 ml32"> -->
+<!--                                 <code><field name="formio_default_builder_js_options"/></code> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                         <div class="col-12 col-md-12 o_setting_box"> -->
+<!--                             <div class="text-muted"> -->
+<!--                                 <strong>Example below</strong>. Options could contain the Form Builder "editForm" with some "File" component settings:<br/> -->
+<!--                                 <a href="https://github.com/formio/formio.js/blob/master/src/components/file/editForm/File.edit.file.js" target="_blank"> -->
+<!--                                     https://github.com/formio/formio.js/blob/master/src/components/file/editForm/File.edit.file.js -->
+<!--                                 </a> -->
+<!--                             </div> -->
+<!--                             <div> -->
+<!--                                 <pre style="background-color: #e9ecef;">{ -->
+<!--   'editForm': { -->
+<!--     'file': [ -->
+<!--       { -->
+<!--         'key': 'file', -->
+<!--         'components': [ -->
+<!--           {'key': 'webcam', 'defaultValue': True}, -->
+<!--           {'key': 'storage', 'defaultValue': 'base64'} -->
+<!--         ] -->
+<!--       } -->
+<!--     ] -->
+<!--   } -->
+<!-- }</pre> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+
                 </app>
             </xpath>
         </field>
