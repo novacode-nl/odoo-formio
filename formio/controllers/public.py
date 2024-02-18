@@ -50,6 +50,7 @@ class FormioPublicController(http.Controller):
     def form_config(self, form_uuid):
         form = self._get_public_form(form_uuid, self._check_public_form())
         res = {'schema': {}, 'options': {}, 'params': {}}
+        args = request.httprequest.args
 
         if form and form.builder_id.schema:
             res['schema'] = json.loads(form.builder_id.schema)
@@ -57,10 +58,10 @@ class FormioPublicController(http.Controller):
             res['locales'] = self._get_public_form_js_locales(form.builder_id)
             res['params'] = self._get_public_form_js_params(form.builder_id)
             res['csrf_token'] = request.csrf_token()
-
-        args = request.httprequest.args
-        etl_odoo_config = form.builder_id.sudo()._etl_odoo_config(params=args.to_dict())
-        res['options'].update(etl_odoo_config.get('options', {}))
+            etl_odoo_config = form.builder_id.sudo()._etl_odoo_config(
+                formio_form=form, params=args.to_dict()
+            )
+            res['options'].update(etl_odoo_config.get('options', {}))
         return request.make_json_response(res)
 
     @http.route('/formio/public/form/<string:uuid>/submission', type='http', auth='public', csrf=False, website=True)
