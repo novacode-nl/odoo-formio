@@ -12,8 +12,11 @@ function uuidv4() {
 }
 
 // random importPath ensures no caching
-let importPath = "./formio_form.js?" + uuidv4();
-let { OdooFormioForm, Branding } = await import(importPath);
+const importPathBranding = "./branding.js?" + uuidv4();
+const importPathForm = "./formio_form.js?" + uuidv4();
+
+let { Branding } = await import(importPathBranding);
+let { OdooFormioForm } = await import(importPathForm);
 
 // use global owl
 // can't import from "@odoo/owl", because not an @odoo-module
