@@ -693,10 +693,10 @@ class Builder(models.Model):
         )
         return trans[0].value if trans else source
 
-    def _etl_odoo_config(self, params):
+    def _etl_odoo_config(self, formio_form=None, params={}):
         return {}
 
-    def _etl_odoo_data(self, params):
+    def _etl_odoo_data(self, formio_form=None, params={}):
         return {}
 
     def _generate_odoo_domain(self, domain=[], params={}):

@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.10.11
+
+Fix public `/formio/public/form/<form_uuid>/config` endpoint.\
+Pass the `formio.form` model object to methods `_etl_odoo_config()` and `_etl_odoo_data`.
+
 ## 16.0.10.10
 
 In Form Builder, when Autosave is disabled, highlight a colored border when a manual saving is required.
