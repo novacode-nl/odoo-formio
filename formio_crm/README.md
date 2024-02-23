@@ -4,11 +4,18 @@ This module extends the functionality of Odoo CRM Leads by integrating Formio fo
 
 ## Features
 
-- Link multiple Formio forms to a single CRM lead.
-- Automatically update forms linked to a CRM lead when the lead's information changes.
-- View and manage all forms associated with a CRM lead directly from the CRM lead's form view.
-- A counter on the CRM lead form shows the number of linked Formio forms.
-- Direct navigation to related Formio forms with full support for Kanban, Tree, and Form views.
+1. Link multiple Formio forms to a single CRM lead.
+2. Automatically update forms linked to a CRM lead when the lead's information changes.
+3. View and manage all forms associated with a CRM lead directly from the CRM lead's form view.
+4. A counter on the CRM lead form shows the number of linked Formio forms.
+5. Direct navigation to related Formio forms with full support for Kanban, Tree, and Form views.
+
+### Where is the data collected in the Formio form stored?
+
+Collected data is stored in CRM Lead Model (crm.lead)
+- Formio Forms (formio_forms): This field establishes a One2many relationship between crm.lead and formio.form, meaning each CRM lead can have multiple Formio forms associated with it. The data for this relationship is stored in the formio.form model, where there is a Many2one field (crm_lead_id) pointing back to crm.lead. This linkage allows the CRM lead to keep track of all its associated forms.
+- Forms Count (formio_forms_count): This computed field stores the count of Formio forms linked to the CRM lead. It's calculated dynamically by counting the number of items in the formio_forms One2many field. Although the count itself is not directly stored in the database, the underlying data (the forms linked to the lead) is, enabling the count to be computed on-the-fly.
+- Model ID (formio_this_model_id): This computed field stores the database ID of the crm.lead model itself (obtained via self.env.ref('crm.model_crm_lead').id). It's used internally to facilitate referencing the CRM Lead model in dynamic contexts, such as in the creation of Formio forms that need to reference back to the model they are associated with.
 
 ## Installation
 
