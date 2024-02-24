@@ -4,16 +4,6 @@
 // use global owl
 // can't import from "@odoo/owl", because not an @odoo-module
 
-import { sha512 } from '/formio/static/lib/noble-hashes.js'; 
-
-const ed = await import('/formio/static/lib/noble-ed25519.min.js');
-
-const base64ToArray = (b64) => {
-    return Uint8Array.from(atob(b64), c => c.charCodeAt(0));
-};
-
-ed.etc.sha512Sync = (...m) => sha512().create().update(ed.etc.concatBytes(...m)).digest();
-
 const { Component, markup, onMounted, onWillStart, useState, xml } = owl;
 
 export class OdooFormioForm extends Component {
@@ -238,7 +228,10 @@ export class OdooFormioForm extends Component {
                         // extra (return) Promise ain't needed.
                         return new Promise((resolve) => {
                             this.postData(apiUrl, data).then(function(result) {
-                                form.submission = {'data': result};
+                                form.submission = {'data': result.values};
+                                if (!$.isEmptyObject(result.config) && !$.isEmptyObject(result.config.options)) {
+                                    form.options = {...form.options, ...result.config.options};
+                                }
                                 self.hideOverlay();
                                 resolve();
                             });

@@ -1,9 +1,14 @@
 // Copyright Nova Code (https://www.novacode.nl)
 // See LICENSE file for full licensing details.
 
-import { sha512 } from '/formio/static/lib/noble-hashes.js';
+const { uuidv4 } = await import('./utils.js');
 
-const ed = await import('/formio/static/lib/noble-ed25519.min.js');
+// random import path ensures no caching
+const pathNobleEd25519 = "/formio/static/lib/noble-ed25519.min.js?" + uuidv4();
+const pathNobleHashes = "/formio/static/lib/noble-hashes.js?" + uuidv4();
+
+const ed = await import(pathNobleEd25519);
+const { sha512 } = await import(pathNobleHashes);
 
 const base64ToArray = (b64) => {
     return Uint8Array.from(atob(b64), c => c.charCodeAt(0));
@@ -63,3 +68,5 @@ export class License extends Component {
         return dateValidUntil.getTime() >= dateToday.getTime();
     }
 }
+
+Object.freeze(License.prototype);

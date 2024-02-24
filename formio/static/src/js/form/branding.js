@@ -1,18 +1,10 @@
 // Copyright Nova Code (https://www.novacode.nl)
 // See LICENSE file for full licensing details.
 
-function uuidv4() {
-    // Used in cache invalidation (can also be used in PWA).
-    // TODO: DRY, move to generic function/method to be imported here.
-    // XXX: not ideal https://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid
-    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(
-        /[018]/g, c =>
-        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-    );
-}
+const { uuidv4 } = await import('./utils.js');
 
-const importPathLicense = "./license.js?" + uuidv4();
-let { License } = await import(importPathLicense);
+const pathLicense = "./license.js?" + uuidv4();
+let { License } = await import(pathLicense);
 
 const { Component, markup, onMounted, useState, xml } = owl;
 
@@ -64,7 +56,7 @@ export class Branding extends License {
         const tooltipTranslations = {
             'en_US': 'You can remove the Nova Forms branding by purchasing a license',
             'ar': 'يمكنك إزالة العلامة التجارية Nova Forms عن طريق شراء ترخيص',
-            'de': 'Sie können das Nova Forms-Branding entfernen, indem Sie eine Lizenz erwerben',
+            'de': 'Sie können das Nova Forms branding entfernen, indem Sie eine lizenz erwerben',
             'es': 'Puede eliminar la marca Nova Forms comprando una licencia',
             'hi_IN': 'आप लाइसेंस खरीदकर नोवा फॉर्म ब्रांडिंग को हटा सकते हैं',
             'it_IT': 'Puoi rimuovere il marchio Nova Forms acquistando una licenza',
@@ -96,8 +88,10 @@ export class Branding extends License {
         this.state.output = markup(`
             <div data-tooltip="${tooltip}"
                 style="display: inline-block !important; margin-bottom: 1px !important; padding: 4px 8px 4px 8px !important; border: 1px solid #c0c0c0 !important; border-radius: 5px !important; background-color: #fff !important; color: #000 !important;">
-                ${poweredBy} <a style="color: #000 !important; font-weight: bold !important;" href="https://www.novaforms.app">Nova Forms</a>
+                ${poweredBy} <a style="color: #aa4689 !important; font-weight: bold !important;" href="https://www.novaforms.app">Nova Forms</a>
             </div>
         `);
     }
 }
+
+Object.freeze(Branding.prototype);
