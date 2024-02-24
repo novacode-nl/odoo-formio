@@ -210,6 +210,9 @@ export class OdooFormioForm extends Component {
                         return new Promise((resolve) => {
                             this.postData(apiUrl, data).then(function(result) {
                                 form.submission = {'data': result};
+                                if (!$.isEmptyObject(result.config) && !$.isEmptyObject(result.config.options)) {
+                                    form.options = {...form.options, ...result.config.options};
+                                }
                                 overlayTimerPromise.then(() => {
                                     self.hideOverlay();
                                     resolve();

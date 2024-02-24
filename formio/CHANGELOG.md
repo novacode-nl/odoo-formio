@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.10.12
+
+Improve the form (component) onChange API to apply Form options described in:\
+https://help.form.io/developers/form-development/form-renderer#form-renderer-options
+
 ## 16.0.10.11
 
 Fix public `/formio/public/form/<form_uuid>/config` endpoint.\
