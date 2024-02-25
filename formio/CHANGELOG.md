@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.10.13
+
+Fix Form Builder with Autosave disabled to show the Save Form button when moving (ordering) components.
+
 ## 16.0.10.12
 
 Improve the form (component) onChange API to apply Form options described in:\
