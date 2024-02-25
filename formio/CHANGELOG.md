@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.0.6.16
+
+Fix `ir.actions.server` model `_constraint_unique_formio_ref` method:\
+`ValueError: Expected singleton: ir.actions.server`
+
 ## 15.0.6.15
 
 Improvement, avoid browser caching for certain assets files (CSS, JS):
