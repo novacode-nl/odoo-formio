@@ -39,7 +39,7 @@ class ServerAction(models.Model):
     def _constraint_unique_formio_ref(self):
         for rec in self:
             domain = [("formio_ref", "=", rec.formio_ref)]
-            if self.formio_ref and self.search_count(domain) > 1:
+            if rec.formio_ref and self.search_count(domain) > 1:
                 msg = _(
                     'A Server Action with Forms Ref "%s" already exists.\nForms Ref should be unique.'
                 ) % (rec.formio_ref)
