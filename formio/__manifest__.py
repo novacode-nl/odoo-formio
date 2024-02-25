@@ -4,7 +4,7 @@
 {
     'name': 'Forms',
     'summary': 'Form Builder for backend, portal and website forms - to collect any information you need for your business.',
-    'version': '16.0.10.13',
+    'version': '16.0.10.14',
     'license': 'LGPL-3',
     'author': 'Nova Code',
     'website': 'https://www.novacode.nl',

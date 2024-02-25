@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.0.10.14
+
+Fix `ir.actions.server` model `_constraint_unique_formio_ref` method:\
+`ValueError: Expected singleton: ir.actions.server`
+
 ## 16.0.10.13
 
 Fix Form Builder with Autosave disabled to show the Save Form button when moving (ordering) components.
