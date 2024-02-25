@@ -146,6 +146,9 @@ function app() {
                         }).then(function() {
                             console.log('[Forms] Builder sucessfully auto-saved.');
                         });
+                    } else {
+                        self.isDirty = true;
+                        self.showSaveBuilder();
                     }
                 }
             });
