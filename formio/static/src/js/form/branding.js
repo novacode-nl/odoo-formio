@@ -1,7 +1,7 @@
 // Copyright Nova Code (https://www.novacode.nl)
 // See LICENSE file for full licensing details.
 
-const { uuidv4 } = await import('./utils.js');
+const { protectComponent, uuidv4 } = await import('./utils.js');
 
 const pathLicense = "./license.js?" + uuidv4();
 let { License } = await import(pathLicense);
@@ -94,4 +94,4 @@ export class Branding extends License {
     }
 }
 
-Object.freeze(Branding.prototype);
+protectComponent(Branding);

@@ -1,7 +1,7 @@
 // Copyright Nova Code (https://www.novacode.nl)
 // See LICENSE file for full licensing details.
 
-const { uuidv4 } = await import('./utils.js');
+const { protectComponent, uuidv4 } = await import('./utils.js');
 
 // random import path ensures no caching
 const pathNobleEd25519 = "/formio/static/lib/noble-ed25519.min.js?" + uuidv4();
@@ -69,4 +69,4 @@ export class License extends Component {
     }
 }
 
-Object.freeze(License.prototype);
+protectComponent(License);
