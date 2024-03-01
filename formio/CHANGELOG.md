@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.0.6.17
+
+Fix form `formio.form` create, to set `public_share` by its `formio.builder``public` field.
+This is still done (but not harmful) by `_onchange_builder` which needs to be fixed or removed.
+
 ## 15.0.6.16
 
 Fix `ir.actions.server` model `_constraint_unique_formio_ref` method:\

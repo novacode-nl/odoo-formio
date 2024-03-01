@@ -174,6 +174,7 @@ class Form(models.Model):
 
         # access
         vals['portal_share'] = builder.portal
+        vals['public_share'] = builder.public
         if builder.public or self.env.user.id == self.env.ref('base.public_user').id:
             vals['public_access'] = True
             vals['public_access_date_from'] = fields.Datetime.now()
