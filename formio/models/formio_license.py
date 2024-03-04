@@ -27,7 +27,7 @@ class FormioLicense(models.Model):
     @api.depends('key')
     def _compute_license_fields(self):
         for rec in self:
-            if self.key:
+            if rec.key:
                 parts = self.key.split('#')
                 part_dict = json.loads(parts[0])
                 rec.valid_until_date = part_dict['validUntil']

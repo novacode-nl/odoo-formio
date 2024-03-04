@@ -6,6 +6,8 @@
 
 const { Component, markup, onMounted, onWillStart, useState, xml } = owl;
 
+const { protectComponent } = await import('./utils.js');
+
 export class OdooFormioForm extends Component {
     setup() {
         super.setup();
@@ -699,3 +701,5 @@ export class OdooFormioForm extends Component {
         }
     }
 }
+
+protectComponent(OdooFormioForm);

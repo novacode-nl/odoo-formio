@@ -1,7 +1,7 @@
 // Copyright Nova Code (https://www.novacode.nl)
 // See LICENSE file for full licensing details.
 
-const { uuidv4 } = await import('./utils.js');
+const { protectComponent, uuidv4 } = await import('./utils.js');
 
 // random import path ensures no caching
 const pathBranding = "./branding.js?" + uuidv4();
@@ -93,6 +93,7 @@ function app() {
         }
     }
 
+    protectComponent(App);
     const app = new App();
     mount(App, document.getElementById('formio_form_app'));
 }
