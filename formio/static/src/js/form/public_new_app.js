@@ -128,6 +128,16 @@ function app() {
             }
         }
 
+        scrollIntoView() {
+            if (this.params.hasOwnProperty('public_scroll_into_view_selector')
+                && this.params.public_scroll_into_view_selector) {
+                const params = {
+                    scroll_into_view_selector: this.params.public_scroll_into_view_selector
+                };
+                window.parent.postMessage({odooFormioMessage: 'formioScroll', params: params});
+            }
+        }
+
         getDataUrl(compObj) {
             return '/formio/public/form/new', self.formUuid, compObj.data.url;
         }

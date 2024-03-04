@@ -1,5 +1,11 @@
 # Changelog
 
+## 16.0.11.16
+
+Add configurable automatic scrolling, especially useful in long-page wizard forms after switching previous/next page.\
+This scrolls an element (CSS selector) into the visible area of the browser window.\
+The element (CSS selector) can be set in the Form Builder for portal and public forms.
+
 ## 16.0.10.15
 
 Fix form `formio.form` create, to set `public_share` by its `formio.builder``public` field.

@@ -35,6 +35,18 @@ export class FormController extends Component {
         const fields = this.props.fields;
         const mode = 'edit';
 
+        // scroll top (especially for wizard forms with long pages)
+        window.addEventListener('message', function(event) {
+            const baseUrl = window.location.protocol + '//' + window.location.host;
+            if (event.data.hasOwnProperty('odooFormioMessage')) {
+                const msg = event.data.odooFormioMessage,
+                      params = event.data.params;
+                if (event.origin == baseUrl && msg == 'formioScroll') {
+                    document.getElementsByClassName('o_content', window.parent.document)[0].scrollTo(0, 0);
+                }
+            }
+        }, false);
+
         // props: model
         this.model = useModel(
             RelationalModel,

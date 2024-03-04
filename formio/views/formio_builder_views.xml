@@ -193,6 +193,13 @@ See LICENSE file for full licensing details. -->
                                 <group name="portal_redirect_after_submit" string="Redirect After Submit">
                                     <field name="portal_submit_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
                                 </group>
+                                <group string="Miscellaneous">
+                                    <field name="portal_scroll_into_view_selector"
+                                           string="Scroll Into View Selector"
+                                           groups="formio.group_formio_admin"
+                                           attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                </group>
+
                             </group>
                         </page>
                         <page string="Public / Website" name="public_settings">
@@ -222,6 +229,12 @@ See LICENSE file for full licensing details. -->
                                 </group>
                                 <group name="public_redirect_after_submit" string="Redirect After Submit">
                                     <field name="public_submit_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
+                                </group>
+                                <group string="Miscellaneous">
+                                    <field name="public_scroll_into_view_selector"
+                                           string="Scroll Into View Selector"
+                                           groups="formio.group_formio_admin"
+                                           attrs="{'readonly': [('is_locked', '=', True)]}"/>
                                 </group>
                             </group>
                         </page>

@@ -95,6 +95,16 @@ function app() {
                 }, 500);
             }
         }
+
+        scrollIntoView() {
+            if (this.params.hasOwnProperty('portal_scroll_into_view_selector')
+                && this.params.portal_scroll_into_view_selector) {
+                const params = {
+                    scroll_into_view_selector: this.params.portal_scroll_into_view_selector
+                };
+                window.parent.postMessage({odooFormioMessage: 'formioScroll', params: params});
+            }
+        }
     }
 
     const app = new App();
