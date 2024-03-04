@@ -111,13 +111,15 @@ export class OdooFormioForm extends Component {
                     }
                     self.hideOverlay();
                     if (window.self !== window.top) {
-                        // window.parent.postMessage({odooFormioMessage: 'formioScroll', params: self.params});
                         self.scrollIntoView();
                     }
                 });
             });
         }
         else {
+            if (window.self !== window.top) {
+                self.scrollIntoView();
+            }
             return null;
         }
     }
