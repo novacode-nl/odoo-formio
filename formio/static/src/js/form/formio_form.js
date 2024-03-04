@@ -60,6 +60,10 @@ export class OdooFormioForm extends Component {
         // Implemented in specific (*_app.js) classes.
     }
 
+    scrollIntoView() {
+        // Optionally implemented in specific (*_app.js) classes.
+    }
+
     getDataUrl(compObj) {
         // Possibly overridden in specific (*_app.js) classes.
         return '/formio/form/', self.formUuid, compObj.data.url;
@@ -109,10 +113,16 @@ export class OdooFormioForm extends Component {
                         this.submitUrl = this.wizardSubmitUrl + this.formUuid + '/submit';
                     }
                     self.hideOverlay();
+                    if (window.self !== window.top) {
+                        self.scrollIntoView();
+                    }
                 });
             });
         }
         else {
+            if (window.self !== window.top) {
+                self.scrollIntoView();
+            }
             return null;
         }
     }

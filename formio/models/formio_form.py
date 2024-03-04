@@ -611,12 +611,13 @@ class Form(models.Model):
         Param = self.env['ir.config_parameter'].sudo()
         cdn_base_url = Param.get_param('formio.cdn_base_url')
         params = {
+            'cdn_base_url': cdn_base_url,
             'portal_save_draft_done_url': self.portal_save_draft_done_url,
             'portal_submit_done_url': self.portal_submit_done_url,
             'public_save_draft_done_url': self.public_save_draft_done_url,
             'public_submit_done_url': self.public_submit_done_url,
             'wizard_on_change_page_save_draft': self.builder_id.wizard and self.builder_id.wizard_on_change_page_save_draft,
-            'cdn_base_url': cdn_base_url
+            'scroll_into_view_selector': self.builder_id.scroll_into_view_selector,
         }
         return params
 

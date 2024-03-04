@@ -6,7 +6,6 @@ import { Layout } from "@web/search/layout";
 import { useModel } from "@web/model/model";
 import { RelationalModel } from "@web/model/relational_model/relational_model";
 import { extractFieldsFromArchInfo } from "@web/model/relational_model/utils";
-// import { formView } from "@web/views/form/form_view";
 import { standardViewProps } from "@web/views/standard_view_props";
 import { ViewButton } from "@web/views/view_button/view_button";
 import { FormArchParser } from "@web/views/form/form_arch_parser";
@@ -38,12 +37,23 @@ export class FormController extends Component {
         };
         
         this.model = useState(useModel(this.props.Model, this.modelParams, { beforeFirstLoad }));
-
         this.display = { ...this.props.display };
 
         useEffect(() => {
             this.updateURL();
         });
+
+        // scroll top (especially for wizard forms with long pages)
+        window.addEventListener('message', function(event) {
+            const baseUrl = window.location.protocol + '//' + window.location.host;
+            if (event.data.hasOwnProperty('odooFormioMessage')) {
+                const msg = event.data.odooFormioMessage,
+                      params = event.data.params;
+                if (event.origin == baseUrl && msg == 'formioScroll') {
+                    document.getElementsByClassName('o_content', window.parent.document)[0].scrollTo(0, 0);
+                }
+            }
+        }, false);
     }
     
     updateURL() {
