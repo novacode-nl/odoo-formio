@@ -623,7 +623,6 @@ class Form(models.Model):
             'public_save_draft_done_url': self.public_save_draft_done_url,
             'public_submit_done_url': self.public_submit_done_url,
             'wizard_on_change_page_save_draft': self.builder_id.wizard and self.builder_id.wizard_on_change_page_save_draft,
-            'scroll_into_view_selector': self.builder_id.scroll_into_view_selector,
         }
         return params
 

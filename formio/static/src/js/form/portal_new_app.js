@@ -96,11 +96,11 @@ function app() {
             }
         }
 
-        scrollIntoView() {
-            if (this.params.hasOwnProperty('portal_scroll_into_view_selector')
-                && this.params.portal_scroll_into_view_selector) {
+        scrollParent() {
+            if (this.params.hasOwnProperty('scroll_into_view_selector')
+                && this.params.scroll_into_view_selector) {
                 const params = {
-                    scroll_into_view_selector: this.params.portal_scroll_into_view_selector
+                    scroll_into_view_selector: this.params.scroll_into_view_selector
                 };
                 window.parent.postMessage({odooFormioMessage: 'formioScroll', params: params});
             }

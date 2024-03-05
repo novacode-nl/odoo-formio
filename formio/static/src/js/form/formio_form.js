@@ -57,7 +57,7 @@ export class OdooFormioForm extends Component {
         // Implemented in specific (*_app.js) classes.
     }
 
-    scrollIntoView() {
+    scrollParent() {
         // Optionally implemented in specific (*_app.js) classes.
     }
 
@@ -111,14 +111,14 @@ export class OdooFormioForm extends Component {
                     }
                     self.hideOverlay();
                     if (window.self !== window.top) {
-                        self.scrollIntoView();
+                        self.scrollParent();
                     }
                 });
             });
         }
         else {
             if (window.self !== window.top) {
-                self.scrollIntoView();
+                self.scrollParent();
             }
             return null;
         }
@@ -219,7 +219,12 @@ export class OdooFormioForm extends Component {
                         // extra (return) Promise ain't needed.
                         return new Promise((resolve) => {
                             this.postData(apiUrl, data).then(function(result) {
-                                form.submission = {'data': result};
+                                if (result.hasOwnProperty('values')) {
+                                    form.submission = {'data': result.values};
+                                }
+                                else {
+                                    form.submission = {'data': result};
+                                }
                                 if (!$.isEmptyObject(result.config) && !$.isEmptyObject(result.config.options)) {
                                     form.options = {...form.options, ...result.config.options};
                                 }
@@ -240,7 +245,12 @@ export class OdooFormioForm extends Component {
                         // extra (return) Promise ain't needed.
                         return new Promise((resolve) => {
                             this.postData(apiUrl, data).then(function(result) {
-                                form.submission = {'data': result};
+                                if (result.hasOwnProperty('values')) {
+                                    form.submission = {'data': result.values};
+                                }
+                                else {
+                                    form.submission = {'data': result};
+                                }
                                 self.hideOverlay();
                                 resolve();
                             });
@@ -249,7 +259,12 @@ export class OdooFormioForm extends Component {
                     else {
                         return new Promise((resolve) => {
                             this.postData(apiUrl, data).then(function(result) {
-                                form.submission = {'data': result};
+                                if (result.hasOwnProperty('values')) {
+                                    form.submission = {'data': result.values};
+                                }
+                                else {
+                                    form.submission = {'data': result};
+                                }
                                 resolve();
                             });
                         });
@@ -320,7 +335,12 @@ export class OdooFormioForm extends Component {
                     // extra (return) Promise ain't needed.
                     return new Promise((resolve) => {
                         this.postData(apiUrl, data).then(function(result) {
-                            form.submission = {'data': result};
+                            if (result.hasOwnProperty('values')) {
+                                form.submission = {'data': result.values};
+                            }
+                            else {
+                                form.submission = {'data': result};
+                            }
                             overlayTimerPromise.then(() => {
                                 self.hideOverlay();
                                 resolve();
@@ -338,7 +358,12 @@ export class OdooFormioForm extends Component {
                     // extra (return) Promise ain't needed.
                     return new Promise((resolve) => {
                         this.postData(apiUrl, data).then(function(result) {
-                            form.submission = {'data': result};
+                            if (result.hasOwnProperty('values')) {
+                                form.submission = {'data': result.values};
+                            }
+                            else {
+                                form.submission = {'data': result};
+                            }
                             self.hideOverlay();
                             resolve();
                         });
@@ -347,7 +372,12 @@ export class OdooFormioForm extends Component {
                 else {
                     return new Promise((resolve) => {
                         this.postData(apiUrl, data).then(function(result) {
-                            form.submission = {'data': result};
+                            if (result.hasOwnProperty('values')) {
+                                form.submission = {'data': result.values};
+                            }
+                            else {
+                                form.submission = {'data': result};
+                            }
                             resolve();
                         });
                     });

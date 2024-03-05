@@ -41,7 +41,7 @@ export class FormController extends Component {
             if (event.data.hasOwnProperty('odooFormioMessage')) {
                 const msg = event.data.odooFormioMessage,
                       params = event.data.params;
-                if (event.origin == baseUrl && msg == 'formioScroll') {
+                if (event.origin == baseUrl && msg == 'formioScrollTop') {
                     document.getElementsByClassName('o_content', window.parent.document)[0].scrollTo(0, 0);
                 }
             }

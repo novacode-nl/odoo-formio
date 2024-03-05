@@ -95,6 +95,10 @@ function app() {
                 }, 500);
             }
         }
+
+        scrollParent() {
+            window.parent.postMessage({odooFormioMessage: 'formioScrollTop', params: {}});
+        }
     }
 
     const app = new App();

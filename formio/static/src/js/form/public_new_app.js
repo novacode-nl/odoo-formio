@@ -128,13 +128,13 @@ function app() {
             }
         }
 
-        scrollIntoView() {
-            if (this.params.hasOwnProperty('public_scroll_into_view_selector')
-                && this.params.public_scroll_into_view_selector) {
+        scrollParent() {
+            if (this.params.hasOwnProperty('scroll_into_view_selector')
+                && this.params.scroll_into_view_selector) {
                 const params = {
-                    scroll_into_view_selector: this.params.public_scroll_into_view_selector
+                    scroll_into_view_selector: this.params.scroll_into_view_selector
                 };
-                window.parent.postMessage({odooFormioMessage: 'formioScroll', params: params});
+                window.parent.postMessage({odooFormioMessage: 'formioScrollIntoView', params: params});
             }
         }
 

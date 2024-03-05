@@ -1,5 +1,11 @@
 # Changelog
 
+## 16.0.11.17
+
+- Fix crashing forms due to 16.0.11.16 (Scroll Into View).
+- Improvements for Scroll Into View feature.
+- Backwards compatibilty fix for (component) onChange event.
+
 ## 16.0.11.16
 
 Add configurable automatic scrolling, especially useful in long-page wizard forms after switching previous/next page.\
