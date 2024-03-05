@@ -20,8 +20,11 @@ $(document).ready(function() {
             else if (event.origin == baseUrl && msg == 'formioSaveDraftDone' && saveDraftDoneUrl) {
                 window.location = saveDraftDoneUrl;
             }
-            else if (event.origin == baseUrl && msg == 'formioScroll' && scrollIntoViewSelector) {
+            else if (event.origin == baseUrl && msg == 'formioScrollIntoView' && scrollIntoViewSelector) {
                 document.querySelector(scrollIntoViewSelector, window.parent.document).scrollIntoView();
+            }
+            else if (event.origin == baseUrl && msg == 'formioScrollTop') {
+                window.parent.scrollTo(0, 0);
             }
         }
     }, false);

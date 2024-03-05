@@ -619,7 +619,7 @@ class Builder(models.Model):
             'cdn_base_url': self._cdn_base_url(),
             'portal_save_draft_done_url': self.portal_save_draft_done_url,
             'portal_submit_done_url': self.portal_submit_done_url,
-            'portal_scroll_into_view_selector': self.portal_scroll_into_view_selector,
+            'scroll_into_view_selector': self.portal_scroll_into_view_selector,
             'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
             'submission_url_add_query_params_from': self.submission_url_add_query_params_from,
         }
@@ -631,7 +631,7 @@ class Builder(models.Model):
             'cdn_base_url': self._cdn_base_url(),
             'public_save_draft_done_url': self.public_save_draft_done_url,
             'public_submit_done_url': self.public_submit_done_url,
-            'public_scroll_into_view_selector': self.public_scroll_into_view_selector,
+            'scroll_into_view_selector': self.public_scroll_into_view_selector,
             'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
             'submission_url_add_query_params_from': self.submission_url_add_query_params_from,
         }
