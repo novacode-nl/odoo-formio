@@ -102,7 +102,7 @@ function app() {
                 const params = {
                     scroll_into_view_selector: this.params.scroll_into_view_selector
                 };
-                window.parent.postMessage({odooFormioMessage: 'formioScroll', params: params});
+                window.parent.postMessage({odooFormioMessage: 'formioScrollIntoView', params: params});
             }
         }
     }
