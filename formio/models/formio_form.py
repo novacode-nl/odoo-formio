@@ -354,7 +354,7 @@ class Form(models.Model):
         for r in self:
             r.display_state = get_field_selection_label(r, 'state')
 
-    def _compute_display_name_get(self):
+    def _compute_display_name(self):
         for r in self:
             r.display_name = '{title} [{id}]'.format(title=r.title, id=r.id)
 
