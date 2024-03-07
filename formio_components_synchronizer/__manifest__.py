@@ -22,7 +22,7 @@
     'application': True,
     'installable': True,
     'images': [
-        'static/description/banner.gif',
+        'static/description/banner.png',
     ],
     'description': 'Saves Form Components as database records.'
 }

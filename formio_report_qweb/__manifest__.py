@@ -31,7 +31,7 @@
         ],
     },
     'images': [
-        'static/description/banner.gif',
+        'static/description/banner.png',
     ],
     'description': 'Generate (PDF) reports for every Form',
 }

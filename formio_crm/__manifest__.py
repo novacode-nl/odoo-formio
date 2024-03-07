@@ -21,7 +21,7 @@
     ],
     'application': True,
     'images': [
-        'static/description/banner.gif',
+        'static/description/banner.png',
     ],
     'description': 'Forms integration with CRM Leads',
 }

@@ -41,17 +41,17 @@ export class Branding extends License {
         const languageShort = language.substring(0, 2);
 
         // translations (en_US is default)
-        const poweredByTranslations = {
-            'en_US': 'Form powered by',
-            'ar': 'النموذج مدعوم من',
-            'es': 'Formulario impulsado por',
+        const madeWithTranslations = {
+            'en_US': 'Form made with',
+            'ar': 'النموذج المصنوع من',
+            'es': 'Formulario credo con',
             'hi_IN': 'द्वारा संभव बनाया गया',
-            'it_IT': 'Modulo alimentato da',
-            'ro_RO': 'Formular alimentat de',
-            'ru_RU': 'Форма стала возможной благодаря',
-            'th_TH': 'แบบฟอร์มขับเคลื่อนโดย',
-            'zh_TW': '表格由',
-            'zh': '表格由',
+            'it_IT': 'Modulo creato con',
+            'ro_RO': 'Formular creat cu',
+            'ru_RU': 'форма, созданная с помощью',
+            'th_TH': 'แบบฟอร์มที่สร้างขึ้นด้วย',
+            'zh_TW': '該表格是使用建立的',
+            'zh': '表单是用创建的'
         };
         const tooltipTranslations = {
             'en_US': 'You can remove the Nova Forms branding by purchasing a license',
@@ -68,12 +68,12 @@ export class Branding extends License {
         };
 
         // powered by
-        let poweredBy = poweredByTranslations['en_US'];
-        if (poweredByTranslations.hasOwnProperty(language)) {
-            poweredBy = poweredByTranslations[language];
+        let madeWith = madeWithTranslations['en_US'];
+        if (madeWithTranslations.hasOwnProperty(language)) {
+            madeWith = madeWithTranslations[language];
         }
-        else if (poweredByTranslations.hasOwnProperty(languageShort)) {
-            poweredBy = poweredByTranslations[languageShort];
+        else if (madeWithTranslations.hasOwnProperty(languageShort)) {
+            madeWith = madeWithTranslations[languageShort];
         }
 
         // tooltip
@@ -84,11 +84,10 @@ export class Branding extends License {
         else if (tooltipTranslations.hasOwnProperty(languageShort)) {
             tooltip = tooltipTranslations[languageShort];
         }
-
         this.state.output = markup(`
             <div data-tooltip="${tooltip}"
-                style="display: inline-block !important; margin-bottom: 1px !important; padding: 4px 8px 4px 8px !important; border: 1px solid #c0c0c0 !important; border-radius: 5px !important; background-color: #fff !important; color: #000 !important;">
-                ${poweredBy} <a style="color: #aa4689 !important; font-weight: bold !important;" target="_parent" href="https://www.novaforms.app">Nova Forms</a>
+                style="display: inline-block !important; margin-bottom: 1px !important; padding: 4px 8px 4px 8px !important; border: 2px solid #c0c0c0 !important; border-radius: 5px !important; background-color: #fff !important; color: #000 !important; font-size: 1.1rem !important;">
+                ${madeWith} <a style="color: #aa4689 !important; font-weight: bold !important; text-decoration-thickness: 0.1rem !important;" target="_blank" href="https://www.novaforms.app">Nova Forms</a>
             </div>
         `);
     }

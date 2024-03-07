@@ -24,7 +24,7 @@
     'application': True,
     'installable': False,
     'images': [
-        'static/description/banner.gif',
+        'static/description/banner.png',
     ],
     'description': "Send forms via mail after completion."
 }

@@ -38,6 +38,6 @@
     },
     'application': True,
     'images': [
-        'static/description/banner.gif',
+        'static/description/banner.png',
     ],
 }

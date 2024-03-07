@@ -20,7 +20,7 @@
     },
     'application': True,
     'images': [
-        'static/description/banner.gif',
+        'static/description/banner.png',
     ],
     'description': 'Python API for Forms data (builder, form/submission)',
 }

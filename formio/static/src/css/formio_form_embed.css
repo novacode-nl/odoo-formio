@@ -87,6 +87,10 @@ h3.formio_form_title {
     width: auto;
 }
 
+div[data-tooltip]:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 div[data-tooltip]:hover::before {
     position: absolute;
     content: attr(data-tooltip);
