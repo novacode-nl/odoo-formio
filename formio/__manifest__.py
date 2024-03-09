@@ -94,6 +94,6 @@
         'data/formio_demo_data.xml',
     ],
     'images': [
-        'static/description/banner.svg',
+        'static/description/banner.png',
     ]
 }
