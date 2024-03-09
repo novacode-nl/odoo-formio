@@ -1,14 +1,14 @@
-# Copyright Nova Code (http://www.novacode.nl)
+# Copyright Nova Code (https://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
 {
-    'name': 'Forms | Sales',
+    'name': 'Forms • Sales',
     'summary': 'Forms integration with Sale Orders/Quotations',
     'version': '0.1',
     'license': 'LGPL-3',
     'author': 'Nova Code',
-    'website': 'https://www.novacode.nl',
-    'live_test_url': 'https://demo16.novacode.nl',
+    'website': 'https://www.novaforms.app',
+    'live_test_url': 'https://demo17.novaforms.app',
     'category': 'Forms/Forms',
     'depends': [
         'sale_management',
@@ -22,7 +22,7 @@
     ],
     'application': True,
     'images': [
-        'static/description/banner.gif',
+        'static/description/banner.png',
     ],
     'description': 'Forms integration with Sale Orders/Quotations'
 }

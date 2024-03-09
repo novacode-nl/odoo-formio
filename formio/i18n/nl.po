@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-18 10:59+0000\n"
-"PO-Revision-Date: 2023-09-18 13:08+0200\n"
+"POT-Creation-Date: 2023-12-14 14:07+0000\n"
+"PO-Revision-Date: 2023-12-14 15:08+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -102,15 +102,15 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hello <t t-out=\"object.user_id.partner_id.name\"></t>,<br><br>\n"
-"        You have been invited to fill-in the form: <t t-out=\"object.title"
-"\"></t><br>\n"
+"        You have been invited to fill-in the form: <t t-out=\"object."
+"title\"></t><br>\n"
 "        Your response would be appreciated.<br><br>\n"
 "        Click the button to go to the form (record), which requires you're "
 "logged in.\n"
 "        <div style=\"margin: 16px 0px 16px 0px;\">\n"
-"            <a t-attf-href=\"{{ object.act_window_url }}\" style="
-"\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: "
-"none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"            <a t-attf-href=\"{{ object.act_window_url }}\" "
+"style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-"
+"decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
 "                Form\n"
 "            </a>\n"
 "        </div>\n"
@@ -121,8 +121,8 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Beste <t t-out=\"object.user_id.partner_id.name\">,<br/><br/>\n"
-"        U bent uitgenodigd voor het invullen van het formulier: <t t-out="
-"\"object.title/><br/>\n"
+"        U bent uitgenodigd voor het invullen van het formulier: <t t-"
+"out=\"object.title/><br/>\n"
 "        Klik op de knop om het formulier te openen. Daarvoor moet u zijn "
 "ingelogd.\n"
 "        <div style=\"margin: 16px 0px 16px 0px;\">\n"
@@ -142,15 +142,15 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Hello <t t-out=\"object.user_id.partner_id.name\"></t>,<br><br>\n"
-"        You have been invited to fill-in the form: <t t-out=\"object.title"
-"\"></t><br>\n"
+"        You have been invited to fill-in the form: <t t-out=\"object."
+"title\"></t><br>\n"
 "        Your response would be appreciated.<br><br>\n"
 "        Click the button to go to the form, which requires you're logged "
 "in.\n"
 "        <div style=\"margin: 16px 0px 16px 0px;\">\n"
-"            <a t-attf-href=\"/my/formio/form/{{ object.uuid }}\" style="
-"\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: "
-"none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
+"            <a t-attf-href=\"/my/formio/form/{{ object.uuid }}\" "
+"style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-"
+"decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
 "                Form\n"
 "            </a>\n"
 "        </div>\n"
@@ -163,8 +163,8 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        Beste <t t-out=\"object.user_id.partner_id.name/>,<br/><br/>\n"
-"        U bent uitgenodigd voor het invullen van het formulier: <t t-out="
-"\"object.title\"/><br/>\n"
+"        U bent uitgenodigd voor het invullen van het formulier: <t t-"
+"out=\"object.title\"/><br/>\n"
 "        Klik op de knop om het formulier te openen. Daarvoor moet u zijn "
 "ingelogd.\n"
 "        <div style=\"margin: 16px 0px 16px 0px;\">\n"
@@ -175,8 +175,8 @@ msgstr ""
 "                Formulier\n"
 "            </a>\n"
 "        </div>\n"
-"        Uw formulieren zijn beschikbaar op de pagina <a href=\"/my/formio"
-"\">Mijn Formulieren</a> \n"
+"        Uw formulieren zijn beschikbaar op de pagina <a href=\"/my/"
+"formio\">Mijn Formulieren</a> \n"
 "    </p>\n"
 "</div>\n"
 
@@ -186,8 +186,8 @@ msgid ""
 "<i class=\"fa fa-clock-o\" title=\"Submission date\" aria-label=\"Submission "
 "date\"/>"
 msgstr ""
-"<i class=\"fa fa-clock-o\" title=\"Ingediend op\" aria-label=\"Ingediend op"
-"\"/>"
+"<i class=\"fa fa-clock-o\" title=\"Ingediend op\" aria-label=\"Ingediend "
+"op\"/>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_kanban
@@ -295,8 +295,8 @@ msgstr ""
 msgid ""
 "<i class=\"fa fa-info-circle\" title=\"info\"/> Server actions which process "
 "the form data / submission<br/>\n"
-"                                        <i class=\"fa fa-info-circle\" title="
-"\"info\"/> This is used by the"
+"                                        <i class=\"fa fa-info-circle\" "
+"title=\"info\"/> This is used by the"
 msgstr ""
 "<i class=\"fa fa-info-circle\" title=\"info\"/> Serveracties die de "
 "formulier data/indiening vewerken<br/>\n"
@@ -315,11 +315,12 @@ msgstr ""
 msgid ""
 "<i class=\"fa fa-info-circle\" title=\"info\"/> The Base Translations can be "
 "found in menu: Configuration / Translations.<br/>\n"
-"                                <i class=\"fa fa-info-circle\" title=\"info"
-"\"/> Action button ADD BASE TRANSLATIONS doesn't overwrite changes.<br/>\n"
-"                                <i class=\"fa fa-info-circle\" title=\"info"
-"\"/> Action button UNLINK BASE TRANSLATIONS removes the Base Translations "
-"from this formio.js version, but not the custom ones."
+"                                <i class=\"fa fa-info-circle\" "
+"title=\"info\"/> Action button ADD BASE TRANSLATIONS doesn't overwrite "
+"changes.<br/>\n"
+"                                <i class=\"fa fa-info-circle\" "
+"title=\"info\"/> Action button UNLINK BASE TRANSLATIONS removes the Base "
+"Translations from this formio.js version, but not the custom ones."
 msgstr ""
 "<i class=\"fa fa-info-circle\" title=\"info\"/> De basisvertalingen kunnen "
 "gevonden in menu: Configuratie / Vertalingen.<br/>\n"
@@ -345,8 +346,8 @@ msgid ""
 "<i class=\"fa fa-info-circle\" title=\"info\"/> Translations of the "
 "<strong>formio.js version</strong> can be done via the General tab (click "
 "field: formio.js version)<br/>\n"
-"                                <i class=\"fa fa-info-circle\" title=\"info"
-"\"/> The button \"Translations\" has the same as in this list."
+"                                <i class=\"fa fa-info-circle\" "
+"title=\"info\"/> The button \"Translations\" has the same as in this list."
 msgstr ""
 "<i class=\"fa fa-info-circle\" title=\"info\"/> Vertalingen van de "
 "<strong>formio.js versie</strong> worden gedaan via het tabblad Algemeen "
@@ -389,14 +390,14 @@ msgid ""
 "<i class=\"fa fa-user\" title=\"Submission partner\" aria-label=\"Submission "
 "partner\"/>"
 msgstr ""
-"<i class=\"fa fa-user\" title=\"Ingediend door\" aria-label=\"Ingediend door"
-"\"/>"
+"<i class=\"fa fa-user\" title=\"Ingediend door\" aria-label=\"Ingediend "
+"door\"/>"
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
 msgid ""
-"<span aria-label=\"Cancel &amp; close Form\" title=\"Cancel &amp; close Form"
-"\" confirm=\"Are you sure?\">Cancel Form</span>"
+"<span aria-label=\"Cancel &amp; close Form\" title=\"Cancel &amp; close "
+"Form\" confirm=\"Are you sure?\">Cancel Form</span>"
 msgstr ""
 "<span aria-label=\"Annuleren\" title=\"Annuleren\" confirm=\"Bent u zeker?"
 "\">Annuleren</span>"
@@ -424,6 +425,16 @@ msgstr "<span aria-label=\"Bewerken\" title=\"Bewerken\">Bewerken</span>"
 #: model_terms:ir.ui.view,arch_db:formio.portal_my_formio
 msgid "<span aria-label=\"View form\" title=\"View form\">View Form</span>"
 msgstr "<span aria-label=\"Weergeven\" title=\"Weergeven\">Weergeven</span>"
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid "<span>Form Builder</span>"
+msgstr "<span>Form Builders</span>"
+
+#. module: formio
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
+msgid "<span>Form</span>"
+msgstr ""
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
@@ -509,7 +520,6 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_needaction
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__message_needaction
 #: model:ir.model.fields,field_description:formio.field_formio_form__message_needaction
 #: model:ir.model.fields,field_description:formio.field_formio_version__message_needaction
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_needaction
@@ -667,11 +677,6 @@ msgid "Api Alert"
 msgstr ""
 
 #. module: formio
-#: model:ir.model.fields.selection,name:formio.selection__formio_extra_asset__target__append
-msgid "Append"
-msgstr ""
-
-#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__archive_url
 msgid "Archive URL"
 msgstr "Archief URL"
@@ -786,14 +791,12 @@ msgstr "Toegewezen gebruiker"
 #. module: formio
 #: model:ir.model,name:formio.model_ir_attachment
 #: model:ir.model.fields,field_description:formio.field_formio_default_asset_css__attachment_id
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__attachment_id
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__attachment_id
 msgid "Attachment"
 msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_attachment_count
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__message_attachment_count
 #: model:ir.model.fields,field_description:formio.field_formio_form__message_attachment_count
 #: model:ir.model.fields,field_description:formio.field_formio_version__message_attachment_count
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_attachment_count
@@ -801,16 +804,26 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__attachment_public
-msgid "Attachment Public"
+#: model:ir.model.fields,field_description:formio.field_formio_default_asset_css__attachment_type
+#: model:ir.model.fields,field_description:formio.field_formio_version_asset__attachment_type
+msgid "Attachment Type"
 msgstr ""
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_default_asset_css__attachment_type
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__attachment_type
-#: model:ir.model.fields,field_description:formio.field_formio_version_asset__attachment_type
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-msgid "Attachment Type"
+#: model:ir.model.fields,field_description:formio.field_formio_builder__auto_save
+msgid "Auto Save"
+msgstr ""
+
+#. module: formio
+#. odoo-javascript
+#: code:addons/formio/static/src/js/views/formio_builder.xml:0
+#, python-format
+msgid "Auto-save"
+msgstr ""
+
+#. module: formio
+#: model:ir.model.fields,help:formio.field_formio_builder__auto_save
+msgid "Auto-save or manually save the Form Builder changes"
 msgstr ""
 
 #. module: formio
@@ -843,6 +856,11 @@ msgstr "Builder Naam"
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__builder_version
 msgid "Builder Version"
 msgstr "Builder versie"
+
+#. module: formio
+#: model:ir.model.fields.selection,name:formio.selection__formio_version_asset__type__css
+msgid "CSS"
+msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version__css_assets
@@ -949,7 +967,6 @@ msgstr "Maak nieuwe versie"
 #: model:ir.model.fields,field_description:formio.field_formio_builder_js_options__create_uid
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__create_uid
 #: model:ir.model.fields,field_description:formio.field_formio_default_asset_css__create_uid
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__create_uid
 #: model:ir.model.fields,field_description:formio.field_formio_form__create_uid
 #: model:ir.model.fields,field_description:formio.field_formio_res_model__create_uid
 #: model:ir.model.fields,field_description:formio.field_formio_translation__create_uid
@@ -968,7 +985,6 @@ msgstr "Aangemaakt door"
 #: model:ir.model.fields,field_description:formio.field_formio_builder_js_options__create_date
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__create_date
 #: model:ir.model.fields,field_description:formio.field_formio_default_asset_css__create_date
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__create_date
 #: model:ir.model.fields,field_description:formio.field_formio_form__create_date
 #: model:ir.model.fields,field_description:formio.field_formio_res_model__create_date
 #: model:ir.model.fields,field_description:formio.field_formio_translation__create_date
@@ -1020,6 +1036,18 @@ msgid "Days"
 msgstr "Dagen"
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__debug
+msgid "Debug"
+msgstr ""
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__debug_mode
+#: model:ir.model.fields,field_description:formio.field_formio_form__debug_mode
+#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
+msgid "Debug Mode"
+msgstr ""
+
+#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
 msgid "Default CSS assets"
 msgstr "Standaard CSS assets"
@@ -1046,6 +1074,13 @@ msgid "Description..."
 msgstr "Omschrijving..."
 
 #. module: formio
+#. odoo-javascript
+#: code:addons/formio/static/src/js/views/formio_builder.xml:0
+#, python-format
+msgid "Disabled"
+msgstr "Uitgeschakeld"
+
+#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_form_form
 msgid "Display"
 msgstr "Weergave"
@@ -1055,7 +1090,6 @@ msgstr "Weergave"
 #: model:ir.model.fields,field_description:formio.field_formio_builder_js_options__display_name
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__display_name
 #: model:ir.model.fields,field_description:formio.field_formio_default_asset_css__display_name
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__display_name
 #: model:ir.model.fields,field_description:formio.field_formio_form__display_name
 #: model:ir.model.fields,field_description:formio.field_formio_res_model__display_name
 #: model:ir.model.fields,field_description:formio.field_formio_translation__display_name
@@ -1117,6 +1151,13 @@ msgid "Email"
 msgstr ""
 
 #. module: formio
+#. odoo-javascript
+#: code:addons/formio/static/src/js/views/formio_builder.xml:0
+#, python-format
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+#. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__submission_url_add_query_params_from
 msgid ""
 "Enables adding the URL query params from the window's iframe (src) or window."
@@ -1137,22 +1178,7 @@ msgid "Expire After"
 msgstr "Verloopt na"
 
 #. module: formio
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_extra_asset_form
-msgid "Extra Asset"
-msgstr ""
-
-#. module: formio
-#: model:ir.actions.act_window,name:formio.action_formio_extra_asset
-#: model:ir.model.fields,field_description:formio.field_formio_builder__extra_asset_ids
-#: model:ir.ui.menu,name:formio.menu_formio_extra_asset
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_extra_asset_tree
-msgid "Extra Assets"
-msgstr ""
-
-#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_follower_ids
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__message_follower_ids
 #: model:ir.model.fields,field_description:formio.field_formio_form__message_follower_ids
 #: model:ir.model.fields,field_description:formio.field_formio_version__message_follower_ids
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_follower_ids
@@ -1161,7 +1187,6 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_partner_ids
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__message_partner_ids
 #: model:ir.model.fields,field_description:formio.field_formio_form__message_partner_ids
 #: model:ir.model.fields,field_description:formio.field_formio_version__message_partner_ids
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_partner_ids
@@ -1298,7 +1323,6 @@ msgid "Forms Count"
 msgstr "Formulieren aantal"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__attachment_formio_ref
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__attachment_formio_ref
 #: model:ir.model.fields,field_description:formio.field_ir_actions_server__formio_ref
 #: model:ir.model.fields,field_description:formio.field_ir_attachment__formio_ref
@@ -1316,7 +1340,6 @@ msgstr "Forms Ref is ongeldig. Gebruik ASCII letters, cijfers, \"-\" of \"_\"."
 
 #. module: formio
 #: model:ir.actions.server,name:formio.ir_cron_formio_version_github_tag_check_and_register_ir_actions_server
-#: model:ir.cron,cron_name:formio.ir_cron_formio_version_github_tag_check_and_register
 msgid "Forms: Check and register new Versions (GitHub tags)"
 msgstr "Forms: Controleer en registreer nieuwe versies (GitHub tags)"
 
@@ -1336,6 +1359,13 @@ msgstr "Forms: Uitnodiging portaal gebruiker."
 #, python-format
 msgid ""
 "Found multiple Partners with email <strong>%s</strong> submitted in the Form."
+msgstr ""
+
+#. module: formio
+#. odoo-javascript
+#: code:addons/formio/static/src/js/views/formio_builder.xml:0
+#, python-format
+msgid "Fullscreen (Exit with ESC)"
 msgstr ""
 
 #. module: formio
@@ -1362,8 +1392,12 @@ msgid "Group By"
 msgstr ""
 
 #. module: formio
+#: model:ir.model,name:formio.model_ir_http
+msgid "HTTP Routing"
+msgstr ""
+
+#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__has_message
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__has_message
 #: model:ir.model.fields,field_description:formio.field_formio_form__has_message
 #: model:ir.model.fields,field_description:formio.field_formio_version__has_message
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__has_message
@@ -1386,7 +1420,6 @@ msgstr "Uren"
 #: model:ir.model.fields,field_description:formio.field_formio_builder_js_options__id
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__id
 #: model:ir.model.fields,field_description:formio.field_formio_default_asset_css__id
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__id
 #: model:ir.model.fields,field_description:formio.field_formio_form__id
 #: model:ir.model.fields,field_description:formio.field_formio_res_model__id
 #: model:ir.model.fields,field_description:formio.field_formio_translation__id
@@ -1433,7 +1466,6 @@ msgid "Identifies a server action with related form builder."
 msgstr "Identificeert een serveractie met gerelateerde Form Builder."
 
 #. module: formio
-#: model:ir.model.fields,help:formio.field_formio_extra_asset__attachment_formio_ref
 #: model:ir.model.fields,help:formio.field_formio_version_asset__attachment_formio_ref
 #: model:ir.model.fields,help:formio.field_ir_attachment__formio_ref
 msgid "Identifies an attachment with a related Forms/Builder record."
@@ -1453,7 +1485,6 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__message_needaction
-#: model:ir.model.fields,help:formio.field_formio_extra_asset__message_needaction
 #: model:ir.model.fields,help:formio.field_formio_form__message_needaction
 #: model:ir.model.fields,help:formio.field_formio_version__message_needaction
 #: model:ir.model.fields,help:formio.field_formio_version_github_tag__message_needaction
@@ -1463,8 +1494,6 @@ msgstr ""
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__message_has_error
 #: model:ir.model.fields,help:formio.field_formio_builder__message_has_sms_error
-#: model:ir.model.fields,help:formio.field_formio_extra_asset__message_has_error
-#: model:ir.model.fields,help:formio.field_formio_extra_asset__message_has_sms_error
 #: model:ir.model.fields,help:formio.field_formio_form__message_has_error
 #: model:ir.model.fields,help:formio.field_formio_form__message_has_sms_error
 #: model:ir.model.fields,help:formio.field_formio_version__message_has_error
@@ -1525,7 +1554,6 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_is_follower
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__message_is_follower
 #: model:ir.model.fields,field_description:formio.field_formio_form__message_is_follower
 #: model:ir.model.fields,field_description:formio.field_formio_version__message_is_follower
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_is_follower
@@ -1541,6 +1569,11 @@ msgstr "JS opties"
 #: model:ir.model.fields,field_description:formio.field_formio_builder__schema
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "JSON Schema"
+msgstr ""
+
+#. module: formio
+#: model:ir.model.fields.selection,name:formio.selection__formio_version_asset__type__js
+msgid "JavaScript"
 msgstr ""
 
 #. module: formio
@@ -1578,30 +1611,10 @@ msgid "Languages & Locales"
 msgstr "Talen en localisaties"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder____last_update
-#: model:ir.model.fields,field_description:formio.field_formio_builder_js_options____last_update
-#: model:ir.model.fields,field_description:formio.field_formio_builder_translation____last_update
-#: model:ir.model.fields,field_description:formio.field_formio_default_asset_css____last_update
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset____last_update
-#: model:ir.model.fields,field_description:formio.field_formio_form____last_update
-#: model:ir.model.fields,field_description:formio.field_formio_res_model____last_update
-#: model:ir.model.fields,field_description:formio.field_formio_translation____last_update
-#: model:ir.model.fields,field_description:formio.field_formio_translation_source____last_update
-#: model:ir.model.fields,field_description:formio.field_formio_version____last_update
-#: model:ir.model.fields,field_description:formio.field_formio_version_asset____last_update
-#: model:ir.model.fields,field_description:formio.field_formio_version_github_checker_wizard____last_update
-#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag____last_update
-#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag_available____last_update
-#: model:ir.model.fields,field_description:formio.field_formio_version_translation____last_update
-msgid "Last Modified on"
-msgstr "Laatst gewijzigd op"
-
-#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__write_uid
 #: model:ir.model.fields,field_description:formio.field_formio_builder_js_options__write_uid
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__write_uid
 #: model:ir.model.fields,field_description:formio.field_formio_default_asset_css__write_uid
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__write_uid
 #: model:ir.model.fields,field_description:formio.field_formio_form__write_uid
 #: model:ir.model.fields,field_description:formio.field_formio_res_model__write_uid
 #: model:ir.model.fields,field_description:formio.field_formio_translation__write_uid
@@ -1620,7 +1633,6 @@ msgstr "Laatst bijgewerkt door"
 #: model:ir.model.fields,field_description:formio.field_formio_builder_js_options__write_date
 #: model:ir.model.fields,field_description:formio.field_formio_builder_translation__write_date
 #: model:ir.model.fields,field_description:formio.field_formio_default_asset_css__write_date
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__write_date
 #: model:ir.model.fields,field_description:formio.field_formio_form__write_date
 #: model:ir.model.fields,field_description:formio.field_formio_res_model__write_date
 #: model:ir.model.fields,field_description:formio.field_formio_translation__write_date
@@ -1633,6 +1645,11 @@ msgstr "Laatst bijgewerkt door"
 #: model:ir.model.fields,field_description:formio.field_formio_version_translation__write_date
 msgid "Last Updated on"
 msgstr "Laatst bijgewerkt op"
+
+#. module: formio
+#: model:ir.model.fields.selection,name:formio.selection__formio_version_asset__type__license
+msgid "License"
+msgstr "Licentie"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_version__license_assets
@@ -1671,17 +1688,7 @@ msgid "Locked"
 msgstr "Vergrendeld"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_builder__message_main_attachment_id
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__message_main_attachment_id
-#: model:ir.model.fields,field_description:formio.field_formio_form__message_main_attachment_id
-#: model:ir.model.fields,field_description:formio.field_formio_version__message_main_attachment_id
-#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Primaire bijlage"
-
-#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_has_error
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__message_has_error
 #: model:ir.model.fields,field_description:formio.field_formio_form__message_has_error
 #: model:ir.model.fields,field_description:formio.field_formio_version__message_has_error
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_has_error
@@ -1690,7 +1697,6 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_ids
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__message_ids
 #: model:ir.model.fields,field_description:formio.field_formio_form__message_ids
 #: model:ir.model.fields,field_description:formio.field_formio_version__message_ids
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_ids
@@ -1762,6 +1768,14 @@ msgid "Name is invalid. Use ASCII letters, digits, \"-\" or \"_\"."
 msgstr "Naam is ongeldig. Gebruik ASCII letters, cijfers, - of _"
 
 #. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__activity_calendar_event_id
+#: model:ir.model.fields,field_description:formio.field_formio_form__activity_calendar_event_id
+#: model:ir.model.fields,field_description:formio.field_formio_version__activity_calendar_event_id
+#: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__activity_date_deadline
 #: model:ir.model.fields,field_description:formio.field_formio_form__activity_date_deadline
 #: model:ir.model.fields,field_description:formio.field_formio_version__activity_date_deadline
@@ -1807,7 +1821,6 @@ msgstr "Niet Wizard"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_needaction_counter
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__message_needaction_counter
 #: model:ir.model.fields,field_description:formio.field_formio_form__message_needaction_counter
 #: model:ir.model.fields,field_description:formio.field_formio_version__message_needaction_counter
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_needaction_counter
@@ -1816,7 +1829,6 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_has_error_counter
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__message_has_error_counter
 #: model:ir.model.fields,field_description:formio.field_formio_form__message_has_error_counter
 #: model:ir.model.fields,field_description:formio.field_formio_version__message_has_error_counter
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_has_error_counter
@@ -1825,7 +1837,6 @@ msgstr "Aantal fouten"
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__message_needaction_counter
-#: model:ir.model.fields,help:formio.field_formio_extra_asset__message_needaction_counter
 #: model:ir.model.fields,help:formio.field_formio_form__message_needaction_counter
 #: model:ir.model.fields,help:formio.field_formio_version__message_needaction_counter
 #: model:ir.model.fields,help:formio.field_formio_version_github_tag__message_needaction_counter
@@ -1834,7 +1845,6 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__message_has_error_counter
-#: model:ir.model.fields,help:formio.field_formio_extra_asset__message_has_error_counter
 #: model:ir.model.fields,help:formio.field_formio_form__message_has_error_counter
 #: model:ir.model.fields,help:formio.field_formio_version__message_has_error_counter
 #: model:ir.model.fields,help:formio.field_formio_version_github_tag__message_has_error_counter
@@ -1895,6 +1905,11 @@ msgstr "Andere"
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
 msgid "Other Component settings."
 msgstr "Overige component instellingen"
+
+#. module: formio
+#: model:ir.model.fields,field_description:formio.field_formio_builder__overlay_api_change
+msgid "Overlay Change API"
+msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__parent_id
@@ -1969,11 +1984,6 @@ msgid "Portal URL"
 msgstr "Portaal URL"
 
 #. module: formio
-#: model:ir.model.fields.selection,name:formio.selection__formio_extra_asset__target__prepend
-msgid "Prepend"
-msgstr ""
-
-#. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_translation__property
 #: model:ir.model.fields,field_description:formio.field_formio_translation_source__property
 #: model:ir.model.fields,field_description:formio.field_formio_version_translation__source_property
@@ -1983,7 +1993,6 @@ msgstr "Eigenschap"
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__public
 #: model:ir.model.fields,field_description:formio.field_formio_form__public_share
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "Public"
 msgstr "Openbaar"
 
@@ -2196,7 +2205,6 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__message_has_sms_error
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__message_has_sms_error
 #: model:ir.model.fields,field_description:formio.field_formio_form__message_has_sms_error
 #: model:ir.model.fields,field_description:formio.field_formio_version__message_has_sms_error
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__message_has_sms_error
@@ -2235,7 +2243,6 @@ msgid "Send Invitation Mail"
 msgstr "Verstuur Uitnodigingsmail"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__sequence
 #: model:ir.model.fields,field_description:formio.field_formio_form__sequence
 #: model:ir.model.fields,field_description:formio.field_formio_version__sequence
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__sequence
@@ -2463,16 +2470,6 @@ msgid "TTF Font File"
 msgstr ""
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__target
-msgid "Target"
-msgstr ""
-
-#. module: formio
-#: model:ir.model.fields,help:formio.field_formio_extra_asset__target
-msgid "Target: append (after) or prepend (before) formio.js, OWL, jQuery"
-msgstr ""
-
-#. module: formio
 #: model:ir.model.fields,help:formio.field_formio_form__public_access
 msgid ""
 "The Public Access check. Computed public access by checking whether (field) "
@@ -2575,7 +2572,6 @@ msgid "Translations"
 msgstr "Vertalingen"
 
 #. module: formio
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__type
 #: model:ir.model.fields,field_description:formio.field_formio_version_asset__type
 msgid "Type"
 msgstr ""
@@ -2590,8 +2586,6 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_default_asset_css__url
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__url
-#: model_terms:ir.ui.view,arch_db:formio.view_formio_builder_form
 msgid "URL"
 msgstr ""
 
@@ -2753,7 +2747,6 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__website_message_ids
-#: model:ir.model.fields,field_description:formio.field_formio_extra_asset__website_message_ids
 #: model:ir.model.fields,field_description:formio.field_formio_form__website_message_ids
 #: model:ir.model.fields,field_description:formio.field_formio_version__website_message_ids
 #: model:ir.model.fields,field_description:formio.field_formio_version_github_tag__website_message_ids
@@ -2762,7 +2755,6 @@ msgstr ""
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_builder__website_message_ids
-#: model:ir.model.fields,help:formio.field_formio_extra_asset__website_message_ids
 #: model:ir.model.fields,help:formio.field_formio_form__website_message_ids
 #: model:ir.model.fields,help:formio.field_formio_version__website_message_ids
 #: model:ir.model.fields,help:formio.field_formio_version_github_tag__website_message_ids
@@ -2786,6 +2778,13 @@ msgid ""
 msgstr ""
 "Bij het kopiëren van een formulier, altijd koppelen aan de huidige versie "
 "van de builder in plaats van de oorspronkelijke builder."
+
+#. module: formio
+#: model:ir.model.fields,help:formio.field_formio_builder__debug
+msgid ""
+"When enabled along the standard Developer Mode (debug mode), this provides "
+"server log output etc."
+msgstr ""
 
 #. module: formio
 #: model:ir.model.fields.selection,name:formio.selection__formio_builder__submission_url_add_query_params_from__window
@@ -2823,7 +2822,6 @@ msgstr "Schrijf commentaar over versie %s ..."
 
 #. module: formio
 #: model:ir.model.fields,help:formio.field_formio_default_asset_css__attachment_type
-#: model:ir.model.fields,help:formio.field_formio_extra_asset__attachment_type
 #: model:ir.model.fields,help:formio.field_formio_version_asset__attachment_type
 msgid ""
 "You can either upload a file from your computer or copy/paste an internet "
@@ -2868,12 +2866,6 @@ msgstr "U mag het formulier niet kopieren."
 #: model:mail.template,subject:formio.mail_invitation_portal_user
 msgid "[Form] {{ object.title }}"
 msgstr "[Formulier] {{ object.title }}"
-
-#. module: formio
-#: model:ir.model.fields.selection,name:formio.selection__formio_extra_asset__type__css
-#: model:ir.model.fields.selection,name:formio.selection__formio_version_asset__type__css
-msgid "css"
-msgstr ""
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.view_formio_version_github_checker_wizard
@@ -2941,16 +2933,6 @@ msgstr "formio.js CSS assets"
 #: model:ir.model,name:formio.model_formio_default_asset_css
 msgid "formio.js Default Asset CSS"
 msgstr ""
-
-#. module: formio
-#: model:ir.model,name:formio.model_formio_extra_asset
-msgid "formio.js Extra Asset"
-msgstr "formio.js extra asset"
-
-#. module: formio
-#: model:ir.model.fields,field_description:formio.field_res_config_settings__formio_extra_asset_ids
-msgid "formio.js Extra assets"
-msgstr "formio.js extra assets"
 
 #. module: formio
 #: model:ir.model.fields,field_description:formio.field_formio_builder__formio_js_assets
@@ -3077,11 +3059,6 @@ msgid "iFrame Resizer bodyMargin"
 msgstr ""
 
 #. module: formio
-#: model:ir.model.fields.selection,name:formio.selection__formio_extra_asset__type__image
-msgid "image"
-msgstr ""
-
-#. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form
 msgid ""
 "is not required, but it can get a higher rate limit.\n"
@@ -3090,18 +3067,6 @@ msgid ""
 msgstr ""
 "is niet vereist, maar kan een hogere snelheidslimiet krijgen.\n"
 "Dit voorkomt time-outs en autorisatiefouten."
-
-#. module: formio
-#: model:ir.model.fields.selection,name:formio.selection__formio_extra_asset__type__js
-#: model:ir.model.fields.selection,name:formio.selection__formio_version_asset__type__js
-msgid "js"
-msgstr ""
-
-#. module: formio
-#: model:ir.model.fields.selection,name:formio.selection__formio_extra_asset__type__license
-#: model:ir.model.fields.selection,name:formio.selection__formio_version_asset__type__license
-msgid "license"
-msgstr ""
 
 #. module: formio
 #: model_terms:ir.ui.view,arch_db:formio.res_config_settings_view_form

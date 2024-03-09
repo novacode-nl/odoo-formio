@@ -3,7 +3,10 @@
 
 // use global owl
 // can't import from "@odoo/owl", because not an @odoo-module
-const { Component, onMounted, onWillStart } = owl;
+
+const { Component, markup, onMounted, onWillStart, useState, xml } = owl;
+
+const { protectComponent } = await import('./utils.js');
 
 export class OdooFormioForm extends Component {
     setup() {
@@ -57,6 +60,10 @@ export class OdooFormioForm extends Component {
         // Implemented in specific (*_app.js) classes.
     }
 
+    scrollParent() {
+        // Optionally implemented in specific (*_app.js) classes.
+    }
+
     getDataUrl(compObj) {
         // Possibly overridden in specific (*_app.js) classes.
         return '/formio/form/', self.formUuid, compObj.data.url;
@@ -106,10 +113,16 @@ export class OdooFormioForm extends Component {
                         this.submitUrl = this.wizardSubmitUrl + this.formUuid + '/submit';
                     }
                     self.hideOverlay();
+                    if (window.self !== window.top) {
+                        self.scrollParent();
+                    }
                 });
             });
         }
         else {
+            if (window.self !== window.top) {
+                self.scrollParent();
+            }
             return null;
         }
     }
@@ -190,13 +203,70 @@ export class OdooFormioForm extends Component {
                         'form_data': form.data,
                         'lang_ietf_code': self.language
                     };
-                    // TODO implement Promise here too, similar to onBlur ?
-                    this.postData(apiUrl, data).then(function(result) {
-                        form.submission = {'data': result};
-                    });
+
+                    const changeOverlay = component.properties.hasOwnProperty('changeOverlay')
+                          && component.properties.changeOverlay;
+
+                    if (changeOverlay) {
+                        // The overlayTimerPromise improves the UI/UX
+                        // feedback showing something (API) is processing.
+                        let overlayTimerPromise = new Promise((resolve) => {
+                            window.setTimeout(
+                                resolve, changeOverlay
+                            );
+                        });
+                        self.showOverlay();
+                        // Fix compatibility with jQuery Promises.
+                        //
+                        // TODO: when replaced $.ajax to native XHR, this
+                        // extra (return) Promise ain't needed.
+                        return new Promise((resolve) => {
+                            this.postData(apiUrl, data).then(function(result) {
+                                form.submission = {'data': result.values};
+                                overlayTimerPromise.then(() => {
+                                    self.hideOverlay();
+                                    resolve();
+                                });
+                            });
+                        });
+                    }
+                    else if (self.params.hasOwnProperty('overlay_api_change')
+                        && !!self.params['overlay_api_change'])
+                    {
+                        self.showOverlay();
+                        // Fix compatibility with jQuery Promises.
+                        //
+                        // TODO: when replaced $.ajax to native XHR, this
+                        // extra (return) Promise ain't needed.
+                        return new Promise((resolve) => {
+                            this.postData(apiUrl, data).then(function(result) {
+                                form.submission = {'data': result.values};
+                                if (!$.isEmptyObject(result.config) && !$.isEmptyObject(result.config.options)) {
+                                    form.options = {...form.options, ...result.config.options};
+                                }
+                                self.hideOverlay();
+                                resolve();
+                            });
+                        });
+                    }
+                    else {
+                        return new Promise((resolve) => {
+                            this.postData(apiUrl, data).then(function(result) {
+                                form.submission = {'data': result.values};
+                                resolve();
+                            });
+                        });
+                    }
+                }
+                else {
+                    return null;
                 }
             }
+            else {
+                return null;
+            }
         }
+        return null;
     }
 
     /**
@@ -235,19 +305,56 @@ export class OdooFormioForm extends Component {
                     'form_data': form._data
                 };
 
-                self.showOverlay();
+                const blurOverlay = component.properties.hasOwnProperty('blurOverlay')
+                      && component.properties.blurOverlay;
 
-                // Fix compatibility with jQuery Promises.
-                //
-                // TODO: when replaced $.ajax to native XHR, this
-                // extra (return) Promise ain't needed.
-                return new Promise((resolve) => {
-                    this.postData(apiUrl, data).then(function(result) {
-                        form.submission = {'data': result};
-                        self.hideOverlay();
-                        resolve();
+                if (blurOverlay) {
+                    // The overlayTimer(Promise) improves the UI/UX
+                    // feedback showing something (API) is processing.
+                    let overlayTimerPromise = new Promise((resolve) => {
+                        window.setTimeout(
+                            resolve, blurOverlay
+                        );
                     });
-                });
+                    self.showOverlay();
+                    // Fix compatibility with jQuery Promises.
+                    //
+                    // TODO: when replaced $.ajax to native XHR, this
+                    // extra (return) Promise ain't needed.
+                    return new Promise((resolve) => {
+                        this.postData(apiUrl, data).then(function(result) {
+                            form.submission = {'data': result.values};
+                            overlayTimerPromise.then(() => {
+                                self.hideOverlay();
+                                resolve();
+                            });
+                        });
+                    });
+                }
+                else if (self.params.hasOwnProperty('overlay_api_change')
+                         && !!self.params['overlay_api_change'])
+                {
+                    self.showOverlay();
+                    // Fix compatibility with jQuery Promises.
+                    //
+                    // TODO: when replaced $.ajax to native XHR, this
+                    // extra (return) Promise ain't needed.
+                    return new Promise((resolve) => {
+                        this.postData(apiUrl, data).then(function(result) {
+                            form.submission = {'data': result.values};
+                            self.hideOverlay();
+                            resolve();
+                        });
+                    });
+                }
+                else {
+                    return new Promise((resolve) => {
+                        this.postData(apiUrl, data).then(function(result) {
+                            form.submission = {'data': result.values};
+                            resolve();
+                        });
+                    });
+                }
             }
             else {
                 return null;
@@ -256,6 +363,7 @@ export class OdooFormioForm extends Component {
         else {
             return null;
         }
+        return null;
     }
 
     getData(url, data) {
@@ -338,6 +446,9 @@ export class OdooFormioForm extends Component {
                 };
             });
 
+            // TODO
+            // var  = document.createElement('div');
+
             window.setLanguage = function(lang, button) {
                 self.language = lang;
                 form.language = lang;
@@ -383,7 +494,9 @@ export class OdooFormioForm extends Component {
                 // @param modified: Flag to determine if the change was
                 //   made by a human interaction, or programatic
                 if (changed.hasOwnProperty('changed')) {
-                    self.onChange(form, changed, flags, modified);
+                    self.promiseQueue.then(() => {
+                        self.onChange(form, changed, flags, modified);
+                    });
                 }
             });
 
@@ -598,3 +711,5 @@ export class OdooFormioForm extends Component {
         }
     }
 }
+
+protectComponent(OdooFormioForm);

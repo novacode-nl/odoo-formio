@@ -1,5 +1,11 @@
 body {
-    margin-right: 12px;
+    /* Remove horizontal scrollbar, due to formio.js 'margin: 15px' on div below:
+
+       <div id="formio_builder_app">
+           <div id="formio_builder">
+               <div class="formio builder row formbuilder"
+   */
+    margin-right: 15px;
 }
 
 #formio_builder_app {
@@ -64,8 +70,14 @@ body {
     margin: 0 0 1rem 0;
 }
 
+.formio_no_autosave_border {
+    box-shadow: inset 0 0 10px #ffc107;
+    padding-top: 8px;
+}
+
 /**
-  Hack: Prevent the comopnent-editor-dialog scale too much
+  Hack:
+  Prevent the comopnent-editor-dialog scale too much
 **/
 /* .component-edit-tabs.col-sm-6 { */
 /*     min-height: auto; */

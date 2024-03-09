@@ -7,6 +7,7 @@ from . import formio_builder_translation
 from . import formio_default_asset_css
 from . import formio_extra_asset
 from . import formio_form
+from . import formio_license
 from . import formio_res_model
 from . import formio_version
 from . import formio_version_asset

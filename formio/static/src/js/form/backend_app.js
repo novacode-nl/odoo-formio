@@ -1,19 +1,14 @@
 // Copyright Nova Code (https://www.novacode.nl)
 // See LICENSE file for full licensing details.
 
-function uuidv4() {
-    // Used in cache invalidation (can also be used in PWA).
-    // TODO: DRY, move to generic function/method to be imported here.
-    // XXX: not ideal https://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid
-    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(
-        /[018]/g, c =>
-        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-    );
-}
+const { protectComponent, uuidv4 } = await import('./utils.js');
 
-// random importPath ensures no caching
-let importPath = "./formio_form.js?" + uuidv4();
-let { OdooFormioForm } = await import(importPath);
+// random import path ensures no caching
+const pathBranding = "./branding.js?" + uuidv4();
+const pathForm = "./formio_form.js?" + uuidv4();
+
+let { Branding } = await import(pathBranding);
+let { OdooFormioForm } = await import(pathForm);
 
 // use global owl
 // can't import from "@odoo/owl", because not an @odoo-module
@@ -21,9 +16,11 @@ const { mount, whenReady, xml } = owl;
 
 function app() {
     class App extends OdooFormioForm {
+        static components = { Branding }
         static template = xml`
             <div t-name="App">
                 <div id="formio_form"></div>
+                <Branding getData="this.getData"/>
             </div>
         `;
 
@@ -95,8 +92,13 @@ function app() {
                 }, 500);
             }
         }
+
+        scrollParent() {
+            window.parent.postMessage({odooFormioMessage: 'formioScrollTop', params: {}});
+        }
     }
 
+    protectComponent(App);
     const app = new App();
     mount(App, document.getElementById('formio_form_app'));
 }

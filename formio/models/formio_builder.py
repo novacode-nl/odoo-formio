@@ -52,11 +52,6 @@ class Builder(models.Model):
     formio_version_is_dummy = fields.Boolean(related='formio_version_id.is_dummy')
     formio_css_assets = fields.One2many(related='formio_version_id.css_assets', string='formio.js CSS')
     formio_js_assets = fields.One2many(related='formio_version_id.js_assets', string='formio.js Javascript')
-    extra_asset_ids = fields.Many2many(
-        comodel_name='formio.extra.asset',
-        string='Extra Assets',
-        domain=[('attachment_id.res_model', '=', 'formio.extra.asset')]
-    )
     formio_js_options_id = fields.Many2one('formio.builder.js.options', string='formio.js Javascript Options template', store=False)
     formio_js_options = fields.Text(
         default=lambda self: self._default_formio_js_options(),
@@ -128,6 +123,12 @@ class Builder(models.Model):
         - Relative URL is also supported e.g. /web/login
         """
     )
+    portal_scroll_into_view_selector = fields.Char(
+        string='Portal Scroll Into View Selector',
+        copy=False,
+        tracking=True,
+        help="Especially for long wizard pages upon prev/next page. This scrolls an element (CSS selector) into the visible area of the browser window."
+    )
     public = fields.Boolean("Public", tracking=True, help="Form is public accessible (e.g. used in Shop checkout, Events registration")
     public_url = fields.Char(string='Public URL', compute='_compute_public_url')
     public_save_draft_done_url = fields.Char(
@@ -153,6 +154,12 @@ class Builder(models.Model):
         tracking=True)
     public_access_interval_number = fields.Integer(default=30, tracking=True, help="Public access to submitted Form shall be rejected after expiration of the configured time interval.")
     public_access_interval_type = fields.Selection(list(_interval_selection.items()), default='minutes', tracking=True)
+    public_scroll_into_view_selector = fields.Char(
+        string='Public Scroll Into View Selector',
+        copy=False,
+        tracking=True,
+        help="Especially for long wizard pages upon prev/next page. This scrolls an element (CSS selector) into the visible area of the browser window."
+    )
     view_as_html = fields.Boolean("View as HTML", tracking=True, help="View submission as a HTML view instead of disabled webform.")
     show_form_title = fields.Boolean("Show Form Title", tracking=True, help="Show Form Title in the Form header.", default=True)
     show_form_id = fields.Boolean("Show Form ID", tracking=True, help="Show Form ID in the Form header.", default=True)
@@ -213,6 +220,8 @@ class Builder(models.Model):
     )
     hook_api_validation = fields.Boolean(
         string='Hook Validation API', default=False, copy=True)
+    overlay_api_change = fields.Boolean(
+        string='Overlay Change API', default=False, copy=True)
     show_api_alert = fields.Boolean(compute='_compute_show_api_alert')
     api_alert = fields.Text(compute='_compute_api_alert')
 
@@ -610,6 +619,7 @@ class Builder(models.Model):
             'cdn_base_url': self._cdn_base_url(),
             'portal_save_draft_done_url': self.portal_save_draft_done_url,
             'portal_submit_done_url': self.portal_submit_done_url,
+            'scroll_into_view_selector': self.portal_scroll_into_view_selector,
             'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
             'submission_url_add_query_params_from': self.submission_url_add_query_params_from,
         }
@@ -621,6 +631,7 @@ class Builder(models.Model):
             'cdn_base_url': self._cdn_base_url(),
             'public_save_draft_done_url': self.public_save_draft_done_url,
             'public_submit_done_url': self.public_submit_done_url,
+            'scroll_into_view_selector': self.public_scroll_into_view_selector,
             'wizard_on_change_page_save_draft': self.wizard and self.wizard_on_change_page_save_draft,
             'submission_url_add_query_params_from': self.submission_url_add_query_params_from,
         }
@@ -691,14 +702,11 @@ class Builder(models.Model):
         )
         return trans[0].value if trans else source
 
-    def _etl_odoo_config(self, params):
+    def _etl_odoo_config(self, formio_form=None, params={}):
         return {}
 
-    def _etl_odoo_data(self, params):
+    def _etl_odoo_data(self, formio_form=None, params={}):
         return {}
 
     def _generate_odoo_domain(self, domain=[], params={}):
         return domain
-
-    def _has_extra_asset(self, extra_asset_record):
-        return self.extra_asset_ids.filtered(lambda x: x.id == extra_asset_record.id)

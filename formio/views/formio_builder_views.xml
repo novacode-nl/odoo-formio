@@ -44,6 +44,7 @@ See LICENSE file for full licensing details. -->
                 <field name="version"/>
                 <field name="parent_version"/>
                 <field name="formio_version_name"/>
+                <field name="auto_save"/>
                 <field name="state"/>
                 <field name="display_state"/>
             </formio_builder>
@@ -87,9 +88,17 @@ See LICENSE file for full licensing details. -->
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_view_formio" type="object" string="Form Builder"
+                        <button name="action_view_formio"
+                                type="object"
+                                string="Form Builder"
+                                aria-label="Form Builder"
                                 groups="formio.group_formio_admin"
-                                class="oe_stat_button" icon="fa-rocket"/>
+                                class="oe_stat_button bg-secondary"
+                                icon="fa-rocket">
+                            <div class="o_stat_info o_field_widget">
+                                <span>Form Builder</span>
+                            </div>
+                        </button>
                         <button name="%(action_formio_builder_translation)d" type="action" string="Translations"
                                 context="{'default_builder_id': id, 'search_default_builder_id': id}"
                                 groups="formio.group_formio_admin" icon="fa-language"/>
@@ -194,6 +203,13 @@ See LICENSE file for full licensing details. -->
                                 <group name="portal_redirect_after_submit" string="Redirect After Submit">
                                     <field name="portal_submit_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
                                 </group>
+                                <group string="Miscellaneous">
+                                    <field name="portal_scroll_into_view_selector"
+                                           string="Scroll Into View Selector"
+                                           groups="formio.group_formio_admin"
+                                           readonly="is_locked == True"/>
+                                </group>
+
                             </group>
                         </page>
                         <page string="Public / Website" name="public_settings">
@@ -223,6 +239,12 @@ See LICENSE file for full licensing details. -->
                                 </group>
                                 <group name="public_redirect_after_submit" string="Redirect After Submit">
                                     <field name="public_submit_done_url" groups="formio.group_formio_admin" string="Redirect URL" readonly="0"/>
+                                </group>
+                                <group string="Miscellaneous">
+                                    <field name="public_scroll_into_view_selector"
+                                           string="Scroll Into View Selector"
+                                           groups="formio.group_formio_admin"
+                                           readonly="is_locked == True"/>
                                 </group>
                             </group>
                         </page>
@@ -322,19 +344,6 @@ See LICENSE file for full licensing details. -->
                                     </field>
                                 </group>
                             </group>
-                        </page>
-                        <page string="Extra Assets" name="extra_assets" groups="formio.group_formio_admin">
-                            <field name="extra_asset_ids">
-                                <tree>
-                                    <field name="type" readonly="1"/>
-                                    <field name="target" readonly="1" optional="hide"/>
-                                    <field name="attachment_id" readonly="1"/>
-                                    <field name="attachment_type" string="Attachment Type" optional="show"/>
-                                    <field name="url" string="URL" optional="show"/>
-                                    <field name="attachment_public" string="Public" optional="show"/>
-                                    <field name="attachment_formio_ref" optional="show"/>
-                                </tree>
-                            </field>
                         </page>
                         <page string="JS Options" name="javascript_options" groups="formio.group_formio_admin">
                             <div style="background-color: #e9ecef; padding: 0 10px;">

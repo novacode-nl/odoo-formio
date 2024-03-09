@@ -41,12 +41,8 @@ class BuilderTranslation(models.Model):
             msg = _('Form Builder Translations must be unique.\n\n%s') % '\n\n'.join(errors)
             raise ValidationError(msg)
 
-    @api.depends('lang_id', 'source', 'value')
-    def name_get(self):
-        res = []
+    def _compute_display_name(self):
         for r in self:
-            name = '{lang}: {source} => {value}'.format(
+            r.display_name = '{lang}: {source} => {value}'.format(
                 lang=r.lang_id, source=r.source, value=r.value
             )
-            res.append((r.id, name))
-        return res

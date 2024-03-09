@@ -12,9 +12,9 @@ class VersionAsset(models.Model):
     version_id = fields.Many2one('formio.version', string='formio.js version', ondelete='cascade')
     type = fields.Selection(
         [
-            ("js", "js"),
-            ("css", "css"),
-            ("license", "license"),
+            ("js", "JavaScript"),
+            ("css", "CSS"),
+            ("license", "License"),
             ("eot", "EOT Font File"),
             ("otf", "OTF Font File"),
             ("svg", "SVG Font File"),
@@ -34,18 +34,12 @@ class VersionAsset(models.Model):
     @api.depends('attachment_id')
     def _compute_url(self):
         for r in self:
-            version_id = str(r.version_id.id)
             if r.attachment_type == 'url':
-                url = '{url}?{param}'.format(
-                    url=r.attachment_id.url,
-                    param=version_id
-                )
-                r.url = url
+                r.url = r.attachment_id.url
             elif r.attachment_type == 'binary':
-                r.url = '/web/content/{attachment_id}/{name}?{param}'.format(
+                r.url = '/web/content/{attachment_id}/{name}'.format(
                     attachment_id=r.attachment_id.id,
                     name=r.attachment_id.name,
-                    param=version_id
                 )
 
     def unlink(self):

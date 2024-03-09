@@ -1,78 +1,49 @@
 /** @odoo-module **/
 
 import { registry } from "@web/core/registry";
-import { KeepLast } from "@web/core/utils/concurrency";
 import { useBus, useService } from "@web/core/utils/hooks";
-import { ActionMenus } from "@web/search/action_menus/action_menus";
 import { Layout } from "@web/search/layout";
 import { useModel } from "@web/model/model";
 import { RelationalModel } from "@web/model/relational_model/relational_model";
+import { extractFieldsFromArchInfo } from "@web/model/relational_model/utils";
+// import { formView } from "@web/views/form/form_view";
 import { standardViewProps } from "@web/views/standard_view_props";
+import { ViewButton } from "@web/views/view_button/view_button";
 import { FormArchParser } from "@web/views/form/form_arch_parser";
 import { FormCompiler } from "@web/views/form/form_compiler";
-import { ControlPanel } from "@web/search/control_panel/control_panel";
-import { useSetupView } from "@web/views/view_hook";
-import { Component, onWillStart, useEffect, useRef, useState } from "@odoo/owl";
+import { Component, useEffect, useState } from "@odoo/owl";
+
+// if (formView.icon === undefined) {
+//     formView.icon = "fa fa-file";
+// }
 
 export class BuilderController extends Component {
     setup() {
         this.router = useService("router");
-        // this.action = useService("action");
         this.orm = useService("orm");
-        this.ui = useService("ui");
         this.state = useState({
             isDisabled: false,
         });
+        this.ui = useService("ui");
         useBus(this.ui.bus, "resize", this.render);
 
         this.archInfo = this.props.archInfo;
         const activeFields = this.archInfo.activeFields;
-
-        this.beforeLoadResolver = null;
-        const beforeLoadProm = new Promise((r) => {
-            this.beforeLoadResolver = r;
-        });
         const fields = this.props.fields;
         const mode = 'edit';
 
-        // props: model
-        this.model = useModel(
-            RelationalModel,
-            {
-                resModel: 'formio.builder',
-                resId: this.props.resId,
-                fields: fields,
-                activeFields,
-                viewMode: "formio_builder",
-                rootType: "record",
-                mode,
-                beforeLoadProm,
-                component: this,
-            },
-            {
-                ignoreUseSampleModel: true,
-            }
-        );
+        const beforeFirstLoad = async () => {
+            const { activeFields, fields } = extractFieldsFromArchInfo(
+                this.archInfo,
+                this.props.fields
+            );
+            this.model.config.activeFields = activeFields;
+            this.model.config.fields = fields;
+        };
 
-        // props: model
+        this.model = useState(useModel(this.props.Model, this.modelParams, { beforeFirstLoad }));
+
         this.display = { ...this.props.display };
-        this.display.controlPanel = true;
-
-        // useSetupView({
-        //     rootRef: useRef("root"),
-        //     // beforeLeave: () => this.beforeLeave(),
-        //     // beforeUnload: (ev) => this.beforeUnload(ev),
-        //     getLocalState: () => {
-        //         const { data, metaData } = this.model;
-        //         console.log(data);
-        //         return { data, metaData };
-        //     },
-        // });
-
-        onWillStart(async () => {
-            // needed to wait on useModel (data loading)
-            this.beforeLoadResolver();
-        });
 
         useEffect(() => {
             this.updateURL();
@@ -82,11 +53,32 @@ export class BuilderController extends Component {
     updateURL() {
         this.router.pushState({ id: this.model.root.resId || undefined });
     }
+
+    get modelParams() {
+        let mode = this.props.mode || "edit";
+        if (!this.canEdit && this.props.resId) {
+            mode = "readonly";
+        }
+        return {
+            config: {
+                resModel: this.props.resModel,
+                resId: this.props.resId || false,
+                fields: this.props.fields,
+                activeFields: {}, // will be generated after loading sub views (see willStart)
+                isMonoRecord: true,
+                mode,
+                context: this.props.context,
+            },
+            state: this.props.state?.modelState,
+        };
+    }
 }
 
-
 BuilderController.template = "formio.BuilderView";
-BuilderController.components = { ActionMenus, Layout };
+BuilderController.components = {
+    Layout,
+    ViewButton,
+};
 BuilderController.props = {
     ...standardViewProps,
     Model: Function,
@@ -105,14 +97,14 @@ export const BuilderView = {
     type: "formio_builder",
     display_name: "Form Builder",
     icon: "fa fa-rocket",
-    multiRecord: false,
+    // multiRecord: true, // when false it shows viewButtons
+    // multiRecord: false, // ideally to show viewButtons
     searchMenuTypes: [],
-    ControlPanel: ControlPanel, // especially for breadcrumbs
     Controller: BuilderController,
     Renderer: BuilderRenderer,
+    ArchParser: FormArchParser,
     Model: RelationalModel,
-    ArchParser: FormArchParser, // to parse fields for formio_builder view (type)
-    Compiler: FormCompiler, // to parse fields for formio_builder view (type)
+    Compiler: FormCompiler,
     
     props: (genericProps, view) => {
         const { ArchParser } = view;

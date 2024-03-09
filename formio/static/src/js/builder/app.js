@@ -146,6 +146,9 @@ function app() {
                         }).then(function() {
                             console.log('[Forms] Builder sucessfully auto-saved.');
                         });
+                    } else {
+                        self.isDirty = true;
+                        self.showSaveBuilder();
                     }
                 }
             });
@@ -186,6 +189,8 @@ function app() {
                 saveButtons.forEach(function(btn) {
                     btn.classList.remove('d-none');
                 });
+                let highlightSaveArea = this.getHighlightSaveArea();
+                highlightSaveArea.classList.add('formio_no_autosave_border');
             }
         }
 
@@ -195,7 +200,13 @@ function app() {
                 saveButtons.forEach(function(btn) {
                     btn.classList.add('d-none');
                 });
+                let highlightSaveArea = this.getHighlightSaveArea();
+                highlightSaveArea.classList.remove('formio_no_autosave_border');
             }
+        }
+
+        getHighlightSaveArea() {
+            return document.getElementById('formio_builder_app');
         }
 
         getData(url, data) {

@@ -1,15 +1,10 @@
-.o_form_view .o_form_sheet#formio_builder_container {
+.o_form_sheet_bg {
     max-width: none !important;
-    width: 95% !important;
 }
 
 #formio_builder_container .formio_builder_dock {
     float: right;
     margin-bottom: 1rem;
-}
-
-#formio_builder_container .formio_builder_dock * {
-    font-size: 14px;
 }
 
 #formio_builder_container .formio_builder_dock * {
@@ -105,15 +100,4 @@
     #formio_builder_iframe_container iframe {
         min-height: 480px;
     }
-}
-
-/**
-   Hacks: Fit nicely in standard Odoo
-**/
-.o_form_view {
-    background-color: #f6f7fa;
-}
-
-.o_form_sheet_bg {
-    border-bottom: none !important;
 }

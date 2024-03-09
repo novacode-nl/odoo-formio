@@ -1,14 +1,14 @@
-# Copyright Nova Code (http://www.novacode.nl)
+# Copyright Nova Code (https://www.novacode.nl)
 # See LICENSE file for full licensing details.
 
 {
     'name': 'Forms',
     'summary': 'Form Builder for backend, portal and website forms - to collect any information you need for your business.',
-    'version': '0.1',
+    'version': '17.0.1.0',
     'license': 'LGPL-3',
     'author': 'Nova Code',
-    'website': 'https://www.novacode.nl',
-    'live_test_url': 'https://demo16.novacode.nl',
+    'website': 'https://www.novaforms.app',
+    'live_test_url': 'https://demo17.novaforms.app',
     'category': 'Forms/Forms',
     'depends': [
         'base',
@@ -26,7 +26,6 @@
         'data/formio_default_asset_css_data.xml',
         'data/formio_version_data.xml',
         'data/formio_asset_data.xml',
-        'data/formio_extra_asset_data.xml',
         'data/formio_default_version_data.xml',
         'data/ir_config_param.xml',
         'data/ir_cron_data.xml',
@@ -46,8 +45,8 @@
         'views/formio_builder_js_options_views.xml',
         'views/formio_builder_translation_views.xml',
         'views/formio_builder_views.xml',
-        'views/formio_extra_asset_views.xml',
         'views/formio_form_views.xml',
+        'views/formio_license_views.xml',
         'views/formio_res_model_views.xml',
         'views/formio_translation_source_views.xml',
         'views/formio_translation_views.xml',
@@ -87,6 +86,7 @@
             'formio/static/src/js/formio_form_container.js'
         ],
         'web.assets_common': [
+            'formio/static/lib/noble-hashes.js',
             'formio/static/lib/iframe-resizer/iframeResizer.min.js',
         ],
     },
@@ -94,6 +94,6 @@
         'data/formio_demo_data.xml',
     ],
     'images': [
-        'static/description/banner.gif',
+        'static/description/banner.svg',
     ]
 }
