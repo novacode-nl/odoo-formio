@@ -13,10 +13,17 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                 <app data-string="Forms" string="Forms" name="formio" groups="formio.group_formio_admin">
                     <block title="formio.js library (js, css) version importer" name="formio_js_library_importer">
                         <setting>
-                            <label for="formio_default_version_id" string="Default Version" class="col-md-4"/>
-                            <field name="formio_default_version_id"/>
+                            <label for="formio_versions_to_register" string="Register Versions" class="col-md-4"/>
+                            <field name="formio_versions_to_register"/>
                             <div class="text-muted">
-                                When adding a new Form Builder, use this formio.js client/library version.
+                                A comma separated string (list) of formio.js versions to register.
+                                The strings must conform to the format of the release names: <a href="https://github.com/formio/formio.js/tags" target="_blank">https://github.com/formio/formio.js/tags</a>
+                                <br/><br/>
+                                Examples:
+                                <ul>
+                                    <li>v4,v5</li>
+                                    <li>v4.17,v4.18</li>
+                                </ul>
                             </div>
                         </setting>
                         <setting string="Check, register and install the latest 30 available Versions">
@@ -43,7 +50,13 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
                                         string="Check and Register available Versions" class="ml-2 btn btn-primary" icon="fa-cog"/>
                             </div>
                         </setting>
-                            
+                        <setting>
+                            <label for="formio_default_version_id" string="Default Version" class="col-md-4"/>
+                            <field name="formio_default_version_id"/>
+                            <div class="text-muted">
+                                When adding a new Form Builder, use this formio.js client/library version.
+                            </div>
+                        </setting>
                     </block>
                     <block title="Default CSS assets" name="default_css_assets">
                         <setting string="Add additional CSS files to be included for every new installed formio.js client/library."

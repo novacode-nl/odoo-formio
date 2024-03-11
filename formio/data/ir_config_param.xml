@@ -8,5 +8,10 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
 	  <field name="key">formio.cdn_base_url</field>
           <field name="value">https://cdnjs.cloudflare.com/ajax/libs</field>
         </record>
+
+        <record id="ir_config_param_formio_versions_to_register" model="ir.config_parameter">
+	  <field name="key">formio.versions_to_register</field>
+          <field name="value">v4</field>
+        </record>
     </data>
 </odoo>

@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html)
 
 from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class ResConfigSettings(models.TransientModel):
@@ -12,6 +13,16 @@ class ResConfigSettings(models.TransientModel):
     formio_default_builder_js_options_id = fields.Many2one('formio.builder.js.options', string='formio.js builder options ID')
     formio_default_builder_js_options = fields.Text(related='formio_default_builder_js_options_id.value', string='formio.js builder options')
     formio_github_personal_access_token = fields.Char(string='GitHub personal access token')
+    formio_versions_to_register = fields.Char(string='formio.js versions to register')
+
+    @api.constrains('formio_versions_to_register')
+    def _constraint_formio_versions_to_register(self):
+        self.ensure_one()
+        versions = self.formio_versions_to_register.split(',')
+        for v in versions:
+            if not v.startswith('v'):
+                msg = _('Invalid formio.js version name: %s') % v
+                raise ValidationError(msg)
 
     @api.model
     def get_values(self):
@@ -45,6 +56,11 @@ class ResConfigSettings(models.TransientModel):
             res.update(
                 formio_github_personal_access_token=github_personal_access_token
             )
+        formio_versions_to_register = Param.get_param('formio.versions_to_register')
+        if formio_versions_to_register:
+            res.update(
+                formio_versions_to_register=formio_versions_to_register
+            )
         return res
 
     def set_values(self):
@@ -60,6 +76,10 @@ class ResConfigSettings(models.TransientModel):
         Param.sudo().set_param(
             "formio.github.personal.access.token",
             self.formio_github_personal_access_token
+        )
+        Param.sudo().set_param(
+            "formio.versions_to_register",
+            self.formio_versions_to_register
         )
 
         context = {'active_test': False}

@@ -38,10 +38,14 @@ class VersionGitHubChecker(models.TransientModel):
 
         if response.status_code == 200:
             tags = response.json()
+            Param = self.env['ir.config_parameter'].sudo()
+            versions_to_register = Param.get_param('formio.versions_to_register').split(',')
             existing = self.env['formio.version.github.tag'].search([]).mapped('name')
-
             for t in tags:
-                if t['name'] not in existing:
+                if (
+                    any([t['name'].startswith(v) for v in versions_to_register])
+                    and t['name'] not in existing
+                ):
                     tag_vals = {
                         'name': t['name'],
                     }
