@@ -16,6 +16,7 @@ const { mount, whenReady, xml } = owl;
 
 function app() {
     class App extends OdooFormioForm {
+        static components = { Branding }
         static template = xml`
             <div t-name="App">
                 <div id="formio_form"></div>
