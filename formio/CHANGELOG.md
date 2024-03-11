@@ -1,5 +1,10 @@
 # Changelog
 
+## 17.0.1.2
+
+- Fix formioScrollIntoView event handler.
+- Default value for form builder fields: `portal_scroll_into_view`, `public_scroll_into_view`
+
 ## 17.0.1.1
 
 Improve the formio.js library registration (downloader, importer) with a new setting to allow only registered versions.\

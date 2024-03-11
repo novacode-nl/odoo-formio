@@ -126,6 +126,7 @@ class Builder(models.Model):
     portal_scroll_into_view_selector = fields.Char(
         string='Portal Scroll Into View Selector',
         copy=False,
+        default='#top',
         tracking=True,
         help="Especially for long wizard pages upon prev/next page. This scrolls an element (CSS selector) into the visible area of the browser window."
     )
@@ -156,6 +157,7 @@ class Builder(models.Model):
     public_access_interval_type = fields.Selection(list(_interval_selection.items()), default='minutes', tracking=True)
     public_scroll_into_view_selector = fields.Char(
         string='Public Scroll Into View Selector',
+        default='#content_top',
         copy=False,
         tracking=True,
         help="Especially for long wizard pages upon prev/next page. This scrolls an element (CSS selector) into the visible area of the browser window."
