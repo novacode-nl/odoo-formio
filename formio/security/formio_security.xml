@@ -28,12 +28,18 @@ License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html) -->
             <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         </record>
 
+        <record id="group_formio_form_update" model="res.groups">
+            <field name="name">Forms: Allow updating form submission data</field>
+	    <field name="implied_ids" eval="[(4, ref('formio.group_formio_admin'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+
         <record id="base.group_system" model="res.groups">
-            <field name="implied_ids" eval="[(4, ref('formio.group_formio_admin'))]"/>
+            <field name="implied_ids" eval="[(4, ref('formio.group_formio_admin')), (4, ref('formio.group_formio_form_update'))]"/>
         </record>
 
         <record id="base.default_user" model="res.users">
-            <field name="groups_id" eval="[(4,ref('formio.group_formio_admin'))]"/>
+            <field name="groups_id" eval="[(4,ref('formio.group_formio_admin')), (4, ref('formio.group_formio_form_update'))]"/>
         </record>
     </data>
 </odoo>

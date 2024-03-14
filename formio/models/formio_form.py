@@ -325,7 +325,9 @@ class Form(models.Model):
             # readonly_submission_data
             if self.env.su:
                 form.readonly_submission_data = False
-            elif self.env.user.has_group('formio.group_formio_admin'):
+            elif not form.id and self.env.user.has_group('formio.group_formio_admin'):
+                form.readonly_submission_data = False
+            elif self.env.user.has_group('formio.group_formio_form_update'):
                 form.readonly_submission_data = False
             else:
                 form.readonly_submission_data = True

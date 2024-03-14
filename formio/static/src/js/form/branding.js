@@ -85,10 +85,10 @@ export class Branding extends License {
             tooltip = tooltipTranslations[languageShort];
         }
         this.state.output = markup(`
-            <div data-tooltip="${tooltip}"
-                style="display: inline-block !important; margin-bottom: 1px !important; padding: 4px 8px 4px 8px !important; border: 2px solid #c0c0c0 !important; border-radius: 5px !important; background-color: #fff !important; color: #000 !important; font-size: 1.1rem !important;">
-                ${madeWith} <a style="color: #aa4689 !important; font-weight: bold !important; text-decoration-thickness: 0.1rem !important;" target="_blank" href="https://www.novaforms.app">Nova Forms</a>
-            </div>
+            <a href="https://www.novaforms.app" target="_blank" data-tooltip="${tooltip}"
+                style="display: inline-block !important; margin-bottom: 1px !important; padding: 4px 8px 4px 8px !important; border: 2px solid #c0c0c0 !important; border-radius: 5px !important; background-color: #fff !important; color: #000 !important; font-size: 1.1rem !important; text-decoration-thickness: 0.1rem !important;">
+                ${madeWith} <span style="color: #aa4689 !important; font-weight: bold !important; text-decoration-thickness: 0.1rem !important;" >Nova Forms</span>
+            </a>
         `);
     }
 }

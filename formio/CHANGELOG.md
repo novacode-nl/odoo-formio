@@ -1,5 +1,10 @@
 # Changelog
 
+## 17.0.1.3
+
+Add new group "Forms: Allow updating form submission data".\
+Users in this group are allowed to edit and update the (raw, JSON) submission data in the `formio.form` form view.
+
 ## 17.0.1.2
 
 - Fix formioScrollIntoView event handler.
