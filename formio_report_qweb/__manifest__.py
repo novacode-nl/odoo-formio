@@ -7,7 +7,7 @@
     'version': '17.0.1.0',
     'author': 'Nova Code',
     'website': 'https://www.novaforms.app',
-    'live_test_url': 'https://demo16.novacode.nl',
+    'live_test_url': 'https://demo17.novaforms.app',
     'license': 'LGPL-3',
     'category': 'Forms/Forms',
     'depends': [
