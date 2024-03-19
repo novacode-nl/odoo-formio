@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.0.11.18
+
+In the Form Builder, show a "Locked" badge in case it is locked.
+
 ## 16.0.11.17
 
 - Fix crashing forms due to 16.0.11.16 (Scroll Into View).

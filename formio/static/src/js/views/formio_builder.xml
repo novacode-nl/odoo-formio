@@ -26,9 +26,16 @@
                                         <li class="formio_version">
                                             <span class="formio_dock_label">formio.js version</span><span t-out="builder.formio_version_name"/>
                                         </li>
+                                        <li class="locked">
+                                            <t t-if="builder.is_locked">
+                                                <span class="badge rounded-pill text-bg-warning mb-1">
+                                                    <span class="formio_dock_label">Locked</span>
+                                                </span>
+                                            </t>
+                                        </li>
                                         <li class="auto_save">
                                             <t t-if="builder.auto_save">
-                                                <span>
+                                                <span class="badge rounded-pill text-bg-warning mb-1">
                                                     <span class="formio_dock_label">Auto-save</span>
                                                     <span>Enabled</span>
                                                 </span>

@@ -45,6 +45,7 @@ See LICENSE file for full licensing details. -->
                 <field name="parent_version"/>
                 <field name="formio_version_name"/>
                 <field name="auto_save"/>
+                <field name="is_locked"/>
                 <field name="state"/>
                 <field name="display_state"/>
             </formio_builder>
@@ -114,7 +115,7 @@ See LICENSE file for full licensing details. -->
                         </group>
                         <group>
                             <field name="uuid" attrs="{'invisible': [('id', '=', False)]}"/>
-                            <field name="is_locked" attrs="{'invisible': [('state', '!=', 'CURRENT')]}"/>
+                            <field name="is_locked" attrs="{'invisible': [('state', '!=', 'CURRENT')]}" widget="boolean_toggle"/>
                             <field name="auto_save" widget="boolean_toggle"/>
                             <field name="backend_use_draft" attrs="{'invisible': [('state', '!=', 'DRAFT')]}" widget="boolean_toggle"/>
                             <field name="backend_use_obsolete" attrs="{'invisible': [('state', '!=', 'OBSOLETE')]}" widget="boolean_toggle"/>
