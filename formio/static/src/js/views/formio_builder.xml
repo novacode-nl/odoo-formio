@@ -40,6 +40,13 @@
                                                 </span>
                                             </t>
                                         </li>
+                                        <li class="locked">
+                                            <t t-if="builder.is_locked">
+                                                <span class="badge rounded-pill text-bg-warning mb-1">
+                                                    <span class="formio_dock_label">Locked</span>
+                                                </span>
+                                            </t>
+                                        </li>
                                         <li class="builder_state">
                                             <t t-if="builder.state == 'DRAFT'">
                                                 <span t-attf-class="badge rounded-pill text-bg-warning mb-1">

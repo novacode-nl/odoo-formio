@@ -1,5 +1,9 @@
 # Changelog
 
+## 17.0.1.4
+
+In the Form Builder, show a "Locked" badge in case it is locked.
+
 ## 17.0.1.3
 
 Add new group "Forms: Allow updating form submission data".\
