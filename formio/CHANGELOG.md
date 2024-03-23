@@ -222,7 +222,7 @@ Put the form builder (loading) spinner in dedicated `<div/>` which hides when th
 ## 16.0.6.5
 
 Security fix / meaurement:\
-Deny update of `submission_data` (field) upon form update, if the form has state 'Completed' or 'Canceled'.
+Deny update of `submission_data` (field) upon form update, if the form has state 'Completed' or 'Cancelled'.
 
 ## 16.0.6.4
 
