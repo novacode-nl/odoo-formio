@@ -10,13 +10,13 @@ This is still done (but not harmful) by `_onchange_builder` which needs to be fi
 Fix `ir.actions.server` model `_constraint_unique_formio_ref` method:\
 `ValueError: Expected singleton: ir.actions.server`
 
-## 15.0.6.15
+## 15.0.16.15
 
 Improvement, avoid browser caching for certain assets files (CSS, JS):
 - Form Builder
 - Form (backend, portal, public)
 
-## 15.0.6.14
+## 15.0.16.14
 
 Workaround for Safari 16.6 (AFAIK), with Columns in a Data Grid.\
 The Columns become too narrow and unusable in a Data Grid.
@@ -31,14 +31,14 @@ first `<td/>` (column) targeted in a Data Grid table.
 }
 ```
 
-## 15.0.6.13
+## 15.0.16.13
 
 Hide field `builder_id_domain` in `formio.form` form view.
 
 - Sidebar pabel disappears for long forms. This reverts some (resizing) changes from 15.0.7.0.
 - Show the "Auto-save" setting in the dock before State.
 
-## 15.0.6.12
+## 15.0.16.12
 
 Possibility to redirect the (parent) window upon submit of an embedded public form.
 
@@ -52,21 +52,21 @@ Fix portal form `AttributeError: 'tuple' object has no attribute 'formio_ietf_co
 Add (again) `language` template variable in the render values of endpoint `/formio/portal/form/<string:uuid>`\
 Issue: [\#257](https://github.com/novacode-nl/odoo-formio/issues/257)
 
-## 15.0.6.10
+## 15.0.16.10
 
 Rename label of `formio.form` field `submission_data`, from `Data` to `Submission Data`.
 
-## 15.0.6.9
+## 15.0.16.9
 
 Add `formio.form` (Form) `after_save_draft` method and execute it in the `/submit` endpoints (backend, portal, public).
 
-## 15.0.6.8
+## 15.0.16.8
 
 Fix:\
 Still one Form loading regression (bug) in template `formio_form_public_embed`.\
 Due to incomplete implementation of the new (loading) spinner implementation in v15.0.6.6.
 
-## 15.0.6.7
+## 15.0.16.7
 
 Fix:\
 Form loading on portal and public/website.\
@@ -75,7 +75,7 @@ Due to incomplete implementation of the new (loading) spinner implementation in 
 Improvement:\
 Put the form builder (loading) spinner in dedicated `<div/>` which hides when the form builder has been rendered.
 
-## 15.0.6.6
+## 15.0.16.6
 
 Improvements:\
 - Menu renaming: 'Forms' to 'Form Submissions'
@@ -90,7 +90,7 @@ Improvements:\
 ## 15.0.16.4
 
 Security fix / meaurement:\
-Deny update of `submission_data` (field) upon form update, if the form has state 'Completed' or 'Canceled'.
+Deny update of `submission_data` (field) upon form update, if the form has state 'Completed' or 'Cancelled'.
 
 ## 15.0.16.3
 
