@@ -131,6 +131,9 @@ class Builder(models.Model):
         help="Especially for long wizard pages upon prev/next page. This scrolls an element (CSS selector) into the visible area of the browser window."
     )
     public = fields.Boolean("Public", tracking=True, help="Form is public accessible (e.g. used in Shop checkout, Events registration")
+    public_uuid = fields.Char(
+        default=lambda self: self._default_uuid(), required=True, readonly=True, copy=True,
+        string='Public UUID')
     public_url = fields.Char(string='Public URL', compute='_compute_public_url')
     public_save_draft_done_url = fields.Char(
         string='Public Save-Draft Done URL', tracking=True,
@@ -645,6 +648,21 @@ class Builder(models.Model):
 
         domain = [
             ('uuid', '=', uuid),
+            ('state', '=', STATE_CURRENT),
+            ('public', '=', True),
+        ]
+        builder = self.sudo().search(domain, limit=1)
+        if builder:
+            return builder
+        else:
+            return False
+
+    @api.model
+    def get_public_builder_public_uuid(self, public_uuid):
+
+        domain = [
+            ('public_uuid', '=', public_uuid),
+            ('state', '=', STATE_CURRENT),
             ('public', '=', True),
         ]
         builder = self.sudo().search(domain, limit=1)

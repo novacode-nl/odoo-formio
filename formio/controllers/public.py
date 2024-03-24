@@ -124,12 +124,48 @@ class FormioPublicController(http.Controller):
 
     @http.route('/formio/public/form/new/<string:builder_uuid>', type='http', auth='public', methods=['GET'], website=True)
     def public_form_new_root(self, builder_uuid):
+        """ TODO LEGACY 18.0
+        - Remove this endpoint in favor of method (below): public_form_new_public_uuid_root
+        - Add to CHANGELOG or UPDATE file: Check the URL of public
+          forms and change the UUID to the form.builder public_uuid
+          (field)
+        """
         formio_builder = self._get_public_builder(builder_uuid)
         if not formio_builder:
             msg = 'Form Builder UUID %s: not found' % builder_uuid
             return request.not_found(msg)
         elif not formio_builder.public:
             msg = 'Form Builder UUID %s: not public' % builder_uuid
+            return request.not_found(msg)
+        # elif not formio_builder.state != BUILDER_STATE_CURRENT:
+        #     msg = 'Form Builder UUID %s not current/published' % builder_uuid
+        #     return request.not_found(msg)
+        else:
+            values = {
+                'builder': formio_builder,
+                'public_form_new': True,
+                # 'languages' already injected in rendering somehow
+                'form_languages': formio_builder.languages,
+                'formio_css_assets': formio_builder.formio_css_assets,
+                'formio_js_assets': formio_builder.formio_js_assets,
+                # uuid is used to disable assets (js, css) caching by hrefs
+                'uuid': generate_uuid4()
+            }
+            return request.render('formio.formio_form_public_new_embed', values)
+
+    @http.route('/formio/public/form/new/current/<string:builder_public_uuid>', type='http', auth='public', methods=['GET'], website=True)
+    def public_form_new_public_uuid_root(self, builder_public_uuid):
+        """ TODO LEGACY 18.0
+        - Rename endpoint method to: public_form_new_root.
+        - Change endpount URL to: '/formio/public/form/new/<string:builder_public_uuid>'
+        - Add to CHANGELOG or UPDATE file: Check public forms and change /new/current/UUID to /new/UUID
+        """
+        formio_builder = self._get_public_builder_public_uuid(builder_public_uuid)
+        if not formio_builder:
+            msg = 'Form Builder (public UUID) %s: not found' % builder_public_uuid
+            return request.not_found(msg)
+        elif not formio_builder.public:
+            msg = 'Form Builder (public UUID) %s: not public' % builder_public_uuid
             return request.not_found(msg)
         # elif not formio_builder.state != BUILDER_STATE_CURRENT:
         #     msg = 'Form Builder UUID %s not current/published' % builder_uuid
@@ -285,6 +321,9 @@ class FormioPublicController(http.Controller):
 
     def _get_public_builder(self, builder_uuid):
         return request.env['formio.builder'].get_public_builder(builder_uuid)
+
+    def _get_public_builder_public_uuid(self, builder_public_uuid):
+        return request.env['formio.builder'].get_public_builder_public_uuid(builder_public_uuid)
 
     def _check_public_form(self):
         return request.env.uid == request.env.ref('base.public_user').id or request.env.uid

@@ -1,5 +1,12 @@
 # Changelog
 
+## 17.0.1.5
+
+### Allow (support) versioning for publicly published forms (form builders)
+
+Add endpoint `/formio/public/form/new/current/<string:builder_public_uuid>` that allows to update the form builders (versioning) and keep them published when the state is "Current".\
+This required to add the `formio.builder` model field `public_uuid`, that is identical to all `formio.builder` records with the same name.
+
 ## 17.0.1.4
 
 In the Form Builder, show a "Locked" badge in case it is locked.
