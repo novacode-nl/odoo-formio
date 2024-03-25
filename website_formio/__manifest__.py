@@ -3,7 +3,7 @@
 
 {
     'name': 'Forms • Website Integration',
-    'summary': "'Drag & drop' Form Block, other website integration",
+    'summary': "Redirect a form (portal, website) to a configurable website page.",
     'version': '17.0.1.1',
     'license': 'LGPL-3',
     'author': 'Nova Code',
