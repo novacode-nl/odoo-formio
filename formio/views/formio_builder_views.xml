@@ -22,7 +22,6 @@ See LICENSE file for full licensing details. -->
                 <field name="portal" optional="show"/>
                 <field name="portal_url" optional="hide"/>
                 <field name="public" optional="show"/>
-                <field name="public_uuid" optional="hide"/>
                 <field name="public_access_rule_type" optional="hide"/>
                 <field name="public_url" optional="hide"/>
                 <field name="formio_version_id"/>
@@ -223,7 +222,6 @@ See LICENSE file for full licensing details. -->
                                     <field name="public_url" widget="CopyClipboardChar" style="font-size: 1.0em;"/>
                                 </group>
                                 <group name="general" string="General">
-                                    <field name="public_uuid"/>
                                     <field name="public_access_rule_type" required="public == True"/>
                                     <div class="text-muted" colspan="2">
                                         <i class="fa fa-info-circle" title="info"/> Other <em>Public Access Rule Type(s)</em> can be implemented by other modules.
@@ -257,9 +255,9 @@ See LICENSE file for full licensing details. -->
                             </group>
                             <field name="translations" context="{'default_builder_id': id}">
                                 <tree editable="bottom">
-                                    <field name="builder_id" invisible="1"/>
+                                    <field name="builder_id" column_invisible="True"/>
                                     <field name="lang_id"/>
-                                    <field name="source_property" placeholder="A formio.js library translation property ..."/>
+                                    <field name="source_property" placeholder="A formio.js library translation property ..." optional="show"/>
                                     <field name="source"/>
                                     <field name="value"/>
                                 </tree>
@@ -404,8 +402,6 @@ See LICENSE file for full licensing details. -->
             <search string="Form Builders">
                 <field name="title"/>
                 <field name="name"/>
-                <field name="uuid"/>
-                <field name="public_uuid"/>
                 <field name="formio_version_id"/>
                 <separator/>
                 <filter string="Draft" name="state_draft"
@@ -427,7 +423,6 @@ See LICENSE file for full licensing details. -->
                 <group expand="0" string="Group By">
                     <filter string="Name" name="name" domain="[]" context="{'group_by':'name'}"/>
                     <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
-                    <filter string="Public UUID" name="public_uuid" domain="[]" context="{'group_by':'public_uuid'}"/>
                 </group>
             </search>
         </field>

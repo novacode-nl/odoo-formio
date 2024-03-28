@@ -1,5 +1,9 @@
 # Changelog
 
+## 17.0.1.6
+
+Minor form builder view migration fix (column_invisible).
+
 ## 17.0.1.5
 
 ### Allow (support) versioning for publicly published forms (form builders)
